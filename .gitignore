@@ -7,3 +7,10 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
+.idea
+gwt-bigoquiz.iml
+*~
+src/main/webapp/WEB-INF/classes/
+src/main/webapp/WEB-INF/lib
+war/
