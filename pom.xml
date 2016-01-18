@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<!-- POM file generated with GWT webAppCreator -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.murrayc.bigoquiz</groupId>
+	<artifactId>gwt-bigoquiz</artifactId>
+	<packaging>war</packaging>
+	<version>0.1</version>
+	<name>Big-O Quiz</name>
+
+	<!-- Specify a recent maven version, so we can use later plugin versions.
+	     We specify the same thing via the maven-enforcer-plugin, but that is normal.
+	     See http://maven.apache.org/enforcer/maven-enforcer-plugin/faq.html#question -->
+	<prerequisites>
+		<maven>3.3.9</maven>
+	</prerequisites>
+
+	<!-- gwt-test-utils is not in the regular maven repository: -->
+	<repositories>
+		<repository>
+			<id>forge.octo.com</id>
+			<url>http://forge.octo.com/nexus/content/repositories/releases/</url>
+		</repository>
+	</repositories>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- Convenience property to set the GWT version -->
+		<gwt.version>2.7.0</gwt.version>
+
+		<!-- Make mvn gwt:run use SSL (HTTPS) when running Jetty.
+		     Login will fail (on purpose) if run as regular HTTP.
+		     TODO: We could instead enable this when running mvn gwt:run, like so:
+		      -Dgwt.server=:ssls
+                     but how do we disable it now that it's on by default here?
+                     Where is this maven gwt plugin property documented? -->
+		<gwt.server>:ssl</gwt.server>
+
+		<!-- GWT requires java 1.6 -->
+		<!-- TODO: Isn't this a duplicate of the maven-compiler-plugin properties below? -->
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+
+		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>${gwt.version}</version>
+			<scope>compile</scope>  <!-- It is used for runtime and test scopes -->
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>1.0.b2</version>
+			<scope>compile</scope>
+		</dependency>    
+		<dependency>
+			<groupId>com.allen-sauer.gwt.log</groupId>
+			<artifactId>gwt-log</artifactId>
+			<version>3.2.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.2.2</version>
+		</dependency>   
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.8</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>14.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<type>jar</type>
+			<scope>compile</scope> <!-- It is used for runtime and test scopes -->
+		</dependency>
+
+		<!-- This seems to be necessary so we can see errors from JDBC -->		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+ 			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.5</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.gwt-test-utils</groupId>
+			<artifactId>gwt-test-utils</artifactId>
+			<version>0.47</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<url>https://github.com/murraycu/gwt-bigoquiz</url>
+	<build>
+		<!-- Generate compiled stuff in the folder used for developing mode -->
+		<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+
+		<plugins>
+			<plugin>
+				<!-- Specify a recent maven version, so we can use later plugin versions.
+                                     We specify the same thing in the prerequisites tag, but that is normal.
+				     See http://maven.apache.org/enforcer/maven-enforcer-plugin/faq.html#question -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.4.1</version>
+				<executions>
+					<execution>
+  						<id>enforce-versions</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>2.2.1</version>
+								</requireMavenVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- GWT Maven Plugin -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>2.7.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>i18n</goal>
+							<goal>compile</goal>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin
+					documentation at codehaus.org -->
+				<configuration>
+					<runTarget>BigOQuiz.html</runTarget>
+					<hostedWebapp>${webappDirectory}</hostedWebapp>
+
+					<i18nConstantsBundles>
+						<i18nConstantsBundle>com.murrayc.bigoquiz.client.ui.BigOQuizConstants</i18nConstantsBundle>
+					</i18nConstantsBundles>
+					<mode>htmlunit</mode> <!-- Because the default, manual, waits for us to paste a URL into a browser. -->
+
+					<!-- <productionMode>true</productionMode> -->
+				</configuration>
+			</plugin>
+
+			<!-- Copy static web files before executing gwt:run -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>exploded</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<webappDirectory>${webappDirectory}</webappDirectory>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<descriptors>
+						<descriptor>assembly.xml</descriptor>
+					</descriptors>
+					<appendAssemblyId>false</appendAssemblyId>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>   
+				<version>3.3</version>
+				<configuration>
+					<source>1.7</source>
+ 					<target>1.7</target>
+				</configuration>
+			</plugin>
+
+			<!-- This lets us do
+			mvn dependency:analyze-report
+			to generate target/dependency-analysis.html
+			-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
+				<executions>
+					<execution>
+  						<id>copy</id>
+						<phase>package</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.15</version>
+				<configuration>
+					<!-- your configuration here -->
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</reporting>
+
+	<description>gwt-bigoquiz is an online quiz about the space and time Big-O complexities of common algorithms.</description>
+	<scm>
+		<url>https://github.com/murraycu/gwt-bigoquiz</url>
+	</scm>
+	<issueManagement>
+		<system>Bugzilla</system>
+		<url>https://github.com/murraycu/gwt-bigoquiz/issues</url>
+	</issueManagement>
+</project>
