@@ -1,7 +1,6 @@
 package com.murrayc.bigoquiz.server;
 
-import com.murrayc.bigoquiz.client.GreetingService;
-import com.murrayc.bigoquiz.shared.FieldVerifier;
+import com.murrayc.bigoquiz.client.QuizService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.murrayc.bigoquiz.shared.Question;
 
@@ -9,8 +8,8 @@ import com.murrayc.bigoquiz.shared.Question;
  * The server-side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
-public class GreetingServiceImpl extends RemoteServiceServlet implements
-    GreetingService {
+public class QuizServiceImpl extends RemoteServiceServlet implements
+        QuizService {
 
   /*
   public String greetServer(String input) throws IllegalArgumentException {

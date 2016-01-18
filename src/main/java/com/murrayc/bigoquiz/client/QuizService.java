@@ -8,6 +8,6 @@ import com.murrayc.bigoquiz.shared.Question;
  * The client-side stub for the RPC service.
  */
 @RemoteServiceRelativePath("greet")
-public interface GreetingService extends RemoteService {
+public interface QuizService extends RemoteService {
     Question getQuestion() throws IllegalArgumentException;
 }

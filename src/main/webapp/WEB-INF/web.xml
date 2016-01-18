@@ -8,7 +8,7 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.murrayc.bigoquiz.server.GreetingServiceImpl</servlet-class>
+    <servlet-class>com.murrayc.bigoquiz.server.QuizServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>

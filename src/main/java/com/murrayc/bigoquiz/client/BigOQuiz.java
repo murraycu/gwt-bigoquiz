@@ -33,7 +33,7 @@ public class BigOQuiz implements EntryPoint {
   /**
    * Create a remote service proxy to talk to the server-side Greeting service.
    */
-  private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+  private final QuizServiceAsync greetingService = GWT.create(QuizService.class);
 
   /**
    * This is the entry point method.
