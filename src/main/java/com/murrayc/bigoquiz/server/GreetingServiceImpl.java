@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.server;
 import com.murrayc.bigoquiz.client.GreetingService;
 import com.murrayc.bigoquiz.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.murrayc.bigoquiz.shared.Question;
 
 /**
  * The server-side implementation of the RPC service.
@@ -11,6 +12,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
     GreetingService {
 
+  /*
   public String greetServer(String input) throws IllegalArgumentException {
     // Verify that the input is valid. 
     if (!FieldVerifier.isValidName(input)) {
@@ -29,6 +31,12 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 
     return "Hello, " + input + "!<br><br>I am running " + serverInfo
         + ".<br><br>It looks like you are using:<br>" + userAgent;
+  }
+  */
+
+  @Override
+  public Question getQuestion() throws IllegalArgumentException {
+    return new Question("example question", "example answer");
   }
 
   /**

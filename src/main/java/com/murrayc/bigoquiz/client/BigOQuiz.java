@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.murrayc.bigoquiz.shared.Question;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -118,7 +119,7 @@ public class BigOQuiz implements EntryPoint {
         sendButton.setEnabled(false);
         textToServerLabel.setText(textToServer);
         serverResponseLabel.setText("");
-        greetingService.greetServer(textToServer, new AsyncCallback<String>() {
+        greetingService.getQuestion(new AsyncCallback<Question>() {
           public void onFailure(Throwable caught) {
             // Show the RPC error message to the user
             dialogBox.setText("Remote Procedure Call - Failure");
@@ -128,10 +129,10 @@ public class BigOQuiz implements EntryPoint {
             closeButton.setFocus(true);
           }
 
-          public void onSuccess(String result) {
+          public void onSuccess(Question result) {
             dialogBox.setText("Remote Procedure Call");
             serverResponseLabel.removeStyleName("serverResponseLabelError");
-            serverResponseLabel.setHTML(result);
+            serverResponseLabel.setHTML(result.getQuestion());
             dialogBox.center();
             closeButton.setFocus(true);
           }
