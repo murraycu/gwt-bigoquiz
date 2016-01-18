@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz xmlns="http://bigoquiz.com/document" format_version="1">
+    <title>Big-O Quiz</title>
+    <section id="data-structure-operations">
+        <title>Data Structure Operations</title>
+        <question>
+            <text>Array: Access</text>
+            <answer>O(1)</answer>
+        </question>
+        <question>
+            <text>Array: Search</text>
+            <answer>O(n)</answer>
+        </question>
+        <question>
+            <text>Array: Insertion</text>
+            <answer>O(n)</answer>
+        </question>
+    </section>
+</quiz>
