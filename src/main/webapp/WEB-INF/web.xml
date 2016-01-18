@@ -15,6 +15,16 @@
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/bigoquiz/greet</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>loginService</servlet-name>
+    <servlet-class>com.murrayc.bigoquiz.server.LoginServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>loginService</servlet-name>
+    <url-pattern>/bigoquiz/login</url-pattern>
+  </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>

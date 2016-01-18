@@ -31,6 +31,9 @@
 		<!-- Convenience property to set the GWT version -->
 		<gwt.version>2.7.0</gwt.version>
 
+        <!-- Convenience property to set the AppEngine version -->
+        <appengine.version>1.9.31</appengine.version>
+
 		<!-- Make mvn gwt:run use SSL (HTTPS) when running Jetty.
 		     Login will fail (on purpose) if run as regular HTTP.
 		     TODO: We could instead enable this when running mvn gwt:run, like so:
@@ -88,6 +91,23 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>${appengine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-testing</artifactId>
+            <version>${appengine.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-stubs</artifactId>
+            <version>${appengine.version}</version>
+            <scope>test</scope>
+        </dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -260,6 +280,13 @@
 						<phase>package</phase>
 					</execution>
 				</executions>
+			</plugin>
+
+			<!-- Google AppEngine plugin -->
+			<plugin>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-maven-plugin</artifactId>
+				<version>1.9.31</version>
 			</plugin>
 		</plugins>
 		<pluginManagement>
