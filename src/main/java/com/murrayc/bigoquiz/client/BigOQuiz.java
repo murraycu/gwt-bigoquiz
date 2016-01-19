@@ -1,16 +1,12 @@
 package com.murrayc.bigoquiz.client;
 
 import com.google.gwt.user.client.ui.*;
-import com.murrayc.bigoquiz.shared.FieldVerifier;
+import com.murrayc.bigoquiz.shared.db.UserProfile;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.murrayc.bigoquiz.shared.Question;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -21,8 +17,11 @@ public class BigOQuiz implements EntryPoint {
   private Label loginLabel = new Label(
           "Please sign in to your Google Account to access the StockWatcher application.");
   private Anchor signInLink = new Anchor("Sign In");
-  
-  /**
+  final Label nameLabel = new Label();
+    final Label scoreLabel = new Label();
+
+
+    /**
    * The message displayed to the user when the server cannot be reached or
    * returns an error.
    */
@@ -33,7 +32,7 @@ public class BigOQuiz implements EntryPoint {
   /**
    * Create a remote service proxy to talk to the server-side Greeting service.
    */
-  private final QuizServiceAsync greetingService = GWT.create(QuizService.class);
+  private final QuizServiceAsync quizService = GWT.create(QuizService.class);
 
   /**
    * This is the entry point method.
@@ -42,7 +41,7 @@ public class BigOQuiz implements EntryPoint {
     // Check login status using login service.
     LoginServiceAsync loginService = GWT.create(LoginService.class);
     loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
-      public void onFailure(Throwable error) {
+      public void onFailure(final Throwable error) {
       }
 
       public void onSuccess(final LoginInfo result) {
@@ -56,9 +55,28 @@ public class BigOQuiz implements EntryPoint {
     });
 
     loadMainUI();
+
+      getAndShowScore();
   }
 
-  private void loadLogin() {
+    private void getAndShowScore() {
+        QuizServiceAsync quizService = GWT.create(QuizService.class);
+        quizService.getUserProfile(new AsyncCallback<UserProfile>() {
+          public void onFailure(final Throwable error) {
+              nameLabel.setText("Error: Can't get username");
+              scoreLabel.setText("0");
+          }
+
+          public void onSuccess(final UserProfile result) {
+            nameLabel.setText(result.getName());
+
+              //TODO: internationalization:
+              scoreLabel.setText(String.valueOf(result.getCountCorrectAnswers()));
+          }
+        });
+    }
+
+    private void loadLogin() {
     // Assemble login panel.
     signInLink.setHref(loginInfo.getLoginUrl());
     loginPanel.add(loginLabel);
@@ -67,23 +85,19 @@ public class BigOQuiz implements EntryPoint {
   }
 
   private void loadMainUI() {
-    final Button sendButton = new Button("Send");
-    final TextBox nameField = new TextBox();
-    nameField.setText("GWT User");
+    final Button nextButton = new Button("Next Question");
+    nameLabel.setText("<user>");
     final Label errorLabel = new Label();
 
     // We can add style names to widgets
-    sendButton.addStyleName("sendButton");
+    nextButton.addStyleName("nextButton");
 
-    // Add the nameField and sendButton to the RootPanel
+    // Add the nameLabel and nextButton to the RootPanel
     // Use RootPanel.get() to get the entire body element
-    RootPanel.get("nameFieldContainer").add(nameField);
-    RootPanel.get("sendButtonContainer").add(sendButton);
+    RootPanel.get("nameFieldContainer").add(nameLabel);
+      RootPanel.get("scoreFieldContainer").add(scoreLabel);
+    RootPanel.get("sendButtonContainer").add(nextButton);
     RootPanel.get("errorLabelContainer").add(errorLabel);
-
-    // Focus the cursor on the name field when the app loads
-    nameField.setFocus(true);
-    nameField.selectAll();
 
     // Create the popup dialog box
     final DialogBox dialogBox = new DialogBox();
@@ -108,69 +122,43 @@ public class BigOQuiz implements EntryPoint {
     closeButton.addClickHandler(new ClickHandler() {
       public void onClick(ClickEvent event) {
         dialogBox.hide();
-        sendButton.setEnabled(true);
-        sendButton.setFocus(true);
+        nextButton.setEnabled(true);
+        nextButton.setFocus(true);
       }
     });
 
-    // Create a handler for the sendButton and nameField
-    class MyHandler implements ClickHandler, KeyUpHandler {
+    // Create a handler for the nextButton and nameLabel
+    class MyHandler implements ClickHandler {
       /**
-       * Fired when the user clicks on the sendButton.
+       * Fired when the user clicks on the nextButton.
        */
       public void onClick(ClickEvent event) {
-        sendNameToServer();
+        increaseScore();
       }
 
       /**
-       * Fired when the user types in the nameField.
+       * Send the name from the nameLabel to the server and wait for a response.
        */
-      public void onKeyUp(KeyUpEvent event) {
-        if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-          sendNameToServer();
-        }
-      }
-
-      /**
-       * Send the name from the nameField to the server and wait for a response.
-       */
-      private void sendNameToServer() {
-        // First, we validate the input.
-        errorLabel.setText("");
-        String textToServer = nameField.getText();
-        if (!FieldVerifier.isValidName(textToServer)) {
-          errorLabel.setText("Please enter at least four characters");
-          return;
-        }
-
-        // Then, we send the input to the server.
-        sendButton.setEnabled(false);
-        textToServerLabel.setText(textToServer);
-        serverResponseLabel.setText("");
-        greetingService.getQuestion(new AsyncCallback<Question>() {
-          public void onFailure(Throwable caught) {
-            // Show the RPC error message to the user
-            dialogBox.setText("Remote Procedure Call - Failure");
-            serverResponseLabel.addStyleName("serverResponseLabelError");
-            serverResponseLabel.setHTML(SERVER_ERROR);
-            dialogBox.center();
-            closeButton.setFocus(true);
-          }
-
-          public void onSuccess(Question result) {
-            dialogBox.setText("Remote Procedure Call");
-            serverResponseLabel.removeStyleName("serverResponseLabelError");
-            serverResponseLabel.setHTML(result.getQuestion());
-            dialogBox.center();
-            closeButton.setFocus(true);
-          }
+      private void increaseScore() {
+          quizService.increaseScore(new AsyncCallback<Void>() {
+              public void onFailure(final Throwable caught) {
+                // Show the RPC error message to the user
+                dialogBox.setText("Remote Procedure Call - Failure");
+                serverResponseLabel.addStyleName("serverResponseLabelError");
+                serverResponseLabel.setHTML(SERVER_ERROR);
+                dialogBox.center();
+                closeButton.setFocus(true);
+              }
+    
+              public void onSuccess(final Void result) {
+                  getAndShowScore();
+              }
         });
       }
     }
 
-    // Add a handler to send the name to the server
+    // Add a handler for the button:
     MyHandler handler = new MyHandler();
-    sendButton.addClickHandler(handler);
-    nameField.addKeyUpHandler(handler);
+    nextButton.addClickHandler(handler);
   }
 }

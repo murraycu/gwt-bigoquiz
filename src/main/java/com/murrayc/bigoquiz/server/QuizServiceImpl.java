@@ -1,8 +1,13 @@
 package com.murrayc.bigoquiz.server;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
+import com.murrayc.bigoquiz.shared.db.UserProfile;
 import com.murrayc.bigoquiz.shared.Question;
 
 import javax.servlet.ServletConfig;
@@ -28,7 +33,7 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
     }
 
     String serverInfo = getServletContext().getServerInfo();
-    String userAgent = getThreadLocalRequest().getHeader("User-Agent");
+    String userAgent = getThreadLocalRequest().getHeader("UserProfile-Agent");
 
     // Escape data from the client to avoid cross-site script vulnerabilities.
     input = escapeHtml(input);
@@ -44,6 +49,35 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
         final Quiz quiz = getQuiz();
         return quiz.getRandomQuestion();
     }
+
+    @Override
+    public UserProfile getUserProfile() throws IllegalArgumentException {
+        return getUserProfileImpl();
+    }
+
+    @Override
+    public void increaseScore() throws IllegalArgumentException {
+        final UserProfile userProfile = getUserProfileImpl();
+        userProfile.setCountCorrectAnswers(userProfile.getCountCorrectAnswers() + 1);
+
+        final EntityManagerFactory emf = EntityManagerFactory.get();
+        emf.ofy().put(userProfile);
+    }
+
+    private UserProfile getUserProfileImpl() {
+        final UserService userService = UserServiceFactory.getUserService();
+        final User user = userService.getCurrentUser();
+
+        final EntityManagerFactory emf = EntityManagerFactory.get();
+        UserProfile userProfile = emf.ofy().find(UserProfile.class, user.getUserId());
+        if (userProfile == null) {
+            userProfile = new UserProfile(user.getUserId(), user.getNickname());
+            emf.ofy().put(userProfile);
+        }
+        return userProfile;
+    }
+
+
 
     /**
      * Escape an html string. Escaping data received from the client helps to

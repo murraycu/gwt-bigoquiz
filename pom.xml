@@ -19,10 +19,16 @@
 
 	<!-- gwt-test-utils is not in the regular maven repository: -->
 	<repositories>
+	  <!-- TODO: Remove this> -->
 		<repository>
 			<id>forge.octo.com</id>
 			<url>http://forge.octo.com/nexus/content/repositories/releases/</url>
 		</repository>
+
+		<repository>
+      <id>objectify-appengine</id>
+      <url>http://objectify-appengine.googlecode.com/svn/maven</url>
+    </repository>
 	</repositories>
 
 	<properties>
@@ -31,8 +37,13 @@
 		<!-- Convenience property to set the GWT version -->
 		<gwt.version>2.7.0</gwt.version>
 
-        <!-- Convenience property to set the AppEngine version -->
-        <appengine.version>1.9.31</appengine.version>
+    <!-- Convenience property to set the AppEngine version -->
+    <appengine.version>1.9.31</appengine.version>
+    <appengine.application.version>1</appengine.application.version>
+    
+    <!-- Convenience property to set the DataNucleus version -->
+    <datanucleusplugin.version>3.2.0-m1</datanucleusplugin.version>
+    <datanucleus.version>3.2.0-m3</datanucleus.version>
 
 		<!-- Make mvn gwt:run use SSL (HTTPS) when running Jetty.
 		     Login will fail (on purpose) if run as regular HTTP.
@@ -91,23 +102,43 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-1.0-sdk</artifactId>
-            <version>${appengine.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-testing</artifactId>
-            <version>${appengine.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-stubs</artifactId>
-            <version>${appengine.version}</version>
-            <scope>test</scope>
-        </dependency>
+
+    <!-- Google App Engine (GAE) -->
+    <dependency>
+      <groupId>com.google.appengine</groupId>
+      <artifactId>appengine-api-1.0-sdk</artifactId>
+      <version>${appengine.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.appengine</groupId>
+      <artifactId>appengine-testing</artifactId>
+      <version>${appengine.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.appengine</groupId>
+      <artifactId>appengine-api-stubs</artifactId>
+      <version>${appengine.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.appengine</groupId>
+      <artifactId>appengine-api-labs</artifactId>
+      <version>${appengine.version}</version>
+    </dependency>
+
+    <!-- Objectify for persistence. It uses the stock javax.persistence annotations -->
+    <dependency>
+      <groupId>com.googlecode.objectify</groupId>
+      <artifactId>objectify</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>persistence-api</artifactId>
+      <version>1.0</version>
+    </dependency>
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -286,8 +317,18 @@
 			<plugin>
 				<groupId>com.google.appengine</groupId>
 				<artifactId>appengine-maven-plugin</artifactId>
-				<version>1.9.31</version>
+				<version>${appengine.version}</version>
+				<configuration>
+          <version>${appengine.application.version}</version>
+          <enableJarClasses>false</enableJarClasses>
+          <!-- Uncomment the snippet below to bind to all IPs instead of just localhost -->
+          <!-- <address>0.0.0.0</address> <port>8080</port> -->
+          <!-- Uncomment the snippet below to enable local debugging with a remove debugger like those included with Eclipse 
+            or IntelliJ -->
+          <!-- <jvmFlags><jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag></jvmFlags> -->
+        </configuration>
 			</plugin>
+            
 		</plugins>
 		<pluginManagement>
 			<plugins>

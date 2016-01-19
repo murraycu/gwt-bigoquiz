@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.client;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.murrayc.bigoquiz.shared.db.UserProfile;
 import com.murrayc.bigoquiz.shared.Question;
 
 /**
@@ -10,4 +11,8 @@ import com.murrayc.bigoquiz.shared.Question;
 @RemoteServiceRelativePath("greet")
 public interface QuizService extends RemoteService {
     Question getQuestion() throws IllegalArgumentException;
+
+    UserProfile getUserProfile() throws IllegalArgumentException;
+
+    void increaseScore()  throws IllegalArgumentException;
 }
