@@ -26,6 +26,11 @@ public class QuizLoader {
     private static final String ATTR_ID = "id";
     private static final String NODE_TEXT = "text";
     private static final String NODE_ANSWER = "answer";
+    private static final String NODE_CHOICES = "choices";
+    private static final String NODE_CHOICE = "choice";
+    private static final String NODE_DEFAULT_CHOICES = "default_choices";
+
+
 
     public static Quiz loadQuiz(final InputStream is) {
         final Quiz result = new Quiz();
@@ -62,6 +67,18 @@ public class QuizLoader {
         final List<Node> listSectionNodes = getChildrenByTagName(rootNode, NODE_SECTION);
         for (final Node sectionNode : listSectionNodes) {
             final Element sectionElement = (Element)sectionNode;
+
+            final String sectionId = sectionElement.getAttribute(ATTR_ID);
+
+            //Default choices:
+            List<String> defaultChoices = null;
+            final Element elementChoices = getElementByName(sectionElement, NODE_DEFAULT_CHOICES);
+            if (elementChoices != null) {
+                defaultChoices = loadChoices(elementChoices);
+                result.setDefaultChoices(sectionId, defaultChoices);
+            }
+
+            //Questions:
             final List<Node> listQuestionNodes = getChildrenByTagName(sectionElement, NODE_QUESTION);
             for (final Node questionNode : listQuestionNodes) {
                 if (!(questionNode instanceof Element)) {
@@ -69,9 +86,9 @@ public class QuizLoader {
                 }
 
                 final Element element = (Element)questionNode;
-                final Question question = loadQuestionNode(element);
+                final Question question = loadQuestionNode(element, defaultChoices);
                 if (question != null) {
-                    result.addQuestion(question);
+                    result.addQuestion(sectionId, question);
                 }
             }
         }
@@ -79,7 +96,7 @@ public class QuizLoader {
         return result;
     }
 
-    private static Question loadQuestionNode(final Element element) {
+    private static Question loadQuestionNode(final Element element, final List<String> defaultChoices) {
         final String id = element.getAttribute(ATTR_ID);
         if (StringUtils.isEmpty(id)) {
             return null;
@@ -105,8 +122,36 @@ public class QuizLoader {
             return null;
         }
 
+        List<String> choices = null;
+        final Element elementChoices = getElementByName(element, NODE_CHOICES);
+        if (elementChoices != null) {
+            choices = loadChoices(elementChoices);
+        }
 
-        return new Question(id, questionText, answerText);
+        if (choices == null || choices.isEmpty()) {
+            choices = defaultChoices;
+        }
+
+        return new Question(id, questionText, answerText, choices);
+    }
+
+    private static List<String> loadChoices(final Element elementChoices) {
+        List<String> choices = new ArrayList<>();
+
+        final List<Node> listChoices = getChildrenByTagName(elementChoices, NODE_CHOICE);
+        for (final Node choiceNode : listChoices) {
+            if (!(choiceNode instanceof Element)) {
+                continue;
+            }
+
+            final Element elementChoice = (Element)choiceNode;
+            final String choice = elementChoice.getTextContent();
+            if (!StringUtils.isEmpty(choice)) {
+                choices.add(choice);
+            }
+        }
+
+        return choices;
     }
 
     private static Element getElementByName(final Element parentElement, final String tagName) {

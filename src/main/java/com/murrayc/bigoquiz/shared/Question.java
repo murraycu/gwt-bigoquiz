@@ -2,6 +2,8 @@ package com.murrayc.bigoquiz.shared;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+import java.util.List;
+
 /**
  * Created by murrayc on 1/18/16.
  */
@@ -10,17 +12,16 @@ public class Question implements IsSerializable {
     private /* final */ String id;
     private /* final */ String question;
     private /* final */ String answer;
+    private /* final */ List<String> choices;
 
-    public Question(final String id, final String question, final String answer) {
+    public Question(final String id, final String question, final String answer, final List<String> choices) {
         this.id = id;
         this.question = question;
         this.answer = answer;
+        this.choices = choices;
     }
 
     public Question() {
-        this.id = null;
-        this.question = null;
-        this.answer = null;
     }
 
     public String getId() {
@@ -34,6 +35,11 @@ public class Question implements IsSerializable {
     public String getAnswer() {
         return answer;
     }
+
+    public List<String> getChoices() {
+        return choices;
+    }
+
 
 
 }
