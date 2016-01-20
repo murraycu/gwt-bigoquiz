@@ -16,7 +16,7 @@ import com.murrayc.bigoquiz.shared.Question;
 /**
  * Created by murrayc on 1/19/16.s
  */
-public class QuestionActivity extends AbstractActivity implements View.Presenter {
+public class QuestionActivity extends AbstractActivity implements QuestionView.Presenter {
     private final ClientFactory clientFactory;
     private final Place place;
     private String questionId;
@@ -42,6 +42,8 @@ public class QuestionActivity extends AbstractActivity implements View.Presenter
 
             @Override
             public void onSuccess(final Question result) {
+
+                questionId = result.getId();
                 questionView.setQuestion(result);
             }
 
@@ -55,4 +57,24 @@ public class QuestionActivity extends AbstractActivity implements View.Presenter
         clientFactory.getPlaceController().goTo(place);
     }
 
+    @Override
+    public void submitAnswer() {
+        final String answer = questionView.getChoiceSelected();
+
+        final AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
+            @Override
+            public void onFailure(final Throwable caught) {
+                // TODO: create a way to notify users of asynchronous callback failures
+                GWT.log("AsyncCallback Failed: submitAnswer(): " + caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(final Boolean result) {
+                questionView.setSubmissionResult(result);
+            }
+
+        };
+
+        QuizServiceAsync.Util.getInstance().submitAnswer(questionId, answer, callback);
+    }
 }

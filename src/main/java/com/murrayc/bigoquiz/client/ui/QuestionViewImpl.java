@@ -1,5 +1,7 @@
 package com.murrayc.bigoquiz.client.ui;
 
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
@@ -15,6 +17,9 @@ public class QuestionViewImpl extends Composite implements QuestionView {
     private Label questionLabel = new Label("question text");
     private Label answerLabel = new Label("answer text");
     private Panel choicesPanel = new VerticalPanel();
+    private String choiceSelected;
+    private Label resultLabel = new Label("result");
+
 
     public QuestionViewImpl() {
         final FlowPanel box = new FlowPanel();
@@ -24,6 +29,7 @@ public class QuestionViewImpl extends Composite implements QuestionView {
         box.add(questionLabel);
         box.add(answerLabel);
         box.add(choicesPanel);
+        box.add(resultLabel);
 
         final FlowPanel mainPanel = new FlowPanel();
         mainPanel.add(box);
@@ -31,8 +37,8 @@ public class QuestionViewImpl extends Composite implements QuestionView {
     }
 
     @Override
-    public void setPresenter(final Presenter presenter) {
-        this.presenter = presenter;
+    public void setPresenter(final View.Presenter presenter) {
+        this.presenter = (QuestionView.Presenter)presenter;
     }
 
     @Override
@@ -53,9 +59,40 @@ public class QuestionViewImpl extends Composite implements QuestionView {
         questionLabel.setText(question.getQuestion());
         answerLabel.setText(question.getAnswer());
 
+        final String groupName = "choices";
         for (final String choice : question.getChoices()) {
-            final CheckBox checkBox = new CheckBox(choice);
-            choicesPanel.add(checkBox);
+            final RadioButton radioButton = new RadioButton(groupName, choice);
+            radioButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+                @Override
+                public void onValueChange(final ValueChangeEvent<Boolean> event) {
+                    if (event.getValue()) {
+                        submitAnswer(choice);
+                    }
+                }
+            });
+
+            choicesPanel.add(radioButton);
         }
+
+        resultLabel.setText("waiting");
+    }
+
+    @Override
+    public String getChoiceSelected() {
+        return choiceSelected;
+    }
+
+    @Override
+    public void setSubmissionResult(boolean submissionResult) {
+        if(submissionResult) {
+            resultLabel.setText("Correct");
+        } else {
+            resultLabel.setText("Wrong");
+        }
+    }
+
+    private void submitAnswer(final String answer) {
+        choiceSelected = answer;
+        presenter.submitAnswer();
     }
 }

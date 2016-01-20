@@ -15,6 +15,9 @@ public interface QuizServiceAsync {
     void getNextQuestion(AsyncCallback<Question> async)
             throws IllegalArgumentException;
 
+    void submitAnswer(final String questionId, final String answer, AsyncCallback<Boolean> async)
+            throws IllegalArgumentException;
+
     void getUserProfile(AsyncCallback<UserProfile> async)
             throws IllegalArgumentException;
 

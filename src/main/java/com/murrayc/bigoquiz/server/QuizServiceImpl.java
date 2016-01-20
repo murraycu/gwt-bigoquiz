@@ -9,6 +9,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 import com.murrayc.bigoquiz.shared.Question;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -18,7 +19,7 @@ import java.io.InputStream;
  * The server-side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
-public class QuizServiceImpl extends RemoteServiceServlet implements
+public class QuizServiceImpl extends ServiceWithUser implements
         QuizService {
     private static final String LOADED_QUIZ = "loaded-quiz";
 
@@ -56,6 +57,20 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
         return quiz.getRandomQuestion();
     }
 
+    public boolean submitAnswer(final String questionId, final String answer) throws IllegalArgumentException {
+        final Question question = getQuestion(questionId);
+        if (question == null) {
+            throw new IllegalArgumentException("Unknown Question ID");
+        }
+
+        final boolean result = StringUtils.equals(question.getAnswer(), answer);
+        if (result) {
+            increaseScore();
+        }
+
+        return result;
+    }
+
 
     @Override
     public UserProfile getUserProfile() throws IllegalArgumentException {
@@ -65,6 +80,11 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
     @Override
     public void increaseScore() throws IllegalArgumentException {
         final UserProfile userProfile = getUserProfileImpl();
+        if (userProfile == null) {
+            //TODO: Keep a score in the session, without a user profile?
+            return;
+        }
+
         userProfile.setCountCorrectAnswers(userProfile.getCountCorrectAnswers() + 1);
 
         final EntityManagerFactory emf = EntityManagerFactory.get();
@@ -72,8 +92,10 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
     }
 
     private UserProfile getUserProfileImpl() {
-        final UserService userService = UserServiceFactory.getUserService();
-        final User user = userService.getCurrentUser();
+        final User user = getUser();
+        if (user == null) {
+            return null;
+        }
 
         final EntityManagerFactory emf = EntityManagerFactory.get();
         UserProfile userProfile = emf.ofy().find(UserProfile.class, user.getUserId());

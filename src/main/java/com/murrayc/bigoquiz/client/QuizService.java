@@ -12,6 +12,7 @@ import com.murrayc.bigoquiz.shared.Question;
 public interface QuizService extends RemoteService {
     Question getQuestion(final String questionId) throws IllegalArgumentException;
     Question getNextQuestion() throws IllegalArgumentException;
+    boolean submitAnswer(final String questionId, final String answer) throws IllegalArgumentException;
 
     UserProfile getUserProfile() throws IllegalArgumentException;
 
