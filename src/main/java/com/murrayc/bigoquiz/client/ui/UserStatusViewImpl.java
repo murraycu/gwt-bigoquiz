@@ -48,7 +48,7 @@ public class UserStatusViewImpl extends Composite implements UserStatusView {
 
     private void showLogin() {
         if(loginInfo == null) {
-            //TODO: Log.error("showLogin(): loginInfo was null.");
+            Log.error("showLogin(): loginInfo was null.");
         } else if(!loginInfo.isLoggedIn()) {
             signInLink.setHref(loginInfo.getLoginUrl());
             loginPanel.setVisible(true);

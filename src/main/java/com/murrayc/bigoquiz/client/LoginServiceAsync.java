@@ -2,7 +2,6 @@ package com.murrayc.bigoquiz.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.murrayc.bigoquiz.client.LoginInfo;
 
 /**
  * Created by murrayc on 1/18/16.

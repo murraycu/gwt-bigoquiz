@@ -1,6 +1,6 @@
 package com.murrayc.bigoquiz.server;
 
-import com.allen_sauer.gwt.log.client.Log;
+import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.shared.Question;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Element;
