@@ -40,10 +40,6 @@
     <!-- Convenience property to set the AppEngine version -->
     <appengine.version>1.9.31</appengine.version>
     <appengine.application.version>1</appengine.application.version>
-    
-    <!-- Convenience property to set the DataNucleus version -->
-    <datanucleusplugin.version>3.2.0-m1</datanucleusplugin.version>
-    <datanucleus.version>3.2.0-m3</datanucleus.version>
 
 		<!-- Make mvn gwt:run use SSL (HTTPS) when running Jetty.
 		     Login will fail (on purpose) if run as regular HTTP.
@@ -194,6 +190,12 @@
 			<groupId>com.googlecode.gwt-test-utils</groupId>
 			<artifactId>gwt-test-utils</artifactId>
 			<version>0.47</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>3.1</version>
 			<scope>test</scope>
 		</dependency>
 

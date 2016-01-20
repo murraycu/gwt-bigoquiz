@@ -1,17 +1,15 @@
 package com.murrayc.bigoquiz.server;
 
-import com.allen_sauer.gwt.log.client.Log;
-import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.io.InputStream;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by murrayc on 1/18/16.
  */
-public class QuizLoaderTest extends TestCase {
+public class QuizLoaderTest {
 
     @Test
     public void testLoadQuiz() throws Exception {

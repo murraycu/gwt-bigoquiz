@@ -1,164 +1,99 @@
 package com.murrayc.bigoquiz.client;
 
+import com.google.gwt.activity.shared.ActivityManager;
+import com.google.gwt.activity.shared.ActivityMapper;
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.place.shared.Place;
+import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.user.client.ui.*;
-import com.murrayc.bigoquiz.shared.db.UserProfile;
+import com.google.web.bindery.event.shared.EventBus;
+import com.murrayc.bigoquiz.client.mvp.AppPlaceHistoryMapper;
+import com.murrayc.bigoquiz.client.mvp.QuestionActivityMapper;
+import com.murrayc.bigoquiz.client.mvp.UserStatusActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class BigOQuiz implements EntryPoint {
-  private LoginInfo loginInfo = null;
-  private VerticalPanel loginPanel = new VerticalPanel();
-  private Label loginLabel = new Label(
-          "Please sign in to your Google Account to access the StockWatcher application.");
-  private Anchor signInLink = new Anchor("Sign In");
-  final Label nameLabel = new Label();
-    final Label scoreLabel = new Label();
+    private final LayoutPanel rootLayoutPanel = RootLayoutPanel.get();
+    private final FlowPanel layoutPanel = new FlowPanel();
+    protected SimplePanel questionPanel = new SimplePanel();
+    protected SimplePanel userStatusPanel = new SimplePanel();
 
+    protected ClientFactory clientFactory;
 
-    /**
-   * The message displayed to the user when the server cannot be reached or
-   * returns an error.
-   */
-  private static final String SERVER_ERROR = "An error occurred while "
-      + "attempting to contact the server. Please check your network "
-      + "connection and try again.";
+    AcceptsOneWidget userStatusDisplay = new AcceptsOneWidget() {
+        @Override
+        public void setWidget(final IsWidget activityWidget) {
+            final Widget widget = Widget.asWidgetOrNull(activityWidget);
+            userStatusPanel.setVisible(widget != null);
+            userStatusPanel.setWidget(widget);
+        }
+    };
 
-  /**
-   * Create a remote service proxy to talk to the server-side Greeting service.
-   */
-  private final QuizServiceAsync quizService = GWT.create(QuizService.class);
+    AcceptsOneWidget questionDisplay = new AcceptsOneWidget() {
+        @Override
+        public void setWidget(final IsWidget activityWidget) {
+            final Widget widget = Widget.asWidgetOrNull(activityWidget);
+            questionPanel.setVisible(widget != null);
+            questionPanel.setWidget(widget);
+        }
+    };
 
   /**
    * This is the entry point method.
    */
   public void onModuleLoad() {
-    // Check login status using login service.
-    LoginServiceAsync loginService = GWT.create(LoginService.class);
-    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
-      public void onFailure(final Throwable error) {
+      rootLayoutPanel.add(layoutPanel);
+      rootLayoutPanel.setWidgetVisible(layoutPanel, true);
+
+      // add the display regions to the main layout panel
+      layoutPanel.add(userStatusPanel);
+      userStatusPanel.setVisible(true);
+      layoutPanel.add(questionPanel);
+      questionPanel.setVisible(true);
+
+      // set some properties for the display regions
+      // The 'overflow: visible' adds a horizontal scrollbar when the content is larger than the browser window.
+      // TODO: It would be better to just have the regular browser scrollbars, but for some reason they
+      // are not shown.
+      rootLayoutPanel.getWidgetContainerElement(layoutPanel).getStyle().setOverflow(Style.Overflow.VISIBLE);
+
+      // We might, in future, use different ClientFactory implementations to create different views
+      // for different browser types (such as mobile), so we use GWT.create() to have deferred binding.
+      // See http://code.google.com/webtoolkit/doc/latest/DevGuideMvpActivitiesAndPlaces.html
+      // which describes how to do this via our OnlineGlom.gwt.xml file.
+      clientFactory = GWT.create(ClientFactory.class);
+      final EventBus eventBus = clientFactory.getEventBus();
+      final PlaceController placeController = clientFactory.getPlaceController();
+
+      // Activity manager for the user status display region.
+      final ActivityMapper userStatusActivityMapper = new UserStatusActivityMapper(clientFactory);
+      final ActivityManager userStatusActivityManager = new ActivityManager(userStatusActivityMapper,
+              eventBus);
+      userStatusActivityManager.setDisplay(userStatusDisplay);
+
+      // Activity manager for the question display region.
+      final ActivityMapper questionActivityMapper = new QuestionActivityMapper(clientFactory);
+      final ActivityManager questionActivityManager = new ActivityManager(questionActivityMapper, eventBus);
+      questionActivityManager.setDisplay(questionDisplay);
+
+      // Start PlaceHistoryHandler with our PlaceHistoryMapper.
+      final AppPlaceHistoryMapper historyMapper = GWT.create(AppPlaceHistoryMapper.class);
+      final PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
+
+      Place defaultPlace = null;
+      if(placeController instanceof PlaceControllerExt) {
+          PlaceControllerExt ext = (PlaceControllerExt)placeController;
+          defaultPlace = ext.getDefaultPlace();
       }
+      historyHandler.register(placeController, eventBus, defaultPlace);
 
-      public void onSuccess(final LoginInfo result) {
-        loginInfo = result;
-        if(loginInfo.isLoggedIn()) {
-          loadMainUI();
-        } else {
-          loadLogin();
-        }
-      }
-    });
-
-    loadMainUI();
-
-      getAndShowScore();
-  }
-
-    private void getAndShowScore() {
-        QuizServiceAsync quizService = GWT.create(QuizService.class);
-        quizService.getUserProfile(new AsyncCallback<UserProfile>() {
-          public void onFailure(final Throwable error) {
-              nameLabel.setText("Error: Can't get username");
-              scoreLabel.setText("0");
-          }
-
-          public void onSuccess(final UserProfile result) {
-            nameLabel.setText(result.getName());
-
-              //TODO: internationalization:
-              scoreLabel.setText(String.valueOf(result.getCountCorrectAnswers()));
-          }
-        });
-    }
-
-    private void loadLogin() {
-    // Assemble login panel.
-    signInLink.setHref(loginInfo.getLoginUrl());
-    loginPanel.add(loginLabel);
-    loginPanel.add(signInLink);
-    RootPanel.get("login").add(loginPanel);
-  }
-
-  private void loadMainUI() {
-    final Button nextButton = new Button("Next Question");
-    nameLabel.setText("<user>");
-    final Label errorLabel = new Label();
-
-    // We can add style names to widgets
-    nextButton.addStyleName("nextButton");
-
-    // Add the nameLabel and nextButton to the RootPanel
-    // Use RootPanel.get() to get the entire body element
-    RootPanel.get("nameFieldContainer").add(nameLabel);
-      RootPanel.get("scoreFieldContainer").add(scoreLabel);
-    RootPanel.get("sendButtonContainer").add(nextButton);
-    RootPanel.get("errorLabelContainer").add(errorLabel);
-
-    // Create the popup dialog box
-    final DialogBox dialogBox = new DialogBox();
-    dialogBox.setText("Remote Procedure Call");
-    dialogBox.setAnimationEnabled(true);
-    final Button closeButton = new Button("Close");
-    // We can set the id of a widget by accessing its Element
-    closeButton.getElement().setId("closeButton");
-    final Label textToServerLabel = new Label();
-    final HTML serverResponseLabel = new HTML();
-    VerticalPanel dialogVPanel = new VerticalPanel();
-    dialogVPanel.addStyleName("dialogVPanel");
-    dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
-    dialogVPanel.add(textToServerLabel);
-    dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
-    dialogVPanel.add(serverResponseLabel);
-    dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-    dialogVPanel.add(closeButton);
-    dialogBox.setWidget(dialogVPanel);
-
-    // Add a handler to close the DialogBox
-    closeButton.addClickHandler(new ClickHandler() {
-      public void onClick(ClickEvent event) {
-        dialogBox.hide();
-        nextButton.setEnabled(true);
-        nextButton.setFocus(true);
-      }
-    });
-
-    // Create a handler for the nextButton and nameLabel
-    class MyHandler implements ClickHandler {
-      /**
-       * Fired when the user clicks on the nextButton.
-       */
-      public void onClick(ClickEvent event) {
-        increaseScore();
-      }
-
-      /**
-       * Send the name from the nameLabel to the server and wait for a response.
-       */
-      private void increaseScore() {
-          quizService.increaseScore(new AsyncCallback<Void>() {
-              public void onFailure(final Throwable caught) {
-                // Show the RPC error message to the user
-                dialogBox.setText("Remote Procedure Call - Failure");
-                serverResponseLabel.addStyleName("serverResponseLabelError");
-                serverResponseLabel.setHTML(SERVER_ERROR);
-                dialogBox.center();
-                closeButton.setFocus(true);
-              }
-    
-              public void onSuccess(final Void result) {
-                  getAndShowScore();
-              }
-        });
-      }
-    }
-
-    // Add a handler for the button:
-    MyHandler handler = new MyHandler();
-    nextButton.addClickHandler(handler);
+      // Goes to the place represented on the URL or the default place.
+      historyHandler.handleCurrentHistory();
   }
 }

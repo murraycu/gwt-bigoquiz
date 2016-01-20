@@ -1,5 +1,6 @@
 package com.murrayc.bigoquiz.server;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -14,9 +15,24 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
         LoginService {
 
     public LoginInfo login(final String requestUri) {
-        final UserService userService = UserServiceFactory.getUserService();
-        final User user = userService.getCurrentUser();
         final LoginInfo loginInfo = new LoginInfo();
+        loginInfo.setLoggedIn(false);
+
+        final UserService userService = UserServiceFactory.getUserService();
+        if (userService == null) {
+            return loginInfo;
+        }
+
+        User user = null;
+        try {
+            userService.getCurrentUser();
+        } catch (final Exception ex) {
+            //This happens when we run this in the gwt superdevmode,
+            //instead of in the appengine.
+            Log.error("Exception from userService.getCurrentUser()()", ex);
+            return loginInfo;
+        }
+
 
         if (user != null) {
             loginInfo.setLoggedIn(true);

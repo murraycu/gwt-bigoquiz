@@ -3,15 +3,15 @@
     <title>Big-O Quiz</title>
     <section id="data-structure-operations">
         <title>Data Structure Operations</title>
-        <question>
+        <question id="1">
             <text>Array: Access</text>
             <answer>O(1)</answer>
         </question>
-        <question>
+        <question id="2">
             <text>Array: Search</text>
             <answer>O(n)</answer>
         </question>
-        <question>
+        <question id="3">
             <text>Array: Insertion</text>
             <answer>O(n)</answer>
         </question>

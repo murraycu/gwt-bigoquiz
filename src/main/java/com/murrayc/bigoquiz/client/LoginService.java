@@ -9,5 +9,5 @@ import com.murrayc.bigoquiz.client.LoginInfo;
  */
 @RemoteServiceRelativePath("login")
 public interface LoginService extends RemoteService {
-    public LoginInfo login(final String requestUri);
+    LoginInfo login(final String requestUri);
 }

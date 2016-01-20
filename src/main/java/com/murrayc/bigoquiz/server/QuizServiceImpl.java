@@ -45,10 +45,17 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
   */
 
     @Override
-    public Question getQuestion() throws IllegalArgumentException {
+    public Question getQuestion(final String questionId) throws IllegalArgumentException {
+        final Quiz quiz = getQuiz();
+        return quiz.getQuestion(questionId);
+    }
+
+    @Override
+    public Question getNextQuestion() throws IllegalArgumentException {
         final Quiz quiz = getQuiz();
         return quiz.getRandomQuestion();
     }
+
 
     @Override
     public UserProfile getUserProfile() throws IllegalArgumentException {
@@ -77,24 +84,7 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
         return userProfile;
     }
 
-
-
-    /**
-     * Escape an html string. Escaping data received from the client helps to
-     * prevent cross-site script vulnerabilities.
-     *
-     * @param html the html string to escape
-     * @return the escaped string
-     */
-    private String escapeHtml(String html) {
-        if (html == null) {
-            return null;
-        }
-        return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(
-                ">", "&gt;");
-    }
-
-    public Quiz getQuiz() {
+    private Quiz getQuiz() {
         final ServletConfig config = this.getServletConfig();
         if(config == null) {
             Log.error("getServletConfig() return null");

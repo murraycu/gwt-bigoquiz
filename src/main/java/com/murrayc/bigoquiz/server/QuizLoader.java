@@ -23,6 +23,7 @@ public class QuizLoader {
     private static final String NODE_ROOT = "quiz";
     private static final String NODE_SECTION = "section";
     private static final String NODE_QUESTION = "question";
+    private static final String ATTR_ID = "id";
     private static final String NODE_TEXT = "text";
     private static final String NODE_ANSWER = "answer";
 
@@ -69,7 +70,9 @@ public class QuizLoader {
 
                 final Element element = (Element)questionNode;
                 final Question question = loadQuestionNode(element);
-                result.addQuestion(question);
+                if (question != null) {
+                    result.addQuestion(question);
+                }
             }
         }
 
@@ -77,6 +80,11 @@ public class QuizLoader {
     }
 
     private static Question loadQuestionNode(final Element element) {
+        final String id = element.getAttribute(ATTR_ID);
+        if (StringUtils.isEmpty(id)) {
+            return null;
+        }
+
         final Element textElement = getElementByName(element, NODE_TEXT);
         if (textElement == null) {
             return null;
@@ -98,7 +106,7 @@ public class QuizLoader {
         }
 
 
-        return new Question(questionText, answerText);
+        return new Question(id, questionText, answerText);
     }
 
     private static Element getElementByName(final Element parentElement, final String tagName) {

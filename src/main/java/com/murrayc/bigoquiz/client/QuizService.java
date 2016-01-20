@@ -10,7 +10,8 @@ import com.murrayc.bigoquiz.shared.Question;
  */
 @RemoteServiceRelativePath("greet")
 public interface QuizService extends RemoteService {
-    Question getQuestion() throws IllegalArgumentException;
+    Question getQuestion(final String questionId) throws IllegalArgumentException;
+    Question getNextQuestion() throws IllegalArgumentException;
 
     UserProfile getUserProfile() throws IllegalArgumentException;
 

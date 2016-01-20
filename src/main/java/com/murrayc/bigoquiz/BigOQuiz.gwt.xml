@@ -18,9 +18,16 @@
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
   <!-- Other module inherits                                      -->
+  <inherits name="com.google.gwt.place.Place"/>
+  <inherits name="com.google.gwt.activity.Activity"/>
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.murrayc.bigoquiz.client.BigOQuiz'/>
+
+  <!-- Use ClientFactoryImpl by default -->
+  <replace-with class="com.murrayc.bigoquiz.client.ClientFactoryImpl">
+    <when-type-is class="com.murrayc.bigoquiz.client.ClientFactory" />
+  </replace-with>
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
