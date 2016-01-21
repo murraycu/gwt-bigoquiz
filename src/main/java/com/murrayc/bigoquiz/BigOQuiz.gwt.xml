@@ -22,9 +22,9 @@
     <inherits name="com.google.gwt.activity.Activity"/>
     <inherits name="com.google.gwt.logging.Logging"/>
 
-
-    <!-- Specify the app entry point class.                         -->
-    <entry-point class='com.murrayc.bigoquiz.client.BigOQuiz'/>
+    <inherits name="com.gwtplatform.mvp.MvpWithEntryPoint"/>
+    <extend-configuration-property name="gin.ginjector.modules"
+                                   value="com.murrayc.bigoquiz.client.ClientModule"/>
 
     <!-- Use ClientFactoryImpl by default -->
     <replace-with class="com.murrayc.bigoquiz.client.ClientFactoryImpl">

@@ -37,9 +37,19 @@
 		<!-- Convenience property to set the GWT version -->
 		<gwt.version>2.7.0</gwt.version>
 
-    <!-- Convenience property to set the AppEngine version -->
-    <appengine.version>1.9.31</appengine.version>
-    <appengine.application.version>1</appengine.application.version>
+        <!-- Convenience property to set the GWTP version -->
+        <gwtp.version>1.5.1</gwtp.version>
+        <!-- <gin.version>2.1.2</gin.version> -->
+        <!-- <gwt.style>OBF</gwt.style> -->
+
+        <!--
+        <guice.version>3.0</guice.version>
+        -->
+
+
+        <!-- Convenience property to set the AppEngine version -->
+		<appengine.version>1.9.31</appengine.version>
+		<appengine.application.version>1</appengine.application.version>
 
 		<!-- Make mvn gwt:run use SSL (HTTPS) when running Jetty.
 		     Login will fail (on purpose) if run as regular HTTP.
@@ -70,13 +80,34 @@
 			<version>${gwt.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
-			<groupId>c3p0</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<groupId>com.gwtplatform</groupId>
+			<artifactId>gwtp-mvp-client</artifactId>
+			<version>${gwtp.version}</version>
+			<scope>provided</scope>
 		</dependency>
+
+        <!-- DI -->
+        <!--
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-servlet</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt.inject</groupId>
+            <artifactId>gin</artifactId>
+            <version>${gin.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        -->
+
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -92,41 +123,41 @@
 			<scope>compile</scope>
 		</dependency>    
 
-    <!-- Google App Engine (GAE) -->
-    <dependency>
-      <groupId>com.google.appengine</groupId>
-      <artifactId>appengine-api-1.0-sdk</artifactId>
-      <version>${appengine.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.appengine</groupId>
-      <artifactId>appengine-testing</artifactId>
-      <version>${appengine.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.appengine</groupId>
-      <artifactId>appengine-api-stubs</artifactId>
-      <version>${appengine.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.appengine</groupId>
-      <artifactId>appengine-api-labs</artifactId>
-      <version>${appengine.version}</version>
-    </dependency>
+        <!-- Google App Engine (GAE) -->
+        <dependency>
+          <groupId>com.google.appengine</groupId>
+          <artifactId>appengine-api-1.0-sdk</artifactId>
+          <version>${appengine.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>com.google.appengine</groupId>
+          <artifactId>appengine-testing</artifactId>
+          <version>${appengine.version}</version>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.google.appengine</groupId>
+          <artifactId>appengine-api-stubs</artifactId>
+          <version>${appengine.version}</version>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.google.appengine</groupId>
+          <artifactId>appengine-api-labs</artifactId>
+          <version>${appengine.version}</version>
+        </dependency>
 
-    <!-- Objectify for persistence. It uses the stock javax.persistence annotations -->
-    <dependency>
-      <groupId>com.googlecode.objectify</groupId>
-      <artifactId>objectify</artifactId>
-      <version>3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>javax.persistence</groupId>
-      <artifactId>persistence-api</artifactId>
-      <version>1.0</version>
-    </dependency>
+        <!-- Objectify for persistence. It uses the stock javax.persistence annotations -->
+        <dependency>
+          <groupId>com.googlecode.objectify</groupId>
+          <artifactId>objectify</artifactId>
+          <version>3.0</version>
+        </dependency>
+        <dependency>
+          <groupId>javax.persistence</groupId>
+          <artifactId>persistence-api</artifactId>
+          <version>1.0</version>
+        </dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>

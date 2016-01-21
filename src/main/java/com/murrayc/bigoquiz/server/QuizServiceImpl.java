@@ -4,6 +4,7 @@ import com.google.appengine.api.users.User;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
+import com.murrayc.bigoquiz.server.db.UserAnswer;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
@@ -13,6 +14,10 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * The server-side implementation of the RPC service.
@@ -81,9 +86,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         final boolean result = StringUtils.equals(questionAndAnswer.getAnswer(), answer);
-        if (result) {
-            increaseScore();
-        }
+        storeAnswer(result, questionId);
 
         return createSubmissionResult(result, questionId);
     }
@@ -171,16 +174,31 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return new SubmissionResult(result, correctAnswer, nextQuestion);
     }
 
-    private void increaseScore() {
+    private void storeAnswer(boolean result, final String questionId) {
         final UserProfile userProfile = getUserProfileImpl();
         if (userProfile == null) {
             //TODO: Keep a score in the session, without a user profile?
             return;
         }
 
-        userProfile.setCountCorrectAnswers(userProfile.getCountCorrectAnswers() + 1);
-
         final EntityManagerFactory emf = EntityManagerFactory.get();
-        emf.ofy().put(userProfile);
+
+        if (result) {
+            userProfile.setCountCorrectAnswers(userProfile.getCountCorrectAnswers() + 1);
+
+            emf.ofy().put(userProfile);
+        }
+
+        final String time = getCurrentTime();
+        final UserAnswer userAnswer = new UserAnswer(questionId, result, time);
+        emf.ofy().put(userAnswer);
+    }
+
+    private static String getCurrentTime() {
+        //TODO: Performance:
+        final TimeZone tz = TimeZone.getTimeZone("UTC");
+        final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
+        df.setTimeZone(tz);
+        return df.format(new Date());
     }
 }
