@@ -6,7 +6,7 @@ import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
-import com.murrayc.bigoquiz.shared.Question;
+import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 
 /**
  * Created by murrayc on 1/19/16.
@@ -25,7 +25,7 @@ public class QuestionViewImpl extends Composite implements QuestionView {
         final FlowPanel box = new FlowPanel();
         //box.getElement().setAttribute("id", "titlebox");
 
-        box.add(new Label("Question"));
+        box.add(new Label("QuestionAndAnswer"));
         box.add(questionLabel);
         box.add(answerLabel);
         box.add(choicesPanel);
@@ -47,20 +47,20 @@ public class QuestionViewImpl extends Composite implements QuestionView {
     }
 
     @Override
-    public void setQuestion(final Question question) {
+    public void setQuestion(final QuestionAndAnswer questionAndAnswer) {
         choicesPanel.clear();
 
-        if (question == null) {
+        if (questionAndAnswer == null) {
             questionLabel.setText("");
             answerLabel.setText("");
             return;
         }
 
-        questionLabel.setText(question.getQuestion());
-        answerLabel.setText(question.getAnswer());
+        questionLabel.setText(questionAndAnswer.getQuestion());
+        answerLabel.setText(questionAndAnswer.getAnswer());
 
         final String groupName = "choices";
-        for (final String choice : question.getChoices()) {
+        for (final String choice : questionAndAnswer.getChoices()) {
             final RadioButton radioButton = new RadioButton(groupName, choice);
             radioButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
                 @Override

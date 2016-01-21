@@ -1,7 +1,7 @@
 package com.murrayc.bigoquiz.server;
 
 import com.murrayc.bigoquiz.client.Log;
-import com.murrayc.bigoquiz.shared.Question;
+import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -86,9 +86,9 @@ public class QuizLoader {
                 }
 
                 final Element element = (Element)questionNode;
-                final Question question = loadQuestionNode(element, defaultChoices);
-                if (question != null) {
-                    result.addQuestion(sectionId, question);
+                final QuestionAndAnswer questionAndAnswer = loadQuestionNode(element, defaultChoices);
+                if (questionAndAnswer != null) {
+                    result.addQuestion(sectionId, questionAndAnswer);
                 }
             }
         }
@@ -96,7 +96,7 @@ public class QuizLoader {
         return result;
     }
 
-    private static Question loadQuestionNode(final Element element, final List<String> defaultChoices) {
+    private static QuestionAndAnswer loadQuestionNode(final Element element, final List<String> defaultChoices) {
         final String id = element.getAttribute(ATTR_ID);
         if (StringUtils.isEmpty(id)) {
             return null;
@@ -132,7 +132,7 @@ public class QuizLoader {
             choices = defaultChoices;
         }
 
-        return new Question(id, questionText, answerText, choices);
+        return new QuestionAndAnswer(id, questionText, answerText, choices);
     }
 
     private static List<String> loadChoices(final Element elementChoices) {

@@ -3,17 +3,17 @@
     <title>Big-O Quiz</title>
     <section id="data-structure-operations">
         <title>Data Structure Operations</title>
-    <question>
+    <questionAndAnswer>
         <text>Array: Access</text>
         <answer>O(1)</answer>
-    </question>
-    <question>
+    </questionAndAnswer>
+    <questionAndAnswer>
         <text>Array: Search</text>
         <answer>O(n)</answer>
-    </question>
-    <question>
+    </questionAndAnswer>
+    <questionAndAnswer>
         <text>Array: Insertion</text>
         <answer>O(n)</answer>
-    </question>
+    </questionAndAnswer>
     </section>
 </quiz>

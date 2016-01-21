@@ -10,8 +10,7 @@ import com.murrayc.bigoquiz.client.ClientFactory;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.place.QuestionPlace;
 import com.murrayc.bigoquiz.client.ui.QuestionView;
-import com.murrayc.bigoquiz.client.ui.View;
-import com.murrayc.bigoquiz.shared.Question;
+import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 
 /**
  * Created by murrayc on 1/19/16.s
@@ -33,7 +32,7 @@ public class QuestionActivity extends AbstractActivity implements QuestionView.P
         questionView.setPresenter(this);
         panel.setWidget(questionView.asWidget());
 
-        final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
+        final AsyncCallback<QuestionAndAnswer> callback = new AsyncCallback<QuestionAndAnswer>() {
             @Override
             public void onFailure(final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
@@ -41,7 +40,7 @@ public class QuestionActivity extends AbstractActivity implements QuestionView.P
             }
 
             @Override
-            public void onSuccess(final Question result) {
+            public void onSuccess(final QuestionAndAnswer result) {
 
                 questionId = result.getId();
                 questionView.setQuestion(result);
