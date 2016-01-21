@@ -55,7 +55,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return quiz.getRandomQuestion();
     }
 
-    public boolean submitAnswer(final String questionId, final String answer) throws IllegalArgumentException {
+    public SubmissionResult submitAnswer(final String questionId, final String answer) throws IllegalArgumentException {
         final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
         if (questionAndAnswer == null) {
             throw new IllegalArgumentException("Unknown QuestionAndAnswer ID");
@@ -66,7 +66,11 @@ public class QuizServiceImpl extends ServiceWithUser implements
             increaseScore();
         }
 
-        return result;
+        return createSubmissionResult(result, questionId);
+    }
+
+    public SubmissionResult submitDontKnowAnswer(final String questionId) throws IllegalArgumentException {
+        return createSubmissionResult(false, questionId);
     }
 
     private QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
@@ -78,20 +82,6 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @Override
     public UserProfile getUserProfile() throws IllegalArgumentException {
         return getUserProfileImpl();
-    }
-
-    @Override
-    public void increaseScore() throws IllegalArgumentException {
-        final UserProfile userProfile = getUserProfileImpl();
-        if (userProfile == null) {
-            //TODO: Keep a score in the session, without a user profile?
-            return;
-        }
-
-        userProfile.setCountCorrectAnswers(userProfile.getCountCorrectAnswers() + 1);
-
-        final EntityManagerFactory emf = EntityManagerFactory.get();
-        emf.ofy().put(userProfile);
     }
 
     private UserProfile getUserProfileImpl() {
@@ -110,6 +100,10 @@ public class QuizServiceImpl extends ServiceWithUser implements
     }
 
     private Quiz getQuiz() {
+        if (quiz != null) {
+            return quiz;
+        }
+
         final ServletConfig config = this.getServletConfig();
         if(config == null) {
             Log.error("getServletConfig() return null");
@@ -129,7 +123,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
             return null;
         }
 
-        Quiz quiz = (Quiz)object;
+        quiz = (Quiz)object;
         if (quiz != null) {
             return quiz;
         }
@@ -145,6 +139,31 @@ public class QuizServiceImpl extends ServiceWithUser implements
         context.setAttribute(LOADED_QUIZ, quiz);
 
         return quiz;
+    }
+
+    private SubmissionResult createSubmissionResult(boolean result, final String questionId) {
+        //We only provide the correct answer if the supplied answer was wrong:
+        String correctAnswer = null;
+        if (!result) {
+            final Quiz quiz = getQuiz();
+            correctAnswer = quiz.getAnswer(questionId);
+        }
+
+        final Question nextQuestion = getNextQuestion();
+        return new SubmissionResult(result, correctAnswer, nextQuestion);
+    }
+
+    private void increaseScore() {
+        final UserProfile userProfile = getUserProfileImpl();
+        if (userProfile == null) {
+            //TODO: Keep a score in the session, without a user profile?
+            return;
+        }
+
+        userProfile.setCountCorrectAnswers(userProfile.getCountCorrectAnswers() + 1);
+
+        final EntityManagerFactory emf = EntityManagerFactory.get();
+        emf.ofy().put(userProfile);
     }
 
     public static Quiz loadQuiz() {

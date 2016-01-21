@@ -15,13 +15,14 @@ public interface QuizServiceAsync {
     void getNextQuestion(AsyncCallback<Question> async)
             throws IllegalArgumentException;
 
-    void submitAnswer(final String questionId, final String answer, AsyncCallback<Boolean> async)
+    void submitAnswer(final String questionId, final String answer, AsyncCallback<QuizService.SubmissionResult> async)
+            throws IllegalArgumentException;
+
+    void submitDontKnowAnswer(final String questionId, AsyncCallback<QuizService.SubmissionResult> async)
             throws IllegalArgumentException;
 
     void getUserProfile(AsyncCallback<UserProfile> async)
             throws IllegalArgumentException;
-
-    void increaseScore(AsyncCallback<Void> async);
 
     /**
      * Utility class to get the RPC Async interface from client-side code
