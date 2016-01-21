@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -45,15 +46,20 @@ public class QuizServiceImpl extends ServiceWithUser implements
     public Quiz quiz;
 
     public static Quiz loadQuiz() {
-        final InputStream is = Thread.currentThread().getContextClassLoader()
-                .getResourceAsStream("quiz.xml");
-        if (is == null) {
-            final String errorMessage = "quiz.xml not found.";
-            Log.fatal(errorMessage);
-            return null;
+        try(final InputStream is = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream("quiz.xml")) {
+            if (is == null) {
+                final String errorMessage = "quiz.xml not found.";
+                Log.fatal(errorMessage);
+                return null;
+            }
+
+            return QuizLoader.loadQuiz(is);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        return QuizLoader.loadQuiz(is);
+        return null;
     }
 
     @Override
