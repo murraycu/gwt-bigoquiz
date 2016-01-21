@@ -49,8 +49,7 @@ public class QuestionPlace extends Place {
          * Build a history token based on a HashMap of parameter names and values. This can later be parsed by
          * getTokenParams().
          *
-         * @param params
-         *            A HashMap of names and values.
+         * @param params A HashMap of names and values.
          * @return A history string for use by getToken() implementation.
          */
         String buildParamsToken(final HashMap<String, String> params) {

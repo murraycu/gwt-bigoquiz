@@ -17,8 +17,7 @@ public class UserStatusActivityMapper implements ActivityMapper {
     /**
      * ActivityMapper associates each Place with its corresponding {@link Activity}
      *
-     * @param clientFactory
-     *            Factory to be passed to activities
+     * @param clientFactory Factory to be passed to activities
      */
     public UserStatusActivityMapper(final ClientFactory clientFactory) {
         super();

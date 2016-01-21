@@ -31,7 +31,6 @@ public class QuizLoader {
     private static final String NODE_DEFAULT_CHOICES = "default_choices";
 
 
-
     public static Quiz loadQuiz(final InputStream is) {
         final Quiz result = new Quiz();
 
@@ -66,7 +65,7 @@ public class QuizLoader {
 
         final List<Node> listSectionNodes = getChildrenByTagName(rootNode, NODE_SECTION);
         for (final Node sectionNode : listSectionNodes) {
-            final Element sectionElement = (Element)sectionNode;
+            final Element sectionElement = (Element) sectionNode;
 
             final String sectionId = sectionElement.getAttribute(ATTR_ID);
 
@@ -85,7 +84,7 @@ public class QuizLoader {
                     continue;
                 }
 
-                final Element element = (Element)questionNode;
+                final Element element = (Element) questionNode;
                 final QuestionAndAnswer questionAndAnswer = loadQuestionNode(element, defaultChoices);
                 if (questionAndAnswer != null) {
                     result.addQuestion(sectionId, questionAndAnswer);
@@ -144,7 +143,7 @@ public class QuizLoader {
                 continue;
             }
 
-            final Element elementChoice = (Element)choiceNode;
+            final Element elementChoice = (Element) choiceNode;
             final String choice = elementChoice.getTextContent();
             if (!StringUtils.isEmpty(choice)) {
                 choices.add(choice);

@@ -1,11 +1,11 @@
 package com.murrayc.bigoquiz.client;
 
 import com.google.gwt.event.shared.SimpleEventBus;
+import com.google.gwt.place.shared.PlaceController;
 import com.google.web.bindery.event.shared.EventBus;
 import com.murrayc.bigoquiz.client.place.QuestionPlace;
 import com.murrayc.bigoquiz.client.ui.QuestionView;
 import com.murrayc.bigoquiz.client.ui.QuestionViewImpl;
-import com.google.gwt.place.shared.PlaceController;
 import com.murrayc.bigoquiz.client.ui.UserStatusView;
 import com.murrayc.bigoquiz.client.ui.UserStatusViewImpl;
 

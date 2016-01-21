@@ -7,7 +7,7 @@ import com.murrayc.bigoquiz.shared.db.UserProfile;
 /**
  * Created by murrayc on 1/19/16.
  */
-public class EntityManagerFactory  extends DAOBase {
+public class EntityManagerFactory extends DAOBase {
     private static EntityManagerFactory singleton;
 
     static {
@@ -15,13 +15,13 @@ public class EntityManagerFactory  extends DAOBase {
         ObjectifyService.register(UserProfile.class);
     }
 
+    protected EntityManagerFactory() {
+    }
+
     public static EntityManagerFactory get() {
         if (singleton == null) {
             singleton = new EntityManagerFactory();
         }
         return singleton;
-    }
-
-    protected EntityManagerFactory() {
     }
 }

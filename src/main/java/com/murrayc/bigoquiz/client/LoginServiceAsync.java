@@ -15,15 +15,15 @@ public interface LoginServiceAsync {
     final class Util {
         private static LoginServiceAsync instance;
 
+        private Util() {
+            // Utility class should not be instantiated
+        }
+
         public static LoginServiceAsync getInstance() {
             if (instance == null) {
                 instance = GWT.create(LoginService.class);
             }
             return instance;
-        }
-
-        private Util() {
-            // Utility class should not be instantiated
         }
     }
 }

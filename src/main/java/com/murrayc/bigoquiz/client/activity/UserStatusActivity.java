@@ -47,7 +47,6 @@ public class UserStatusActivity extends AbstractActivity implements View.Present
         QuizServiceAsync.Util.getInstance().getUserProfile(callback);
 
 
-
         // Check login status using login service.
         LoginServiceAsync.Util.getInstance().login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
             public void onFailure(final Throwable error) {

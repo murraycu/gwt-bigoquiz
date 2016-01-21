@@ -42,6 +42,19 @@ public class QuizServiceImpl extends ServiceWithUser implements
         + ".<br><br>It looks like you are using:<br>" + userAgent;
   }
   */
+    public Quiz quiz;
+
+    public static Quiz loadQuiz() {
+        final InputStream is = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream("quiz.xml");
+        if (is == null) {
+            final String errorMessage = "quiz.xml not found.";
+            Log.fatal(errorMessage);
+            return null;
+        }
+
+        return QuizLoader.loadQuiz(is);
+    }
 
     @Override
     public Question getQuestion(final String questionId) throws IllegalArgumentException {
@@ -78,7 +91,6 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return quiz.getQuestionAndAnswer(questionId);
     }
 
-
     @Override
     public UserProfile getUserProfile() throws IllegalArgumentException {
         return getUserProfileImpl();
@@ -105,25 +117,25 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         final ServletConfig config = this.getServletConfig();
-        if(config == null) {
+        if (config == null) {
             Log.error("getServletConfig() return null");
             return null;
         }
 
         final ServletContext context = config.getServletContext();
-        if(context == null) {
+        if (context == null) {
             Log.error("getServletContext() return null");
             return null;
         }
 
         //Use the existing shared quiz if any:
         final Object object = context.getAttribute(LOADED_QUIZ);
-        if((object != null) && !(object instanceof Quiz)) {
+        if ((object != null) && !(object instanceof Quiz)) {
             Log.error("The loaded-quiz attribute is not of the expected type.");
             return null;
         }
 
-        quiz = (Quiz)object;
+        quiz = (Quiz) object;
         if (quiz != null) {
             return quiz;
         }
@@ -165,18 +177,4 @@ public class QuizServiceImpl extends ServiceWithUser implements
         final EntityManagerFactory emf = EntityManagerFactory.get();
         emf.ofy().put(userProfile);
     }
-
-    public static Quiz loadQuiz() {
-        final InputStream is = Thread.currentThread().getContextClassLoader()
-                .getResourceAsStream("quiz.xml");
-        if (is == null) {
-            final String errorMessage = "quiz.xml not found.";
-            Log.fatal(errorMessage);
-            return null;
-        }
-
-        return QuizLoader.loadQuiz(is);
-    }
-
-    public Quiz quiz;
 }

@@ -30,15 +30,15 @@ public interface QuizServiceAsync {
     final class Util {
         private static QuizServiceAsync instance;
 
+        private Util() {
+            // Utility class should not be instantiated
+        }
+
         public static QuizServiceAsync getInstance() {
             if (instance == null) {
                 instance = GWT.create(QuizService.class);
             }
             return instance;
-        }
-
-        private Util() {
-            // Utility class should not be instantiated
         }
     }
 

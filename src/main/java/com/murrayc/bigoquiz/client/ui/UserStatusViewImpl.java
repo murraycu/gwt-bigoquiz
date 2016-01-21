@@ -1,7 +1,8 @@
 package com.murrayc.bigoquiz.client.ui;
 
 import com.google.gwt.user.client.ui.*;
-import com.murrayc.bigoquiz.client.*;
+import com.murrayc.bigoquiz.client.Log;
+import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 
 /**
@@ -47,9 +48,9 @@ public class UserStatusViewImpl extends Composite implements UserStatusView {
     }
 
     private void showLogin() {
-        if(loginInfo == null) {
+        if (loginInfo == null) {
             Log.error("showLogin(): loginInfo was null.");
-        } else if(!loginInfo.isLoggedIn()) {
+        } else if (!loginInfo.isLoggedIn()) {
             signInLink.setHref(loginInfo.getLoginUrl());
             loginPanel.setVisible(true);
         } else {

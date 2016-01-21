@@ -8,12 +8,12 @@ import com.google.gwt.user.client.ui.IsWidget;
  */
 public interface View extends IsWidget {
 
-    interface Presenter {
-        void goTo(Place place);
-    }
-
     void setPresenter(Presenter presenter);
 
     void clear();
+
+    interface Presenter {
+        void goTo(Place place);
+    }
 }
 

@@ -1,7 +1,7 @@
 package com.murrayc.bigoquiz.client;
 
-import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by murrayc on 1/20/16.

@@ -69,7 +69,7 @@ public class QuestionViewImpl extends Composite implements QuestionView {
 
     @Override
     public void setPresenter(final View.Presenter presenter) {
-        this.presenter = (QuestionView.Presenter)presenter;
+        this.presenter = (QuestionView.Presenter) presenter;
     }
 
     @Override
@@ -114,7 +114,7 @@ public class QuestionViewImpl extends Composite implements QuestionView {
 
     @Override
     public void setSubmissionResult(QuizService.SubmissionResult submissionResult) {
-        if(submissionResult == null) {
+        if (submissionResult == null) {
             Log.error("setSubmissionResult(): submissionResult was null.");
             return;
         }

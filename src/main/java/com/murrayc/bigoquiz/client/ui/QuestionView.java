@@ -8,7 +8,9 @@ import com.murrayc.bigoquiz.shared.Question;
  */
 public interface QuestionView extends View {
     void setQuestion(final Question question);
+
     String getChoiceSelected();
+
     void setSubmissionResult(QuizService.SubmissionResult submissionResult);
 
     void showAnswer(String correctAnswer);
