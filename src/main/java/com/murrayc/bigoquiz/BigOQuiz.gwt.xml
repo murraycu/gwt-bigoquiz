@@ -24,7 +24,7 @@
 
     <inherits name="com.gwtplatform.mvp.MvpWithEntryPoint"/>
     <extend-configuration-property name="gin.ginjector.modules"
-                                   value="com.murrayc.bigoquiz.client.ClientModule"/>
+                                   value="com.murrayc.bigoquiz.client.application.gin.ClientModule"/>
 
     <!-- Use ClientFactoryImpl by default -->
     <replace-with class="com.murrayc.bigoquiz.client.ClientFactoryImpl">

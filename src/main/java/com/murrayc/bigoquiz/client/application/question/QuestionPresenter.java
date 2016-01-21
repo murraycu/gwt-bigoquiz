@@ -1,4 +1,4 @@
-package com.murrayc.bigoquiz.client.application.home;
+package com.murrayc.bigoquiz.client.application.question;
 
 
 import com.google.web.bindery.event.shared.EventBus;
@@ -15,17 +15,17 @@ import com.google.inject.Inject;
 /**
  * Created by murrayc on 1/21/16.
  */
-public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> {
+public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, QuestionPresenter.MyProxy> {
     interface MyView extends View {
     }
 
     @ProxyStandard
     @NameToken(NameTokens.HOME)
-    interface MyProxy extends ProxyPlace<HomePresenter> {
+    interface MyProxy extends ProxyPlace<QuestionPresenter> {
     }
 
     @Inject
-    HomePresenter(
+    QuestionPresenter(
             EventBus eventBus,
             MyView view,
             MyProxy proxy) {

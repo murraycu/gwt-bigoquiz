@@ -1,8 +1,9 @@
-package com.murrayc.bigoquiz.client;
+package com.murrayc.bigoquiz.client.application.gin;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
 import com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter;
+import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.application.ApplicationModule;
 
 /**
