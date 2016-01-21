@@ -1,12 +1,12 @@
 package com.murrayc.bigoquiz.client.ui;
 
-import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
+import com.murrayc.bigoquiz.shared.Question;
 
 /**
  * Created by murrayc on 1/19/16.
  */
 public interface QuestionView extends View {
-    void setQuestion(final QuestionAndAnswer questionAndAnswer);
+    void setQuestion(final Question question);
     String getChoiceSelected();
     void setSubmissionResult(boolean submissionResult);
 

@@ -3,10 +3,7 @@ package com.murrayc.bigoquiz.client.ui;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.*;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Panel;
-import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
+import com.murrayc.bigoquiz.shared.Question;
 
 /**
  * Created by murrayc on 1/19/16.
@@ -15,7 +12,6 @@ public class QuestionViewImpl extends Composite implements QuestionView {
     private Presenter presenter;
 
     private Label questionLabel = new Label("question text");
-    private Label answerLabel = new Label("answer text");
     private Panel choicesPanel = new VerticalPanel();
     private String choiceSelected;
     private Label resultLabel = new Label("result");
@@ -27,7 +23,6 @@ public class QuestionViewImpl extends Composite implements QuestionView {
 
         box.add(new Label("QuestionAndAnswer"));
         box.add(questionLabel);
-        box.add(answerLabel);
         box.add(choicesPanel);
         box.add(resultLabel);
 
@@ -47,20 +42,18 @@ public class QuestionViewImpl extends Composite implements QuestionView {
     }
 
     @Override
-    public void setQuestion(final QuestionAndAnswer questionAndAnswer) {
+    public void setQuestion(final Question question) {
         choicesPanel.clear();
 
-        if (questionAndAnswer == null) {
+        if (question == null) {
             questionLabel.setText("");
-            answerLabel.setText("");
             return;
         }
 
-        questionLabel.setText(questionAndAnswer.getQuestion());
-        answerLabel.setText(questionAndAnswer.getAnswer());
+        questionLabel.setText(question.getText());
 
         final String groupName = "choices";
-        for (final String choice : questionAndAnswer.getChoices()) {
+        for (final String choice : question.getChoices()) {
             final RadioButton radioButton = new RadioButton(groupName, choice);
             radioButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
                 @Override

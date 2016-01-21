@@ -2,17 +2,17 @@ package com.murrayc.bigoquiz.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
-import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 
 /**
  * The async counterpart of <code>QuizService</code>.
  */
 public interface QuizServiceAsync {
-    void getQuestion(String questionId, AsyncCallback<QuestionAndAnswer> async)
+    void getQuestion(String questionId, AsyncCallback<Question> async)
             throws IllegalArgumentException;
 
-    void getNextQuestion(AsyncCallback<QuestionAndAnswer> async)
+    void getNextQuestion(AsyncCallback<Question> async)
             throws IllegalArgumentException;
 
     void submitAnswer(final String questionId, final String answer, AsyncCallback<Boolean> async)

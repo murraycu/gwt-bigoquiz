@@ -1,6 +1,6 @@
 package com.murrayc.bigoquiz.client;
 
-import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
+import com.murrayc.bigoquiz.shared.Question;
 import org.junit.Test;
 
 import com.google.gwt.junit.client.GWTTestCase;
@@ -15,14 +15,14 @@ public class GwtTestQuizService extends GWTTestCase {
 	@Test
 	public void test() {
 		// Setup an asynchronous event handler.
-		final AsyncCallback<QuestionAndAnswer> callback = new AsyncCallback<QuestionAndAnswer>() {
+		final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
 			@Override
 			public void onFailure(final Throwable caught) {
 				fail(caught.toString());
 			}
 
 			@Override
-			public void onSuccess(final QuestionAndAnswer question) {
+			public void onSuccess(final Question question) {
 				finishTest();
 			}
 		};

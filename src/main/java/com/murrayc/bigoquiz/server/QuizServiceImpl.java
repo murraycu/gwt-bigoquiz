@@ -4,6 +4,7 @@ import com.google.appengine.api.users.User;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
+import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 import org.apache.commons.lang3.StringUtils;
@@ -43,19 +44,19 @@ public class QuizServiceImpl extends ServiceWithUser implements
   */
 
     @Override
-    public QuestionAndAnswer getQuestion(final String questionId) throws IllegalArgumentException {
+    public Question getQuestion(final String questionId) throws IllegalArgumentException {
         final Quiz quiz = getQuiz();
         return quiz.getQuestion(questionId);
     }
 
     @Override
-    public QuestionAndAnswer getNextQuestion() throws IllegalArgumentException {
+    public Question getNextQuestion() throws IllegalArgumentException {
         final Quiz quiz = getQuiz();
         return quiz.getRandomQuestion();
     }
 
     public boolean submitAnswer(final String questionId, final String answer) throws IllegalArgumentException {
-        final QuestionAndAnswer questionAndAnswer = getQuestion(questionId);
+        final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
         if (questionAndAnswer == null) {
             throw new IllegalArgumentException("Unknown QuestionAndAnswer ID");
         }
@@ -66,6 +67,11 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         return result;
+    }
+
+    private QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
+        final Quiz quiz = getQuiz();
+        return quiz.getQuestionAndAnswer(questionId);
     }
 
 

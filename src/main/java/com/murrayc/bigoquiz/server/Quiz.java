@@ -1,5 +1,6 @@
 package com.murrayc.bigoquiz.server;
 
+import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 
 import java.util.*;
@@ -35,16 +36,43 @@ public class Quiz {
         listQuestions.add(questionAndAnswer);
     }
 
-    public QuestionAndAnswer getRandomQuestion() {
+    public Question getRandomQuestion() {
         if (listQuestions.isEmpty()) {
             return null;
         }
 
         final int index = new Random().nextInt(listQuestions.size());
-        return listQuestions.get(index);
+        final QuestionAndAnswer questionAndAnswer = listQuestions.get(index);
+        if (questionAndAnswer != null) {
+            return questionAndAnswer.getQuestion();
+        }
+
+        return null;
     }
 
-    public QuestionAndAnswer getQuestion(final String questionId) {
+    public Question getQuestion(final String questionId) {
+        final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
+        if (questionAndAnswer != null) {
+            return questionAndAnswer.getQuestion();
+        }
+
+        return null;
+    }
+
+    public String getAnswer(final String questionId) {
+        final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
+        if (questionAndAnswer != null) {
+            return questionAndAnswer.getAnswer();
+        }
+
+        return null;
+    }
+
+    public void setDefaultChoices(final String sectionId, final List<String> choices) {
+        defaultChoices.put(sectionId, choices);
+    }
+
+    QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
         //Look in every section:
         for (Map<String, QuestionAndAnswer> section : questions.values()) {
             final QuestionAndAnswer questionAndAnswer = section.get(questionId);
@@ -54,9 +82,5 @@ public class Quiz {
         }
 
         return null;
-    }
-
-    public void setDefaultChoices(final String sectionId, final List<String> choices) {
-        defaultChoices.put(sectionId, choices);
     }
 }
