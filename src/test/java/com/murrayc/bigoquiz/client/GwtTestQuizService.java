@@ -36,7 +36,7 @@ public class GwtTestQuizService extends GWTTestCase {
 
 	@Override
 	public String getModuleName() {
-		return "org.glom.web.OnlineGlom";
+		return "com.murrayc.BigOQuiz";
 	}
 
 }

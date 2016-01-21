@@ -36,7 +36,7 @@ public class QuestionActivity extends AbstractActivity implements QuestionView.P
             @Override
             public void onFailure(final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
-                GWT.log("AsyncCallback Failed: OnlineGlomService.getDetailsLayoutAndData(): " + caught.getMessage());
+                GWT.log("AsyncCallback Failed: getNextQuestion(): " + caught.getMessage());
             }
 
             @Override

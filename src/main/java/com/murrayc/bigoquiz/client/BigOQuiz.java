@@ -66,7 +66,7 @@ public class BigOQuiz implements EntryPoint {
       // We might, in future, use different ClientFactory implementations to create different views
       // for different browser types (such as mobile), so we use GWT.create() to have deferred binding.
       // See http://code.google.com/webtoolkit/doc/latest/DevGuideMvpActivitiesAndPlaces.html
-      // which describes how to do this via our OnlineGlom.gwt.xml file.
+      // which describes how to do this via our .gwt.xml file.
       clientFactory = GWT.create(ClientFactory.class);
       final EventBus eventBus = clientFactory.getEventBus();
       final PlaceController placeController = clientFactory.getPlaceController();

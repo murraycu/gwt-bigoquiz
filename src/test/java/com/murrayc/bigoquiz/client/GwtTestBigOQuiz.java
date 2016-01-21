@@ -9,11 +9,11 @@ import org.junit.Test;
 import com.googlecode.gwt.test.GwtModule;
 import com.googlecode.gwt.test.GwtTestWithEasyMock;
 
-@GwtModule("org.glom.web.OnlineGlom")
+@GwtModule("com.murrayc.BigOQuiz")
 public class GwtTestBigOQuiz extends GwtTestWithEasyMock {
 
 	/**
-	 * Tell gwt-test-utils to use this mock when trying to create this class via GWT.create() in OnlineGlom.
+	 * Tell gwt-test-utils to use this mock when trying to create this class via GWT.create().
 	 */
 	// @Mock
 	// private AppPlaceHistoryMapper mockAppPlaceHistoryMapper;
@@ -34,7 +34,7 @@ public class GwtTestBigOQuiz extends GwtTestWithEasyMock {
 	}
 
 	@Before
-	public void beforeOnlineGlom() {
+	public void beforeBigOQuiz() {
 		app = new BigOQuiz();
 		app.onModuleLoad();
 

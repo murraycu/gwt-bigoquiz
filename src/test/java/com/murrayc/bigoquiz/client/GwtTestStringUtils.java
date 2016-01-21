@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.googlecode.gwt.test.GwtModule;
 import com.googlecode.gwt.test.GwtTest;
 
-@GwtModule("com.murrayc.OnlineGlom")
+@GwtModule("com.murrayc.BigOQuiz")
 public class GwtTestStringUtils extends GwtTest {
 
 	public GwtTestStringUtils() {

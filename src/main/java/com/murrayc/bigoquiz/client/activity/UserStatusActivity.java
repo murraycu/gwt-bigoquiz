@@ -35,7 +35,7 @@ public class UserStatusActivity extends AbstractActivity implements View.Present
             @Override
             public void onFailure(final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
-                GWT.log("AsyncCallback Failed: OnlineGlomService.getDetailsLayoutAndData(): " + caught.getMessage());
+                GWT.log("AsyncCallback Failed: login(): " + caught.getMessage());
             }
 
             @Override
