@@ -10,7 +10,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
         implements UserProfilePresenter.MyView {
     private Label usernameTitleLabel = new Label("Username: ");
     private Label usernameLabel = new Label();
-;
+
     UserProfileView() {
         final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("user-profile-panel");

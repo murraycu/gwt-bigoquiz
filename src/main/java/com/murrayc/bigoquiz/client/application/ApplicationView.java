@@ -10,15 +10,18 @@ import com.gwtplatform.mvp.client.ViewImpl;
 public class ApplicationView extends ViewImpl implements ApplicationPresenter.MyView {
     private final VerticalPanel main = new VerticalPanel();
     private final SimplePanel mainPanel = new SimplePanel();
+    private final SimplePanel menuPanel = new SimplePanel();
     private final SimplePanel userStatusPanel = new SimplePanel();
 
 
     ApplicationView() {
+        main.add(menuPanel);
         main.add(userStatusPanel);
         main.add(mainPanel);
         initWidget(main);
 
-        bindSlot(ApplicationPresenter.SLOT_MAIN, mainPanel);
+        bindSlot(ApplicationPresenter.SLOT_MENU, menuPanel);
         bindSlot(ApplicationPresenter.SLOT_USER_STATUS, userStatusPanel);
+        bindSlot(ApplicationPresenter.SLOT_MAIN, mainPanel);
     }
 }
