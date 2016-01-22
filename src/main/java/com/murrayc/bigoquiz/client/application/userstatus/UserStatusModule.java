@@ -8,7 +8,6 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 public class UserStatusModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
-        bindPresenter(UserStatusPresenter.class, UserStatusPresenter.MyView.class, UserStatusView.class,
-                UserStatusPresenter.MyProxy.class);
+        //TODO? bindPresenter(UserStatusPresenter.class, UserStatusPresenter.MyView.class, UserStatusView.class);
     }
 }

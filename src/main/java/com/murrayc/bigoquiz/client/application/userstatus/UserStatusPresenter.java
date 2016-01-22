@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
@@ -21,25 +22,19 @@ import com.murrayc.bigoquiz.shared.db.UserProfile;
 /**
  * Created by murrayc on 1/21/16.
  */
-public class UserStatusPresenter extends Presenter<UserStatusPresenter.MyView, UserStatusPresenter.MyProxy>
+public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyView>
         implements UserEditUiHandlers {
-    interface MyView extends View, HasUiHandlers<UserEditUiHandlers> {
+    public interface MyView extends View, HasUiHandlers<UserEditUiHandlers> {
         void setUserStatus(final UserProfile result);
 
         void setLoginInfo(final LoginInfo result);
     }
 
-    @ProxyStandard
-    @NameToken(NameTokens.USER_STATUS)
-    interface MyProxy extends ProxyPlace<UserStatusPresenter> {
-    }
-
     @Inject
     UserStatusPresenter(
             EventBus eventBus,
-            MyView view,
-            MyProxy proxy) {
-        super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN);
+            MyView view) {
+        super(eventBus, view);
 
         getView().setUiHandlers(this);
 

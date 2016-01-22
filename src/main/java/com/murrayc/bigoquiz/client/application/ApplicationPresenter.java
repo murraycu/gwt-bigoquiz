@@ -7,15 +7,19 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter.MyView;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter.MyProxy;
+import com.murrayc.bigoquiz.client.application.userstatus.UserStatusPresenter;
 
 /**
  * Created by murrayc on 1/21/16.
  */
 public class ApplicationPresenter extends Presenter<MyView, MyProxy> {
+    private final UserStatusPresenter userStatusPresenter;
+
     interface MyView extends View {
     }
 
@@ -27,11 +31,23 @@ public class ApplicationPresenter extends Presenter<MyView, MyProxy> {
     //such as QuestionPresenter, or some other page such as a User Profile/settings or About page.
     public static final NestedSlot SLOT_MAIN = new NestedSlot();
 
+    public static final SingleSlot SLOT_USER_STATUS = new SingleSlot();
+
     @Inject
     ApplicationPresenter(
             EventBus eventBus,
             MyView view,
-            MyProxy proxy) {
+            MyProxy proxy,
+            UserStatusPresenter userStatusPresenter) {
         super(eventBus, view, proxy, RevealType.Root);
+
+        this.userStatusPresenter = userStatusPresenter;
+    }
+
+    @Override
+    protected void onBind() {
+        super.onBind();
+
+        setInSlot(SLOT_USER_STATUS, userStatusPresenter);
     }
 }
