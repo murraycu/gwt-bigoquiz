@@ -1,7 +1,6 @@
 /** Application-specific CSS rules. */
 
 .gwt-Label {
-    margin-top: 1em;
     margin-bottom: 1em;
 }
 
@@ -78,7 +77,14 @@
 }
 
 .menu-title {
+    font-weight: bold;
+    font-family: Sans;
+    font-size: 2.5em;
+}
 
+.menu-title.gwt-Label {
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
 }
 
 .menu-panel {
