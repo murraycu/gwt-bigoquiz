@@ -71,7 +71,6 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
     private void showStatus() {
         //TODO: Avoid duplication with UserProfile.
         String username = loginInfo == null ? "" : loginInfo.getNickname();
-        final String logoutLink = loginInfo == null ? null : loginInfo.getLogoutUrl();
         if (userProfile != null) {
             username = userProfile.getName();
         }
