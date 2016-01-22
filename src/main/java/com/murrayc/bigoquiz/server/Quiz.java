@@ -26,7 +26,7 @@ public class Quiz {
     public void addQuestion(final String sectionId, final QuestionAndAnswer questionAndAnswer) {
         Map<String, QuestionAndAnswer> map = questions.get(sectionId);
         if (map == null) {
-            map = new HashMap<String, QuestionAndAnswer>();
+            map = new HashMap<>();
             questions.put(sectionId, map);
         }
 
