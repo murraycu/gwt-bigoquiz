@@ -23,6 +23,8 @@ public class ApplicationPresenter extends Presenter<MyView, MyProxy> {
     interface MyProxy extends Proxy<ApplicationPresenter> {
     }
 
+    //This will use some presenter that corresponds to a place (URL token),
+    //such as QuestionPresenter, or some other page such as a User Profile/settings or About page.
     public static final NestedSlot SLOT_MAIN = new NestedSlot();
 
     @Inject
