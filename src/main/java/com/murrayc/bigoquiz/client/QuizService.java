@@ -9,7 +9,7 @@ import com.murrayc.bigoquiz.shared.db.UserProfile;
 /**
  * The client-side stub for the RPC service.
  */
-@RemoteServiceRelativePath("greet")
+@RemoteServiceRelativePath("quiz-service")
 public interface QuizService extends RemoteService {
     Question getQuestion(final String questionId) throws IllegalArgumentException;
 

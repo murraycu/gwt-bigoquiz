@@ -13,7 +13,7 @@
 
     <servlet-mapping>
         <servlet-name>quizServlet</servlet-name>
-        <url-pattern>/bigoquiz/greet</url-pattern>
+        <url-pattern>/bigoquiz/quiz-service</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -23,7 +23,7 @@
 
     <servlet-mapping>
         <servlet-name>loginService</servlet-name>
-        <url-pattern>/bigoquiz/login</url-pattern>
+        <url-pattern>/bigoquiz/login-service</url-pattern>
     </servlet-mapping>
 
     <!-- Default page to serve -->
