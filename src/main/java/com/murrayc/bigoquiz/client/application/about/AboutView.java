@@ -13,10 +13,18 @@ public class AboutView extends ViewWithUiHandlers<AboutUserEditUiHandlers>
 
     private final Panel mainPanel = new FlowPanel();
     private final Label aboutLabel = new Label("Yadda yadda yadda yadda.");
+    private final Label versionLabel = new Label();
 
     AboutView() {
         mainPanel.add(aboutLabel);
         aboutLabel.addStyleName("about-label");
+
+        mainPanel.add(versionLabel);
+        versionLabel.addStyleName("version-label");
+
+        //TODO: Internationalization:
+        //TODO: Get the number from pom.xml somehow.
+        versionLabel.setText("Version: " + "0.1");
 
         initWidget(mainPanel);
     }
