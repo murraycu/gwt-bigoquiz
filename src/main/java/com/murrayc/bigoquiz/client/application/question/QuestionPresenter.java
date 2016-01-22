@@ -122,7 +122,9 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         //we would have received the next question along with the result:
         if (nextQuestion != null) {
             final Question question = nextQuestion;
+            questionId = nextQuestion.getId();
             nextQuestion = null;
+
             getView().setQuestion(question);
             return;
         }
