@@ -87,7 +87,12 @@ public class QuizLoader {
                 final Element element = (Element) questionNode;
                 final QuestionAndAnswer questionAndAnswer = loadQuestionNode(element, defaultChoices);
                 if (questionAndAnswer != null) {
-                    result.addQuestion(sectionId, questionAndAnswer);
+                    //warn about duplicates:
+                    if (result.contains(questionAndAnswer.getId())) {
+                        Log.error("QuizLoader: Duplicate question ID: " + questionAndAnswer.getId());
+                    } else {
+                        result.addQuestion(sectionId, questionAndAnswer);
+                    }
                 }
             }
         }

@@ -50,6 +50,10 @@ public class Quiz {
         return null;
     }
 
+    public boolean contains(final String questionId) {
+        return questions.containsKey(questionId);
+    }
+
     public Question getQuestion(final String questionId) {
         final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
         if (questionAndAnswer != null) {
