@@ -100,3 +100,15 @@
     font-weight: bold;
     font-size: 1.2em;
 }
+
+.result-label {
+    font-weight: bold;
+}
+
+.question-radio-button {
+
+}
+
+.gwt-RadioButton {
+    line-height: 2em;
+}

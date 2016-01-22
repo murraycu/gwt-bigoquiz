@@ -40,8 +40,9 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         mainPanel.add(choicesPanel);
         choicesPanel.addStyleName("choices-panel");
 
-        resultPanel.add(resultLabel);
         resultPanel.addStyleName("result-panel");
+        resultPanel.add(resultLabel);
+        resultLabel.addStyleName("result-label");
 
         resultPanel.add(showAnswerButton);
         showAnswerButton.addStyleName("show-answer-button");
@@ -90,6 +91,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         final String groupName = "choices";
         for (final String choice : question.getChoices()) {
             final RadioButton radioButton = new RadioButton(groupName, choice);
+            radioButton.addStyleName("question-radio-button");
             radioButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
                 @Override
                 public void onValueChange(final ValueChangeEvent<Boolean> event) {
