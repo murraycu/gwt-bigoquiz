@@ -1,9 +1,6 @@
 package com.murrayc.bigoquiz.client.application.userstatus;
 
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
@@ -18,7 +15,7 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
     private final Label usernameLabel = new Label();
     private final Label scoreLabel = new Label();
 
-    private final VerticalPanel loginPanel = new VerticalPanel();
+    private final Panel loginPanel = new FlowPanel();
     private final Label loginLabel = new Label(
             "Please sign in to your Google Account to track your progress.");
     private final Label loginFailedLabel = new Label(

@@ -15,7 +15,7 @@ public class MenuView extends ViewWithUiHandlers<MenuUserEditUiHandlers>
     private final MenuBar menuBar = new MenuBar();
 
     MenuView() {
-        final VerticalPanel mainPanel = new VerticalPanel();
+        final Panel mainPanel = new FlowPanel();
         mainPanel.addStyleName("menu-panel");
         mainPanel.add(titleLabel);
         titleLabel.addStyleName("menu-title");
