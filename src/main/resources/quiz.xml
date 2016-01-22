@@ -12,16 +12,20 @@
             <choice>O(nk)</choice>
             <choice>O(n + k)</choice>
         </default_choices>
-        <question id="array-access">
-            <text>Array: Access</text>
+        <question id="array-access-average">
+            <text>Array: Access (Average)</text>
             <answer>O(1)</answer>
         </question>
-        <question id="array-search">
-            <text>Array: Search</text>
+        <question id="array-search-average">
+            <text>Array: Search (Average)</text>
             <answer>O(n)</answer>
         </question>
-        <question id="array-insertion">
-            <text>Array: Insertion</text>
+        <question id="array-insertion-average">
+            <text>Array: Insertion (Average)</text>
+            <answer>O(n)</answer>
+        </question>
+        <question id="array-deletion-average">
+            <text>Array: Deletion (Average)</text>
             <answer>O(n)</answer>
         </question>
     </section>

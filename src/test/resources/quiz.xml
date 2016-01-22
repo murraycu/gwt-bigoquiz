@@ -3,17 +3,30 @@
     <title>Big-O Quiz</title>
     <section id="data-structure-operations">
         <title>Data Structure Operations</title>
-        <questionAndAnswer>
-            <text>Array: Access</text>
+        <default_choices>
+            <choice>O(1)</choice>
+            <choice>O(log(n))</choice>
+            <choice>O(n)</choice>
+            <choice>O(n log(n))</choice>
+            <choice>O(n^2)</choice>
+            <choice>O(nk)</choice>
+            <choice>O(n + k)</choice>
+        </default_choices>
+        <question id="array-access-average">
+            <text>Array: Access (Average)</text>
             <answer>O(1)</answer>
-        </questionAndAnswer>
-        <questionAndAnswer>
-            <text>Array: Search</text>
+        </question>
+        <question id="array-search-average">
+            <text>Array: Search (Average)</text>
             <answer>O(n)</answer>
-        </questionAndAnswer>
-        <questionAndAnswer>
-            <text>Array: Insertion</text>
+        </question>
+        <question id="array-insertion-average">
+            <text>Array: Insertion (Average)</text>
             <answer>O(n)</answer>
-        </questionAndAnswer>
+        </question>
+        <question id="array-deletion-average">
+            <text>Array: Deletion (Average)</text>
+            <answer>O(n)</answer>
+        </question>
     </section>
 </quiz>
