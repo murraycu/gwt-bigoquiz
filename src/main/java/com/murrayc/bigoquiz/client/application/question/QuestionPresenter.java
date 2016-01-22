@@ -50,6 +50,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN);
 
         getView().setUiHandlers(this);
+
+        getAndUseNextQuestion();
     }
 
     @Override
