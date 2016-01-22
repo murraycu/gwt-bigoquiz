@@ -17,8 +17,8 @@ import com.murrayc.bigoquiz.shared.db.UserProfile;
  * Created by murrayc on 1/21/16.
  */
 public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyView>
-        implements UserEditUiHandlers {
-    public interface MyView extends View, HasUiHandlers<UserEditUiHandlers> {
+        implements UserStatusUserEditUiHandlers {
+    public interface MyView extends View, HasUiHandlers<UserStatusUserEditUiHandlers> {
         void setUserStatus(final UserProfile result);
 
         void setLoginInfo(final LoginInfo result);

@@ -22,8 +22,8 @@ import com.murrayc.bigoquiz.shared.Question;
  * Created by murrayc on 1/21/16.
  */
 public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, QuestionPresenter.MyProxy>
-        implements UserEditUiHandlers {
-    interface MyView extends View, HasUiHandlers<UserEditUiHandlers> {
+        implements QuestionUserEditUiHandlers {
+    interface MyView extends View, HasUiHandlers<QuestionUserEditUiHandlers> {
         void setQuestion(final Question question);
 
         String getChoiceSelected();

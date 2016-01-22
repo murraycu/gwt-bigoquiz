@@ -12,7 +12,7 @@ import com.murrayc.bigoquiz.shared.db.UserProfile;
 /**
  * Created by murrayc on 1/21/16.
  */
-public class UserStatusView extends ViewWithUiHandlers<UserEditUiHandlers>
+public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandlers>
         implements UserStatusPresenter.MyView {
 
     private final Label usernameLabel = new Label();

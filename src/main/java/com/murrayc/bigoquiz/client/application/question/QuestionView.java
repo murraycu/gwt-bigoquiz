@@ -14,7 +14,7 @@ import com.murrayc.bigoquiz.shared.Question;
 /**
  * Created by murrayc on 1/21/16.
  */
-public class QuestionView extends ViewWithUiHandlers<UserEditUiHandlers>
+public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         implements QuestionPresenter.MyView {
     private Label questionLabel = new Label("question text");
     private Panel choicesPanel = new VerticalPanel();
