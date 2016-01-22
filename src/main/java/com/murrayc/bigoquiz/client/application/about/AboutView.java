@@ -16,7 +16,7 @@ public class AboutView extends ViewWithUiHandlers<AboutUserEditUiHandlers>
     private final Label versionLabel = new Label();
 
     AboutView() {
-        mainPanel.addStyleName("about-panel");
+        mainPanel.addStyleName("content-panel");
 
         final Label titleLabel = new Label("About");
         titleLabel.addStyleName("page-title-label");

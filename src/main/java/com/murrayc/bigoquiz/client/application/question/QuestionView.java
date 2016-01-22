@@ -28,7 +28,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
     QuestionView() {
         final FlowPanel mainPanel = new FlowPanel();
-        mainPanel.addStyleName("question-panel");
+        mainPanel.addStyleName("content-panel");
         //mainPanel.getElement().setAttribute("id", "titlebox");
 
         final Label titleLabel = new Label("Question");

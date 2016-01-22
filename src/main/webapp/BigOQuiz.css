@@ -4,7 +4,7 @@
     margin-bottom: 1em;
 }
 
-.question-panel {
+.content-panel {
     margin: 2em;
 }
 
@@ -69,10 +69,6 @@
 
 }
 
-.user-profile-panel {
-
-}
-
 .menu-bar {
     float: right;
 }
@@ -103,8 +99,4 @@
 .page-title-label {
     font-weight: bold;
     font-size: 1.2em;
-}
-
-.about-panel {
-
 }
