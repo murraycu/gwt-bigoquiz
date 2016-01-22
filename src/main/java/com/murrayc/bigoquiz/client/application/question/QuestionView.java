@@ -16,7 +16,7 @@ import com.murrayc.bigoquiz.shared.Question;
  */
 public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         implements QuestionPresenter.MyView {
-    private Label questionLabel = new Label("question text");
+    private Label questionLabel = new Label("");
     private Panel choicesPanel = new VerticalPanel();
     private String choiceSelected;
 
@@ -31,7 +31,10 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         mainPanel.addStyleName("question-panel");
         //mainPanel.getElement().setAttribute("id", "titlebox");
 
-        mainPanel.add(new Label("QuestionAndAnswer"));
+        final Label titleLabel = new Label("Question");
+        titleLabel.addStyleName("page-title-label");
+        mainPanel.add(titleLabel);
+
         mainPanel.add(questionLabel);
         questionLabel.addStyleName("question-label");
         mainPanel.add(choicesPanel);
