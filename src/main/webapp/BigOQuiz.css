@@ -1,11 +1,58 @@
-/** Add css rules here for your application. */
+/** Application-specific CSS rules. */
 
-/** Example rules used by the template application (remove for your app) */
-h1 {
-    font-size: 2em;
-    font-weight: bold;
-    color: #777777;
-    margin: 40px 0px 70px;
-    text-align: center;
+.gwt-Label {
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
+.question-panel {
+    margin: 2em;
+}
+
+.result-panel {
+
+}
+
+.choices-panel {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+
+.user-status-panel {
+    margin: 2em;
+}
+
+.status-panel {
+}
+
+.login-panel {
+}
+
+.login-failed {
+    font-weight: bold;
+}
+
+.score {
+
+}
+
+.user-name {
+
+}
+
+.next-question-button {
+
+}
+
+.show-answer-button {
+
+}
+
+.question-label {
+
+}
+
+.sign-in-link {
+
+}

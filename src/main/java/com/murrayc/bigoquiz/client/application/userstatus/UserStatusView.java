@@ -31,16 +31,27 @@ public class UserStatusView extends ViewWithUiHandlers<UserEditUiHandlers>
 
     UserStatusView() {
         final FlowPanel statusPanel = new FlowPanel();
+        statusPanel.addStyleName("status-panel");
         //box.getElement().setAttribute("id", "titlebox");
         statusPanel.add(usernameLabel);
+        usernameLabel.addStyleName("user-name");
+
         statusPanel.add(scoreLabel);
+        usernameLabel.addStyleName("score");
+
 
         loginPanel.add(loginLabel);
+        loginPanel.addStyleName("login-panel");
+
         loginPanel.add(signInLink);
+        signInLink.addStyleName("sign-in-link");
+
         loginPanel.add(loginFailedLabel);
+        loginFailedLabel.addStyleName("login-failed");
         loginFailedLabel.setVisible(false);
 
         final FlowPanel mainPanel = new FlowPanel();
+        mainPanel.addStyleName("user-status-panel");
         mainPanel.add(loginPanel);
         mainPanel.add(statusPanel);
         initWidget(mainPanel);

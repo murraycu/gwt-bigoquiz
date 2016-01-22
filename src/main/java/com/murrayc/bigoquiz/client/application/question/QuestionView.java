@@ -27,15 +27,22 @@ public class QuestionView extends ViewWithUiHandlers<UserEditUiHandlers>
     private Label resultLabel = new Label();
 
     QuestionView() {
-        final FlowPanel box = new FlowPanel();
-        //box.getElement().setAttribute("id", "titlebox");
+        final FlowPanel mainPanel = new FlowPanel();
+        mainPanel.addStyleName("question-panel");
+        //mainPanel.getElement().setAttribute("id", "titlebox");
 
-        box.add(new Label("QuestionAndAnswer"));
-        box.add(questionLabel);
-        box.add(choicesPanel);
+        mainPanel.add(new Label("QuestionAndAnswer"));
+        mainPanel.add(questionLabel);
+        questionLabel.addStyleName("question-label");
+        mainPanel.add(choicesPanel);
+        choicesPanel.addStyleName("choices-panel");
 
         resultPanel.add(resultLabel);
+        resultPanel.addStyleName("result-panel");
+
         resultPanel.add(showAnswerButton);
+        showAnswerButton.addStyleName("show-answer-button");
+
         showAnswerButton.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
@@ -45,16 +52,16 @@ public class QuestionView extends ViewWithUiHandlers<UserEditUiHandlers>
         resultPanel.add(correctAnswerLabel);
 
         resultPanel.add(nextQuestionButton);
+        nextQuestionButton.addStyleName("next-question-button");
+
         nextQuestionButton.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
                 onNextQuestionButton();
             }
         });
-        box.add(resultPanel);
+        mainPanel.add(resultPanel);
 
-        final FlowPanel mainPanel = new FlowPanel();
-        mainPanel.add(box);
         initWidget(mainPanel);
     }
 
