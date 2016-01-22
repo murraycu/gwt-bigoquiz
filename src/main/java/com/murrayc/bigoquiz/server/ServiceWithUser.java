@@ -18,7 +18,7 @@ public class ServiceWithUser extends RemoteServiceServlet {
 
         User user = null;
         try {
-            userService.getCurrentUser();
+            user = userService.getCurrentUser();
         } catch (final Exception ex) {
             //This happens when we run this in the gwt superdevmode,
             //instead of in the appengine.
