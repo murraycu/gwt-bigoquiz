@@ -15,16 +15,19 @@ import com.murrayc.bigoquiz.shared.db.UserProfile;
 public class UserStatusView extends ViewWithUiHandlers<UserEditUiHandlers>
         implements UserStatusPresenter.MyView {
 
-    private Label usernameLabel = new Label();
-    private Label scoreLabel = new Label();
+    private final Label usernameLabel = new Label();
+    private final Label scoreLabel = new Label();
 
-    private VerticalPanel loginPanel = new VerticalPanel();
-    private Label loginLabel = new Label(
+    private final VerticalPanel loginPanel = new VerticalPanel();
+    private final Label loginLabel = new Label(
             "Please sign in to your Google Account to track your progress.");
-    private Anchor signInLink = new Anchor("Sign In");
+    private final Label loginFailedLabel = new Label(
+            "Error: Could not connect to the login server.");
+    private final Anchor signInLink = new Anchor("Sign In");
 
     private LoginInfo loginInfo = null;
     private UserProfile userProfile = null;
+    private boolean loginServerFailed = false;
 
     UserStatusView() {
         final FlowPanel statusPanel = new FlowPanel();
@@ -34,6 +37,8 @@ public class UserStatusView extends ViewWithUiHandlers<UserEditUiHandlers>
 
         loginPanel.add(loginLabel);
         loginPanel.add(signInLink);
+        loginPanel.add(loginFailedLabel);
+        loginFailedLabel.setVisible(false);
 
         final FlowPanel mainPanel = new FlowPanel();
         mainPanel.add(loginPanel);
@@ -50,6 +55,8 @@ public class UserStatusView extends ViewWithUiHandlers<UserEditUiHandlers>
         } else {
             loginPanel.setVisible(false);
         }
+
+        loginFailedLabel.setVisible(loginServerFailed);
     }
 
     private void showStatus() {
@@ -65,6 +72,16 @@ public class UserStatusView extends ViewWithUiHandlers<UserEditUiHandlers>
     @Override
     public void setUserStatus(final UserProfile userProfile) {
         this.userProfile = userProfile;
+        this.loginServerFailed = false;
+
+
+        updateUi();
+    }
+
+    @Override
+    public void setUserStatusFailed() {
+        this.userProfile = null;
+        this.loginServerFailed = true;
 
         updateUi();
     }

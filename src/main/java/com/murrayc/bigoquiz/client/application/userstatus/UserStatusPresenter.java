@@ -28,6 +28,8 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
         void setUserStatus(final UserProfile result);
 
         void setLoginInfo(final LoginInfo result);
+
+        void setUserStatusFailed();
     }
 
     @Inject
@@ -42,12 +44,18 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
             @Override
             public void onFailure(final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
-                GWT.log("AsyncCallback Failed: login(): " + caught.getMessage());
+                GWT.log("AsyncCallback Failed: getUserProfile(): " + caught.getMessage());
+                getView().setUserStatusFailed();
             }
 
             @Override
             public void onSuccess(final UserProfile result) {
-                getView().setUserStatus(result);
+                //TODO: Throw an exception instead of returning null?
+                if(result == null) {
+                    //getView().setUserStatusFailed();
+                } else {
+                    getView().setUserStatus(result);
+                }
             }
         };
 
@@ -57,11 +65,18 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
         // Check login status using login service.
         LoginServiceAsync.Util.getInstance().login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
             public void onFailure(final Throwable error) {
-                //TODO: Handle this: Log.error("login() failed.", error);
+                GWT.log("AsyncCallback Failed: login(): " + error.getMessage());
+
+                getView().setUserStatusFailed();
             }
 
             public void onSuccess(final LoginInfo result) {
-                getView().setLoginInfo(result);
+                //TODO: Throw an exception instead of returning null?
+                if(result == null) {
+                    getView().setUserStatusFailed();
+                } else {
+                    getView().setLoginInfo(result);
+                }
             }
         });
     }
