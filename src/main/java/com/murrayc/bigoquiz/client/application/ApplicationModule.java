@@ -1,7 +1,9 @@
 package com.murrayc.bigoquiz.client.application;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+import com.murrayc.bigoquiz.client.application.about.AboutModule;
 import com.murrayc.bigoquiz.client.application.question.QuestionModule;
+import com.murrayc.bigoquiz.client.application.userprofile.UserProfileModule;
 import com.murrayc.bigoquiz.client.application.userstatus.UserStatusModule;
 import com.murrayc.bigoquiz.client.application.userstatus.UserStatusPresenter;
 import com.murrayc.bigoquiz.client.application.userstatus.UserStatusView;
@@ -13,6 +15,9 @@ public class ApplicationModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
         install(new QuestionModule());
+        install(new UserProfileModule());
+        install(new AboutModule());
+
         install(new UserStatusModule());
 
         bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationView.class,
