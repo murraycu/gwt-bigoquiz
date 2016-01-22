@@ -6,17 +6,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
-import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.NameToken;
-import com.gwtplatform.mvp.client.annotations.ProxyStandard;
-import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.LoginServiceAsync;
-import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
-import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 
 /**
