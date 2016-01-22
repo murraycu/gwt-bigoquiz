@@ -26,8 +26,6 @@ public interface QuizService extends RemoteService {
      */
     SubmissionResult submitAnswer(final String questionId, final String answer) throws IllegalArgumentException;
 
-    ;
-
     SubmissionResult submitDontKnowAnswer(final String questionId) throws IllegalArgumentException;
 
     UserProfile getUserProfile() throws IllegalArgumentException;
