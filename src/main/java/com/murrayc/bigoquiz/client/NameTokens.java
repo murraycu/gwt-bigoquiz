@@ -5,4 +5,6 @@ package com.murrayc.bigoquiz.client;
  */
 public class NameTokens {
     public static final String HOME = "/";
+    public static final String USER_STATUS = "/userstatus";
+
 }
