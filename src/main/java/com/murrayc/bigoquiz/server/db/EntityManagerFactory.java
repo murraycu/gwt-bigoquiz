@@ -13,6 +13,7 @@ public class EntityManagerFactory extends DAOBase {
     static {
         //Register classes whose instances we want to store in the databse via Objectify:
         ObjectifyService.register(UserProfile.class);
+        ObjectifyService.register(UserAnswer.class);
     }
 
     protected EntityManagerFactory() {
