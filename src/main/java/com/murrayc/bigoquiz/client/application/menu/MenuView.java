@@ -11,7 +11,7 @@ import com.murrayc.bigoquiz.client.NameTokens;
 public class MenuView extends ViewWithUiHandlers<MenuUserEditUiHandlers>
         implements MenuPresenter.MyView {
 
-    private final Label titleLabel = new Label("Big-O Algorithms Quiz");
+    private final Anchor titleLabel = new Anchor("Big-O Algorithms Quiz");
     private final MenuBar menuBar = new MenuBar();
 
     MenuView() {
@@ -19,23 +19,31 @@ public class MenuView extends ViewWithUiHandlers<MenuUserEditUiHandlers>
         mainPanel.addStyleName("menu-panel");
         mainPanel.add(titleLabel);
         titleLabel.addStyleName("menu-title");
-
+        titleLabel.setHref("#" + NameTokens.HOME); //TODO: Or just / ?
 
         mainPanel.add(menuBar);
-        titleLabel.addStyleName("menu-bar");
+        menuBar.addStyleName("menu-bar");
 
+        //Instead, the title is a clickable link.
+        /*
         menuBar.addItem("Home", new Command() {
             @Override
             public void execute() {
                 goTo(NameTokens.HOME);
             }
         });
+        */
+
+        //Instead, the user name is a clickable link:
+        /*
         menuBar.addItem("Profile", new Command() {
             @Override
             public void execute() {
                 goTo(NameTokens.USER_PROFILE);
             }
         });
+        */
+
         menuBar.addItem("About", new Command() {
             @Override
             public void execute() {

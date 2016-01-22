@@ -4,6 +4,7 @@ import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
+import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 
 /**
@@ -12,7 +13,7 @@ import com.murrayc.bigoquiz.shared.db.UserProfile;
 public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandlers>
         implements UserStatusPresenter.MyView {
 
-    private final Label usernameLabel = new Label();
+    private final Anchor usernameLabel = new Anchor();
     private final Label scoreLabel = new Label();
 
     private final Panel loginPanel = new FlowPanel();
@@ -70,11 +71,13 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
     private void showStatus() {
         //TODO: Avoid duplication with UserProfile.
         String username = loginInfo == null ? "" : loginInfo.getNickname();
+        final String logoutLink = loginInfo == null ? null : loginInfo.getLogoutUrl();
         if (userProfile != null) {
             username = userProfile.getName();
         }
 
         usernameLabel.setText(username);
+        usernameLabel.setHref("#" + NameTokens.USER_PROFILE);
     }
 
     @Override

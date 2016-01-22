@@ -74,7 +74,7 @@
 }
 
 .menu-bar {
-
+    float: right;
 }
 
 .menu-title {
@@ -93,5 +93,9 @@
 }
 
 .version-label {
+
+}
+
+.logout-label {
 
 }
