@@ -1,5 +1,17 @@
 /** Application-specific CSS rules. */
 
+/* Responsive:
+ *
+ * Only show user-history-recent-panel on wider screens: */
+@media screen and (min-width: 400px)  {
+    .user-history-recent-panel { display: block; }
+}
+
+@media screen and (max-width: 399px)  {
+    .user-history-recent-panel { display: none; }
+}
+
+
 .gwt-Label {
     margin-bottom: 1em;
 }
@@ -21,6 +33,7 @@
 .user-status-panel {
     margin: 2em;
     float: right;
+    clear: right;
 }
 
 .status-panel {
@@ -116,6 +129,7 @@
 .user-history-recent-panel {
     margin: 2em;
     float: right;
+    clear: right;
 }
 
 .subsection-title {
