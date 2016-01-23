@@ -18,17 +18,14 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     final VerticalPanel answersPanel = new VerticalPanel();
 
     UserHistoryRecentView() {
-        final FlowPanel statusPanel = new FlowPanel();
-        statusPanel.addStyleName("user-history-recent-panel");
+        final FlowPanel mainPanel = new FlowPanel();
+        mainPanel.addStyleName("user-history-recent-panel");
         //box.getElement().setAttribute("id", "titlebox");
 
         final Label labelTitle = new Label("Recent History");
-        statusPanel.add(labelTitle);
+        mainPanel.add(labelTitle);
         labelTitle.addStyleName("subsection-title");
 
-        final FlowPanel mainPanel = new FlowPanel();
-        mainPanel.addStyleName("user-status-panel");
-        mainPanel.add(labelTitle);
         mainPanel.add(answersPanel);
         answersPanel.addStyleName("user-status-answers-panel");
         initWidget(mainPanel);
