@@ -2,8 +2,7 @@ package com.murrayc.bigoquiz.shared.db;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.googlecode.objectify.annotation.Entity;
-
-import javax.persistence.Id;
+import com.googlecode.objectify.annotation.Id;
 
 /**
  * Created by murrayc on 1/19/16.

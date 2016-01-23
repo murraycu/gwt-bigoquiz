@@ -112,10 +112,10 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         final EntityManagerFactory emf = EntityManagerFactory.get();
-        UserProfile userProfile = emf.ofy().find(UserProfile.class, user.getUserId());
+        UserProfile userProfile = emf.ofy().load().type(UserProfile.class).id(user.getUserId()).now();
         if (userProfile == null) {
             userProfile = new UserProfile(user.getUserId(), user.getNickname());
-            emf.ofy().put(userProfile);
+            emf.ofy().save().entity(userProfile).now();
         }
         return userProfile;
     }
@@ -186,12 +186,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
         if (result) {
             userProfile.setCountCorrectAnswers(userProfile.getCountCorrectAnswers() + 1);
 
-            emf.ofy().put(userProfile);
+            emf.ofy().save().entity(userProfile).now();
         }
 
         final String time = getCurrentTime();
         final UserAnswer userAnswer = new UserAnswer(questionId, result, time);
-        emf.ofy().put(userAnswer);
+        emf.ofy().save().entity(userAnswer).now();
     }
 
     private static String getCurrentTime() {

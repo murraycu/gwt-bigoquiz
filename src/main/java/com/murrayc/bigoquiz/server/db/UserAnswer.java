@@ -1,12 +1,13 @@
 package com.murrayc.bigoquiz.server.db;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
-
-import javax.persistence.Id;
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
 
 /**
  * Created by murrayc on 1/21/16.
  */
+@Entity
 public class UserAnswer implements IsSerializable {
     @Id
     private Long id;

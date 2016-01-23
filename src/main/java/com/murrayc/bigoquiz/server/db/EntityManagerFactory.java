@@ -1,13 +1,13 @@
 package com.murrayc.bigoquiz.server.db;
 
+import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.util.DAOBase;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 
 /**
  * Created by murrayc on 1/19/16.
  */
-public class EntityManagerFactory extends DAOBase {
+public class EntityManagerFactory {
     private static EntityManagerFactory singleton;
 
     static {
@@ -17,6 +17,10 @@ public class EntityManagerFactory extends DAOBase {
     }
 
     protected EntityManagerFactory() {
+    }
+
+    public static Objectify ofy() {
+        return ObjectifyService.ofy();
     }
 
     public static EntityManagerFactory get() {
