@@ -13,6 +13,8 @@ public class UserAnswer implements IsSerializable {
     @Id
     private Long id;
 
+    //TODO: I would rather use a Ref<UserProfile> here,
+    //but that doesn't seem to GWT-compile for the client side.b
     @Index
     private String userId;
 
