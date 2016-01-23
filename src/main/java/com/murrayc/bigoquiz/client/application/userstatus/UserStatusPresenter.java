@@ -46,7 +46,7 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
             public void onSuccess(final UserProfile result) {
                 //TODO: Throw an exception instead of returning null?
                 if(result == null) {
-                    //getView().setUserStatusFailed();
+                    //getView().setServerFailed();
                 } else {
                     getView().setUserStatus(result);
                 }

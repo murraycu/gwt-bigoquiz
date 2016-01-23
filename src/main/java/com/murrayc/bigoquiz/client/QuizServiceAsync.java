@@ -24,6 +24,11 @@ public interface QuizServiceAsync {
     void getUserProfile(AsyncCallback<UserProfile> async)
             throws IllegalArgumentException;
 
+    void getUserRecentHistory(AsyncCallback<UserRecentHistory> async)
+            throws IllegalArgumentException;
+
+
+
     /**
      * Utility class to get the RPC Async interface from client-side code
      */

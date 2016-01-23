@@ -30,6 +30,8 @@ public interface QuizService extends RemoteService {
 
     UserProfile getUserProfile() throws IllegalArgumentException;
 
+    UserRecentHistory getUserRecentHistory() throws IllegalArgumentException;
+
     class SubmissionResult implements IsSerializable {
         private boolean result;
         private String correctAnswer; //If result is false.

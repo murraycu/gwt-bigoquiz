@@ -1,10 +1,12 @@
 package com.murrayc.bigoquiz.server;
 
 import com.google.appengine.api.users.User;
+import com.googlecode.objectify.cmd.Query;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.QuizService;
+import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
-import com.murrayc.bigoquiz.server.db.UserAnswer;
+import com.murrayc.bigoquiz.shared.db.UserAnswer;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
@@ -16,7 +18,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 /**
@@ -27,27 +31,30 @@ public class QuizServiceImpl extends ServiceWithUser implements
         QuizService {
     private static final String LOADED_QUIZ = "loaded-quiz";
 
-  /*
-  public String greetServer(String input) throws IllegalArgumentException {
-    // Verify that the input is valid.
-    if (!FieldVerifier.isValidName(input)) {
-      // If the input is not valid, throw an IllegalArgumentException back to
-      // the client.
-      throw new IllegalArgumentException(
-          "Name must be at least 4 characters long");
+    //How many items to return.
+    public static final int HISTORY_LIMIT = 5;
+
+    /*
+    public String greetServer(String input) throws IllegalArgumentException {
+      // Verify that the input is valid.
+      if (!FieldVerifier.isValidName(input)) {
+        // If the input is not valid, throw an IllegalArgumentException back to
+        // the client.
+        throw new IllegalArgumentException(
+            "Name must be at least 4 characters long");
+      }
+
+      String serverInfo = getServletContext().getServerInfo();
+      String userAgent = getThreadLocalRequest().getHeader("UserProfile-Agent");
+
+      // Escape data from the client to avoid cross-site script vulnerabilities.
+      input = escapeHtml(input);
+      userAgent = escapeHtml(userAgent);
+
+      return "Hello, " + input + "!<br><br>I am running " + serverInfo
+          + ".<br><br>It looks like you are using:<br>" + userAgent;
     }
-
-    String serverInfo = getServletContext().getServerInfo();
-    String userAgent = getThreadLocalRequest().getHeader("UserProfile-Agent");
-
-    // Escape data from the client to avoid cross-site script vulnerabilities.
-    input = escapeHtml(input);
-    userAgent = escapeHtml(userAgent);
-
-    return "Hello, " + input + "!<br><br>I am running " + serverInfo
-        + ".<br><br>It looks like you are using:<br>" + userAgent;
-  }
-  */
+    */
     public Quiz quiz;
 
     public static Quiz loadQuiz() {
@@ -103,6 +110,31 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @Override
     public UserProfile getUserProfile() throws IllegalArgumentException {
         return getUserProfileImpl();
+    }
+
+    //@Override
+    public UserRecentHistory getUserRecentHistory() throws IllegalArgumentException {
+        final User user = getUser();
+        if (user == null) {
+            return null;
+        }
+
+        final EntityManagerFactory emf = EntityManagerFactory.get();
+        Query<UserAnswer> q = emf.ofy().load().type(UserAnswer.class);
+        q = q.filter("userId", user.getUserId());
+        q = q.limit(HISTORY_LIMIT);
+
+        //Objectify's Query.list() method seems to return a list implementation that contains
+        //some kind of (non-serializable) proxy, leading to gwt compilation errors such as this:
+        //  com.google.gwt.user.client.rpc.SerializationException: Type 'com.sun.proxy.$Proxy10' was not included in the set of types which can be serialized by this SerializationPolicy or its Class object could not be loaded. For security purposes, this type will not be serialized.: instance = [com.murrayc.bigoquiz.shared.db.UserAnswer@7a44340b]
+        //so we copy the items into a new list.
+        //Presumably the act of iterating over the list causes us to actually get the data for each item,
+        //as the actual type.
+        final List<UserAnswer> listCopy = new ArrayList<>();
+        for (final UserAnswer a : q.list()) {
+            listCopy.add(a);
+        }
+        return new UserRecentHistory(listCopy);
     }
 
     private UserProfile getUserProfileImpl() {

@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.server.db;
 
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
+import com.murrayc.bigoquiz.shared.db.UserAnswer;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 
 /**

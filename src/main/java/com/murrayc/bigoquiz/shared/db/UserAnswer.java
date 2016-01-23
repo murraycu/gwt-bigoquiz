@@ -1,4 +1,4 @@
-package com.murrayc.bigoquiz.server.db;
+package com.murrayc.bigoquiz.shared.db;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.googlecode.objectify.annotation.Entity;
@@ -20,7 +20,7 @@ public class UserAnswer implements IsSerializable {
     private boolean result;
     private String time;
 
-    UserAnswer() {
+    public UserAnswer() {
     }
 
     public UserAnswer(final String userId, final String questionId, final boolean result, final String time) {
