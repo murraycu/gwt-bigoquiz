@@ -190,7 +190,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         final String time = getCurrentTime();
-        final UserAnswer userAnswer = new UserAnswer(questionId, result, time);
+        final UserAnswer userAnswer = new UserAnswer(userProfile.getId(), questionId, result, time);
         emf.ofy().save().entity(userAnswer).now();
     }
 

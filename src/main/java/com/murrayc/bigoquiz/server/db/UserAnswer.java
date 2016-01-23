@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.server.db;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -12,6 +13,9 @@ public class UserAnswer implements IsSerializable {
     @Id
     private Long id;
 
+    @Index
+    private String userId;
+
     private String questionId;
     private boolean result;
     private String time;
@@ -19,10 +23,15 @@ public class UserAnswer implements IsSerializable {
     UserAnswer() {
     }
 
-    public UserAnswer(final String questionId, final boolean result, final String time) {
+    public UserAnswer(final String userId, final String questionId, final boolean result, final String time) {
+        this.userId = userId;
         this.questionId = questionId;
         this.result = result;
         this.time = time;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public String getQuestionId() {
