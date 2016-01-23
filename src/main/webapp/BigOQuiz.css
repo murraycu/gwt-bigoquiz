@@ -112,3 +112,11 @@
 .gwt-RadioButton {
     line-height: 2em;
 }
+
+.user-history-recent-panel {
+    margin: 2em;
+}
+
+.subsection-title {
+    font-weight: bold;
+}

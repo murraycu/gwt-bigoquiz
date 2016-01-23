@@ -13,16 +13,19 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
     private final SimplePanel mainPanel = new SimplePanel();
     private final SimplePanel menuPanel = new SimplePanel();
     private final SimplePanel userStatusPanel = new SimplePanel();
-
+    private final SimplePanel userHistoryRecentPanel = new SimplePanel();
 
     ApplicationView() {
         main.add(menuPanel);
         main.add(userStatusPanel);
+        main.add(userHistoryRecentPanel);
+
         main.add(mainPanel);
         initWidget(main);
 
         bindSlot(ApplicationPresenter.SLOT_MENU, menuPanel);
         bindSlot(ApplicationPresenter.SLOT_USER_STATUS, userStatusPanel);
+        bindSlot(ApplicationPresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
         bindSlot(ApplicationPresenter.SLOT_MAIN, mainPanel);
     }
 }
