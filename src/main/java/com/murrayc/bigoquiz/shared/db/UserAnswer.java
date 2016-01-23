@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.shared.db;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
 
 /**
@@ -19,6 +20,11 @@ public class UserAnswer implements IsSerializable {
     private String userId;
 
     private String questionId;
+
+    //TODO: Internationalization.
+    @Ignore
+    private String questionTitle;
+
     private boolean result;
     private String time;
 
@@ -48,5 +54,11 @@ public class UserAnswer implements IsSerializable {
         return time;
     }
 
+    public String getQuestionTitle() {
+        return questionTitle;
+    }
 
+    public void setQuestionTitle(final String questionTitle) {
+        this.questionTitle = questionTitle;
+    }
 }

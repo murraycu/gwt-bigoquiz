@@ -130,11 +130,28 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //so we copy the items into a new list.
         //Presumably the act of iterating over the list causes us to actually get the data for each item,
         //as the actual type.
+        //
+        //This also gives us the opportunity to fill in the question title,
+        //which we want to give to the client, but which we didn't want to store
+        //along with each UserAnswer.
         final List<UserAnswer> listCopy = new ArrayList<>();
         for (final UserAnswer a : q.list()) {
+            final String questionTitle = getQuestionTitle(a.getQuestionId());
+            a.setQuestionTitle(questionTitle);
+
             listCopy.add(a);
         }
         return new UserRecentHistory(listCopy);
+    }
+
+    private String getQuestionTitle(final String questionId) {
+        final Quiz quiz = getQuiz();
+        final Question question = quiz.getQuestion(questionId);
+        if (question == null) {
+            return null;
+        }
+
+        return question.getText();
     }
 
     private UserProfile getUserProfileImpl() {

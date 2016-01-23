@@ -1,9 +1,11 @@
 package com.murrayc.bigoquiz.client.application.userhistoryrecent;
 
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
 
@@ -37,7 +39,10 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         answersPanel.clear();
 
         for (final UserAnswer userAnswer : result.getUserAnswers()) {
-            final Label label = new Label(userAnswer.getQuestionId());
+            final Anchor label = new Anchor(userAnswer.getQuestionTitle());
+
+            //TODO: Do this the proper way and make it actually work:
+            label.setHref("#" + NameTokens.HOME + "?question=" + userAnswer.getQuestionId());
             answersPanel.add(label);
         }
     }
