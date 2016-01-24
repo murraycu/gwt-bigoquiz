@@ -1,7 +1,10 @@
 package com.murrayc.bigoquiz.client.application.userhistoryrecent;
 
 import com.google.gwt.user.client.ui.*;
+import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
@@ -13,8 +16,12 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         implements UserHistoryRecentPresenter.MyView {
 
     final VerticalPanel answersPanel = new VerticalPanel();
+    private final PlaceManager placeManager;
 
-    UserHistoryRecentView() {
+    @Inject
+    UserHistoryRecentView(PlaceManager placeManager) {
+        this.placeManager = placeManager;
+
         final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("user-history-recent-panel");
         //box.getElement().setAttribute("id", "titlebox");
@@ -33,10 +40,12 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         answersPanel.clear();
 
         for (final UserAnswer userAnswer : result.getUserAnswers()) {
-            final Anchor label = new Anchor(userAnswer.getQuestionTitle());
-
-            //TODO: Do this the proper way and make it actually work:
-            label.setHref("#" + NameTokens.HOME + "?question=" + userAnswer.getQuestionId());
+            final PlaceRequest placeRequest = new PlaceRequest.Builder()
+                    .nameToken(NameTokens.HOME)
+                    .with("questionId", userAnswer.getQuestionId())
+                    .build();
+            final String url = placeManager.buildHistoryToken(placeRequest);
+            final Hyperlink label = new Hyperlink(userAnswer.getQuestionTitle(), url);
             answersPanel.add(label);
         }
     }
