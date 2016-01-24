@@ -12,6 +12,9 @@ public class Quiz {
     //Map of section ID to (map of question IDs to question):
     private Map<String, Map<String, QuestionAndAnswer>> questions = new HashMap<>();
 
+    //Map of section ID to section title.
+    private Map<String, String> sectionTitles = new HashMap<>();
+
     //Map of section ID to default choices:
     private Map<String, List<String>> defaultChoices = new HashMap<>();
 
@@ -61,6 +64,16 @@ public class Quiz {
         }
 
         return null;
+    }
+
+    //TODO: Internationalization.
+    public String getSectionTitle(final String sectionId) {
+        return sectionTitles.get(sectionId);
+    }
+
+    //TODO: Internationalization.
+    public void setSectionTitle(final String sectionId, final String sectionTitle) {
+        sectionTitles.put(sectionId, sectionTitle);
     }
 
     public String getAnswer(final String questionId) {
