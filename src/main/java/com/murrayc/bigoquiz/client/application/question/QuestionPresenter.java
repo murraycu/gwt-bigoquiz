@@ -68,13 +68,14 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         //Question ID:
         final String questionId = request.getParameter(NameTokens.QUESTION_PARAM_QUESTION_ID, null);
+        GWT.log("prepareFromRequest(): questionId=" + questionId);
         if (!StringUtils.isEmpty(questionId)) {
             getAndUseQuestion(questionId);
         }
 
         //Next question section ID,
         nextQuestionSectionId = request.getParameter(NameTokens.QUESTION_PARAM_SECTION_ID, null);
-        if (StringUtils.isEmpty(nextQuestionSectionId)) {
+        if (StringUtils.isEmpty(questionId)) {
             getView().setNextQuestionSectionId(nextQuestionSectionId);
 
             getAndUseNextQuestion(nextQuestionSectionId);
