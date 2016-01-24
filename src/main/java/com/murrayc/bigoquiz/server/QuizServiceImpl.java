@@ -92,8 +92,9 @@ public class QuizServiceImpl extends ServiceWithUser implements
             throw new IllegalArgumentException("Unknown QuestionAndAnswer ID");
         }
 
+        //Store whether we got the question right or wrong:
         final boolean result = StringUtils.equals(questionAndAnswer.getAnswer(), answer);
-        storeAnswer(result, questionId);
+        storeAnswer(result, questionAndAnswer.getQuestion());
 
         return createSubmissionResult(result, questionId);
     }
@@ -136,8 +137,13 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //along with each UserAnswer.
         final List<UserAnswer> listCopy = new ArrayList<>();
         for (final UserAnswer a : q.list()) {
-            final String questionTitle = getQuestionTitle(a.getQuestionId());
-            a.setQuestionTitle(questionTitle);
+            if (a == null) {
+                continue;
+            }
+
+            a.setQuestionTitle(getQuestionTitle(a.getQuestionId()));
+            a.setSectionTitle(getSectionTitle(a.getSectionId()));
+
 
             listCopy.add(a);
         }
@@ -152,6 +158,11 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         return question.getText();
+    }
+
+    private String getSectionTitle(final String sectionId) {
+        final Quiz quiz = getQuiz();
+        return quiz.getSectionTitle(sectionId);
     }
 
     private UserProfile getUserProfileImpl() {
@@ -223,7 +234,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return new SubmissionResult(result, correctAnswer, nextQuestion);
     }
 
-    private void storeAnswer(boolean result, final String questionId) {
+    private void storeAnswer(boolean result, final Question question) {
         final UserProfile userProfile = getUserProfileImpl();
         if (userProfile == null) {
             //TODO: Keep a score in the session, without a user profile?
@@ -239,7 +250,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         final String time = getCurrentTime();
-        final UserAnswer userAnswer = new UserAnswer(userProfile.getId(), questionId, result, time);
+        final UserAnswer userAnswer = new UserAnswer(userProfile.getId(), question, result, time);
         emf.ofy().save().entity(userAnswer).now();
     }
 

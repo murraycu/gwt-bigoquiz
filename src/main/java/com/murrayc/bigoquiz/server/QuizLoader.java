@@ -88,7 +88,7 @@ public class QuizLoader {
                 }
 
                 final Element element = (Element) questionNode;
-                final QuestionAndAnswer questionAndAnswer = loadQuestionNode(element, defaultChoices);
+                final QuestionAndAnswer questionAndAnswer = loadQuestionNode(element, sectionId, defaultChoices);
                 if (questionAndAnswer != null) {
                     //warn about duplicates:
                     if (result.contains(questionAndAnswer.getId())) {
@@ -103,7 +103,7 @@ public class QuizLoader {
         return result;
     }
 
-    private static QuestionAndAnswer loadQuestionNode(final Element element, final List<String> defaultChoices) {
+    private static QuestionAndAnswer loadQuestionNode(final Element element, final String sectionID, final List<String> defaultChoices) {
         final String id = element.getAttribute(ATTR_ID);
         if (StringUtils.isEmpty(id)) {
             return null;
@@ -139,7 +139,7 @@ public class QuizLoader {
             choices = defaultChoices;
         }
 
-        return new QuestionAndAnswer(id, questionText, answerText, choices);
+        return new QuestionAndAnswer(id, sectionID, questionText, answerText, choices);
     }
 
     private static List<String> loadChoices(final Element elementChoices) {
