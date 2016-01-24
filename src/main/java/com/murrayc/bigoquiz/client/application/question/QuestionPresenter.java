@@ -75,8 +75,26 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         //Question ID:
         final String questionId = request.getParameter(NameTokens.QUESTION_PARAM_QUESTION_ID, null);
-        GWT.log("prepareFromRequest(): questionId=" + questionId);
+        //GWT.log("prepareFromRequest(): questionId=" + questionId);
         if (!StringUtils.isEmpty(questionId)) {
+            if (StringUtils.equals(questionId, this.questionId)) {
+                //We are already showing the correct question.
+                //GWT.log("prepareFromRequest(): already showing.");
+                return;
+            }
+
+            //If we have already cached this one, just show it:
+            if (nextQuestion != null && StringUtils.equals(nextQuestion.getId(), questionId)) {
+                //GWT.log("prepareFromRequest(): using nextQuestion.");
+                final Question question = nextQuestion;
+                nextQuestion = null;
+                showQuestionInView(question);
+                return;
+            }
+
+            //GWT.log("prepareFromRequest(): getting from server.");
+
+            //Otherwise, get it from the server and show it:
             getAndUseQuestion(questionId);
         }
 
@@ -104,7 +122,16 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             public void onSuccess(final QuizService.SubmissionResult result) {
                 //Store these in case they are needed soon:
                 correctAnswer = result.getCorrectAnswer();
-                nextQuestion = result.getNextQuestion();
+
+                //Store the possible next question, to avoid having to ask as a separate async request,
+                //but ignore duplicates:
+                nextQuestion = null;
+                final Question possibleNextQuestion = result.getNextQuestion();
+                if ((possibleNextQuestion != null) &&
+                        (!StringUtils.equals(possibleNextQuestion.getId(), questionId))) {
+                    nextQuestion = possibleNextQuestion;
+                    //GWT.log("Storing nextQuestion for later: " + nextQuestion.getId());
+                }
 
                 //Show the user:
                 getView().setSubmissionResult(result);
@@ -150,17 +177,22 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
     @Override
     public void onGoToNextQuestion() {
+        //GWT.log("onGoToNextQuestion: current=" + questionId);
         //This was for the previously-answered question:
         correctAnswer = null;
 
         //If we previously submitted an answer,
-        //we would have received the next question along with the result:
+        //we would have received the next question along with the result,
+        //and it might still be what we want:
         if (nextQuestion != null) {
-            final Question question = nextQuestion;
-            nextQuestion = null;
+            //GWT.log("onGoToNextQuestion: nextQuestion != null");
 
-            revealQuestion(question);
-            return;
+            if ((nextQuestionSectionId == null) ||
+                StringUtils.equals(nextQuestion.getSectionId(), nextQuestionSectionId)) {
+                //GWT.log("onGoToNextQuestion: revealQuestion(): id=" + nextQuestion.getId());
+                revealQuestion(nextQuestion);
+                return;
+            }
         }
 
         //Otherwise, get it from the server:
@@ -176,10 +208,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
      * @param question
      */
     private void revealQuestion(final Question question) {
-        questionId = question.getId();
-
-        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(questionId, nextQuestionSectionId);
-        placeManager.revealPlace(placeRequest);;
+        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(question.getId(), nextQuestionSectionId);
+        placeManager.revealPlace(placeRequest);
     }
 
     /**
@@ -194,7 +224,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         this.nextQuestionSectionId = nextQuestionSectionId;
 
         final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(nextQuestionSectionId);
-        placeManager.revealPlace(placeRequest);;
+        placeManager.revealPlace(placeRequest);
     }
 
     private void showQuestionInView(final Question question) {
@@ -228,22 +258,14 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
     /** Get and show a question from the specified section.
      * or from any section if @a sectionId is null.
+     * This ignores any cached nextQuestion,
+     * so don't call this method if you want to possibly use
+     * the cached nextQuestion
      *
      * @param sectionId
      */
     private void getAndUseNextQuestion(final String sectionId) {
         correctAnswer = null;
-
-        if (nextQuestion != null &&
-                StringUtils.equals(nextQuestion.getSectionId(), sectionId)) {
-            //We don't need to get another question.
-            //Just use the one that we have already.
-            final Question question = nextQuestion;
-            nextQuestion = null;
-            showQuestionInView(question);
-            return;
-        }
-
         nextQuestion = null;
 
         final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
@@ -264,6 +286,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     }
 
     private void getAndUseQuestion(final String questionId) {
+        //GWT.log("getAndUseQuestion");
         correctAnswer = null;
         nextQuestion = null;
 

@@ -1,8 +1,10 @@
 package com.murrayc.bigoquiz.server;
 
+import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 import com.murrayc.bigoquiz.shared.QuizSections;
+import com.murrayc.bigoquiz.shared.StringUtils;
 
 import java.util.*;
 
@@ -19,6 +21,10 @@ public class Quiz {
     //regardless of what section it is in.
     private List<QuestionAndAnswer> listQuestions = new ArrayList<>();
 
+    //This is only for getting a random question from a particular section:
+    private Map<String, List<QuestionAndAnswer>> listSectionQuestions = new HashMap<>();
+
+
     public Quiz() {
         questions = new HashMap<>();
     }
@@ -34,20 +40,40 @@ public class Quiz {
 
         //Store it here too:
         listQuestions.add(questionAndAnswer);
+
+        //And here too:
+        List<QuestionAndAnswer> sectionList = listSectionQuestions.get(sectionId);
+        if (sectionList == null) {
+            sectionList = new ArrayList<>();
+            listSectionQuestions.put(sectionId, sectionList);
+        }
+        sectionList.add(questionAndAnswer);
     }
 
     public Question getRandomQuestion(final String sectionId) {
-        if (listQuestions.isEmpty()) {
+        if (!StringUtils.isEmpty(sectionId)) {
+            final List<QuestionAndAnswer> sectionQuestions = listSectionQuestions.get(sectionId);
+            if ((sectionQuestions != null) && !sectionQuestions.isEmpty()) {
+                return getRandomQuestionFromList(sectionQuestions);
+            }
+        }
+
+        return getRandomQuestionFromList(listQuestions);
+    }
+
+    private static Question getRandomQuestionFromList(final List<QuestionAndAnswer> listQuestions) {
+        if (listQuestions == null) {
             return null;
         }
 
         final int index = new Random().nextInt(listQuestions.size());
         final QuestionAndAnswer questionAndAnswer = listQuestions.get(index);
-        if (questionAndAnswer != null) {
-            return questionAndAnswer.getQuestion();
+        if (questionAndAnswer == null) {
+            Log.error("getRandomQuestionFromList(): QuestionAndAnswer was null.");
+            return null;
         }
 
-        return null;
+        return questionAndAnswer.getQuestion();
     }
 
     public boolean contains(final String questionId) {
