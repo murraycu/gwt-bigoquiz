@@ -9,11 +9,13 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
+import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 
@@ -26,6 +28,8 @@ import com.murrayc.bigoquiz.shared.QuizSections;
  */
 public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, QuestionPresenter.MyProxy>
         implements QuestionUserEditUiHandlers {
+    private final PlaceManager placeManager;
+
     interface MyView extends View, HasUiHandlers<QuestionUserEditUiHandlers> {
         void setSections(final QuizSections sections);
 
@@ -54,8 +58,11 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     QuestionPresenter(
             EventBus eventBus,
             MyView view,
-            MyProxy proxy) {
+            MyProxy proxy,
+            PlaceManager placeManager) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN);
+
+        this.placeManager = placeManager;
 
         getView().setUiHandlers(this);
 
@@ -152,7 +159,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             final Question question = nextQuestion;
             nextQuestion = null;
 
-            showQuestion(question);
+            revealQuestion(question);
             return;
         }
 
@@ -160,7 +167,22 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         getAndUseNextQuestion(nextQuestionSectionId);
     }
 
-    private void showQuestion(Question question) {
+    /**
+     * This will cause prepareRequest() be called,
+     * where we can update the view with the specified questionId,
+     * storing a history token for the "place" along the way,
+     * so the browser's back button can take us to the previous question.
+     *
+     * @param question
+     */
+    private void revealQuestion(final Question question) {
+        questionId = question.getId();
+
+        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(questionId);
+        placeManager.revealPlace(placeRequest);;
+    }
+
+    private void showQuestionInView(final Question question) {
         questionId = question.getId();
         getView().setQuestion(question);
     }
@@ -207,7 +229,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
             @Override
             public void onSuccess(final Question result) {
-                showQuestion(result);
+                revealQuestion(result);
             }
 
         };
@@ -228,7 +250,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
             @Override
             public void onSuccess(final Question result) {
-                showQuestion(result);
+                showQuestionInView(result);
             }
 
         };

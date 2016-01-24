@@ -5,8 +5,8 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
-import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
+import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
 
 /**
@@ -40,10 +40,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         answersPanel.clear();
 
         for (final UserAnswer userAnswer : result.getUserAnswers()) {
-            final PlaceRequest placeRequest = new PlaceRequest.Builder()
-                    .nameToken(NameTokens.QUESTION)
-                    .with(NameTokens.QUESTION_PARAM_QUESTION_ID, userAnswer.getQuestionId())
-                    .build();
+            final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(userAnswer.getQuestionId());
             final String url = placeManager.buildHistoryToken(placeRequest);
             final Hyperlink label = new Hyperlink(userAnswer.getQuestionTitle(), url);
             answersPanel.add(label);
