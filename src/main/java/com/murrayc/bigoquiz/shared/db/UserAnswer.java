@@ -5,6 +5,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
+import com.murrayc.bigoquiz.shared.Question;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -20,6 +21,7 @@ public class UserAnswer implements IsSerializable {
     private String userId;
 
     private String questionId;
+    private String sectionId;
 
     //TODO: Internationalization.
     @Ignore
@@ -31,9 +33,10 @@ public class UserAnswer implements IsSerializable {
     public UserAnswer() {
     }
 
-    public UserAnswer(final String userId, final String questionId, final boolean result, final String time) {
+    public UserAnswer(final String userId, final Question question, final boolean result, final String time) {
         this.userId = userId;
-        this.questionId = questionId;
+        this.questionId = question.getId();
+        this.sectionId = question.getSectionId();
         this.result = result;
         this.time = time;
     }
@@ -45,6 +48,11 @@ public class UserAnswer implements IsSerializable {
     public String getQuestionId() {
         return questionId;
     }
+
+    public String getSectionId() {
+        return sectionId;
+    }
+
 
     public boolean getResult() {
         return result;

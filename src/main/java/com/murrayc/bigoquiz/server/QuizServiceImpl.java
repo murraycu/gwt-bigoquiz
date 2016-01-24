@@ -137,13 +137,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //along with each UserAnswer.
         final List<UserAnswer> listCopy = new ArrayList<>();
         for (final UserAnswer a : q.list()) {
-            if (a == null) {
-                continue;
-            }
-
-            a.setQuestionTitle(getQuestionTitle(a.getQuestionId()));
-            a.setSectionTitle(getSectionTitle(a.getSectionId()));
-
+            final String questionTitle = a.getQuestionTitle();
+            a.setQuestionTitle(questionTitle);
 
             listCopy.add(a);
         }
