@@ -10,17 +10,21 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.LoginServiceAsync;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
+import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentPresenter;
 
 /**
  * Created by murrayc on 1/21/16.
  */
 public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView, UserProfilePresenter.MyProxy>
         implements UserProfileUserEditUiHandlers {
+    private final UserHistoryRecentPresenter userHistoryRecentPresenter;
+
     interface MyView extends View, HasUiHandlers<UserProfileUserEditUiHandlers> {
         void setUserStatusFailed();
 
@@ -32,12 +36,17 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
     interface MyProxy extends ProxyPlace<UserProfilePresenter> {
     }
 
+    public static final SingleSlot SLOT_USER_HISTORY_RECENT = new SingleSlot();
+
     @Inject
     UserProfilePresenter(
             EventBus eventBus,
             MyView view,
-            MyProxy proxy) {
+            MyProxy proxy,
+            UserHistoryRecentPresenter userHistoryRecentPresenter) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN);
+
+        this.userHistoryRecentPresenter = userHistoryRecentPresenter;
 
         getView().setUiHandlers(this);
 
@@ -60,4 +69,10 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
         });
     }
 
+    @Override
+    protected void onBind() {
+        super.onBind();
+
+        setInSlot(SLOT_USER_HISTORY_RECENT, userHistoryRecentPresenter);
+    }
 }

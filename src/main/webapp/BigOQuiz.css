@@ -4,11 +4,11 @@
  *
  * Only show user-history-recent-panel on wider screens: */
 @media screen and (min-width: 400px)  {
-    .user-history-recent-panel { display: block; }
+    .user-history-recent-as-sidebar { display: block; }
 }
 
 @media screen and (max-width: 399px)  {
-    .user-history-recent-panel { display: none; }
+    .user-history-recent-as-sidebar { display: none; }
 }
 
 
@@ -137,5 +137,9 @@
 }
 
 .user-status-answers-panel {
+
+}
+
+.user-history-recent-as-sidebar {
 
 }

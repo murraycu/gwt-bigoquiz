@@ -7,8 +7,6 @@ import com.murrayc.bigoquiz.client.application.menu.MenuPresenter;
 import com.murrayc.bigoquiz.client.application.menu.MenuView;
 import com.murrayc.bigoquiz.client.application.question.QuestionModule;
 import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentModule;
-import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentPresenter;
-import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentView;
 import com.murrayc.bigoquiz.client.application.userprofile.UserProfileModule;
 import com.murrayc.bigoquiz.client.application.userstatus.UserStatusModule;
 import com.murrayc.bigoquiz.client.application.userstatus.UserStatusPresenter;
@@ -35,7 +33,7 @@ public class ApplicationModule extends AbstractPresenterModule {
                 MenuView.class);
         bindSingletonPresenterWidget(UserStatusPresenter.class, UserStatusPresenter.MyView.class,
                 UserStatusView.class);
-        bindSingletonPresenterWidget(UserHistoryRecentPresenter.class, UserHistoryRecentPresenter.MyView.class,
-                UserHistoryRecentView.class);
+        //bindSingletonPresenterWidget(UserHistoryRecentPresenter.class, UserHistoryRecentPresenter.MyView.class,
+        //        UserHistoryRecentView.class);
     }
 }

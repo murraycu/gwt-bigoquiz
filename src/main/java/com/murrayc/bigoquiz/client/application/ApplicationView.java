@@ -18,7 +18,10 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
     ApplicationView() {
         main.add(menuPanel);
         main.add(userStatusPanel);
+
+        //We use a CSS media query to only show this on wider screens:
         main.add(userHistoryRecentPanel);
+        userHistoryRecentPanel.addStyleName("user-history-recent-as-sidebar");
 
         main.add(mainPanel);
         initWidget(main);

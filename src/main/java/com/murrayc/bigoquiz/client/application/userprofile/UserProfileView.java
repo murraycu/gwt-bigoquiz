@@ -13,6 +13,8 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
     private Label usernameLabel = new Label();
     private final Anchor logoutLabel = new Anchor("Log out");
 
+    private SimplePanel userHistoryRecentPanel = new SimplePanel();
+
     UserProfileView() {
         final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("content-panel");
@@ -28,6 +30,11 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
         mainPanel.add(logoutLabel);
         logoutLabel.addStyleName("logout-label");
+
+        //TODO: Why doesn't this appear?
+        bindSlot(UserProfilePresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
+        mainPanel.add(userHistoryRecentPanel);
+        //userHistoryRecentPanel.addStyleName("debug-userhistory");
 
         initWidget(mainPanel);
     }
