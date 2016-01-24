@@ -1,4 +1,4 @@
-package com.murrayc.bigoquiz.client;
+package com.murrayc.bigoquiz.shared;
 
 /**
  * Created by murrayc on 1/19/16.

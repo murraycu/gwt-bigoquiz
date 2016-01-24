@@ -14,7 +14,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
-import com.murrayc.bigoquiz.client.StringUtils;
+import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 
 import com.google.inject.Inject;

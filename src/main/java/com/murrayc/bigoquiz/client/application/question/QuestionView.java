@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.QuizService;
-import com.murrayc.bigoquiz.client.StringUtils;
+import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 

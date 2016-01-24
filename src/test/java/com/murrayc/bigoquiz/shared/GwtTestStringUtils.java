@@ -1,7 +1,8 @@
-package com.murrayc.bigoquiz.client;
+package com.murrayc.bigoquiz.shared;
 
 import com.googlecode.gwt.test.GwtModule;
 import com.googlecode.gwt.test.GwtTest;
+import com.murrayc.bigoquiz.shared.StringUtils;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
