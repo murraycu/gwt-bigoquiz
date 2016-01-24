@@ -12,11 +12,30 @@ public class Quiz {
     //Map of section ID to (map of question IDs to question):
     private Map<String, Map<String, QuestionAndAnswer>> questions = new HashMap<>();
 
-    //Map of section ID to section title.
-    private Map<String, String> sectionTitles = new HashMap<>();
+    static class QuizSections {
+        //Map of section ID to section title.
+        private Map<String, String> sectionTitles = new HashMap<>();
 
-    //Map of section ID to default choices:
-    private Map<String, List<String>> defaultChoices = new HashMap<>();
+        //Map of section ID to default choices:
+        private Map<String, List<String>> defaultChoices = new HashMap<>();
+
+        void addSection(final String sectionId, final String sectionTitle, final List<String> defaultChoices) {
+            this.sectionTitles.put(sectionId, sectionTitle);
+            this. defaultChoices.put(sectionId, defaultChoices);
+        }
+
+        //TODO: Internationalization.
+        public String getSectionTitle(final String sectionId) {
+            return sectionTitles.get(sectionId);
+        }
+
+        //TODO: Internationalization.
+        public void setSectionTitle(final String sectionId, final String sectionTitle) {
+            sectionTitles.put(sectionId, sectionTitle);
+        }
+    }
+
+    private final QuizSections quizSections = new QuizSections();
 
     //An extra list, used only for getting a random question,
     //regardless of what section it is in.
@@ -66,16 +85,6 @@ public class Quiz {
         return null;
     }
 
-    //TODO: Internationalization.
-    public String getSectionTitle(final String sectionId) {
-        return sectionTitles.get(sectionId);
-    }
-
-    //TODO: Internationalization.
-    public void setSectionTitle(final String sectionId, final String sectionTitle) {
-        sectionTitles.put(sectionId, sectionTitle);
-    }
-
     public String getAnswer(final String questionId) {
         final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
         if (questionAndAnswer != null) {
@@ -85,8 +94,8 @@ public class Quiz {
         return null;
     }
 
-    public void setDefaultChoices(final String sectionId, final List<String> choices) {
-        defaultChoices.put(sectionId, choices);
+    public void addSection(final String sectionId, final String sectionTitle, final List<String> defaultChoices) {
+        quizSections.addSection(sectionId, sectionTitle, defaultChoices);
     }
 
     QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
@@ -99,5 +108,9 @@ public class Quiz {
         }
 
         return null;
+    }
+
+    public String getSectionTitle(final String sectionId) {
+        return quizSections.getSectionTitle(sectionId);
     }
 }

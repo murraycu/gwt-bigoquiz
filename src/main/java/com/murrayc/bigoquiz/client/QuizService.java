@@ -11,6 +11,7 @@ import com.murrayc.bigoquiz.shared.db.UserProfile;
  */
 @RemoteServiceRelativePath("quiz-service")
 public interface QuizService extends RemoteService {
+
     Question getQuestion(final String questionId) throws IllegalArgumentException;
 
     Question getNextQuestion() throws IllegalArgumentException;

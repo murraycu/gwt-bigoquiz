@@ -64,21 +64,22 @@ public class QuizLoader {
             return null;
         }
 
+        //Sections:
         final List<Node> listSectionNodes = getChildrenByTagName(rootNode, NODE_SECTION);
         for (final Node sectionNode : listSectionNodes) {
             final Element sectionElement = (Element) sectionNode;
 
             final String sectionId = sectionElement.getAttribute(ATTR_ID);
             final String sectionTitle = sectionElement.getAttribute(ATTR_TITLE);
-            result.setSectionTitle(sectionId, sectionTitle);
 
             //Default choices:
             List<String> defaultChoices = null;
             final Element elementChoices = getElementByName(sectionElement, NODE_DEFAULT_CHOICES);
             if (elementChoices != null) {
                 defaultChoices = loadChoices(elementChoices);
-                result.setDefaultChoices(sectionId, defaultChoices);
             }
+
+            result.addSection(sectionId, sectionTitle, defaultChoices);
 
             //Questions:
             final List<Node> listQuestionNodes = getChildrenByTagName(sectionElement, NODE_QUESTION);
