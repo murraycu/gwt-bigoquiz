@@ -38,7 +38,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     private Question nextQuestion;
 
     @ProxyStandard
-    @NameToken(NameTokens.HOME)
+    @NameToken(NameTokens.QUESTION)
     interface MyProxy extends ProxyPlace<QuestionPresenter> {
     }
 

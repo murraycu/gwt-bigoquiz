@@ -41,7 +41,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
         for (final UserAnswer userAnswer : result.getUserAnswers()) {
             final PlaceRequest placeRequest = new PlaceRequest.Builder()
-                    .nameToken(NameTokens.HOME)
+                    .nameToken(NameTokens.QUESTION)
                     .with("questionId", userAnswer.getQuestionId())
                     .build();
             final String url = placeManager.buildHistoryToken(placeRequest);

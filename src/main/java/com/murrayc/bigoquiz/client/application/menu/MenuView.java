@@ -19,7 +19,7 @@ public class MenuView extends ViewWithUiHandlers<MenuUserEditUiHandlers>
         mainPanel.addStyleName("menu-panel");
         mainPanel.add(titleLabel);
         titleLabel.addStyleName("menu-title");
-        titleLabel.setHref("#" + NameTokens.HOME); //TODO: Or just / ?
+        titleLabel.setHref("#" + NameTokens.QUESTION); //TODO: Or just / ?
 
         mainPanel.add(menuBar);
         menuBar.addStyleName("menu-bar");
@@ -29,7 +29,7 @@ public class MenuView extends ViewWithUiHandlers<MenuUserEditUiHandlers>
         menuBar.addItem("Home", new Command() {
             @Override
             public void execute() {
-                goTo(NameTokens.HOME);
+                goTo(NameTokens.QUESTION);
             }
         });
         */
