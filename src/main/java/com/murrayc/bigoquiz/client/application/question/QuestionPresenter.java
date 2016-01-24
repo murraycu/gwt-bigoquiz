@@ -10,9 +10,11 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
+import com.murrayc.bigoquiz.client.StringUtils;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 
 import com.google.inject.Inject;
@@ -50,9 +52,20 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN);
 
         getView().setUiHandlers(this);
-
-        getAndUseNextQuestion();
     }
+
+    @Override
+    public void prepareFromRequest(final PlaceRequest request) {
+        super.prepareFromRequest(request);
+
+        final String questionId = request.getParameter(NameTokens.QUESTION_PARAM_QUESTION_ID, null);
+        if (StringUtils.isEmpty(questionId)) {
+            getAndUseNextQuestion();
+        } else {
+            getAndUseQuestion(questionId);
+        }
+    }
+
 
     @Override
     public void onSubmitAnswer() {
@@ -154,5 +167,28 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         };
 
         QuizServiceAsync.Util.getInstance().getNextQuestion(callback);
+    }
+
+    private void getAndUseQuestion(final String questionId) {
+        correctAnswer = null;
+        nextQuestion = null;
+
+        final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
+            @Override
+            public void onFailure(final Throwable caught) {
+                // TODO: create a way to notify users of asynchronous callback failures
+                GWT.log("AsyncCallback Failed: getNextQuestion(): " + caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(final Question result) {
+
+                QuestionPresenter.this.questionId = result.getId();
+                getView().setQuestion(result);
+            }
+
+        };
+
+        QuizServiceAsync.Util.getInstance().getQuestion(questionId, callback);
     }
 }

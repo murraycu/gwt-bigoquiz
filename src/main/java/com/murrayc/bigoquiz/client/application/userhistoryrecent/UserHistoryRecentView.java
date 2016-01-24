@@ -42,7 +42,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         for (final UserAnswer userAnswer : result.getUserAnswers()) {
             final PlaceRequest placeRequest = new PlaceRequest.Builder()
                     .nameToken(NameTokens.QUESTION)
-                    .with("questionId", userAnswer.getQuestionId())
+                    .with(NameTokens.QUESTION_PARAM_QUESTION_ID, userAnswer.getQuestionId())
                     .build();
             final String url = placeManager.buildHistoryToken(placeRequest);
             final Hyperlink label = new Hyperlink(userAnswer.getQuestionTitle(), url);

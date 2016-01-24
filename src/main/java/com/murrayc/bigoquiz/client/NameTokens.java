@@ -5,6 +5,7 @@ package com.murrayc.bigoquiz.client;
  */
 public class NameTokens {
     public static final String QUESTION = "/question";
+    public static final String QUESTION_PARAM_QUESTION_ID = "questionId";
     public static final String USER_PROFILE = "/user";
     public static final String ABOUT = "/about";
 }
