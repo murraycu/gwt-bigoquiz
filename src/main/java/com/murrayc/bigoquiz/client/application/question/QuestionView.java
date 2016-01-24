@@ -1,6 +1,5 @@
 package com.murrayc.bigoquiz.client.application.question;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -13,8 +12,6 @@ import com.murrayc.bigoquiz.client.StringUtils;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 
-import java.util.Map;
-
 /**
  * Created by murrayc on 1/21/16.
  */
@@ -22,13 +19,13 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         implements QuestionPresenter.MyView {
     //Map of section IDs to section titles.
     private QuizSections sections;
-
+    private String nextQuestionSection;
     private String choiceSelected;
 
-    private ListBox sectionTitleListBox = new ListBox();
+    private Label labelSectionTitle = new Label();
+    private ListBox nextQuestionSectionListBox = new ListBox();
     private Label questionLabel = new Label("");
     private Panel choicesPanel = new VerticalPanel();
-
 
     private FlowPanel resultPanel = new FlowPanel();
     private Button showAnswerButton = new Button("Show Answer");
@@ -43,8 +40,15 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         final Label sectiontitle = new Label("Section:");
         sectiontitle.addStyleName("page-title-label");
         mainPanel.add(sectiontitle);
-        mainPanel.add(sectionTitleListBox);
-        sectionTitleListBox.addStyleName("section-title");
+
+        mainPanel.add(labelSectionTitle);
+        labelSectionTitle.addStyleName("section-title");
+
+        final Label nextQuestionSectiontitle = new Label("Showing Questions from:");
+        nextQuestionSectiontitle.addStyleName("page-title-label");
+        mainPanel.add(nextQuestionSectiontitle);
+        mainPanel.add(nextQuestionSectionListBox);
+        nextQuestionSectionListBox.addStyleName("next-question-section-title");
 
         final Label titleLabel = new Label("Question");
         titleLabel.addStyleName("page-title-label");
@@ -97,14 +101,35 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         this.sections = sections;
 
         if (sections == null) {
-            sectionTitleListBox.clear();
+            nextQuestionSectionListBox.clear();
             return;
         }
 
-        sectionTitleListBox.clear();
+        nextQuestionSectionListBox.clear();
+
+        //TODO: Give this a special DI/boolean-marker when we can use a proper assocative ListBox:
+        nextQuestionSectionListBox.addItem("All Sections");
+
         for(final String title : sections.getTitles()) {
             if (!StringUtils.isEmpty(title)) {
-                sectionTitleListBox.addItem(title);
+                nextQuestionSectionListBox.addItem(title);
+            }
+        }
+
+        setNextQuestionSection(nextQuestionSection);
+    }
+
+    @Override
+    public void setNextQuestionSection(final String sectionTitle) {
+        nextQuestionSection = sectionTitle;
+
+        //TODO: Use a derived/better ListBox that lets us refere to the items by ID.
+        final int count = nextQuestionSectionListBox.getItemCount();
+        for (int i = 0; i < count; ++i) {
+            if (StringUtils.equals(
+                    nextQuestionSectionListBox.getItemText(i), nextQuestionSection)) {
+                nextQuestionSectionListBox.setSelectedIndex(i);
+                break;
             }
         }
     }
@@ -120,7 +145,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
         questionLabel.setText(question.getText());
 
-        setSectionTitle(sections.getSectionTitle(question.getSectionId()));
+        labelSectionTitle.setText(sections.getSectionTitle(question.getSectionId()));
 
         final String groupName = "choices";
         for (final String choice : question.getChoices()) {
@@ -167,18 +192,6 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         }
 
         updateResultPanelUi(State.DONT_KNOW_ANSWER);
-    }
-
-    private void setSectionTitle(final String sectionTitle) {
-        //TODO: Use a derived/better ListBox that lets us refere to the items by ID.
-        final int count = sectionTitleListBox.getItemCount();
-        for (int i = 0; i < count; ++i) {
-            if (StringUtils.equals(
-                    sectionTitleListBox.getItemText(i), sectionTitle)) {
-                sectionTitleListBox.setSelectedIndex(i);
-                break;
-            }
-        }
     }
 
     private void submitAnswer(final String answer) {

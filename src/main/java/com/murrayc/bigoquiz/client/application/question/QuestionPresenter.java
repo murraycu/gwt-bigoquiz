@@ -31,6 +31,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         void setQuestion(final Question question);
 
+        void setNextQuestionSection(final String sectionId);
+
         String getChoiceSelected();
 
         void setSubmissionResult(final QuizService.SubmissionResult submissionResult);
@@ -38,7 +40,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         void showAnswer(final String correctAnswer);
     }
 
-    private String sectionId;
+    private String nextQuestionSectionId;
     private String questionId;
     private String correctAnswer;
     private Question nextQuestion;
@@ -64,16 +66,19 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     public void prepareFromRequest(final PlaceRequest request) {
         super.prepareFromRequest(request);
 
-        //If there is a question ID then we use that, ignoring any section ID.
+        //Question ID:
         final String questionId = request.getParameter(NameTokens.QUESTION_PARAM_QUESTION_ID, null);
         if (!StringUtils.isEmpty(questionId)) {
             getAndUseQuestion(questionId);
-            return;
         }
 
-        //If there is no question ID then we try to use a section ID:
-        final String sectionID = request.getParameter(NameTokens.QUESTION_PARAM_SECTION_ID, null);
-        getAndUseNextQuestion(sectionID);
+        //Next question section ID,
+        nextQuestionSectionId = request.getParameter(NameTokens.QUESTION_PARAM_SECTION_ID, null);
+        if (StringUtils.isEmpty(nextQuestionSectionId)) {
+            getView().setNextQuestionSection(nextQuestionSectionId);
+
+            getAndUseNextQuestion(nextQuestionSectionId);
+        }
     }
 
 
@@ -100,7 +105,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         };
 
-        QuizServiceAsync.Util.getInstance().submitAnswer(questionId, answer, sectionId, callback);
+        QuizServiceAsync.Util.getInstance().submitAnswer(questionId, answer, nextQuestionSectionId, callback);
     }
 
     @Override
@@ -133,7 +138,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         };
 
-        QuizServiceAsync.Util.getInstance().submitDontKnowAnswer(questionId, sectionId, callback);
+        QuizServiceAsync.Util.getInstance().submitDontKnowAnswer(questionId, nextQuestionSectionId, callback);
     }
 
     @Override
@@ -153,7 +158,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         }
 
         //Otherwise, get it from the server:
-        getAndUseNextQuestion(sectionId);
+        getAndUseNextQuestion(nextQuestionSectionId);
     }
 
     private void getAndUseSections() {
@@ -194,10 +199,6 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             public void onSuccess(final Question result) {
 
                 questionId = result.getId();
-
-                //In case we asked for a question from any (null) section,
-                //we will now have a question in an actual section:
-                QuestionPresenter.this.sectionId = result.getSectionId();
 
                 getView().setQuestion(result);
             }
