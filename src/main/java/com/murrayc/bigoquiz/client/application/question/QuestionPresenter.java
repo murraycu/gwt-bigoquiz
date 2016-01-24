@@ -149,15 +149,19 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         //we would have received the next question along with the result:
         if (nextQuestion != null) {
             final Question question = nextQuestion;
-            questionId = nextQuestion.getId();
             nextQuestion = null;
 
-            getView().setQuestion(question);
+            showQuestion(question);
             return;
         }
 
         //Otherwise, get it from the server:
         getAndUseNextQuestion(nextQuestionSectionId);
+    }
+
+    private void showQuestion(Question question) {
+        questionId = question.getId();
+        getView().setQuestion(question);
     }
 
     @Override
@@ -202,10 +206,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
             @Override
             public void onSuccess(final Question result) {
-
-                questionId = result.getId();
-
-                getView().setQuestion(result);
+                showQuestion(result);
             }
 
         };
@@ -226,9 +227,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
             @Override
             public void onSuccess(final Question result) {
-
-                QuestionPresenter.this.questionId = result.getId();
-                getView().setQuestion(result);
+                showQuestion(result);
             }
 
         };
