@@ -233,6 +233,17 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
      */
     private void getAndUseNextQuestion(final String sectionId) {
         correctAnswer = null;
+
+        if (nextQuestion != null &&
+                StringUtils.equals(nextQuestion.getSectionId(), sectionId)) {
+            //We don't need to get another question.
+            //Just use the one that we have already.
+            final Question question = nextQuestion;
+            nextQuestion = null;
+            showQuestionInView(question);
+            return;
+        }
+
         nextQuestion = null;
 
         final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
