@@ -19,6 +19,7 @@ import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 
 import com.google.inject.Inject;
 import com.murrayc.bigoquiz.shared.Question;
+import com.murrayc.bigoquiz.shared.QuizSections;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -26,6 +27,8 @@ import com.murrayc.bigoquiz.shared.Question;
 public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, QuestionPresenter.MyProxy>
         implements QuestionUserEditUiHandlers {
     interface MyView extends View, HasUiHandlers<QuestionUserEditUiHandlers> {
+        void setSections(final QuizSections sections);
+
         void setQuestion(final Question question);
 
         String getChoiceSelected();
@@ -52,6 +55,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN);
 
         getView().setUiHandlers(this);
+
+        getAndUseSections();
     }
 
     @Override
@@ -144,6 +149,24 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         //Otherwise, get it from the server:
         getAndUseNextQuestion();
+    }
+
+    private void getAndUseSections() {
+        final AsyncCallback<QuizSections> callback = new AsyncCallback<QuizSections>() {
+            @Override
+            public void onFailure(final Throwable caught) {
+                // TODO: create a way to notify users of asynchronous callback failures
+                GWT.log("AsyncCallback Failed: getSections(): " + caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(final QuizSections result) {
+                getView().setSections(result);
+            }
+
+        };
+
+        QuizServiceAsync.Util.getInstance().getSections(callback);
     }
 
     private void getAndUseNextQuestion() {

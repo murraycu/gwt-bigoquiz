@@ -6,6 +6,7 @@ import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
+import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
@@ -84,6 +85,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
     public Question getNextQuestion() throws IllegalArgumentException {
         final Quiz quiz = getQuiz();
         return quiz.getRandomQuestion();
+    }
+
+    @Override
+    public QuizSections getSections() throws IllegalArgumentException {
+        final Quiz quiz = getQuiz();
+        return quiz.getSections();
     }
 
     public SubmissionResult submitAnswer(final String questionId, final String answer) throws IllegalArgumentException {

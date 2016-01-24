@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.murrayc.bigoquiz.shared.Question;
+import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 
 /**
@@ -27,6 +28,7 @@ public interface QuizServiceAsync {
     void getUserRecentHistory(AsyncCallback<UserRecentHistory> async)
             throws IllegalArgumentException;
 
+    void getSections(AsyncCallback<QuizSections> async);
 
 
     /**

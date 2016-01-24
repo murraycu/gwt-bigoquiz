@@ -4,6 +4,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.murrayc.bigoquiz.shared.Question;
+import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 
 /**
@@ -15,6 +16,8 @@ public interface QuizService extends RemoteService {
     Question getQuestion(final String questionId) throws IllegalArgumentException;
 
     Question getNextQuestion() throws IllegalArgumentException;
+
+    QuizSections getSections() throws IllegalArgumentException;
 
     /**
      * submitAnswer() returns the correct correctAnswer (if the supplied correctAnswer was wrong) and the next question.

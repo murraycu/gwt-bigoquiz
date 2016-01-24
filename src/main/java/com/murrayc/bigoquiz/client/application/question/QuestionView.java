@@ -1,5 +1,6 @@
 package com.murrayc.bigoquiz.client.application.question;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -10,15 +11,24 @@ import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.StringUtils;
 import com.murrayc.bigoquiz.shared.Question;
+import com.murrayc.bigoquiz.shared.QuizSections;
+
+import java.util.Map;
 
 /**
  * Created by murrayc on 1/21/16.
  */
 public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         implements QuestionPresenter.MyView {
+    //Map of section IDs to section titles.
+    private QuizSections sections;
+
+    private String choiceSelected;
+
+    private ListBox sectionTitleListBox = new ListBox();
     private Label questionLabel = new Label("");
     private Panel choicesPanel = new VerticalPanel();
-    private String choiceSelected;
+
 
     private FlowPanel resultPanel = new FlowPanel();
     private Button showAnswerButton = new Button("Show Answer");
@@ -29,7 +39,12 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     QuestionView() {
         final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("content-panel");
-        //mainPanel.getElement().setAttribute("id", "titlebox");
+
+        final Label sectiontitle = new Label("Section:");
+        sectiontitle.addStyleName("page-title-label");
+        mainPanel.add(sectiontitle);
+        mainPanel.add(sectionTitleListBox);
+        sectionTitleListBox.addStyleName("section-title");
 
         final Label titleLabel = new Label("Question");
         titleLabel.addStyleName("page-title-label");
@@ -75,6 +90,23 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
     private void onNextQuestionButton() {
         getUiHandlers().onGoToNextQuestion();
+    }
+
+    @Override
+    public void setSections(final QuizSections sections) {
+        this.sections = sections;
+
+        if (sections == null) {
+            sectionTitleListBox.clear();
+            return;
+        }
+
+        sectionTitleListBox.clear();
+        for(final String title : sections.getTitles()) {
+            if (!StringUtils.isEmpty(title)) {
+                sectionTitleListBox.addItem(title);
+            }
+        }
     }
 
     @Override
