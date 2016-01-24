@@ -15,7 +15,7 @@ public interface QuizService extends RemoteService {
 
     Question getQuestion(final String questionId) throws IllegalArgumentException;
 
-    Question getNextQuestion() throws IllegalArgumentException;
+    Question getNextQuestion(final String sectionId) throws IllegalArgumentException;
 
     QuizSections getSections() throws IllegalArgumentException;
 
@@ -25,12 +25,13 @@ public interface QuizService extends RemoteService {
      *
      * @param questionId
      * @param answer
+     * @param nextQuestionSectionId
      * @return
      * @throws IllegalArgumentException
      */
-    SubmissionResult submitAnswer(final String questionId, final String answer) throws IllegalArgumentException;
+    SubmissionResult submitAnswer(final String questionId, final String answer, String nextQuestionSectionId) throws IllegalArgumentException;
 
-    SubmissionResult submitDontKnowAnswer(final String questionId) throws IllegalArgumentException;
+    SubmissionResult submitDontKnowAnswer(final String questionId, String nextQuestionSectionId) throws IllegalArgumentException;
 
     UserProfile getUserProfile() throws IllegalArgumentException;
 

@@ -36,7 +36,7 @@ public class Quiz {
         listQuestions.add(questionAndAnswer);
     }
 
-    public Question getRandomQuestion() {
+    public Question getRandomQuestion(final String sectionId) {
         if (listQuestions.isEmpty()) {
             return null;
         }

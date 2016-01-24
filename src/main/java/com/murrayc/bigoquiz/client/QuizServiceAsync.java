@@ -13,13 +13,13 @@ public interface QuizServiceAsync {
     void getQuestion(String questionId, AsyncCallback<Question> async)
             throws IllegalArgumentException;
 
-    void getNextQuestion(AsyncCallback<Question> async)
+    void getNextQuestion(final String sectionId, AsyncCallback<Question> async)
             throws IllegalArgumentException;
 
-    void submitAnswer(final String questionId, final String answer, AsyncCallback<QuizService.SubmissionResult> async)
+    void submitAnswer(final String questionId, final String answer, String nextQuestionSectionId, AsyncCallback<QuizService.SubmissionResult> async)
             throws IllegalArgumentException;
 
-    void submitDontKnowAnswer(final String questionId, AsyncCallback<QuizService.SubmissionResult> async)
+    void submitDontKnowAnswer(final String questionId, String nextQuestionSectionId, AsyncCallback<QuizService.SubmissionResult> async)
             throws IllegalArgumentException;
 
     void getUserProfile(AsyncCallback<UserProfile> async)

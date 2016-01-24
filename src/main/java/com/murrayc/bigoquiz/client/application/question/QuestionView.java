@@ -120,6 +120,8 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
         questionLabel.setText(question.getText());
 
+        setSectionTitle(sections.getSectionTitle(question.getSectionId()));
+
         final String groupName = "choices";
         for (final String choice : question.getChoices()) {
             final RadioButton radioButton = new RadioButton(groupName, choice);
@@ -165,6 +167,18 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         }
 
         updateResultPanelUi(State.DONT_KNOW_ANSWER);
+    }
+
+    private void setSectionTitle(final String sectionTitle) {
+        //TODO: Use a derived/better ListBox that lets us refere to the items by ID.
+        final int count = sectionTitleListBox.getItemCount();
+        for (int i = 0; i < count; ++i) {
+            if (StringUtils.equals(
+                    sectionTitleListBox.getItemText(i), sectionTitle)) {
+                sectionTitleListBox.setSelectedIndex(i);
+                break;
+            }
+        }
     }
 
     private void submitAnswer(final String answer) {

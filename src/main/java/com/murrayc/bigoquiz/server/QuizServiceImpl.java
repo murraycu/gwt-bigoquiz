@@ -82,9 +82,9 @@ public class QuizServiceImpl extends ServiceWithUser implements
     }
 
     @Override
-    public Question getNextQuestion() throws IllegalArgumentException {
+    public Question getNextQuestion(final String sectionId) throws IllegalArgumentException {
         final Quiz quiz = getQuiz();
-        return quiz.getRandomQuestion();
+        return quiz.getRandomQuestion(sectionId);
     }
 
     @Override
@@ -93,7 +93,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return quiz.getSections();
     }
 
-    public SubmissionResult submitAnswer(final String questionId, final String answer) throws IllegalArgumentException {
+    @Override
+    public SubmissionResult submitAnswer(final String questionId, final String answer, String nextQuestionSectionId) throws IllegalArgumentException {
         final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
         if (questionAndAnswer == null) {
             throw new IllegalArgumentException("Unknown QuestionAndAnswer ID");
@@ -103,11 +104,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
         final boolean result = StringUtils.equals(questionAndAnswer.getAnswer(), answer);
         storeAnswer(result, questionAndAnswer.getQuestion());
 
-        return createSubmissionResult(result, questionId);
+        return createSubmissionResult(result, questionId, nextQuestionSectionId);
     }
 
-    public SubmissionResult submitDontKnowAnswer(final String questionId) throws IllegalArgumentException {
-        return createSubmissionResult(false, questionId);
+    @Override
+    public SubmissionResult submitDontKnowAnswer(final String questionId, final String nextQuestionSectionId) throws IllegalArgumentException {
+        return createSubmissionResult(false, questionId, nextQuestionSectionId);
     }
 
     private QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
@@ -227,7 +229,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return quiz;
     }
 
-    private SubmissionResult createSubmissionResult(boolean result, final String questionId) {
+    private SubmissionResult createSubmissionResult(boolean result, final String questionId, final String nextQuestionSectionId) {
         //We only provide the correct answer if the supplied answer was wrong:
         String correctAnswer = null;
         if (!result) {
@@ -235,7 +237,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
             correctAnswer = quiz.getAnswer(questionId);
         }
 
-        final Question nextQuestion = getNextQuestion();
+        final Question nextQuestion = getNextQuestion(nextQuestionSectionId);
         return new SubmissionResult(result, correctAnswer, nextQuestion);
     }
 
