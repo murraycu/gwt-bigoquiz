@@ -1,5 +1,7 @@
 package com.murrayc.bigoquiz.client.application.question;
 
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -19,7 +21,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         implements QuestionPresenter.MyView {
     //Map of section IDs to section titles.
     private QuizSections sections;
-    private String nextQuestionSection;
+    private String nextQuestionSectionId;
     private String choiceSelected;
 
     private Label labelSectionTitle = new Label();
@@ -49,6 +51,14 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         mainPanel.add(nextQuestionSectiontitle);
         mainPanel.add(nextQuestionSectionListBox);
         nextQuestionSectionListBox.addStyleName("next-question-section-title");
+        nextQuestionSectionListBox.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(final ChangeEvent event) {
+                //QuestionView.this.nextQuestionSectionId = nextQuestionSectionListBox.getSelectedValue();
+                final String nextQuestionSectionId = getSelectedNextQuestionSectionId();
+                getUiHandlers().onNextQuestionSectionSelected(nextQuestionSectionId);
+            }
+        });
 
         final Label titleLabel = new Label("Question");
         titleLabel.addStyleName("page-title-label");
@@ -88,6 +98,11 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         initWidget(mainPanel);
     }
 
+    private String getSelectedNextQuestionSectionId() {
+        final String title = nextQuestionSectionListBox.getSelectedValue();
+        return sections.getIdForTitle(title);
+    }
+
     private void onShowAnswerButton() {
         getUiHandlers().onShowAnswer();
     }
@@ -116,18 +131,26 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             }
         }
 
-        setNextQuestionSection(nextQuestionSection);
+        setNextQuestionSectionTitle(nextQuestionSectionId);
     }
 
     @Override
-    public void setNextQuestionSection(final String sectionTitle) {
-        nextQuestionSection = sectionTitle;
+    public void setNextQuestionSectionId(final String sectionId) {
+        nextQuestionSectionId = sectionId;
 
+        String title = null;
+        if (sections != null) {
+            title = sections.getSectionTitle(nextQuestionSectionId);
+        }
+        setNextQuestionSectionTitle(title);
+    }
+
+    private void setNextQuestionSectionTitle(final String sectionTitle) {
         //TODO: Use a derived/better ListBox that lets us refere to the items by ID.
         final int count = nextQuestionSectionListBox.getItemCount();
         for (int i = 0; i < count; ++i) {
             if (StringUtils.equals(
-                    nextQuestionSectionListBox.getItemText(i), nextQuestionSection)) {
+                    nextQuestionSectionListBox.getItemText(i), sectionTitle)) {
                 nextQuestionSectionListBox.setSelectedIndex(i);
                 break;
             }

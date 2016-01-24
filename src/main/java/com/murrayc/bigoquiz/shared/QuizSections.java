@@ -36,4 +36,16 @@ public class QuizSections implements IsSerializable {
     public Collection<String> getTitles() {
         return sectionTitles.values();
     }
+
+    public String getIdForTitle(final String title) {
+        //TODO: Use reverse hashmap?
+        for (final String id : sectionTitles.keySet()) {
+            if (StringUtils.equals(
+                    getSectionTitle(id), title)) {
+                return id;
+            }
+        }
+
+        return null;
+    }
 }

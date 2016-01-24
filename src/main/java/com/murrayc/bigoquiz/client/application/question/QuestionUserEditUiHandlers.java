@@ -11,4 +11,6 @@ interface QuestionUserEditUiHandlers extends UiHandlers {
     void onShowAnswer();
 
     void onGoToNextQuestion();
+
+    void onNextQuestionSectionSelected(final String nextQuestionSectionId);
 }

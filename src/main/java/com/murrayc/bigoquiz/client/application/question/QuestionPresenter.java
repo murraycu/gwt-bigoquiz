@@ -31,7 +31,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         void setQuestion(final Question question);
 
-        void setNextQuestionSection(final String sectionId);
+        void setNextQuestionSectionId(final String sectionId);
 
         String getChoiceSelected();
 
@@ -75,12 +75,11 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         //Next question section ID,
         nextQuestionSectionId = request.getParameter(NameTokens.QUESTION_PARAM_SECTION_ID, null);
         if (StringUtils.isEmpty(nextQuestionSectionId)) {
-            getView().setNextQuestionSection(nextQuestionSectionId);
+            getView().setNextQuestionSectionId(nextQuestionSectionId);
 
             getAndUseNextQuestion(nextQuestionSectionId);
         }
     }
-
 
     @Override
     public void onSubmitAnswer() {
@@ -158,6 +157,12 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         }
 
         //Otherwise, get it from the server:
+        getAndUseNextQuestion(nextQuestionSectionId);
+    }
+
+    @Override
+    public void onNextQuestionSectionSelected(final String nextQuestionSectionId) {
+        this.nextQuestionSectionId = nextQuestionSectionId;
         getAndUseNextQuestion(nextQuestionSectionId);
     }
 
