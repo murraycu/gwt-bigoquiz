@@ -24,7 +24,7 @@ public class QuizLoader {
     private static final String NODE_SECTION = "section";
     private static final String NODE_QUESTION = "question";
     private static final String ATTR_ID = "id";
-    private static final String ATTR_TITLE = "title";
+    private static final String NODE_TITLE = "title";
     private static final String NODE_TEXT = "text";
     private static final String NODE_ANSWER = "answer";
     private static final String NODE_CHOICES = "choices";
@@ -70,7 +70,12 @@ public class QuizLoader {
             final Element sectionElement = (Element) sectionNode;
 
             final String sectionId = sectionElement.getAttribute(ATTR_ID);
-            final String sectionTitle = sectionElement.getAttribute(ATTR_TITLE);
+
+            String sectionTitle = null;
+            final Element sectionTitleElement = getElementByName(sectionElement, NODE_TITLE);
+            if (sectionTitleElement != null) {
+                sectionTitle = sectionTitleElement.getTextContent();
+            }
 
             //Default choices:
             List<String> defaultChoices = null;
