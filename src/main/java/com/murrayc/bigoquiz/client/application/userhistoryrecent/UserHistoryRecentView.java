@@ -40,7 +40,12 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         answersPanel.clear();
 
         for (final UserAnswer userAnswer : result.getUserAnswers()) {
-            final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(userAnswer.getQuestionId());
+            //TODO: This will take the user to that question,
+            //and keep any subsequent questions to that question's section,
+            //by specifying the nextSectionQuestionId to getPlaceRequestForQuestion().
+            //Alternatively, we could specify no section (meaning it would use questions from all sections).
+            //Both alternatives lose whatever the user had set before clicking this link.
+            final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(userAnswer.getQuestionId(), userAnswer.getSectionId());
             final String url = placeManager.buildHistoryToken(placeRequest);
             final Hyperlink label = new Hyperlink(userAnswer.getQuestionTitle(), url);
             answersPanel.add(label);

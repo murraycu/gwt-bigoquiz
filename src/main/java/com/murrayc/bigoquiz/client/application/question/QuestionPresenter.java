@@ -81,7 +81,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         }
 
         //Next question section ID,
-        nextQuestionSectionId = request.getParameter(NameTokens.QUESTION_PARAM_SECTION_ID, null);
+        nextQuestionSectionId = request.getParameter(NameTokens.QUESTION_PARAM_NEXT_QUESTION_SECTION_ID, null);
         if (StringUtils.isEmpty(questionId)) {
             getView().setNextQuestionSectionId(nextQuestionSectionId);
 
@@ -168,7 +168,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     }
 
     /**
-     * This will cause prepareRequest() be called,
+     * This will cause prepareFromRequest() be called,
      * where we can update the view with the specified questionId,
      * storing a history token for the "place" along the way,
      * so the browser's back button can take us to the previous question.
@@ -178,7 +178,22 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     private void revealQuestion(final Question question) {
         questionId = question.getId();
 
-        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(questionId);
+        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(questionId, nextQuestionSectionId);
+        placeManager.revealPlace(placeRequest);;
+    }
+
+    /**
+     * This will cause prepareFromRequest() be called,
+     * where we can update the view with a question from the specified section,
+     * storing a history token for the "place" along the way,
+     * so the browser's back button can take us to the previous question.
+     *
+     * @param nextQuestionSectionId
+     */
+    private void revealSection(final String nextQuestionSectionId) {
+        this.nextQuestionSectionId = nextQuestionSectionId;
+
+        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(nextQuestionSectionId);
         placeManager.revealPlace(placeRequest);;
     }
 
@@ -189,8 +204,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
     @Override
     public void onNextQuestionSectionSelected(final String nextQuestionSectionId) {
-        this.nextQuestionSectionId = nextQuestionSectionId;
-        getAndUseNextQuestion(nextQuestionSectionId);
+
+        revealSection(nextQuestionSectionId);
     }
 
     private void getAndUseSections() {
