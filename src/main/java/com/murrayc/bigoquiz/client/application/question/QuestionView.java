@@ -236,8 +236,9 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
                 showAnswerButton.setVisible(false); //No need to click it again.
                 nextQuestionButton.setVisible(true);
 
-                resultLabel.setText("Don't Know");
-                resultLabel.setVisible(true);
+                //resultLabel.setText("Don't Know");
+                //resultLabel.setVisible(true);
+                resultLabel.setVisible(false); //Showing "Don't Know" is annoying to the user.
                 break;
             }
             case WRONG_ANSWER: {
