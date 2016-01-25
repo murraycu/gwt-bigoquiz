@@ -15,6 +15,8 @@ import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 
+import java.util.Iterator;
+
 /**
  * Created by murrayc on 1/21/16.
  */
@@ -226,6 +228,8 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     }
 
     private void updateResultPanelUi(final State state) {
+        enableChoices(true);
+
         switch (state) {
             case WAITING_FOR_ANSWER: {
                 showAnswerButton.setVisible(true);
@@ -235,6 +239,9 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
                 break;
             }
             case DONT_KNOW_ANSWER: {
+                //Don't let them choose the correct answer right after we've shown them the correct answer:
+                enableChoices(false);
+
                 showAnswerButton.setVisible(false); //No need to click it again.
                 nextQuestionButton.setVisible(true);
                 correctAnswerLabel.setVisible(true);
@@ -257,6 +264,23 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
                 correctAnswerLabel.setVisible(false);
                 resultLabel.setText("Correct");
                 resultLabel.setVisible(true);
+            }
+        }
+    }
+
+    /** Disable all radio buttons in the the choicesPanel.
+     * We need this helper method because there is no general Panel.setEnabled() method.
+     *
+     * @param enabled
+     */
+    private void enableChoices(boolean enabled) {
+        final Iterator<Widget> iter = choicesPanel.iterator();
+        while (iter.hasNext()) {
+            final Widget widget = iter.next();
+
+            if (widget instanceof RadioButton) {
+                final RadioButton radionButton = (RadioButton) widget;
+                radionButton.setEnabled(enabled);
             }
         }
     }
