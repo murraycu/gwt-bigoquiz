@@ -28,6 +28,8 @@ public class UserAnswer implements IsSerializable {
     private String questionTitle;
 
     private boolean result;
+
+    @Index
     private String time;
 
     public UserAnswer() {

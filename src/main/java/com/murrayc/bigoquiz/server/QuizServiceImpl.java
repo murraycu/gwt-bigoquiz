@@ -132,7 +132,9 @@ public class QuizServiceImpl extends ServiceWithUser implements
         final EntityManagerFactory emf = EntityManagerFactory.get();
         Query<UserAnswer> q = emf.ofy().load().type(UserAnswer.class);
         q = q.filter("userId", user.getUserId());
+        q = q.order("-time"); //- means descending.
         q = q.limit(HISTORY_LIMIT);
+
 
         //Objectify's Query.list() method seems to return a list implementation that contains
         //some kind of (non-serializable) proxy, leading to gwt compilation errors such as this:
@@ -264,7 +266,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
     private static String getCurrentTime() {
         //TODO: Performance:
         final TimeZone tz = TimeZone.getTimeZone("UTC");
-        final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
+        final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
         df.setTimeZone(tz);
         return df.format(new Date());
     }
