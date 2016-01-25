@@ -11,6 +11,13 @@
     .user-history-recent-as-sidebar { display: none; }
 }
 
+body {
+    /* Remove the clean.css margin around the whole page.
+     * We need the !important to override the body style in clean.css,
+     * for some reason.
+     */
+    margin: 0px !important;
+}
 
 .gwt-Label {
     margin-bottom: 1em;
@@ -98,7 +105,31 @@
 }
 
 .menu-panel {
-    margin: 2em;
+    padding: 2em;
+    background-color: blue;
+}
+
+/* TODO: Why doesn't any of this work to make the a text white, insead of gwt-Anchor.menu-title?
+.menu-title {
+    color: white;
+    background-color: blue;
+}
+
+.menu-title.a, a:visited {
+    color: white;
+    background-color: blue;
+}
+
+.menu-title.a:visited {
+    color: white;
+    background-color: blue;
+}
+*/
+
+.gwt-Anchor.menu-title {
+    color: white;
+    background-color: blue;
+
 }
 
 .version-label {
