@@ -8,14 +8,17 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
+import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
 
 /**
  * Created by murrayc on 1/21/16.
  */
 public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecentPresenter.MyView>
-        implements UserHistoryRecentUserEditUiHandlers {
+        implements UserHistoryRecentUserEditUiHandlers, QuestionUserAnswerAddedEvent.QuestionUserAnswerAddedEventHandler {
+
     public interface MyView extends View, HasUiHandlers<UserHistoryRecentUserEditUiHandlers> {
         void setUserRecentHistory(final UserRecentHistory result);
 
@@ -30,6 +33,20 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
 
         getView().setUiHandlers(this);
 
+        addRegisteredHandler(QuestionUserAnswerAddedEvent.TYPE, this);
+
+        getAndShowHistory();
+    }
+
+    @ProxyEvent
+    @Override
+    public void onQuestionUserAnswerAdded(final QuestionUserAnswerAddedEvent event) {
+        GWT.log("debug: onQuestionUserAnswerAdded");
+
+        getAndShowHistory();
+    }
+
+    private void getAndShowHistory() {
         final AsyncCallback<UserRecentHistory> callback = new AsyncCallback<UserRecentHistory>() {
             @Override
             public void onFailure(final Throwable caught) {
@@ -50,6 +67,6 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         };
 
         QuizServiceAsync.Util.getInstance().getUserRecentHistory(callback);
-
     }
+
 }

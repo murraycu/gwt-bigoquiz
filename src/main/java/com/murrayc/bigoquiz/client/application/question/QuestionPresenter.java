@@ -22,6 +22,7 @@ import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.google.inject.Inject;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
+import com.murrayc.bigoquiz.shared.db.UserAnswer;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -109,6 +110,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
     @Override
     public void onSubmitAnswer() {
+        //Submit the answer to the server:
         final String answer = getView().getChoiceSelected();
 
         final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
@@ -135,6 +137,11 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
                 //Show the user:
                 getView().setSubmissionResult(result);
+
+                //Tell the UserHistoryRecent presenter/view that there is a new history item.
+                //Otherwise it will only update when the whole page refreshes.
+                final UserAnswer userAnswer = null; //TODO
+                QuestionUserAnswerAddedEvent.fire(QuestionPresenter.this, userAnswer);
             }
 
         };
