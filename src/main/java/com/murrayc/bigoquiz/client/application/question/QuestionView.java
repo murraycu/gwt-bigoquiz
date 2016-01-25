@@ -248,6 +248,10 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
                 break;
             }
             case CORRECT_ANSWER: {
+                //Don't let them immediately submit another correct answer,
+                //because they now know the correct answer.
+                enableChoices(false);
+
                 showAnswerButton.setVisible(false);
                 nextQuestionButton.setVisible(true);
                 resultLabel.setText("Correct");
