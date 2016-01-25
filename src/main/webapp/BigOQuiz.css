@@ -122,6 +122,11 @@
 
 }
 
+.question-radio-button-correct {
+    font-weight: bold;
+    font-size: larger;
+}
+
 .gwt-RadioButton {
     line-height: 2em;
 }

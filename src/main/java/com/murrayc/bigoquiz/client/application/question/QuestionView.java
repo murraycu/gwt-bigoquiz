@@ -35,7 +35,6 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private FlowPanel resultPanel = new FlowPanel();
     private Button showAnswerButton = new Button("Show Answer");
     private Button nextQuestionButton = new Button("Next");
-    private Label correctAnswerLabel = new Label();
     private Label resultLabel = new Label();
 
     QuestionView() {
@@ -78,14 +77,12 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
         resultPanel.add(showAnswerButton);
         showAnswerButton.addStyleName("show-answer-button");
-
         showAnswerButton.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
                 onShowAnswerButton();
             }
         });
-        resultPanel.add(correctAnswerLabel);
 
         resultPanel.add(nextQuestionButton);
         nextQuestionButton.addStyleName("next-question-button");
@@ -207,17 +204,12 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             return;
         }
 
-        //This is empty if the answer was correct:
-        //correctAnswerLabel.setText(submissionResult.getCorrectAnswer());
         updateResultPanelUi(submissionResult.getResult() ? State.CORRECT_ANSWER : State.WRONG_ANSWER);
     }
 
     @Override
     public void showAnswer(final String correctAnswer) {
-        if (!StringUtils.isEmpty(correctAnswer)) {
-            //We have the correct answer from the result of a previously-wrong subsmission:
-            correctAnswerLabel.setText(correctAnswer);
-        }
+        showCorrectAnswerInChoices(correctAnswer);
 
         updateResultPanelUi(State.DONT_KNOW_ANSWER);
     }
@@ -234,7 +226,6 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             case WAITING_FOR_ANSWER: {
                 showAnswerButton.setVisible(true);
                 nextQuestionButton.setVisible(false);
-                correctAnswerLabel.setVisible(false);
                 resultLabel.setVisible(false);
                 break;
             }
@@ -244,7 +235,6 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
                 showAnswerButton.setVisible(false); //No need to click it again.
                 nextQuestionButton.setVisible(true);
-                correctAnswerLabel.setVisible(true);
 
                 resultLabel.setText("Don't Know");
                 resultLabel.setVisible(true);
@@ -253,7 +243,6 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             case WRONG_ANSWER: {
                 showAnswerButton.setVisible(true);
                 nextQuestionButton.setVisible(false);
-                correctAnswerLabel.setVisible(false);
                 resultLabel.setText("Wrong");
                 resultLabel.setVisible(true);
                 break;
@@ -261,7 +250,6 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             case CORRECT_ANSWER: {
                 showAnswerButton.setVisible(false);
                 nextQuestionButton.setVisible(true);
-                correctAnswerLabel.setVisible(false);
                 resultLabel.setText("Correct");
                 resultLabel.setVisible(true);
             }
@@ -279,8 +267,23 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             final Widget widget = iter.next();
 
             if (widget instanceof RadioButton) {
-                final RadioButton radionButton = (RadioButton) widget;
-                radionButton.setEnabled(enabled);
+                final RadioButton radioButton = (RadioButton) widget;
+                radioButton.setEnabled(enabled);
+            }
+        }
+    }
+
+    private void showCorrectAnswerInChoices(final String correctAnswer) {
+        final Iterator<Widget> iter = choicesPanel.iterator();
+        while (iter.hasNext()) {
+            final Widget widget = iter.next();
+
+            if (widget instanceof RadioButton) {
+                final RadioButton radioButton = (RadioButton) widget;
+                if (StringUtils.equals(radioButton.getText(), correctAnswer)) {
+                    radioButton.addStyleName("question-radio-button-correct");
+                    return;
+                }
             }
         }
     }
