@@ -12,6 +12,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
+import com.murrayc.bigoquiz.shared.db.UserAnswer;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -20,9 +21,21 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         implements UserHistoryRecentUserEditUiHandlers, QuestionUserAnswerAddedEvent.QuestionUserAnswerAddedEventHandler {
 
     public interface MyView extends View, HasUiHandlers<UserHistoryRecentUserEditUiHandlers> {
+        /** Set a whole set of history.
+         */
         void setUserRecentHistory(final UserRecentHistory result);
 
+        /** Add a single item of history.
+         * For instance, to avoid retrieving the whole history from the server,
+         * if the new item is know already.
+         *
+         * @param userAnswer
+         */
+        void addUserAnswer(final UserAnswer userAnswer);
+
         void setServerFailed();
+
+
     }
 
     @Inject
@@ -41,9 +54,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
     @ProxyEvent
     @Override
     public void onQuestionUserAnswerAdded(final QuestionUserAnswerAddedEvent event) {
-        GWT.log("debug: onQuestionUserAnswerAdded");
-
-        getAndShowHistory();
+        getView().addUserAnswer(event.getUserAnswer());
     }
 
     private void getAndShowHistory() {

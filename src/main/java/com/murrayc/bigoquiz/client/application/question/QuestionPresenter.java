@@ -46,7 +46,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     }
 
     private String nextQuestionSectionId;
-    private String questionId;
+    private Question question;
     private String correctAnswer;
     private Question nextQuestion;
 
@@ -70,6 +70,15 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         getAndUseSections();
     }
 
+    private
+    String getQuestionId() {
+        if (question == null) {
+            return null;
+        }
+
+        return question.getId();
+    }
+
     @Override
     public void prepareFromRequest(final PlaceRequest request) {
         super.prepareFromRequest(request);
@@ -78,7 +87,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         final String questionId = request.getParameter(NameTokens.QUESTION_PARAM_QUESTION_ID, null);
         //GWT.log("prepareFromRequest(): questionId=" + questionId);
         if (!StringUtils.isEmpty(questionId)) {
-            if (StringUtils.equals(questionId, this.questionId)) {
+            if (StringUtils.equals(questionId, getQuestionId())) {
                 //We are already showing the correct question.
                 //GWT.log("prepareFromRequest(): already showing.");
                 return;
@@ -130,23 +139,27 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
                 nextQuestion = null;
                 final Question possibleNextQuestion = result.getNextQuestion();
                 if ((possibleNextQuestion != null) &&
-                        (!StringUtils.equals(possibleNextQuestion.getId(), questionId))) {
+                        (!StringUtils.equals(possibleNextQuestion.getId(), getQuestionId()))) {
                     nextQuestion = possibleNextQuestion;
                     //GWT.log("Storing nextQuestion for later: " + nextQuestion.getId());
                 }
 
+                tellUserHistoryPresenterAboutNewUserAnswer(result.getResult());
+
                 //Show the user:
                 getView().setSubmissionResult(result);
-
-                //Tell the UserHistoryRecent presenter/view that there is a new history item.
-                //Otherwise it will only update when the whole page refreshes.
-                final UserAnswer userAnswer = null; //TODO
-                QuestionUserAnswerAddedEvent.fire(QuestionPresenter.this, userAnswer);
             }
 
         };
 
-        QuizServiceAsync.Util.getInstance().submitAnswer(questionId, answer, nextQuestionSectionId, callback);
+        QuizServiceAsync.Util.getInstance().submitAnswer(getQuestionId(), answer, nextQuestionSectionId, callback);
+    }
+
+    private void tellUserHistoryPresenterAboutNewUserAnswer(boolean answerIsCorrect) {
+        //Tell the UserHistoryRecent presenter/view that there is a new history item.
+        //Otherwise it will only update when the whole page refreshes.
+        final UserAnswer userAnswer = new UserAnswer(null, question, answerIsCorrect, null);
+        QuestionUserAnswerAddedEvent.fire(this, userAnswer);
     }
 
     @Override
@@ -179,7 +192,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         };
 
-        QuizServiceAsync.Util.getInstance().submitDontKnowAnswer(questionId, nextQuestionSectionId, callback);
+        QuizServiceAsync.Util.getInstance().submitDontKnowAnswer(getQuestionId(), nextQuestionSectionId, callback);
     }
 
     @Override
@@ -235,7 +248,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     }
 
     private void showQuestionInView(final Question question) {
-        questionId = question.getId();
+        this.question = question;
         getView().setQuestion(question);
     }
 

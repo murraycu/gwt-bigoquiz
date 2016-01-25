@@ -38,6 +38,7 @@ public class UserAnswer implements IsSerializable {
     public UserAnswer(final String userId, final Question question, final boolean result, final String time) {
         this.userId = userId;
         this.questionId = question.getId();
+        this.questionTitle = question.getText();
         this.sectionId = question.getSectionId();
         this.result = result;
         this.time = time;

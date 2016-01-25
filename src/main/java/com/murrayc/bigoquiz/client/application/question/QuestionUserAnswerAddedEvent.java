@@ -15,6 +15,10 @@ public class QuestionUserAnswerAddedEvent extends GwtEvent<QuestionUserAnswerAdd
         this.userAnswer = userAnswer;
     }
 
+    public UserAnswer getUserAnswer() {
+        return userAnswer;
+    }
+
     public interface QuestionUserAnswerAddedEventHandler extends EventHandler {
         void onQuestionUserAnswerAdded(QuestionUserAnswerAddedEvent event);
     }
