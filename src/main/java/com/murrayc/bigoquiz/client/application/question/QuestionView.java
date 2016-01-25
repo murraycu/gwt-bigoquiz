@@ -6,6 +6,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.Log;
@@ -159,6 +160,8 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
     @Override
     public void setQuestion(final Question question) {
+        Window.setTitle("Big-O Algorithms Quiz" + ": " + "Question" + ": " + question.getText());
+
         choicesPanel.clear();
 
         if (question == null) {
