@@ -68,7 +68,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     @Override
     public void addUserAnswer(final UserAnswer userAnswer) {
-        userRecentHistory.addUserAnswer(userAnswer);
+        userRecentHistory.addUserAnswerAtStart(userAnswer);
 
         //Re-generate the whole list in the UI:
         setUserRecentHistory(userRecentHistory);

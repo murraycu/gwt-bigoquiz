@@ -33,12 +33,12 @@ public class UserRecentHistory implements IsSerializable {
     }
     */
 
-    public void addUserAnswer(final UserAnswer userAnswer) {
+    public void addUserAnswerAtStart(final UserAnswer userAnswer) {
         if (userAnswer == null) {
         }
 
         final List<UserAnswer> list = getUserAnswersListWithCreate(userAnswer.getSectionId());
-        list.add(userAnswer);
+        list.add(0, userAnswer);
     }
 
     private List<UserAnswer> getUserAnswersListWithCreate(final String sectionId) {

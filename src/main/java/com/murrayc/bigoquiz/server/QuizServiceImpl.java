@@ -153,7 +153,10 @@ public class QuizServiceImpl extends ServiceWithUser implements
             //This also gives us the opportunity to fill in the question title,
             //which we want to give to the client, but which we didn't want to store
             //along with each UserAnswer.
-            final List<UserAnswer> listCopy = new ArrayList<>();
+            //
+            //We use a LinkedList, instead of an ArrayList, so that addUserAnswerAtStart() is not too inefficient.
+            //TODO: Hide all that inside UserRecentHistory, though that means copying the list.
+            final List<UserAnswer> listCopy = new LinkedList<>();
             for (final UserAnswer a : q.list()) {
                 if (a == null) {
                     continue;
