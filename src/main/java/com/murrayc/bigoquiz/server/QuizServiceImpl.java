@@ -131,7 +131,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         //Get the UserAnswers for this user, for each section:
-        final Map<String, List<UserAnswer>> map = new HashMap<>();
+        final UserRecentHistory result = new UserRecentHistory(sections);
         for (final String sectionId : sections.getSectionIds()) {
 
             final EntityManagerFactory emf = EntityManagerFactory.get();
@@ -152,9 +152,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
             //which we want to give to the client, but which we didn't want to store
             //along with each UserAnswer.
             //
-            //We use a LinkedList, instead of an ArrayList, so that addUserAnswerAtStart() is not too inefficient.
-            //TODO: Hide all that inside UserRecentHistory, though that means copying the list.
-            final List<UserAnswer> listCopy = new LinkedList<>();
+            final List<UserAnswer> listCopy = new ArrayList<>();
             for (final UserAnswer a : q.list()) {
                 if (a == null) {
                     continue;
@@ -164,10 +162,10 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
                 listCopy.add(a);
             }
-            map.put(sectionId, listCopy);
+            result.setUserAnswers(sectionId, listCopy);
         }
 
-        return new UserRecentHistory(sections, map);
+        return result;
     }
 
     private String getQuestionTitle(final String questionId) {

@@ -4,10 +4,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by murrayc on 1/23/16.
@@ -20,18 +17,17 @@ public class UserRecentHistory implements IsSerializable {
 
     }
 
-    public UserRecentHistory(final QuizSections sections, final Map<String, List<UserAnswer>> userAnswers) {
+    public UserRecentHistory(final QuizSections sections) {
         this.sections = sections;
-        this.userAnswers = userAnswers;
     }
 
-    /*
-    public void addUserAnswers(final String sectionId, final List<UserAnswer> userAnswers) {
-        //TODO: This is inefficient if the list was null to begin with.
+
+    public void setUserAnswers(final String sectionId, final List<UserAnswer> userAnswers) {
         final List<UserAnswer> list = getUserAnswersListWithCreate(sectionId);
+        list.clear();
         list.addAll(userAnswers);
     }
-    */
+
 
     /**
      * Add @a userAnswer to the beginning of the list for it section, making sure that
@@ -59,7 +55,9 @@ public class UserRecentHistory implements IsSerializable {
 
         List<UserAnswer> list = userAnswers.get(sectionId);
         if (list == null) {
-            list = new ArrayList<>();
+            // We use a LinkedList , instead of HashMap,
+            // so that addUserAnswerAtStart() is more efficient.
+            list = new LinkedList<>();
             userAnswers.put(sectionId, list);
         } return list;
     }
