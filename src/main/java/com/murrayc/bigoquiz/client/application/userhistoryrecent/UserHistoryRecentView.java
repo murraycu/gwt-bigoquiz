@@ -50,7 +50,9 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         }
 
         for (final String sectionId : sections.getSectionIds()) {
-            final Label titleLabel = new Label(sections.getSectionTitle(sectionId));
+            final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(sectionId);
+            final String url = placeManager.buildHistoryToken(placeRequest);
+            final Hyperlink titleLabel = new Hyperlink(sections.getSectionTitle(sectionId), url);
             answersPanel.add(titleLabel);
             titleLabel.addStyleName("section-title-label");
 

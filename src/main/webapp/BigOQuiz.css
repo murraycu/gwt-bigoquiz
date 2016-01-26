@@ -170,6 +170,7 @@ body {
 
 .subsection-title {
     font-weight: bold;
+    font-size: 1.2em;
 }
 
 .user-status-answers-panel {
@@ -189,7 +190,8 @@ body {
 }
 
 .section-title-label {
-
+    margin-bottom: 1em;
+    font-weight: bold;
 }
 
 .user-answer-hyperlink {
