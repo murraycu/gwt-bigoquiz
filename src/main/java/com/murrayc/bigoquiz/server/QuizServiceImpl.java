@@ -19,10 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
 /**
  * The server-side implementation of the RPC service.
@@ -129,34 +126,47 @@ public class QuizServiceImpl extends ServiceWithUser implements
             return null;
         }
 
-        final EntityManagerFactory emf = EntityManagerFactory.get();
-        Query<UserAnswer> q = emf.ofy().load().type(UserAnswer.class);
-        q = q.filter("userId", user.getUserId());
-        q = q.order("-time"); //- means descending.
-        q = q.limit(HISTORY_LIMIT);
-
-
-        //Objectify's Query.list() method seems to return a list implementation that contains
-        //some kind of (non-serializable) proxy, leading to gwt compilation errors such as this:
-        //  com.google.gwt.user.client.rpc.SerializationException: Type 'com.sun.proxy.$Proxy10' was not included in the set of types which can be serialized by this SerializationPolicy or its Class object could not be loaded. For security purposes, this type will not be serialized.: instance = [com.murrayc.bigoquiz.shared.db.UserAnswer@7a44340b]
-        //so we copy the items into a new list.
-        //Presumably the act of iterating over the list causes us to actually get the data for each item,
-        //as the actual type.
-        //
-        //This also gives us the opportunity to fill in the question title,
-        //which we want to give to the client, but which we didn't want to store
-        //along with each UserAnswer.
-        final List<UserAnswer> listCopy = new ArrayList<>();
-        for (final UserAnswer a : q.list()) {
-            if (a == null) {
-                continue;
-            }
-
-            a.setQuestionTitle(getQuestionTitle(a.getQuestionId()));
-
-            listCopy.add(a);
+        final Quiz quiz = getQuiz();
+        final QuizSections sections = quiz.getSections();
+        if (sections == null) {
+            return null;
         }
-        return new UserRecentHistory(listCopy);
+
+        //Get the UserAnswers for this user, for each section:
+        final Map<String, List<UserAnswer>> map = new HashMap<>();
+        for (final String sectionId : sections.getSectionIds()) {
+
+            final EntityManagerFactory emf = EntityManagerFactory.get();
+            Query<UserAnswer> q = emf.ofy().load().type(UserAnswer.class);
+            q = q.filter("userId", user.getUserId());
+            q = q.filter("sectionId", sectionId);
+            q = q.order("-time"); //- means descending.
+            q = q.limit(HISTORY_LIMIT);
+
+            //Objectify's Query.list() method seems to return a list implementation that contains
+            //some kind of (non-serializable) proxy, leading to gwt compilation errors such as this:
+            //  com.google.gwt.user.client.rpc.SerializationException: Type 'com.sun.proxy.$Proxy10' was not included in the set of types which can be serialized by this SerializationPolicy or its Class object could not be loaded. For security purposes, this type will not be serialized.: instance = [com.murrayc.bigoquiz.shared.db.UserAnswer@7a44340b]
+            //so we copy the items into a new list.
+            //Presumably the act of iterating over the list causes us to actually get the data for each item,
+            //as the actual type.
+            //
+            //This also gives us the opportunity to fill in the question title,
+            //which we want to give to the client, but which we didn't want to store
+            //along with each UserAnswer.
+            final List<UserAnswer> listCopy = new ArrayList<>();
+            for (final UserAnswer a : q.list()) {
+                if (a == null) {
+                    continue;
+                }
+
+                a.setQuestionTitle(getQuestionTitle(a.getQuestionId()));
+
+                listCopy.add(a);
+            }
+            map.put(sectionId, listCopy);
+        }
+
+        return new UserRecentHistory(sections, map);
     }
 
     private String getQuestionTitle(final String questionId) {

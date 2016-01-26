@@ -21,6 +21,8 @@ public class UserAnswer implements IsSerializable {
     private String userId;
 
     private String questionId;
+
+    @Index
     private String sectionId;
 
     //TODO: Internationalization.

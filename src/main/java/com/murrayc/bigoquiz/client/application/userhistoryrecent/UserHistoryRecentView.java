@@ -1,6 +1,5 @@
 package com.murrayc.bigoquiz.client.application.userhistoryrecent;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -8,6 +7,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
+import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
 
 /**
@@ -16,8 +16,10 @@ import com.murrayc.bigoquiz.shared.db.UserAnswer;
 public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentUserEditUiHandlers>
         implements UserHistoryRecentPresenter.MyView {
 
-    final VerticalPanel answersPanel = new VerticalPanel();
+    final FlowPanel answersPanel = new FlowPanel();
     private final PlaceManager placeManager;
+
+    private UserRecentHistory userRecentHistory;
 
     @Inject
     UserHistoryRecentView(PlaceManager placeManager) {
@@ -37,20 +39,37 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     }
 
     @Override
-    public void setUserRecentHistory(final UserRecentHistory result) {
+    public void setUserRecentHistory(final UserRecentHistory userRecentHistory) {
+        this.userRecentHistory = userRecentHistory;
+
         answersPanel.clear();
 
-        for (final UserAnswer userAnswer : result.getUserAnswers()) {
-            final Hyperlink link = createUserAnswerHyperlink(userAnswer);
-            answersPanel.add(link);
+        final QuizSections sections = userRecentHistory.getSections();
+        if (sections == null) {
+            return;
+        }
+
+        for (final String sectionId : sections.getSectionIds()) {
+            final Label titleLabel = new Label(sections.getSectionTitle(sectionId));
+            answersPanel.add(titleLabel);
+            titleLabel.addStyleName("section-title-label");
+
+            final Panel panel = new FlowPanel();
+            answersPanel.add(panel);
+            panel.addStyleName("panel-user-answers");
+            for (final UserAnswer userAnswer : userRecentHistory.getUserAnswers(sectionId)) {
+                final Hyperlink link = createUserAnswerHyperlink(userAnswer);
+                panel.add(link);
+            }
         }
     }
 
     @Override
     public void addUserAnswer(final UserAnswer userAnswer) {
-        //We assume that this is the most recent activity:
-        final Hyperlink link = createUserAnswerHyperlink(userAnswer);
-        answersPanel.insert(link, 0);
+        userRecentHistory.addUserAnswer(userAnswer);
+
+        //Re-generate the whole list in the UI:
+        setUserRecentHistory(userRecentHistory);
     }
 
     private Hyperlink createUserAnswerHyperlink(final UserAnswer userAnswer) {
@@ -61,7 +80,9 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         //Both alternatives lose whatever the user had set before clicking this link.
         final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(userAnswer.getQuestionId(), userAnswer.getSectionId());
         final String url = placeManager.buildHistoryToken(placeRequest);
-        return new Hyperlink(userAnswer.getQuestionTitle(), url);
+        final Hyperlink result = new Hyperlink(userAnswer.getQuestionTitle(), url);
+        result.addStyleName("user-answer-hyperlink");
+        return result;
     }
 
     @Override
