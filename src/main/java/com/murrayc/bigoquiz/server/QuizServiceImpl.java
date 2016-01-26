@@ -6,6 +6,7 @@ import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
+import com.murrayc.bigoquiz.shared.Constants;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
 import com.murrayc.bigoquiz.shared.Question;
@@ -28,9 +29,6 @@ import java.util.*;
 public class QuizServiceImpl extends ServiceWithUser implements
         QuizService {
     private static final String LOADED_QUIZ = "loaded-quiz";
-
-    //How many items to return.
-    public static final int HISTORY_LIMIT = 5;
 
     /*
     public String greetServer(String input) throws IllegalArgumentException {
@@ -141,7 +139,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
             q = q.filter("userId", user.getUserId());
             q = q.filter("sectionId", sectionId);
             q = q.order("-time"); //- means descending.
-            q = q.limit(HISTORY_LIMIT);
+            q = q.limit(Constants.HISTORY_LIMIT);
 
             //Objectify's Query.list() method seems to return a list implementation that contains
             //some kind of (non-serializable) proxy, leading to gwt compilation errors such as this:

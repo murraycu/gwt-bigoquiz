@@ -7,6 +7,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
+import com.murrayc.bigoquiz.shared.Constants;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
 
@@ -68,7 +69,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     @Override
     public void addUserAnswer(final UserAnswer userAnswer) {
-        userRecentHistory.addUserAnswerAtStart(userAnswer);
+        userRecentHistory.addUserAnswerAtStart(userAnswer, Constants.HISTORY_LIMIT);
 
         //Re-generate the whole list in the UI:
         setUserRecentHistory(userRecentHistory);

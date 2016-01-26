@@ -33,12 +33,23 @@ public class UserRecentHistory implements IsSerializable {
     }
     */
 
-    public void addUserAnswerAtStart(final UserAnswer userAnswer) {
+    /**
+     * Add @a userAnswer to the beginning of the list for it section, making sure that
+     * there are no more than @max items in that sections's list. If necessary,
+     * this removes older items.
+     *
+     * @param userAnswer
+     * @param max
+     */
+    public void addUserAnswerAtStart(final UserAnswer userAnswer, final int max) {
         if (userAnswer == null) {
         }
 
         final List<UserAnswer> list = getUserAnswersListWithCreate(userAnswer.getSectionId());
         list.add(0, userAnswer);
+        while(!list.isEmpty() && list.size() > max) {
+            list.remove(list.size() - 1);
+        }
     }
 
     private List<UserAnswer> getUserAnswersListWithCreate(final String sectionId) {
