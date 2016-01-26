@@ -9,6 +9,9 @@ import com.googlecode.objectify.annotation.Id;
  */
 @Entity
 public class UserProfile implements IsSerializable {
+    /**
+     * This is the same as the User.getUserId().
+     */
     @Id
     private String id;
 
@@ -18,6 +21,10 @@ public class UserProfile implements IsSerializable {
     UserProfile() {
     }
 
+    /**
+     * @param id The User ID, from User.getUserId().
+     * @param name
+     */
     public UserProfile(final String id, final String name) {
         this.id = id;
         this.name = name;
