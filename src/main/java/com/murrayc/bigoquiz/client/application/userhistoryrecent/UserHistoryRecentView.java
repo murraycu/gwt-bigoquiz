@@ -76,14 +76,6 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                 GWT.log("buildUi(): UserStats is null.");
             }
 
-            final Panel userAnswersPanel = new FlowPanel();
-            detailsPanel.add(userAnswersPanel);
-            userAnswersPanel.addStyleName("panel-user-answers");
-            for (final UserAnswer userAnswer : userRecentHistory.getUserAnswers(sectionId)) {
-                final Hyperlink link = createUserAnswerHyperlink(userAnswer);
-                userAnswersPanel.add(link);
-            }
-
             final List<UserProblemQuestion> problemQuestions = userRecentHistory.getProblemQuestions(sectionId);
             String problemQuestionsTitle = "";
             if (problemQuestions == null || problemQuestions.isEmpty()) {
@@ -115,7 +107,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     @Override
     public void addUserAnswer(final UserAnswer userAnswer) {
-        userRecentHistory.addUserAnswerAtStart(userAnswer, Constants.HISTORY_LIMIT);
+        userRecentHistory.addUserAnswerAtStart(userAnswer);
 
         //Re-generate the whole list in the UI:
         buildUi();

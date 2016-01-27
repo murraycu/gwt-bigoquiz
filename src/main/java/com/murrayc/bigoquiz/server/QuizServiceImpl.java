@@ -153,7 +153,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
             final List<UserProblemQuestion> problemQuestions = getProblemQuestions(userId, sectionId);
 
-            result.setUserAnswers(sectionId, userAnswers, userStats, problemQuestions);
+            result.setSectionStats(sectionId, userStats, problemQuestions);
         }
 
         return result;

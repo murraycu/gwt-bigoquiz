@@ -15,7 +15,6 @@ import java.util.*;
  */
 public class UserRecentHistory implements IsSerializable {
     private QuizSections sections;
-    private Map<String, List<UserAnswer>> userAnswers = new HashMap<>();
     private Map<String, List<UserProblemQuestion>> userProblemQuestions = new HashMap<>();
     private Map<String, UserStats> sectionStats = new HashMap<>();
 
@@ -27,11 +26,7 @@ public class UserRecentHistory implements IsSerializable {
         this.sections = sections;
     }
 
-    public void setUserAnswers(final String sectionId, final List<UserAnswer> userAnswers, final UserStats stats, final List<UserProblemQuestion> problemQuestions) {
-        final List<UserAnswer> listUserAnswers = getUserAnswersListWithCreate(sectionId);
-        listUserAnswers.clear();
-        listUserAnswers.addAll(userAnswers);
-
+    public void setSectionStats(final String sectionId, final UserStats stats, final List<UserProblemQuestion> problemQuestions) {
         sectionStats.put(sectionId, stats);
 
         final List<UserProblemQuestion> listProblemQuestions = getProblemQuestionsListWithCreate(sectionId);
@@ -46,9 +41,8 @@ public class UserRecentHistory implements IsSerializable {
      * this removes older items.
      *
      * @param userAnswer
-     * @param max
      */
-    public void addUserAnswerAtStart(final UserAnswer userAnswer, final int max) {
+    public void addUserAnswerAtStart(final UserAnswer userAnswer) {
         if (userAnswer == null) {
             GWT.log("addUserAnswerAtStart(): userAnswer was null.");
             return;
@@ -58,12 +52,6 @@ public class UserRecentHistory implements IsSerializable {
         if (StringUtils.isEmpty(sectionId)) {
             GWT.log("addUserAnswerAtStart(): sectionId was empty.");
             return;
-        }
-
-        final List<UserAnswer> listUserAnswers = getUserAnswersListWithCreate(sectionId);
-        listUserAnswers.add(0, userAnswer);
-        while(!listUserAnswers.isEmpty() && listUserAnswers.size() > max) {
-            listUserAnswers.remove(listUserAnswers.size() - 1);
         }
 
         final String userId = userAnswer.getUserId();
@@ -118,16 +106,6 @@ public class UserRecentHistory implements IsSerializable {
         }
     }
 
-    private List<UserAnswer> getUserAnswersListWithCreate(final String sectionId) {
-        List<UserAnswer> list = userAnswers.get(sectionId);
-        if (list == null) {
-            // We use a LinkedList, instead of HashMap,
-            // so that addUserAnswerAtStart() is more efficient.
-            list = new LinkedList<>();
-            userAnswers.put(sectionId, list);
-        } return list;
-    }
-
     private List<UserProblemQuestion> getProblemQuestionsListWithCreate(final String sectionId) {
         List<UserProblemQuestion> list = userProblemQuestions.get(sectionId);
         if (list == null) {
@@ -136,14 +114,6 @@ public class UserRecentHistory implements IsSerializable {
             list = new LinkedList<>();
             userProblemQuestions.put(sectionId, list);
         } return list;
-    }
-
-    public List<UserAnswer> getUserAnswers(final String sectionId ) {
-        if (userAnswers == null) {
-            return null;
-        }
-
-        return userAnswers.get(sectionId);
     }
 
     public List<UserProblemQuestion> getProblemQuestions(final String sectionId) {

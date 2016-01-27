@@ -26,23 +26,19 @@ public class UserRecentHistoryTest {
         UserRecentHistory history = createUserRecentHistory();
 
         UserAnswer userAnswer = createUserAnswer("question4", SECTION_1, false);
-        history.addUserAnswerAtStart(userAnswer, 5 /* max */);
-
-        List<UserAnswer> answers = history.getUserAnswers(SECTION_1);
-        assertNotNull(answers);
-        assertEquals(answers.size(), 4);
+        history.addUserAnswerAtStart(userAnswer);
 
         List<UserProblemQuestion> problems = history.getProblemQuestions(SECTION_1);
         assertNotNull(problems);
         assertEquals(1, problems.size());
 
-        history.addUserAnswerAtStart(userAnswer, 5 /* max */);
+        history.addUserAnswerAtStart(userAnswer);
         problems = history.getProblemQuestions(SECTION_1);
         assertNotNull(problems);
         assertEquals(1, problems.size());
 
         userAnswer = createUserAnswer("question5", SECTION_1, false);
-        history.addUserAnswerAtStart(userAnswer, 5 /* max */);
+        history.addUserAnswerAtStart(userAnswer);
 
         problems = history.getProblemQuestions(SECTION_1);
         assertNotNull(problems);
@@ -56,21 +52,12 @@ public class UserRecentHistoryTest {
         sections.addSection(SECTION_1, "section 1", null);
         sections.addSection("section2", "section 2", null);
 
-        final List<UserAnswer> userAnswers = new ArrayList<>();
-        userAnswers.add(createUserAnswer("question1", SECTION_1, false));
-        userAnswers.add(createUserAnswer("question2", SECTION_1, true));
-        userAnswers.add(createUserAnswer("question3", SECTION_1, false));
-
         final UserStats stats = new UserStats();
 
         final List<UserProblemQuestion> problemQuestions = new ArrayList<>();
 
         UserRecentHistory history = new UserRecentHistory(sections);
-        history.setUserAnswers("section1", userAnswers, stats, problemQuestions);
-
-        List<UserAnswer> answers = history.getUserAnswers(SECTION_1);
-        assertNotNull(answers);
-        assertEquals(answers.size(), 3);
+        history.setSectionStats("section1", stats, problemQuestions);
 
         return history;
     }
