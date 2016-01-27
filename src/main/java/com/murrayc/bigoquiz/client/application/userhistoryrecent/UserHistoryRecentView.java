@@ -11,7 +11,10 @@ import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.shared.Constants;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
+import com.murrayc.bigoquiz.shared.db.UserProblemQuestion;
 import com.murrayc.bigoquiz.shared.db.UserStats;
+
+import java.util.List;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -19,7 +22,7 @@ import com.murrayc.bigoquiz.shared.db.UserStats;
 public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentUserEditUiHandlers>
         implements UserHistoryRecentPresenter.MyView {
 
-    final FlowPanel answersPanel = new FlowPanel();
+    final FlowPanel detailsPanel = new FlowPanel();
     private final PlaceManager placeManager;
 
     private UserRecentHistory userRecentHistory;
@@ -36,8 +39,8 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         mainPanel.add(labelTitle);
         labelTitle.addStyleName("subsection-title");
 
-        mainPanel.add(answersPanel);
-        answersPanel.addStyleName("user-status-answers-panel");
+        mainPanel.add(detailsPanel);
+        detailsPanel.addStyleName("user-status-answers-panel");
         initWidget(mainPanel);
     }
 
@@ -49,7 +52,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     }
 
     private void buildUi() {
-        answersPanel.clear();
+        detailsPanel.clear();
 
         final QuizSections sections = userRecentHistory.getSections();
         if (sections == null) {
@@ -60,26 +63,53 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(sectionId);
             final String url = placeManager.buildHistoryToken(placeRequest);
             final Hyperlink titleLabel = new Hyperlink(sections.getSectionTitle(sectionId), url);
-            answersPanel.add(titleLabel);
+            detailsPanel.add(titleLabel);
             titleLabel.addStyleName("section-title-label");
 
             final UserStats stats = userRecentHistory.getStats(sectionId);
             if (stats != null) {
                 final String strStats = "Answered: " +  stats.getAnswered() + ", Correct: " + stats.getCorrect();
                 final Label labelStats = new Label(strStats);
-                answersPanel.add(labelStats);
+                detailsPanel.add(labelStats);
                 labelStats.addStyleName("label-stats");
             } else {
                 GWT.log("buildUi(): UserStats is null.");
             }
 
-            final Panel panel = new FlowPanel();
-            answersPanel.add(panel);
-            panel.addStyleName("panel-user-answers");
+            final Panel userAnswersPanel = new FlowPanel();
+            detailsPanel.add(userAnswersPanel);
+            userAnswersPanel.addStyleName("panel-user-answers");
             for (final UserAnswer userAnswer : userRecentHistory.getUserAnswers(sectionId)) {
                 final Hyperlink link = createUserAnswerHyperlink(userAnswer);
-                panel.add(link);
+                userAnswersPanel.add(link);
             }
+
+            final List<UserProblemQuestion> problemQuestions = userRecentHistory.getProblemQuestions(sectionId);
+            String problemQuestionsTitle = "";
+            if (problemQuestions == null || problemQuestions.isEmpty()) {
+                problemQuestionsTitle = "Problem Questions: None yet";
+            } else {
+                problemQuestionsTitle = "Problem Questions: " + problemQuestions.size();
+            }
+
+            final Label label = new Label(problemQuestionsTitle);
+            detailsPanel.add(label);
+            label.addStyleName("label-problem-questions");
+
+            final Panel problemQuestionsPanel = new FlowPanel();
+            detailsPanel.add(problemQuestionsPanel);
+            problemQuestionsPanel.addStyleName("panel-problem-questions");
+            for (final UserProblemQuestion problemQuestion : problemQuestions) {
+                final Hyperlink link = createProblemQuestionrHyperlink(problemQuestion);
+                problemQuestionsPanel.add(link);
+
+                final String strScore = "Error count: " + problemQuestion.getCountAnsweredWrong();
+                final Label labelScore = new Label(strScore);
+                labelScore.addStyleName("problem-answer-score");
+                problemQuestionsPanel.add(labelScore);
+            }
+
+
         }
     }
 
@@ -101,6 +131,19 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         final String url = placeManager.buildHistoryToken(placeRequest);
         final Hyperlink result = new Hyperlink(userAnswer.getQuestionTitle(), url);
         result.addStyleName("user-answer-hyperlink");
+        return result;
+    }
+
+    private Hyperlink createProblemQuestionrHyperlink(final UserProblemQuestion problemQuestion) {
+        //TODO: This will take the user to that question,
+        //and keep any subsequent questions to that question's section,
+        //by specifying the nextSectionQuestionId to getPlaceRequestForQuestion().
+        //Alternatively, we could specify no section (meaning it would use questions from all sections).
+        //Both alternatives lose whatever the user had set before clicking this link.
+        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(problemQuestion.getQuestionId(), problemQuestion.getSectionId());
+        final String url = placeManager.buildHistoryToken(placeRequest);
+        final Hyperlink result = new Hyperlink(problemQuestion.getQuestionTitle(), url);
+        result.addStyleName("problem-answer-hyperlink");
         return result;
     }
 

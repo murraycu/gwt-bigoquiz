@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.server.db;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
+import com.murrayc.bigoquiz.shared.db.UserProblemQuestion;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 import com.murrayc.bigoquiz.shared.db.UserStats;
 
@@ -13,11 +14,11 @@ public class EntityManagerFactory {
     private static EntityManagerFactory singleton;
 
     static {
-        //Register classes whose instances we want to store in the databse via Objectify:
+        //Register classes whose instances we want to store in the database via Objectify:
         ObjectifyService.register(UserProfile.class);
         ObjectifyService.register(UserAnswer.class);
+        ObjectifyService.register(UserProblemQuestion.class);
         ObjectifyService.register(UserStats.class);
-
     }
 
     protected EntityManagerFactory() {

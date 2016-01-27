@@ -11,6 +11,7 @@ import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
+import com.murrayc.bigoquiz.shared.db.UserProblemQuestion;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 import com.murrayc.bigoquiz.shared.db.UserStats;
 import org.apache.commons.lang3.StringUtils;
@@ -136,52 +137,97 @@ public class QuizServiceImpl extends ServiceWithUser implements
             return null;
         }
 
+        final EntityManagerFactory emf = EntityManagerFactory.get();
+
         //Get the UserAnswers for this user, for each section:
         final UserRecentHistory result = new UserRecentHistory(sections);
         for (final String sectionId : sections.getSectionIds()) {
 
-            final EntityManagerFactory emf = EntityManagerFactory.get();
-            Query<UserAnswer> q = emf.ofy().load().type(UserAnswer.class);
-            q = q.filter("userId", userId);
-            q = q.filter("sectionId", sectionId);
-            q = q.order("-time"); //- means descending.
-            q = q.limit(Constants.HISTORY_LIMIT);
+            final List<UserAnswer> userAnswers = getUserAnswers(userId, sectionId);
 
-            //Objectify's Query.list() method seems to return a list implementation that contains
-            //some kind of (non-serializable) proxy, leading to gwt compilation errors such as this:
-            //  com.google.gwt.user.client.rpc.SerializationException: Type 'com.sun.proxy.$Proxy10' was not included in the set of types which can be serialized by this SerializationPolicy or its Class object could not be loaded. For security purposes, this type will not be serialized.: instance = [com.murrayc.bigoquiz.shared.db.UserAnswer@7a44340b]
-            //so we copy the items into a new list.
-            //Presumably the act of iterating over the list causes us to actually get the data for each item,
-            //as the actual type.
-            //
-            //This also gives us the opportunity to fill in the question title,
-            //which we want to give to the client, but which we didn't want to store
-            //along with each UserAnswer.
-            //
-            final List<UserAnswer> listCopy = new ArrayList<>();
-            for (final UserAnswer a : q.list()) {
-                if (a == null) {
-                    continue;
-                }
-
-                a.setQuestionTitle(getQuestionTitle(a.getQuestionId()));
-
-                listCopy.add(a);
-            }
-
-            UserStats userStats = emf.ofy().load().type(UserStats.class).id(userId).now();
+            UserStats userStats = getUserStats(userId, sectionId);
             if (userStats == null) {
                 //So we get the default values:
-                userStats = new UserStats(userId);
+                userStats = new UserStats(userId, sectionId);
             }
 
-            result.setUserAnswers(sectionId, listCopy, userStats);
+            final List<UserProblemQuestion> problemQuestions = getProblemQuestions(userId, sectionId);
+
+            result.setUserAnswers(sectionId, userAnswers, userStats, problemQuestions);
         }
 
         return result;
     }
 
-    private String getQuestionTitle(final String questionId) {
+    private List<UserAnswer> getUserAnswers(final String userId, final String sectionId) {
+        final EntityManagerFactory emf = EntityManagerFactory.get();
+        Query<UserAnswer> q = emf.ofy().load().type(UserAnswer.class);
+        q = q.filter("userId", userId);
+        q = q.filter("sectionId", sectionId);
+        q = q.order("-time"); //- means descending. //TODO: Avoid mentioning field name in a string.
+        q = q.limit(Constants.HISTORY_LIMIT);
+
+        //Objectify's Query.list() method seems to return a list implementation that contains
+        //some kind of (non-serializable) proxy, leading to gwt compilation errors such as this:
+        //  com.google.gwt.user.client.rpc.SerializationException: Type 'com.sun.proxy.$Proxy10' was not included in the set of types which can be serialized by this SerializationPolicy or its Class object could not be loaded. For security purposes, this type will not be serialized.: instance = [com.murrayc.bigoquiz.shared.db.UserAnswer@7a44340b]
+        //so we copy the items into a new list.
+        //Presumably the act of iterating over the list causes us to actually get the data for each item,
+        //as the actual type.
+        //
+        //This also gives us the opportunity to fill in the question title,
+        //which we want to give to the client, but which we didn't want to store
+        //along with each UserAnswer.
+        //
+        final List<UserAnswer> listCopy = new ArrayList<>();
+        for (final UserAnswer a : q.list()) {
+            if (a == null) {
+                continue;
+            }
+
+            a.setQuestionTitle(getQuestionTitle(a.getQuestionId()));
+
+            listCopy.add(a);
+        }
+
+        return listCopy;
+    }
+
+    private UserStats getUserStats(final String userId, final String sectionId) {
+        final EntityManagerFactory emf = EntityManagerFactory.get();
+        Query<UserStats> q = emf.ofy().load().type(UserStats.class);
+        q = q.filter("userId", userId);
+        q = q.filter("sectionId", sectionId);
+        q = q.limit(1);
+        final List<UserStats> list = q.list();
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+
+        return null;
+    }
+
+    private List<UserProblemQuestion> getProblemQuestions(final String userId, final String sectionId) {
+        final EntityManagerFactory emf = EntityManagerFactory.get();
+        Query<UserProblemQuestion> q = emf.ofy().load().type(UserProblemQuestion.class);
+        q = q.filter("userId", userId);
+        q = q.filter("sectionId", sectionId);
+        q = q.limit(Constants.HISTORY_LIMIT);
+        q = q.order("-countAnsweredWrong"); //- means descending. //TODO: Avoid mentioning field name in a string.
+        final List<UserProblemQuestion> listCopy = new ArrayList<>();
+        for (final UserProblemQuestion a : q.list()) {
+            if (a == null) {
+                continue;
+            }
+
+            a.setQuestionTitle(getQuestionTitle(a.getQuestionId()));
+
+            listCopy.add(a);
+        }
+
+        return listCopy;
+    }
+
+        private String getQuestionTitle(final String questionId) {
         final Quiz quiz = getQuiz();
         final Question question = quiz.getQuestion(questionId);
         if (question == null) {
@@ -282,9 +328,15 @@ public class QuizServiceImpl extends ServiceWithUser implements
         final EntityManagerFactory emf = EntityManagerFactory.get();
 
         //Update the statistics:
-        UserStats userStats = emf.ofy().load().type(UserStats.class).id(userId).now();
+        final String sectionId = question.getSectionId();
+        if (StringUtils.isEmpty(sectionId)) {
+            Log.error("storeAnswer(): sectionId is null.");
+            return;
+        }
+
+        UserStats userStats = getUserStats(userId, sectionId);
         if (userStats == null) {
-            userStats = new UserStats(userId);
+            userStats = new UserStats(userId, sectionId);
         }
 
         userStats.incrementAnswered();
@@ -295,10 +347,39 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
         emf.ofy().save().entity(userStats).now();
 
+        //Update the Problem question if any:
+        //TODO: Is there something more efficient than a query?
+        //Maybe something like this? UserProblemQuestion problemQuestion = emf.ofy().load().type(UserProblemQuestion.class).filter("questionId", question.getUserId()).id(userId)..now();
+        UserProblemQuestion problemQuestion = getUserProblemQuestion(userId, question);
+        if (problemQuestion == null && !result) {
+            problemQuestion = new UserProblemQuestion(userId, question);
+        }
+
+        if (problemQuestion != null) {
+            problemQuestion.adjustCount(result);
+            emf.ofy().save().entity(problemQuestion).now();
+        }
+
         //Store the per-answer result:
         final String time = getCurrentTime();
         final UserAnswer userAnswer = new UserAnswer(userId, question, result, time);
-        emf.ofy().save().entity(userAnswer).now();
+        emf.ofy().save().entity(userAnswer).now(); //TODO: lots of now() calls is probably inefficient.
+    }
+
+    private UserProblemQuestion getUserProblemQuestion(final String userId, final Question question) {
+        UserProblemQuestion problemQuestion = null;
+
+        final EntityManagerFactory emf = EntityManagerFactory.get();
+        Query<UserProblemQuestion> q = emf.ofy().load().type(UserProblemQuestion.class);
+        q = q.filter("userId", userId);
+        q = q.filter("questionId", question.getId());
+        q = q.limit(1);
+        final List<UserProblemQuestion> list = q.list();
+        if (!list.isEmpty()) {
+            problemQuestion = list.get(0);
+        }
+
+        return problemQuestion;
     }
 
     private static String getCurrentTime() {

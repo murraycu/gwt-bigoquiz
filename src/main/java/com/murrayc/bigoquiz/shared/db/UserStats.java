@@ -3,33 +3,49 @@ package com.murrayc.bigoquiz.shared.db;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
 /**
  * Created by murrayc on 1/27/16.
  */
 @Entity
 public class UserStats implements IsSerializable {
-    //This is the User ID.
+    //TODO: Just use userId as the Id, but then get the query to still work.
     @Id
-    private String id;
+    Long id;
+
+    @Index
+    private String userId;
+
+    @Index
+    private String sectionId;
+
     int answered;
     int correct;
 
     public UserStats() {
     }
 
-    public UserStats(final String userId) {
-        this.id = userId;
+    public UserStats(final String userId, final String sectionId) {
+        this.userId = userId;
+        this.sectionId = sectionId;
     }
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void seUserId(final String userId) {
+        this.userId = userId;
     }
 
+    public String getSectionId() {
+        return sectionId;
+    }
+
+    public void setSectionid(final String sectionId) {
+        this.sectionId = sectionId;
+    }
 
     public void incrementAnswered() {
         answered += 1;
