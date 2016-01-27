@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.client;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.murrayc.bigoquiz.shared.QuizSections;
+import com.murrayc.bigoquiz.shared.db.UserStats;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
 
 import java.util.*;
@@ -11,7 +12,9 @@ import java.util.*;
  */
 public class UserRecentHistory implements IsSerializable {
     private QuizSections sections;
-    private Map<String, List<UserAnswer>> userAnswers;
+    private Map<String, List<UserAnswer>> userAnswers = new HashMap<>();
+
+    private Map<String, UserStats> sectionStats = new HashMap<>();
 
     UserRecentHistory() {
 
@@ -21,11 +24,12 @@ public class UserRecentHistory implements IsSerializable {
         this.sections = sections;
     }
 
-
-    public void setUserAnswers(final String sectionId, final List<UserAnswer> userAnswers) {
+    public void setUserAnswers(final String sectionId, final List<UserAnswer> userAnswers, final UserStats stats) {
         final List<UserAnswer> list = getUserAnswersListWithCreate(sectionId);
         list.clear();
         list.addAll(userAnswers);
+
+        sectionStats.put(sectionId, stats);
     }
 
 
@@ -46,13 +50,15 @@ public class UserRecentHistory implements IsSerializable {
         while(!list.isEmpty() && list.size() > max) {
             list.remove(list.size() - 1);
         }
+
+        final UserStats userStats = getStatsWithAdd(userAnswer.getUserId(), userAnswer.getSectionId());
+        userStats.incrementAnswered();
+        if (userAnswer.getResult()) {
+            userStats.incrementCorrect();
+        }
     }
 
     private List<UserAnswer> getUserAnswersListWithCreate(final String sectionId) {
-        if (userAnswers == null) {
-            userAnswers = new HashMap<>();
-        }
-
         List<UserAnswer> list = userAnswers.get(sectionId);
         if (list == null) {
             // We use a LinkedList , instead of HashMap,
@@ -70,10 +76,27 @@ public class UserRecentHistory implements IsSerializable {
         return userAnswers.get(sectionId);
     }
 
+    public UserStats getStats(final String sectionId ) {
+        return sectionStats.get(sectionId);
+    }
+
 
     public QuizSections getSections() {
         return sections;
     }
 
+    private UserStats getStatsWithAdd(final String userId, final String sectionId ) {
+        UserStats stats = getStats(sectionId);
+        if (stats == null) {
+            stats = new UserStats(userId);
+            setStats(sectionId, stats);
+        }
+
+        return stats;
+    }
+
+    private void setStats(final String sectionId, final UserStats stats) {
+        sectionStats.put(sectionId, stats);
+    }
 
 }

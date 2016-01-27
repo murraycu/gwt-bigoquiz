@@ -12,6 +12,7 @@ import com.murrayc.bigoquiz.shared.db.UserAnswer;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
+import com.murrayc.bigoquiz.shared.db.UserStats;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletConfig;
@@ -119,8 +120,13 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     //@Override
     public UserRecentHistory getUserRecentHistory() throws IllegalArgumentException {
-        final User user = getUser();
-        if (user == null) {
+        final UserProfile userProfile = getUserProfile();
+        if (userProfile == null) {
+            return null;
+        }
+
+        final String userId = userProfile.getId();
+        if (StringUtils.isEmpty(userId)) {
             return null;
         }
 
@@ -136,7 +142,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
             final EntityManagerFactory emf = EntityManagerFactory.get();
             Query<UserAnswer> q = emf.ofy().load().type(UserAnswer.class);
-            q = q.filter("userId", user.getUserId());
+            q = q.filter("userId", userId);
             q = q.filter("sectionId", sectionId);
             q = q.order("-time"); //- means descending.
             q = q.limit(Constants.HISTORY_LIMIT);
@@ -162,7 +168,14 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
                 listCopy.add(a);
             }
-            result.setUserAnswers(sectionId, listCopy);
+
+            UserStats userStats = emf.ofy().load().type(UserStats.class).id(userId).now();
+            if (userStats == null) {
+                //So we get the default values:
+                userStats = new UserStats(userId);
+            }
+
+            result.setUserAnswers(sectionId, listCopy, userStats);
         }
 
         return result;
@@ -255,20 +268,36 @@ public class QuizServiceImpl extends ServiceWithUser implements
     private void storeAnswer(boolean result, final Question question) {
         final UserProfile userProfile = getUserProfileImpl();
         if (userProfile == null) {
+            Log.error("storeAnswer(): userProfile is null.");
             //TODO: Keep a score in the session, without a user profile?
+            return;
+        }
+
+        final String userId = userProfile.getId();
+        if (StringUtils.isEmpty(userId)) {
+            Log.error("storeAnswer(): userId is null.");
             return;
         }
 
         final EntityManagerFactory emf = EntityManagerFactory.get();
 
-        if (result) {
-            userProfile.setCountCorrectAnswers(userProfile.getCountCorrectAnswers() + 1);
-
-            emf.ofy().save().entity(userProfile).now();
+        //Update the statistics:
+        UserStats userStats = emf.ofy().load().type(UserStats.class).id(userId).now();
+        if (userStats == null) {
+            userStats = new UserStats(userId);
         }
 
+        userStats.incrementAnswered();
+
+        if (result) {
+            userStats.incrementCorrect();
+        }
+
+        emf.ofy().save().entity(userStats).now();
+
+        //Store the per-answer result:
         final String time = getCurrentTime();
-        final UserAnswer userAnswer = new UserAnswer(userProfile.getId(), question, result, time);
+        final UserAnswer userAnswer = new UserAnswer(userId, question, result, time);
         emf.ofy().save().entity(userAnswer).now();
     }
 

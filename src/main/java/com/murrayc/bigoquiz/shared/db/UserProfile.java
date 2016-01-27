@@ -15,7 +15,6 @@ public class UserProfile implements IsSerializable {
     @Id
     private String id;
 
-    private long countCorrectAnswers;
     private String name;
 
     UserProfile() {
@@ -36,13 +35,5 @@ public class UserProfile implements IsSerializable {
 
     public String getName() {
         return name;
-    }
-
-    public long getCountCorrectAnswers() {
-        return countCorrectAnswers;
-    }
-
-    public void setCountCorrectAnswers(long countCorrectAnswers) {
-        this.countCorrectAnswers = countCorrectAnswers;
     }
 }

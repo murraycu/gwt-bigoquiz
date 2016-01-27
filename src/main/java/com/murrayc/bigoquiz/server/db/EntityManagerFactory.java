@@ -4,6 +4,7 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
+import com.murrayc.bigoquiz.shared.db.UserStats;
 
 /**
  * Created by murrayc on 1/19/16.
@@ -15,6 +16,8 @@ public class EntityManagerFactory {
         //Register classes whose instances we want to store in the databse via Objectify:
         ObjectifyService.register(UserProfile.class);
         ObjectifyService.register(UserAnswer.class);
+        ObjectifyService.register(UserStats.class);
+
     }
 
     protected EntityManagerFactory() {

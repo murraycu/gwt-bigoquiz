@@ -198,7 +198,12 @@ body {
 
 }
 
+.label-stats {
+    margin-left: 1em;
+}
+
 .panel-user-answers {
     margin-left: 1em;
     margin-bottom: 1em;
 }
+

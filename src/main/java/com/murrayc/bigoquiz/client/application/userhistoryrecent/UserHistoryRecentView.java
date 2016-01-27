@@ -1,5 +1,6 @@
 package com.murrayc.bigoquiz.client.application.userhistoryrecent;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -10,6 +11,7 @@ import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.shared.Constants;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
+import com.murrayc.bigoquiz.shared.db.UserStats;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -43,6 +45,10 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     public void setUserRecentHistory(final UserRecentHistory userRecentHistory) {
         this.userRecentHistory = userRecentHistory;
 
+        buildUi();
+    }
+
+    private void buildUi() {
         answersPanel.clear();
 
         final QuizSections sections = userRecentHistory.getSections();
@@ -56,6 +62,16 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             final Hyperlink titleLabel = new Hyperlink(sections.getSectionTitle(sectionId), url);
             answersPanel.add(titleLabel);
             titleLabel.addStyleName("section-title-label");
+
+            final UserStats stats = userRecentHistory.getStats(sectionId);
+            if (stats != null) {
+                final String strStats = "Answered: " +  stats.getAnswered() + ", Correct: " + stats.getCorrect();
+                final Label labelStats = new Label(strStats);
+                answersPanel.add(labelStats);
+                labelStats.addStyleName("label-stats");
+            } else {
+                GWT.log("buildUi(): UserStats is null.");
+            }
 
             final Panel panel = new FlowPanel();
             answersPanel.add(panel);
@@ -72,7 +88,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         userRecentHistory.addUserAnswerAtStart(userAnswer, Constants.HISTORY_LIMIT);
 
         //Re-generate the whole list in the UI:
-        setUserRecentHistory(userRecentHistory);
+        buildUi();
     }
 
     private Hyperlink createUserAnswerHyperlink(final UserAnswer userAnswer) {
