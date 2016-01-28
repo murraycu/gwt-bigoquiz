@@ -1,6 +1,8 @@
 package com.murrayc.bigoquiz.client.application.question;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -34,7 +36,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private String nextQuestionSectionId;
     private String choiceSelected;
 
-    private final Label labelSectionTitle = new Label();
+    private ParagraphElement paraSectionTitle;
     private final ListBox nextQuestionSectionListBox = new ListBox();
     private final Label questionLabel = new Label();
     private final Panel choicesPanel = new VerticalPanel();
@@ -47,12 +49,10 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("content-panel");
 
-        final Label sectiontitle = new Label("Section:");
-        sectiontitle.addStyleName("page-title-label");
-        mainPanel.add(sectiontitle);
-
-        mainPanel.add(labelSectionTitle);
-        labelSectionTitle.addStyleName("section-title");
+        paraSectionTitle = Document.get().createPElement();
+        //paraSectionTitle.setInnerText(messages.sectionTitle());
+        mainPanel.getElement().appendChild(paraSectionTitle);
+        //paraSectionTitle.addStyleName("section-title-label");;
 
         final Label nextQuestionSectiontitle = new Label(constants.showingQuestionsFrom());
         nextQuestionSectiontitle.addStyleName("page-title-label");
@@ -177,7 +177,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
         questionLabel.setText(question.getText());
 
-        labelSectionTitle.setText(sections.getSectionTitle(question.getSectionId()));
+        paraSectionTitle.setInnerHTML(messages.sectionTitle(sections.getSectionTitle(question.getSectionId())));
 
         final String groupName = "choices";
         for (final String choice : question.getChoices()) {
