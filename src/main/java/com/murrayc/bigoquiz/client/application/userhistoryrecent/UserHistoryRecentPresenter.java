@@ -68,12 +68,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
 
             @Override
             public void onSuccess(final UserRecentHistory result) {
-                //TODO: Throw an exception instead of returning null?
-                if(result == null) {
-                    //getView().setServerFailed();
-                } else {
-                    getView().setUserRecentHistory(result);
-                }
+                getView().setUserRecentHistory(result);
             }
         };
 

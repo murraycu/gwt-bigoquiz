@@ -41,6 +41,10 @@ body {
     clear: right;
 }
 
+.sidebar-panel h2 {
+    margin-top: 0;
+}
+
 .recommended-reading {
     float: left;
     clear: both;
@@ -233,10 +237,6 @@ background-color: blue;
 
 }
 
-.user-history-recent-as-sidebar {
-
-}
-
 .section-title {
 
 }
@@ -277,5 +277,9 @@ background-color: blue;
 }
 
 .problem-answer-score {
+
+}
+
+.about-label {
 
 }

@@ -1,6 +1,8 @@
 package com.murrayc.bigoquiz.client.application.userhistoryrecent;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -23,6 +25,10 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         implements UserHistoryRecentPresenter.MyView {
 
     final FlowPanel detailsPanel = new FlowPanel();
+
+    private final Label loginLabel = new Label(
+            "Please sign in to track your progress and identify problem questions.");
+
     private final PlaceManager placeManager;
 
     private UserRecentHistory userRecentHistory;
@@ -35,9 +41,13 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         mainPanel.addStyleName("user-history-recent-panel");
         //box.getElement().setAttribute("id", "titlebox");
 
-        final Label labelTitle = new Label("Recent History");
-        mainPanel.add(labelTitle);
-        labelTitle.addStyleName("subsection-title");
+        final HeadingElement headingElement = Document.get().createHElement(2);
+        headingElement.setInnerText("Recent History");
+        mainPanel.getElement().appendChild(headingElement);
+
+        //This is only visible when necessary:
+        mainPanel.add(loginLabel);
+        loginLabel.setVisible(false);
 
         mainPanel.add(detailsPanel);
         detailsPanel.addStyleName("user-status-answers-panel");
@@ -52,7 +62,15 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     }
 
     private void buildUi() {
+        loginLabel.setVisible(userRecentHistory == null);
+
         detailsPanel.clear();
+
+        //This would just mean that the user is not logged in.
+        //TODO: Make this more explicit in the API.
+        if (userRecentHistory == null) {
+            return;
+        }
 
         final QuizSections sections = userRecentHistory.getSections();
         if (sections == null) {

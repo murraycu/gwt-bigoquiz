@@ -17,8 +17,6 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
     private final Label scoreLabel = new Label();
 
     private final Panel loginPanel = new FlowPanel();
-    private final Label loginLabel = new Label(
-            "Please sign in to your Google Account to track your progress.");
     private final Label loginFailedLabel = new Label(
             "Error: Could not connect to the login server.");
     private final Anchor signInLink = new Anchor("Sign In");
@@ -37,7 +35,6 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
         statusPanel.add(scoreLabel);
         scoreLabel.addStyleName("score");
 
-        loginPanel.add(loginLabel);
         loginPanel.addStyleName("login-panel");
 
         loginPanel.add(signInLink);
