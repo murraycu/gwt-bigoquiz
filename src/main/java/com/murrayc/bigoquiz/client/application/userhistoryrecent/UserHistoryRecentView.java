@@ -10,6 +10,8 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
+import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
+import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.shared.Constants;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
@@ -24,10 +26,15 @@ import java.util.List;
 public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentUserEditUiHandlers>
         implements UserHistoryRecentPresenter.MyView {
 
+    // OnlineGlomConstants.java is generated in the target/ directory,
+    // from OnlineGlomConstants.properties
+    // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
+    private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
+    private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
+
     final FlowPanel detailsPanel = new FlowPanel();
 
-    private final Label loginLabel = new Label(
-            "Please sign in to track your progress and identify problem questions.");
+    private final Label loginLabel = new Label(constants.pleaseSignIn());
 
     private final PlaceManager placeManager;
 
@@ -42,7 +49,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         //box.getElement().setAttribute("id", "titlebox");
 
         final HeadingElement headingElement = Document.get().createHElement(2);
-        headingElement.setInnerText("Recent History");
+        headingElement.setInnerText(constants.recentHistoryTitle());
         mainPanel.getElement().appendChild(headingElement);
 
         //This is only visible when necessary:
@@ -86,7 +93,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
             final UserStats stats = userRecentHistory.getStats(sectionId);
             if (stats != null) {
-                final String strStats = "Answered: " +  stats.getAnswered() + ", Correct: " + stats.getCorrect();
+                final String strStats = messages.scoreMessage(stats.getAnswered(), stats.getCorrect());
                 final Label labelStats = new Label(strStats);
                 detailsPanel.add(labelStats);
                 labelStats.addStyleName("label-stats");
@@ -97,9 +104,9 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             final List<UserProblemQuestion> problemQuestions = userRecentHistory.getProblemQuestions(sectionId);
             String problemQuestionsTitle = "";
             if (problemQuestions == null || problemQuestions.isEmpty()) {
-                problemQuestionsTitle = "Problem Questions: None yet";
+                problemQuestionsTitle = constants.problemQuestionsNoneYet();
             } else {
-                problemQuestionsTitle = "Problem Questions: " + problemQuestions.size();
+                problemQuestionsTitle = messages.problemQuestionsCount(problemQuestions.size());
             }
 
             final Label label = new Label(problemQuestionsTitle);

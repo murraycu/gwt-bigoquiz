@@ -1,5 +1,6 @@
 package com.murrayc.bigoquiz.client.application.question;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -9,8 +10,10 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.QuizService;
+import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
@@ -22,6 +25,12 @@ import java.util.Iterator;
  */
 public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         implements QuestionPresenter.MyView {
+    // OnlineGlomConstants.java is generated in the target/ directory,
+    // from OnlineGlomConstants.properties
+    // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
+    private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
+    private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
+
     //Map of section IDs to section titles.
     private QuizSections sections;
     private String nextQuestionSectionId;
@@ -29,12 +38,12 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
     private Label labelSectionTitle = new Label();
     private ListBox nextQuestionSectionListBox = new ListBox();
-    private Label questionLabel = new Label("");
+    private Label questionLabel = new Label();
     private Panel choicesPanel = new VerticalPanel();
 
     private FlowPanel resultPanel = new FlowPanel();
-    private Button showAnswerButton = new Button("Show Answer");
-    private Button nextQuestionButton = new Button("Next");
+    private Button showAnswerButton = new Button(constants.showAnswerButton());
+    private Button nextQuestionButton = new Button(constants.nextButton());
     private Label resultLabel = new Label();
 
     QuestionView() {
@@ -48,7 +57,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         mainPanel.add(labelSectionTitle);
         labelSectionTitle.addStyleName("section-title");
 
-        final Label nextQuestionSectiontitle = new Label("Showing Questions from:");
+        final Label nextQuestionSectiontitle = new Label(constants.showingQuestionsFrom());
         nextQuestionSectiontitle.addStyleName("page-title-label");
         mainPanel.add(nextQuestionSectiontitle);
         mainPanel.add(nextQuestionSectionListBox);
@@ -62,7 +71,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             }
         });
 
-        final Label titleLabel = new Label("Question");
+        final Label titleLabel = new Label(constants.questionLabel());
         titleLabel.addStyleName("page-title-label");
         mainPanel.add(titleLabel);
 
@@ -123,7 +132,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         nextQuestionSectionListBox.clear();
 
         //TODO: Give this a special DI/boolean-marker when we can use a proper assocative ListBox:
-        nextQuestionSectionListBox.addItem("All Sections");
+        nextQuestionSectionListBox.addItem(constants.allSectionsTitle());
 
         for(final String title : sections.getTitles()) {
             if (!StringUtils.isEmpty(title)) {
@@ -159,7 +168,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
     @Override
     public void setQuestion(final Question question) {
-        Window.setTitle("Big-O Algorithms Quiz" + ": " + "Question" + ": " + question.getText());
+        Window.setTitle(messages.windowTitle(question.getText()));
 
         choicesPanel.clear();
 
@@ -244,7 +253,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             case WRONG_ANSWER: {
                 showAnswerButton.setVisible(true);
                 nextQuestionButton.setVisible(false);
-                resultLabel.setText("Wrong");
+                resultLabel.setText(constants.wrongLabel());
                 resultLabel.setVisible(true);
                 break;
             }
@@ -255,7 +264,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
                 showAnswerButton.setVisible(false);
                 nextQuestionButton.setVisible(true);
-                resultLabel.setText("Correct");
+                resultLabel.setText(constants.correctLabel());
                 resultLabel.setVisible(true);
             }
         }

@@ -1,17 +1,24 @@
 package com.murrayc.bigoquiz.client.application.userprofile;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.LoginInfo;
+import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 
 /**
  * Created by murrayc on 1/21/16.
  */
 public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHandlers>
         implements UserProfilePresenter.MyView {
-    private Label usernameTitleLabel = new Label("Username: ");
+    // OnlineGlomConstants.java is generated in the target/ directory,
+    // from OnlineGlomConstants.properties
+    // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
+    private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
+
+    private Label usernameTitleLabel = new Label(constants.username());
     private Label usernameLabel = new Label();
-    private final Anchor logoutLabel = new Anchor("Log out");
+    private final Anchor logoutLabel = new Anchor(constants.logOut());
 
     private SimplePanel userHistoryRecentPanel = new SimplePanel();
 

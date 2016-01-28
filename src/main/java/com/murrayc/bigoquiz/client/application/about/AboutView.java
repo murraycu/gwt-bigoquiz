@@ -1,9 +1,11 @@
 package com.murrayc.bigoquiz.client.application.about;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -11,14 +13,19 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 public class AboutView extends ViewWithUiHandlers<AboutUserEditUiHandlers>
         implements AboutPresenter.MyView {
 
+    // OnlineGlomConstants.java is generated in the target/ directory,
+    // from OnlineGlomConstants.properties
+    // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
+    private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
+
     private final Panel mainPanel = new FlowPanel();
-    private final Label aboutLabel = new Label("Yadda yadda yadda yadda.");
+    private final Label aboutLabel = new Label(constants.aboutText());
     private final Label versionLabel = new Label();
 
     AboutView() {
         mainPanel.addStyleName("content-panel");
 
-        final Label titleLabel = new Label("About");
+        final Label titleLabel = new Label(constants.aboutTitle());
         titleLabel.addStyleName("page-title-label");
         mainPanel.add(titleLabel);
 

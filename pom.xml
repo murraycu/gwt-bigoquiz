@@ -272,6 +272,14 @@
 					<i18nConstantsBundles>
 						<i18nConstantsBundle>com.murrayc.bigoquiz.client.ui.BigOQuizConstants</i18nConstantsBundle>
 					</i18nConstantsBundles>
+
+					<!-- Instead, we hand-code BigOQuizMessages,
+					because this doesn't generate the correct method signatures for numbers.
+					<i18nMessagesBundles>
+						<i18nMessagesBundle>com.murrayc.bigoquiz.client.ui.BigOQuizMessages</i18nMessagesBundle>
+					</i18nMessagesBundles>
+					-->
+
 					<mode>htmlunit</mode> <!-- Because the default, manual, waits for us to paste a URL into a browser. -->
 
 					<!-- <productionMode>true</productionMode> -->

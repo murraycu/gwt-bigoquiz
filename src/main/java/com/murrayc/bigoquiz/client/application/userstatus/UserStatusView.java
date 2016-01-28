@@ -1,10 +1,12 @@
 package com.murrayc.bigoquiz.client.application.userstatus;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.NameTokens;
+import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 
 /**
@@ -12,14 +14,17 @@ import com.murrayc.bigoquiz.shared.db.UserProfile;
  */
 public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandlers>
         implements UserStatusPresenter.MyView {
+    // OnlineGlomConstants.java is generated in the target/ directory,
+    // from OnlineGlomConstants.properties
+    // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
+    private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
 
     private final Anchor usernameLabel = new Anchor();
     private final Label scoreLabel = new Label();
 
     private final Panel loginPanel = new FlowPanel();
-    private final Label loginFailedLabel = new Label(
-            "Error: Could not connect to the login server.");
-    private final Anchor signInLink = new Anchor("Sign In");
+    private final Label loginFailedLabel = new Label(constants.errorNoServer());
+    private final Anchor signInLink = new Anchor(constants.signInLinkTitle());
 
     private LoginInfo loginInfo = null;
     private UserProfile userProfile = null;
