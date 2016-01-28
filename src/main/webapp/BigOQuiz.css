@@ -210,7 +210,8 @@ background-color: blue;
 }
 
 .question-radio-button {
-
+    float: left;
+    clear: left;
 }
 
 .question-radio-button-correct {

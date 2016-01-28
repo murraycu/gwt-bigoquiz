@@ -40,7 +40,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private ParagraphElement paraSectionTitle;
     private final ListBox nextQuestionSectionListBox = new ListBox();
     private final Label questionLabel = new Label();
-    private final Panel choicesPanel = new VerticalPanel();
+    private final Panel choicesPanel = new FlowPanel();
 
     private final Button showAnswerButton = new Button(constants.showAnswerButton());
     private final Button nextQuestionButton = new Button(constants.nextButton());
@@ -80,6 +80,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
         mainPanel.add(choicesPanel);
         choicesPanel.addStyleName("choices-panel");
+        choicesPanel.addStyleName("clearfix"); //So it is as high as its children.
 
         FlowPanel resultPanel = new FlowPanel();
         resultPanel.addStyleName("result-panel");
