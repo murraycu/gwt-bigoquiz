@@ -1,6 +1,8 @@
 package com.murrayc.bigoquiz.client.application.userprofile;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.LoginInfo;
@@ -23,9 +25,9 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
         final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("content-panel");
 
-        final Label titleLabel = new Label("Profile");
-        titleLabel.addStyleName("page-title-label");
-        mainPanel.add(titleLabel);
+        final HeadingElement headingElement = Document.get().createHElement(2);
+        headingElement.setInnerText(constants.profileTitle());
+        mainPanel.getElement().appendChild(headingElement);
 
         Label usernameTitleLabel = new Label(constants.username());
         mainPanel.add(usernameTitleLabel);
