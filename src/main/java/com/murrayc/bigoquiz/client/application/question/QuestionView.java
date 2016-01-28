@@ -49,11 +49,6 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("content-panel");
 
-        paraSectionTitle = Document.get().createPElement();
-        //paraSectionTitle.setInnerText(messages.sectionTitle());
-        mainPanel.getElement().appendChild(paraSectionTitle);
-        //paraSectionTitle.addStyleName("section-title-label");;
-
         final Label nextQuestionSectiontitle = new Label(constants.showingQuestionsFrom());
         nextQuestionSectiontitle.addStyleName("page-title-label");
         mainPanel.add(nextQuestionSectiontitle);
@@ -71,6 +66,9 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         final Label titleLabel = new Label(constants.questionLabel());
         titleLabel.addStyleName("page-title-label");
         mainPanel.add(titleLabel);
+
+        paraSectionTitle = Document.get().createPElement();
+        mainPanel.getElement().appendChild(paraSectionTitle);
 
         mainPanel.add(questionLabel);
         questionLabel.addStyleName("question-label");
