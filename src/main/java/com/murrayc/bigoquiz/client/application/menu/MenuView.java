@@ -38,8 +38,4 @@ public class MenuView extends ViewWithUiHandlers<MenuUserEditUiHandlers>
         initWidget(mainPanel);
 
     }
-
-    private void goTo(final String token) {
-        getUiHandlers().goTo(token);
-    }
 }

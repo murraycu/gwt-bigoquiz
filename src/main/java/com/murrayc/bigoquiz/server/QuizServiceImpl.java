@@ -237,11 +237,6 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return question.getText();
     }
 
-    private String getSectionTitle(final String sectionId) {
-        final Quiz quiz = getQuiz();
-        return quiz.getSectionTitle(sectionId);
-    }
-
     private UserProfile getUserProfileImpl() {
         final User user = getUser();
         if (user == null) {

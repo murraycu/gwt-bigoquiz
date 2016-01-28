@@ -31,9 +31,11 @@ public class QuestionUserAnswerAddedEvent extends GwtEvent<QuestionUserAnswerAdd
         }
     }
 
+    /*
     public static Type<QuestionUserAnswerAddedEventHandler> getType() {
         return TYPE;
     }
+    */
 
     @Override
     public Type<QuestionUserAnswerAddedEventHandler> getAssociatedType() {

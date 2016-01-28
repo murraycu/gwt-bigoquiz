@@ -29,9 +29,11 @@ public class QuizSections implements IsSerializable {
     }
 
     //TODO: Internationalization.
+    /*
     public void setSectionTitle(final String sectionId, final String sectionTitle) {
         sectionTitles.put(sectionId, sectionTitle);
     }
+    */
 
     public Collection<String> getTitles() {
         return sectionTitles.values();
