@@ -21,7 +21,6 @@ import com.murrayc.bigoquiz.client.application.userstatus.UserStatusPresenter;
  */
 public class ApplicationPresenter extends Presenter<MyView, MyProxy> {
     private final MenuPresenter menuPresenter;
-    private final UserStatusPresenter userStatusPresenter;
     private final UserHistoryRecentPresenter userHistoryRecentPresenter;
 
     interface MyView extends View {
@@ -35,9 +34,8 @@ public class ApplicationPresenter extends Presenter<MyView, MyProxy> {
     //such as QuestionPresenter, UserProfilePresenter, or AboutPresenter.
     public static final NestedSlot SLOT_CONTENT = new NestedSlot();
 
-    //The MenuPresenter and UserStatusPresenter are on every page.
+    //The MenuPresenter is are on every page.
     public static final SingleSlot SLOT_MENU = new SingleSlot();
-    public static final SingleSlot SLOT_USER_STATUS = new SingleSlot();
     public static final SingleSlot SLOT_USER_HISTORY_RECENT = new SingleSlot();
 
     @Inject
@@ -46,12 +44,10 @@ public class ApplicationPresenter extends Presenter<MyView, MyProxy> {
             MyView view,
             MyProxy proxy,
             MenuPresenter menuPresenter,
-            UserStatusPresenter userStatusPresenter,
             UserHistoryRecentPresenter userHistoryRecentPresenter) {
         super(eventBus, view, proxy, RevealType.Root);
 
         this.menuPresenter = menuPresenter;
-        this.userStatusPresenter = userStatusPresenter;
         this.userHistoryRecentPresenter = userHistoryRecentPresenter;
     }
 
@@ -60,8 +56,6 @@ public class ApplicationPresenter extends Presenter<MyView, MyProxy> {
         super.onBind();
 
         setInSlot(SLOT_MENU, menuPresenter);
-        setInSlot(SLOT_USER_STATUS, userStatusPresenter);
         setInSlot(SLOT_USER_HISTORY_RECENT, userHistoryRecentPresenter);
-
     }
 }

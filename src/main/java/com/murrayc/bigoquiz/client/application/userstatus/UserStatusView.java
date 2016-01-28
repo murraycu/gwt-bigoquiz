@@ -35,8 +35,7 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
         usernameLabel.addStyleName("user-name");
 
         statusPanel.add(scoreLabel);
-        usernameLabel.addStyleName("score");
-
+        scoreLabel.addStyleName("score");
 
         loginPanel.add(loginLabel);
         loginPanel.addStyleName("login-panel");

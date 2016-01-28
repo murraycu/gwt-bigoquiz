@@ -6,6 +6,7 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.murrayc.bigoquiz.client.HtmlResources;
+import com.murrayc.bigoquiz.client.application.menu.MenuPresenter;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -19,7 +20,6 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
 
     //These go in the sidebar:
     private final SimplePanel readingPanel = new SimplePanel();
-    private final SimplePanel userStatusPanel = new SimplePanel();
     private final SimplePanel userHistoryRecentPanel = new SimplePanel();
 
     ApplicationView() {
@@ -39,14 +39,11 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
         readingPanel.add(htmlPanel);
         sidebarPanel.add(readingPanel);
 
-        sidebarPanel.add(userStatusPanel);
-
         sidebarPanel.add(userHistoryRecentPanel);
 
         initWidget(main);
 
         bindSlot(ApplicationPresenter.SLOT_MENU, menuPanel);
-        bindSlot(ApplicationPresenter.SLOT_USER_STATUS, userStatusPanel);
         bindSlot(ApplicationPresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
         bindSlot(ApplicationPresenter.SLOT_CONTENT, contentPanel);
     }

@@ -12,46 +12,26 @@ public class MenuView extends ViewWithUiHandlers<MenuUserEditUiHandlers>
         implements MenuPresenter.MyView {
 
     private final Anchor titleLabel = new Anchor("Big-O Algorithms Quiz");
-    private final MenuBar menuBar = new MenuBar();
+    private final SimplePanel userStatusPanel = new SimplePanel();
 
     MenuView() {
         final Panel mainPanel = new FlowPanel();
         mainPanel.addStyleName("menu-panel");
+        mainPanel.addStyleName("clearfix"); //So it is as high as its children.
         mainPanel.add(titleLabel);
         titleLabel.addStyleName("menu-title");
         titleLabel.setHref("#" + NameTokens.QUESTION); //TODO: Or just / ?
 
-        mainPanel.add(menuBar);
-        menuBar.addStyleName("menu-bar");
+        Anchor aboutLink = new Anchor("About");
+        aboutLink.setHref("#" + NameTokens.ABOUT);
+        mainPanel.add(aboutLink);
+        aboutLink.addStyleName("about-link");
 
-        //Instead, the title is a clickable link.
-        /*
-        menuBar.addItem("Home", new Command() {
-            @Override
-            public void execute() {
-                goTo(NameTokens.QUESTION);
-            }
-        });
-        */
-
-        //Instead, the user name is a clickable link:
-        /*
-        menuBar.addItem("Profile", new Command() {
-            @Override
-            public void execute() {
-                goTo(NameTokens.USER_PROFILE);
-            }
-        });
-        */
-
-        menuBar.addItem("About", new Command() {
-            @Override
-            public void execute() {
-                goTo(NameTokens.ABOUT);
-            }
-        });
+        mainPanel.add(userStatusPanel);
+        bindSlot(MenuPresenter.SLOT_USER_STATUS, userStatusPanel);
 
         initWidget(mainPanel);
+
     }
 
     private void goTo(final String token) {

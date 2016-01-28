@@ -19,6 +19,22 @@ body {
     margin: 0px !important;
 }
 
+/* This lets a parent <div> be as high as its children.
+ * See http://nicolasgallagher.com/micro-clearfix-hack/
+ */
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
 .sidebar-panel {
     margin: 2em;
     float: right;
@@ -54,30 +70,6 @@ body {
 }
 
 
-.user-status-panel {
-    margin-bottom: 1em;
-    float: left;
-    clear: both;
-}
-
-.status-panel {
-}
-
-.login-panel {
-}
-
-.login-failed {
-    font-weight: bold;
-}
-
-.score {
-
-}
-
-.user-name {
-
-}
-
 .next-question-button {
 
 }
@@ -94,8 +86,31 @@ body {
 
 }
 
-.about-label {
+a.gwt-Anchor.sign-in-link {
+    color: white;
+}
+a.gwt-Anchor.sign-in-link:visited {
+    color: white;
+}
 
+.about-link {
+    float: right;
+    clear: both;
+    color: white;
+}
+
+a.gwt-Anchor.about-link {
+    color: white;
+}
+a.gwt-Anchor.about-link:visited {
+    color: white;
+}
+
+a.gwt-Anchor.user-name {
+    color: white;
+}
+a.gwt-Anchor.user-name:visited {
+    color: white;
 }
 
 .username-label {
@@ -104,10 +119,6 @@ body {
 
 .username-title-label {
 
-}
-
-.menu-bar {
-    float: right;
 }
 
 .menu-panel {
@@ -150,6 +161,32 @@ background-color: blue;
     background-color: blue;
 
 }
+
+
+.user-status-panel {
+    float: right;
+    clear: both;
+    color: white;
+}
+
+.status-panel {
+}
+
+.login-panel {
+}
+
+.login-failed {
+    font-weight: bold;
+}
+
+.score {
+
+}
+
+.user-name {
+
+}
+
 
 .version-label {
 
