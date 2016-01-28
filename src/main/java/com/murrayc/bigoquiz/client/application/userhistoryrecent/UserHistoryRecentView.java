@@ -12,7 +12,6 @@ import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
-import com.murrayc.bigoquiz.shared.Constants;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserAnswer;
 import com.murrayc.bigoquiz.shared.db.UserProblemQuestion;

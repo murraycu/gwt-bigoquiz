@@ -6,27 +6,21 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.murrayc.bigoquiz.client.HtmlResources;
-import com.murrayc.bigoquiz.client.application.menu.MenuPresenter;
 
 /**
  * Created by murrayc on 1/21/16.
  */
 public class ApplicationView extends ViewImpl implements ApplicationPresenter.MyView {
-    private final Panel main = new FlowPanel();
-
-    private final SimplePanel menuPanel = new SimplePanel();
-    private final SimplePanel contentPanel = new SimplePanel();
-    private final Panel sidebarPanel = new FlowPanel();
-
-    //These go in the sidebar:
-    private final SimplePanel readingPanel = new SimplePanel();
-    private final SimplePanel userHistoryRecentPanel = new SimplePanel();
 
     ApplicationView() {
+        SimplePanel menuPanel = new SimplePanel();
+        Panel main = new FlowPanel();
         main.add(menuPanel);
+        SimplePanel contentPanel = new SimplePanel();
         main.add(contentPanel);
 
         //We use a CSS media query to only show this on wider screens:
+        Panel sidebarPanel = new FlowPanel();
         main.add(sidebarPanel);
         sidebarPanel.addStyleName("sidebar-panel");
 
@@ -36,9 +30,11 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
         final HTML htmlPanel = new HTML();
         final String html = HtmlResources.INSTANCE.getReadingHtml().getText();
         htmlPanel.setHTML(html);
+        SimplePanel readingPanel = new SimplePanel();
         readingPanel.add(htmlPanel);
         sidebarPanel.add(readingPanel);
 
+        SimplePanel userHistoryRecentPanel = new SimplePanel();
         sidebarPanel.add(userHistoryRecentPanel);
 
         initWidget(main);

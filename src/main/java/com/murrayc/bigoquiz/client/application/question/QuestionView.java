@@ -41,7 +41,6 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private Label questionLabel = new Label();
     private Panel choicesPanel = new VerticalPanel();
 
-    private FlowPanel resultPanel = new FlowPanel();
     private Button showAnswerButton = new Button(constants.showAnswerButton());
     private Button nextQuestionButton = new Button(constants.nextButton());
     private Label resultLabel = new Label();
@@ -80,6 +79,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         mainPanel.add(choicesPanel);
         choicesPanel.addStyleName("choices-panel");
 
+        FlowPanel resultPanel = new FlowPanel();
         resultPanel.addStyleName("result-panel");
         resultPanel.add(resultLabel);
         resultLabel.addStyleName("result-label");

@@ -14,7 +14,6 @@ import com.murrayc.bigoquiz.client.application.ApplicationPresenter.MyView;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter.MyProxy;
 import com.murrayc.bigoquiz.client.application.menu.MenuPresenter;
 import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentPresenter;
-import com.murrayc.bigoquiz.client.application.userstatus.UserStatusPresenter;
 
 /**
  * Created by murrayc on 1/21/16.

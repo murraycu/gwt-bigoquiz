@@ -18,20 +18,19 @@ public class AboutView extends ViewWithUiHandlers<AboutUserEditUiHandlers>
     // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
     private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
 
-    private final Panel mainPanel = new FlowPanel();
-    private final Label aboutLabel = new Label(constants.aboutText());
-    private final Label versionLabel = new Label();
-
     AboutView() {
+        Panel mainPanel = new FlowPanel();
         mainPanel.addStyleName("content-panel");
 
         final Label titleLabel = new Label(constants.aboutTitle());
         titleLabel.addStyleName("page-title-label");
         mainPanel.add(titleLabel);
 
+        Label aboutLabel = new Label(constants.aboutText());
         mainPanel.add(aboutLabel);
         aboutLabel.addStyleName("about-label");
 
+        Label versionLabel = new Label();
         mainPanel.add(versionLabel);
         versionLabel.addStyleName("version-label");
 

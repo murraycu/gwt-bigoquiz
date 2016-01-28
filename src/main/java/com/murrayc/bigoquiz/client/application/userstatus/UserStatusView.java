@@ -20,7 +20,6 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
     private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
 
     private final Anchor usernameLabel = new Anchor();
-    private final Label scoreLabel = new Label();
 
     private final Panel loginPanel = new FlowPanel();
     private final Label loginFailedLabel = new Label(constants.errorNoServer());
@@ -37,6 +36,7 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
         statusPanel.add(usernameLabel);
         usernameLabel.addStyleName("user-name");
 
+        Label scoreLabel = new Label();
         statusPanel.add(scoreLabel);
         scoreLabel.addStyleName("score");
 

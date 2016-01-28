@@ -16,11 +16,8 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
     // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
     private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
 
-    private Label usernameTitleLabel = new Label(constants.username());
     private Label usernameLabel = new Label();
     private final Anchor logoutLabel = new Anchor(constants.logOut());
-
-    private SimplePanel userHistoryRecentPanel = new SimplePanel();
 
     UserProfileView() {
         final FlowPanel mainPanel = new FlowPanel();
@@ -30,6 +27,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
         titleLabel.addStyleName("page-title-label");
         mainPanel.add(titleLabel);
 
+        Label usernameTitleLabel = new Label(constants.username());
         mainPanel.add(usernameTitleLabel);
         usernameTitleLabel.addStyleName("username-title-label");
         mainPanel.add(usernameLabel);
@@ -39,6 +37,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
         logoutLabel.addStyleName("logout-label");
 
         //TODO: Why doesn't this appear?
+        SimplePanel userHistoryRecentPanel = new SimplePanel();
         bindSlot(UserProfilePresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
         mainPanel.add(userHistoryRecentPanel);
         //userHistoryRecentPanel.addStyleName("debug-userhistory");
