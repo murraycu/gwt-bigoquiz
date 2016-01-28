@@ -2,7 +2,6 @@ package com.murrayc.bigoquiz.client.application.question;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -16,6 +15,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.QuizService;
+import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.Question;
@@ -68,9 +68,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         });
         mainPanel.add(showingFromPanel);
 
-        final HeadingElement headingElement = Document.get().createHElement(2);
-        headingElement.setInnerText(constants.questionLabel());
-        mainPanel.getElement().appendChild(headingElement);
+        Utils.addH2ToPanel(mainPanel, constants.questionLabel());
 
         paraSectionTitle = Document.get().createPElement();
         mainPanel.getElement().appendChild(paraSectionTitle);
