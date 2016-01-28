@@ -228,11 +228,6 @@ background-color: blue;
     clear: both;
 }
 
-.subsection-title {
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
 .user-status-answers-panel {
 
 }
@@ -256,11 +251,6 @@ background-color: blue;
 
 .label-stats {
     margin-left: 1em;
-}
-
-.panel-user-answers {
-    margin-left: 1em;
-    margin-bottom: 1em;
 }
 
 .label-problem-questions {
