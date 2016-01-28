@@ -50,10 +50,13 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("content-panel");
 
+        final Panel showingFromPanel = new FlowPanel();
+        showingFromPanel.addStyleName("showing-from-panel");
+        showingFromPanel.addStyleName("clearfix"); //So it is as high as its children.
         final Label nextQuestionSectiontitle = new Label(constants.showingQuestionsFrom());
-        nextQuestionSectiontitle.addStyleName("page-title-label");
-        mainPanel.add(nextQuestionSectiontitle);
-        mainPanel.add(nextQuestionSectionListBox);
+        nextQuestionSectiontitle.addStyleName("next-question-section-title-label");
+        showingFromPanel.add(nextQuestionSectiontitle);
+        showingFromPanel.add(nextQuestionSectionListBox);
         nextQuestionSectionListBox.addStyleName("next-question-section-title");
         nextQuestionSectionListBox.addChangeHandler(new ChangeHandler() {
             @Override
@@ -63,6 +66,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
                 getUiHandlers().onNextQuestionSectionSelected(nextQuestionSectionId);
             }
         });
+        mainPanel.add(showingFromPanel);
 
         final HeadingElement headingElement = Document.get().createHElement(2);
         headingElement.setInnerText(constants.questionLabel());
@@ -73,6 +77,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
         mainPanel.add(questionLabel);
         questionLabel.addStyleName("question-label");
+
         mainPanel.add(choicesPanel);
         choicesPanel.addStyleName("choices-panel");
 
