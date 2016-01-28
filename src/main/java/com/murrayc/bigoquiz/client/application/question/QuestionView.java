@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.client.application.question;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -63,9 +64,9 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             }
         });
 
-        final Label titleLabel = new Label(constants.questionLabel());
-        titleLabel.addStyleName("page-title-label");
-        mainPanel.add(titleLabel);
+        final HeadingElement headingElement = Document.get().createHElement(2);
+        headingElement.setInnerText(constants.questionLabel());
+        mainPanel.getElement().appendChild(headingElement);
 
         paraSectionTitle = Document.get().createPElement();
         mainPanel.getElement().appendChild(paraSectionTitle);
