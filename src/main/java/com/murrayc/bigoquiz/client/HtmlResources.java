@@ -8,8 +8,8 @@ import com.google.gwt.resources.client.TextResource;
  * Created by murrayc on 1/28/16.
  */
 public interface HtmlResources extends ClientBundle {
-    public static final HtmlResources INSTANCE = GWT.create(HtmlResources.class);
+    HtmlResources INSTANCE = GWT.create(HtmlResources.class);
 
     @Source("com/murrayc/bigoquiz/client/ui/reading.html")
-    public TextResource getReadingHtml();
+    TextResource getReadingHtml();
 }
