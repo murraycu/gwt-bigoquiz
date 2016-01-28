@@ -105,7 +105,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             if (problemQuestions == null || problemQuestions.isEmpty()) {
                 problemQuestionsTitle = constants.problemQuestionsNoneYet();
             } else {
-                problemQuestionsTitle = messages.problemQuestionsCount(problemQuestions.size());
+                problemQuestionsTitle = constants.problemQuestions();
             }
 
             final Label label = new Label(problemQuestionsTitle);
