@@ -33,7 +33,7 @@ public class ApplicationPresenter extends Presenter<MyView, MyProxy> {
 
     //This will use some presenter that corresponds to a place (see NameTokens)
     //such as QuestionPresenter, UserProfilePresenter, or AboutPresenter.
-    public static final NestedSlot SLOT_MAIN = new NestedSlot();
+    public static final NestedSlot SLOT_CONTENT = new NestedSlot();
 
     //The MenuPresenter and UserStatusPresenter are on every page.
     public static final SingleSlot SLOT_MENU = new SingleSlot();

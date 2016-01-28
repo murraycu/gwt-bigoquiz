@@ -44,7 +44,7 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
             MyView view,
             MyProxy proxy,
             UserHistoryRecentPresenter userHistoryRecentPresenter) {
-        super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN);
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         this.userHistoryRecentPresenter = userHistoryRecentPresenter;
 

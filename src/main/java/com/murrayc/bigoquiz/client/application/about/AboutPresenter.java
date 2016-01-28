@@ -30,7 +30,7 @@ public class AboutPresenter extends Presenter<AboutPresenter.MyView, AboutPresen
             EventBus eventBus,
             MyView view,
             MyProxy proxy) {
-        super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN);
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         getView().setUiHandlers(this);
     }

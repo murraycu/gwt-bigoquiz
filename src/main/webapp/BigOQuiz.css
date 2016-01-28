@@ -4,11 +4,11 @@
  *
  * Only show user-history-recent-panel on wider screens: */
 @media screen and (min-width: 400px)  {
-    .user-history-recent-as-sidebar { display: block; }
+    .sidebar-panel { display: block; }
 }
 
 @media screen and (max-width: 399px)  {
-    .user-history-recent-as-sidebar { display: none; }
+    .sidebar-panel { display: none; }
 }
 
 body {
@@ -19,8 +19,15 @@ body {
     margin: 0px !important;
 }
 
-.recommended-reading {
+.sidebar-panel {
+    margin: 2em;
     float: right;
+    clear: right;
+}
+
+.recommended-reading {
+    float: left;
+    clear: both;
 }
 
 .recommended-reading ul {
@@ -33,6 +40,7 @@ body {
 }
 
 .content-panel {
+    float: left;
     margin: 2em;
 }
 
@@ -47,9 +55,9 @@ body {
 
 
 .user-status-panel {
-    margin: 2em;
-    float: right;
-    clear: right;
+    margin-bottom: 1em;
+    float: left;
+    clear: both;
 }
 
 .status-panel {
@@ -174,9 +182,9 @@ background-color: blue;
 }
 
 .user-history-recent-panel {
-    margin: 2em;
-    float: right;
-    clear: right;
+    margin-bottom: 1em;
+    float: left;
+    clear: both;
 }
 
 .subsection-title {

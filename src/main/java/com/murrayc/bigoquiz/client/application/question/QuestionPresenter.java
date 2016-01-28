@@ -61,7 +61,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             MyView view,
             MyProxy proxy,
             PlaceManager placeManager) {
-        super(eventBus, view, proxy, ApplicationPresenter.SLOT_MAIN);
+        super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         this.placeManager = placeManager;
 
