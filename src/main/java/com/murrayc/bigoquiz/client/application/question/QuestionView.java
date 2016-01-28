@@ -34,14 +34,14 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private String nextQuestionSectionId;
     private String choiceSelected;
 
-    private Label labelSectionTitle = new Label();
-    private ListBox nextQuestionSectionListBox = new ListBox();
-    private Label questionLabel = new Label();
-    private Panel choicesPanel = new VerticalPanel();
+    private final Label labelSectionTitle = new Label();
+    private final ListBox nextQuestionSectionListBox = new ListBox();
+    private final Label questionLabel = new Label();
+    private final Panel choicesPanel = new VerticalPanel();
 
-    private Button showAnswerButton = new Button(constants.showAnswerButton());
-    private Button nextQuestionButton = new Button(constants.nextButton());
-    private Label resultLabel = new Label();
+    private final Button showAnswerButton = new Button(constants.showAnswerButton());
+    private final Button nextQuestionButton = new Button(constants.nextButton());
+    private final Label resultLabel = new Label();
 
     QuestionView() {
         final FlowPanel mainPanel = new FlowPanel();

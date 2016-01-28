@@ -23,7 +23,7 @@ public class QuestionUserAnswerAddedEvent extends GwtEvent<QuestionUserAnswerAdd
         void onQuestionUserAnswerAdded(QuestionUserAnswerAddedEvent event);
     }
 
-    public static Type<QuestionUserAnswerAddedEventHandler> TYPE = new Type<>();
+    public static final Type<QuestionUserAnswerAddedEventHandler> TYPE = new Type<>();
 
     public static void fire(final HasHandlers source, final UserAnswer userAnswer) {
         if (TYPE != null) {

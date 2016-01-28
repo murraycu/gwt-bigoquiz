@@ -16,7 +16,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
     // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
     private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
 
-    private Label usernameLabel = new Label();
+    private final Label usernameLabel = new Label();
     private final Anchor logoutLabel = new Anchor(constants.logOut());
 
     UserProfileView() {

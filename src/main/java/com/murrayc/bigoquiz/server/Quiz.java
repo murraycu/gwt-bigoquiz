@@ -19,10 +19,10 @@ public class Quiz {
 
     //An extra list, used only for getting a random question,
     //regardless of what section it is in.
-    private List<QuestionAndAnswer> listQuestions = new ArrayList<>();
+    private final List<QuestionAndAnswer> listQuestions = new ArrayList<>();
 
     //This is only for getting a random question from a particular section:
-    private Map<String, List<QuestionAndAnswer>> listSectionQuestions = new HashMap<>();
+    private final Map<String, List<QuestionAndAnswer>> listSectionQuestions = new HashMap<>();
 
 
     public Quiz() {
