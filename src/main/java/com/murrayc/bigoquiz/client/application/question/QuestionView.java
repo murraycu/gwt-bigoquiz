@@ -179,7 +179,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             radioButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
                 @Override
                 public void onValueChange(final ValueChangeEvent<Boolean> event) {
-                    if (event.getValue()) {
+                    if (event != null && event.getValue()) {
                         submitAnswer(choice);
                     }
                 }

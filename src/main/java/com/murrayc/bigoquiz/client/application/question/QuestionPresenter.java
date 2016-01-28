@@ -121,6 +121,10 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     public void onSubmitAnswer() {
         //Submit the answer to the server:
         final String answer = getView().getChoiceSelected();
+        if (answer == null) {
+            GWT.log("onSubmitAnswer(): answer was null.");
+            return;
+        }
 
         final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
             @Override
@@ -131,6 +135,11 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
             @Override
             public void onSuccess(final QuizService.SubmissionResult result) {
+                if (result == null) {
+                    GWT.log("AsyncCallback: onSubmitAnswer: onSuccess: result was null.");
+                    return;
+                }
+
                 //Store these in case they are needed soon:
                 correctAnswer = result.getCorrectAnswer();
 

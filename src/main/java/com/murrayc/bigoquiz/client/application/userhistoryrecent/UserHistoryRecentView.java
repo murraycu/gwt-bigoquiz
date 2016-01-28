@@ -125,6 +125,12 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     @Override
     public void addUserAnswer(final UserAnswer userAnswer) {
+        if (userRecentHistory == null) {
+            //The user is not logged in, so we don't show history.
+            //TODO: See buildUi(), which makes the same assumption.
+            return;
+        }
+
         userRecentHistory.addUserAnswerAtStart(userAnswer);
 
         //Re-generate the whole list in the UI:
