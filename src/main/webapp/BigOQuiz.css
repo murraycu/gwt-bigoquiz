@@ -133,7 +133,7 @@ a.gwt-Anchor.user-name:visited {
 
 .menu-title {
     font-weight: bold;
-    font-family: Sans;
+    font-family: sans;
     font-size: 2.5em;
 
     /* TODO: Why doesn't any of this work to make the a text white, insead of gwt-Anchor.menu-title?
