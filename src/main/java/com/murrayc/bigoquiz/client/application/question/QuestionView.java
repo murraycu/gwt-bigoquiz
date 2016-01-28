@@ -18,8 +18,6 @@ import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 
-import java.util.Iterator;
-
 /**
  * Created by murrayc on 1/21/16.
  */
@@ -276,10 +274,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
      * @param enabled
      */
     private void enableChoices(boolean enabled) {
-        final Iterator<Widget> iter = choicesPanel.iterator();
-        while (iter.hasNext()) {
-            final Widget widget = iter.next();
-
+        for (final Widget widget : choicesPanel) {
             if (widget instanceof RadioButton) {
                 final RadioButton radioButton = (RadioButton) widget;
                 radioButton.setEnabled(enabled);
@@ -288,10 +283,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     }
 
     private void showCorrectAnswerInChoices(final String correctAnswer) {
-        final Iterator<Widget> iter = choicesPanel.iterator();
-        while (iter.hasNext()) {
-            final Widget widget = iter.next();
-
+        for (final Widget widget : choicesPanel) {
             if (widget instanceof RadioButton) {
                 final RadioButton radioButton = (RadioButton) widget;
                 if (StringUtils.equals(radioButton.getText(), correctAnswer)) {
