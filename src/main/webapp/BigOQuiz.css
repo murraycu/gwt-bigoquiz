@@ -19,6 +19,15 @@ body {
     margin: 0px !important;
 }
 
+.recommended-reading {
+    float: right;
+}
+
+.recommended-reading ul {
+    list-style-type: none;
+    padding: 0;
+}
+
 .gwt-Label {
     margin-bottom: 1em;
 }
@@ -93,36 +102,38 @@ body {
     float: right;
 }
 
+.menu-panel {
+    padding: 2em;
+    background-color: blue;
+    clear: both;
+}
+
 .menu-title {
     font-weight: bold;
     font-family: Sans;
     font-size: 2.5em;
-}
 
-.menu-title.gwt-Label {
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
-}
-
-.menu-panel {
-    padding: 2em;
+    /* TODO: Why doesn't any of this work to make the a text white, insead of gwt-Anchor.menu-title?
+    color: white;
     background-color: blue;
+    */
 }
 
 /* TODO: Why doesn't any of this work to make the a text white, insead of gwt-Anchor.menu-title?
-.menu-title {
-    color: white;
-    background-color: blue;
+.menu-title.gwt-Label {
+margin-top: 0.2em;
+margin-bottom: 0.2em;
 }
 
+
 .menu-title.a, a:visited {
-    color: white;
-    background-color: blue;
+color: white;
+background-color: blue;
 }
 
 .menu-title.a:visited {
-    color: white;
-    background-color: blue;
+color: white;
+background-color: blue;
 }
 */
 
