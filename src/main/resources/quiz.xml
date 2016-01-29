@@ -12,22 +12,480 @@
             <choice>O(nk)</choice>
             <choice>O(n + k)</choice>
         </default_choices>
-        <question id="array-access-average">
-            <text>Array: Access (Average)</text>
-            <answer>O(1)</answer>
-        </question>
-        <question id="array-search-average">
-            <text>Array: Search (Average)</text>
-            <answer>O(n)</answer>
-        </question>
-        <question id="array-insertion-average">
-            <text>Array: Insertion (Average)</text>
-            <answer>O(n)</answer>
-        </question>
-        <question id="array-deletion-average">
-            <text>Array: Deletion (Average)</text>
-            <answer>O(n)</answer>
-        </question>
+        <subsection id="array">
+            <question id="array-access-average">
+                <text>Array: Access (Average)</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="array-search-average">
+                <text>Array: Search (Average)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="array-insertion-average">
+                <text>Array: Insertion (Average)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="array-deletion-average">
+                <text>Array: Deletion (Average)</text>
+                <answer>O(n)</answer>
+            </question>
+
+            <question id="array-access-worst">
+                <text>Array: Access (Worst)</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="array-search-worst">
+                <text>Array: Search (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="array-insertion-worst">
+                <text>Array: Insertion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="array-deletion-worst">
+                <text>Array: Deletion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+
+            <question id="array-space">
+                <text>Array: Space Complexity</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="stack">
+            <question id="stack-access-average">
+                <text>Stack: Access (Average)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="stack-search-average">
+                <text>Stack: Search (Average)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="stack-insertion-average">
+                <text>Stack: Insertion (Average)</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="stack-deletion-average">
+                <text>Stack: Deletion (Average)</text>
+                <answer>O(1)</answer>
+            </question>
+
+            <question id="stack-access-worst">
+                <text>Stack: Access (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="stack-search-worst">
+                <text>Stack: Search (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="stack-insertion-worst">
+                <text>Stack: Insertion (Worst)</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="stack-deletion-worst">
+                <text>Stack: Deletion (Worst)</text>
+                <answer>O(1)</answer>
+            </question>
+
+            <question id="stack-space">
+                <text>Stack: Space Complexity</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="singly-linked-list">
+            <question id="singly-linked-list-access-average">
+                <text>Singly-Linked List: Access (Average)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="singly-linked-list-search-average">
+                <text>Singly-Linked List: Search (Average)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="singly-linked-list-insertion-average">
+                <text>Singly-Linked List: Insertion (Average)</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="singly-linked-list-deletion-average">
+                <text>Singly-Linked List: Deletion (Average)</text>
+                <answer>O(1)</answer>
+            </question>
+
+            <question id="singly-linked-list-access-worst">
+                <text>Singly-Linked List: Access (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="singly-linked-list-search-worst">
+                <text>Singly-Linked List: Search (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="singly-linked-list-insertion-worst">
+                <text>Singly-Linked List: Insertion (Worst)</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="singly-linked-list-deletion-worst">
+                <text>Singly-Linked List: Deletion (Worst)</text>
+                <answer>O(1)</answer>
+            </question>
+
+            <question id="singly-linked-list-space">
+                <text>Singly-Linked List: Space Complexity</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="doubly-linked-list">
+            <question id="doubly-linked-list-access-average">
+                <text>Doubly-Linked List: Access (Average)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="doubly-linked-list-search-average">
+                <text>Doubly-Linked List: Search (Average)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="doubly-linked-list-insertion-average">
+                <text>Doubly-Linked List: Insertion (Average)</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="doubly-linked-list-deletion-average">
+                <text>Doubly-Linked List: Deletion (Average)</text>
+                <answer>O(1)</answer>
+            </question>
+
+            <question id="doubly-linked-list-access-worst">
+                <text>Doubly-Linked List: Access (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="doubly-linked-list-search-worst">
+                <text>Doubly-Linked List: Search (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="doubly-linked-list-insertion-worst">
+                <text>Doubly-Linked List: Insertion (Worst)</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="doubly-linked-list-deletion-worst">
+                <text>Doubly-Linked List: Deletion (Worst)</text>
+                <answer>O(1)</answer>
+            </question>
+
+            <question id="doubly-linked-list-space">
+                <text>Doubly-Linked List: Space Complexity</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="skip-list">
+            <question id="skip-list-access-average">
+                <text>Skip List: Access (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="skip-list-search-average">
+                <text>Skip List: Search (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="skip-list-insertion-average">
+                <text>Skip List: Insertion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="skip-list-deletion-average">
+                <text>Skip List: Deletion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+
+            <question id="skip-list-access-worst">
+                <text>Skip List: Access (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="skip-list-search-worst">
+                <text>Skip List: Search (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="skip-list-insertion-worst">
+                <text>Skip List: Insertion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="skip-list-deletion-worst">
+                <text>Skip List: Deletion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+
+            <question id="skip-list-space">
+                <text>Skip List: Space Complexity</text>
+                <answer>O(n log(n))</answer>
+            </question>
+        </subsection>
+
+        <subsection id="hash-table">
+            <!-- No hash-table-search-access-average -->
+            <question id="hash-table-search-average">
+                <text>Hash Table: Search (Average)</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="hash-table-insertion-average">
+                <text>Hash Table: Insertion (Average)</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="hash-table-deletion-average">
+                <text>Hash Table: Deletion (Average)</text>
+                <answer>O(1))</answer>
+            </question>
+
+            <!-- No hash-table-search-access-worst -->
+            <question id="hash-table-search-worst">
+                <text>Hash Table: Search (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="hash-table-insertion-worst">
+                <text>Hash Table: Insertion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="hash-table-deletion-worst">
+                <text>Hash Table: Deletion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+
+            <question id="hash-table-space">
+                <text>Hash Table: Space Complexity</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="binary-search-tree">
+            <question id="binary-search-tree-access-average">
+                <text>Binary Search Tree: Access (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="binary-search-tree-search-average">
+                <text>Binary Search Tree: Search (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="binary-search-tree-insertion-average">
+                <text>Binary Search Tree: Insertion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="binary-search-tree-deletion-average">
+                <text>Binary Search Tree: Deletion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+
+            <question id="binary-search-tree-access-worst">
+                <text>Binary Search Tree: Access (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="binary-search-tree-search-worst">
+                <text>Binary Search Tree: Search (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="binary-search-tree-insertion-worst">
+                <text>Binary Search Tree: Insertion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="binary-search-tree-deletion-worst">
+                <text>Binary Search Tree: Deletion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+
+            <question id="binary-search-tree-space">
+                <text>Binary Search Tree: Space Complexity</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="cartesian-tree">
+            <!-- No cartesian-tree-search-access-average -->
+            <question id="cartesian-tree-search-average">
+                <text>Cartesian Tree: Search (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="cartesian-tree-insertion-average">
+                <text>Cartesian Tree: Insertion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="cartesian-tree-deletion-average">
+                <text>Cartesian Tree: Deletion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+
+            <!-- No cartesian-tree-search-access-worst -->
+            <question id="cartesian-tree-search-worst">
+                <text>Cartesian Tree: Search (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="cartesian-tree-insertion-worst">
+                <text>Cartesian Tree: Insertion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="cartesian-tree-deletion-worst">
+                <text>Cartesian Tree: Deletion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+
+            <question id="cartesian-tree-space">
+                <text>Cartesian Tree: Space Complexity</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="b-tree">
+            <question id="b-tree-access-average">
+                <text>B-Tree: Access (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="b-tree-search-average">
+                <text>B-Tree: Search (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="b-tree-insertion-average">
+                <text>B-Tree: Insertion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="b-tree-deletion-average">
+                <text>B-Tree: Deletion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+
+            <question id="b-tree-access-worst">
+                <text>B-Tree: Access (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="b-tree-search-worst">
+                <text>B-Tree: Search (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="b-tree-insertion-worst">
+                <text>B-Tree: Insertion (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="b-tree-deletion-worst">
+                <text>B-Tree: Deletion (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+
+            <question id="b-tree-space">
+                <text>B-Tree: Space Complexity</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="red-black-tree">
+            <question id="red-black-tree-access-average">
+                <text>Red Black Tree: Access (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="red-black-tree-search-average">
+                <text>Red Black Tree: Search (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="red-black-tree-insertion-average">
+                <text>Red Black Tree: Insertion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="red-black-tree-deletion-average">
+                <text>Red Black Tree: Deletion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+
+            <question id="red-black-tree-access-worst">
+                <text>Red Black Tree: Access (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="red-black-tree-search-worst">
+                <text>Red Black Tree: Search (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="red-black-tree-insertion-worst">
+                <text>Red Black Tree: Insertion (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="red-black-tree-deletion-worst">
+                <text>Red Black Tree: Deletion (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+
+            <question id="red-black-tree-space">
+                <text>Red Black Tree: Space Complexity</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="splay-tree">
+            <!-- No splay-tree-search-access-average -->
+            <question id="splay-tree-search-average">
+                <text>Splay Tree: Search (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="splay-tree-insertion-average">
+                <text>Splay Tree: Insertion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="splay-tree-deletion-average">
+                <text>Splay Tree: Deletion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+
+            <!-- No splay-tree-search-access-worst -->
+            <question id="splay-tree-search-worst">
+                <text>Splay Tree: Search (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="splay-tree-insertion-worst">
+                <text>Splay Tree: Insertion (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="splay-tree-deletion-worst">
+                <text>Splay Tree: Deletion (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+
+            <question id="splay-tree-space">
+                <text>Splay Tree: Space Complexity</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="avl-tree">
+            <question id="avl-tree-access-average">
+                <text>AVL Tree: Access (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="avl-tree-search-average">
+                <text>AVL Tree: Search (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="avl-tree-insertion-average">
+                <text>AVL Tree: Insertion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="avl-tree-deletion-average">
+                <text>AVL Tree: Deletion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+
+            <question id="avl-tree-access-worst">
+                <text>AVL Tree: Access (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="avl-tree-search-worst">
+                <text>AVL Tree: Search (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="avl-tree-insertion-worst">
+                <text>AVL Tree: Insertion (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="avl-tree-deletion-worst">
+                <text>AVL Tree: Deletion (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+
+            <question id="avl-tree-space">
+                <text>AVL Tree: Space Complexity</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
     </section>
 
     <section id="array-sorting-algorithms">
