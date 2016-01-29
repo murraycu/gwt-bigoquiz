@@ -246,6 +246,10 @@ background-color: blue;
 }
 
 .section-title {
+    font-weight: bolder;
+}
+
+.sub-section-title {
     font-weight: bold;
 }
 

@@ -73,6 +73,9 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         Utils.addParagraphWithChild(mainPanel, sectionTitle);
         sectionTitle.addStyleName("section-title");
 
+        Utils.addParagraphWithChild(mainPanel, subSectionTitle);
+        subSectionTitle.addStyleName("sub-section-title");
+
         Utils.addParagraphWithChild(mainPanel, questionLabel);
         questionLabel.addStyleName("question-label");
 
@@ -187,7 +190,10 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         //TODO: Make the
         //( <b>Section:</b> some section title )
         //properly internationalized, without putting the <b> tags in the translatable string.
-        sectionTitle.setText(sections.getSectionTitle(question.getSectionId()));
+        final String sectionId = question.getSectionId();
+        sectionTitle.setText(sections.getSectionTitle(sectionId));
+
+        subSectionTitle.setText(sections.getSubSectionTitle(sectionId, question.getSubSectionId()));
 
         final String groupName = "choices";
         for (final String choice : question.getChoices()) {
