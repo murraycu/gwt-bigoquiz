@@ -17,7 +17,7 @@ public class Utils {
         mainPanel.getElement().appendChild(headingElement);
     }
 
-    public static Panel addParagraph(final FlowPanel mainPanel) {
+    public static Panel addParagraph(final Panel mainPanel) {
         final Panel p = new FlowPanel(ParagraphElement.TAG);
         mainPanel.add(p);
         return p;

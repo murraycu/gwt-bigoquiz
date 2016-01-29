@@ -113,13 +113,15 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             detailsPanel.add(problemQuestionsPanel);
             problemQuestionsPanel.addStyleName("panel-problem-questions");
             for (final UserProblemQuestion problemQuestion : problemQuestions) {
-                final Hyperlink link = createProblemQuestionrHyperlink(problemQuestion);
-                problemQuestionsPanel.add(link);
+                final Panel p = Utils.addParagraph(problemQuestionsPanel);
 
-                final String strScore = "Error count: " + problemQuestion.getCountAnsweredWrong();
-                final Label labelScore = new Label(strScore);
+                final String strScore = "-" + problemQuestion.getCountAnsweredWrong();
+                final Label labelScore = new InlineLabel(strScore);
                 labelScore.addStyleName("problem-answer-score");
-                problemQuestionsPanel.add(labelScore);
+                p.add(labelScore);
+
+                final Hyperlink link = createProblemQuestionrHyperlink(problemQuestion);
+                p.add(link);
             }
 
 
@@ -161,7 +163,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         //Both alternatives lose whatever the user had set before clicking this link.
         final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(problemQuestion.getQuestionId(), problemQuestion.getSectionId());
         final String url = placeManager.buildHistoryToken(placeRequest);
-        final Hyperlink result = new Hyperlink(problemQuestion.getQuestionTitle(), url);
+        final Hyperlink result = new InlineHyperlink(problemQuestion.getQuestionTitle(), url);
         result.addStyleName("problem-answer-hyperlink");
         return result;
     }
