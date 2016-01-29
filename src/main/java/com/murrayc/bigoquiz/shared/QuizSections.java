@@ -1,5 +1,6 @@
 package com.murrayc.bigoquiz.shared;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 import java.util.*;
@@ -8,24 +9,45 @@ import java.util.*;
  * Created by murrayc on 1/24/16.
  */
 public class QuizSections implements IsSerializable {
-    //Map of section ID to section title.
-    private Map<String, String> sectionTitles = new HashMap<>();
+    //TODO: Can this be non-public while still being serializable by GWT?
+    static public class Section implements IsSerializable {
+        public String title;
+        public Map<String, String> subSectionTitles = new HashMap<>();
+        public List<String> defaultChoices;
+    }
 
-    //Map of section ID to default choices:
-    private Map<String, List<String>> defaultChoices = new HashMap<>();
+    //Map of section ID to sections.
+    private Map<String, Section> sections = new HashMap<>();
 
     public void addSection(final String sectionId, final String sectionTitle, final List<String> defaultChoices) {
-        this.sectionTitles.put(sectionId, sectionTitle);
-        this.defaultChoices.put(sectionId, defaultChoices);
+        final Section section = new Section();
+        section.title = sectionTitle;
+        section.defaultChoices = defaultChoices;
+        this.sections.put(sectionId, section);
+    }
+
+    public void addSubSection(final String sectionId, final String subSectionId, final String subSectionTitle) {
+        final Section section = getSection(sectionId);
+        if (section == null) {
+            GWT.log("addSubSection(): section does not exist: " + sectionId);
+            return;
+        }
+
+        section.subSectionTitles.put(subSectionId, subSectionTitle);
     }
 
     public Set<String> getSectionIds() {
-        return sectionTitles.keySet();
+        return sections.keySet();
     }
 
     //TODO: Internationalization.
     public String getSectionTitle(final String sectionId) {
-        return sectionTitles.get(sectionId);
+        final Section section = getSection(sectionId);
+        if (section == null) {
+            return null;
+        }
+
+        return section.title;
     }
 
     //TODO: Internationalization.
@@ -35,16 +57,32 @@ public class QuizSections implements IsSerializable {
     }
     */
 
+    //TODO: Internationalization.
+    public String getSubSectionTitle(final String sectionId, final String subSectionId) {
+        final Section section = getSection(sectionId);
+        if (section == null) {
+            return null;
+        }
+
+        return section.subSectionTitles.get(subSectionId);
+    }
+
     public Collection<String> getTitles() {
-        return sectionTitles.values();
+        final Collection<String> result = new ArrayList<>();
+        for (final Section section : sections.values()) {
+            result.add(section.title);
+        }
+
+        return result;
     }
 
     public String getIdForTitle(final String title) {
         //TODO: Use reverse hashmap?
-        for (final String id : sectionTitles.keySet()) {
-            if (StringUtils.equals(
-                    getSectionTitle(id), title)) {
-                return id;
+        for (final String sectionId : sections.keySet()) {
+            final Section section = sections.get(sectionId);
+            if ((section != null) &&
+                    StringUtils.equals(section.title, title)) {
+                return sectionId;
             }
         }
 
@@ -52,6 +90,10 @@ public class QuizSections implements IsSerializable {
     }
 
     public boolean containsSection(final String sectionId) {
-        return sectionTitles.containsKey(sectionId);
+        return sections.containsKey(sectionId);
+    }
+
+    private Section getSection(final String sectionId) {
+        return sections.get(sectionId);
     }
 }

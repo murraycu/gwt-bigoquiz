@@ -72,12 +72,7 @@ public class QuizLoader {
             final Element sectionElement = (Element) sectionNode;
 
             final String sectionId = sectionElement.getAttribute(ATTR_ID);
-
-            String sectionTitle = null;
-            final Element sectionTitleElement = getElementByName(sectionElement, NODE_TITLE);
-            if (sectionTitleElement != null) {
-                sectionTitle = sectionTitleElement.getTextContent();
-            }
+            final String sectionTitle = getTitleNodeText(sectionElement);
 
             //Default choices:
             List<String> defaultChoices = null;
@@ -91,19 +86,31 @@ public class QuizLoader {
             final List<Node> listSubSectionNodes = getChildrenByTagName(sectionElement, NODE_SUB_SECTION);
             for (final Node subSectionNode : listSubSectionNodes) {
                 final Element subSectionElement = (Element) subSectionNode;
+                final String subSectionId = subSectionElement.getAttribute(ATTR_ID);
+                final String subSectionTitle = getTitleNodeText(subSectionElement);
+                result.addSubSection(sectionId, subSectionId, subSectionTitle);
 
                 //Questions:
-                addChildQuestions(result, sectionId, defaultChoices, subSectionElement);
+                addChildQuestions(result, sectionId, subSectionId, defaultChoices, subSectionElement);
             }
 
             //Add any Questions that are not in a subsection:
-            addChildQuestions(result, sectionId, defaultChoices, sectionElement);
+            addChildQuestions(result, sectionId, null, defaultChoices, sectionElement);
         }
 
         return result;
     }
 
-    private static void addChildQuestions(final Quiz result, final String sectionId, final List<String> defaultChoices, final Element parentElement) {
+    private static String getTitleNodeText(Element sectionElement) {
+        String sectionTitle = null;
+        final Element sectionTitleElement = getElementByName(sectionElement, NODE_TITLE);
+        if (sectionTitleElement != null) {
+            sectionTitle = sectionTitleElement.getTextContent();
+        }
+        return sectionTitle;
+    }
+
+    private static void addChildQuestions(final Quiz result, final String sectionId, final String subSectionId, final List<String> defaultChoices, final Element parentElement) {
         final List<Node> listQuestionNodes = getChildrenByTagName(parentElement, NODE_QUESTION);
         for (final Node questionNode : listQuestionNodes) {
             if (!(questionNode instanceof Element)) {
@@ -111,7 +118,7 @@ public class QuizLoader {
             }
 
             final Element element = (Element) questionNode;
-            final QuestionAndAnswer questionAndAnswer = loadQuestionNode(element, sectionId, defaultChoices);
+            final QuestionAndAnswer questionAndAnswer = loadQuestionNode(element, sectionId, subSectionId, defaultChoices);
             if (questionAndAnswer != null) {
                 //warn about duplicates:
                 if (result.contains(questionAndAnswer.getId())) {
@@ -123,7 +130,7 @@ public class QuizLoader {
         }
     }
 
-    private static QuestionAndAnswer loadQuestionNode(final Element element, final String sectionID, final List<String> defaultChoices) {
+    private static QuestionAndAnswer loadQuestionNode(final Element element, final String sectionID, final String subSectionId, final List<String> defaultChoices) {
         final String id = element.getAttribute(ATTR_ID);
         if (StringUtils.isEmpty(id)) {
             return null;
@@ -164,7 +171,7 @@ public class QuizLoader {
             return null;
         }
 
-        return new QuestionAndAnswer(id, sectionID, questionText, answerText, choices);
+        return new QuestionAndAnswer(id, sectionID, subSectionId, questionText, answerText, choices);
     }
 
     private static List<String> loadChoices(final Element elementChoices) {

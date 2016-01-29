@@ -38,6 +38,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
     private final ListBox nextQuestionSectionListBox = new ListBox();
     private final Label sectionTitle = new InlineLabel();
+    private final Label subSectionTitle = new InlineLabel();
     private final Label questionLabel = new InlineLabel();
     private final Panel choicesPanel = new FlowPanel();
 

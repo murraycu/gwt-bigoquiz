@@ -106,6 +106,15 @@ public class Quiz {
         quizSections.addSection(sectionId, sectionTitle, defaultChoices);
     }
 
+    public void addSubSection(final String sectionId, final String subSectionId, final String subSectionTitle) {
+        if (!quizSections.containsSection(sectionId)) {
+            Log.error("Quiz.addSection(): section does not already exist. Failing.");
+            return;
+        }
+
+        quizSections.addSubSection(sectionId, subSectionId, subSectionTitle);
+    }
+
     QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
         //Look in every section:
         for (Map<String, QuestionAndAnswer> section : questions.values()) {

@@ -14,8 +14,8 @@ public class QuestionAndAnswer implements IsSerializable {
     private /* final */ String answer;
 
 
-    public QuestionAndAnswer(final String questionId, final String sectionId, final String questionText, final String answerText, final List<String> choices) {
-        this.question = new Question(questionId, sectionId, questionText, choices);
+    public QuestionAndAnswer(final String questionId, final String sectionId, final String subSectionId, final String questionText, final String answerText, final List<String> choices) {
+        this.question = new Question(questionId, sectionId, subSectionId, questionText, choices);
         this.answer = answerText;
     }
 

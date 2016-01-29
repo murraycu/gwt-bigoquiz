@@ -18,6 +18,7 @@ import static org.junit.Assert.*;
 public class UserRecentHistoryTest {
 
     public static final String SECTION_1 = "section1";
+    public static final String SUBSECTION_1_1 = "subsection1.1";
 
     @Test
     public void testAddUserAnswerAtStart() throws Exception {
@@ -25,7 +26,7 @@ public class UserRecentHistoryTest {
         //when the UserRecentHistory API has settled down.
         UserRecentHistory history = createUserRecentHistory();
 
-        UserAnswer userAnswer = createUserAnswer("question4", SECTION_1, false);
+        UserAnswer userAnswer = createUserAnswer("question4", SECTION_1, SUBSECTION_1_1, false);
         history.addUserAnswerAtStart(userAnswer);
 
         List<UserProblemQuestion> problems = history.getProblemQuestions(SECTION_1);
@@ -37,7 +38,7 @@ public class UserRecentHistoryTest {
         assertNotNull(problems);
         assertEquals(1, problems.size());
 
-        userAnswer = createUserAnswer("question5", SECTION_1, false);
+        userAnswer = createUserAnswer("question5", SECTION_1, SUBSECTION_1_1, false);
         history.addUserAnswerAtStart(userAnswer);
 
         problems = history.getProblemQuestions(SECTION_1);
@@ -62,8 +63,8 @@ public class UserRecentHistoryTest {
         return history;
     }
 
-    private UserAnswer createUserAnswer(final String questionId, final String sectionId, boolean result) {
-        final Question question = new Question(questionId, sectionId, "question text", null);
+    private UserAnswer createUserAnswer(final String questionId, final String sectionId, final String subSectionId, boolean result) {
+        final Question question = new Question(questionId, sectionId, subSectionId, "question text", null);
         return new UserAnswer("user1", question, result, "sometime");
     }
 }
