@@ -498,23 +498,197 @@
             <choice>O(n^2)</choice>
             <choice>O(nk)</choice>
             <choice>O(n + k)</choice>
+            <choice>O((n log(n))^2)</choice>
         </default_choices>
-        <question id="quicksort-time-best">
-            <text>Quicksort: Time (Best)</text>
-            <answer>O(n log(n))</answer>
-        </question>
-        <question id="quicksort-time-average">
-            <text>Quicksort: Time (Average)</text>
-            <answer>O(n log(n))</answer>
-        </question>
-        <question id="quicksort-time-worst">
-            <text>Quicksort: Time (Worst)</text>
-            <answer>O(n^2)</answer>
-        </question>
-        <question id="quicksort-space-worst">
-            <text>Quicksort: Space (Worst)</text>
-            <answer>O(log(n))</answer>
-        </question>
+        <subsection id="quicksort">
+            <question id="quicksort-time-best">
+                <text>Quicksort: Time (Best)</text>
+                <answer>O(n log(n))</answer>
+            </question>
+            <question id="quicksort-time-average">
+                <text>Quicksort: Time (Average)</text>
+                <answer>O(n log(n))</answer>
+            </question>
+            <question id="quicksort-time-worst">
+                <text>Quicksort: Time (Worst)</text>
+                <answer>O(n^2)</answer>
+            </question>
+            <question id="quicksort-space-worst">
+                <text>Quicksort: Space (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+        </subsection>
+
+        <subsection id="mergesort">
+            <question id="mergesort-time-best">
+                <text>Mergesort: Time (Best)</text>
+                <answer>O(n log(n))</answer>
+            </question>
+            <question id="mergesort-time-average">
+                <text>Mergesort: Time (Average)</text>
+                <answer>O(n log(n))</answer>
+            </question>
+            <question id="mergesort-time-worst">
+                <text>Mergesort: Time (Worst)</text>
+                <answer>O(n log(n))</answer>
+            </question>
+            <question id="mergesort-space-worst">
+                <text>Mergesort: Space (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="timsort">
+            <question id="timsort-time-best">
+                <text>Timsort: Time (Best)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="timsort-time-average">
+                <text>Timsort: Time (Average)</text>
+                <answer>O(n log(n))</answer>
+            </question>
+            <question id="timsort-time-worst">
+                <text>Timsort: Time (Worst)</text>
+                <answer>O(n log(n))</answer>
+            </question>
+            <question id="timsort-space-worst">
+                <text>Timsort: Space (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="heapsort">
+            <question id="heapsort-time-best">
+                <text>Heapsort: Time (Best)</text>
+                <answer>O(n log(n))</answer>
+            </question>
+            <question id="heapsort-time-average">
+                <text>Heapsort: Time (Average)</text>
+                <answer>O(n log(n))</answer>
+            </question>
+            <question id="heapsort-time-worst">
+                <text>Heapsort: Time (Worst)</text>
+                <answer>O(n log(n))</answer>
+            </question>
+            <question id="heapsort-space-worst">
+                <text>Heapsort: Space (Worst)</text>
+                <answer>O(1)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="bubble-sort">
+            <question id="bubble-sort-time-best">
+                <text>Bubble Sort: Time (Best)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="bubble-sort-time-average">
+                <text>Bubble Sort: Time (Average)</text>
+                <answer>O(n^2)</answer>
+            </question>
+            <question id="bubble-sort-time-worst">
+                <text>Bubble Sort: Time (Worst)</text>
+                <answer>O(n^2)</answer>
+            </question>
+            <question id="bubble-sort-space-worst">
+                <text>Bubble Sort: Space (Worst)</text>
+                <answer>O(1)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="insertion-sort">
+            <question id="insertion-sort-time-best">
+                <text>Insertion Sort: Time (Best)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="insertion-sort-time-average">
+                <text>Insertion Sort: Time (Average)</text>
+                <answer>O(n^2)</answer>
+            </question>
+            <question id="insertion-sort-time-worst">
+                <text>Insertion Sort: Time (Worst)</text>
+                <answer>O(n^2)</answer>
+            </question>
+            <question id="insertion-sort-space-worst">
+                <text>Insertion Sort: Space (Worst)</text>
+                <answer>O(1)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="selection-sort">
+            <question id="selection-sort-time-best">
+                <text>Selection Sort: Time (Best)</text>
+                <answer>O(n^2)</answer>
+            </question>
+            <question id="selection-sort-time-average">
+                <text>Selection Sort: Time (Average)</text>
+                <answer>O(n^2)</answer>
+            </question>
+            <question id="selection-sort-time-worst">
+                <text>Selection Sort: Time (Worst)</text>
+                <answer>O(n^2)</answer>
+            </question>
+            <question id="selection-sort-space-worst">
+                <text>Selection Sort: Space (Worst)</text>
+                <answer>O(1)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="shell-sort">
+            <question id="shell-sort-sort-time-best">
+                <text>Shell Sort: Time (Best)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="shell-sort-sort-time-average">
+                <text>Shell Sort: Time (Average)</text>
+                <answer>O((n log(n))^2)</answer>
+            </question>
+            <question id="shell-sort-sort-time-worst">
+                <text>Shell Sort: Time (Worst)</text>
+                <answer>O((n log(n))^2))</answer>
+            </question>
+            <question id="shell-sort-sort-space-worst">
+                <text>Shell Sort: Space (Worst)</text>
+                <answer>O(1)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="bucket-sort">
+            <question id="bucket-sort-sort-time-best">
+                <text>Bucket Sort: Time (Best)</text>
+                <answer>O(n + k)</answer>
+            </question>
+            <question id="bucket-sort-sort-time-average">
+                <text>Bucket Sort: Time (Average)</text>
+                <answer>O(n + k)</answer>
+            </question>
+            <question id="bucket-sort-sort-time-worst">
+                <text>Bucket Sort: Time (Worst)</text>
+                <answer>O(n^2)</answer>
+            </question>
+            <question id="bucket-sort-sort-space-worst">
+                <text>Bucket Sort: Space (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="radix-sort">
+            <question id="radix-sort-sort-time-best">
+                <text>Radix Sort: Time (Best)</text>
+                <answer>O(nk)</answer>
+            </question>
+            <question id="radix-sort-sort-time-average">
+                <text>Radix Sort: Time (Average)</text>
+                <answer>O(nk)</answer>
+            </question>
+            <question id="radix-sort-sort-time-worst">
+                <text>Radix Sort: Time (Worst)</text>
+                <answer>O(nk)</answer>
+            </question>
+            <question id="radix-sort-sort-space-worst">
+                <text>Radix Sort: Space (Worst)</text>
+                <answer>O(n + k)</answer>
+            </question>
+        </subsection>
     </section>
 
     <section id="graph-operations">
