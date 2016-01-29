@@ -118,9 +118,11 @@ public class Quiz {
         return null;
     }
 
+    /*
     public String getSectionTitle(final String sectionId) {
         return quizSections.getSectionTitle(sectionId);
     }
+    */
 
     public QuizSections getSections() {
         return quizSections;
