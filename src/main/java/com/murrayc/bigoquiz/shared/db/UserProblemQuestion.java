@@ -25,6 +25,9 @@ public class UserProblemQuestion implements IsSerializable {
     private String questionId;
 
     @Index
+    private String subSectionId;
+
+    @Index
     private String sectionId;
 
     //TODO: Internationalization.
@@ -52,15 +55,17 @@ public class UserProblemQuestion implements IsSerializable {
         this.questionId = question.getId();
         this.subSectionTitle = null;
         this.questionTitle = question.getText();
+        this.subSectionId = question.getSubSectionId();
         this.sectionId = question.getSectionId();
         this.countAnsweredWrong = 0;
     }
 
-    public UserProblemQuestion(final String userId, final String questionId, final String subSectionTitle, final String questionTitle, final String sectionId) {
+    public UserProblemQuestion(final String userId, final String questionId, final String subSectionTitle, final String questionTitle, final String sectionId, final String subSectionId) {
         this.userId = userId;
         this.questionId = questionId;
         this.subSectionTitle = subSectionTitle;
         this.questionTitle = questionTitle;
+        this.subSectionId = subSectionId;
         this.sectionId = sectionId;
         this.countAnsweredWrong = 1;
     }

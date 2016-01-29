@@ -25,6 +25,9 @@ public class UserAnswer implements IsSerializable {
     @Index
     private String sectionId;
 
+    @Index
+    private String subSectionId;
+
     //TODO: Internationalization.
     @Ignore
     private String subSectionTitle;
@@ -47,6 +50,7 @@ public class UserAnswer implements IsSerializable {
         this.questionTitle = null;
         this.questionTitle = question.getText();
         this.sectionId = question.getSectionId();
+        this.subSectionId = question.getSubSectionId();
         this.result = result;
         this.time = time;
     }
@@ -63,6 +67,9 @@ public class UserAnswer implements IsSerializable {
         return sectionId;
     }
 
+    public String getSubSectionId() {
+        return subSectionId;
+    }
 
     public boolean getResult() {
         return result;
