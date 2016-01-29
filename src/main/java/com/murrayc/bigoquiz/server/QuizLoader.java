@@ -159,6 +159,11 @@ public class QuizLoader {
             choices = defaultChoices;
         }
 
+        if (choices != null && !choices.contains(answerText)) {
+            Log.error("QuizLoader.loadQuestionNode(): answer is not in the choices: questionId: " + id);
+            return null;
+        }
+
         return new QuestionAndAnswer(id, sectionID, questionText, answerText, choices);
     }
 
