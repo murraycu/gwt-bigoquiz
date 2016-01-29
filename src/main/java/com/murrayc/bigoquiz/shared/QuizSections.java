@@ -50,4 +50,8 @@ public class QuizSections implements IsSerializable {
 
         return null;
     }
+
+    public boolean containsSection(final String sectionId) {
+        return sectionTitles.containsKey(sectionId);
+    }
 }

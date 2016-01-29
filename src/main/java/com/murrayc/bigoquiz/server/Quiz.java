@@ -99,6 +99,10 @@ public class Quiz {
     }
 
     public void addSection(final String sectionId, final String sectionTitle, final List<String> defaultChoices) {
+        if (quizSections.containsSection(sectionId)) {
+            Log.error("Quiz.addSection(): section already exists. Replacing. sectionId: " + sectionId);
+        }
+
         quizSections.addSection(sectionId, sectionTitle, defaultChoices);
     }
 
