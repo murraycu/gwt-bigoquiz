@@ -50,10 +50,9 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("content-panel");
 
-        final Panel showingFromPanel = new FlowPanel();
+        final Panel showingFromPanel = new FlowPanel(ParagraphElement.TAG);
         showingFromPanel.addStyleName("showing-from-panel");
-        showingFromPanel.addStyleName("clearfix"); //So it is as high as its children.
-        final Label nextQuestionSectiontitle = new Label(constants.showingQuestionsFrom());
+        final Label nextQuestionSectiontitle = new InlineLabel(constants.showingQuestionsFrom());
         nextQuestionSectiontitle.addStyleName("next-question-section-title-label");
         showingFromPanel.add(nextQuestionSectiontitle);
         showingFromPanel.add(nextQuestionSectionListBox);
