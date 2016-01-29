@@ -50,8 +50,9 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         mainPanel.addStyleName("content-panel");
 
         final Panel showingFromPanel = new FlowPanel(ParagraphElement.TAG);
-        showingFromPanel.addStyleName("showing-from-panel");
-        final Label nextQuestionSectiontitle = new InlineLabel(constants.showingQuestionsFrom());
+        showingFromPanel.addStyleName("show-from-panel");
+        //TODO: Avoid the " " concatenation:
+        final Label nextQuestionSectiontitle = new InlineLabel(constants.showQuestionsFrom() + " ");
         nextQuestionSectiontitle.addStyleName("next-question-section-title-label");
         showingFromPanel.add(nextQuestionSectiontitle);
         showingFromPanel.add(nextQuestionSectionListBox);
