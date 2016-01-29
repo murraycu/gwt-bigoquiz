@@ -24,8 +24,8 @@ import java.util.List;
 public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentUserEditUiHandlers>
         implements UserHistoryRecentPresenter.MyView {
 
-    // OnlineGlomConstants.java is generated in the target/ directory,
-    // from OnlineGlomConstants.properties
+    // BigOQuizConstants.java is generated in the target/ directory,
+    // from BigOQuizConstants.properties
     // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
     private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);

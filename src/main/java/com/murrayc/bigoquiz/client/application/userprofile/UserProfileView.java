@@ -12,8 +12,8 @@ import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
  */
 public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHandlers>
         implements UserProfilePresenter.MyView {
-    // OnlineGlomConstants.java is generated in the target/ directory,
-    // from OnlineGlomConstants.properties
+    // BigOQuizConstants.java is generated in the target/ directory,
+    // from BigOQuizConstants.properties
     // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
     private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
 
