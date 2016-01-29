@@ -150,7 +150,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         //Both alternatives lose whatever the user had set before clicking this link.
         final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(userAnswer.getQuestionId(), userAnswer.getSectionId());
         final String url = placeManager.buildHistoryToken(placeRequest);
-        final Hyperlink result = new Hyperlink(userAnswer.getQuestionTitle(), url);
+        final Hyperlink result = new Hyperlink(userAnswer.getSubSectionTitle() + ": " + userAnswer.getQuestionTitle(), url);
         result.addStyleName("user-answer-hyperlink");
         return result;
     }
@@ -163,7 +163,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         //Both alternatives lose whatever the user had set before clicking this link.
         final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(problemQuestion.getQuestionId(), problemQuestion.getSectionId());
         final String url = placeManager.buildHistoryToken(placeRequest);
-        final Hyperlink result = new InlineHyperlink(problemQuestion.getQuestionTitle(), url);
+        final Hyperlink result = new InlineHyperlink(problemQuestion.getSubSectionTitle() + ": " + problemQuestion.getQuestionTitle(), url);
         result.addStyleName("problem-answer-hyperlink");
         return result;
     }

@@ -91,7 +91,7 @@ public class UserRecentHistory implements IsSerializable {
 
             if (toUse == null) {
                 toUse = new UserProblemQuestion(userId, questionId,
-                        userAnswer.getQuestionTitle(), userAnswer.getSectionId());
+                        userAnswer.getSubSectionTitle(), userAnswer.getQuestionTitle(), userAnswer.getSectionId());
                 listProblemQuestions.add(0, toUse);
             }
         }

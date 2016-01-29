@@ -27,6 +27,10 @@ public class UserAnswer implements IsSerializable {
 
     //TODO: Internationalization.
     @Ignore
+    private String subSectionTitle;
+
+    //TODO: Internationalization.
+    @Ignore
     private String questionTitle;
 
     private boolean result;
@@ -40,6 +44,7 @@ public class UserAnswer implements IsSerializable {
     public UserAnswer(final String userId, final Question question, final boolean result, final String time) {
         this.userId = userId;
         this.questionId = question.getId();
+        this.questionTitle = null;
         this.questionTitle = question.getText();
         this.sectionId = question.getSectionId();
         this.result = result;
@@ -73,5 +78,13 @@ public class UserAnswer implements IsSerializable {
 
     public void setQuestionTitle(final String questionTitle) {
         this.questionTitle = questionTitle;
+    }
+
+    public String getSubSectionTitle() {
+        return subSectionTitle;
+    }
+
+    public void setSubSectionTitle(final String subSectionTitle) {
+        this.subSectionTitle = subSectionTitle;
     }
 }

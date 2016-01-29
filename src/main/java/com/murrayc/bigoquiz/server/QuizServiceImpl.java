@@ -178,13 +178,27 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //which we want to give to the client, but which we didn't want to store
         //along with each UserAnswer.
         //
+        final Quiz quiz = getQuiz();
+        final QuizSections sections = quiz.getSections();
+        if (sections == null) {
+            return null;
+        }
+
         final List<UserAnswer> listCopy = new ArrayList<>();
         for (final UserAnswer a : q.list()) {
             if (a == null) {
                 continue;
             }
 
-            a.setQuestionTitle(getQuestionTitle(a.getQuestionId()));
+            final Question question = quiz.getQuestion(a.getQuestionId());
+            if (question == null) {
+                continue;
+            }
+
+            a.setQuestionTitle(question.getText());
+
+            final String subSectionTitle = sections.getSubSectionTitle(question.getSectionId(), question.getSubSectionId());
+            a.setSubSectionTitle(subSectionTitle);
 
             listCopy.add(a);
         }
@@ -207,6 +221,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
     }
 
     private List<UserProblemQuestion> getProblemQuestions(final String userId, final String sectionId) {
+        final Quiz quiz = getQuiz();
+        final QuizSections sections = quiz.getSections();
+        if (sections == null) {
+            return null;
+        }
+
         final EntityManagerFactory emf = EntityManagerFactory.get();
         Query<UserProblemQuestion> q = emf.ofy().load().type(UserProblemQuestion.class);
         q = q.filter("userId", userId);
@@ -219,22 +239,22 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 continue;
             }
 
-            a.setQuestionTitle(getQuestionTitle(a.getQuestionId()));
+            final String questionId = a.getQuestionId();
+
+            final Question question = quiz.getQuestion(questionId);
+            if (question == null) {
+                continue;
+            }
+
+            a.setQuestionTitle(question.getText());
+
+            final String subSectionTitle = sections.getSubSectionTitle(question.getSectionId(), question.getSubSectionId());
+            a.setSubSectionTitle(subSectionTitle);
 
             listCopy.add(a);
         }
 
         return listCopy;
-    }
-
-        private String getQuestionTitle(final String questionId) {
-        final Quiz quiz = getQuiz();
-        final Question question = quiz.getQuestion(questionId);
-        if (question == null) {
-            return null;
-        }
-
-        return question.getText();
     }
 
     private UserProfile getUserProfileImpl() {

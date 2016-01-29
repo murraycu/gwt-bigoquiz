@@ -29,6 +29,10 @@ public class UserProblemQuestion implements IsSerializable {
 
     //TODO: Internationalization.
     @Ignore
+    private String subSectionTitle;
+
+    //TODO: Internationalization.
+    @Ignore
     private String questionTitle;
 
     public int getCountAnsweredWrong() {
@@ -46,14 +50,16 @@ public class UserProblemQuestion implements IsSerializable {
     public UserProblemQuestion(final String userId, final Question question) {
         this.userId = userId;
         this.questionId = question.getId();
+        this.subSectionTitle = null;
         this.questionTitle = question.getText();
         this.sectionId = question.getSectionId();
         this.countAnsweredWrong = 0;
     }
 
-    public UserProblemQuestion(final String userId, final String questionId, final String questionTitle, final String sectionId) {
+    public UserProblemQuestion(final String userId, final String questionId, final String subSectionTitle, final String questionTitle, final String sectionId) {
         this.userId = userId;
         this.questionId = questionId;
+        this.subSectionTitle = subSectionTitle;
         this.questionTitle = questionTitle;
         this.sectionId = sectionId;
         this.countAnsweredWrong = 1;
@@ -77,6 +83,14 @@ public class UserProblemQuestion implements IsSerializable {
 
     public void setQuestionTitle(final String questionTitle) {
         this.questionTitle = questionTitle;
+    }
+
+    public void setSubSectionTitle(final String subSectionTitle) {
+        this.subSectionTitle = subSectionTitle;
+    }
+
+    public String getSubSectionTitle() {
+        return subSectionTitle;
     }
 
     public void adjustCount(boolean result) {
