@@ -42,6 +42,11 @@ body {
 }
 
 .sidebar-panel h2 {
+    margin-top: 1em;
+}
+
+/* TODO: Make this not apply to a h2 inside sub-divs? */
+.sidebar-panel h2:first-child {
     margin-top: 0;
 }
 
@@ -224,6 +229,7 @@ background-color: blue;
 }
 
 .user-history-recent-panel {
+    margin-top: 1em; /* Same as sidebar-panel h2 */
     margin-bottom: 1em;
     float: left;
     clear: both;
@@ -255,7 +261,6 @@ background-color: blue;
 }
 
 .panel-problem-questions {
-    margin-bottom: 2em;
 }
 
 .problem-answer-hyperlink {
@@ -273,10 +278,16 @@ background-color: blue;
 }
 
 .show-from-panel {
-
+    /* Otherewise there is a top margin. */
+    margin-top: 0em;
 }
 
 .user-history-section-title-label {
+    margin-top: 1em;
     font-weight: bold;
     font-size: 120%
+}
+
+.user-history-section-title-label:first-child {
+    margin-top: 0em;
 }
