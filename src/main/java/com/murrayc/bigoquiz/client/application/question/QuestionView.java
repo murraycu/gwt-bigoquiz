@@ -216,7 +216,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             return;
         }
 
-        updateResultPanelUi(submissionResult.getResult() ? State.CORRECT_ANSWER : State.WRONG_ANSWER);
+        updateResultPanelUi(submissionResult.getResult() ? State.CORRECT_ANSWER : State.WAITING_AFTER_WRONG_ANSWER);
     }
 
     @Override
@@ -253,7 +253,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
                 resultLabel.setVisible(false); //Showing "Don't Know" is annoying to the user.
                 break;
             }
-            case WRONG_ANSWER: {
+            case WAITING_AFTER_WRONG_ANSWER: {
                 showAnswerButton.setVisible(true);
                 nextQuestionButton.setVisible(false);
                 resultLabel.setText(constants.wrongLabel());
@@ -301,8 +301,8 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
     private enum State {
         WAITING_FOR_ANSWER,
+        WAITING_AFTER_WRONG_ANSWER,
         DONT_KNOW_ANSWER,
-        WRONG_ANSWER,
         CORRECT_ANSWER
     }
 }
