@@ -235,7 +235,7 @@
             </question>
             <question id="hash-table-deletion-average">
                 <text>Hash Table: Deletion (Average)</text>
-                <answer>O(1))</answer>
+                <answer>O(1)</answer>
             </question>
 
             <!-- No hash-table-search-access-worst -->
@@ -664,7 +664,7 @@
             </question>
             <question id="shell-sort-sort-time-worst">
                 <text>Shell Sort: Time (Worst)</text>
-                <answer>O((n log(n))^2))</answer>
+                <answer>O((n log(n))^2)</answer>
             </question>
             <question id="shell-sort-sort-space-worst">
                 <text>Shell Sort: Space (Worst)</text>
