@@ -809,4 +809,158 @@
             </question>
         </subsection>
     </section>
+
+    <section id="heap-operations">
+        <title>Heap Operations</title>
+        <default_choices>
+            <choice>O(1)</choice>
+            <choice>O(log(n))</choice>
+            <choice>O(n)</choice>
+            <choice>O(n log(n))</choice>
+            <choice>O(n^2)</choice>
+            <choice>O(m + n)</choice>
+        </default_choices>
+        <subsection id="linked-list-sorted">
+            <!-- No linked-list-sorted-heapify -->
+            <question id="linked-list-sorted-find-max">
+                <text>Linked List (sorted): Find Max</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="linked-list-sorted-extract-max">
+                <text>Linked List (sorted): Extract Max</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="linked-list-sorted-increase-key">
+                <text>Linked List (sorted): Increase Key</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="linked-list-sorted-insert">
+                <text>Linked List (sorted): Insert</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="linked-list-sorted-delete">
+                <text>Linked List (sorted): Delete</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="linked-list-sorted-merge">
+                <text>Linked List (sorted): Merge</text>
+                <answer>O(m + n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="linked-list-unsorted">
+            <!-- No linked-list-unsorted-heapify -->
+            <question id="linked-list-unsorted-find-max">
+                <text>Linked List (unsorted): Find Max</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="linked-list-unsorted-extract-max">
+                <text>Linked List (unsorted): Extract Max</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="linked-list-unsorted-increase-key">
+                <text>Linked List (unsorted): Increase Key</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="linked-list-unsorted-insert">
+                <text>Linked List (unsorted): Insert</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="linked-list-unsorted-delete">
+                <text>Linked List (unsorted): Delete</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="linked-list-unsorted-merge">
+                <text>Linked List (unsorted): Merge</text>
+                <answer>O(1)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="binary-heap">
+            <question id="binary-heap-heapify">
+                <text>Binary Heap: Heapify</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="binary-heap-find-max">
+                <text>Binary Heap: Find Max</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="binary-heap-extract-max">
+                <text>Binary Heap: Extract Max</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="binary-heap-increase-key">
+                <text>Binary Heap: Increase Key</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="binary-heap-insert">
+                <text>Binary Heap: Insert</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="binary-heap-delete">
+                <text>Binary Heap: Delete</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="binary-heap-merge">
+                <text>Binary Heap: Merge</text>
+                <answer>O(m + n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="binomial-heap">
+            <!-- No binomial-heap-heapify -->
+            <question id="binomial-heap-find-max">
+                <text>Binomial Heap: Find Max</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="binomial-heap-extract-max">
+                <text>Binomial Heap: Extract Max</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="binomial-heap-increase-key">
+                <text>Binomial Heap: Increase Key</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="binomial-heap-insert">
+                <text>Binomial Heap: Insert</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="binomial-heap-delete">
+                <text>Binomial Heap: Delete</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="binomial-heap-merge">
+                <text>Binomial Heap: Merge</text>
+                <answer>O(log(n))</answer>
+            </question>
+        </subsection>
+
+        <subsection id="fibonacci-heap">
+            <!-- No fibonacci-heap-heapify -->
+            <question id="fibonacci-heap-find-max">
+                <text>Fibonacci Heap: Find Max</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="fibonacci-heap-extract-max">
+                <text>Fibonacci Heap: Extract Max</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="fibonacci-heap-increase-key">
+                <text>Fibonacci Heap: Increase Key</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="fibonacci-heap-insert">
+                <text>Fibonacci Heap: Insert</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="fibonacci-heap-delete">
+                <text>Fibonacci Heap: Delete</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="fibonacci-heap-merge">
+                <text>Fibonacci Heap: Merge</text>
+                <answer>O(1)</answer>
+            </question>
+        </subsection>
+    </section>
 </quiz>
