@@ -43,6 +43,10 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         void setSubmissionResult(final QuizService.SubmissionResult submissionResult);
 
         void showAnswer(final String correctAnswer);
+
+        //TODO: The presenter should know if it is waiting,
+        //because it tells the view what to do.
+        boolean isWaiting();
     }
 
     private String nextQuestionSectionId;
@@ -244,15 +248,17 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     /**
      * This will cause prepareFromRequest() be called,
      * where we can update the view with a question from the specified section,
+     * or the specified question from that section, getting subsequent questions from the same section.
      * storing a history token for the "place" along the way,
      * so the browser's back button can take us to the previous question.
      *
      * @param nextQuestionSectionId
+     * @param nextQuestionId May be null.
      */
-    private void revealSection(final String nextQuestionSectionId) {
+    private void revealSection(final String nextQuestionSectionId, final String nextQuestionId) {
         this.nextQuestionSectionId = nextQuestionSectionId;
 
-        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(nextQuestionSectionId);
+        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(nextQuestionId, nextQuestionSectionId);
         placeManager.revealPlace(placeRequest);
     }
 
@@ -264,7 +270,19 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     @Override
     public void onNextQuestionSectionSelected(final String nextQuestionSectionId) {
 
-        revealSection(nextQuestionSectionId);
+        // Don't get a new question if we are already waiting for an answer
+        // and the current question is already from a correct section.
+        String nextQuestionId = null;
+        if (question != null &&
+                getView().isWaiting()) {
+            //null means "any section"
+            if(nextQuestionSectionId == null ||
+                    StringUtils.equals(nextQuestionSectionId, question.getSectionId())) {
+                nextQuestionId = getQuestionId();
+            }
+        }
+
+        revealSection(nextQuestionSectionId, nextQuestionId);
     }
 
     private void getAndUseSections() {

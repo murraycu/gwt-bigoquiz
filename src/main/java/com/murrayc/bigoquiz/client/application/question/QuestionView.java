@@ -44,6 +44,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private final Button showAnswerButton = new Button(constants.showAnswerButton());
     private final Button nextQuestionButton = new Button(constants.nextButton());
     private final Label resultLabel = new Label();
+    private State state = State.WAITING_INVALID;
 
     QuestionView() {
         final FlowPanel mainPanel = new FlowPanel();
@@ -60,7 +61,6 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         nextQuestionSectionListBox.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(final ChangeEvent event) {
-                //QuestionView.this.nextQuestionSectionId = nextQuestionSectionListBox.getSelectedValue();
                 final String nextQuestionSectionId = getSelectedNextQuestionSectionId();
                 getUiHandlers().onNextQuestionSectionSelected(nextQuestionSectionId);
             }
@@ -168,15 +168,16 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
     @Override
     public void setQuestion(final Question question) {
-        Window.setTitle(messages.windowTitle(question.getText()));
-
         choicesPanel.clear();
 
         if (question == null) {
+            Window.setTitle(messages.windowTitle(""));
             questionLabel.setText("");
+
             return;
         }
 
+        Window.setTitle(messages.windowTitle(question.getText()));
         questionLabel.setText(question.getText());
 
         //TODO: Make the
@@ -226,12 +227,18 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         updateResultPanelUi(State.DONT_KNOW_ANSWER);
     }
 
+    @Override
+    public boolean isWaiting() {
+        return state.isWaiting();
+    }
+
     private void submitAnswer(final String answer) {
         choiceSelected = answer;
         getUiHandlers().onSubmitAnswer();
     }
 
     private void updateResultPanelUi(final State state) {
+        this.state = state;
         enableChoices(true);
 
         switch (state) {
@@ -300,9 +307,14 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     }
 
     private enum State {
+        WAITING_INVALID,
         WAITING_FOR_ANSWER,
         WAITING_AFTER_WRONG_ANSWER,
         DONT_KNOW_ANSWER,
-        CORRECT_ANSWER
+        CORRECT_ANSWER;
+
+        public boolean isWaiting() {
+            return this == WAITING_FOR_ANSWER || this == WAITING_AFTER_WRONG_ANSWER;
+        }
     }
 }
