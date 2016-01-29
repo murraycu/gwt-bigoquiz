@@ -85,7 +85,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             final String url = placeManager.buildHistoryToken(placeRequest);
             final Hyperlink titleLabel = new Hyperlink(sections.getSectionTitle(sectionId), url);
             detailsPanel.add(titleLabel);
-            titleLabel.addStyleName("section-title-label");
+            titleLabel.addStyleName("user-history-section-title-label");
 
             final UserStats stats = userRecentHistory.getStats(sectionId);
             if (stats != null) {
