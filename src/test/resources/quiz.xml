@@ -701,29 +701,112 @@
             <choice>O(|V| ⋅ |E|)</choice>
             <choice>O(|V|^2)</choice>
         </default_choices>
-        <question id="adjacency-list-storage">
-            <text>Adjacency List: Storage</text>
-            <answer>O(|V| + |E|)</answer>
-        </question>
-        <question id="adjacency-list-add-vertex">
-            <text>Adjacency List: Add Vertex</text>
-            <answer>O(1)</answer>
-        </question>
-        <question id="adjacency-list-add-edge">
-            <text>Adjacency List: Add Edge</text>
-            <answer>O(1)</answer>
-        </question>
-        <question id="adjacency-list-remove-vertex">
-            <text>Adjacency List: Remove Vertex</text>
-            <answer>O(|V| + |E|)</answer>
-        </question>
-        <question id="adjacency-list-remove-edge">
-            <text>Adjacency List: Remove Edge</text>
-            <answer>O(|E|)</answer>
-        </question>
-        <question id="adjacency-list-query">
-            <text>Adjacency List: Remove Edge</text>
-            <answer>O(|V|)</answer>
-        </question>
+        <subsection id="adjacency-list">
+            <question id="adjacency-list-storage">
+                <text>Adjacency List: Storage</text>
+                <answer>O(|V| + |E|)</answer>
+            </question>
+            <question id="adjacency-list-add-vertex">
+                <text>Adjacency List: Add Vertex</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="adjacency-list-add-edge">
+                <text>Adjacency List: Add Edge</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="adjacency-list-remove-vertex">
+                <text>Adjacency List: Remove Vertex</text>
+                <answer>O(|V| + |E|)</answer>
+            </question>
+            <question id="adjacency-list-remove-edge">
+                <text>Adjacency List: Remove Edge</text>
+                <answer>O(|E|)</answer>
+            </question>
+            <question id="adjacency-list-query">
+                <text>Adjacency List: Query</text>
+                <answer>O(|V|)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="incidence-list">
+            <question id="incidence-list-storage">
+                <text>Incidence List: Storage</text>
+                <answer>O(|V| + |E|)</answer>
+            </question>
+            <question id="incidence-list-add-vertex">
+                <text>Incidence List: Add Vertex</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="incidence-list-add-edge">
+                <text>Incidence List: Add Edge</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="incidence-list-remove-vertex">
+                <text>Incidence List: Remove Vertex</text>
+                <answer>O(|E|)</answer>
+            </question>
+            <question id="incidence-list-remove-edge">
+                <text>Incidence List: Remove Edge</text>
+                <answer>O(|E|)</answer>
+            </question>
+            <question id="incidence-list-query">
+                <text>Incidence List: Query</text>
+                <answer>O(|E|)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="adjacency-matrix">
+            <question id="adjacency-matrix-storage">
+                <text>Adjacency Matrix: Storage</text>
+                <answer>O(|V|^2)</answer>
+            </question>
+            <question id="adjacency-matrix-add-vertex">
+                <text>Adjacency Matrix: Add Vertex</text>
+                <answer>O(|V|^2)</answer>
+            </question>
+            <question id="adjacency-matrix-add-edge">
+                <text>Adjacency Matrix: Add Edge</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="adjacency-matrix-remove-vertex">
+                <text>Adjacency Matrix: Remove Vertex</text>
+                <answer>O(|V|^2)</answer>
+            </question>
+            <question id="adjacency-matrix-remove-edge">
+                <text>Adjacency Matrix: Remove Edge</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="adjacency-matrix-query">
+                <text>Adjacency Matrix: Query</text>
+                <answer>O(1)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="incidence-matrix">
+            <question id="incidence-matrix-storage">
+                <text>Incidence Matrix: Storage</text>
+                <answer>O(|V| ⋅ |E|)</answer>
+            </question>
+            <question id="incidence-matrix-add-vertex">
+                <text>Incidence Matrix: Add Vertex</text>
+                <answer>O(|V| ⋅ |E|)</answer>
+            </question>
+            <question id="incidence-matrix-add-edge">
+                <text>Incidence Matrix: Add Edge</text>
+                <answer>O(|V| ⋅ |E|)</answer>
+            </question>
+            <question id="incidence-matrix-remove-vertex">
+                <text>Incidence Matrix: Remove Vertex</text>
+                <answer>O(|V| ⋅ |E|)</answer>
+            </question>
+            <question id="incidence-matrix-remove-edge">
+                <text>Incidence Matrix: Remove Edge</text>
+                <answer>O(|V| ⋅ |E|)</answer>
+            </question>
+            <question id="incidence-matrix-query">
+                <text>Incidence Matrix: Query</text>
+                <answer>O(|E|)</answer>
+            </question>
+        </subsection>
     </section>
 </quiz>
