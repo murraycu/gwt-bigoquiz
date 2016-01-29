@@ -148,14 +148,17 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         nextQuestionSectionId = sectionId;
 
         String title = null;
-        if (sections != null) {
+        if (StringUtils.isEmpty(sectionId)) {
+            title = constants.allSectionsTitle();
+        } else if (sections != null) {
             title = sections.getSectionTitle(nextQuestionSectionId);
         }
+
         setNextQuestionSectionTitle(title);
     }
 
     private void setNextQuestionSectionTitle(final String sectionTitle) {
-        //TODO: Use a derived/better ListBox that lets us refere to the items by ID.
+        //TODO: Use a derived/better ListBox that lets us refer to the items by ID.
         final int count = nextQuestionSectionListBox.getItemCount();
         for (int i = 0; i < count; ++i) {
             if (StringUtils.equals(

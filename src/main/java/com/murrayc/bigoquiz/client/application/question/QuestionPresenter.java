@@ -87,6 +87,10 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     public void prepareFromRequest(final PlaceRequest request) {
         super.prepareFromRequest(request);
 
+        //Next question section ID,
+        nextQuestionSectionId = request.getParameter(NameTokens.QUESTION_PARAM_NEXT_QUESTION_SECTION_ID, null);
+        getView().setNextQuestionSectionId(nextQuestionSectionId);
+
         //Question ID:
         final String questionId = request.getParameter(NameTokens.QUESTION_PARAM_QUESTION_ID, null);
         //GWT.log("prepareFromRequest(): questionId=" + questionId);
@@ -110,15 +114,10 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
             //Otherwise, get it from the server and show it:
             getAndUseQuestion(questionId);
-        }
-
-        //Next question section ID,
-        nextQuestionSectionId = request.getParameter(NameTokens.QUESTION_PARAM_NEXT_QUESTION_SECTION_ID, null);
-        if (StringUtils.isEmpty(questionId)) {
-            getView().setNextQuestionSectionId(nextQuestionSectionId);
-
+        } else {
             getAndUseNextQuestion(nextQuestionSectionId);
         }
+
     }
 
     @Override
