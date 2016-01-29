@@ -13,6 +13,7 @@
             <choice>O(n + k)</choice>
         </default_choices>
         <subsection id="array">
+            <title>Array</title>
             <question id="array-access-average">
                 <text>Array: Access (Average)</text>
                 <answer>O(1)</answer>
@@ -54,6 +55,7 @@
         </subsection>
 
         <subsection id="stack">
+            <title>Stack</title>
             <question id="stack-access-average">
                 <text>Stack: Access (Average)</text>
                 <answer>O(n)</answer>
@@ -95,6 +97,7 @@
         </subsection>
 
         <subsection id="singly-linked-list">
+            <title>Singly-Linked List</title>
             <question id="singly-linked-list-access-average">
                 <text>Singly-Linked List: Access (Average)</text>
                 <answer>O(n)</answer>
@@ -136,6 +139,7 @@
         </subsection>
 
         <subsection id="doubly-linked-list">
+            <title>Doubly-Linked List</title>
             <question id="doubly-linked-list-access-average">
                 <text>Doubly-Linked List: Access (Average)</text>
                 <answer>O(n)</answer>
@@ -177,6 +181,7 @@
         </subsection>
 
         <subsection id="skip-list">
+            <title>Skip List</title>
             <question id="skip-list-access-average">
                 <text>Skip List: Access (Average)</text>
                 <answer>O(log(n))</answer>
@@ -218,6 +223,7 @@
         </subsection>
 
         <subsection id="hash-table">
+            <title>Hash Table</title>
             <!-- No hash-table-search-access-average -->
             <question id="hash-table-search-average">
                 <text>Hash Table: Search (Average)</text>
@@ -253,6 +259,7 @@
         </subsection>
 
         <subsection id="binary-search-tree">
+            <title>Binary Search Tree</title>
             <question id="binary-search-tree-access-average">
                 <text>Binary Search Tree: Access (Average)</text>
                 <answer>O(log(n))</answer>
@@ -294,6 +301,7 @@
         </subsection>
 
         <subsection id="cartesian-tree">
+            <title>Cartesian Tree</title>
             <!-- No cartesian-tree-search-access-average -->
             <question id="cartesian-tree-search-average">
                 <text>Cartesian Tree: Search (Average)</text>
@@ -329,6 +337,7 @@
         </subsection>
 
         <subsection id="b-tree">
+            <title>B-Tree</title>
             <question id="b-tree-access-average">
                 <text>B-Tree: Access (Average)</text>
                 <answer>O(log(n))</answer>
@@ -370,6 +379,7 @@
         </subsection>
 
         <subsection id="red-black-tree">
+            <title>Red Black Tree</title>
             <question id="red-black-tree-access-average">
                 <text>Red Black Tree: Access (Average)</text>
                 <answer>O(log(n))</answer>
@@ -411,6 +421,7 @@
         </subsection>
 
         <subsection id="splay-tree">
+            <title>Splay Tree</title>
             <!-- No splay-tree-search-access-average -->
             <question id="splay-tree-search-average">
                 <text>Splay Tree: Search (Average)</text>
@@ -446,6 +457,7 @@
         </subsection>
 
         <subsection id="avl-tree">
+            <title>AVL Tree</title>
             <question id="avl-tree-access-average">
                 <text>AVL Tree: Access (Average)</text>
                 <answer>O(log(n))</answer>
@@ -501,6 +513,7 @@
             <choice>O((n log(n))^2)</choice>
         </default_choices>
         <subsection id="quicksort">
+            <title>Quicksort</title>
             <question id="quicksort-time-best">
                 <text>Quicksort: Time (Best)</text>
                 <answer>O(n log(n))</answer>
@@ -520,6 +533,7 @@
         </subsection>
 
         <subsection id="mergesort">
+            <title>Mergesort</title>
             <question id="mergesort-time-best">
                 <text>Mergesort: Time (Best)</text>
                 <answer>O(n log(n))</answer>
@@ -539,6 +553,7 @@
         </subsection>
 
         <subsection id="timsort">
+            <title>Timsort</title>
             <question id="timsort-time-best">
                 <text>Timsort: Time (Best)</text>
                 <answer>O(n)</answer>
@@ -558,6 +573,7 @@
         </subsection>
 
         <subsection id="heapsort">
+            <title>Heapsort</title>
             <question id="heapsort-time-best">
                 <text>Heapsort: Time (Best)</text>
                 <answer>O(n log(n))</answer>
@@ -577,6 +593,7 @@
         </subsection>
 
         <subsection id="bubble-sort">
+            <title>Bubble Sort</title>
             <question id="bubble-sort-time-best">
                 <text>Bubble Sort: Time (Best)</text>
                 <answer>O(n)</answer>
@@ -596,6 +613,7 @@
         </subsection>
 
         <subsection id="insertion-sort">
+            <title>Insertion Sort</title>
             <question id="insertion-sort-time-best">
                 <text>Insertion Sort: Time (Best)</text>
                 <answer>O(n)</answer>
@@ -615,6 +633,7 @@
         </subsection>
 
         <subsection id="selection-sort">
+            <title>Selection Sort</title>
             <question id="selection-sort-time-best">
                 <text>Selection Sort: Time (Best)</text>
                 <answer>O(n^2)</answer>
@@ -634,6 +653,7 @@
         </subsection>
 
         <subsection id="shell-sort">
+            <title>Shell Sort</title>
             <question id="shell-sort-sort-time-best">
                 <text>Shell Sort: Time (Best)</text>
                 <answer>O(n)</answer>
@@ -653,6 +673,7 @@
         </subsection>
 
         <subsection id="bucket-sort">
+            <title>Bucket Sort</title>
             <question id="bucket-sort-sort-time-best">
                 <text>Bucket Sort: Time (Best)</text>
                 <answer>O(n + k)</answer>
@@ -672,6 +693,7 @@
         </subsection>
 
         <subsection id="radix-sort">
+            <title>Radix Sort</title>
             <question id="radix-sort-sort-time-best">
                 <text>Radix Sort: Time (Best)</text>
                 <answer>O(nk)</answer>
@@ -702,6 +724,7 @@
             <choice>O(|V|^2)</choice>
         </default_choices>
         <subsection id="adjacency-list">
+            <title>Adjacency List</title>
             <question id="adjacency-list-storage">
                 <text>Adjacency List: Storage</text>
                 <answer>O(|V| + |E|)</answer>
@@ -729,6 +752,7 @@
         </subsection>
 
         <subsection id="incidence-list">
+            <title>Incidence List</title>
             <question id="incidence-list-storage">
                 <text>Incidence List: Storage</text>
                 <answer>O(|V| + |E|)</answer>
@@ -756,6 +780,7 @@
         </subsection>
 
         <subsection id="adjacency-matrix">
+            <title>Ajacency Matrix</title>
             <question id="adjacency-matrix-storage">
                 <text>Adjacency Matrix: Storage</text>
                 <answer>O(|V|^2)</answer>
@@ -783,6 +808,7 @@
         </subsection>
 
         <subsection id="incidence-matrix">
+            <title>Incidence Matrix</title>
             <question id="incidence-matrix-storage">
                 <text>Incidence Matrix: Storage</text>
                 <answer>O(|V| ⋅ |E|)</answer>
@@ -821,6 +847,7 @@
             <choice>O(m + n)</choice>
         </default_choices>
         <subsection id="linked-list-sorted">
+            <title>Linked List (sorted)</title>
             <!-- No linked-list-sorted-heapify -->
             <question id="linked-list-sorted-find-max">
                 <text>Linked List (sorted): Find Max</text>
@@ -849,6 +876,7 @@
         </subsection>
 
         <subsection id="linked-list-unsorted">
+            <title>Linked List (unsorted)</title>
             <!-- No linked-list-unsorted-heapify -->
             <question id="linked-list-unsorted-find-max">
                 <text>Linked List (unsorted): Find Max</text>
@@ -877,6 +905,7 @@
         </subsection>
 
         <subsection id="binary-heap">
+            <title>Binary Heap</title>
             <question id="binary-heap-heapify">
                 <text>Binary Heap: Heapify</text>
                 <answer>O(n)</answer>
@@ -908,6 +937,7 @@
         </subsection>
 
         <subsection id="binomial-heap">
+            <title>Binomial Heap</title>
             <!-- No binomial-heap-heapify -->
             <question id="binomial-heap-find-max">
                 <text>Binomial Heap: Find Max</text>
@@ -936,6 +966,7 @@
         </subsection>
 
         <subsection id="fibonacci-heap">
+            <title>Fibonacci Heap</title>
             <!-- No fibonacci-heap-heapify -->
             <question id="fibonacci-heap-find-max">
                 <text>Fibonacci Heap: Find Max</text>
