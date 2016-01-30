@@ -14,6 +14,7 @@
         </default_choices>
         <subsection id="array">
             <title>Array</title>
+            <link>http://en.wikipedia.org/wiki/Array_data_structure</link>
             <question id="array-access-average">
                 <text>Access (Average)</text>
                 <answer>O(1)</answer>
@@ -56,6 +57,7 @@
 
         <subsection id="stack">
             <title>Stack</title>
+            <link>http://en.wikipedia.org/wiki/Stack_(abstract_data_type)</link>
             <question id="stack-access-average">
                 <text>Access (Average)</text>
                 <answer>O(n)</answer>
@@ -98,6 +100,7 @@
 
         <subsection id="singly-linked-list">
             <title>Singly-Linked List</title>
+            <link>http://en.wikipedia.org/wiki/Singly_linked_list#Singly_linked_lists</link>
             <question id="singly-linked-list-access-average">
                 <text>Access (Average)</text>
                 <answer>O(n)</answer>
@@ -140,6 +143,7 @@
 
         <subsection id="doubly-linked-list">
             <title>Doubly-Linked List</title>
+            <link>http://en.wikipedia.org/wiki/Doubly_linked_list</link>
             <question id="doubly-linked-list-access-average">
                 <text>Access (Average)</text>
                 <answer>O(n)</answer>
@@ -182,6 +186,7 @@
 
         <subsection id="skip-list">
             <title>Skip List</title>
+            <link>http://en.wikipedia.org/wiki/Skip_list</link>
             <question id="skip-list-access-average">
                 <text>Access (Average)</text>
                 <answer>O(log(n))</answer>
@@ -224,6 +229,7 @@
 
         <subsection id="hash-table">
             <title>Hash Table</title>
+            <link>http://en.wikipedia.org/wiki/Hash_table</link>
             <!-- No hash-table-search-access-average -->
             <question id="hash-table-search-average">
                 <text>Search (Average)</text>
@@ -260,6 +266,7 @@
 
         <subsection id="binary-search-tree">
             <title>Binary Search Tree</title>
+            <link>http://en.wikipedia.org/wiki/Binary_search_tree</link>
             <question id="binary-search-tree-access-average">
                 <text>Access (Average)</text>
                 <answer>O(log(n))</answer>
@@ -302,6 +309,7 @@
 
         <subsection id="cartesian-tree">
             <title>Cartesian Tree</title>
+            <link>https://en.wikipedia.org/wiki/Cartesian_tree</link>
             <!-- No cartesian-tree-search-access-average -->
             <question id="cartesian-tree-search-average">
                 <text>Search (Average)</text>
@@ -338,6 +346,7 @@
 
         <subsection id="b-tree">
             <title>B-Tree</title>
+            <link>http://en.wikipedia.org/wiki/B_tree</link>
             <question id="b-tree-access-average">
                 <text>Access (Average)</text>
                 <answer>O(log(n))</answer>
@@ -380,6 +389,7 @@
 
         <subsection id="red-black-tree">
             <title>Red Black Tree</title>
+            <link>http://en.wikipedia.org/wiki/Red-black_tree</link>
             <question id="red-black-tree-access-average">
                 <text>Access (Average)</text>
                 <answer>O(log(n))</answer>
@@ -422,6 +432,7 @@
 
         <subsection id="splay-tree">
             <title>Splay Tree</title>
+            <link>https://en.wikipedia.org/wiki/Splay_tree</link>
             <!-- No splay-tree-search-access-average -->
             <question id="splay-tree-search-average">
                 <text>Search (Average)</text>
@@ -458,6 +469,7 @@
 
         <subsection id="avl-tree">
             <title>AVL Tree</title>
+            <link>http://en.wikipedia.org/wiki/AVL_tree</link>
             <question id="avl-tree-access-average">
                 <text>Access (Average)</text>
                 <answer>O(log(n))</answer>
@@ -514,6 +526,7 @@
         </default_choices>
         <subsection id="quicksort">
             <title>Quicksort</title>
+            <link>http://en.wikipedia.org/wiki/Quicksort</link>
             <question id="quicksort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n log(n))</answer>
@@ -534,6 +547,7 @@
 
         <subsection id="mergesort">
             <title>Mergesort</title>
+            <link>http://en.wikipedia.org/wiki/Merge_sort</link>
             <question id="mergesort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n log(n))</answer>
@@ -554,6 +568,7 @@
 
         <subsection id="timsort">
             <title>Timsort</title>
+            <link>http://en.wikipedia.org/wiki/Timsort</link>
             <question id="timsort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n)</answer>
@@ -574,6 +589,7 @@
 
         <subsection id="heapsort">
             <title>Heapsort</title>
+            <link>http://en.wikipedia.org/wiki/Heapsort</link>
             <question id="heapsort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n log(n))</answer>
@@ -594,6 +610,7 @@
 
         <subsection id="bubble-sort">
             <title>Bubble Sort</title>
+            <link>http://en.wikipedia.org/wiki/Bubble_sort</link>
             <question id="bubble-sort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n)</answer>
@@ -614,6 +631,7 @@
 
         <subsection id="insertion-sort">
             <title>Insertion Sort</title>
+            <link>http://en.wikipedia.org/wiki/Insertion_sort</link>
             <question id="insertion-sort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n)</answer>
@@ -634,6 +652,7 @@
 
         <subsection id="selection-sort">
             <title>Selection Sort</title>
+            <link>http://en.wikipedia.org/wiki/Selection_sort</link>
             <question id="selection-sort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n^2)</answer>
@@ -654,6 +673,7 @@
 
         <subsection id="shell-sort">
             <title>Shell Sort</title>
+            <link>http://en.wikipedia.org/wiki/Shellsort</link>
             <question id="shell-sort-sort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n)</answer>
@@ -674,6 +694,7 @@
 
         <subsection id="bucket-sort">
             <title>Bucket Sort</title>
+            <link>http://en.wikipedia.org/wiki/Bucket_sort</link>
             <question id="bucket-sort-sort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n + k)</answer>
@@ -694,6 +715,7 @@
 
         <subsection id="radix-sort">
             <title>Radix Sort</title>
+            <link>http://en.wikipedia.org/wiki/Radix_sort</link>
             <question id="radix-sort-sort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(nk)</answer>
@@ -725,6 +747,7 @@
         </default_choices>
         <subsection id="adjacency-list">
             <title>Adjacency List</title>
+            <link>http://en.wikipedia.org/wiki/Adjacency_list</link>
             <question id="adjacency-list-storage">
                 <text>Storage</text>
                 <answer>O(|V| + |E|)</answer>
@@ -753,6 +776,7 @@
 
         <subsection id="incidence-list">
             <title>Incidence List</title>
+            <link>http://en.wikipedia.org/wiki/Incidence_list</link>
             <question id="incidence-list-storage">
                 <text>Storage</text>
                 <answer>O(|V| + |E|)</answer>
@@ -781,6 +805,7 @@
 
         <subsection id="adjacency-matrix">
             <title>Ajacency Matrix</title>
+            <link>http://en.wikipedia.org/wiki/Adjacency_matrix</link>
             <question id="adjacency-matrix-storage">
                 <text>Storage</text>
                 <answer>O(|V|^2)</answer>
@@ -809,6 +834,7 @@
 
         <subsection id="incidence-matrix">
             <title>Incidence Matrix</title>
+            <link>http://en.wikipedia.org/wiki/Incidence_matrix</link>
             <question id="incidence-matrix-storage">
                 <text>Storage</text>
                 <answer>O(|V| ⋅ |E|)</answer>
@@ -848,6 +874,7 @@
         </default_choices>
         <subsection id="linked-list-sorted">
             <title>Linked List (sorted)</title>
+            <link>http://en.wikipedia.org/wiki/Linked_list</link>
             <!-- No linked-list-sorted-heapify -->
             <question id="linked-list-sorted-find-max">
                 <text>Find Max</text>
@@ -877,6 +904,7 @@
 
         <subsection id="linked-list-unsorted">
             <title>Linked List (unsorted)</title>
+            <link>http://en.wikipedia.org/wiki/Linked_list</link>
             <!-- No linked-list-unsorted-heapify -->
             <question id="linked-list-unsorted-find-max">
                 <text>Find Max</text>
@@ -906,6 +934,7 @@
 
         <subsection id="binary-heap">
             <title>Binary Heap</title>
+            <link>http://en.wikipedia.org/wiki/Binary_heap</link>
             <question id="binary-heap-heapify">
                 <text>Heapify</text>
                 <answer>O(n)</answer>
@@ -938,6 +967,7 @@
 
         <subsection id="binomial-heap">
             <title>Binomial Heap</title>
+            <link>http://en.wikipedia.org/wiki/Binomial_heap</link>
             <!-- No binomial-heap-heapify -->
             <question id="binomial-heap-find-max">
                 <text>Find Max</text>
@@ -967,6 +997,7 @@
 
         <subsection id="fibonacci-heap">
             <title>Fibonacci Heap</title>
+            <link>http://en.wikipedia.org/wiki/Fibonacci_heap</link>
             <!-- No fibonacci-heap-heapify -->
             <question id="fibonacci-heap-find-max">
                 <text>Find Max</text>
