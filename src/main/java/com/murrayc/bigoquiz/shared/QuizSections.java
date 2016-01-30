@@ -9,8 +9,12 @@ import java.util.*;
  * Created by murrayc on 1/24/16.
  */
 public class QuizSections implements IsSerializable {
+
     //TODO: Can this be non-public while still being serializable by GWT?
-    static public class SubSection implements IsSerializable {
+    /**
+     * Created by murrayc on 1/30/16.
+     */
+    public static class SubSection implements IsSerializable {
         public String title;
         public String link;
 
@@ -73,13 +77,18 @@ public class QuizSections implements IsSerializable {
     */
 
     //TODO: Internationalization.
-    public String getSubSectionTitle(final String sectionId, final String subSectionId) {
+    public SubSection getSubSection(final String sectionId, final String subSectionId) {
         final Section section = getSection(sectionId);
         if (section == null) {
             return null;
         }
 
-        final SubSection subSection = section.subSections.get(subSectionId);
+        return section.subSections.get(subSectionId);
+    }
+
+    //TODO: Internationalization.
+    public String getSubSectionTitle(final String sectionId, final String subSectionId) {
+        final SubSection subSection = getSubSection(sectionId, subSectionId);
         if (subSection == null) {
             return null;
         }

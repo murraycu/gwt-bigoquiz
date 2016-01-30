@@ -39,7 +39,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
     private final ListBox nextQuestionSectionListBox = new ListBox();
     private final HeadingElement sectionTitle;
-    private final HeadingElement subSectionTitle;
+    private final Anchor subSectionTitle = new Anchor();
     private final Label questionLabel = new InlineLabel();
     private final Panel choicesPanel = new FlowPanel();
 
@@ -74,8 +74,8 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         sectionTitle = Utils.addHeaderToPanel(3, mainPanel, "");
         //sectionTitle.addStyleName("section-title");
 
-        subSectionTitle = Utils.addHeaderToPanel(4, mainPanel, "");
-        //subSectionTitle.addStyleName("sub-section-title");
+        mainPanel.add(subSectionTitle);
+        subSectionTitle.addStyleName("sub-section-title");
 
         Utils.addParagraphWithChild(mainPanel, questionLabel);
         questionLabel.addStyleName("question-label");
@@ -194,7 +194,14 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         final String sectionId = question.getSectionId();
         sectionTitle.setInnerText(sections.getSectionTitle(sectionId));
 
-        subSectionTitle.setInnerText(sections.getSubSectionTitle(sectionId, question.getSubSectionId()));
+        final QuizSections.SubSection subSection = sections.getSubSection(sectionId, question.getSubSectionId());
+        if (subSection != null) {
+            subSectionTitle.setText(subSection.title);
+            subSectionTitle.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
+        } else {
+            subSectionTitle.setText("error: null subsection for: " + question.getSubSectionId());
+            subSectionTitle.setHref("");
+        }
 
         final String groupName = "choices";
         for (final String choice : question.getChoices()) {
