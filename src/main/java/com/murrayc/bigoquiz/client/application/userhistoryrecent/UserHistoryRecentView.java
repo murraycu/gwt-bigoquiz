@@ -97,31 +97,31 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                 GWT.log("buildUi(): UserStats is null.");
             }
 
-            final List<UserProblemQuestion> problemQuestions = userRecentHistory.getProblemQuestions(sectionId);
-            String problemQuestionsTitle = "";
-            if (problemQuestions == null || problemQuestions.isEmpty()) {
-                problemQuestionsTitle = constants.problemQuestionsNoneYet();
-            } else {
-                problemQuestionsTitle = constants.problemQuestions();
-            }
-
-            final Label label = new Label(problemQuestionsTitle);
-            detailsPanel.add(label);
-            label.addStyleName("label-problem-questions");
+            Utils.addHeaderToPanel(3, detailsPanel,constants.problemQuestions());
+            //label.addStyleName("label-problem-questions");
 
             final Panel problemQuestionsPanel = new FlowPanel();
             detailsPanel.add(problemQuestionsPanel);
             problemQuestionsPanel.addStyleName("panel-problem-questions");
-            for (final UserProblemQuestion problemQuestion : problemQuestions) {
-                final Panel p = Utils.addParagraph(problemQuestionsPanel);
 
-                final String strScore = "-" + problemQuestion.getCountAnsweredWrong();
-                final Label labelScore = new InlineLabel(strScore);
+            final List<UserProblemQuestion> problemQuestions = userRecentHistory.getProblemQuestions(sectionId);
+            if (problemQuestions == null || problemQuestions.isEmpty()) {
+                final Panel p = Utils.addParagraph(problemQuestionsPanel);
+                final Label labelScore = new InlineLabel(constants.problemQuestionsNoneYet());
                 labelScore.addStyleName("problem-answer-score");
                 p.add(labelScore);
+            } else {
+                for (final UserProblemQuestion problemQuestion : problemQuestions) {
+                    final Panel p = Utils.addParagraph(problemQuestionsPanel);
 
-                final Hyperlink link = createProblemQuestionrHyperlink(problemQuestion);
-                p.add(link);
+                    final String strScore = "-" + problemQuestion.getCountAnsweredWrong();
+                    final Label labelScore = new InlineLabel(strScore);
+                    labelScore.addStyleName("problem-answer-score");
+                    p.add(labelScore);
+
+                    final Hyperlink link = createProblemQuestionrHyperlink(problemQuestion);
+                    p.add(link);
+                }
             }
 
 
