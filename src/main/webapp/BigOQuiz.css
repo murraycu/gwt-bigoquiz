@@ -286,12 +286,10 @@ background-color: blue;
     margin-top: 0em;
 }
 
-.user-history-section-title-label {
-    margin-top: 1em;
-    font-weight: bold;
-    font-size: 120%
+.user-status-answers-panel h3 {
+    margin-top: 2em;
 }
 
-.user-history-section-title-label:first-child {
+.user-status-answers-panel h3:first-child {
     margin-top: 0em;
 }

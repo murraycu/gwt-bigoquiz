@@ -1,6 +1,8 @@
 package com.murrayc.bigoquiz.client.application.userhistoryrecent;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.HeadingElement;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -81,11 +83,14 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         }
 
         for (final String sectionId : sections.getSectionIds()) {
+            final HeadingElement h = Utils.addHeaderToPanel(3, detailsPanel, "");
+
             final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(sectionId);
             final String url = placeManager.buildHistoryToken(placeRequest);
             final Hyperlink titleLabel = new InlineHyperlink(sections.getSectionTitle(sectionId), url);
-            detailsPanel.add(titleLabel);
-            titleLabel.addStyleName("user-history-section-title-label");
+            //titleLabel.addStyleName("user-history-section-title-label");
+
+            DOM.insertChild(h, titleLabel.getElement(), 0);
 
             final UserStats stats = userRecentHistory.getStats(sectionId);
             if (stats != null) {
@@ -97,7 +102,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                 GWT.log("buildUi(): UserStats is null.");
             }
 
-            Utils.addHeaderToPanel(3, detailsPanel,constants.problemQuestions());
+            Utils.addHeaderToPanel(4, detailsPanel, constants.problemQuestions());
             //label.addStyleName("label-problem-questions");
 
             final Panel problemQuestionsPanel = new FlowPanel();
