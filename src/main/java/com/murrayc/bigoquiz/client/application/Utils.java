@@ -11,10 +11,11 @@ import com.google.gwt.user.client.ui.Panel;
  * Created by murrayc on 1/28/16.
  */
 public class Utils {
-    public static void addH2ToPanel(final Panel mainPanel, final String title) {
-        final HeadingElement headingElement = Document.get().createHElement(2);
+    public static HeadingElement addHeaderToPanel(int level, final Panel mainPanel, final String title) {
+        final HeadingElement headingElement = Document.get().createHElement(level);
         headingElement.setInnerText(title);
         mainPanel.getElement().appendChild(headingElement);
+        return headingElement;
     }
 
     public static Panel addParagraph(final Panel mainPanel) {

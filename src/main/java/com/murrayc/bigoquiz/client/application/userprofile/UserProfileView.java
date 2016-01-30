@@ -24,7 +24,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
         final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("content-panel");
 
-        Utils.addH2ToPanel(mainPanel, constants.profileTitle());
+        Utils.addHeaderToPanel(2, mainPanel, constants.profileTitle());
 
         Label usernameTitleLabel = new Label(constants.username());
         mainPanel.add(usernameTitleLabel);

@@ -46,7 +46,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         mainPanel.addStyleName("user-history-recent-panel");
         //box.getElement().setAttribute("id", "titlebox");
 
-        Utils.addH2ToPanel(mainPanel, constants.recentHistoryTitle());
+        Utils.addHeaderToPanel(2, mainPanel, constants.recentHistoryTitle());
 
         //This is only visible when necessary:
         mainPanel.add(loginLabel);
