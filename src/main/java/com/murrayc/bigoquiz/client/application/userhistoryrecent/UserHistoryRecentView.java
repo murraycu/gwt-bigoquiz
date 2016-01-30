@@ -48,7 +48,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         mainPanel.addStyleName("user-history-recent-panel");
         //box.getElement().setAttribute("id", "titlebox");
 
-        Utils.addHeaderToPanel(2, mainPanel, constants.recentHistoryTitle());
+        Utils.addHeaderToPanel(2, mainPanel, constants.sectionsTitle());
 
         //This is only visible when necessary:
         mainPanel.add(loginLabel);
@@ -83,20 +83,32 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         }
 
         for (final String sectionId : sections.getSectionIds()) {
+            final QuizSections.Section section = sections.getSection(sectionId);
+            if (section == null) {
+                continue;
+            }
+
             final HeadingElement h = Utils.addHeaderToPanel(3, detailsPanel, "");
 
             final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(sectionId);
             final String url = placeManager.buildHistoryToken(placeRequest);
-            final Hyperlink titleLabel = new InlineHyperlink(sections.getSectionTitle(sectionId), url);
+            final Hyperlink titleLabel = new InlineHyperlink(section.title, url);
             //titleLabel.addStyleName("user-history-section-title-label");
 
             DOM.insertChild(h, titleLabel.getElement(), 0);
 
+            final Panel p = Utils.addParagraph(detailsPanel);
+            final int count = section.questionsCount;
+            final Label labelCount = new InlineLabel(messages.questionsCount(count));
+            p.add(labelCount);
+            labelCount.addStyleName("label-questions-count");
+
             final UserStats stats = userRecentHistory.getStats(sectionId);
             if (stats != null) {
                 final String strStats = messages.scoreMessage(stats.getAnswered(), stats.getCorrect());
-                final Label labelStats = new Label(strStats);
-                detailsPanel.add(labelStats);
+                final Panel paraStats = Utils.addParagraph(detailsPanel);
+                final Label labelStats = new InlineLabel(strStats);
+                paraStats.add(labelStats);
                 labelStats.addStyleName("label-stats");
             } else {
                 GWT.log("buildUi(): UserStats is null.");
@@ -111,21 +123,21 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
             final List<UserProblemQuestion> problemQuestions = userRecentHistory.getProblemQuestions(sectionId);
             if (problemQuestions == null || problemQuestions.isEmpty()) {
-                final Panel p = Utils.addParagraph(problemQuestionsPanel);
+                final Panel paraCount = Utils.addParagraph(problemQuestionsPanel);
                 final Label labelScore = new InlineLabel(constants.problemQuestionsNoneYet());
                 labelScore.addStyleName("problem-answer-score");
-                p.add(labelScore);
+                paraCount.add(labelScore);
             } else {
                 for (final UserProblemQuestion problemQuestion : problemQuestions) {
-                    final Panel p = Utils.addParagraph(problemQuestionsPanel);
+                    final Panel paraScore = Utils.addParagraph(problemQuestionsPanel);
 
                     final String strScore = "-" + problemQuestion.getCountAnsweredWrong();
                     final Label labelScore = new InlineLabel(strScore);
                     labelScore.addStyleName("problem-answer-score");
-                    p.add(labelScore);
+                    paraScore.add(labelScore);
 
                     final Hyperlink link = createProblemQuestionrHyperlink(problemQuestion);
-                    p.add(link);
+                    paraScore.add(link);
                 }
             }
 

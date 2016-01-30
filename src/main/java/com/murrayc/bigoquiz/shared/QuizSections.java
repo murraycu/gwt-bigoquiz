@@ -9,7 +9,6 @@ import java.util.*;
  * Created by murrayc on 1/24/16.
  */
 public class QuizSections implements IsSerializable {
-
     //TODO: Can this be non-public while still being serializable by GWT?
     /**
      * Created by murrayc on 1/30/16.
@@ -32,6 +31,7 @@ public class QuizSections implements IsSerializable {
         public String title;
         public Map<String, SubSection> subSections = new HashMap<>();
         public List<String> defaultChoices;
+        public int questionsCount;
     }
 
     //Map of section ID to sections.
@@ -122,7 +122,7 @@ public class QuizSections implements IsSerializable {
         return sections.containsKey(sectionId);
     }
 
-    private Section getSection(final String sectionId) {
+    public Section getSection(final String sectionId) {
         return sections.get(sectionId);
     }
 }

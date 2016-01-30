@@ -84,6 +84,7 @@ public class QuizLoader {
 
             result.addSection(sectionId, sectionTitle, defaultChoices);
 
+            int questionsCount = 0;
             final List<Node> listSubSectionNodes = getChildrenByTagName(sectionElement, NODE_SUB_SECTION);
             for (final Node subSectionNode : listSubSectionNodes) {
                 final Element subSectionElement = (Element) subSectionNode;
@@ -94,11 +95,13 @@ public class QuizLoader {
                 result.addSubSection(sectionId, subSectionId, subSectionTitle, subSectionLink);
 
                 //Questions:
-                addChildQuestions(result, sectionId, subSectionId, defaultChoices, subSectionElement);
+                questionsCount += addChildQuestions(result, sectionId, subSectionId, defaultChoices, subSectionElement);
             }
 
             //Add any Questions that are not in a subsection:
-            addChildQuestions(result, sectionId, null, defaultChoices, sectionElement);
+            questionsCount += addChildQuestions(result, sectionId, null, defaultChoices, sectionElement);
+
+            result.setSectionQuestionsCount(sectionId, questionsCount);
         }
 
         return result;
@@ -122,7 +125,9 @@ public class QuizLoader {
         return sectionTitle;
     }
 
-    private static void addChildQuestions(final Quiz result, final String sectionId, final String subSectionId, final List<String> defaultChoices, final Element parentElement) {
+    private static int addChildQuestions(final Quiz quiz, final String sectionId, final String subSectionId, final List<String> defaultChoices, final Element parentElement) {
+        int result = 0;
+
         final List<Node> listQuestionNodes = getChildrenByTagName(parentElement, NODE_QUESTION);
         for (final Node questionNode : listQuestionNodes) {
             if (!(questionNode instanceof Element)) {
@@ -133,13 +138,16 @@ public class QuizLoader {
             final QuestionAndAnswer questionAndAnswer = loadQuestionNode(element, sectionId, subSectionId, defaultChoices);
             if (questionAndAnswer != null) {
                 //warn about duplicates:
-                if (result.contains(questionAndAnswer.getId())) {
+                if (quiz.contains(questionAndAnswer.getId())) {
                     Log.error("QuizLoader: Duplicate question ID: " + questionAndAnswer.getId());
                 } else {
-                    result.addQuestion(sectionId, questionAndAnswer);
+                    quiz.addQuestion(sectionId, questionAndAnswer);
+                    result += 1;
                 }
             }
         }
+
+        return result;
     }
 
     private static QuestionAndAnswer loadQuestionNode(final Element element, final String sectionID, final String subSectionId, final List<String> defaultChoices) {
