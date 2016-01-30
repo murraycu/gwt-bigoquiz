@@ -27,6 +27,7 @@ public class QuizLoader {
     private static final String NODE_QUESTION = "question";
     private static final String ATTR_ID = "id";
     private static final String NODE_TITLE = "title";
+    private static final String NODE_LINK = "link";
     private static final String NODE_TEXT = "text";
     private static final String NODE_ANSWER = "answer";
     private static final String NODE_CHOICES = "choices";
@@ -88,7 +89,9 @@ public class QuizLoader {
                 final Element subSectionElement = (Element) subSectionNode;
                 final String subSectionId = subSectionElement.getAttribute(ATTR_ID);
                 final String subSectionTitle = getTitleNodeText(subSectionElement);
-                result.addSubSection(sectionId, subSectionId, subSectionTitle);
+                final String subSectionLink= getLinkNodeText(subSectionElement);
+
+                result.addSubSection(sectionId, subSectionId, subSectionTitle, subSectionLink);
 
                 //Questions:
                 addChildQuestions(result, sectionId, subSectionId, defaultChoices, subSectionElement);
@@ -101,9 +104,18 @@ public class QuizLoader {
         return result;
     }
 
-    private static String getTitleNodeText(Element sectionElement) {
+    private static String getTitleNodeText(final Element sectionElement) {
         String sectionTitle = null;
         final Element sectionTitleElement = getElementByName(sectionElement, NODE_TITLE);
+        if (sectionTitleElement != null) {
+            sectionTitle = sectionTitleElement.getTextContent();
+        }
+        return sectionTitle;
+    }
+
+    private static String getLinkNodeText(final Element sectionElement) {
+        String sectionTitle = null;
+        final Element sectionTitleElement = getElementByName(sectionElement, NODE_LINK);
         if (sectionTitleElement != null) {
             sectionTitle = sectionTitleElement.getTextContent();
         }

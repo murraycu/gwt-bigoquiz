@@ -10,9 +10,23 @@ import java.util.*;
  */
 public class QuizSections implements IsSerializable {
     //TODO: Can this be non-public while still being serializable by GWT?
+    static public class SubSection implements IsSerializable {
+        public String title;
+        public String link;
+
+        public SubSection() {
+        }
+
+        public SubSection(final String title, final String link) {
+            this.title = title;
+            this.link = link;
+        }
+    }
+
+    //TODO: Can this be non-public while still being serializable by GWT?
     static public class Section implements IsSerializable {
         public String title;
-        public Map<String, String> subSectionTitles = new HashMap<>();
+        public Map<String, SubSection> subSections = new HashMap<>();
         public List<String> defaultChoices;
     }
 
@@ -26,14 +40,15 @@ public class QuizSections implements IsSerializable {
         this.sections.put(sectionId, section);
     }
 
-    public void addSubSection(final String sectionId, final String subSectionId, final String subSectionTitle) {
+    public void addSubSection(final String sectionId, final String subSectionId, final String subSectionTitle, final String subSectionLink) {
         final Section section = getSection(sectionId);
         if (section == null) {
             GWT.log("addSubSection(): section does not exist: " + sectionId);
             return;
         }
 
-        section.subSectionTitles.put(subSectionId, subSectionTitle);
+        section.subSections.put(subSectionId,
+                new SubSection(subSectionTitle, subSectionLink));
     }
 
     public Set<String> getSectionIds() {
@@ -64,7 +79,12 @@ public class QuizSections implements IsSerializable {
             return null;
         }
 
-        return section.subSectionTitles.get(subSectionId);
+        final SubSection subSection = section.subSections.get(subSectionId);
+        if (subSection == null) {
+            return null;
+        }
+
+        return subSection.title;
     }
 
     public Collection<String> getTitles() {

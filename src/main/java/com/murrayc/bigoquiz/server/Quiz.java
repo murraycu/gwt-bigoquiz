@@ -106,13 +106,13 @@ public class Quiz {
         quizSections.addSection(sectionId, sectionTitle, defaultChoices);
     }
 
-    public void addSubSection(final String sectionId, final String subSectionId, final String subSectionTitle) {
+    public void addSubSection(final String sectionId, final String subSectionId, final String subSectionTitle, final String subSectionLink) {
         if (!quizSections.containsSection(sectionId)) {
             Log.error("Quiz.addSection(): section does not already exist. Failing.");
             return;
         }
 
-        quizSections.addSubSection(sectionId, subSectionId, subSectionTitle);
+        quizSections.addSubSection(sectionId, subSectionId, subSectionTitle, subSectionLink);
     }
 
     QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
