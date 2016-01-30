@@ -67,7 +67,7 @@ public class UserProblemQuestion implements IsSerializable {
         this.questionTitle = questionTitle;
         this.subSectionId = subSectionId;
         this.sectionId = sectionId;
-        this.countAnsweredWrong = 1;
+        this.countAnsweredWrong = 0;
     }
 
     public String getUserId() {
