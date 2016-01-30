@@ -83,7 +83,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         for (final String sectionId : sections.getSectionIds()) {
             final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(sectionId);
             final String url = placeManager.buildHistoryToken(placeRequest);
-            final Hyperlink titleLabel = new Hyperlink(sections.getSectionTitle(sectionId), url);
+            final Hyperlink titleLabel = new InlineHyperlink(sections.getSectionTitle(sectionId), url);
             detailsPanel.add(titleLabel);
             titleLabel.addStyleName("user-history-section-title-label");
 
@@ -150,7 +150,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         //Both alternatives lose whatever the user had set before clicking this link.
         final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(userAnswer.getQuestionId(), userAnswer.getSectionId());
         final String url = placeManager.buildHistoryToken(placeRequest);
-        final Hyperlink result = new Hyperlink(userAnswer.getSubSectionTitle() + ": " + userAnswer.getQuestionTitle(), url);
+        final Hyperlink result = new InlineHyperlink(userAnswer.getSubSectionTitle() + ": " + userAnswer.getQuestionTitle(), url);
         result.addStyleName("user-answer-hyperlink");
         return result;
     }
