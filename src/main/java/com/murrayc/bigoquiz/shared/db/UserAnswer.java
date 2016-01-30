@@ -44,11 +44,16 @@ public class UserAnswer implements IsSerializable {
     public UserAnswer() {
     }
 
+    /** See also setSubSectionTitle().
+     *
+     * @param userId
+     * @param question
+     * @param result
+     * @param time
+     */
     public UserAnswer(final String userId, final Question question, final boolean result, final String time) {
         this.userId = userId;
         this.questionId = question.getId();
-        this.questionTitle = null;
-        this.questionTitle = question.getText();
         this.sectionId = question.getSectionId();
         this.subSectionId = question.getSubSectionId();
         this.result = result;
@@ -91,7 +96,14 @@ public class UserAnswer implements IsSerializable {
         return subSectionTitle;
     }
 
-    public void setSubSectionTitle(final String subSectionTitle) {
+    /** These are not stored in the datastore by Objectify.
+     *
+     * @param subSectionTitle
+     * @param question
+     */
+    public void setTitles(final String subSectionTitle, final Question question) {
         this.subSectionTitle = subSectionTitle;
+        this.questionTitle = question.getText();
+
     }
 }

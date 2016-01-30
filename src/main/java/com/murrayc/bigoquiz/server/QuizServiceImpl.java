@@ -198,7 +198,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
             a.setQuestionTitle(question.getText());
 
             final String subSectionTitle = sections.getSubSectionTitle(question.getSectionId(), question.getSubSectionId());
-            a.setSubSectionTitle(subSectionTitle);
+            a.setTitles(subSectionTitle, question);
 
             listCopy.add(a);
         }

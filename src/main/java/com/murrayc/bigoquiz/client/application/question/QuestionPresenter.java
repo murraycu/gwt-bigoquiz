@@ -30,6 +30,7 @@ import com.murrayc.bigoquiz.shared.db.UserAnswer;
 public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, QuestionPresenter.MyProxy>
         implements QuestionUserEditUiHandlers {
     private final PlaceManager placeManager;
+    private QuizSections sections;
 
     interface MyView extends View, HasUiHandlers<QuestionUserEditUiHandlers> {
         void setSections(final QuizSections sections);
@@ -168,9 +169,19 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     }
 
     private void tellUserHistoryPresenterAboutNewUserAnswer(boolean answerIsCorrect) {
+        if (sections == null) {
+            //We need this to continue, to get the titles.
+            GWT.log("tellUserHistoryPresenterAboutNewUserAnswer(): sections is null.");
+            return;
+        }
+
         //Tell the UserHistoryRecent presenter/view that there is a new history item.
         //Otherwise it will only update when the whole page refreshes.
         final UserAnswer userAnswer = new UserAnswer(null, question, answerIsCorrect, null);
+        final String subSectionTitle =
+                sections.getSubSectionTitle(question.getSectionId(), question.getSubSectionId());
+        userAnswer.setTitles(subSectionTitle, question);
+
         QuestionUserAnswerAddedEvent.fire(this, userAnswer);
     }
 
@@ -294,6 +305,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
             @Override
             public void onSuccess(final QuizSections result) {
+                QuestionPresenter.this.sections = result;
                 getView().setSections(result);
             }
 
