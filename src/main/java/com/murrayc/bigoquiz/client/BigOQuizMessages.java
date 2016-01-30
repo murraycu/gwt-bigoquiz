@@ -14,7 +14,7 @@ public interface BigOQuizMessages extends com.google.gwt.i18n.client.Messages {
      *
      * @return translated "Answered: {0,number}: , Correct: {1,number}"
      */
-    @DefaultMessage("{1,number} correct / {0,number} answered")
+    @DefaultMessage("{1,number} correct / {0,number} answers")
     @Key("scoreMessage")
     String scoreMessage(int arg0, int arg1);
 
