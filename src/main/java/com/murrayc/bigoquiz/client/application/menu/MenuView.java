@@ -24,15 +24,20 @@ public class MenuView extends ViewWithUiHandlers<MenuUserEditUiHandlers>
         Anchor titleLabel = new Anchor(constants.appTitle());
         mainPanel.add(titleLabel);
         titleLabel.addStyleName("menu-title");
+        titleLabel.addStyleName("clearfix"); //Stop any other item from ever being in the rectangle of the title text.
         titleLabel.setHref("#" + NameTokens.QUESTION); //TODO: Or just / ?
 
+        final Panel othersPanel = new FlowPanel();
+        othersPanel.addStyleName("menu-others-panel");
+        othersPanel.addStyleName("clearfix");
+        mainPanel.add(othersPanel);
         Anchor aboutLink = new Anchor(constants.aboutTitle());
         aboutLink.setHref("#" + NameTokens.ABOUT);
-        mainPanel.add(aboutLink);
+        othersPanel.add(aboutLink);
         aboutLink.addStyleName("about-link");
 
         SimplePanel userStatusPanel = new SimplePanel();
-        mainPanel.add(userStatusPanel);
+        othersPanel.add(userStatusPanel);
         bindSlot(MenuPresenter.SLOT_USER_STATUS, userStatusPanel);
 
         initWidget(mainPanel);
