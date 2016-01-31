@@ -2,7 +2,10 @@ package com.murrayc.bigoquiz.client.application.userhistoryrecent;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.HeadingElement;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -40,6 +43,10 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     private UserRecentHistory userRecentHistory;
 
+    //When we skip building of the UI because its hidden (by CSS) anyway,
+    //this lets us do that building if necessary later.
+    private boolean buildUiPending = false;
+
     @Inject
     UserHistoryRecentView(PlaceManager placeManager) {
         this.placeManager = placeManager;
@@ -57,6 +64,18 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         mainPanel.add(detailsPanel);
         detailsPanel.addStyleName("user-status-answers-panel");
         initWidget(mainPanel);
+
+        //Listen to window resizes, because that could trigger
+        //this UI being visible again,
+        //at which time we should build it:
+        Window.addResizeHandler(new ResizeHandler() {
+            @Override
+            public void onResize(final ResizeEvent event) {
+                if (buildUiPending) {
+                    buildUi();
+                }
+            }
+        });
     }
 
     @Override
@@ -83,8 +102,11 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             //Don't bother building this if the whole sidebar is hidden,
             //for instance on devices with a smaller width,
             //via a CSS media query.
+            buildUiPending = true;
             return;
         }
+
+        buildUiPending = false;
 
         final QuizSections sections = userRecentHistory.getSections();
         if (sections == null) {
