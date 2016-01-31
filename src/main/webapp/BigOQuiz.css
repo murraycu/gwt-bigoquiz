@@ -3,11 +3,7 @@
 /* Responsive:
  *
  * Only show user-history-recent-panel on wider screens: */
-@media screen and (min-width: 400px)  {
-    .sidebar-panel { display: block; }
-}
-
-@media screen and (max-width: 399px)  {
+@media screen and (max-width: 750px)  {
     .sidebar-panel { display: none; }
 }
 
