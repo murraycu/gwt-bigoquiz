@@ -6,6 +6,7 @@ import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Created by murrayc on 1/28/16.
@@ -29,4 +30,22 @@ public class Utils {
         p.add(questionLabel);
         return p;
     }
+
+    public static boolean widgetIsVisible(final Widget w) {
+        return w.isVisible() && (w.getAbsoluteLeft() > 0) && (w.getAbsoluteTop() > 0);
+    }
+
+    /* This doesn't seem to work:
+    public static boolean widgetIsInvisible(Widget w) {
+        while (w.getElement().hasParentElement()) {
+            if (!w.isVisible()) {
+                return false;
+            }
+
+            w = w.getParent();
+        }
+
+        return w.isVisible();
+    }
+    */
 }

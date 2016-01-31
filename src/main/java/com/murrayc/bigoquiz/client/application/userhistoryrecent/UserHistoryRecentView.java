@@ -77,6 +77,15 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             return;
         }
 
+        //TODO: Build it if detailsPanel becomes visible later,
+        //for instance by changing orientation or resizing of the browser window.
+        if (!Utils.widgetIsVisible(detailsPanel)) {
+            //Don't bother building this if the whole sidebar is hidden,
+            //for instance on devices with a smaller width,
+            //via a CSS media query.
+            return;
+        }
+
         final QuizSections sections = userRecentHistory.getSections();
         if (sections == null) {
             return;
