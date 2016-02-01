@@ -38,7 +38,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private String choiceSelected;
 
     private final ListBox nextQuestionSectionListBox = new ListBox();
-    private final HeadingElement sectionTitle;
+    private final Label sectionTitle = new InlineLabel();
     private final Anchor subSectionTitle = new Anchor();
     private final Label questionLabel = new InlineLabel();
     private final Panel choicesPanel = new FlowPanel();
@@ -71,10 +71,9 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
         Utils.addHeaderToPanel(2, mainPanel, constants.questionLabel());
 
-        sectionTitle = Utils.addHeaderToPanel(3, mainPanel, "");
-        //sectionTitle.addStyleName("section-title");
-
-        Utils.addHeaderToPanel(4, mainPanel, subSectionTitle);
+        final Panel paraHeader = Utils.addParagraphWithChild(mainPanel, sectionTitle);
+        paraHeader.add(subSectionTitle);
+        Utils.addHeaderToPanel(3, mainPanel, paraHeader);
 
         Utils.addParagraphWithChild(mainPanel, questionLabel);
         questionLabel.addStyleName("question-label");
@@ -191,7 +190,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         //( <b>Section:</b> some section title )
         //properly internationalized, without putting the <b> tags in the translatable string.
         final String sectionId = question.getSectionId();
-        sectionTitle.setInnerText(sections.getSectionTitle(sectionId));
+        sectionTitle.setText(sections.getSectionTitle(sectionId) + ": ");
 
         final QuizSections.SubSection subSection = sections.getSubSection(sectionId, question.getSubSectionId());
         if (subSection != null) {
