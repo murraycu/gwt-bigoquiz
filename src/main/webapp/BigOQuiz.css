@@ -62,7 +62,7 @@ body {
 
 .content-panel {
     float: left;
-    margin: 2em;
+    margin: 1rem; /* same as for menu-title. */
 }
 
 .result-panel {
@@ -288,6 +288,7 @@ h4 * {
 }
 
 .next-question-section-title-label {
+    margin-right: 1em;
 }
 
 .section-title {
