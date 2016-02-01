@@ -13,8 +13,60 @@
  * Only show user-profile-user-history-panel on narrower screens.
  * On wider screens, it is already visible in the sidebar.
  */
-@media screen and (min-width: 749px)  {
+@media screen and (min-width: 751px)  {
     .user-profile-user-history-panel { display: none; }
+}
+
+@media screen and (max-height: 600px) {
+    /* TODO: Find some way to do this by justing changing one variable instead.. */
+
+    .menu-panel {
+        padding-bottom: 0.3rem;
+    }
+
+    .menu-title {
+        margin-top: 0.3rem;
+    }
+
+    .menu-others-panel {
+        margin-top: 0.3rem;
+    }
+
+    .content-panel {
+        margin-top: 0.3rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .sidebar-panel {
+        margin-top: 0.3rem;
+        margin-bottom: 0.3rem;
+    }
+}
+
+@media screen and (min-height: 601px)  {
+    /* TODO: Find some way to do this by justing changing one variable instead.. */
+
+    .menu-panel {
+        padding-bottom: 1rem;
+    }
+
+    .menu-title {
+        margin-top: 1rem;
+    }
+
+    .menu-others-panel {
+        margin-top: 1rem;
+    }
+
+    .content-panel {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .sidebar-panel {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
 }
 
 
@@ -45,7 +97,11 @@ body {
 }
 
 .sidebar-panel {
-    margin: 2em;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    /* See media query: margin-top: 1em; */
+    /* See media query: margin-bottom: 1em; */
+
     float: right;
     clear: right;
 }
@@ -75,7 +131,14 @@ body {
 
 .content-panel {
     float: left;
-    margin: 1rem; /* same as for menu-title. */
+
+    /* same as for menu-title.
+     * We use less space vertically, trying to fit into mobile screens.
+     */
+    margin-left: 1rem;
+    margin-right: 1rem;
+    /* See media query: margin-top: 1rem; */
+    /* See media query: margin-bottom: 1rem; */
 }
 
 .result-panel {
@@ -140,11 +203,11 @@ a.gwt-Anchor.user-name:visited {
      * Note that margins don't collapse on floated divs.
      */
     padding-left: 1rem;
-    padding-bottom: 1rem;
+    /* See media query: padding-bottom: 1rem; */
 }
 
 .menu-title {
-    margin-top: 1rem;
+    /* See media query: margin-top: 1rem; */
     margin-right: 1rem;
     display: inline-block; /* Don't stretch the empty rest of the div across the whole screen. */
     font-weight: 900;
@@ -181,7 +244,7 @@ background-color: #B6B2DD;
 }
 
 .menu-others-panel {
-    margin-top: 1rem;
+    /* See media query: margin-top: 1rem; */
     margin-right: 1rem;
     display: inline-block; /* Don't stretch the empty rest of the div across the whole screen. */
     float: right;
