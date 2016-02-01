@@ -13,7 +13,7 @@ public class UserProfileModule extends AbstractPresenterModule {
         bindPresenter(UserProfilePresenter.class, UserProfilePresenter.MyView.class, UserProfileView.class,
                 UserProfilePresenter.MyProxy.class);
 
-        bindSingletonPresenterWidget(UserHistoryRecentPresenter.class, UserHistoryRecentPresenter.MyView.class,
+        bindPresenterWidget(UserHistoryRecentPresenter.class, UserHistoryRecentPresenter.MyView.class,
                 UserHistoryRecentView.class);
     }
 }
