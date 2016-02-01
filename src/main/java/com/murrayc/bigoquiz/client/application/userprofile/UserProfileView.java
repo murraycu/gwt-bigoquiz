@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.client.application.userprofile;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.LoginInfo;
@@ -17,7 +18,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
     // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
     private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
 
-    private final Label usernameLabel = new Label();
+    private final Label usernameLabel = new InlineLabel();
     private final Anchor logoutLabel = new Anchor(constants.logOut());
 
     UserProfileView() {
@@ -26,10 +27,11 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
         Utils.addHeaderToPanel(2, mainPanel, constants.profileTitle());
 
-        Label usernameTitleLabel = new Label(constants.username());
-        mainPanel.add(usernameTitleLabel);
+        final Panel p = Utils.addParagraph(mainPanel);
+        Label usernameTitleLabel = new InlineLabel(constants.username());
+        p.add(usernameTitleLabel);
         usernameTitleLabel.addStyleName("username-title-label");
-        mainPanel.add(usernameLabel);
+        p.add(usernameLabel);
         usernameLabel.addStyleName("username-label");
 
         mainPanel.add(logoutLabel);
