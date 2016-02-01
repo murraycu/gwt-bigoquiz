@@ -8,7 +8,6 @@ import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
 import com.murrayc.bigoquiz.shared.Constants;
 import com.murrayc.bigoquiz.shared.QuizSections;
-import com.murrayc.bigoquiz.shared.db.UserAnswer;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 import com.murrayc.bigoquiz.shared.db.UserProblemQuestion;
@@ -139,12 +138,9 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
         final EntityManagerFactory emf = EntityManagerFactory.get();
 
-        //Get the UserAnswers for this user, for each section:
-        final UserRecentHistory result = new UserRecentHistory(sections);
+        //Get the stats for this user, for each section:
+        final UserRecentHistory result = new UserRecentHistory(userId, sections);
         for (final String sectionId : sections.getSectionIds()) {
-
-            final List<UserAnswer> userAnswers = getUserAnswers(userId, sectionId);
-
             UserStats userStats = getUserStats(userId, sectionId);
             if (userStats == null) {
                 //So we get the default values:
@@ -157,53 +153,6 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         return result;
-    }
-
-    private List<UserAnswer> getUserAnswers(final String userId, final String sectionId) {
-        final EntityManagerFactory emf = EntityManagerFactory.get();
-        Query<UserAnswer> q = emf.ofy().load().type(UserAnswer.class);
-        q = q.filter("userId", userId);
-        q = q.filter("sectionId", sectionId);
-        q = q.order("-time"); //- means descending. //TODO: Avoid mentioning field name in a string.
-        q = q.limit(Constants.HISTORY_LIMIT);
-
-        //Objectify's Query.list() method seems to return a list implementation that contains
-        //some kind of (non-serializable) proxy, leading to gwt compilation errors such as this:
-        //  com.google.gwt.user.client.rpc.SerializationException: Type 'com.sun.proxy.$Proxy10' was not included in the set of types which can be serialized by this SerializationPolicy or its Class object could not be loaded. For security purposes, this type will not be serialized.: instance = [com.murrayc.bigoquiz.shared.db.UserAnswer@7a44340b]
-        //so we copy the items into a new list.
-        //Presumably the act of iterating over the list causes us to actually get the data for each item,
-        //as the actual type.
-        //
-        //This also gives us the opportunity to fill in the question title,
-        //which we want to give to the client, but which we didn't want to store
-        //along with each UserAnswer.
-        //
-        final Quiz quiz = getQuiz();
-        final QuizSections sections = quiz.getSections();
-        if (sections == null) {
-            return null;
-        }
-
-        final List<UserAnswer> listCopy = new ArrayList<>();
-        for (final UserAnswer a : q.list()) {
-            if (a == null) {
-                continue;
-            }
-
-            final Question question = quiz.getQuestion(a.getQuestionId());
-            if (question == null) {
-                continue;
-            }
-
-            a.setQuestionTitle(question.getText());
-
-            final String subSectionTitle = sections.getSubSectionTitle(question.getSectionId(), question.getSubSectionId());
-            a.setTitles(subSectionTitle, question);
-
-            listCopy.add(a);
-        }
-
-        return listCopy;
     }
 
     private UserStats getUserStats(final String userId, final String sectionId) {
@@ -374,11 +323,6 @@ public class QuizServiceImpl extends ServiceWithUser implements
             problemQuestion.adjustCount(result);
             emf.ofy().save().entity(problemQuestion).now();
         }
-
-        //Store the per-answer result:
-        final String time = getCurrentTime();
-        final UserAnswer userAnswer = new UserAnswer(userId, question, result, time);
-        emf.ofy().save().entity(userAnswer).now(); //TODO: lots of now() calls is probably inefficient.
     }
 
     private UserProblemQuestion getUserProblemQuestion(final String userId, final Question question) {

@@ -3,20 +3,26 @@ package com.murrayc.bigoquiz.client.application.question;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
-import com.murrayc.bigoquiz.shared.db.UserAnswer;
+import com.murrayc.bigoquiz.shared.Question;
 
 /**
  * Created by murrayc on 1/25/16.
  */
 public class QuestionUserAnswerAddedEvent extends GwtEvent<QuestionUserAnswerAddedEvent.QuestionUserAnswerAddedEventHandler> {
-    private final UserAnswer userAnswer;
+    private final Question question;
+    private final boolean answerIsCorrect;
 
-    public QuestionUserAnswerAddedEvent(final UserAnswer userAnswer) {
-        this.userAnswer = userAnswer;
+    public QuestionUserAnswerAddedEvent(final Question question, boolean answerIsCorrect) {
+        this.question = question;
+        this.answerIsCorrect = answerIsCorrect;
     }
 
-    public UserAnswer getUserAnswer() {
-        return userAnswer;
+    public Question getQuestion() {
+        return question;
+    }
+
+    public boolean getAnswerIsCorrect() {
+        return answerIsCorrect;
     }
 
     public interface QuestionUserAnswerAddedEventHandler extends EventHandler {
@@ -25,9 +31,9 @@ public class QuestionUserAnswerAddedEvent extends GwtEvent<QuestionUserAnswerAdd
 
     public static final Type<QuestionUserAnswerAddedEventHandler> TYPE = new Type<>();
 
-    public static void fire(final HasHandlers source, final UserAnswer userAnswer) {
+    public static void fire(final HasHandlers source, final Question question, boolean answerIsCorrect) {
         if (TYPE != null) {
-            source.fireEvent(new QuestionUserAnswerAddedEvent(userAnswer));
+            source.fireEvent(new QuestionUserAnswerAddedEvent(question, answerIsCorrect));
         }
     }
 

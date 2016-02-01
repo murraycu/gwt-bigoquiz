@@ -2,7 +2,6 @@ package com.murrayc.bigoquiz.client;
 
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
-import com.murrayc.bigoquiz.shared.db.UserAnswer;
 import com.murrayc.bigoquiz.shared.db.UserProblemQuestion;
 import com.murrayc.bigoquiz.shared.db.UserStats;
 import org.junit.Test;
@@ -26,20 +25,20 @@ public class UserRecentHistoryTest {
         //when the UserRecentHistory API has settled down.
         UserRecentHistory history = createUserRecentHistory();
 
-        UserAnswer userAnswer = createUserAnswer("question4", SECTION_1, SUBSECTION_1_1, false);
-        history.addUserAnswerAtStart(userAnswer);
+        Question question = createQuestion("question4", SECTION_1, SUBSECTION_1_1);
+        history.addUserAnswerAtStart(question, false);
 
         List<UserProblemQuestion> problems = history.getProblemQuestions(SECTION_1);
         assertNotNull(problems);
         assertEquals(1, problems.size());
 
-        history.addUserAnswerAtStart(userAnswer);
+        history.addUserAnswerAtStart(question, false);
         problems = history.getProblemQuestions(SECTION_1);
         assertNotNull(problems);
         assertEquals(1, problems.size());
 
-        userAnswer = createUserAnswer("question5", SECTION_1, SUBSECTION_1_1, false);
-        history.addUserAnswerAtStart(userAnswer);
+        question = createQuestion("question5", SECTION_1, SUBSECTION_1_1);
+        history.addUserAnswerAtStart(question, false);
 
         problems = history.getProblemQuestions(SECTION_1);
         assertNotNull(problems);
@@ -57,14 +56,13 @@ public class UserRecentHistoryTest {
 
         final List<UserProblemQuestion> problemQuestions = new ArrayList<>();
 
-        UserRecentHistory history = new UserRecentHistory(sections);
+        UserRecentHistory history = new UserRecentHistory("userid 1", sections);
         history.setSectionStats("section1", stats, problemQuestions);
 
         return history;
     }
 
-    private UserAnswer createUserAnswer(final String questionId, final String sectionId, final String subSectionId, boolean result) {
-        final Question question = new Question(questionId, sectionId, subSectionId, "question text", null);
-        return new UserAnswer("user1", question, result, "sometime");
+    private Question createQuestion(final String questionId, final String sectionId, final String subSectionId) {
+        return new Question(questionId, sectionId, subSectionId, "question text", null);
     }
 }

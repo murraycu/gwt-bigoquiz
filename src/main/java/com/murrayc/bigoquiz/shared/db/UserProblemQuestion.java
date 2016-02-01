@@ -53,20 +53,10 @@ public class UserProblemQuestion implements IsSerializable {
     public UserProblemQuestion(final String userId, final Question question) {
         this.userId = userId;
         this.questionId = question.getId();
-        this.subSectionTitle = null;
+        this.subSectionTitle = question.getSubSectionTitle();
         this.questionTitle = question.getText();
         this.subSectionId = question.getSubSectionId();
         this.sectionId = question.getSectionId();
-        this.countAnsweredWrong = 0;
-    }
-
-    public UserProblemQuestion(final String userId, final String questionId, final String subSectionTitle, final String questionTitle, final String sectionId, final String subSectionId) {
-        this.userId = userId;
-        this.questionId = questionId;
-        this.subSectionTitle = subSectionTitle;
-        this.questionTitle = questionTitle;
-        this.subSectionId = subSectionId;
-        this.sectionId = sectionId;
         this.countAnsweredWrong = 0;
     }
 

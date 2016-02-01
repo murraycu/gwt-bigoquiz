@@ -14,8 +14,8 @@ import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
+import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
-import com.murrayc.bigoquiz.shared.db.UserAnswer;
 import com.murrayc.bigoquiz.shared.db.UserProblemQuestion;
 import com.murrayc.bigoquiz.shared.db.UserStats;
 
@@ -174,30 +174,17 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     }
 
     @Override
-    public void addUserAnswer(final UserAnswer userAnswer) {
+    public void addUserAnswer(final Question question, boolean answerIsCorrect) {
         if (userRecentHistory == null) {
             //The user is not logged in, so we don't show history.
             //TODO: See buildUi(), which makes the same assumption.
             return;
         }
 
-        userRecentHistory.addUserAnswerAtStart(userAnswer);
+        userRecentHistory.addUserAnswerAtStart(question, answerIsCorrect);
 
         //Re-generate the whole list in the UI:
         buildUi();
-    }
-
-    private Hyperlink createUserAnswerHyperlink(final UserAnswer userAnswer) {
-        //TODO: This will take the user to that question,
-        //and keep any subsequent questions to that question's section,
-        //by specifying the nextSectionQuestionId to getPlaceRequestForQuestion().
-        //Alternatively, we could specify no section (meaning it would use questions from all sections).
-        //Both alternatives lose whatever the user had set before clicking this link.
-        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(userAnswer.getQuestionId(), userAnswer.getSectionId());
-        final String url = placeManager.buildHistoryToken(placeRequest);
-        final Hyperlink result = new InlineHyperlink(userAnswer.getSubSectionTitle() + ": " + userAnswer.getQuestionTitle(), url);
-        result.addStyleName("user-answer-hyperlink");
-        return result;
     }
 
     private Hyperlink createProblemQuestionrHyperlink(final UserProblemQuestion problemQuestion) {

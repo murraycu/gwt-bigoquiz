@@ -12,7 +12,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
-import com.murrayc.bigoquiz.shared.db.UserAnswer;
+import com.murrayc.bigoquiz.shared.Question;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -28,10 +28,8 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         /** Add a single item of history.
          * For instance, to avoid retrieving the whole history from the server,
          * if the new item is know already.
-         *
-         * @param userAnswer
          */
-        void addUserAnswer(final UserAnswer userAnswer);
+        void addUserAnswer(final Question question, boolean answerIsCorrect);
 
         void setServerFailed();
 
@@ -54,7 +52,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
     @ProxyEvent
     @Override
     public void onQuestionUserAnswerAdded(final QuestionUserAnswerAddedEvent event) {
-        getView().addUserAnswer(event.getUserAnswer());
+        getView().addUserAnswer(event.getQuestion(), event.getAnswerIsCorrect());
     }
 
     private void getAndShowHistory() {

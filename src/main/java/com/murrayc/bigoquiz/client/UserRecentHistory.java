@@ -2,11 +2,11 @@ package com.murrayc.bigoquiz.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.db.UserProblemQuestion;
 import com.murrayc.bigoquiz.shared.db.UserStats;
-import com.murrayc.bigoquiz.shared.db.UserAnswer;
 
 import java.util.*;
 
@@ -14,15 +14,19 @@ import java.util.*;
  * Created by murrayc on 1/23/16.
  */
 public class UserRecentHistory implements IsSerializable {
-    private QuizSections sections;
+    /* Do not make thse final, because then GWT cannot serialize them. */
+    private /* final */ String userId;
+    private /* final */ QuizSections sections;
     private Map<String, List<UserProblemQuestion>> userProblemQuestions = new HashMap<>();
     private Map<String, UserStats> sectionStats = new HashMap<>();
 
     UserRecentHistory() {
-
+        userId = null;
+        sections = null;
     }
 
-    public UserRecentHistory(final QuizSections sections) {
+    public UserRecentHistory(final String userId, final QuizSections sections) {
+        this.userId = userId;
         this.sections = sections;
     }
 
@@ -39,37 +43,26 @@ public class UserRecentHistory implements IsSerializable {
      * Add @a userAnswer to the beginning of the list for it section, making sure that
      * there are no more than @max items in that sections's list. If necessary,
      * this removes older items.
-     *
-     * @param userAnswer
      */
-    public void addUserAnswerAtStart(final UserAnswer userAnswer) {
-        if (userAnswer == null) {
-            GWT.log("addUserAnswerAtStart(): userAnswer was null.");
+    public void addUserAnswerAtStart(final Question question, boolean answerIsCorrect) {
+        if (question == null) {
+            GWT.log("addUserAnswerAtStart(): question was null.");
             return;
         }
 
-        final String sectionId = userAnswer.getSectionId();
+        final String sectionId = question.getSectionId();
         if (StringUtils.isEmpty(sectionId)) {
             GWT.log("addUserAnswerAtStart(): sectionId was empty.");
             return;
         }
 
-        final String userId = userAnswer.getUserId();
-        /* userId is null on the client,
-        because we don't really need it here.
-        if (StringUtils.isEmpty(userId)) {
-            GWT.log("addUserAnswerAtStart(): userId was empty.");
-            return;
-        }
-        */
-
-        final UserStats userStats = getStatsWithAdd(userId, userAnswer.getSectionId());
+        final UserStats userStats = getStatsWithAdd(question.getSectionId());
         userStats.incrementAnswered();
-        if (userAnswer.getResult()) {
+        if (answerIsCorrect) {
             userStats.incrementCorrect();
         }
 
-        final String questionId = userAnswer.getQuestionId();
+        final String questionId = question.getId();
         if (StringUtils.isEmpty(questionId)) {
             GWT.log("addUserAnswerAtStart(): questionId was empty.");
             return;
@@ -79,7 +72,7 @@ public class UserRecentHistory implements IsSerializable {
         final List<UserProblemQuestion> listProblemQuestions = getProblemQuestionsListWithCreate(sectionId);
 
         //Add one, if necessary, if the answer was wrong:
-        if (!userAnswer.getResult()) {
+        if (!answerIsCorrect) {
             UserProblemQuestion toUse = null;
             for (final UserProblemQuestion userProblemQuestion : listProblemQuestions) {
                 if (StringUtils.equals(userProblemQuestion.getQuestionId(),
@@ -90,8 +83,7 @@ public class UserRecentHistory implements IsSerializable {
             }
 
             if (toUse == null) {
-                toUse = new UserProblemQuestion(userId, questionId,
-                        userAnswer.getSubSectionTitle(), userAnswer.getQuestionTitle(), userAnswer.getSectionId(), userAnswer.getSubSectionId());
+                toUse = new UserProblemQuestion(userId, question);
                 listProblemQuestions.add(0, toUse);
             }
         }
@@ -101,7 +93,7 @@ public class UserRecentHistory implements IsSerializable {
             if (StringUtils.equals(userProblemQuestion.getQuestionId(),
                     questionId)) {
                 //Increase the wrong-answer count:
-                userProblemQuestion.adjustCount(userAnswer.getResult());
+                userProblemQuestion.adjustCount(answerIsCorrect);
             }
         }
     }
@@ -132,9 +124,13 @@ public class UserRecentHistory implements IsSerializable {
         return sections;
     }
 
-    private UserStats getStatsWithAdd(final String userId, final String sectionId ) {
+    private UserStats getStatsWithAdd(final String sectionId ) {
         UserStats stats = getStats(sectionId);
         if (stats == null) {
+            if (userId == null) {
+                throw new NullPointerException("getStatsWithAdd() needs a userId.");
+            }
+
             stats = new UserStats(userId, sectionId);
             setStats(sectionId, stats);
         }

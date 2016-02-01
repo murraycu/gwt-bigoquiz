@@ -14,6 +14,9 @@ public class Question implements IsSerializable {
     private /* final */ String text;
     private /* final */ List<String> choices;
 
+    private String questionTitle;
+    private String subSectionTitle;
+
     public Question() {
     }
 
@@ -43,5 +46,23 @@ public class Question implements IsSerializable {
 
     public List<String> getChoices() {
         return choices;
+    }
+
+    /**
+     * @param subSectionTitle
+     * @param question
+     */
+    public void setTitles(final String subSectionTitle, final Question question) {
+        this.subSectionTitle = subSectionTitle;
+        this.questionTitle = question.getText();
+
+    }
+
+    public String getSubSectionTitle() {
+        return subSectionTitle;
+    }
+
+    public String getQuestionTitle() {
+        return questionTitle;
     }
 }

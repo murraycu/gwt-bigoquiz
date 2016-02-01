@@ -23,7 +23,6 @@ import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.google.inject.Inject;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
-import com.murrayc.bigoquiz.shared.db.UserAnswer;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -190,12 +189,11 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         //Tell the UserHistoryRecent presenter/view that there is a new history item.
         //Otherwise it will only update when the whole page refreshes.
-        final UserAnswer userAnswer = new UserAnswer(null, question, answerIsCorrect, null);
         final String subSectionTitle =
                 sections.getSubSectionTitle(question.getSectionId(), question.getSubSectionId());
-        userAnswer.setTitles(subSectionTitle, question);
+        question.setTitles(subSectionTitle, question);
 
-        QuestionUserAnswerAddedEvent.fire(this, userAnswer);
+        QuestionUserAnswerAddedEvent.fire(this, question, answerIsCorrect);
     }
 
     @Override
