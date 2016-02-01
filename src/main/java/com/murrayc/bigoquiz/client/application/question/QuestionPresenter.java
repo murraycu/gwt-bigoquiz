@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.client.application.question;
 
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -54,6 +55,13 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     private Question question;
     private String correctAnswer;
     private Question nextQuestion;
+
+    final Timer autoNextTimer = new Timer() {
+        @Override
+        public void run() {
+            onGoToNextQuestion();
+        }
+    };
 
     @ProxyStandard
     @NameToken(NameTokens.QUESTION)
@@ -161,6 +169,11 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
                 //Show the user:
                 getView().setSubmissionResult(result);
+
+                if (result.getResult()) {
+                    //Automatically show the next question after a delay.
+                    autoNextTimer.schedule(5000);
+                }
             }
 
         };
