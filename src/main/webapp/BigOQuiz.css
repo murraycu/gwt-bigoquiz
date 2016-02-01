@@ -133,10 +133,19 @@ a.gwt-Anchor.user-name:visited {
 .menu-panel {
     background-color: #B6B2DD;
     clear: both;
+
+    /** We give left and bottom padding to the parent div,
+     * and top-and-right margins to the child divs,
+     * so that the space between them is never double.
+     * Note that margins don't collapse on floated divs.
+     */
+    padding-left: 1rem;
+    padding-bottom: 1rem;
 }
 
 .menu-title {
-    margin: 1rem;
+    margin-top: 1rem;
+    margin-right: 1rem;
     display: inline-block; /* Don't stretch the empty rest of the div across the whole screen. */
     font-weight: 900;
     font-family: 'Lato', sans-serif;
@@ -172,7 +181,8 @@ background-color: #B6B2DD;
 }
 
 .menu-others-panel {
-    margin: 1rem;
+    margin-top: 1rem;
+    margin-right: 1rem;
     display: inline-block; /* Don't stretch the empty rest of the div across the whole screen. */
     float: right;
 }
