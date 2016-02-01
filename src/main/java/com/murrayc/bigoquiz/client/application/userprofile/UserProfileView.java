@@ -35,11 +35,15 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
         mainPanel.add(logoutLabel);
         logoutLabel.addStyleName("logout-label");
 
-        //TODO: Why doesn't this appear?
-        SimplePanel userHistoryRecentPanel = new SimplePanel();
+        //Put it in a div with a specific class, so we can hide in on wider
+        //screens where it is already visible in the sidebar:
+        final SimplePanel userHistoryParent = new SimplePanel();
+        userHistoryParent.addStyleName("user-profile-user-history-panel");
+        mainPanel.add(userHistoryParent);
+
+        final SimplePanel userHistoryRecentPanel = new SimplePanel();
         bindSlot(UserProfilePresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
-        mainPanel.add(userHistoryRecentPanel);
-        //userHistoryRecentPanel.addStyleName("debug-userhistory");
+        userHistoryParent.add(userHistoryRecentPanel);
 
         initWidget(mainPanel);
     }

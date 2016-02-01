@@ -2,10 +2,21 @@
 
 /* Responsive:
  *
- * Only show user-history-recent-panel on wider screens: */
+ * Only show user-history-recent-panel on wider screens. */
 @media screen and (max-width: 750px)  {
     .sidebar-panel { display: none; }
+    .user-profile-user-history-panel { display: block; }
 }
+
+/* Responsive:
+ *
+ * Only show user-profile-user-history-panel on narrower screens.
+ * On wider screens, it is already visible in the sidebar.
+ */
+@media screen and (min-width: 749px)  {
+    .user-profile-user-history-panel { display: none; }
+}
+
 
 body {
     /* Remove the clean.css margin around the whole page.
@@ -196,6 +207,10 @@ background-color: #B6B2DD;
 }
 
 .logout-label {
+
+}
+
+.user-profile-user-history-panel {
 
 }
 
