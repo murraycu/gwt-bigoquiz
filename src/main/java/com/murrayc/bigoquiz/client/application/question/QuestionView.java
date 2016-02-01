@@ -281,6 +281,8 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
                 nextQuestionButton.setVisible(false);
                 resultLabel.setText(constants.wrongLabel());
                 resultLabel.setVisible(true);
+
+                showWrongAnswerInChoices(choiceSelected);
                 break;
             }
             case CORRECT_ANSWER: {
@@ -317,6 +319,19 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
                 if (StringUtils.equals(radioButton.getText(), correctAnswer)) {
                     radioButton.addStyleName("question-radio-button-correct");
                     return;
+                }
+            }
+        }
+    }
+
+    private void showWrongAnswerInChoices(final String wrongAnswer) {
+        for (final Widget widget : choicesPanel) {
+            if (widget instanceof RadioButton) {
+                final RadioButton radioButton = (RadioButton) widget;
+                if (StringUtils.equals(radioButton.getText(), wrongAnswer)) {
+                    radioButton.addStyleName("question-radio-button-wrong");
+                } else {
+                    radioButton.removeStyleName("question-radio-button-wrong");
                 }
             }
         }
