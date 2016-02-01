@@ -72,6 +72,10 @@ public class UserProblemQuestion implements IsSerializable {
         return sectionId;
     }
 
+    public String getSubSectionId() {
+        return subSectionId;
+    }
+
     public String getQuestionTitle() {
         return questionTitle;
     }

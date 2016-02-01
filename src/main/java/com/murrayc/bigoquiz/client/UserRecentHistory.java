@@ -5,7 +5,6 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.StringUtils;
-import com.murrayc.bigoquiz.shared.db.UserProblemQuestion;
 import com.murrayc.bigoquiz.shared.db.UserStats;
 
 import java.util.*;
@@ -17,7 +16,6 @@ public class UserRecentHistory implements IsSerializable {
     /* Do not make thse final, because then GWT cannot serialize them. */
     private /* final */ String userId;
     private /* final */ QuizSections sections;
-    private Map<String, List<UserProblemQuestion>> userProblemQuestions = new HashMap<>();
     private Map<String, UserStats> sectionStats = new HashMap<>();
 
     UserRecentHistory() {
@@ -30,12 +28,8 @@ public class UserRecentHistory implements IsSerializable {
         this.sections = sections;
     }
 
-    public void setSectionStats(final String sectionId, final UserStats stats, final List<UserProblemQuestion> problemQuestions) {
-        sectionStats.put(sectionId, stats);
-
-        final List<UserProblemQuestion> listProblemQuestions = getProblemQuestionsListWithCreate(sectionId);
-        listProblemQuestions.clear();
-        listProblemQuestions.addAll(problemQuestions);
+    public void setSectionStats(final String sectionId, final UserStats stats) {
+        sectionStats.put(sectionId, stats);;
     }
 
     //TODO: Use gwt codesplit because this is only used on the client?
@@ -68,52 +62,8 @@ public class UserRecentHistory implements IsSerializable {
             return;
         }
 
-        //List a new problem question, if necessary:
-        final List<UserProblemQuestion> listProblemQuestions = getProblemQuestionsListWithCreate(sectionId);
-
-        //Add one, if necessary, if the answer was wrong:
-        if (!answerIsCorrect) {
-            UserProblemQuestion toUse = null;
-            for (final UserProblemQuestion userProblemQuestion : listProblemQuestions) {
-                if (StringUtils.equals(userProblemQuestion.getQuestionId(),
-                        questionId)) {
-                    toUse = userProblemQuestion;
-                    break;
-                }
-            }
-
-            if (toUse == null) {
-                toUse = new UserProblemQuestion(userId, question);
-                listProblemQuestions.add(0, toUse);
-            }
-        }
-
-        //It could also be in the list if the current answer is correct:
-        for (final UserProblemQuestion userProblemQuestion : listProblemQuestions) {
-            if (StringUtils.equals(userProblemQuestion.getQuestionId(),
-                    questionId)) {
-                //Increase the wrong-answer count:
-                userProblemQuestion.adjustCount(answerIsCorrect);
-            }
-        }
+        userStats.updateProblemQuestion(question, answerIsCorrect);
     }
-
-    private List<UserProblemQuestion> getProblemQuestionsListWithCreate(final String sectionId) {
-        List<UserProblemQuestion> list = userProblemQuestions.get(sectionId);
-        if (list == null) {
-            // We use a LinkedList, instead of HashMap,
-            // so that addUserAnswerAtStart() is more efficient.
-            list = new LinkedList<>();
-            userProblemQuestions.put(sectionId, list);
-        } return list;
-    }
-
-    public List<UserProblemQuestion> getProblemQuestions(final String sectionId) {
-        if (userProblemQuestions == null) {
-            return null;
-        }
-
-        return userProblemQuestions.get(sectionId);    }
 
     public UserStats getStats(final String sectionId ) {
         return sectionStats.get(sectionId);

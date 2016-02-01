@@ -19,7 +19,7 @@ import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserProblemQuestion;
 import com.murrayc.bigoquiz.shared.db.UserStats;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -149,7 +149,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             detailsPanel.add(problemQuestionsPanel);
             problemQuestionsPanel.addStyleName("panel-problem-questions");
 
-            final List<UserProblemQuestion> problemQuestions = userRecentHistory.getProblemQuestions(sectionId);
+            final Collection<UserProblemQuestion> problemQuestions = stats.getProblemQuestions();
             if (problemQuestions == null || problemQuestions.isEmpty()) {
                 final Panel paraCount = Utils.addParagraph(problemQuestionsPanel);
                 final Label labelScore = new InlineLabel(constants.problemQuestionsNoneYet());

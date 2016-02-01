@@ -6,7 +6,6 @@ import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
-import com.murrayc.bigoquiz.shared.Constants;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
@@ -19,8 +18,6 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -147,9 +144,21 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 userStats = new UserStats(userId, sectionId);
             }
 
-            final List<UserProblemQuestion> problemQuestions = getProblemQuestions(userId, sectionId);
+            //Set the titles.
+            //We don't store these in the datastore because we can get them easily from the Quiz.
+            //TODO: It might really be more efficient to store them in the datastore.
+            for (final UserProblemQuestion userProblemQuestion : userStats.getProblemQuestions()) {
+                final Question question = quiz.getQuestion(userProblemQuestion.getQuestionId());
+                if (question != null) {
+                    userProblemQuestion.setQuestionTitle(question.getText());
+                }
 
-            result.setSectionStats(sectionId, userStats, problemQuestions);
+                final String subSectionTitle = sections.getSubSectionTitle(userProblemQuestion.getSectionId(),
+                        userProblemQuestion.getSubSectionId());
+                userProblemQuestion.setSubSectionTitle(subSectionTitle);
+            }
+
+            result.setSectionStats(sectionId, userStats);
         }
 
         return result;
@@ -167,43 +176,6 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         return null;
-    }
-
-    private List<UserProblemQuestion> getProblemQuestions(final String userId, final String sectionId) {
-        final Quiz quiz = getQuiz();
-        final QuizSections sections = quiz.getSections();
-        if (sections == null) {
-            return null;
-        }
-
-        final EntityManagerFactory emf = EntityManagerFactory.get();
-        Query<UserProblemQuestion> q = emf.ofy().load().type(UserProblemQuestion.class);
-        q = q.filter("userId", userId);
-        q = q.filter("sectionId", sectionId);
-        q = q.limit(Constants.HISTORY_LIMIT);
-        q = q.order("-countAnsweredWrong"); //- means descending. //TODO: Avoid mentioning field name in a string.
-        final List<UserProblemQuestion> listCopy = new ArrayList<>();
-        for (final UserProblemQuestion a : q.list()) {
-            if (a == null) {
-                continue;
-            }
-
-            final String questionId = a.getQuestionId();
-
-            final Question question = quiz.getQuestion(questionId);
-            if (question == null) {
-                continue;
-            }
-
-            a.setQuestionTitle(question.getText());
-
-            final String subSectionTitle = sections.getSubSectionTitle(question.getSectionId(), question.getSubSectionId());
-            a.setSubSectionTitle(subSectionTitle);
-
-            listCopy.add(a);
-        }
-
-        return listCopy;
     }
 
     private UserProfile getUserProfileImpl() {
@@ -309,38 +281,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
             userStats.incrementCorrect();
         }
 
+        userStats.updateProblemQuestion(question, result);
+
         emf.ofy().save().entity(userStats).now();
-
-        //Update the Problem question if any:
-        //TODO: Is there something more efficient than a query?
-        //Maybe something like this? UserProblemQuestion problemQuestion = emf.ofy().load().type(UserProblemQuestion.class).filter("questionId", question.getUserId()).id(userId)..now();
-        UserProblemQuestion problemQuestion = getUserProblemQuestion(userId, question);
-        if (problemQuestion == null && !result) {
-            problemQuestion = new UserProblemQuestion(userId, question);
-        }
-
-        if (problemQuestion != null) {
-            problemQuestion.adjustCount(result);
-            emf.ofy().save().entity(problemQuestion).now();
-        }
     }
 
-    private UserProblemQuestion getUserProblemQuestion(final String userId, final Question question) {
-        UserProblemQuestion problemQuestion = null;
-
-        final EntityManagerFactory emf = EntityManagerFactory.get();
-        Query<UserProblemQuestion> q = emf.ofy().load().type(UserProblemQuestion.class);
-        q = q.filter("userId", userId);
-        q = q.filter("questionId", question.getId());
-        q = q.limit(1);
-        final List<UserProblemQuestion> list = q.list();
-        if (!list.isEmpty()) {
-            problemQuestion = list.get(0);
-        }
-
-        return problemQuestion;
-    }
-
+    /*
     private static String getCurrentTime() {
         //TODO: Performance:
         final TimeZone tz = TimeZone.getTimeZone("UTC");
@@ -348,4 +294,5 @@ public class QuizServiceImpl extends ServiceWithUser implements
         df.setTimeZone(tz);
         return df.format(new Date());
     }
+    */
 }
