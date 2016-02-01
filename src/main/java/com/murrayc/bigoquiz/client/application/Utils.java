@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.client.application;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.ParagraphElement;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
@@ -17,6 +18,13 @@ public class Utils {
         headingElement.setInnerText(title);
         mainPanel.getElement().appendChild(headingElement);
         return headingElement;
+    }
+
+    public static void addHeaderToPanel(int level, final Panel mainPanel, final Widget widget) {
+        final HeadingElement headingElement = Document.get().createHElement(level);
+        mainPanel.getElement().appendChild(headingElement);
+
+        DOM.insertChild(headingElement, widget.getElement(), 0);
     }
 
     public static Panel addParagraph(final Panel mainPanel) {

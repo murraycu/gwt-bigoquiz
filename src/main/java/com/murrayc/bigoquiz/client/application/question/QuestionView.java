@@ -74,8 +74,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         sectionTitle = Utils.addHeaderToPanel(3, mainPanel, "");
         //sectionTitle.addStyleName("section-title");
 
-        mainPanel.add(subSectionTitle);
-        subSectionTitle.addStyleName("sub-section-title");
+        Utils.addHeaderToPanel(4, mainPanel, subSectionTitle);
 
         Utils.addParagraphWithChild(mainPanel, questionLabel);
         questionLabel.addStyleName("question-label");

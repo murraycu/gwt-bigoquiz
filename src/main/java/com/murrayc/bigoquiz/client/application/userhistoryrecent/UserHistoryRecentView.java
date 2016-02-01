@@ -1,10 +1,8 @@
 package com.murrayc.bigoquiz.client.application.userhistoryrecent;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
@@ -119,14 +117,13 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                 continue;
             }
 
-            final HeadingElement h = Utils.addHeaderToPanel(3, detailsPanel, "");
 
             final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(sectionId);
             final String url = placeManager.buildHistoryToken(placeRequest);
             final Hyperlink titleLabel = new InlineHyperlink(section.title, url);
             //titleLabel.addStyleName("user-history-section-title-label");
 
-            DOM.insertChild(h, titleLabel.getElement(), 0);
+            Utils.addHeaderToPanel(3, detailsPanel, titleLabel);
 
             final Panel p = Utils.addParagraph(detailsPanel);
             final int count = section.questionsCount;
