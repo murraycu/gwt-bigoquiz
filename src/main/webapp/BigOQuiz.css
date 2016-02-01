@@ -13,6 +13,8 @@ body {
      * for some reason.
      */
     margin: 0px !important;
+
+    background-color: #F4F4F9 !important;
 }
 
 /* This lets a parent <div> be as high as its children.
@@ -74,15 +76,6 @@ body {
     margin-bottom: 1em;
 }
 
-
-.next-question-button {
-
-}
-
-.show-answer-button {
-
-}
-
 .question-label {
 
 }
@@ -92,30 +85,30 @@ body {
 }
 
 a.gwt-Anchor.sign-in-link {
-    color: white;
+    color: #2F4550;
 }
 a.gwt-Anchor.sign-in-link:visited {
-    color: white;
+    color: #2F4550;
 }
 
 .about-link {
     float: right;
     clear: both;
-    color: white;
+    color: #2F4550;
 }
 
 a.gwt-Anchor.about-link {
-    color: white;
+    color: #2F4550;
 }
 a.gwt-Anchor.about-link:visited {
-    color: white;
+    color: #2F4550;
 }
 
 a.gwt-Anchor.user-name {
-    color: white;
+    color: #2F4550;
 }
 a.gwt-Anchor.user-name:visited {
-    color: white;
+    color: #2F4550;
 }
 
 .username-label {
@@ -127,7 +120,7 @@ a.gwt-Anchor.user-name:visited {
 }
 
 .menu-panel {
-    background-color: blue;
+    background-color: #B6B2DD;
     clear: both;
 }
 
@@ -140,7 +133,7 @@ a.gwt-Anchor.user-name:visited {
 
     /* TODO: Why doesn't any of this work to make the a text white, insead of gwt-Anchor.menu-title?
     color: white;
-    background-color: blue;
+    background-color: #B6B2DD;
     */
 }
 
@@ -153,18 +146,18 @@ margin-bottom: 0.2em;
 
 .menu-title.a, a:visited {
 color: white;
-background-color: blue;
+background-color: #B6B2DD;
 }
 
 .menu-title.a:visited {
 color: white;
-background-color: blue;
+background-color: #B6B2DD;
 }
 */
 
 .gwt-Anchor.menu-title {
-    color: white;
-    background-color: blue;
+    color: #2F4550;
+    background-color: #B6B2DD;
 }
 
 .menu-others-panel {
@@ -176,7 +169,7 @@ background-color: blue;
 .user-status-panel {
     float: right;
     clear: both;
-    color: white;
+    color: #2F4550;
 }
 
 .status-panel {
@@ -209,41 +202,49 @@ background-color: blue;
 h1 {
     font-family: 'Lato', sans-serif;
     font-weight: 700;
+    color: #2F4550;
+}
+
+h1 * {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    color: #2F4550;
 }
 
 h2 {
     font-family: 'Lato', sans-serif;
     font-weight: 700;
+    color: #2F4550;
 }
 
 h2 * {
     font-family: 'Lato', sans-serif;
     font-weight: 700;
+    color: #2F4550;
 }
 
 h3 {
     font-family: 'Lato', sans-serif;
     font-weight: 700;
+    color: #2F4550;
 }
 
 h3 * {
     font-family: 'Lato', sans-serif;
     font-weight: 700;
-}
-
-h3 * {
-    font-family: 'Lato', sans-serif;
-    font-weight: 700;
+    color: #2F4550;
 }
 
 h4 {
     font-family: 'Lato', sans-serif;
     font-weight: 700;
+    color: #2F4550;
 }
 
 h4 * {
     font-family: 'Lato', sans-serif;
     font-weight: 700;
+    color: #2F4550;
 }
 
 * {
@@ -299,7 +300,12 @@ h4 * {
 
 }
 
+.label-questions-count {
+    color: #586F7C;
+}
+
 .label-stats {
+    color: #586F7C;
 }
 
 .label-problem-questions {
@@ -315,7 +321,8 @@ h4 * {
 
 .problem-answer-score {
     margin-right: 0.5em;
-    background: lightcyan;
+    background: #B8DBD9;
+    color: #2F4550;
     padding: 0.3em;
 }
 
@@ -337,6 +344,22 @@ h4 * {
     margin-top: 0em;
 }
 
-.label-questions-count {
+.gwt-Button.next-question-button {
+    background: #B6B2DD;
+    color: #2F4550;
+    font-family: 'Lato', sans-serif;
+}
 
+.gwt-Button.next-question-button:hover {
+    border-color: #2F4550;
+}
+
+.gwt-Button.show-answer-button {
+    background: #B6B2DD;
+    color: #2F4550;
+    font-family: 'Lato', sans-serif;
+}
+
+.gwt-Button.show-answer-button:hover {
+    border-color: #2F4550;
 }
