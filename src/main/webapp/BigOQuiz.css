@@ -134,8 +134,8 @@ a.gwt-Anchor.user-name:visited {
 .menu-title {
     margin: 1rem;
     display: inline-block; /* Don't stretch the empty rest of the div across the whole screen. */
-    font-weight: bold;
-    font-family: sans;
+    font-weight: 900;
+    font-family: 'Lato', sans-serif;
     font-size: 2.5em;
 
     /* TODO: Why doesn't any of this work to make the a text white, insead of gwt-Anchor.menu-title?
@@ -204,6 +204,45 @@ background-color: blue;
 
 .logout-label {
 
+}
+
+h1 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+}
+
+h2 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+}
+
+h2 a {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+}
+
+h3 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+}
+
+h3 a {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+}
+
+h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+}
+
+h4 a {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+}
+
+* {
+    font-family: 'Merriweather', serif;;
 }
 
 .page-title-label {
@@ -284,6 +323,7 @@ background-color: blue;
 }
 
 .user-status-answers-panel h3 {
+    font-family: 'Lato', sans-serif;
     margin-top: 2em;
 }
 
