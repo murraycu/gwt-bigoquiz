@@ -18,11 +18,13 @@ public class UserQuestionHistory implements IsSerializable {
     @Index
     private String questionId;
 
+    /* TODO: We might want these to do overall statistics for all users:
     @Index
     private String subSectionId;
 
     @Index
     private String sectionId;
+    */
 
     //TODO: Internationalization.
     @Ignore
@@ -46,24 +48,32 @@ public class UserQuestionHistory implements IsSerializable {
 
     public UserQuestionHistory(final Question question) {
         this.questionId = question.getId();
+        this.countAnsweredWrong = 0;
+
         this.subSectionTitle = question.getSubSectionTitle();
         this.questionTitle = question.getText();
+
+        /*
         this.subSectionId = question.getSubSectionId();
         this.sectionId = question.getSectionId();
-        this.countAnsweredWrong = 0;
+         */
     }
 
     public String getQuestionId() {
         return questionId;
     }
 
+    /*
     public String getSectionId() {
         return sectionId;
     }
+    */
 
+    /*
     public String getSubSectionId() {
         return subSectionId;
     }
+    */
 
     public String getQuestionTitle() {
         return questionTitle;

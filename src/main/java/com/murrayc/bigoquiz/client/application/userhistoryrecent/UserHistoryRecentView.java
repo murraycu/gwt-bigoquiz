@@ -189,11 +189,9 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     private Hyperlink createProblemQuestionrHyperlink(final UserQuestionHistory problemQuestion) {
         //TODO: This will take the user to that question,
-        //and keep any subsequent questions to that question's section,
-        //by specifying the nextSectionQuestionId to getPlaceRequestForQuestion().
-        //Alternatively, we could specify no section (meaning it would use questions from all sections).
-        //Both alternatives lose whatever the user had set before clicking this link.
-        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(problemQuestion.getQuestionId(), problemQuestion.getSectionId());
+        //and keep any subsequent questions to all sections),
+        //losing any current section the user had set before clicking this link.
+        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(problemQuestion.getQuestionId(), null /* TODO */);
         final String url = placeManager.buildHistoryToken(placeRequest);
         final Hyperlink result = new InlineHyperlink(problemQuestion.getSubSectionTitle() + ": " + problemQuestion.getQuestionTitle(), url);
         result.addStyleName("problem-answer-hyperlink");

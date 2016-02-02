@@ -153,8 +153,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
                     userQuestionHistory.setQuestionTitle(question.getText());
                 }
 
-                final String subSectionTitle = sections.getSubSectionTitle(userQuestionHistory.getSectionId(),
-                        userQuestionHistory.getSubSectionId());
+                final String subSectionTitle = sections.getSubSectionTitle(question.getSectionId(),
+                        question.getSubSectionId());
                 userQuestionHistory.setSubSectionTitle(subSectionTitle);
             }
 
