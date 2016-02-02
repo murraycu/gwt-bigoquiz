@@ -13,11 +13,10 @@ import com.google.gwt.user.client.ui.Widget;
  * Created by murrayc on 1/28/16.
  */
 public class Utils {
-    public static HeadingElement addHeaderToPanel(int level, final Panel mainPanel, final String title) {
+    public static void addHeaderToPanel(int level, final Panel mainPanel, final String title) {
         final HeadingElement headingElement = Document.get().createHElement(level);
         headingElement.setInnerText(title);
         mainPanel.getElement().appendChild(headingElement);
-        return headingElement;
     }
 
     public static void addHeaderToPanel(int level, final Panel mainPanel, final Widget widget) {

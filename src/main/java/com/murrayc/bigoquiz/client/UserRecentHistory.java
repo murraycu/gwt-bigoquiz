@@ -29,7 +29,7 @@ public class UserRecentHistory implements IsSerializable {
     }
 
     public void setSectionStats(final String sectionId, final UserStats stats) {
-        sectionStats.put(sectionId, stats);;
+        sectionStats.put(sectionId, stats);
     }
 
     //TODO: Use gwt codesplit because this is only used on the client?
