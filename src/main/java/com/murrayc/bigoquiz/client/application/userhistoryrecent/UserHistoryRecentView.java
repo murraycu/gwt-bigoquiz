@@ -33,6 +33,8 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
+    String nextQuestionSectionId;
+
     final FlowPanel detailsPanel = new FlowPanel();
 
     private final Label loginLabel = new Label(constants.pleaseSignIn());
@@ -77,7 +79,8 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     }
 
     @Override
-    public void setUserRecentHistory(final UserRecentHistory userRecentHistory) {
+    public void setUserRecentHistory(final UserRecentHistory userRecentHistory, final String nextQuestionSectionId) {
+        this.nextQuestionSectionId = nextQuestionSectionId;
         this.userRecentHistory = userRecentHistory;
 
         buildUi();
@@ -164,7 +167,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                     labelScore.addStyleName("problem-answer-score");
                     paraScore.add(labelScore);
 
-                    final Hyperlink link = createProblemQuestionHyperlink(problemQuestion);
+                    final Hyperlink link = createProblemQuestionHyperlink(problemQuestion, nextQuestionSectionId);
                     paraScore.add(link);
                 }
             }
@@ -187,11 +190,14 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         buildUi();
     }
 
-    private Hyperlink createProblemQuestionHyperlink(final UserQuestionHistory problemQuestion) {
-        //TODO: This will take the user to that question,
-        //and keep any subsequent questions to all sections),
-        //losing any current section the user had set before clicking this link.
-        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(problemQuestion.getQuestionId(), null /* TODO */);
+    @Override
+    public void setQuestionNextSectionId(final String nextQuestionSectionId) {
+        this.nextQuestionSectionId = nextQuestionSectionId;
+        buildUi();
+    }
+
+    private Hyperlink createProblemQuestionHyperlink(final UserQuestionHistory problemQuestion, final String nextQuestionSectionId) {
+        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(problemQuestion.getQuestionId(), nextQuestionSectionId);
         final String url = placeManager.buildHistoryToken(placeRequest);
         final Hyperlink result = new InlineHyperlink(problemQuestion.getSubSectionTitle() + ": " + problemQuestion.getQuestionTitle(), url);
         result.addStyleName("problem-answer-hyperlink");

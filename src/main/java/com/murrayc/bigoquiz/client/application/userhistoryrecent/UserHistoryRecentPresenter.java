@@ -11,19 +11,25 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
+import com.murrayc.bigoquiz.client.application.question.QuestionNextQuestionSetionIdEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
 import com.murrayc.bigoquiz.shared.Question;
+import com.murrayc.bigoquiz.shared.StringUtils;
 
 /**
  * Created by murrayc on 1/21/16.
  */
 public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecentPresenter.MyView>
-        implements UserHistoryRecentUserEditUiHandlers, QuestionUserAnswerAddedEvent.QuestionUserAnswerAddedEventHandler {
+        implements UserHistoryRecentUserEditUiHandlers,
+        QuestionUserAnswerAddedEvent.QuestionUserAnswerAddedEventHandler,
+        QuestionNextQuestionSetionIdEvent.QuestionUserAnswerAddedEventHandler {
+
+    private String nextQuestionSectionId;
 
     public interface MyView extends View, HasUiHandlers<UserHistoryRecentUserEditUiHandlers> {
         /** Set a whole set of history.
          */
-        void setUserRecentHistory(final UserRecentHistory result);
+        void setUserRecentHistory(final UserRecentHistory result, final String nextQuestionSectionId);
 
         /** Add a single item of history.
          * For instance, to avoid retrieving the whole history from the server,
@@ -33,7 +39,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
 
         void setServerFailed();
 
-
+        void setQuestionNextSectionId(final String nextQuestionSectionId);
     }
 
     @Inject
@@ -45,7 +51,13 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         getView().setUiHandlers(this);
 
         addRegisteredHandler(QuestionUserAnswerAddedEvent.TYPE, this);
+        addRegisteredHandler(QuestionNextQuestionSetionIdEvent.TYPE, this);
 
+
+        //TODO: If QUESTION_PARAM_NEXT_QUESTION_SECTION_ID was specified in the URL,
+        //then QuestionPresenter will cause the UI to be rebuilt again,
+        //making this first build of the UI (without a nextQuestionSectionId) a
+        //waste of effort.
         getAndShowHistory();
     }
 
@@ -53,6 +65,20 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
     @Override
     public void onQuestionUserAnswerAdded(final QuestionUserAnswerAddedEvent event) {
         getView().addUserAnswer(event.getQuestion(), event.getAnswerIsCorrect());
+    }
+
+    @ProxyEvent
+    @Override
+    public void onQuestionNextSectionId(final QuestionNextQuestionSetionIdEvent event) {
+        final String nextQuestionSectionId = event.getNextQuestionSectionId();
+        if (StringUtils.equals(this.nextQuestionSectionId, nextQuestionSectionId)) {
+            //Do nothing.
+            return;
+        }
+
+        this.nextQuestionSectionId = nextQuestionSectionId;
+
+        getView().setQuestionNextSectionId(nextQuestionSectionId);
     }
 
     private void getAndShowHistory() {
@@ -66,7 +92,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
 
             @Override
             public void onSuccess(final UserRecentHistory result) {
-                getView().setUserRecentHistory(result);
+                getView().setUserRecentHistory(result, nextQuestionSectionId);
             }
         };
 

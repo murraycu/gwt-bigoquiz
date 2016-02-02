@@ -99,6 +99,9 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         nextQuestionSectionId = request.getParameter(NameTokens.QUESTION_PARAM_NEXT_QUESTION_SECTION_ID, null);
         getView().setNextQuestionSectionId(nextQuestionSectionId);
 
+        //Make sure that the sidebar's links are updated too:
+        tellUserHistoryPresenterAboutNextQuestionSectionId(nextQuestionSectionId);
+
         //Question ID:
         final String questionId = request.getParameter(NameTokens.QUESTION_PARAM_QUESTION_ID, null);
         //GWT.log("prepareFromRequest(): questionId=" + questionId);
@@ -194,6 +197,10 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         question.setTitles(subSectionTitle, question);
 
         QuestionUserAnswerAddedEvent.fire(this, question, answerIsCorrect);
+    }
+
+    private void tellUserHistoryPresenterAboutNextQuestionSectionId(final String nextQuestionSectionId) {
+        QuestionNextQuestionSetionIdEvent.fire(this, nextQuestionSectionId);
     }
 
     @Override

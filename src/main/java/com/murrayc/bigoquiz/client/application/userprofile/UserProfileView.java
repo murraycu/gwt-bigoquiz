@@ -1,7 +1,6 @@
 package com.murrayc.bigoquiz.client.application.userprofile;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.LoginInfo;
