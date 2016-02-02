@@ -34,14 +34,11 @@ public class UserQuestionHistory implements IsSerializable {
     @Ignore
     private String questionTitle;
 
-    public int getCountAnsweredWrong() {
-        return countAnsweredWrong;
-    }
-
     //Decrements once for each time the user answers it correctly.
     //Increments once for each time the user answers it wrongly.
     @Index
     private int countAnsweredWrong;
+
 
     public UserQuestionHistory() {
     }
@@ -61,6 +58,10 @@ public class UserQuestionHistory implements IsSerializable {
 
     public String getQuestionId() {
         return questionId;
+    }
+
+    public int getCountAnsweredWrong() {
+        return countAnsweredWrong;
     }
 
     /*
