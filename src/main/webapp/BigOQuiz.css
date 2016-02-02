@@ -2,9 +2,16 @@
 
 /* Responsive:
  *
- * Only show user-history-recent-panel on wider screens. */
-@media screen and (max-width: 750px)  {
-    .sidebar-panel { display: none; }
+ * Only show links sidebar on wider screens. */
+@media screen and (max-width: 1100px)  {
+    .sidebar-panel-links { display: none; }
+}
+
+/* Responsive:
+ *
+ * Only show sections sidebar on wider screens. */
+@media screen and (max-width: 550px)  {
+    .sidebar-panel-sections { display: none; }
     .user-profile-user-history-panel { display: block; }
 }
 
@@ -13,7 +20,7 @@
  * Only show user-profile-user-history-panel on narrower screens.
  * On wider screens, it is already visible in the sidebar.
  */
-@media screen and (min-width: 751px)  {
+@media screen and (min-width: 551px)  {
     .user-profile-user-history-panel { display: none; }
 }
 
@@ -37,7 +44,12 @@
         margin-bottom: 0.3rem;
     }
 
-    .sidebar-panel {
+    .sidebar-panel-sections {
+        margin-top: 0.3rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .sidebar-panel-links {
         margin-top: 0.3rem;
         margin-bottom: 0.3rem;
     }
@@ -96,23 +108,31 @@ body {
     *zoom: 1;
 }
 
-.sidebar-panel {
+.sidebar-panel-sections {
     margin-left: 1rem;
     margin-right: 1rem;
     /* See media query: margin-top: 1em; */
     /* See media query: margin-bottom: 1em; */
 
     float: right;
-    clear: right;
 }
 
-.sidebar-panel h2 {
+.sidebar-panel-sections h2 {
     margin-top: 1em;
 }
 
 /* TODO: Make this not apply to a h2 inside sub-divs? */
-.sidebar-panel h2:first-child {
+.sidebar-panel-sections h2:first-child {
     margin-top: 0;
+}
+
+.sidebar-panel-links {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    /* See media query: margin-top: 1em; */
+    /* See media query: margin-bottom: 1em; */
+
+    float: right;
 }
 
 .recommended-reading {
@@ -388,7 +408,7 @@ h4 * {
 }
 
 .user-history-recent-panel {
-    margin-top: 1em; /* Same as sidebar-panel h2 */
+    margin-top: 1em; /* Same as sidebar-panel-sections h2 */
     margin-bottom: 1em;
     float: left;
     clear: both;
