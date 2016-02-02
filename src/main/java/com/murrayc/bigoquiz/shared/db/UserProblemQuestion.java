@@ -12,14 +12,8 @@ import com.murrayc.bigoquiz.shared.Question;
  */
 @Entity
 public class UserProblemQuestion implements IsSerializable {
-    //TODO: Remove this?
     @Id
     private Long id;
-
-    //TODO: I would rather use a Ref<UserProfile> here,
-    //but that doesn't seem to GWT-compile for the client side.b
-    @Index
-    private String userId;
 
     @Index
     private String questionId;
@@ -50,18 +44,13 @@ public class UserProblemQuestion implements IsSerializable {
     public UserProblemQuestion() {
     }
 
-    public UserProblemQuestion(final String userId, final Question question) {
-        this.userId = userId;
+    public UserProblemQuestion(final Question question) {
         this.questionId = question.getId();
         this.subSectionTitle = question.getSubSectionTitle();
         this.questionTitle = question.getText();
         this.subSectionId = question.getSubSectionId();
         this.sectionId = question.getSectionId();
         this.countAnsweredWrong = 0;
-    }
-
-    public String getUserId() {
-        return userId;
     }
 
     public String getQuestionId() {

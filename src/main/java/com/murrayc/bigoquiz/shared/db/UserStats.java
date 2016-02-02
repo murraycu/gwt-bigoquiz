@@ -96,7 +96,7 @@ public class UserStats implements IsSerializable {
 
         //Add a new problem question, if necessary, if the answer was wrong:
         if (!answerIsCorrect && userProblemQuestion == null) {
-            userProblemQuestion = new UserProblemQuestion(userId, question);
+            userProblemQuestion = new UserProblemQuestion(question);
             problemQuestions.put(questionId, userProblemQuestion);
         }
 
