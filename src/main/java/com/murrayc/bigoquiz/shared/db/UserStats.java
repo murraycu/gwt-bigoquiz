@@ -28,6 +28,9 @@ public class UserStats implements IsSerializable {
     int answered;
     int correct;
 
+    int count_questions_asked_once = 0;
+    int count_questions_correct_once = 0;
+
     Map<String, UserQuestionHistory> questionHistories;
 
     public UserStats() {
@@ -92,17 +95,32 @@ public class UserStats implements IsSerializable {
             return;
         }
 
+        boolean firstTimeAsked = false;
+        boolean firstTimeCorrect = false;
         UserQuestionHistory userQuestionHistory = questionHistories.get(questionId);
 
-        //Add a new problem question, if necessary, if the answer was wrong:
-        if (!answerIsCorrect && userQuestionHistory == null) {
+        //Add a new one, if necessary:
+        if (userQuestionHistory == null) {
+            firstTimeAsked = true;
+            if (answerIsCorrect) {
+                firstTimeCorrect = true;
+            }
+
             userQuestionHistory = new UserQuestionHistory(question);
             questionHistories.put(questionId, userQuestionHistory);
+        } else if (answerIsCorrect && !userQuestionHistory.getAnsweredCorrectlyOnce()) {
+            firstTimeCorrect = true;
         }
 
-        if (userQuestionHistory != null) {
-            //Increase the wrong-answer count:
-            userQuestionHistory.adjustCount(answerIsCorrect);
+        //Increase the wrong-answer count:
+        userQuestionHistory.adjustCount(answerIsCorrect);
+
+        if (firstTimeAsked) {
+            count_questions_asked_once++;
+        }
+
+        if (firstTimeCorrect) {
+            count_questions_correct_once++;
         }
     }
 

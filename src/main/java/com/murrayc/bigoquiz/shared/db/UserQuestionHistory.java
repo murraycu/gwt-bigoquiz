@@ -34,6 +34,8 @@ public class UserQuestionHistory implements IsSerializable {
     @Ignore
     private String questionTitle;
 
+    private boolean answeredCorrectlyOnce;
+
     //Decrements once for each time the user answers it correctly.
     //Increments once for each time the user answers it wrongly.
     @Index
@@ -45,6 +47,7 @@ public class UserQuestionHistory implements IsSerializable {
 
     public UserQuestionHistory(final Question question) {
         this.questionId = question.getId();
+        this.answeredCorrectlyOnce = false;
         this.countAnsweredWrong = 0;
 
         this.subSectionTitle = question.getSubSectionTitle();
@@ -92,7 +95,15 @@ public class UserQuestionHistory implements IsSerializable {
         return subSectionTitle;
     }
 
+    public boolean getAnsweredCorrectlyOnce() {
+        return answeredCorrectlyOnce;
+    }
+
     public void adjustCount(boolean result) {
+        if (result) {
+            answeredCorrectlyOnce = true;
+        }
+
         if (result) {
             countAnsweredWrong -= 1;
         } else {
