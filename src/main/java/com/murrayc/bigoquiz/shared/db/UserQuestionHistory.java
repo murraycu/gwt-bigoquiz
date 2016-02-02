@@ -11,7 +11,7 @@ import com.murrayc.bigoquiz.shared.Question;
  * Created by murrayc on 1/21/16.
  */
 @Entity
-public class UserProblemQuestion implements IsSerializable {
+public class UserQuestionHistory implements IsSerializable {
     @Id
     private Long id;
 
@@ -41,10 +41,10 @@ public class UserProblemQuestion implements IsSerializable {
     @Index
     private int countAnsweredWrong;
 
-    public UserProblemQuestion() {
+    public UserQuestionHistory() {
     }
 
-    public UserProblemQuestion(final Question question) {
+    public UserQuestionHistory(final Question question) {
         this.questionId = question.getId();
         this.subSectionTitle = question.getSubSectionTitle();
         this.questionTitle = question.getText();

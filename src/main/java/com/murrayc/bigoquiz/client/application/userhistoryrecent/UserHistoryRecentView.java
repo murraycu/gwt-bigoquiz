@@ -16,7 +16,7 @@ import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
-import com.murrayc.bigoquiz.shared.db.UserProblemQuestion;
+import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
 import com.murrayc.bigoquiz.shared.db.UserStats;
 
 import java.util.Collection;
@@ -149,14 +149,14 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             detailsPanel.add(problemQuestionsPanel);
             problemQuestionsPanel.addStyleName("panel-problem-questions");
 
-            final Collection<UserProblemQuestion> problemQuestions = stats.getProblemQuestions();
+            final Collection<UserQuestionHistory> problemQuestions = stats.getQuestionHistories();
             if (problemQuestions == null || problemQuestions.isEmpty()) {
                 final Panel paraCount = Utils.addParagraph(problemQuestionsPanel);
                 final Label labelScore = new InlineLabel(constants.problemQuestionsNoneYet());
                 labelScore.addStyleName("problem-answer-score");
                 paraCount.add(labelScore);
             } else {
-                for (final UserProblemQuestion problemQuestion : problemQuestions) {
+                for (final UserQuestionHistory problemQuestion : problemQuestions) {
                     final Panel paraScore = Utils.addParagraph(problemQuestionsPanel);
 
                     final String strScore = "-" + problemQuestion.getCountAnsweredWrong();
@@ -187,7 +187,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         buildUi();
     }
 
-    private Hyperlink createProblemQuestionrHyperlink(final UserProblemQuestion problemQuestion) {
+    private Hyperlink createProblemQuestionrHyperlink(final UserQuestionHistory problemQuestion) {
         //TODO: This will take the user to that question,
         //and keep any subsequent questions to that question's section,
         //by specifying the nextSectionQuestionId to getPlaceRequestForQuestion().

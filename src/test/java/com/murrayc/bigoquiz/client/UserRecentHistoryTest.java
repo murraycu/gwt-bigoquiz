@@ -2,7 +2,7 @@ package com.murrayc.bigoquiz.client;
 
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
-import com.murrayc.bigoquiz.shared.db.UserProblemQuestion;
+import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
 import com.murrayc.bigoquiz.shared.db.UserStats;
 import org.junit.Test;
 
@@ -30,19 +30,19 @@ public class UserRecentHistoryTest {
         final UserStats stats = history.getStats(SECTION_1);
         assertNotNull(stats);
 
-        Collection<UserProblemQuestion> problems = stats.getProblemQuestions();
+        Collection<UserQuestionHistory> problems = stats.getQuestionHistories();
         assertNotNull(problems);
         assertEquals(1, problems.size());
 
         history.addUserAnswerAtStart(question, false);
-        problems = stats.getProblemQuestions();
+        problems = stats.getQuestionHistories();
         assertNotNull(problems);
         assertEquals(1, problems.size());
 
         question = createQuestion("question5", SECTION_1, SUBSECTION_1_1);
         history.addUserAnswerAtStart(question, false);
 
-        problems = stats.getProblemQuestions();
+        problems = stats.getQuestionHistories();
         assertNotNull(problems);
         assertEquals(2, problems.size());
 

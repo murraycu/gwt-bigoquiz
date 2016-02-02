@@ -9,7 +9,7 @@ import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
-import com.murrayc.bigoquiz.shared.db.UserProblemQuestion;
+import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 import com.murrayc.bigoquiz.shared.db.UserStats;
 import org.apache.commons.lang3.StringUtils;
@@ -147,15 +147,15 @@ public class QuizServiceImpl extends ServiceWithUser implements
             //Set the titles.
             //We don't store these in the datastore because we can get them easily from the Quiz.
             //TODO: It might really be more efficient to store them in the datastore.
-            for (final UserProblemQuestion userProblemQuestion : userStats.getProblemQuestions()) {
-                final Question question = quiz.getQuestion(userProblemQuestion.getQuestionId());
+            for (final UserQuestionHistory userQuestionHistory : userStats.getQuestionHistories()) {
+                final Question question = quiz.getQuestion(userQuestionHistory.getQuestionId());
                 if (question != null) {
-                    userProblemQuestion.setQuestionTitle(question.getText());
+                    userQuestionHistory.setQuestionTitle(question.getText());
                 }
 
-                final String subSectionTitle = sections.getSubSectionTitle(userProblemQuestion.getSectionId(),
-                        userProblemQuestion.getSubSectionId());
-                userProblemQuestion.setSubSectionTitle(subSectionTitle);
+                final String subSectionTitle = sections.getSubSectionTitle(userQuestionHistory.getSectionId(),
+                        userQuestionHistory.getSubSectionId());
+                userQuestionHistory.setSubSectionTitle(subSectionTitle);
             }
 
             result.setSectionStats(sectionId, userStats);

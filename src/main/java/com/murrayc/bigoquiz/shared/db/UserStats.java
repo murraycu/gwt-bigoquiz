@@ -28,16 +28,16 @@ public class UserStats implements IsSerializable {
     int answered;
     int correct;
 
-    Map<String, UserProblemQuestion> problemQuestions;
+    Map<String, UserQuestionHistory> questionHistories;
 
     public UserStats() {
-        problemQuestions = new HashMap<>();
+        questionHistories = new HashMap<>();
     }
 
     public UserStats(final String userId, final String sectionId) {
         this.userId = userId;
         this.sectionId = sectionId;
-        problemQuestions = new HashMap<>();
+        questionHistories = new HashMap<>();
     }
 
     public String getUserId() {
@@ -92,21 +92,21 @@ public class UserStats implements IsSerializable {
             return;
         }
 
-        UserProblemQuestion userProblemQuestion = problemQuestions.get(questionId);
+        UserQuestionHistory userQuestionHistory = questionHistories.get(questionId);
 
         //Add a new problem question, if necessary, if the answer was wrong:
-        if (!answerIsCorrect && userProblemQuestion == null) {
-            userProblemQuestion = new UserProblemQuestion(question);
-            problemQuestions.put(questionId, userProblemQuestion);
+        if (!answerIsCorrect && userQuestionHistory == null) {
+            userQuestionHistory = new UserQuestionHistory(question);
+            questionHistories.put(questionId, userQuestionHistory);
         }
 
-        if (userProblemQuestion != null) {
+        if (userQuestionHistory != null) {
             //Increase the wrong-answer count:
-            userProblemQuestion.adjustCount(answerIsCorrect);
+            userQuestionHistory.adjustCount(answerIsCorrect);
         }
     }
 
-    public Collection<UserProblemQuestion> getProblemQuestions() {
-        return problemQuestions.values();
+    public Collection<UserQuestionHistory> getQuestionHistories() {
+        return questionHistories.values();
     }
 }
