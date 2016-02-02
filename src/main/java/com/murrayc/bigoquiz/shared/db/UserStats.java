@@ -28,8 +28,8 @@ public class UserStats implements IsSerializable {
     int answered;
     int correct;
 
-    int count_questions_asked_once = 0;
-    int count_questions_correct_once = 0;
+    int countQuestionsAnsweredOnce = 0;
+    int countQuestionsCorrectOnce = 0;
 
     Map<String, UserQuestionHistory> questionHistories;
 
@@ -116,15 +116,23 @@ public class UserStats implements IsSerializable {
         userQuestionHistory.adjustCount(answerIsCorrect);
 
         if (firstTimeAsked) {
-            count_questions_asked_once++;
+            countQuestionsAnsweredOnce++;
         }
 
         if (firstTimeCorrect) {
-            count_questions_correct_once++;
+            countQuestionsCorrectOnce++;
         }
     }
 
     public Collection<UserQuestionHistory> getQuestionHistories() {
         return questionHistories.values();
+    }
+
+    public int getAnsweredOnce() {
+        return countQuestionsAnsweredOnce;
+    }
+
+    public int getCorrectOnce() {
+        return countQuestionsCorrectOnce;
     }
 }

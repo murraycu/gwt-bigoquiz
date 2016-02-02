@@ -413,13 +413,40 @@ h4 * {
 
 }
 
-.label-questions-count {
+.label-score {
     color: #586F7C;
 }
 
-.label-stats {
-    color: #586F7C;
+
+.progress-bar {
+
 }
+
+.progress-part-correct-once {
+    background-color: #B8DBD9;
+    padding: 0.3em;
+    width: 20%;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.progress-part-answered-once {
+    background-color: #B6B2DD;
+    padding: 0.3em;
+    width: 20%;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.progress-part-count {
+    background-color: #586F7C;
+    padding: 0.3em;
+    width: 20%;
+    margin: 0;
+    white-space: nowrap;
+
+}
+
 
 .label-problem-questions {
     margin-bottom: 1em;

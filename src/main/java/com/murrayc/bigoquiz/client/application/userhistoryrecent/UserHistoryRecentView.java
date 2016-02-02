@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.client.application.userhistoryrecent;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
@@ -128,19 +129,17 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
             Utils.addHeaderToPanel(3, detailsPanel, titleLabel);
 
-            final Panel p = Utils.addParagraph(detailsPanel);
             final int count = section.questionsCount;
-            final Label labelCount = new InlineLabel(messages.questionsCount(count));
-            p.add(labelCount);
-            labelCount.addStyleName("label-questions-count");
 
             final UserStats stats = userRecentHistory.getStats(sectionId);
             if (stats != null) {
-                final String strStats = messages.scoreMessage(stats.getAnswered(), stats.getCorrect());
-                final Panel paraStats = Utils.addParagraph(detailsPanel);
-                final Label labelStats = new InlineLabel(strStats);
-                paraStats.add(labelStats);
-                labelStats.addStyleName("label-stats");
+                addStackedProgressBar(detailsPanel, stats.getCorrectOnce(), stats.getAnsweredOnce(), count);
+
+                /* This doesn't seem interesting enough to take up the extra space with it:
+                addParagraphWithText(detailsPanel,
+                        messages.scoreMessage(stats.getAnswered(), stats.getCorrect()),
+                        "label-score");
+                */
             } else {
                 GWT.log("buildUi(): UserStats is null.");
             }
@@ -174,6 +173,39 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
 
         }
+    }
+
+    private void addStackedProgressBar(final FlowPanel parentPanel, int correctOnce, int answeredOnce, int count) {
+        final FlowPanel panelProgress = new FlowPanel();
+        parentPanel.add(panelProgress);
+        panelProgress.addStyleName("progress-bar");
+        //panelProgress.addStyleName("clearfix");
+
+        final String correctStr = messages.correctOnce(correctOnce);
+        final String answeredStr = messages.answeredOnce(answeredOnce);
+        final String countStr = messages.questionsCount(count);
+
+        final Panel partCorrect = addParagraphWithText(panelProgress, correctStr, "progress-part-correct-once");
+        final Panel partAnswered = addParagraphWithText(panelProgress, answeredStr, "progress-part-answered-once");
+        final Panel partCount = addParagraphWithText(panelProgress, countStr, "progress-part-count");
+
+        final double countDouble = (double)count;
+        final double correctPercentage = (count == 0 ? 0 : (double)correctOnce / countDouble) * 100;
+        final String correctWidthStr = NumberFormat.getFormat("#").format(correctPercentage) + "%";
+        final double answeredPercentage = (count == 0 ? 0 : (double)answeredOnce / countDouble) * 100;
+        final String answeredWidthStr = NumberFormat.getFormat("#").format(answeredPercentage) + "%";
+
+        partCorrect.setWidth(correctWidthStr);
+        partAnswered.setWidth(answeredWidthStr);
+        partCount.setWidth("100%");
+    }
+
+    private Panel addParagraphWithText(final FlowPanel parentPanel, final String text, final String styleName) {
+        final Panel para = Utils.addParagraph(parentPanel);
+        final Label label = new InlineLabel(text);
+        para.add(label);
+        para.addStyleName(styleName);
+        return para;
     }
 
     @Override
