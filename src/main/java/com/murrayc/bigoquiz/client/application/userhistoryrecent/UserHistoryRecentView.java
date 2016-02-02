@@ -164,7 +164,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                     labelScore.addStyleName("problem-answer-score");
                     paraScore.add(labelScore);
 
-                    final Hyperlink link = createProblemQuestionrHyperlink(problemQuestion);
+                    final Hyperlink link = createProblemQuestionHyperlink(problemQuestion);
                     paraScore.add(link);
                 }
             }
@@ -187,7 +187,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         buildUi();
     }
 
-    private Hyperlink createProblemQuestionrHyperlink(final UserQuestionHistory problemQuestion) {
+    private Hyperlink createProblemQuestionHyperlink(final UserQuestionHistory problemQuestion) {
         //TODO: This will take the user to that question,
         //and keep any subsequent questions to all sections),
         //losing any current section the user had set before clicking this link.
