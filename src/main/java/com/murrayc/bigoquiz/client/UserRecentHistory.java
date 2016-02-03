@@ -13,7 +13,7 @@ import java.util.*;
  * Created by murrayc on 1/23/16.
  */
 public class UserRecentHistory implements IsSerializable {
-    /* Do not make thse final, because then GWT cannot serialize them. */
+    /* Do not make these final, because then GWT cannot serialize them. */
     private /* final */ String userId;
     private /* final */ QuizSections sections;
     private Map<String, UserStats> sectionStats = new HashMap<>();

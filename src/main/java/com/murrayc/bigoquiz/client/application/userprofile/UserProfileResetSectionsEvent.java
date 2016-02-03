@@ -4,8 +4,6 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 
-//TODO: Fix the "Setion" spelling errors here:
-
 /**
  * Created by murrayc on 1/25/16.
  */

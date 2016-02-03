@@ -55,7 +55,7 @@ public class UserStats implements IsSerializable {
         return sectionId;
     }
 
-    public void setSectionid(final String sectionId) {
+    public void setSectionId(final String sectionId) {
         this.sectionId = sectionId;
     }
 

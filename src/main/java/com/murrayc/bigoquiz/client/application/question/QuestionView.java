@@ -54,9 +54,9 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         final Panel showingFromPanel = new FlowPanel(ParagraphElement.TAG);
         showingFromPanel.addStyleName("show-from-panel");
         //TODO: Avoid the " " concatenation:
-        final Label nextQuestionSectiontitle = new InlineLabel(constants.showQuestionsFrom() + " ");
-        nextQuestionSectiontitle.addStyleName("next-question-section-title-label");
-        showingFromPanel.add(nextQuestionSectiontitle);
+        final Label nextQuestionSectionTitle = new InlineLabel(constants.showQuestionsFrom() + " ");
+        nextQuestionSectionTitle.addStyleName("next-question-section-title-label");
+        showingFromPanel.add(nextQuestionSectionTitle);
         showingFromPanel.add(nextQuestionSectionListBox);
         nextQuestionSectionListBox.addStyleName("next-question-section-title");
         nextQuestionSectionListBox.addChangeHandler(new ChangeHandler() {
@@ -133,7 +133,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
         nextQuestionSectionListBox.clear();
 
-        //TODO: Give this a special DI/boolean-marker when we can use a proper assocative ListBox:
+        //TODO: Give this a special DI/boolean-marker when we can use a proper associative ListBox:
         nextQuestionSectionListBox.addItem(constants.allSectionsTitle());
 
         for(final String title : sections.getTitles()) {

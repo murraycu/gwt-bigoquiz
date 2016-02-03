@@ -105,7 +105,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
             final UserStats userStats = mapUserStats.get(question.getSectionId());
             if (userStats == null) {
-                //Assume this means the user has never answered any question in the sectoin.
+                //Assume this means the user has never answered any question in the section.
                 return question;
             }
 
