@@ -133,6 +133,9 @@ body {
     /* See media query: margin-bottom: 1em; */
 
     float: right;
+
+    /* TODO: Avoid this somehow? */
+    width: 350px; /* To avoid any text from making it too wide. */
 }
 
 .sidebar-panel-sections h2 {
