@@ -133,8 +133,15 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
         //Get the stats for this user, for each section:
         final UserRecentHistory result = new UserRecentHistory(userId, sections);
+
+        final Map<String, UserStats> mapUserStats = getUserStats(userId);
         for (final String sectionId : sections.getSectionIds()) {
-            UserStats userStats = getUserStats(userId, sectionId);
+            if (StringUtils.isEmpty(sectionId)) {
+                //This seems wise.
+                continue;
+            }
+
+            UserStats userStats = mapUserStats.get(sectionId);
             if (userStats == null) {
                 //So we get the default values:
                 userStats = new UserStats(userId, sectionId);
@@ -184,7 +191,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
     }
 
-    private UserStats getUserStats(final String userId, final String sectionId) {
+    private UserStats getUserStatsForSection(final String userId, final String sectionId) {
         final EntityManagerFactory emf = EntityManagerFactory.get();
         Query<UserStats> q = emf.ofy().load().type(UserStats.class);
         q = q.filter("userId", userId);
@@ -196,6 +203,25 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         return null;
+    }
+
+    /**
+     * Get a map of section ID to UserStats for that section, for the specified user.
+     *
+     * @param userId
+     * @return
+     */
+    private Map<String, UserStats> getUserStats(final String userId) {
+        final EntityManagerFactory emf = EntityManagerFactory.get();
+        Query<UserStats> q = emf.ofy().load().type(UserStats.class);
+        q = q.filter("userId", userId);
+
+        final Map<String, UserStats> map = new HashMap<>();
+        for (final UserStats userStats : q.list()) {
+            map.put(userStats.getSectionId(), userStats);
+        }
+
+        return map;
     }
 
     private UserProfile getUserProfileImpl() {
@@ -283,7 +309,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
             return;
         }
 
-        UserStats userStats = getUserStats(userId, sectionId);
+        UserStats userStats = getUserStatsForSection(userId, sectionId);
         if (userStats == null) {
             userStats = new UserStats(userId, sectionId);
         }
