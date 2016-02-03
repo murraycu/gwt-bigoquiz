@@ -21,7 +21,6 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
     private final Label usernameLabel = new InlineLabel();
     private final Anchor logoutLabel = new Anchor(constants.logOut());
-    private final Button buttonResetSections = new Button(constants.buttonResetSections());
 
 
     UserProfileView() {
@@ -35,6 +34,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
         mainPanel.add(logoutLabel);
         logoutLabel.addStyleName("logout-label");
 
+        Button buttonResetSections = new Button(constants.buttonResetSections());
         Utils.addParagraphWithChild(mainPanel, buttonResetSections);
         buttonResetSections.addStyleName("button-reset-sections");
         buttonResetSections.addClickHandler(new ClickHandler() {

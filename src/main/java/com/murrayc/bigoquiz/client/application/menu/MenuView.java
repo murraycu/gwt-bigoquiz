@@ -12,12 +12,12 @@ import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 public class MenuView extends ViewWithUiHandlers<MenuUserEditUiHandlers>
         implements MenuPresenter.MyView {
 
-    // BigOQuizConstants.java is generated in the target/ directory,
-    // from BigOQuizConstants.properties
-    // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
-    private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
-
     MenuView() {
+        // BigOQuizConstants.java is generated in the target/ directory,
+        // from BigOQuizConstants.properties
+        // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
+        final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
+
         final Panel mainPanel = new FlowPanel();
         mainPanel.addStyleName("menu-panel");
         mainPanel.addStyleName("clearfix"); //So it is as high as its children.
