@@ -17,7 +17,6 @@ import com.murrayc.bigoquiz.client.LoginServiceAsync;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
-import com.murrayc.bigoquiz.client.application.question.QuestionNextQuestionSetionIdEvent;
 import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentPresenter;
 
 /**

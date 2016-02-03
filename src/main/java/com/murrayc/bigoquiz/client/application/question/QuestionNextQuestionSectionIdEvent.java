@@ -4,14 +4,13 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 
-//TODO: Fix the "Setion" spelling errors here:
 /**
  * Created by murrayc on 1/25/16.
  */
-public class QuestionNextQuestionSetionIdEvent extends GwtEvent<QuestionNextQuestionSetionIdEvent.QuestionUserAnswerAddedEventHandler> {
+public class QuestionNextQuestionSectionIdEvent extends GwtEvent<QuestionNextQuestionSectionIdEvent.QuestionUserAnswerAddedEventHandler> {
     private final String nextQuestionSectionId;
 
-    public QuestionNextQuestionSetionIdEvent(final String nextQuestionSectionId) {
+    public QuestionNextQuestionSectionIdEvent(final String nextQuestionSectionId) {
         this.nextQuestionSectionId = nextQuestionSectionId;
     }
 
@@ -20,14 +19,14 @@ public class QuestionNextQuestionSetionIdEvent extends GwtEvent<QuestionNextQues
     }
 
     public interface QuestionUserAnswerAddedEventHandler extends EventHandler {
-        void onQuestionNextSectionId(QuestionNextQuestionSetionIdEvent event);
+        void onQuestionNextSectionId(QuestionNextQuestionSectionIdEvent event);
     }
 
     public static final Type<QuestionUserAnswerAddedEventHandler> TYPE = new Type<>();
 
     public static void fire(final HasHandlers source, final String nextQuestionSectionId) {
         if (TYPE != null) {
-            source.fireEvent(new QuestionNextQuestionSetionIdEvent(nextQuestionSectionId));
+            source.fireEvent(new QuestionNextQuestionSectionIdEvent(nextQuestionSectionId));
         }
     }
 

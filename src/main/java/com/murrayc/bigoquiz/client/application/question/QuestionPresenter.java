@@ -200,7 +200,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     }
 
     private void tellUserHistoryPresenterAboutNextQuestionSectionId(final String nextQuestionSectionId) {
-        QuestionNextQuestionSetionIdEvent.fire(this, nextQuestionSectionId);
+        QuestionNextQuestionSectionIdEvent.fire(this, nextQuestionSectionId);
     }
 
     @Override
