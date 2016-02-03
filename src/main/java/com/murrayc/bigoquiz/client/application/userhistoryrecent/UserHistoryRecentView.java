@@ -129,11 +129,11 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
             Utils.addHeaderToPanel(3, detailsPanel, titleLabel);
 
-            final int count = section.questionsCount;
+            final int questionsCount = section.questionsCount;
 
             final UserStats stats = userRecentHistory.getStats(sectionId);
             if (stats != null) {
-                addStackedProgressBar(detailsPanel, stats.getCorrectOnce(), stats.getAnsweredOnce(), count);
+                addStackedProgressBar(detailsPanel, stats.getCorrectOnce(), stats.getAnsweredOnce(), questionsCount);
 
                 /* This doesn't seem interesting enough to take up the extra space with it:
                 addParagraphWithText(detailsPanel,
@@ -156,7 +156,20 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                 Utils.addParagraphWithText(problemQuestionsPanel, constants.problemQuestionsNoneYet(),
                         "problem-answer-score");
             } else {
+                int count = 0;
+                int extras = 0;
+                final int MAX = 5;
                 for (final UserQuestionHistory problemQuestion : problemQuestions) {
+                    if (count >= MAX) {
+                        extras += 1;
+                        continue;
+                    }
+
+                    if (problemQuestion.getCountAnsweredWrong() <= 0) {
+                        //It's not really a problem question.
+                        continue;
+                    }
+
                     final Panel paraScore = Utils.addParagraph(problemQuestionsPanel);
 
                     final String strScore = "-" + problemQuestion.getCountAnsweredWrong();
@@ -166,6 +179,13 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
                     final Hyperlink link = createProblemQuestionHyperlink(problemQuestion, nextQuestionSectionId);
                     paraScore.add(link);
+
+                    count += 1;
+                }
+
+                if (extras > 0) {
+                    Utils.addParagraphWithText(problemQuestionsPanel, messages.moreProblemQuestions(extras),
+                            "problem-questions-more-questions");
                 }
             }
 
