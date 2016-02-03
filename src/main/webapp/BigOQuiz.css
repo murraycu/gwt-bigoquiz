@@ -105,7 +105,7 @@ body {
      * We need the !important to override the body style in clean.css,
      * for some reason.
      */
-    margin: 0px !important;
+    margin: 0 !important;
 
     background-color: #F4F4F9 !important;
 }
@@ -531,7 +531,7 @@ h4 * {
 
 .show-from-panel {
     /* Otherewise there is a top margin. */
-    margin-top: 0em;
+    margin-top: 0;
 }
 
 .user-status-answers-panel h3 {
@@ -540,7 +540,7 @@ h4 * {
 }
 
 .user-status-answers-panel h3:first-child {
-    margin-top: 0em;
+    margin-top: 0;
 }
 
 .gwt-Button.next-question-button {
