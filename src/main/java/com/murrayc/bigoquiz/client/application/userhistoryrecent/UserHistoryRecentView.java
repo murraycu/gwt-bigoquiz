@@ -17,10 +17,11 @@ import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
+import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
 import com.murrayc.bigoquiz.shared.db.UserStats;
 
-import java.util.Collection;
+import java.util.*;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -115,12 +116,40 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             return;
         }
 
-        for (final String sectionId : sections.getSectionIds()) {
-            final QuizSections.Section section = sections.getSection(sectionId);
+        final List<QuizSections.Section> sectionItems = new ArrayList<>(sections.getSections());
+
+        //Do the sorting here on the client-side,
+        //because the titles could (one day) be localized,
+        //and the sorting would need to depend on the user's locale too.
+        Collections.sort(sectionItems,
+                new Comparator<QuizSections.Section>() {
+                    @Override
+                    public int compare(final QuizSections.Section o1, final QuizSections.Section o2) {
+                        if ((o1 == null) && (o2 == null)) {
+                            return 0;
+                        } else if (o1 == null) {
+                            return -1;
+                        }
+
+                        if ((o1.title == null) && (o2.title == null)) {
+                            return 0;
+                        } else if (o1.title == null) {
+                            return -1;
+                        }
+
+                        return o1.title.compareTo(o2.title);
+                    }
+                });
+
+        for (final QuizSections.Section section : sectionItems) {
             if (section == null) {
                 continue;
             }
 
+            final String sectionId = section.id;
+            if (StringUtils.isEmpty(sectionId)) {
+                continue;
+            }
 
             final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(sectionId);
             final String url = placeManager.buildHistoryToken(placeRequest);
