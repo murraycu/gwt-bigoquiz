@@ -179,8 +179,6 @@ public class QuizServiceImpl extends ServiceWithUser implements
             return null;
         }
 
-        final EntityManagerFactory emf = EntityManagerFactory.get();
-
         //Get the stats for this user, for each section:
         final UserRecentHistory result = new UserRecentHistory(userId, sections);
 
