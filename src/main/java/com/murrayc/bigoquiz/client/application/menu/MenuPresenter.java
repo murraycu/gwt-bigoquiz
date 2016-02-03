@@ -44,14 +44,4 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 
         setInSlot(MenuPresenter.SLOT_USER_STATUS, userStatusPresenter);
     }
-
-    @Override
-    public void goTo(final String token) {
-        PlaceRequest placeRequest = new PlaceRequest.Builder()
-                .nameToken(token)
-                /* .with(ParameterTokens.MODEL, model) */
-                .build();
-
-        placeManager.revealPlace(placeRequest);
-    }
 }
