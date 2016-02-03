@@ -15,4 +15,7 @@ public interface HtmlResources extends ClientBundle {
 
     @Source("com/murrayc/bigoquiz/client/ui/sidebar-advert.html")
     TextResource getSidebarAdvertHtml();
+
+    @Source("com/murrayc/bigoquiz/client/ui/about.html")
+    TextResource getAboutHtml();
 }

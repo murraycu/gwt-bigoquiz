@@ -5,6 +5,8 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.murrayc.bigoquiz.client.HtmlResources;
+import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 
 /**
@@ -26,9 +28,7 @@ public class AboutView extends ViewWithUiHandlers<AboutUserEditUiHandlers>
         titleLabel.addStyleName("page-title-label");
         mainPanel.add(titleLabel);
 
-        Label aboutLabel = new Label(constants.aboutText());
-        mainPanel.add(aboutLabel);
-        aboutLabel.addStyleName("about-label");
+        Utils.addHtmlToPanel(mainPanel, HtmlResources.INSTANCE.getAboutHtml());
 
         Label versionLabel = new Label();
         mainPanel.add(versionLabel);

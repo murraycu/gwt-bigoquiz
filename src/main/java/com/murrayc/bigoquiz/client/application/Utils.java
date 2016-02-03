@@ -3,11 +3,9 @@ package com.murrayc.bigoquiz.client.application;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.ParagraphElement;
+import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 
 /**
  * Created by murrayc on 1/28/16.
@@ -40,6 +38,14 @@ public class Utils {
 
     public static boolean widgetIsVisible(final Widget w) {
         return w.isVisible() && (w.getAbsoluteLeft() > 0) && (w.getAbsoluteTop() > 0);
+    }
+
+    public static void addHtmlToPanel(final Panel parentPanel, final TextResource textResource) {
+        final HTML htmlPanel = new HTML();
+        htmlPanel.setHTML(textResource.getText());
+        final SimplePanel readingPanel = new SimplePanel();
+        readingPanel.add(htmlPanel);
+        parentPanel.add(readingPanel);
     }
 
     /* This doesn't seem to work:

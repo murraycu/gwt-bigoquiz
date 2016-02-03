@@ -1,13 +1,13 @@
 /** Application-specific CSS rules. */
 
-/* Responsive:
+/* Slightly-narrow screens:
  *
  * Only show links sidebar on wider screens. */
 @media screen and (max-width: 1100px)  {
     .sidebar-panel-links { display: none; }
 }
 
-/* Responsive:
+/* Narrow screens:
  *
  * Only show sections sidebar on wider screens. */
 @media screen and (max-width: 550px)  {
@@ -15,7 +15,7 @@
     .user-profile-user-history-panel { display: block; }
 }
 
-/* Responsive:
+/* Not-narrow screens:
  *
  * Only show user-profile-user-history-panel on narrower screens.
  * On wider screens, it is already visible in the sidebar.
@@ -23,6 +23,22 @@
 @media screen and (min-width: 551px)  {
     .user-profile-user-history-panel { display: none; }
 }
+
+
+/* Wide (Not-slightly-narrow) screens:
+ *
+ * Stop the about text from filling the full page width,
+ * pushing the sidebars to the bottom. */
+@media screen and (min-width: 1100px)  {
+    /* TODO: Find some way to avoid this arbitrary value,
+     * which has to be just enough to show the content,
+     * but not so much that the empty extra width will
+     * push the sidebars down on typical screen widths.
+     */
+    .content-panel{ width: 500px }
+}
+
+
 
 @media screen and (max-height: 600px) {
     /* TODO: Find some way to do this by justing changing one variable instead.. */

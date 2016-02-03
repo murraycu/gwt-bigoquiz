@@ -1,8 +1,6 @@
 package com.murrayc.bigoquiz.client.application;
 
-import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -39,8 +37,8 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
         //Add some static HTML in the sidebar:
         //TODO: It would be nicer to have this right in the main .html file,
         //but then we couldn't put it in the correct <div>.
-        addHtml(sidebarPanelLinks, HtmlResources.INSTANCE.getReadingHtml());
-        addHtml(sidebarPanelLinks, HtmlResources.INSTANCE.getSidebarAdvertHtml());
+        Utils.addHtmlToPanel(sidebarPanelLinks, HtmlResources.INSTANCE.getReadingHtml());
+        Utils.addHtmlToPanel(sidebarPanelLinks, HtmlResources.INSTANCE.getSidebarAdvertHtml());
 
 
         initWidget(main);
@@ -50,11 +48,4 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
         bindSlot(ApplicationPresenter.SLOT_CONTENT, contentPanel);
     }
 
-    private void addHtml(final Panel parentPanel, final TextResource textResource) {
-        final HTML htmlPanel = new HTML();
-        htmlPanel.setHTML(textResource.getText());
-        final SimplePanel readingPanel = new SimplePanel();
-        readingPanel.add(htmlPanel);
-        parentPanel.add(readingPanel);
-    }
 }
