@@ -1,6 +1,8 @@
 package com.murrayc.bigoquiz.client.application.userprofile;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.LoginInfo;
@@ -19,6 +21,8 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
     private final Label usernameLabel = new InlineLabel();
     private final Anchor logoutLabel = new Anchor(constants.logOut());
+    private final Button buttonResetSections = new Button(constants.buttonResetSections());
+
 
     UserProfileView() {
         final FlowPanel mainPanel = new FlowPanel();
@@ -26,16 +30,22 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
         Utils.addHeaderToPanel(2, mainPanel, constants.profileTitle());
 
-        final Panel p = Utils.addParagraph(mainPanel);
-        Label usernameTitleLabel = new InlineLabel(constants.username());
-        p.add(usernameTitleLabel);
-        usernameTitleLabel.addStyleName("username-title-label");
-        p.add(usernameLabel);
-        usernameLabel.addStyleName("username-label");
+        Utils.addParagraphWithText(mainPanel, constants.username(), "username-title-label");
 
         mainPanel.add(logoutLabel);
         logoutLabel.addStyleName("logout-label");
 
+        Utils.addParagraphWithChild(mainPanel, buttonResetSections);
+        buttonResetSections.addStyleName("button-reset-sections");
+        buttonResetSections.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(final ClickEvent event) {
+                onResetSectionsButton();
+            }
+        });
+
+
+        //Show the sections (user recent history):
         //Put it in a div with a specific class, so we can hide in on wider
         //screens where it is already visible in the sidebar:
         final SimplePanel userHistoryParent = new SimplePanel();
@@ -48,7 +58,6 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
         initWidget(mainPanel);
     }
-
 
     @Override
     public void setUserStatusFailed() {
@@ -66,5 +75,42 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
         usernameLabel.setText(username);
         logoutLabel.setHref(logoutLink);
+    }
+
+    private void onResetSectionsButton() {
+        //TODO: Do this in the presenter?
+        final DialogBox dialog = new DialogBox();
+        dialog.setText(constants.dialogResetSectionsTitle());
+
+        final Button buttonOK = new Button(constants.dialogResetSectionsOkButton());
+        buttonOK.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                dialog.hide();
+                getUiHandlers().onResetSections();
+            }
+        });
+
+        final Button buttonCancel = new Button(constants.dialogResetSectionsCancelButton());
+        buttonCancel.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                dialog.hide();
+            }
+        });
+
+        final Panel panelDialog = new FlowPanel();
+        Utils.addParagraphWithText(panelDialog, constants.dialogResetSectionsText(),
+                "reset-sections-confirm-dialog-text");
+        final Panel panelButtons = new FlowPanel();
+        panelButtons.addStyleName("reset-sections-confirm-dialog-buttons-panel");
+        panelButtons.add(buttonCancel);
+        buttonCancel.addStyleName("reset-sections-confirm-dialog-cancel-button");
+        panelButtons.add(buttonOK);
+        buttonOK.addStyleName("reset-sections-confirm-dialog-ok-button");
+        panelDialog.add(panelButtons);
+        dialog.setWidget(panelDialog);
+
+        dialog.show();
     }
 }

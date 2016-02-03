@@ -15,7 +15,9 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.LoginServiceAsync;
 import com.murrayc.bigoquiz.client.NameTokens;
+import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
+import com.murrayc.bigoquiz.client.application.question.QuestionNextQuestionSetionIdEvent;
 import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentPresenter;
 
 /**
@@ -24,6 +26,7 @@ import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRece
 public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView, UserProfilePresenter.MyProxy>
         implements UserProfileUserEditUiHandlers {
     private final UserHistoryRecentPresenter userHistoryRecentPresenter;
+
 
     interface MyView extends View, HasUiHandlers<UserProfileUserEditUiHandlers> {
         void setUserStatusFailed();
@@ -74,5 +77,26 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
         super.onBind();
 
         setInSlot(SLOT_USER_HISTORY_RECENT, userHistoryRecentPresenter);
+    }
+
+    @Override
+    public void onResetSections() {
+        QuizServiceAsync.Util.getInstance().resetSections(new AsyncCallback<Void>() {
+            @Override
+            public void onFailure(final Throwable error) {
+                GWT.log("AsyncCallback Failed: resetSections(): " + error.getMessage());
+
+                //TODO: getView().setUserStatusFailed();
+            }
+
+            @Override
+            public void onSuccess(Void result) {
+                tellUserHistoryPresenterAboutResetSections();
+            }
+        });
+    }
+
+    private void tellUserHistoryPresenterAboutResetSections() {
+        UserProfileResetSectionsEvent.fire(this);
     }
 }

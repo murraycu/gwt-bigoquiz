@@ -37,6 +37,11 @@ public interface QuizService extends RemoteService {
 
     UserRecentHistory getUserRecentHistory() throws IllegalArgumentException;
 
+    /**
+     * Clear all question answer history, progress, scores, etc.
+     */
+    void resetSections();
+
     class SubmissionResult implements IsSerializable {
         private boolean result;
         private String correctAnswer; //If result is false.

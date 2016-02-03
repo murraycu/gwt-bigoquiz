@@ -160,6 +160,30 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return result;
     }
 
+    @Override
+    public void resetSections() {
+        final String userId = getUserId();
+        if (StringUtils.isEmpty(userId)) {
+            Log.error("resetSections(): userId was null.");
+            return;
+        }
+
+        //TODO: Get the keys only:
+        final EntityManagerFactory emf = EntityManagerFactory.get();
+        Query<UserStats> q = emf.ofy().load().type(UserStats.class);
+        q = q.filter("userId", userId);
+        final List<UserStats> list = q.list();
+        if (list.isEmpty()) {
+            //Presumably, they don't exist yet, or have already been deleted.
+            return;
+        }
+
+        for (final UserStats userStats : list) {
+            //TODO: Batch these:
+            emf.ofy().delete().entity(userStats).now();
+        }
+    }
+
     private UserStats getUserStats(final String userId, final String sectionId) {
         final EntityManagerFactory emf = EntityManagerFactory.get();
         Query<UserStats> q = emf.ofy().load().type(UserStats.class);

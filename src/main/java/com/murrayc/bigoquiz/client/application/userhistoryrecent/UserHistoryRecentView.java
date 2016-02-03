@@ -153,10 +153,8 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
             final Collection<UserQuestionHistory> problemQuestions = stats.getQuestionHistories();
             if (problemQuestions == null || problemQuestions.isEmpty()) {
-                final Panel paraCount = Utils.addParagraph(problemQuestionsPanel);
-                final Label labelScore = new InlineLabel(constants.problemQuestionsNoneYet());
-                labelScore.addStyleName("problem-answer-score");
-                paraCount.add(labelScore);
+                Utils.addParagraphWithText(problemQuestionsPanel, constants.problemQuestionsNoneYet(),
+                        "problem-answer-score");
             } else {
                 for (final UserQuestionHistory problemQuestion : problemQuestions) {
                     final Panel paraScore = Utils.addParagraph(problemQuestionsPanel);
@@ -185,9 +183,9 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         final String answeredStr = messages.answeredOnce(answeredOnce);
         final String countStr = messages.questionsCount(count);
 
-        final Panel partCorrect = addParagraphWithText(panelProgress, correctStr, "progress-part-correct-once");
-        final Panel partAnswered = addParagraphWithText(panelProgress, answeredStr, "progress-part-answered-once");
-        final Panel partCount = addParagraphWithText(panelProgress, countStr, "progress-part-count");
+        final Panel partCorrect = Utils.addParagraphWithText(panelProgress, correctStr, "progress-part-correct-once");
+        final Panel partAnswered = Utils.addParagraphWithText(panelProgress, answeredStr, "progress-part-answered-once");
+        final Panel partCount = Utils.addParagraphWithText(panelProgress, countStr, "progress-part-count");
 
         final double countDouble = (double)count;
         final double correctPercentage = (count == 0 ? 0 : (double)correctOnce / countDouble) * 100;
@@ -198,14 +196,6 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         partCorrect.setWidth(correctWidthStr);
         partAnswered.setWidth(answeredWidthStr);
         partCount.setWidth("100%");
-    }
-
-    private Panel addParagraphWithText(final FlowPanel parentPanel, final String text, final String styleName) {
-        final Panel para = Utils.addParagraph(parentPanel);
-        final Label label = new InlineLabel(text);
-        para.add(label);
-        para.addStyleName(styleName);
-        return para;
     }
 
     @Override

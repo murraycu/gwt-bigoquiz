@@ -321,6 +321,27 @@ background-color: #B6B2DD;
 
 }
 
+.button-reset-sections {
+
+}
+
+.dialogMiddleCenterInner.dialogContent {
+    margin: 1em;
+}
+
+.reset-sections-confirm-dialog-buttons-panel {
+
+}
+
+.gwt-Button.reset-sections-confirm-dialog-ok-button {
+    background: red;
+    font-weight: bold;
+}
+
+.gwt-Button.reset-sections-confirm-dialog-cancel-button {
+    font-weight: bold;
+}
+
 .user-profile-user-history-panel {
 
 }

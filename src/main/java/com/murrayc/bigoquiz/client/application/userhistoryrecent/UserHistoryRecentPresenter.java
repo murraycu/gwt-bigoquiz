@@ -13,6 +13,7 @@ import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.client.application.question.QuestionNextQuestionSetionIdEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
+import com.murrayc.bigoquiz.client.application.userprofile.UserProfileResetSectionsEvent;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.StringUtils;
 
@@ -22,7 +23,8 @@ import com.murrayc.bigoquiz.shared.StringUtils;
 public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecentPresenter.MyView>
         implements UserHistoryRecentUserEditUiHandlers,
         QuestionUserAnswerAddedEvent.QuestionUserAnswerAddedEventHandler,
-        QuestionNextQuestionSetionIdEvent.QuestionUserAnswerAddedEventHandler {
+        QuestionNextQuestionSetionIdEvent.QuestionUserAnswerAddedEventHandler,
+        UserProfileResetSectionsEvent.UserProfileResetSectionsEventHandler {
 
     private String nextQuestionSectionId;
 
@@ -52,7 +54,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
 
         addRegisteredHandler(QuestionUserAnswerAddedEvent.TYPE, this);
         addRegisteredHandler(QuestionNextQuestionSetionIdEvent.TYPE, this);
-
+        addRegisteredHandler(UserProfileResetSectionsEvent.TYPE, this);
 
         //TODO: If QUESTION_PARAM_NEXT_QUESTION_SECTION_ID was specified in the URL,
         //then QuestionPresenter will cause the UI to be rebuilt again,
@@ -79,6 +81,13 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         this.nextQuestionSectionId = nextQuestionSectionId;
 
         getView().setQuestionNextSectionId(nextQuestionSectionId);
+    }
+
+    @ProxyEvent
+    @Override
+    public void onUserProfileResetSections(final UserProfileResetSectionsEvent event) {
+        //Completely refresh the data from the server:
+        getAndShowHistory();
     }
 
     private void getAndShowHistory() {

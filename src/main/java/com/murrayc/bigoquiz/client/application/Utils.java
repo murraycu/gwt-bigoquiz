@@ -24,15 +24,23 @@ public class Utils {
         DOM.insertChild(headingElement, widget.getElement(), 0);
     }
 
+    public static Panel addParagraphWithText(final Panel parentPanel, final String text, final String styleName) {
+        final Panel para = addParagraph(parentPanel);
+        final Label label = new InlineLabel(text);
+        para.add(label);
+        para.addStyleName(styleName);
+        return para;
+    }
+
     public static Panel addParagraph(final Panel mainPanel) {
         final Panel p = new FlowPanel(ParagraphElement.TAG);
         mainPanel.add(p);
         return p;
     }
 
-    public static Panel addParagraphWithChild(final FlowPanel mainPanel, final Label questionLabel) {
+    public static Panel addParagraphWithChild(final FlowPanel mainPanel, final Widget childWidget) {
         final Panel p = addParagraph(mainPanel);
-        p.add(questionLabel);
+        p.add(childWidget);
         return p;
     }
 

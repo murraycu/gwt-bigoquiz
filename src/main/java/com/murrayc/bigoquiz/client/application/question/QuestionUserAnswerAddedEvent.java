@@ -38,7 +38,7 @@ public class QuestionUserAnswerAddedEvent extends GwtEvent<QuestionUserAnswerAdd
     }
 
     /*
-    public static Type<QuestionUserAnswerAddedEventHandler> getType() {
+    public static Type<UserProfileResetSectionsEventHandler> getType() {
         return TYPE;
     }
     */
