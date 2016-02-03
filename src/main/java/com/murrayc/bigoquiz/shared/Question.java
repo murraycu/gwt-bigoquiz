@@ -14,7 +14,6 @@ public class Question implements IsSerializable {
     private /* final */ String text;
     private /* final */ List<String> choices;
 
-    private String questionTitle;
     private String subSectionTitle;
 
     public Question() {
@@ -54,15 +53,11 @@ public class Question implements IsSerializable {
      */
     public void setTitles(final String subSectionTitle, final Question question) {
         this.subSectionTitle = subSectionTitle;
-        this.questionTitle = question.getText();
+        this.text = question.getText(); //TODO: This is not useful.
 
     }
 
     public String getSubSectionTitle() {
         return subSectionTitle;
-    }
-
-    public String getQuestionTitle() {
-        return questionTitle;
     }
 }
