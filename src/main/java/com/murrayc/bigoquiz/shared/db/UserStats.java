@@ -135,4 +135,17 @@ public class UserStats implements IsSerializable {
     public int getCorrectOnce() {
         return countQuestionsCorrectOnce;
     }
+
+    public boolean getQuestionWasAnswered(final String questionId) {
+        return questionHistories.containsKey(questionId);
+    }
+
+    public int getQuestionCountAnsweredWrong(final String questionId) {
+        final UserQuestionHistory history = questionHistories.get(questionId);
+        if (history == null) {
+            return 0;
+        }
+
+        return history.getCountAnsweredWrong();
+    }
 }

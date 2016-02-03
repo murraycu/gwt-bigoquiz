@@ -76,8 +76,58 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @Override
     public Question getNextQuestion(final String sectionId) throws IllegalArgumentException {
+        final String userId = getUserId();
+        if (StringUtils.isEmpty(userId)) {
+            //The user is not logged in,
+            //so just return a random question:
+            return quiz.getRandomQuestion(sectionId);
+        }
+
         final Quiz quiz = getQuiz();
-        return quiz.getRandomQuestion(sectionId);
+
+        Map<String, UserStats> mapUserStats = getUserStats(userId);
+        final int MAX_TRIES = 10;
+        int tries = 0;
+        Question question = null;
+        Question questionBestSoFar = null;
+        int questionBestCountAnsweredWrong = 0;
+        while(tries < MAX_TRIES) {
+            tries += 1;
+
+            question = quiz.getRandomQuestion(sectionId);
+            if (question == null) {
+                continue;
+            }
+
+            if (questionBestSoFar == null) {
+                questionBestSoFar = question;
+            }
+
+            final UserStats userStats = mapUserStats.get(question.getSectionId());
+            if (userStats == null) {
+                //Assume this means the user has never answered any question in the sectoin.
+                return question;
+            }
+
+            final String questionId = question.getId();
+
+            //Prioritize questions that have never been asked.
+            if (!userStats.getQuestionWasAnswered(questionId)) {
+                return question;
+            }
+
+            //Otherwise, try a few times to get a question that
+            //we have got wrong many times:
+            //We could just get the most-wrong answer directly,
+            //but we want some randomness.
+            final int countAnsweredWrong = userStats.getQuestionCountAnsweredWrong(questionId);
+            if (countAnsweredWrong > questionBestCountAnsweredWrong) {
+                questionBestSoFar = question;
+                questionBestCountAnsweredWrong = countAnsweredWrong;
+            }
+        }
+
+        return questionBestSoFar;
     }
 
     @Override
