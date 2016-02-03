@@ -115,15 +115,11 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return getUserProfileImpl();
     }
 
-    //@Override
+    @Override
     public UserRecentHistory getUserRecentHistory() throws IllegalArgumentException {
-        final UserProfile userProfile = getUserProfile();
-        if (userProfile == null) {
-            return null;
-        }
-
-        final String userId = userProfile.getId();
+        final String userId = getUserId();
         if (StringUtils.isEmpty(userId)) {
+            Log.error("getUserRecentHistory(): userId was null.");
             return null;
         }
 
@@ -248,16 +244,9 @@ public class QuizServiceImpl extends ServiceWithUser implements
     }
 
     private void storeAnswer(boolean result, final Question question) {
-        final UserProfile userProfile = getUserProfileImpl();
-        if (userProfile == null) {
-            Log.error("storeAnswer(): userProfile is null.");
-            //TODO: Keep a score in the session, without a user profile?
-            return;
-        }
-
-        final String userId = userProfile.getId();
+        final String userId = getUserId();
         if (StringUtils.isEmpty(userId)) {
-            Log.error("storeAnswer(): userId is null.");
+            Log.error("storeAnswer(): userId was null.");
             return;
         }
 
@@ -295,4 +284,19 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return df.format(new Date());
     }
     */
+
+    private String getUserId() {
+        final UserProfile userProfile = getUserProfile();
+        if (userProfile == null) {
+            Log.error("getUserId(): userProfile was null.");
+            return null;
+        }
+
+        final String userId = userProfile.getId();
+        if (StringUtils.isEmpty(userId)) {
+            Log.error("getUserId(): userId was null.");
+        }
+
+        return userId;
+    }
 }
