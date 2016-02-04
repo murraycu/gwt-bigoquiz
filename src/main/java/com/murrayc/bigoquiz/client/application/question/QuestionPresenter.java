@@ -238,6 +238,10 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
     @Override
     public void onGoToNextQuestion() {
+        //Stop this from happening automatically,
+        //because then the question would change yet again:
+        autoNextTimer.cancel();
+
         //GWT.log("onGoToNextQuestion: current=" + questionId);
         //This was for the previously-answered question:
         correctAnswer = null;
@@ -297,6 +301,9 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
     @Override
     public void onNextQuestionSectionSelected(final String nextQuestionSectionId) {
+        //Stop the next question from being shown automatically
+        //because then the question would change yet again:
+        autoNextTimer.cancel();
 
         // Don't get a new question if we are already waiting for an answer
         // and the current question is already from a correct section.
