@@ -12,10 +12,7 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.murrayc.bigoquiz.client.LoginInfo;
-import com.murrayc.bigoquiz.client.LoginServiceAsync;
-import com.murrayc.bigoquiz.client.NameTokens;
-import com.murrayc.bigoquiz.client.QuizServiceAsync;
+import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentPresenter;
 import org.jetbrains.annotations.NotNull;
@@ -57,7 +54,7 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
         // Check login status using login service.
         LoginServiceAsync.Util.getInstance().login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
             public void onFailure(@NotNull final Throwable error) {
-                GWT.log("AsyncCallback Failed: login(): " + error.getMessage());
+                Log.error("AsyncCallback Failed: login(): " + error.getMessage());
 
                 getView().setUserStatusFailed();
             }
@@ -85,7 +82,7 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
         QuizServiceAsync.Util.getInstance().resetSections(new AsyncCallback<Void>() {
             @Override
             public void onFailure(@NotNull final Throwable error) {
-                GWT.log("AsyncCallback Failed: resetSections(): " + error.getMessage());
+                Log.error("AsyncCallback Failed: resetSections(): " + error.getMessage());
 
                 //TODO: getView().setUserStatusFailed();
             }

@@ -45,13 +45,13 @@ public class UserRecentHistory implements IsSerializable {
      */
     public void addUserAnswerAtStart(@NotNull final Question question, boolean answerIsCorrect) {
         if (question == null) {
-            GWT.log("addUserAnswerAtStart(): question was null.");
+            Log.error("addUserAnswerAtStart(): question was null.");
             return;
         }
 
         final String sectionId = question.getSectionId();
         if (StringUtils.isEmpty(sectionId)) {
-            GWT.log("addUserAnswerAtStart(): sectionId was empty.");
+            Log.error("addUserAnswerAtStart(): sectionId was empty.");
             return;
         }
 
@@ -63,7 +63,7 @@ public class UserRecentHistory implements IsSerializable {
 
         final String questionId = question.getId();
         if (StringUtils.isEmpty(questionId)) {
-            GWT.log("addUserAnswerAtStart(): questionId was empty.");
+            Log.error("addUserAnswerAtStart(): questionId was empty.");
             return;
         }
 

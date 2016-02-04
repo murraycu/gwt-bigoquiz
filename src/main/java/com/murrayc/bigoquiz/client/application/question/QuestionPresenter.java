@@ -13,6 +13,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
@@ -108,24 +109,24 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         //Question ID:
         final String questionId = request.getParameter(NameTokens.QUESTION_PARAM_QUESTION_ID, null);
-        //GWT.log("prepareFromRequest(): questionId=" + questionId);
+        //Log.error("prepareFromRequest(): questionId=" + questionId);
         if (!StringUtils.isEmpty(questionId)) {
             if (StringUtils.equals(questionId, getQuestionId())) {
                 //We are already showing the correct question.
-                //GWT.log("prepareFromRequest(): already showing.");
+                //Log.error("prepareFromRequest(): already showing.");
                 return;
             }
 
             //If we have already cached this one, just show it:
             if (nextQuestion != null && StringUtils.equals(nextQuestion.getId(), questionId)) {
-                //GWT.log("prepareFromRequest(): using nextQuestion.");
+                //Log.error("prepareFromRequest(): using nextQuestion.");
                 @Nullable final Question question = nextQuestion;
                 nextQuestion = null;
                 showQuestionInView(question);
                 return;
             }
 
-            //GWT.log("prepareFromRequest(): getting from server.");
+            //Log.error("prepareFromRequest(): getting from server.");
 
             //Otherwise, get it from the server and show it:
             getAndUseQuestion(questionId);
@@ -140,7 +141,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         //Submit the answer to the server:
         final String answer = getView().getChoiceSelected();
         if (answer == null) {
-            GWT.log("onSubmitAnswer(): answer was null.");
+            Log.error("onSubmitAnswer(): answer was null.");
             return;
         }
 
@@ -148,13 +149,13 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
-                GWT.log("AsyncCallback Failed: onSubmitAnswer(): " + caught.getMessage());
+                Log.error("AsyncCallback Failed: onSubmitAnswer(): " + caught.getMessage());
             }
 
             @Override
             public void onSuccess(@Nullable final QuizService.SubmissionResult result) {
                 if (result == null) {
-                    GWT.log("AsyncCallback: onSubmitAnswer: onSuccess: result was null.");
+                    Log.error("AsyncCallback: onSubmitAnswer: onSuccess: result was null.");
                     return;
                 }
 
@@ -168,7 +169,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
                 if ((possibleNextQuestion != null) &&
                         (!StringUtils.equals(possibleNextQuestion.getId(), getQuestionId()))) {
                     nextQuestion = possibleNextQuestion;
-                    //GWT.log("Storing nextQuestion for later: " + nextQuestion.getId());
+                    //Log.error("Storing nextQuestion for later: " + nextQuestion.getId());
                 }
 
                 tellUserHistoryPresenterAboutNewUserAnswer(result.getResult());
@@ -190,7 +191,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     private void tellUserHistoryPresenterAboutNewUserAnswer(boolean answerIsCorrect) {
         if (sections == null) {
             //We need this to continue, to get the titles.
-            GWT.log("tellUserHistoryPresenterAboutNewUserAnswer(): sections is null.");
+            Log.error("tellUserHistoryPresenterAboutNewUserAnswer(): sections is null.");
             return;
         }
 
@@ -222,7 +223,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
-                GWT.log("AsyncCallback Failed: onSubmitAnswer(): " + caught.getMessage());
+                Log.error("AsyncCallback Failed: onSubmitAnswer(): " + caught.getMessage());
             }
 
             @Override
@@ -248,7 +249,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         //because then the question would change yet again:
         autoNextTimer.cancel();
 
-        //GWT.log("onGoToNextQuestion: current=" + questionId);
+        //Log.error("onGoToNextQuestion: current=" + questionId);
         //This was for the previously-answered question:
         correctAnswer = null;
 
@@ -256,11 +257,11 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         //we would have received the next question along with the result,
         //and it might still be what we want:
         if (nextQuestion != null) {
-            //GWT.log("onGoToNextQuestion: nextQuestion != null");
+            //Log.error("onGoToNextQuestion: nextQuestion != null");
 
             if ((nextQuestionSectionId == null) ||
                 StringUtils.equals(nextQuestion.getSectionId(), nextQuestionSectionId)) {
-                //GWT.log("onGoToNextQuestion: revealQuestion(): id=" + nextQuestion.getId());
+                //Log.error("onGoToNextQuestion: revealQuestion(): id=" + nextQuestion.getId());
                 revealQuestion(nextQuestion);
                 return;
             }
@@ -331,7 +332,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
-                GWT.log("AsyncCallback Failed: getSections(): " + caught.getMessage());
+                Log.error("AsyncCallback Failed: getSections(): " + caught.getMessage());
             }
 
             @Override
@@ -361,7 +362,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
-                GWT.log("AsyncCallback Failed: getNextQuestion(): " + caught.getMessage());
+                Log.error("AsyncCallback Failed: getNextQuestion(): " + caught.getMessage());
             }
 
             @Override
@@ -375,7 +376,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     }
 
     private void getAndUseQuestion(final String questionId) {
-        //GWT.log("getAndUseQuestion");
+        //Log.error("getAndUseQuestion");
         correctAnswer = null;
         nextQuestion = null;
 
@@ -383,7 +384,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
-                GWT.log("AsyncCallback Failed: getNextQuestion(): " + caught.getMessage());
+                Log.error("AsyncCallback Failed: getNextQuestion(): " + caught.getMessage());
             }
 
             @Override

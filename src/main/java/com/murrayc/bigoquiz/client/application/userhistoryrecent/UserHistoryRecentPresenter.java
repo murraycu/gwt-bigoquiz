@@ -9,6 +9,7 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.client.application.question.QuestionNextQuestionSectionIdEvent;
@@ -96,7 +97,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
-                GWT.log("AsyncCallback Failed: getUserRecentHistory(): " + caught.getMessage());
+                Log.error("AsyncCallback Failed: getUserRecentHistory(): " + caught.getMessage());
                 getView().setServerFailed();
             }
 

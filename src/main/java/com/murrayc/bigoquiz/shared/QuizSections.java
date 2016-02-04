@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.shared;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.murrayc.bigoquiz.client.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,7 +54,7 @@ public class QuizSections implements IsSerializable {
     public void addSubSection(final String sectionId, final String subSectionId, final String subSectionTitle, final String subSectionLink) {
         final Section section = getSection(sectionId);
         if (section == null) {
-            GWT.log("addSubSection(): section does not exist: " + sectionId);
+            Log.error("addSubSection(): section does not exist: " + sectionId);
             return;
         }
 

@@ -10,6 +10,7 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
@@ -178,7 +179,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                         "label-score");
                 */
             } else {
-                GWT.log("buildUi(): UserStats is null.");
+                Log.error("buildUi(): UserStats is null.");
             }
 
             Utils.addHeaderToPanel(4, detailsPanel, constants.problemQuestions());

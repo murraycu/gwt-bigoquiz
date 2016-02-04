@@ -8,6 +8,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
+import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.LoginServiceAsync;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
@@ -40,7 +41,7 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
-                GWT.log("AsyncCallback Failed: getUserProfile(): " + caught.getMessage());
+                Log.error("AsyncCallback Failed: getUserProfile(): " + caught.getMessage());
                 getView().setUserStatusFailed();
             }
 
@@ -61,7 +62,7 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
         // Check login status using login service.
         LoginServiceAsync.Util.getInstance().login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
             public void onFailure(@NotNull final Throwable error) {
-                GWT.log("AsyncCallback Failed: login(): " + error.getMessage());
+                Log.error("AsyncCallback Failed: login(): " + error.getMessage());
 
                 getView().setUserStatusFailed();
             }
