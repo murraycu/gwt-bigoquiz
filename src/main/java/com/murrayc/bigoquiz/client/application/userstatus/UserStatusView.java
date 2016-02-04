@@ -102,7 +102,7 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
     }
 
     @Override
-    public void setLoginInfo(LoginInfo result) {
+    public void setLoginInfo(@NotNull LoginInfo result) {
         loginInfo = result;
         updateUi();
     }

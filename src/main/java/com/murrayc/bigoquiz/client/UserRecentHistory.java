@@ -16,9 +16,9 @@ import java.util.*;
  */
 public class UserRecentHistory implements IsSerializable {
     /* Do not make these final, because then GWT cannot serialize them. */
-    @Nullable
+    @NotNull
     private /* final */ String userId;
-    @Nullable
+    @NotNull
     private /* final */ QuizSections sections;
     @NotNull
     private Map<String, UserStats> sectionStats = new HashMap<>();
@@ -28,7 +28,7 @@ public class UserRecentHistory implements IsSerializable {
         sections = null;
     }
 
-    public UserRecentHistory(final String userId, final QuizSections sections) {
+    public UserRecentHistory(@NotNull final String userId, @Nullable final QuizSections sections) {
         this.userId = userId;
         this.sections = sections;
     }
@@ -75,7 +75,7 @@ public class UserRecentHistory implements IsSerializable {
     }
 
 
-    @Nullable
+    @NotNull
     public QuizSections getSections() {
         return sections;
     }

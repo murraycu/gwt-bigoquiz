@@ -23,7 +23,7 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
     public interface MyView extends View, HasUiHandlers<UserStatusUserEditUiHandlers> {
         void setUserStatus(final UserProfile result);
 
-        void setLoginInfo(final LoginInfo result);
+        void setLoginInfo(@NotNull final LoginInfo result);
 
         void setUserStatusFailed();
     }
