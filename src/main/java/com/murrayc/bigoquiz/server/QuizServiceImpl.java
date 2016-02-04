@@ -205,8 +205,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         //TODO: Get the keys only:
-        final EntityManagerFactory emf = EntityManagerFactory.get();
-        Query<UserStats> q = emf.ofy().load().type(UserStats.class);
+        Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
         q = q.filter("userId", userId);
         final List<UserStats> list = q.list();
         if (list.isEmpty()) {
@@ -216,13 +215,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
         for (final UserStats userStats : list) {
             //TODO: Batch these:
-            emf.ofy().delete().entity(userStats).now();
+            EntityManagerFactory.ofy().delete().entity(userStats).now();
         }
     }
 
     private UserStats getUserStatsForSection(final String userId, final String sectionId) {
-        final EntityManagerFactory emf = EntityManagerFactory.get();
-        Query<UserStats> q = emf.ofy().load().type(UserStats.class);
+        Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
         q = q.filter("userId", userId);
         q = q.filter("sectionId", sectionId);
         q = q.limit(1);
@@ -242,8 +240,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
      */
     @NotNull
     private Map<String, UserStats> getUserStats(final String userId) {
-        final EntityManagerFactory emf = EntityManagerFactory.get();
-        Query<UserStats> q = emf.ofy().load().type(UserStats.class);
+        Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
         q = q.filter("userId", userId);
 
         @NotNull final Map<String, UserStats> map = new HashMap<>();
@@ -260,11 +257,10 @@ public class QuizServiceImpl extends ServiceWithUser implements
             return null;
         }
 
-        final EntityManagerFactory emf = EntityManagerFactory.get();
-        UserProfile userProfile = emf.ofy().load().type(UserProfile.class).id(user.getUserId()).now();
+        UserProfile userProfile = EntityManagerFactory.ofy().load().type(UserProfile.class).id(user.getUserId()).now();
         if (userProfile == null) {
             userProfile = new UserProfile(user.getUserId(), user.getNickname());
-            emf.ofy().save().entity(userProfile).now();
+            EntityManagerFactory.ofy().save().entity(userProfile).now();
         }
         return userProfile;
     }
@@ -404,8 +400,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
         userStats.updateProblemQuestion(question, result);
 
-        final EntityManagerFactory emf = EntityManagerFactory.get();
-        emf.ofy().save().entity(userStats).now();
+        EntityManagerFactory.ofy().save().entity(userStats).now();
     }
 
     /*
