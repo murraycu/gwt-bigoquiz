@@ -223,6 +223,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
             @Override
             public void onSuccess(final QuizService.SubmissionResult result) {
+                tellUserHistoryPresenterAboutNewUserAnswer(false);
+
                 //Store these in case they are needed soon:
                 correctAnswer = result.getCorrectAnswer();
                 nextQuestion = result.getNextQuestion();
