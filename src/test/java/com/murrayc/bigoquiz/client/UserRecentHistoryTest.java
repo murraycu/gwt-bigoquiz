@@ -24,15 +24,15 @@ public class UserRecentHistoryTest {
     public void testAddUserAnswerAtStart() throws Exception {
         //TODO: Break this up into smaller tests,
         //when the UserRecentHistory API has settled down.
-        UserRecentHistory history = createUserRecentHistory();
+        @NotNull UserRecentHistory history = createUserRecentHistory();
 
-        Question question = createQuestion("question4", SECTION_1, SUBSECTION_1_1);
+        @Nullable Question question = createQuestion("question4", SECTION_1, SUBSECTION_1_1);
         history.addUserAnswerAtStart(question, false);
 
         final UserStats stats = history.getStats(SECTION_1);
         assertNotNull(stats);
 
-        Collection<UserQuestionHistory> problems = stats.getQuestionHistories();
+        @NotNull Collection<UserQuestionHistory> problems = stats.getQuestionHistories();
         assertNotNull(problems);
         assertEquals(1, problems.size());
 
@@ -53,13 +53,13 @@ public class UserRecentHistoryTest {
 
     @NotNull
     private UserRecentHistory createUserRecentHistory() {
-        final QuizSections sections = new QuizSections();
+        @NotNull final QuizSections sections = new QuizSections();
         sections.addSection(SECTION_1, "section 1", null);
         sections.addSection("section2", "section 2", null);
 
-        final UserStats stats = new UserStats();
+        @NotNull final UserStats stats = new UserStats();
 
-        UserRecentHistory history = new UserRecentHistory("userid 1", sections);
+        @NotNull UserRecentHistory history = new UserRecentHistory("userid 1", sections);
         history.setSectionStats("section1", stats);
 
         return history;

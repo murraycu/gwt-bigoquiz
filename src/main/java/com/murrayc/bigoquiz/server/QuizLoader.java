@@ -38,7 +38,7 @@ public class QuizLoader {
 
 
     public static Quiz loadQuiz(final InputStream is) {
-        final Quiz result = new Quiz();
+        @NotNull final Quiz result = new Quiz();
 
         final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder;
@@ -70,16 +70,16 @@ public class QuizLoader {
         }
 
         //Sections:
-        final List<Node> listSectionNodes = getChildrenByTagName(rootNode, NODE_SECTION);
+        @NotNull final List<Node> listSectionNodes = getChildrenByTagName(rootNode, NODE_SECTION);
         for (final Node sectionNode : listSectionNodes) {
-            final Element sectionElement = (Element) sectionNode;
+            @NotNull final Element sectionElement = (Element) sectionNode;
 
             final String sectionId = sectionElement.getAttribute(ATTR_ID);
-            final String sectionTitle = getTitleNodeText(sectionElement);
+            @Nullable final String sectionTitle = getTitleNodeText(sectionElement);
 
             //Default choices:
-            List<String> defaultChoices = null;
-            final Element elementChoices = getElementByName(sectionElement, NODE_DEFAULT_CHOICES);
+            @Nullable List<String> defaultChoices = null;
+            @Nullable final Element elementChoices = getElementByName(sectionElement, NODE_DEFAULT_CHOICES);
             if (elementChoices != null) {
                 defaultChoices = loadChoices(elementChoices);
             }
@@ -87,12 +87,12 @@ public class QuizLoader {
             result.addSection(sectionId, sectionTitle, defaultChoices);
 
             int questionsCount = 0;
-            final List<Node> listSubSectionNodes = getChildrenByTagName(sectionElement, NODE_SUB_SECTION);
+            @NotNull final List<Node> listSubSectionNodes = getChildrenByTagName(sectionElement, NODE_SUB_SECTION);
             for (final Node subSectionNode : listSubSectionNodes) {
-                final Element subSectionElement = (Element) subSectionNode;
+                @NotNull final Element subSectionElement = (Element) subSectionNode;
                 final String subSectionId = subSectionElement.getAttribute(ATTR_ID);
-                final String subSectionTitle = getTitleNodeText(subSectionElement);
-                final String subSectionLink= getLinkNodeText(subSectionElement);
+                @Nullable final String subSectionTitle = getTitleNodeText(subSectionElement);
+                @Nullable final String subSectionLink= getLinkNodeText(subSectionElement);
 
                 result.addSubSection(sectionId, subSectionId, subSectionTitle, subSectionLink);
 
@@ -111,8 +111,8 @@ public class QuizLoader {
 
     @Nullable
     private static String getTitleNodeText(@NotNull final Element sectionElement) {
-        String sectionTitle = null;
-        final Element sectionTitleElement = getElementByName(sectionElement, NODE_TITLE);
+        @Nullable String sectionTitle = null;
+        @Nullable final Element sectionTitleElement = getElementByName(sectionElement, NODE_TITLE);
         if (sectionTitleElement != null) {
             sectionTitle = sectionTitleElement.getTextContent();
         }
@@ -121,8 +121,8 @@ public class QuizLoader {
 
     @Nullable
     private static String getLinkNodeText(@NotNull final Element sectionElement) {
-        String sectionTitle = null;
-        final Element sectionTitleElement = getElementByName(sectionElement, NODE_LINK);
+        @Nullable String sectionTitle = null;
+        @Nullable final Element sectionTitleElement = getElementByName(sectionElement, NODE_LINK);
         if (sectionTitleElement != null) {
             sectionTitle = sectionTitleElement.getTextContent();
         }
@@ -132,14 +132,14 @@ public class QuizLoader {
     private static int addChildQuestions(@NotNull final Quiz quiz, final String sectionId, final String subSectionId, final List<String> defaultChoices, @NotNull final Element parentElement) {
         int result = 0;
 
-        final List<Node> listQuestionNodes = getChildrenByTagName(parentElement, NODE_QUESTION);
+        @NotNull final List<Node> listQuestionNodes = getChildrenByTagName(parentElement, NODE_QUESTION);
         for (final Node questionNode : listQuestionNodes) {
             if (!(questionNode instanceof Element)) {
                 continue;
             }
 
-            final Element element = (Element) questionNode;
-            final QuestionAndAnswer questionAndAnswer = loadQuestionNode(element, sectionId, subSectionId, defaultChoices);
+            @NotNull final Element element = (Element) questionNode;
+            @Nullable final QuestionAndAnswer questionAndAnswer = loadQuestionNode(element, sectionId, subSectionId, defaultChoices);
             if (questionAndAnswer != null) {
                 //warn about duplicates:
                 if (quiz.contains(questionAndAnswer.getId())) {
@@ -160,12 +160,12 @@ public class QuizLoader {
             return null;
         }
 
-        final Element textElement = getElementByName(element, NODE_TEXT);
+        @Nullable final Element textElement = getElementByName(element, NODE_TEXT);
         if (textElement == null) {
             return null;
         }
 
-        final Element answerElement = getElementByName(element, NODE_ANSWER);
+        @Nullable final Element answerElement = getElementByName(element, NODE_ANSWER);
         if (answerElement == null) {
             return null;
         }
@@ -180,8 +180,8 @@ public class QuizLoader {
             return null;
         }
 
-        List<String> choices = null;
-        final Element elementChoices = getElementByName(element, NODE_CHOICES);
+        @Nullable List<String> choices = null;
+        @Nullable final Element elementChoices = getElementByName(element, NODE_CHOICES);
         if (elementChoices != null) {
             choices = loadChoices(elementChoices);
         }
@@ -200,15 +200,15 @@ public class QuizLoader {
 
     @NotNull
     private static List<String> loadChoices(@NotNull final Element elementChoices) {
-        List<String> choices = new ArrayList<>();
+        @NotNull List<String> choices = new ArrayList<>();
 
-        final List<Node> listChoices = getChildrenByTagName(elementChoices, NODE_CHOICE);
+        @NotNull final List<Node> listChoices = getChildrenByTagName(elementChoices, NODE_CHOICE);
         for (final Node choiceNode : listChoices) {
             if (!(choiceNode instanceof Element)) {
                 continue;
             }
 
-            final Element elementChoice = (Element) choiceNode;
+            @NotNull final Element elementChoice = (Element) choiceNode;
             final String choice = elementChoice.getTextContent();
             if (!StringUtils.isEmpty(choice)) {
                 choices.add(choice);
@@ -219,7 +219,7 @@ public class QuizLoader {
     }
 
     private static Element getElementByName(@NotNull final Element parentElement, final String tagName) {
-        final List<Node> listNodes = getChildrenByTagName(parentElement, tagName);
+        @NotNull final List<Node> listNodes = getChildrenByTagName(parentElement, tagName);
         if (listNodes == null) {
             return null;
         }
@@ -239,7 +239,7 @@ public class QuizLoader {
      */
     @NotNull
     private static List<Node> getChildrenByTagName(@NotNull final Element parentNode, final String tagName) {
-        final List<Node> result = new ArrayList<>();
+        @NotNull final List<Node> result = new ArrayList<>();
 
         final NodeList list = parentNode.getElementsByTagName(tagName);
         final int num = list.getLength();

@@ -87,7 +87,7 @@ public class Quiz {
 
     @Nullable
     public Question getQuestion(final String questionId) {
-        final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
+        @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
         if (questionAndAnswer != null) {
             return questionAndAnswer.getQuestion();
         }
@@ -97,7 +97,7 @@ public class Quiz {
 
     @Nullable
     public String getAnswer(final String questionId) {
-        final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
+        @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
         if (questionAndAnswer != null) {
             return questionAndAnswer.getAnswer();
         }
@@ -134,7 +134,7 @@ public class Quiz {
 
     @Nullable QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
         //Look in every section:
-        for (Map<String, QuestionAndAnswer> section : questions.values()) {
+        for (@NotNull Map<String, QuestionAndAnswer> section : questions.values()) {
             final QuestionAndAnswer questionAndAnswer = section.get(questionId);
             if (questionAndAnswer != null) {
                 return questionAndAnswer;

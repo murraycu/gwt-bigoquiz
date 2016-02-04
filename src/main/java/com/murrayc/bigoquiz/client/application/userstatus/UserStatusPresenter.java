@@ -36,7 +36,7 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
 
         getView().setUiHandlers(this);
 
-        final AsyncCallback<UserProfile> callback = new AsyncCallback<UserProfile>() {
+        @Nullable final AsyncCallback<UserProfile> callback = new AsyncCallback<UserProfile>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures

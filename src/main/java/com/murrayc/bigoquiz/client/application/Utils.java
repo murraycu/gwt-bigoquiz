@@ -27,8 +27,8 @@ public class Utils {
 
     @NotNull
     public static Panel addParagraphWithText(@NotNull final Panel parentPanel, final String text, final String styleName) {
-        final Panel para = addParagraph(parentPanel);
-        final Label label = new InlineLabel(text);
+        @NotNull final Panel para = addParagraph(parentPanel);
+        @NotNull final Label label = new InlineLabel(text);
         para.add(label);
         para.addStyleName(styleName);
         return para;
@@ -36,14 +36,14 @@ public class Utils {
 
     @NotNull
     public static Panel addParagraph(@NotNull final Panel mainPanel) {
-        final Panel p = new FlowPanel(ParagraphElement.TAG);
+        @NotNull final Panel p = new FlowPanel(ParagraphElement.TAG);
         mainPanel.add(p);
         return p;
     }
 
     @NotNull
     public static Panel addParagraphWithChild(@NotNull final FlowPanel mainPanel, final Widget childWidget) {
-        final Panel p = addParagraph(mainPanel);
+        @NotNull final Panel p = addParagraph(mainPanel);
         p.add(childWidget);
         return p;
     }
@@ -53,9 +53,9 @@ public class Utils {
     }
 
     public static void addHtmlToPanel(@NotNull final Panel parentPanel, @NotNull final TextResource textResource) {
-        final HTML htmlPanel = new HTML();
+        @NotNull final HTML htmlPanel = new HTML();
         htmlPanel.setHTML(textResource.getText());
-        final SimplePanel readingPanel = new SimplePanel();
+        @NotNull final SimplePanel readingPanel = new SimplePanel();
         readingPanel.add(htmlPanel);
         parentPanel.add(readingPanel);
     }

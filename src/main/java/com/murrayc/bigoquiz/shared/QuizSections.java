@@ -43,7 +43,7 @@ public class QuizSections implements IsSerializable {
     private Map<String, Section> sections = new HashMap<>();
 
     public void addSection(final String sectionId, final String sectionTitle, final List<String> defaultChoices) {
-        final Section section = new Section();
+        @NotNull final Section section = new Section();
         section.id = sectionId;
         section.title = sectionTitle;
         section.defaultChoices = defaultChoices;
@@ -98,7 +98,7 @@ public class QuizSections implements IsSerializable {
     //TODO: Internationalization.
     @Nullable
     public String getSubSectionTitle(final String sectionId, final String subSectionId) {
-        final SubSection subSection = getSubSection(sectionId, subSectionId);
+        @Nullable final SubSection subSection = getSubSection(sectionId, subSectionId);
         if (subSection == null) {
             return null;
         }
@@ -108,8 +108,8 @@ public class QuizSections implements IsSerializable {
 
     @NotNull
     public Collection<String> getTitles() {
-        final Collection<String> result = new ArrayList<>();
-        for (final Section section : sections.values()) {
+        @NotNull final Collection<String> result = new ArrayList<>();
+        for (@NotNull final Section section : sections.values()) {
             result.add(section.title);
         }
 

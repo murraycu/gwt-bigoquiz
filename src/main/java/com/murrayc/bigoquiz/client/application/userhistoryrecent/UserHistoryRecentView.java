@@ -55,7 +55,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     UserHistoryRecentView(PlaceManager placeManager) {
         this.placeManager = placeManager;
 
-        final FlowPanel mainPanel = new FlowPanel();
+        @NotNull final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("user-history-recent-panel");
         //box.getElement().setAttribute("id", "titlebox");
 
@@ -113,12 +113,12 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
         buildUiPending = false;
 
-        final QuizSections sections = userRecentHistory.getSections();
+        @Nullable final QuizSections sections = userRecentHistory.getSections();
         if (sections == null) {
             return;
         }
 
-        final List<QuizSections.Section> sectionItems = new ArrayList<>(sections.getSections());
+        @NotNull final List<QuizSections.Section> sectionItems = new ArrayList<>(sections.getSections());
 
         //Do the sorting here on the client-side,
         //because the titles could (one day) be localized,
@@ -143,7 +143,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                     }
                 });
 
-        for (final QuizSections.Section section : sectionItems) {
+        for (@Nullable final QuizSections.Section section : sectionItems) {
             if (section == null) {
                 continue;
             }
@@ -153,9 +153,9 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                 continue;
             }
 
-            final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(sectionId);
+            @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(sectionId);
             final String url = placeManager.buildHistoryToken(placeRequest);
-            final Hyperlink titleLabel = new InlineHyperlink(section.title, url);
+            @NotNull final Hyperlink titleLabel = new InlineHyperlink(section.title, url);
             //titleLabel.addStyleName("user-history-section-title-label");
 
             Utils.addHeaderToPanel(3, detailsPanel, titleLabel);
@@ -178,11 +178,11 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             Utils.addHeaderToPanel(4, detailsPanel, constants.problemQuestions());
             //label.addStyleName("label-problem-questions");
 
-            final Panel problemQuestionsPanel = new FlowPanel();
+            @NotNull final Panel problemQuestionsPanel = new FlowPanel();
             detailsPanel.add(problemQuestionsPanel);
             problemQuestionsPanel.addStyleName("panel-problem-questions");
 
-            final Collection<UserQuestionHistory> problemQuestions = stats.getQuestionHistories();
+            @NotNull final Collection<UserQuestionHistory> problemQuestions = stats.getQuestionHistories();
             if (problemQuestions == null || problemQuestions.isEmpty()) {
                 Utils.addParagraphWithText(problemQuestionsPanel, constants.problemQuestionsNoneYet(),
                         "problem-answer-score");
@@ -190,7 +190,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                 int count = 0;
                 int extras = 0;
                 final int MAX = 5;
-                for (final UserQuestionHistory problemQuestion : problemQuestions) {
+                for (@NotNull final UserQuestionHistory problemQuestion : problemQuestions) {
                     if (count >= MAX) {
                         extras += 1;
                         continue;
@@ -201,14 +201,14 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                         continue;
                     }
 
-                    final Panel paraScore = Utils.addParagraph(problemQuestionsPanel);
+                    @NotNull final Panel paraScore = Utils.addParagraph(problemQuestionsPanel);
 
-                    final String strScore = "-" + problemQuestion.getCountAnsweredWrong();
-                    final Label labelScore = new InlineLabel(strScore);
+                    @NotNull final String strScore = "-" + problemQuestion.getCountAnsweredWrong();
+                    @NotNull final Label labelScore = new InlineLabel(strScore);
                     labelScore.addStyleName("problem-answer-score");
                     paraScore.add(labelScore);
 
-                    final Hyperlink link = createProblemQuestionHyperlink(problemQuestion, nextQuestionSectionId);
+                    @NotNull final Hyperlink link = createProblemQuestionHyperlink(problemQuestion, nextQuestionSectionId);
                     paraScore.add(link);
 
                     count += 1;
@@ -225,24 +225,24 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     }
 
     private void addStackedProgressBar(@NotNull final FlowPanel parentPanel, int correctOnce, int answeredOnce, int count) {
-        final FlowPanel panelProgress = new FlowPanel();
+        @NotNull final FlowPanel panelProgress = new FlowPanel();
         parentPanel.add(panelProgress);
         panelProgress.addStyleName("progress-bar");
         //panelProgress.addStyleName("clearfix");
 
-        final String correctStr = messages.correctOnce(correctOnce);
-        final String answeredStr = messages.answeredOnce(answeredOnce);
-        final String countStr = messages.questionsCount(count);
+        @NotNull final String correctStr = messages.correctOnce(correctOnce);
+        @NotNull final String answeredStr = messages.answeredOnce(answeredOnce);
+        @NotNull final String countStr = messages.questionsCount(count);
 
-        final Panel partCorrect = Utils.addParagraphWithText(panelProgress, correctStr, "progress-part-correct-once");
-        final Panel partAnswered = Utils.addParagraphWithText(panelProgress, answeredStr, "progress-part-answered-once");
-        final Panel partCount = Utils.addParagraphWithText(panelProgress, countStr, "progress-part-count");
+        @NotNull final Panel partCorrect = Utils.addParagraphWithText(panelProgress, correctStr, "progress-part-correct-once");
+        @NotNull final Panel partAnswered = Utils.addParagraphWithText(panelProgress, answeredStr, "progress-part-answered-once");
+        @NotNull final Panel partCount = Utils.addParagraphWithText(panelProgress, countStr, "progress-part-count");
 
         final double countDouble = (double)count;
         final double correctPercentage = (count == 0 ? 0 : (double)correctOnce / countDouble) * 100;
-        final String correctWidthStr = NumberFormat.getFormat("#").format(correctPercentage) + "%";
+        @NotNull final String correctWidthStr = NumberFormat.getFormat("#").format(correctPercentage) + "%";
         final double answeredPercentage = (count == 0 ? 0 : (double)answeredOnce / countDouble) * 100;
-        final String answeredWidthStr = NumberFormat.getFormat("#").format(answeredPercentage) + "%";
+        @NotNull final String answeredWidthStr = NumberFormat.getFormat("#").format(answeredPercentage) + "%";
 
         partCorrect.setWidth(correctWidthStr);
         partAnswered.setWidth(answeredWidthStr);
@@ -271,9 +271,9 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     @NotNull
     private Hyperlink createProblemQuestionHyperlink(@NotNull final UserQuestionHistory problemQuestion, final String nextQuestionSectionId) {
-        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(problemQuestion.getQuestionId(), nextQuestionSectionId);
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(problemQuestion.getQuestionId(), nextQuestionSectionId);
         final String url = placeManager.buildHistoryToken(placeRequest);
-        final Hyperlink result = new InlineHyperlink(problemQuestion.getSubSectionTitle() + ": " + problemQuestion.getQuestionTitle(), url);
+        @NotNull final Hyperlink result = new InlineHyperlink(problemQuestion.getSubSectionTitle() + ": " + problemQuestion.getQuestionTitle(), url);
         result.addStyleName("problem-answer-hyperlink");
         return result;
     }

@@ -119,7 +119,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             //If we have already cached this one, just show it:
             if (nextQuestion != null && StringUtils.equals(nextQuestion.getId(), questionId)) {
                 //GWT.log("prepareFromRequest(): using nextQuestion.");
-                final Question question = nextQuestion;
+                @Nullable final Question question = nextQuestion;
                 nextQuestion = null;
                 showQuestionInView(question);
                 return;
@@ -144,7 +144,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             return;
         }
 
-        final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
+        @NotNull final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
@@ -196,7 +196,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         //Tell the UserHistoryRecent presenter/view that there is a new history item.
         //Otherwise it will only update when the whole page refreshes.
-        final String subSectionTitle =
+        @Nullable final String subSectionTitle =
                 sections.getSubSectionTitle(question.getSectionId(), question.getSubSectionId());
         question.setTitles(subSectionTitle, question);
 
@@ -218,7 +218,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         //The user is giving up on the question,
         //which we treat much the same way as submitting an incorrect answer:
-        final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
+        @NotNull final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
@@ -279,7 +279,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
      * @param question
      */
     private void revealQuestion(@NotNull final Question question) {
-        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(question.getId(), nextQuestionSectionId);
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(question.getId(), nextQuestionSectionId);
         placeManager.revealPlace(placeRequest);
     }
 
@@ -296,7 +296,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     private void revealSection(final String nextQuestionSectionId, final String nextQuestionId) {
         this.nextQuestionSectionId = nextQuestionSectionId;
 
-        final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(nextQuestionId, nextQuestionSectionId);
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(nextQuestionId, nextQuestionSectionId);
         placeManager.revealPlace(placeRequest);
     }
 
@@ -313,7 +313,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         // Don't get a new question if we are already waiting for an answer
         // and the current question is already from a correct section.
-        String nextQuestionId = null;
+        @Nullable String nextQuestionId = null;
         if (question != null &&
                 getView().isWaiting()) {
             //null means "any section"
@@ -327,7 +327,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     }
 
     private void getAndUseSections() {
-        final AsyncCallback<QuizSections> callback = new AsyncCallback<QuizSections>() {
+        @NotNull final AsyncCallback<QuizSections> callback = new AsyncCallback<QuizSections>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
@@ -357,7 +357,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         correctAnswer = null;
         nextQuestion = null;
 
-        final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
+        @NotNull final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
@@ -379,7 +379,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         correctAnswer = null;
         nextQuestion = null;
 
-        final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
+        @NotNull final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures

@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.server;
 
 import com.murrayc.bigoquiz.shared.QuizSections;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
@@ -16,15 +17,15 @@ public class QuizLoaderTest {
 
     @Test
     public void testSections() throws Exception {
-        final Quiz quiz = loadQuiz();
+        @Nullable final Quiz quiz = loadQuiz();
         assertNotNull(quiz);
 
-        final QuizSections sections = quiz.getSections();
+        @NotNull final QuizSections sections = quiz.getSections();
         assertNotNull(sections);
 
         assertEquals(sections.getSectionTitle("heap-operations"), "Heap Operations");
 
-        final QuizSections.SubSection subSection = sections.getSubSection("heap-operations", "fibonacci-heap");
+        @Nullable final QuizSections.SubSection subSection = sections.getSubSection("heap-operations", "fibonacci-heap");
         assertNotNull(subSection);
         assertEquals(subSection.title, "Fibonacci Heap");
     }
@@ -35,7 +36,7 @@ public class QuizLoaderTest {
                 .getResourceAsStream("quiz.xml")) {
             assertNotNull(is);
 
-            final Quiz quiz = QuizLoader.loadQuiz(is);
+            @Nullable final Quiz quiz = QuizLoader.loadQuiz(is);
             assertNotNull(quiz);
             return quiz;
         }

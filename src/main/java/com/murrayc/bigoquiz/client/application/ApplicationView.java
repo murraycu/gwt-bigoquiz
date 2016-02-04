@@ -5,6 +5,7 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.murrayc.bigoquiz.client.HtmlResources;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -12,25 +13,25 @@ import com.murrayc.bigoquiz.client.HtmlResources;
 public class ApplicationView extends ViewImpl implements ApplicationPresenter.MyView {
 
     ApplicationView() {
-        SimplePanel menuPanel = new SimplePanel();
-        Panel main = new FlowPanel();
+        @NotNull SimplePanel menuPanel = new SimplePanel();
+        @NotNull Panel main = new FlowPanel();
         main.add(menuPanel);
-        SimplePanel contentPanel = new SimplePanel();
+        @NotNull SimplePanel contentPanel = new SimplePanel();
         main.add(contentPanel);
 
 
         //We use a CSS media query to only show this on wider screens:
-        Panel sidebarPanelLinks = new FlowPanel();
+        @NotNull Panel sidebarPanelLinks = new FlowPanel();
         main.add(sidebarPanelLinks);
         sidebarPanelLinks.addStyleName("sidebar-panel-links");
 
 
         //We use a CSS media query to only show this on wider screens:
-        Panel sidebarPanelSections = new FlowPanel();
+        @NotNull Panel sidebarPanelSections = new FlowPanel();
         main.add(sidebarPanelSections);
         sidebarPanelSections.addStyleName("sidebar-panel-sections");
 
-        SimplePanel userHistoryRecentPanel = new SimplePanel();
+        @NotNull SimplePanel userHistoryRecentPanel = new SimplePanel();
         sidebarPanelSections.add(userHistoryRecentPanel);
 
 

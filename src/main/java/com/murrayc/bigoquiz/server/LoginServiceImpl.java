@@ -6,6 +6,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.LoginService;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by murrayc on 1/18/16.
@@ -15,10 +16,10 @@ public class LoginServiceImpl extends ServiceWithUser implements
 
     @NotNull
     public LoginInfo login(final String requestUri) {
-        final LoginInfo loginInfo = new LoginInfo();
+        @NotNull final LoginInfo loginInfo = new LoginInfo();
         loginInfo.setLoggedIn(false);
 
-        final User user = getUser();
+        @Nullable final User user = getUser();
         final UserService userService = UserServiceFactory.getUserService();
         if (user != null) {
             loginInfo.setLoggedIn(true);

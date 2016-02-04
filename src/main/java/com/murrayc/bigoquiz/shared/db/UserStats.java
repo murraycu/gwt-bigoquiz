@@ -99,7 +99,7 @@ public class UserStats implements IsSerializable {
 
         boolean firstTimeAsked = false;
         boolean firstTimeCorrect = false;
-        UserQuestionHistory userQuestionHistory = questionHistories.get(questionId);
+        @Nullable UserQuestionHistory userQuestionHistory = questionHistories.get(questionId);
 
         //Add a new one, if necessary:
         if (userQuestionHistory == null) {

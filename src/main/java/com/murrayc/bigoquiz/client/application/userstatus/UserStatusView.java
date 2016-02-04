@@ -8,6 +8,7 @@ import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -33,13 +34,13 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
     private boolean loginServerFailed = false;
 
     UserStatusView() {
-        final FlowPanel statusPanel = new FlowPanel();
+        @NotNull final FlowPanel statusPanel = new FlowPanel();
         statusPanel.addStyleName("status-panel");
         //box.getElement().setAttribute("id", "titlebox");
         statusPanel.add(usernameLabel);
         usernameLabel.addStyleName("user-name");
 
-        Label scoreLabel = new Label();
+        @NotNull Label scoreLabel = new Label();
         statusPanel.add(scoreLabel);
         scoreLabel.addStyleName("score");
 
@@ -52,7 +53,7 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
         loginFailedLabel.addStyleName("login-failed");
         loginFailedLabel.setVisible(false);
 
-        final FlowPanel mainPanel = new FlowPanel();
+        @NotNull final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("user-status-panel");
         mainPanel.add(loginPanel);
         mainPanel.add(statusPanel);

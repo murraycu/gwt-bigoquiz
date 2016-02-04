@@ -92,7 +92,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
     }
 
     private void getAndShowHistory() {
-        final AsyncCallback<UserRecentHistory> callback = new AsyncCallback<UserRecentHistory>() {
+        @NotNull final AsyncCallback<UserRecentHistory> callback = new AsyncCallback<UserRecentHistory>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures

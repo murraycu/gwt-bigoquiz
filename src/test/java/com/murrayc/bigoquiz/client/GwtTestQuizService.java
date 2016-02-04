@@ -14,7 +14,7 @@ public class GwtTestQuizService extends GWTTestCase {
     @Test
     public void test() {
         // Setup an asynchronous event handler.
-        final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
+        @NotNull final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 fail(caught.toString());

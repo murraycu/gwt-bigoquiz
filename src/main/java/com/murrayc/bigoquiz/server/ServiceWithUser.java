@@ -19,7 +19,7 @@ public class ServiceWithUser extends RemoteServiceServlet {
             return null;
         }
 
-        User user = null;
+        @Nullable User user = null;
         try {
             user = userService.getCurrentUser();
         } catch (@NotNull final Exception ex) {

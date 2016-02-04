@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.client.application;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.shared.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by murrayc on 1/24/16.
@@ -10,7 +11,7 @@ import com.murrayc.bigoquiz.shared.StringUtils;
 public class PlaceUtils {
     public static PlaceRequest getPlaceRequestForQuestion(final String questionId, final String sectionId) {
 
-        PlaceRequest.Builder builder = new PlaceRequest.Builder()
+        @NotNull PlaceRequest.Builder builder = new PlaceRequest.Builder()
                 .nameToken(NameTokens.QUESTION);
         if (!StringUtils.isEmpty(questionId)) {
             builder = builder.with(NameTokens.QUESTION_PARAM_QUESTION_ID, questionId);

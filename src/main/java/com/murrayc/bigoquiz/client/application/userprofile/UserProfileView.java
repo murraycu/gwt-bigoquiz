@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -25,7 +26,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
 
     UserProfileView() {
-        final FlowPanel mainPanel = new FlowPanel();
+        @NotNull final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("content-panel");
 
         Utils.addHeaderToPanel(2, mainPanel, constants.profileTitle());
@@ -35,7 +36,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
         mainPanel.add(logoutLabel);
         logoutLabel.addStyleName("logout-label");
 
-        Button buttonResetSections = new Button(constants.buttonResetSections());
+        @NotNull Button buttonResetSections = new Button(constants.buttonResetSections());
         Utils.addParagraphWithChild(mainPanel, buttonResetSections);
         buttonResetSections.addStyleName("button-reset-sections");
         buttonResetSections.addClickHandler(new ClickHandler() {
@@ -49,11 +50,11 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
         //Show the sections (user recent history):
         //Put it in a div with a specific class, so we can hide in on wider
         //screens where it is already visible in the sidebar:
-        final SimplePanel userHistoryParent = new SimplePanel();
+        @NotNull final SimplePanel userHistoryParent = new SimplePanel();
         userHistoryParent.addStyleName("user-profile-user-history-panel");
         mainPanel.add(userHistoryParent);
 
-        final SimplePanel userHistoryRecentPanel = new SimplePanel();
+        @NotNull final SimplePanel userHistoryRecentPanel = new SimplePanel();
         bindSlot(UserProfilePresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
         userHistoryParent.add(userHistoryRecentPanel);
 
@@ -67,8 +68,8 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
     @Override
     public void setLoginInfo(@Nullable final LoginInfo loginInfo) {
-        String username = null;
-        String logoutLink = null;
+        @Nullable String username = null;
+        @Nullable String logoutLink = null;
         if (loginInfo != null) {
             username = loginInfo.getNickname();
             logoutLink = loginInfo.getLogoutUrl();
@@ -80,10 +81,10 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
     private void onResetSectionsButton() {
         //TODO: Do this in the presenter?
-        final DialogBox dialog = new DialogBox();
+        @NotNull final DialogBox dialog = new DialogBox();
         dialog.setText(constants.dialogResetSectionsTitle());
 
-        final Button buttonOK = new Button(constants.dialogResetSectionsOkButton());
+        @NotNull final Button buttonOK = new Button(constants.dialogResetSectionsOkButton());
         buttonOK.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -92,7 +93,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
             }
         });
 
-        final Button buttonCancel = new Button(constants.dialogResetSectionsCancelButton());
+        @NotNull final Button buttonCancel = new Button(constants.dialogResetSectionsCancelButton());
         buttonCancel.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -100,10 +101,10 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
             }
         });
 
-        final Panel panelDialog = new FlowPanel();
+        @NotNull final Panel panelDialog = new FlowPanel();
         Utils.addParagraphWithText(panelDialog, constants.dialogResetSectionsText(),
                 "reset-sections-confirm-dialog-text");
-        final Panel panelButtons = new FlowPanel();
+        @NotNull final Panel panelButtons = new FlowPanel();
         panelButtons.addStyleName("reset-sections-confirm-dialog-buttons-panel");
         panelButtons.add(buttonCancel);
         buttonCancel.addStyleName("reset-sections-confirm-dialog-cancel-button");

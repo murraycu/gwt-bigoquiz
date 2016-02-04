@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.HtmlResources;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -21,16 +22,16 @@ public class AboutView extends ViewWithUiHandlers<AboutUserEditUiHandlers>
         // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
         final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
 
-        Panel mainPanel = new FlowPanel();
+        @NotNull Panel mainPanel = new FlowPanel();
         mainPanel.addStyleName("content-panel");
 
-        final Label titleLabel = new Label(constants.aboutTitle());
+        @NotNull final Label titleLabel = new Label(constants.aboutTitle());
         titleLabel.addStyleName("page-title-label");
         mainPanel.add(titleLabel);
 
         Utils.addHtmlToPanel(mainPanel, HtmlResources.INSTANCE.getAboutHtml());
 
-        Label versionLabel = new Label();
+        @NotNull Label versionLabel = new Label();
         mainPanel.add(versionLabel);
         versionLabel.addStyleName("version-label");
 

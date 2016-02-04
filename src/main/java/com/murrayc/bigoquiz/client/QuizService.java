@@ -6,6 +6,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * The client-side stub for the RPC service.
@@ -13,11 +15,11 @@ import com.murrayc.bigoquiz.shared.db.UserProfile;
 @RemoteServiceRelativePath("quiz-service")
 public interface QuizService extends RemoteService {
 
-    Question getQuestion(final String questionId) throws IllegalArgumentException;
+    @Nullable Question getQuestion(final String questionId) throws IllegalArgumentException;
 
-    Question getNextQuestion(final String sectionId) throws IllegalArgumentException;
+    @Nullable Question getNextQuestion(final String sectionId) throws IllegalArgumentException;
 
-    QuizSections getSections() throws IllegalArgumentException;
+    @NotNull QuizSections getSections() throws IllegalArgumentException;
 
     /**
      * submitAnswer() returns the correct correctAnswer (if the supplied correctAnswer was wrong) and the next question.
@@ -29,13 +31,13 @@ public interface QuizService extends RemoteService {
      * @return
      * @throws IllegalArgumentException
      */
-    SubmissionResult submitAnswer(final String questionId, final String answer, String nextQuestionSectionId) throws IllegalArgumentException;
+    @NotNull SubmissionResult submitAnswer(final String questionId, final String answer, String nextQuestionSectionId) throws IllegalArgumentException;
 
-    SubmissionResult submitDontKnowAnswer(final String questionId, String nextQuestionSectionId) throws IllegalArgumentException;
+    @NotNull SubmissionResult submitDontKnowAnswer(final String questionId, String nextQuestionSectionId) throws IllegalArgumentException;
 
-    UserProfile getUserProfile() throws IllegalArgumentException;
+    @Nullable UserProfile getUserProfile() throws IllegalArgumentException;
 
-    UserRecentHistory getUserRecentHistory() throws IllegalArgumentException;
+    @Nullable UserRecentHistory getUserRecentHistory() throws IllegalArgumentException;
 
     /**
      * Clear all question answer history, progress, scores, etc.

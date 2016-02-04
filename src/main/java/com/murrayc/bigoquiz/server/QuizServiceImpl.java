@@ -58,7 +58,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         try(final InputStream is = Thread.currentThread().getContextClassLoader()
                 .getResourceAsStream("quiz.xml")) {
             if (is == null) {
-                final String errorMessage = "quiz.xml not found.";
+                @NotNull final String errorMessage = "quiz.xml not found.";
                 Log.fatal(errorMessage);
                 return null;
             }
@@ -74,16 +74,16 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @Nullable
     @Override
     public Question getQuestion(final String questionId) throws IllegalArgumentException {
-        final Quiz quiz = getQuiz();
+        @Nullable final Quiz quiz = getQuiz();
         return quiz.getQuestion(questionId);
     }
 
     @Nullable
     @Override
     public Question getNextQuestion(final String sectionId) throws IllegalArgumentException {
-        final Quiz quiz = getQuiz();
+        @Nullable final Quiz quiz = getQuiz();
 
-        final String userId = getUserId();
+        @Nullable final String userId = getUserId();
         if (StringUtils.isEmpty(userId)) {
             //The user is not logged in,
             //so just return a random question:
@@ -91,12 +91,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         if (StringUtils.isEmpty(sectionId)) {
-            final Map<String, UserStats> mapUserStats = getUserStats(userId);
+            @NotNull final Map<String, UserStats> mapUserStats = getUserStats(userId);
             return getNextQuestionFromUserStats(sectionId, quiz, mapUserStats);
         } else {
             //This special case is a bit copy-and-pasty of the general case with the
             //map, but it seems more efficient to avoid an unncessary Map.
-            final UserStats userStats = getUserStatsForSection(userId, sectionId);
+            @Nullable final UserStats userStats = getUserStatsForSection(userId, sectionId);
             return getNextQuestionFromUserStatsForSection(sectionId, quiz, userStats);
         }
     }
@@ -104,14 +104,14 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @NotNull
     @Override
     public QuizSections getSections() throws IllegalArgumentException {
-        final Quiz quiz = getQuiz();
+        @Nullable final Quiz quiz = getQuiz();
         return quiz.getSections();
     }
 
     @NotNull
     @Override
     public SubmissionResult submitAnswer(final String questionId, final String answer, String nextQuestionSectionId) throws IllegalArgumentException {
-        final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
+        @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
         if (questionAndAnswer == null) {
             throw new IllegalArgumentException("Unknown QuestionAndAnswer ID");
         }
@@ -123,7 +123,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @NotNull
     @Override
     public SubmissionResult submitDontKnowAnswer(final String questionId, final String nextQuestionSectionId) throws IllegalArgumentException {
-        final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
+        @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
         if (questionAndAnswer == null) {
             throw new IllegalArgumentException("Unknown QuestionAndAnswer ID");
         }
@@ -134,7 +134,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @Nullable
     private QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
-        final Quiz quiz = getQuiz();
+        @Nullable final Quiz quiz = getQuiz();
         return quiz.getQuestionAndAnswer(questionId);
     }
 
@@ -147,30 +147,30 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @Nullable
     @Override
     public UserRecentHistory getUserRecentHistory() throws IllegalArgumentException {
-        final String userId = getUserId();
+        @Nullable final String userId = getUserId();
         if (StringUtils.isEmpty(userId)) {
             //This is normal, if the user is not logged in.
             //Log.error("getUserRecentHistory(): userId was null.");
             return null;
         }
 
-        final Quiz quiz = getQuiz();
-        final QuizSections sections = quiz.getSections();
+        @Nullable final Quiz quiz = getQuiz();
+        @NotNull final QuizSections sections = quiz.getSections();
         if (sections == null) {
             return null;
         }
 
         //Get the stats for this user, for each section:
-        final UserRecentHistory result = new UserRecentHistory(userId, sections);
+        @NotNull final UserRecentHistory result = new UserRecentHistory(userId, sections);
 
-        final Map<String, UserStats> mapUserStats = getUserStats(userId);
+        @NotNull final Map<String, UserStats> mapUserStats = getUserStats(userId);
         for (final String sectionId : sections.getSectionIds()) {
             if (StringUtils.isEmpty(sectionId)) {
                 //This seems wise.
                 continue;
             }
 
-            UserStats userStats = mapUserStats.get(sectionId);
+            @Nullable UserStats userStats = mapUserStats.get(sectionId);
             if (userStats == null) {
                 //So we get the default values:
                 userStats = new UserStats(userId, sectionId);
@@ -179,13 +179,13 @@ public class QuizServiceImpl extends ServiceWithUser implements
             //Set the titles.
             //We don't store these in the datastore because we can get them easily from the Quiz.
             //TODO: It might really be more efficient to store them in the datastore.
-            for (final UserQuestionHistory userQuestionHistory : userStats.getQuestionHistories()) {
-                final Question question = quiz.getQuestion(userQuestionHistory.getQuestionId());
+            for (@NotNull final UserQuestionHistory userQuestionHistory : userStats.getQuestionHistories()) {
+                @Nullable final Question question = quiz.getQuestion(userQuestionHistory.getQuestionId());
                 if (question != null) {
                     userQuestionHistory.setQuestionTitle(question.getText());
                 }
 
-                final String subSectionTitle = sections.getSubSectionTitle(question.getSectionId(),
+                @Nullable final String subSectionTitle = sections.getSubSectionTitle(question.getSectionId(),
                         question.getSubSectionId());
                 userQuestionHistory.setSubSectionTitle(subSectionTitle);
             }
@@ -198,7 +198,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @Override
     public void resetSections() {
-        final String userId = getUserId();
+        @Nullable final String userId = getUserId();
         if (StringUtils.isEmpty(userId)) {
             Log.error("resetSections(): userId was null.");
             return;
@@ -246,8 +246,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
         Query<UserStats> q = emf.ofy().load().type(UserStats.class);
         q = q.filter("userId", userId);
 
-        final Map<String, UserStats> map = new HashMap<>();
-        for (final UserStats userStats : q.list()) {
+        @NotNull final Map<String, UserStats> map = new HashMap<>();
+        for (@NotNull final UserStats userStats : q.list()) {
             map.put(userStats.getSectionId(), userStats);
         }
 
@@ -255,7 +255,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
     }
 
     private UserProfile getUserProfileImpl() {
-        final User user = getUser();
+        @Nullable final User user = getUser();
         if (user == null) {
             return null;
         }
@@ -313,15 +313,15 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @NotNull
     private SubmissionResult createSubmissionResult(boolean result, final String questionId, final String nextQuestionSectionId, final Map<String, UserStats> mapUserStats) {
-        final Quiz quiz = getQuiz();
+        @Nullable final Quiz quiz = getQuiz();
 
         //We only provide the correct answer if the supplied answer was wrong:
-        String correctAnswer = null;
+        @Nullable String correctAnswer = null;
         if (!result) {
             correctAnswer = quiz.getAnswer(questionId);
         }
 
-        final Question nextQuestion = getNextQuestionFromUserStats(nextQuestionSectionId, quiz, mapUserStats);
+        @Nullable final Question nextQuestion = getNextQuestionFromUserStats(nextQuestionSectionId, quiz, mapUserStats);
         return new SubmissionResult(result, correctAnswer, nextQuestion);
     }
 
@@ -335,15 +335,15 @@ public class QuizServiceImpl extends ServiceWithUser implements
      */
     @NotNull
     private SubmissionResult createSubmissionResultForSection(boolean result, final String questionId, final String nextQuestionSectionId, final UserStats userStats) {
-        final Quiz quiz = getQuiz();
+        @Nullable final Quiz quiz = getQuiz();
 
         //We only provide the correct answer if the supplied answer was wrong:
-        String correctAnswer = null;
+        @Nullable String correctAnswer = null;
         if (!result) {
             correctAnswer = quiz.getAnswer(questionId);
         }
 
-        final Question nextQuestion = getNextQuestionFromUserStatsForSection(nextQuestionSectionId, quiz, userStats);
+        @Nullable final Question nextQuestion = getNextQuestionFromUserStatsForSection(nextQuestionSectionId, quiz, userStats);
         return new SubmissionResult(result, correctAnswer, nextQuestion);
     }
 
@@ -423,7 +423,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
      * @return null if the user is not logged in.
      */
     private String getUserId() {
-        final UserProfile userProfile = getUserProfile();
+        @Nullable final UserProfile userProfile = getUserProfile();
         if (userProfile == null) {
             //This is normal if the user is not logged in.
             //Log.error("getUserId(): userProfile was null.");
@@ -441,7 +441,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @NotNull
     private SubmissionResult storeAnswerCorrectnessAndGetSubmissionResult(final String questionId, final String nextQuestionSectionId, @NotNull final QuestionAndAnswer questionAndAnswer, boolean result) {
         //If the user is logged in, store whether we got the question right or wrong:
-        final String userId = getUserId();
+        @Nullable final String userId = getUserId();
 
         final String sectionId = questionAndAnswer.getQuestion().getSectionId();
 
@@ -452,7 +452,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         // questino's section ID, to avoid allocating a Map just containing one UserStats.
         if (!StringUtils.isEmpty(nextQuestionSectionId) &&
                 StringUtils.equals(nextQuestionSectionId, sectionId)) {
-            UserStats userStats = null;
+            @Nullable UserStats userStats = null;
             if (!StringUtils.isEmpty(userId)) {
                 userStats = getUserStatsForSection(userId, nextQuestionSectionId);
                 storeAnswerForSection(result, questionAndAnswer.getQuestion(), userId, userStats);
@@ -460,7 +460,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
             return createSubmissionResultForSection(result, questionId, nextQuestionSectionId, userStats);
         } else {
-            Map<String, UserStats> mapUserStats = null;
+            @Nullable Map<String, UserStats> mapUserStats = null;
             if (!StringUtils.isEmpty(userId)) {
                 mapUserStats = getUserStats(userId);
                 storeAnswer(result, questionAndAnswer.getQuestion(), userId, mapUserStats);
@@ -484,7 +484,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         //TODO: Avoid this temporary map:
-        final Map<String, UserStats> map = new HashMap<>();
+        @NotNull final Map<String, UserStats> map = new HashMap<>();
         if (userStats != null) {
             map.put(userStats.getSectionId(), userStats);
         }
@@ -496,8 +496,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
     private Question getNextQuestionFromUserStats(final String sectionId, @NotNull final Quiz quiz, @Nullable final Map<String, UserStats> mapUserStats) {
         final int MAX_TRIES = 10;
         int tries = 0;
-        Question question = null;
-        Question questionBestSoFar = null;
+        @Nullable Question question = null;
+        @Nullable Question questionBestSoFar = null;
         int questionBestCountAnsweredWrong = 0;
         while(tries < MAX_TRIES) {
             tries += 1;

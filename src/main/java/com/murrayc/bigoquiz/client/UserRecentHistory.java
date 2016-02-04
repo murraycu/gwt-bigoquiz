@@ -55,7 +55,7 @@ public class UserRecentHistory implements IsSerializable {
             return;
         }
 
-        final UserStats userStats = getStatsWithAdd(question.getSectionId());
+        @Nullable final UserStats userStats = getStatsWithAdd(question.getSectionId());
         userStats.incrementAnswered();
         if (answerIsCorrect) {
             userStats.incrementCorrect();
@@ -82,7 +82,7 @@ public class UserRecentHistory implements IsSerializable {
 
     @Nullable
     private UserStats getStatsWithAdd(final String sectionId ) {
-        UserStats stats = getStats(sectionId);
+        @Nullable UserStats stats = getStats(sectionId);
         if (stats == null) {
             if (userId == null) {
                 throw new NullPointerException("getStatsWithAdd() needs a userId.");

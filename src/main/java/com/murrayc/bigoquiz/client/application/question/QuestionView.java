@@ -52,13 +52,13 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private State state = State.WAITING_INVALID;
 
     QuestionView() {
-        final FlowPanel mainPanel = new FlowPanel();
+        @NotNull final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("content-panel");
 
-        final Panel showingFromPanel = new FlowPanel(ParagraphElement.TAG);
+        @NotNull final Panel showingFromPanel = new FlowPanel(ParagraphElement.TAG);
         showingFromPanel.addStyleName("show-from-panel");
         //TODO: Avoid the " " concatenation:
-        final Label nextQuestionSectionTitle = new InlineLabel(constants.showQuestionsFrom() + " ");
+        @NotNull final Label nextQuestionSectionTitle = new InlineLabel(constants.showQuestionsFrom() + " ");
         nextQuestionSectionTitle.addStyleName("next-question-section-title-label");
         showingFromPanel.add(nextQuestionSectionTitle);
         showingFromPanel.add(nextQuestionSectionListBox);
@@ -66,7 +66,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         nextQuestionSectionListBox.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(final ChangeEvent event) {
-                final String nextQuestionSectionId = getSelectedNextQuestionSectionId();
+                @Nullable final String nextQuestionSectionId = getSelectedNextQuestionSectionId();
                 getUiHandlers().onNextQuestionSectionSelected(nextQuestionSectionId);
             }
         });
@@ -74,7 +74,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
         Utils.addHeaderToPanel(2, mainPanel, constants.questionLabel());
 
-        final Panel paraHeader = Utils.addParagraphWithChild(mainPanel, sectionTitle);
+        @NotNull final Panel paraHeader = Utils.addParagraphWithChild(mainPanel, sectionTitle);
         paraHeader.add(subSectionTitle);
         Utils.addHeaderToPanel(3, mainPanel, paraHeader);
 
@@ -85,7 +85,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         choicesPanel.addStyleName("choices-panel");
         choicesPanel.addStyleName("clearfix"); //So it is as high as its children.
 
-        FlowPanel resultPanel = new FlowPanel();
+        @NotNull FlowPanel resultPanel = new FlowPanel();
         resultPanel.addStyleName("result-panel");
         resultPanel.add(resultLabel);
         resultLabel.addStyleName("result-label");
@@ -113,6 +113,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         initWidget(mainPanel);
     }
 
+    @Nullable
     private String getSelectedNextQuestionSectionId() {
         final String title = nextQuestionSectionListBox.getSelectedValue();
         return sections.getIdForTitle(title);
@@ -153,7 +154,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     public void setNextQuestionSectionId(final String sectionId) {
         nextQuestionSectionId = sectionId;
 
-        String title = null;
+        @Nullable String title = null;
         if (StringUtils.isEmpty(sectionId)) {
             title = constants.allSectionsTitle();
         } else if (sections != null) {
@@ -195,7 +196,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         final String sectionId = question.getSectionId();
         sectionTitle.setText(sections.getSectionTitle(sectionId) + ": ");
 
-        final QuizSections.SubSection subSection = sections.getSubSection(sectionId, question.getSubSectionId());
+        @Nullable final QuizSections.SubSection subSection = sections.getSubSection(sectionId, question.getSubSectionId());
         if (subSection != null) {
             subSectionTitle.setText(subSection.title);
             subSectionTitle.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
@@ -204,9 +205,9 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             subSectionTitle.setHref("");
         }
 
-        final String groupName = "choices";
+        @NotNull final String groupName = "choices";
         for (final String choice : question.getChoices()) {
-            final RadioButton radioButton = new RadioButton(groupName, choice);
+            @NotNull final RadioButton radioButton = new RadioButton(groupName, choice);
             radioButton.addStyleName("question-radio-button");
             radioButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
                 @Override
@@ -309,7 +310,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private void enableChoices(boolean enabled) {
         for (final Widget widget : choicesPanel) {
             if (widget instanceof RadioButton) {
-                final RadioButton radioButton = (RadioButton) widget;
+                @NotNull final RadioButton radioButton = (RadioButton) widget;
                 radioButton.setEnabled(enabled);
             }
         }
@@ -318,7 +319,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private void showCorrectAnswerInChoices(final String correctAnswer) {
         for (final Widget widget : choicesPanel) {
             if (widget instanceof RadioButton) {
-                final RadioButton radioButton = (RadioButton) widget;
+                @NotNull final RadioButton radioButton = (RadioButton) widget;
                 if (StringUtils.equals(radioButton.getText(), correctAnswer)) {
                     radioButton.addStyleName("question-radio-button-correct");
                     return;
@@ -330,7 +331,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private void showWrongAnswerInChoices(final String wrongAnswer) {
         for (final Widget widget : choicesPanel) {
             if (widget instanceof RadioButton) {
-                final RadioButton radioButton = (RadioButton) widget;
+                @NotNull final RadioButton radioButton = (RadioButton) widget;
                 if (StringUtils.equals(radioButton.getText(), wrongAnswer)) {
                     radioButton.addStyleName("question-radio-button-wrong");
                 } else {
