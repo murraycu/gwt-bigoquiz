@@ -565,3 +565,7 @@ h4 * {
 .gwt-Button.show-answer-button:hover {
     border-color: #2F4550;
 }
+
+.server-error-label {
+
+}

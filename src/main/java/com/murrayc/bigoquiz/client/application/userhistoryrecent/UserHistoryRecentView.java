@@ -50,6 +50,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     //When we skip building of the UI because its hidden (by CSS) anyway,
     //this lets us do that building if necessary later.
     private boolean buildUiPending = false;
+    private Label labelError = new InlineLabel(constants.errorNoServer());
 
     @Inject
     UserHistoryRecentView(PlaceManager placeManager) {
@@ -60,6 +61,10 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         //box.getElement().setAttribute("id", "titlebox");
 
         Utils.addHeaderToPanel(2, mainPanel, constants.sectionsTitle());
+
+        labelError.addStyleName("server-error-label");
+        labelError.setVisible(false);
+        mainPanel.add(labelError);
 
         //This is only visible when necessary:
         mainPanel.add(loginLabel);
@@ -92,6 +97,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     private void buildUi() {
         loginLabel.setVisible(userRecentHistory == null);
+        labelError.setVisible(false);
 
         detailsPanel.clear();
 
@@ -280,7 +286,6 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     @Override
     public void setServerFailed() {
-        //TODO: labelDebug.setText("Error: Connection to service failed.");
-
+        labelError.setVisible(true);
     }
 }

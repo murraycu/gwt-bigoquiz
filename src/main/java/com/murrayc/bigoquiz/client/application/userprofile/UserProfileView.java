@@ -23,6 +23,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
     private final Label usernameLabel = new InlineLabel();
     private final Anchor logoutLabel = new Anchor(constants.logOut());
+    private Label labelError = new InlineLabel(constants.errorNoServer());
 
 
     UserProfileView() {
@@ -30,6 +31,10 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
         mainPanel.addStyleName("content-panel");
 
         Utils.addHeaderToPanel(2, mainPanel, constants.profileTitle());
+
+        labelError.addStyleName("server-error-label");
+        labelError.setVisible(false);
+        mainPanel.add(labelError);
 
         Utils.addParagraphWithText(mainPanel, constants.username(), "username-title-label");
 
@@ -63,7 +68,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
     @Override
     public void setUserStatusFailed() {
-
+        labelError.setVisible(true);
     }
 
     @Override
