@@ -92,7 +92,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
         if (StringUtils.isEmpty(sectionId)) {
             @NotNull final Map<String, UserStats> mapUserStats = getUserStats(userId);
-            return getNextQuestionFromUserStats(quiz, mapUserStats);
+            return getNextQuestionFromUserStats(null, quiz, mapUserStats);
         } else {
             //This special case is a bit copy-and-pasty of the general case with the
             //map, but it seems more efficient to avoid an unncessary Map.
@@ -488,12 +488,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
     }
 
     @Nullable
-    private Question getNextQuestionFromUserStats(@NotNull final Quiz quiz, @Nullable final Map<String, UserStats> mapUserStats) {
-        return getNextQuestionFromUserStats(null, quiz, mapUserStats);
-    }
-
-    @Nullable
-    private Question getNextQuestionFromUserStats(@NotNull final String sectionId, @NotNull final Quiz quiz, @Nullable final Map<String, UserStats> mapUserStats) {
+    private Question getNextQuestionFromUserStats(@Nullable final String sectionId, @NotNull final Quiz quiz, @Nullable final Map<String, UserStats> mapUserStats) {
         final int MAX_TRIES = 10;
         int tries = 0;
         @Nullable Question question = null;
