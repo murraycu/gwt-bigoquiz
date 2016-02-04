@@ -135,7 +135,7 @@ body {
     float: right;
 
     /* TODO: Avoid this somehow? */
-    width: 350px; /* To avoid any text from making it too wide. */
+    width: 330px; /* To avoid any text from making it too wide. Same as for sidebar-panel-links. */
 }
 
 .sidebar-panel-sections h2 {
@@ -154,6 +154,9 @@ body {
     /* See media query: margin-bottom: 1em; */
 
     float: right;
+
+    /* TODO: Avoid this somehow? */
+    width: 330px; /* To avoid any text from making it too wide. Same as for sidebar-panel-sections. */
 }
 
 .recommended-reading {
