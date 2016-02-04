@@ -2,6 +2,8 @@ package com.murrayc.bigoquiz.shared;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.IsSerializable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -30,12 +32,14 @@ public class QuizSections implements IsSerializable {
     static public class Section implements IsSerializable {
         public String id;
         public String title;
+        @NotNull
         public Map<String, SubSection> subSections = new HashMap<>();
         public List<String> defaultChoices;
         public int questionsCount;
     }
 
     //Map of section ID to sections.
+    @NotNull
     private Map<String, Section> sections = new HashMap<>();
 
     public void addSection(final String sectionId, final String sectionTitle, final List<String> defaultChoices) {
@@ -57,11 +61,13 @@ public class QuizSections implements IsSerializable {
                 new SubSection(subSectionTitle, subSectionLink));
     }
 
+    @NotNull
     public Set<String> getSectionIds() {
         return sections.keySet();
     }
 
     //TODO: Internationalization.
+    @Nullable
     public String getSectionTitle(final String sectionId) {
         final Section section = getSection(sectionId);
         if (section == null) {
@@ -79,6 +85,7 @@ public class QuizSections implements IsSerializable {
     */
 
     //TODO: Internationalization.
+    @Nullable
     public SubSection getSubSection(final String sectionId, final String subSectionId) {
         final Section section = getSection(sectionId);
         if (section == null) {
@@ -89,6 +96,7 @@ public class QuizSections implements IsSerializable {
     }
 
     //TODO: Internationalization.
+    @Nullable
     public String getSubSectionTitle(final String sectionId, final String subSectionId) {
         final SubSection subSection = getSubSection(sectionId, subSectionId);
         if (subSection == null) {
@@ -98,6 +106,7 @@ public class QuizSections implements IsSerializable {
         return subSection.title;
     }
 
+    @NotNull
     public Collection<String> getTitles() {
         final Collection<String> result = new ArrayList<>();
         for (final Section section : sections.values()) {
@@ -107,6 +116,7 @@ public class QuizSections implements IsSerializable {
         return result;
     }
 
+    @Nullable
     public String getIdForTitle(final String title) {
         //TODO: Use reverse hashmap?
         for (final String sectionId : sections.keySet()) {
@@ -128,6 +138,7 @@ public class QuizSections implements IsSerializable {
         return sections.get(sectionId);
     }
 
+    @NotNull
     public Collection<Section> getSections() {
         return sections.values();
     }

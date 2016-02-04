@@ -16,6 +16,7 @@ import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedE
 import com.murrayc.bigoquiz.client.application.userprofile.UserProfileResetSectionsEvent;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -65,13 +66,13 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
 
     @ProxyEvent
     @Override
-    public void onQuestionUserAnswerAdded(final QuestionUserAnswerAddedEvent event) {
+    public void onQuestionUserAnswerAdded(@NotNull final QuestionUserAnswerAddedEvent event) {
         getView().addUserAnswer(event.getQuestion(), event.getAnswerIsCorrect());
     }
 
     @ProxyEvent
     @Override
-    public void onQuestionNextSectionId(final QuestionNextQuestionSectionIdEvent event) {
+    public void onQuestionNextSectionId(@NotNull final QuestionNextQuestionSectionIdEvent event) {
         final String nextQuestionSectionId = event.getNextQuestionSectionId();
         if (StringUtils.equals(this.nextQuestionSectionId, nextQuestionSectionId)) {
             //Do nothing.
@@ -93,7 +94,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
     private void getAndShowHistory() {
         final AsyncCallback<UserRecentHistory> callback = new AsyncCallback<UserRecentHistory>() {
             @Override
-            public void onFailure(final Throwable caught) {
+            public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
                 GWT.log("AsyncCallback Failed: getUserRecentHistory(): " + caught.getMessage());
                 getView().setServerFailed();

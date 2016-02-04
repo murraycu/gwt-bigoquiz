@@ -4,6 +4,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import com.murrayc.bigoquiz.shared.Question;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by murrayc on 1/25/16.
@@ -31,7 +32,7 @@ public class QuestionUserAnswerAddedEvent extends GwtEvent<QuestionUserAnswerAdd
 
     public static final Type<QuestionUserAnswerAddedEventHandler> TYPE = new Type<>();
 
-    public static void fire(final HasHandlers source, final Question question, boolean answerIsCorrect) {
+    public static void fire(@NotNull final HasHandlers source, final Question question, boolean answerIsCorrect) {
         if (TYPE != null) {
             source.fireEvent(new QuestionUserAnswerAddedEvent(question, answerIsCorrect));
         }
@@ -43,13 +44,14 @@ public class QuestionUserAnswerAddedEvent extends GwtEvent<QuestionUserAnswerAdd
     }
     */
 
+    @NotNull
     @Override
     public Type<QuestionUserAnswerAddedEventHandler> getAssociatedType() {
         return TYPE;
     }
 
     @Override
-    protected void dispatch(final QuestionUserAnswerAddedEventHandler handler) {
+    protected void dispatch(@NotNull final QuestionUserAnswerAddedEventHandler handler) {
         handler.onQuestionUserAnswerAdded(this);
     }
 }

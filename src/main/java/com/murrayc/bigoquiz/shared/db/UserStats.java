@@ -7,6 +7,8 @@ import com.googlecode.objectify.annotation.Index;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -83,7 +85,7 @@ public class UserStats implements IsSerializable {
         this.correct = correct;
     }
 
-    public void updateProblemQuestion(final Question question, boolean answerIsCorrect) {
+    public void updateProblemQuestion(@Nullable final Question question, boolean answerIsCorrect) {
         if (question == null) {
             Log.error("updateProblemQuestion(): question is null.");
             return;
@@ -124,6 +126,7 @@ public class UserStats implements IsSerializable {
         }
     }
 
+    @NotNull
     public Collection<UserQuestionHistory> getQuestionHistories() {
         return questionHistories.values();
     }

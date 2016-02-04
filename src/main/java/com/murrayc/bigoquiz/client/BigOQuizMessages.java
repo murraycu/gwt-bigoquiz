@@ -4,6 +4,7 @@ package com.murrayc.bigoquiz.client;
 //using <i18nMessagesBundles> declarations.
 
 import com.google.gwt.i18n.client.LocalizableResource;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Interface to represent the messages contained in resource bundle:
@@ -17,28 +18,34 @@ public interface BigOQuizMessages extends com.google.gwt.i18n.client.Messages {
      *
      * @return translated "Answered: {0,number}: , Correct: {1,number}"
      */
+    @NotNull
     @DefaultMessage("{1,number} correct / {0,number} answers")
     @AlternateMessage({"one", "{1,number} correct / {0,number} answer"})
     @Key("scoreMessage")
     String scoreMessage(@PluralCount int arg0, int arg1);
 
+    @NotNull
     @DefaultMessage("{0,number} questions")
     @AlternateMessage({"one", "1 question"})
     @Key("questionsCount")
     String questionsCount(@PluralCount int questionsCount);
 
+    @NotNull
     @DefaultMessage("{0,number} correct once")
     @Key("correctOnce")
     String correctOnce(int arg0);
 
+    @NotNull
     @DefaultMessage("{0,number} answered once")
     @Key("answeredOnce")
     String answeredOnce(int arg0);
 
+    @NotNull
     @DefaultMessage("Big-O Algorithms Quiz : Question: {0}")
     @Key("windowTitle")
     String windowTitle(String text);
 
+    @NotNull
     @DefaultMessage("and {0,number} more")
     @AlternateMessage({"one", "and {0,number} more"})
     @Key("moreProblemQuestions")

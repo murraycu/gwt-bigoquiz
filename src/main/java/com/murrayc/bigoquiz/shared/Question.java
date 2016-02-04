@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.shared;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class Question implements IsSerializable {
      * @param subSectionTitle
      * @param question
      */
-    public void setTitles(final String subSectionTitle, final Question question) {
+    public void setTitles(final String subSectionTitle, @NotNull final Question question) {
         this.subSectionTitle = subSectionTitle;
         this.text = question.getText(); //TODO: This is not useful.
 

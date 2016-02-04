@@ -19,6 +19,8 @@ import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -32,6 +34,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
     //Map of section IDs to section titles.
+    @Nullable
     private QuizSections sections;
     private String nextQuestionSectionId;
     private String choiceSelected;
@@ -45,6 +48,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private final Button showAnswerButton = new Button(constants.showAnswerButton());
     private final Button nextQuestionButton = new Button(constants.nextButton());
     private final Label resultLabel = new Label();
+    @NotNull
     private State state = State.WAITING_INVALID;
 
     QuestionView() {
@@ -123,7 +127,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     }
 
     @Override
-    public void setSections(final QuizSections sections) {
+    public void setSections(@Nullable final QuizSections sections) {
         this.sections = sections;
 
         if (sections == null) {
@@ -172,7 +176,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     }
 
     @Override
-    public void setQuestion(final Question question) {
+    public void setQuestion(@Nullable final Question question) {
         choicesPanel.clear();
 
         if (question == null) {
@@ -206,7 +210,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             radioButton.addStyleName("question-radio-button");
             radioButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
                 @Override
-                public void onValueChange(final ValueChangeEvent<Boolean> event) {
+                public void onValueChange(@Nullable final ValueChangeEvent<Boolean> event) {
                     if (event != null && event.getValue()) {
                         submitAnswer(choice);
                     }
@@ -226,7 +230,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     }
 
     @Override
-    public void setSubmissionResult(final QuizService.SubmissionResult submissionResult) {
+    public void setSubmissionResult(@Nullable final QuizService.SubmissionResult submissionResult) {
         if (submissionResult == null) {
             Log.error("setSubmissionResult(): submissionResult was null.");
             return;
@@ -252,7 +256,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         getUiHandlers().onSubmitAnswer();
     }
 
-    private void updateResultPanelUi(final State state) {
+    private void updateResultPanelUi(@NotNull final State state) {
         this.state = state;
         enableChoices(true);
 

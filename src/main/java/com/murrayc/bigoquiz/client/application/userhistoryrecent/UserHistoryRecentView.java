@@ -20,6 +20,8 @@ import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
 import com.murrayc.bigoquiz.shared.db.UserStats;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -124,7 +126,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         Collections.sort(sectionItems,
                 new Comparator<QuizSections.Section>() {
                     @Override
-                    public int compare(final QuizSections.Section o1, final QuizSections.Section o2) {
+                    public int compare(@Nullable final QuizSections.Section o1, @Nullable final QuizSections.Section o2) {
                         if ((o1 == null) && (o2 == null)) {
                             return 0;
                         } else if (o1 == null) {
@@ -222,7 +224,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         }
     }
 
-    private void addStackedProgressBar(final FlowPanel parentPanel, int correctOnce, int answeredOnce, int count) {
+    private void addStackedProgressBar(@NotNull final FlowPanel parentPanel, int correctOnce, int answeredOnce, int count) {
         final FlowPanel panelProgress = new FlowPanel();
         parentPanel.add(panelProgress);
         panelProgress.addStyleName("progress-bar");
@@ -267,7 +269,8 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         buildUi();
     }
 
-    private Hyperlink createProblemQuestionHyperlink(final UserQuestionHistory problemQuestion, final String nextQuestionSectionId) {
+    @NotNull
+    private Hyperlink createProblemQuestionHyperlink(@NotNull final UserQuestionHistory problemQuestion, final String nextQuestionSectionId) {
         final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(problemQuestion.getQuestionId(), nextQuestionSectionId);
         final String url = placeManager.buildHistoryToken(placeRequest);
         final Hyperlink result = new InlineHyperlink(problemQuestion.getSubSectionTitle() + ": " + problemQuestion.getQuestionTitle(), url);

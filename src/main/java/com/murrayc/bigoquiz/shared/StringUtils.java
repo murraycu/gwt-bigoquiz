@@ -1,11 +1,13 @@
 package com.murrayc.bigoquiz.shared;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Created by murrayc on 1/19/16.
  */
 public class StringUtils {
 
-    public static boolean isEmpty(final String str) {
+    public static boolean isEmpty(@Nullable final String str) {
         return (str == null) || (str.isEmpty());
     }
 
@@ -14,7 +16,7 @@ public class StringUtils {
      * @param b
      * @return
      */
-    public static boolean equals(final String a, final String b) {
+    public static boolean equals(@Nullable final String a, @Nullable final String b) {
         if (a == null) {
             return b == null;
         }
@@ -30,7 +32,8 @@ public class StringUtils {
      * @param text
      * @return
      */
-    public static String defaultString(final String text) {
+    @Nullable
+    public static String defaultString(@Nullable final String text) {
         if (text == null) {
             return "";
         } else {

@@ -13,6 +13,8 @@ import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 import com.murrayc.bigoquiz.shared.db.UserStats;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -49,6 +51,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
           + ".<br><br>It looks like you are using:<br>" + userAgent;
     }
     */
+    @Nullable
     public Quiz quiz;
 
     public static Quiz loadQuiz() {
@@ -68,12 +71,14 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return null;
     }
 
+    @Nullable
     @Override
     public Question getQuestion(final String questionId) throws IllegalArgumentException {
         final Quiz quiz = getQuiz();
         return quiz.getQuestion(questionId);
     }
 
+    @Nullable
     @Override
     public Question getNextQuestion(final String sectionId) throws IllegalArgumentException {
         final Quiz quiz = getQuiz();
@@ -96,12 +101,14 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
     }
 
+    @NotNull
     @Override
     public QuizSections getSections() throws IllegalArgumentException {
         final Quiz quiz = getQuiz();
         return quiz.getSections();
     }
 
+    @NotNull
     @Override
     public SubmissionResult submitAnswer(final String questionId, final String answer, String nextQuestionSectionId) throws IllegalArgumentException {
         final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
@@ -113,6 +120,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return storeAnswerCorrectnessAndGetSubmissionResult(questionId, nextQuestionSectionId, questionAndAnswer, result);
     }
 
+    @NotNull
     @Override
     public SubmissionResult submitDontKnowAnswer(final String questionId, final String nextQuestionSectionId) throws IllegalArgumentException {
         final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
@@ -124,16 +132,19 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return storeAnswerCorrectnessAndGetSubmissionResult(questionId, nextQuestionSectionId, questionAndAnswer, false);
     }
 
+    @Nullable
     private QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
         final Quiz quiz = getQuiz();
         return quiz.getQuestionAndAnswer(questionId);
     }
 
+    @Nullable
     @Override
     public UserProfile getUserProfile() throws IllegalArgumentException {
         return getUserProfileImpl();
     }
 
+    @Nullable
     @Override
     public UserRecentHistory getUserRecentHistory() throws IllegalArgumentException {
         final String userId = getUserId();
@@ -229,6 +240,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
      * @param userId
      * @return
      */
+    @NotNull
     private Map<String, UserStats> getUserStats(final String userId) {
         final EntityManagerFactory emf = EntityManagerFactory.get();
         Query<UserStats> q = emf.ofy().load().type(UserStats.class);
@@ -289,7 +301,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //Load it for the first time:
         try {
             quiz = loadQuiz();
-        } catch (final Exception e) {
+        } catch (@NotNull final Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -299,6 +311,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return quiz;
     }
 
+    @NotNull
     private SubmissionResult createSubmissionResult(boolean result, final String questionId, final String nextQuestionSectionId, final Map<String, UserStats> mapUserStats) {
         final Quiz quiz = getQuiz();
 
@@ -320,6 +333,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
      * @param userStats This may be null if nextQuestionSectionId is null.
      * @return
      */
+    @NotNull
     private SubmissionResult createSubmissionResultForSection(boolean result, final String questionId, final String nextQuestionSectionId, final UserStats userStats) {
         final Quiz quiz = getQuiz();
 
@@ -333,7 +347,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return new SubmissionResult(result, correctAnswer, nextQuestion);
     }
 
-    private void storeAnswer(boolean result, final Question question, final String userId, final Map<String, UserStats> mapUserStats) {
+    private void storeAnswer(boolean result, @NotNull final Question question, final String userId, @Nullable final Map<String, UserStats> mapUserStats) {
         if (StringUtils.isEmpty(userId)) {
             Log.error("storeAnswer(): userId was null.");
             return;
@@ -359,7 +373,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         storeAnswerForSection(result, question, userId, userStats);
     }
 
-    private void storeAnswerForSection(boolean result, final Question question, final String userId, UserStats userStats) {
+    private void storeAnswerForSection(boolean result, @Nullable final Question question, final String userId, @Nullable UserStats userStats) {
         if (question == null) {
             Log.error("storeAnswerForSection(): question is null.");
             return;
@@ -424,7 +438,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return userId;
     }
 
-    private SubmissionResult storeAnswerCorrectnessAndGetSubmissionResult(final String questionId, final String nextQuestionSectionId, final QuestionAndAnswer questionAndAnswer, boolean result) {
+    @NotNull
+    private SubmissionResult storeAnswerCorrectnessAndGetSubmissionResult(final String questionId, final String nextQuestionSectionId, @NotNull final QuestionAndAnswer questionAndAnswer, boolean result) {
         //If the user is logged in, store whether we got the question right or wrong:
         final String userId = getUserId();
 
@@ -462,7 +477,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
      * @param userStats Can be null.
      * @return
      */
-    private Question getNextQuestionFromUserStatsForSection(final String sectionId, final Quiz quiz, final UserStats userStats) {
+    private Question getNextQuestionFromUserStatsForSection(final String sectionId, @NotNull final Quiz quiz, @Nullable final UserStats userStats) {
         if (StringUtils.isEmpty(sectionId)) {
             Log.error("getNextQuestionFromPerSectionUserStat(): sectionId was null.");
             return null;
@@ -477,7 +492,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return getNextQuestionFromUserStats(sectionId, quiz, map);
     }
 
-    private Question getNextQuestionFromUserStats(final String sectionId, final Quiz quiz, final Map<String, UserStats> mapUserStats) {
+    @Nullable
+    private Question getNextQuestionFromUserStats(final String sectionId, @NotNull final Quiz quiz, @Nullable final Map<String, UserStats> mapUserStats) {
         final int MAX_TRIES = 10;
         int tries = 0;
         Question question = null;

@@ -6,6 +6,7 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
 import com.murrayc.bigoquiz.shared.Question;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -45,7 +46,7 @@ public class UserQuestionHistory implements IsSerializable {
     public UserQuestionHistory() {
     }
 
-    public UserQuestionHistory(final Question question) {
+    public UserQuestionHistory(@NotNull final Question question) {
         this.questionId = question.getId();
         this.answeredCorrectlyOnce = false;
         this.countAnsweredWrong = 0;

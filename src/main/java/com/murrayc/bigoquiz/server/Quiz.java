@@ -5,6 +5,8 @@ import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -13,6 +15,7 @@ import java.util.*;
  */
 public class Quiz {
     //Map of section ID to (map of question IDs to question):
+    @NotNull
     private Map<String, Map<String, QuestionAndAnswer>> questions = new HashMap<>();
 
     private final QuizSections quizSections = new QuizSections();
@@ -29,7 +32,7 @@ public class Quiz {
         questions = new HashMap<>();
     }
 
-    public void addQuestion(final String sectionId, final QuestionAndAnswer questionAndAnswer) {
+    public void addQuestion(final String sectionId, @NotNull final QuestionAndAnswer questionAndAnswer) {
         Map<String, QuestionAndAnswer> map = questions.get(sectionId);
         if (map == null) {
             map = new HashMap<>();
@@ -50,6 +53,7 @@ public class Quiz {
         sectionList.add(questionAndAnswer);
     }
 
+    @Nullable
     public Question getRandomQuestion(final String sectionId) {
         if (!StringUtils.isEmpty(sectionId)) {
             final List<QuestionAndAnswer> sectionQuestions = listSectionQuestions.get(sectionId);
@@ -61,7 +65,8 @@ public class Quiz {
         return getRandomQuestionFromList(listQuestions);
     }
 
-    private static Question getRandomQuestionFromList(final List<QuestionAndAnswer> listQuestions) {
+    @Nullable
+    private static Question getRandomQuestionFromList(@Nullable final List<QuestionAndAnswer> listQuestions) {
         if (listQuestions == null) {
             return null;
         }
@@ -80,6 +85,7 @@ public class Quiz {
         return questions.containsKey(questionId);
     }
 
+    @Nullable
     public Question getQuestion(final String questionId) {
         final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
         if (questionAndAnswer != null) {
@@ -89,6 +95,7 @@ public class Quiz {
         return null;
     }
 
+    @Nullable
     public String getAnswer(final String questionId) {
         final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
         if (questionAndAnswer != null) {
@@ -125,7 +132,7 @@ public class Quiz {
         quizSections.addSubSection(sectionId, subSectionId, subSectionTitle, subSectionLink);
     }
 
-    QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
+    @Nullable QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
         //Look in every section:
         for (Map<String, QuestionAndAnswer> section : questions.values()) {
             final QuestionAndAnswer questionAndAnswer = section.get(questionId);
@@ -143,6 +150,7 @@ public class Quiz {
     }
     */
 
+    @NotNull
     public QuizSections getSections() {
         return quizSections;
     }

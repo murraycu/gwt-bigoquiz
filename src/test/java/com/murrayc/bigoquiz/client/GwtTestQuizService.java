@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.client;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.murrayc.bigoquiz.shared.Question;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 /**
@@ -15,7 +16,7 @@ public class GwtTestQuizService extends GWTTestCase {
         // Setup an asynchronous event handler.
         final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
             @Override
-            public void onFailure(final Throwable caught) {
+            public void onFailure(@NotNull final Throwable caught) {
                 fail(caught.toString());
             }
 
@@ -32,6 +33,7 @@ public class GwtTestQuizService extends GWTTestCase {
         service.getQuestion("1", callback);
     }
 
+    @NotNull
     @Override
     public String getModuleName() {
         return "com.murrayc.BigOQuiz";

@@ -12,6 +12,8 @@ import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.LoginServiceAsync;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -36,14 +38,14 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
 
         final AsyncCallback<UserProfile> callback = new AsyncCallback<UserProfile>() {
             @Override
-            public void onFailure(final Throwable caught) {
+            public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
                 GWT.log("AsyncCallback Failed: getUserProfile(): " + caught.getMessage());
                 getView().setUserStatusFailed();
             }
 
             @Override
-            public void onSuccess(final UserProfile result) {
+            public void onSuccess(@Nullable final UserProfile result) {
                 //TODO: Throw an exception instead of returning null?
                 if(result == null) {
                     //getView().setServerFailed();
@@ -58,13 +60,13 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
 
         // Check login status using login service.
         LoginServiceAsync.Util.getInstance().login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
-            public void onFailure(final Throwable error) {
+            public void onFailure(@NotNull final Throwable error) {
                 GWT.log("AsyncCallback Failed: login(): " + error.getMessage());
 
                 getView().setUserStatusFailed();
             }
 
-            public void onSuccess(final LoginInfo result) {
+            public void onSuccess(@Nullable final LoginInfo result) {
                 //TODO: Throw an exception instead of returning null?
                 if(result == null) {
                     getView().setUserStatusFailed();

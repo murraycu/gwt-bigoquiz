@@ -4,6 +4,8 @@ import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
 import com.murrayc.bigoquiz.shared.db.UserStats;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 import java.util.Collection;
@@ -49,6 +51,7 @@ public class UserRecentHistoryTest {
         //assertEquals("question5", problems.get(0).getQuestionId());
     }
 
+    @NotNull
     private UserRecentHistory createUserRecentHistory() {
         final QuizSections sections = new QuizSections();
         sections.addSection(SECTION_1, "section 1", null);
@@ -62,6 +65,7 @@ public class UserRecentHistoryTest {
         return history;
     }
 
+    @Nullable
     private Question createQuestion(final String questionId, final String sectionId, final String subSectionId) {
         return new Question(questionId, sectionId, subSectionId, "question text", null);
     }

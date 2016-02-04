@@ -3,6 +3,8 @@ package com.murrayc.bigoquiz.server;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -42,7 +44,7 @@ public class QuizLoader {
         DocumentBuilder documentBuilder;
         try {
             documentBuilder = dbf.newDocumentBuilder();
-        } catch (final ParserConfigurationException e) {
+        } catch (@NotNull final ParserConfigurationException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
@@ -51,11 +53,11 @@ public class QuizLoader {
         org.w3c.dom.Document xmlDocument;
         try {
             xmlDocument = documentBuilder.parse(is);
-        } catch (final SAXException e) {
+        } catch (@NotNull final SAXException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
-        } catch (final IOException e) {
+        } catch (@NotNull final IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
@@ -107,7 +109,8 @@ public class QuizLoader {
         return result;
     }
 
-    private static String getTitleNodeText(final Element sectionElement) {
+    @Nullable
+    private static String getTitleNodeText(@NotNull final Element sectionElement) {
         String sectionTitle = null;
         final Element sectionTitleElement = getElementByName(sectionElement, NODE_TITLE);
         if (sectionTitleElement != null) {
@@ -116,7 +119,8 @@ public class QuizLoader {
         return sectionTitle;
     }
 
-    private static String getLinkNodeText(final Element sectionElement) {
+    @Nullable
+    private static String getLinkNodeText(@NotNull final Element sectionElement) {
         String sectionTitle = null;
         final Element sectionTitleElement = getElementByName(sectionElement, NODE_LINK);
         if (sectionTitleElement != null) {
@@ -125,7 +129,7 @@ public class QuizLoader {
         return sectionTitle;
     }
 
-    private static int addChildQuestions(final Quiz quiz, final String sectionId, final String subSectionId, final List<String> defaultChoices, final Element parentElement) {
+    private static int addChildQuestions(@NotNull final Quiz quiz, final String sectionId, final String subSectionId, final List<String> defaultChoices, @NotNull final Element parentElement) {
         int result = 0;
 
         final List<Node> listQuestionNodes = getChildrenByTagName(parentElement, NODE_QUESTION);
@@ -150,7 +154,7 @@ public class QuizLoader {
         return result;
     }
 
-    private static QuestionAndAnswer loadQuestionNode(final Element element, final String sectionID, final String subSectionId, final List<String> defaultChoices) {
+    private static QuestionAndAnswer loadQuestionNode(@NotNull final Element element, final String sectionID, final String subSectionId, final List<String> defaultChoices) {
         final String id = element.getAttribute(ATTR_ID);
         if (StringUtils.isEmpty(id)) {
             return null;
@@ -194,7 +198,8 @@ public class QuizLoader {
         return new QuestionAndAnswer(id, sectionID, subSectionId, questionText, answerText, choices);
     }
 
-    private static List<String> loadChoices(final Element elementChoices) {
+    @NotNull
+    private static List<String> loadChoices(@NotNull final Element elementChoices) {
         List<String> choices = new ArrayList<>();
 
         final List<Node> listChoices = getChildrenByTagName(elementChoices, NODE_CHOICE);
@@ -213,7 +218,7 @@ public class QuizLoader {
         return choices;
     }
 
-    private static Element getElementByName(final Element parentElement, final String tagName) {
+    private static Element getElementByName(@NotNull final Element parentElement, final String tagName) {
         final List<Node> listNodes = getChildrenByTagName(parentElement, tagName);
         if (listNodes == null) {
             return null;
@@ -232,7 +237,8 @@ public class QuizLoader {
      * @param
      * @return
      */
-    private static List<Node> getChildrenByTagName(final Element parentNode, final String tagName) {
+    @NotNull
+    private static List<Node> getChildrenByTagName(@NotNull final Element parentNode, final String tagName) {
         final List<Node> result = new ArrayList<>();
 
         final NodeList list = parentNode.getElementsByTagName(tagName);

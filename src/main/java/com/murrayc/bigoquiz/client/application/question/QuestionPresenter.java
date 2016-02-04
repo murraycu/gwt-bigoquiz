@@ -23,6 +23,8 @@ import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.google.inject.Inject;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -52,7 +54,9 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
     private String nextQuestionSectionId;
     private Question question;
+    @Nullable
     private String correctAnswer;
+    @Nullable
     private Question nextQuestion;
 
     final Timer autoNextTimer = new Timer() {
@@ -92,7 +96,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     }
 
     @Override
-    public void prepareFromRequest(final PlaceRequest request) {
+    public void prepareFromRequest(@NotNull final PlaceRequest request) {
         super.prepareFromRequest(request);
 
         //Next question section ID,
@@ -142,13 +146,13 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
             @Override
-            public void onFailure(final Throwable caught) {
+            public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
                 GWT.log("AsyncCallback Failed: onSubmitAnswer(): " + caught.getMessage());
             }
 
             @Override
-            public void onSuccess(final QuizService.SubmissionResult result) {
+            public void onSuccess(@Nullable final QuizService.SubmissionResult result) {
                 if (result == null) {
                     GWT.log("AsyncCallback: onSubmitAnswer: onSuccess: result was null.");
                     return;
@@ -216,13 +220,13 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         //which we treat much the same way as submitting an incorrect answer:
         final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
             @Override
-            public void onFailure(final Throwable caught) {
+            public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
                 GWT.log("AsyncCallback Failed: onSubmitAnswer(): " + caught.getMessage());
             }
 
             @Override
-            public void onSuccess(final QuizService.SubmissionResult result) {
+            public void onSuccess(@NotNull final QuizService.SubmissionResult result) {
                 tellUserHistoryPresenterAboutNewUserAnswer(false);
 
                 //Store these in case they are needed soon:
@@ -274,7 +278,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
      *
      * @param question
      */
-    private void revealQuestion(final Question question) {
+    private void revealQuestion(@NotNull final Question question) {
         final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(question.getId(), nextQuestionSectionId);
         placeManager.revealPlace(placeRequest);
     }
@@ -302,7 +306,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     }
 
     @Override
-    public void onNextQuestionSectionSelected(final String nextQuestionSectionId) {
+    public void onNextQuestionSectionSelected(@Nullable final String nextQuestionSectionId) {
         //Stop the next question from being shown automatically
         //because then the question would change yet again:
         autoNextTimer.cancel();
@@ -325,7 +329,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     private void getAndUseSections() {
         final AsyncCallback<QuizSections> callback = new AsyncCallback<QuizSections>() {
             @Override
-            public void onFailure(final Throwable caught) {
+            public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
                 GWT.log("AsyncCallback Failed: getSections(): " + caught.getMessage());
             }
@@ -355,13 +359,13 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
             @Override
-            public void onFailure(final Throwable caught) {
+            public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
                 GWT.log("AsyncCallback Failed: getNextQuestion(): " + caught.getMessage());
             }
 
             @Override
-            public void onSuccess(final Question result) {
+            public void onSuccess(@NotNull final Question result) {
                 revealQuestion(result);
             }
 
@@ -377,7 +381,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
             @Override
-            public void onFailure(final Throwable caught) {
+            public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
                 GWT.log("AsyncCallback Failed: getNextQuestion(): " + caught.getMessage());
             }

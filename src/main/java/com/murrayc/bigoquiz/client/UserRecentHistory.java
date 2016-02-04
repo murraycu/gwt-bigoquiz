@@ -6,6 +6,8 @@ import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.db.UserStats;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -14,8 +16,11 @@ import java.util.*;
  */
 public class UserRecentHistory implements IsSerializable {
     /* Do not make these final, because then GWT cannot serialize them. */
+    @Nullable
     private /* final */ String userId;
+    @Nullable
     private /* final */ QuizSections sections;
+    @NotNull
     private Map<String, UserStats> sectionStats = new HashMap<>();
 
     UserRecentHistory() {
@@ -38,7 +43,7 @@ public class UserRecentHistory implements IsSerializable {
      * there are no more than @max items in that sections's list. If necessary,
      * this removes older items.
      */
-    public void addUserAnswerAtStart(final Question question, boolean answerIsCorrect) {
+    public void addUserAnswerAtStart(@Nullable final Question question, boolean answerIsCorrect) {
         if (question == null) {
             GWT.log("addUserAnswerAtStart(): question was null.");
             return;
@@ -70,10 +75,12 @@ public class UserRecentHistory implements IsSerializable {
     }
 
 
+    @Nullable
     public QuizSections getSections() {
         return sections;
     }
 
+    @Nullable
     private UserStats getStatsWithAdd(final String sectionId ) {
         UserStats stats = getStats(sectionId);
         if (stats == null) {

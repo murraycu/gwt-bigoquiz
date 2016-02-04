@@ -8,6 +8,7 @@ import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -25,7 +26,9 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
     private final Label loginFailedLabel = new Label(constants.errorNoServer());
     private final Anchor signInLink = new Anchor(constants.signInLinkTitle());
 
+    @Nullable
     private LoginInfo loginInfo = null;
+    @Nullable
     private UserProfile userProfile = null;
     private boolean loginServerFailed = false;
 

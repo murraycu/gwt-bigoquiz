@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.server;
 
 import com.murrayc.bigoquiz.shared.QuizSections;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -28,6 +29,7 @@ public class QuizLoaderTest {
         assertEquals(subSection.title, "Fibonacci Heap");
     }
 
+    @Nullable
     private static Quiz loadQuiz() throws Exception {
         try (final InputStream is = Thread.currentThread().getContextClassLoader()
                 .getResourceAsStream("quiz.xml")) {
