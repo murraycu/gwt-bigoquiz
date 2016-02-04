@@ -6,10 +6,12 @@ import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
@@ -31,6 +33,15 @@ import java.util.*;
  */
 public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentUserEditUiHandlers>
         implements UserHistoryRecentPresenter.MyView {
+
+    final Timer autoBuildUiTimer = new Timer() {
+        @Override
+        public void run() {
+            if (buildUiPending) {
+                buildUi();
+            }
+        }
+    };
 
     // BigOQuizConstants.java is generated in the target/ directory,
     // from BigOQuizConstants.properties
@@ -115,6 +126,14 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             //for instance on devices with a smaller width,
             //via a CSS media query.
             buildUiPending = true;
+
+            //Try again later.
+            //We listen for window resizes that could change the visibility,
+            //by triggering our CSS media queries for page width.
+            //
+            //But this is an extra horrible workaround to deal with this view
+            //not being visible sometimes until just after this buildUi() code has run.
+            autoBuildUiTimer.schedule(2000);
             return;
         }
 
