@@ -28,7 +28,7 @@ public class UserRecentHistory implements IsSerializable {
         sections = null;
     }
 
-    public UserRecentHistory(@NotNull final String userId, @Nullable final QuizSections sections) {
+    public UserRecentHistory(@NotNull final String userId, @NotNull final QuizSections sections) {
         this.userId = userId;
         this.sections = sections;
     }
@@ -43,7 +43,7 @@ public class UserRecentHistory implements IsSerializable {
      * there are no more than @max items in that sections's list. If necessary,
      * this removes older items.
      */
-    public void addUserAnswerAtStart(@Nullable final Question question, boolean answerIsCorrect) {
+    public void addUserAnswerAtStart(@NotNull final Question question, boolean answerIsCorrect) {
         if (question == null) {
             GWT.log("addUserAnswerAtStart(): question was null.");
             return;
@@ -55,7 +55,7 @@ public class UserRecentHistory implements IsSerializable {
             return;
         }
 
-        @Nullable final UserStats userStats = getStatsWithAdd(question.getSectionId());
+        @NotNull final UserStats userStats = getStatsWithAdd(question.getSectionId());
         userStats.incrementAnswered();
         if (answerIsCorrect) {
             userStats.incrementCorrect();
@@ -80,7 +80,7 @@ public class UserRecentHistory implements IsSerializable {
         return sections;
     }
 
-    @Nullable
+    @NotNull
     private UserStats getStatsWithAdd(final String sectionId ) {
         @Nullable UserStats stats = getStats(sectionId);
         if (stats == null) {
