@@ -6,6 +6,7 @@ import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.*;
+import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -58,6 +59,22 @@ public class Utils {
         @NotNull final SimplePanel readingPanel = new SimplePanel();
         readingPanel.add(htmlPanel);
         parentPanel.add(readingPanel);
+    }
+
+    /**
+     * Creates a Label with generic server error text,
+     * to show if the communication with the server failed.
+     * It will initially be invisible.
+     *
+     * @return
+     * @param constants
+     */
+    @NotNull
+    public static InlineLabel createServerErrorLabel(final BigOQuizConstants constants) {
+        final InlineLabel result = new InlineLabel(constants.errorNoServer());
+        result.addStyleName("server-error-label");
+        result.setVisible(false);
+        return result;
     }
 
     /* This doesn't seem to work:

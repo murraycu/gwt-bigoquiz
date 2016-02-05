@@ -23,8 +23,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
     private final Label usernameLabel = new InlineLabel();
     private final Anchor logoutLabel = new Anchor(constants.logOut());
-    private Label labelError = new InlineLabel(constants.errorNoServer());
-
+    private Label labelError = Utils.createServerErrorLabel(constants);
 
     UserProfileView() {
         @NotNull final FlowPanel mainPanel = new FlowPanel();
@@ -32,8 +31,6 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
         Utils.addHeaderToPanel(2, mainPanel, constants.profileTitle());
 
-        labelError.addStyleName("server-error-label");
-        labelError.setVisible(false);
         mainPanel.add(labelError);
 
         Utils.addParagraphWithText(mainPanel, constants.username(), "username-title-label");
