@@ -48,6 +48,10 @@ public class Question implements IsSerializable {
         return choices;
     }
 
+    public boolean hasChoices() {
+        return (choices != null) && !choices.isEmpty();
+    }
+
     /**
      * @param subSectionTitle
      * @param question

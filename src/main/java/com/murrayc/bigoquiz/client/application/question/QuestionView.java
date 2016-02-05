@@ -210,20 +210,24 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             subSectionTitle.setHref("");
         }
 
-        @NotNull final String GROUP_NAME = "choices";
-        for (final String choice : question.getChoices()) {
-            @NotNull final RadioButton radioButton = new RadioButton(GROUP_NAME, choice);
-            radioButton.addStyleName("question-radio-button");
-            radioButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
-                @Override
-                public void onValueChange(@Nullable final ValueChangeEvent<Boolean> event) {
-                    if (event != null && event.getValue()) {
-                        submitAnswer(choice);
+        if (question.hasChoices()) {
+            @NotNull final String GROUP_NAME = "choices";
+            for (final String choice : question.getChoices()) {
+                @NotNull final RadioButton radioButton = new RadioButton(GROUP_NAME, choice);
+                radioButton.addStyleName("question-radio-button");
+                radioButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+                    @Override
+                    public void onValueChange(@Nullable final ValueChangeEvent<Boolean> event) {
+                        if (event != null && event.getValue()) {
+                            submitAnswer(choice);
+                        }
                     }
-                }
-            });
+                });
 
-            choicesPanel.add(radioButton);
+                choicesPanel.add(radioButton);
+            }
+        } else {
+            Utils.addParagraphWithText(choicesPanel, constants.errorNoChoices(), "error-label-no-choices");
         }
 
         updateResultPanelUi(State.WAITING_FOR_ANSWER);
