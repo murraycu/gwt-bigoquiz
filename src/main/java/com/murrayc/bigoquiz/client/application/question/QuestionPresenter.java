@@ -51,6 +51,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         //TODO: The presenter should know if it is waiting,
         //because it tells the view what to do.
         boolean isWaiting();
+
+        void setServerFailed();
     }
 
     private String nextQuestionSectionId;
@@ -148,8 +150,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         @NotNull final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
-                // TODO: create a way to notify users of asynchronous callback failures
                 Log.error("AsyncCallback Failed: onSubmitAnswer(): " + caught.getMessage());
+                getView().setServerFailed();
             }
 
             @Override

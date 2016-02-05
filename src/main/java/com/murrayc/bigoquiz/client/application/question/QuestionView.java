@@ -39,6 +39,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private String nextQuestionSectionId;
     private String choiceSelected;
 
+    private Label labelError = Utils.createServerErrorLabel(constants);
     private final ListBox nextQuestionSectionListBox = new ListBox();
     private final Label sectionTitle = new InlineLabel();
     private final Anchor subSectionTitle = new Anchor();
@@ -54,6 +55,8 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     QuestionView() {
         @NotNull final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("content-panel");
+
+        mainPanel.add(labelError);
 
         @NotNull final Panel showingFromPanel = new FlowPanel(ParagraphElement.TAG);
         showingFromPanel.addStyleName("show-from-panel");
@@ -187,6 +190,8 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             return;
         }
 
+        labelError.setVisible(false);
+
         Window.setTitle(messages.windowTitle(question.getText()));
         questionLabel.setText(question.getText());
 
@@ -250,6 +255,11 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     @Override
     public boolean isWaiting() {
         return state.isWaiting();
+    }
+
+    @Override
+    public void setServerFailed() {
+        labelError.setVisible(true);
     }
 
     private void submitAnswer(final String answer) {
