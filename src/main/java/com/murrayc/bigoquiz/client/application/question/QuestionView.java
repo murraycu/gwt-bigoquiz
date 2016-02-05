@@ -210,9 +210,9 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             subSectionTitle.setHref("");
         }
 
-        @NotNull final String groupName = "choices";
+        @NotNull final String GROUP_NAME = "choices";
         for (final String choice : question.getChoices()) {
-            @NotNull final RadioButton radioButton = new RadioButton(groupName, choice);
+            @NotNull final RadioButton radioButton = new RadioButton(GROUP_NAME, choice);
             radioButton.addStyleName("question-radio-button");
             radioButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
                 @Override
