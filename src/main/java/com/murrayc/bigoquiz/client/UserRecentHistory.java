@@ -1,6 +1,5 @@
 package com.murrayc.bigoquiz.client;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;

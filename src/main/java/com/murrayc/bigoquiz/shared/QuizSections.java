@@ -1,6 +1,5 @@
 package com.murrayc.bigoquiz.shared;
 
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.murrayc.bigoquiz.client.Log;
 import org.jetbrains.annotations.NotNull;

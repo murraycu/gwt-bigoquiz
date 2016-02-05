@@ -1,7 +1,6 @@
 package com.murrayc.bigoquiz.client.application.question;
 
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
