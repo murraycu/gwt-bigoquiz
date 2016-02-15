@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.client.application.userhistoryrecent;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.i18n.client.NumberFormat;
@@ -13,6 +14,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import com.murrayc.bigoquiz.client.Log;
+import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
@@ -53,7 +55,8 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     final FlowPanel detailsPanel = new FlowPanel();
 
-    private final Label loginLabel = new Label(constants.pleaseSignIn());
+    private Panel loginParagraph = null;
+    private final InlineHTML loginLabel = new InlineHTML();
 
     private final PlaceManager placeManager;
 
@@ -76,8 +79,8 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
         mainPanel.add(labelError);
 
         //This is only visible when necessary:
-        mainPanel.add(loginLabel);
-        loginLabel.setVisible(false);
+        loginParagraph = Utils.addParagraphWithChild(mainPanel, loginLabel);
+        loginParagraph.setVisible(false);
 
         mainPanel.add(detailsPanel);
         detailsPanel.addStyleName("user-status-answers-panel");
@@ -106,7 +109,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     private void buildUi() {
         //Some defaults:
-        loginLabel.setVisible(false);
+        loginParagraph.setVisible(false);
         labelError.setVisible(false);
 
         detailsPanel.clear();
@@ -116,8 +119,11 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             return;
         }
 
-        loginLabel.setVisible(userRecentHistory.hasUser());
-
+        if (!userRecentHistory.hasUser()) {
+            final LoginInfo loginInfo = userRecentHistory.getLoginInfo();
+            loginLabel.setHTML(messages.pleaseSignIn(loginInfo.getLoginUrl()));
+            loginParagraph.setVisible(true);
+        }
 
         //TODO: Build it if detailsPanel becomes visible later,
         //for instance by changing orientation or resizing of the browser window.

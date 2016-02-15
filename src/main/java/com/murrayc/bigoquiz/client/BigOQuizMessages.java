@@ -50,4 +50,9 @@ public interface BigOQuizMessages extends com.google.gwt.i18n.client.Messages {
     @AlternateMessage({"one", "and {0,number} more"})
     @Key("moreProblemQuestions")
     String moreProblemQuestions(@PluralCount int arg0);
+
+    @NotNull
+    @DefaultMessage("Please <a href=\"{0}\">sign in</a> to track your progress and identify problem questions.")
+    @Key("pleaseSignIn")
+    String pleaseSignIn(final String text);
 }

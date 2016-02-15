@@ -114,4 +114,8 @@ public class UserRecentHistory implements IsSerializable {
     private String getUserId() {
         return loginInfo.getUserId();
     }
+
+    public LoginInfo getLoginInfo() {
+        return loginInfo;
+    }
 }
