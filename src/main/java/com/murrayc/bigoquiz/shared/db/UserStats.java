@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.shared.db;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.shared.Question;
@@ -34,6 +35,15 @@ public class UserStats implements IsSerializable {
     int countQuestionsCorrectOnce = 0;
 
     Map<String, UserQuestionHistory> questionHistories;
+
+    @Ignore
+    private transient List<UserQuestionHistory> questionHistoriesInOrder = null;
+
+    @Ignore
+    private transient boolean cacheIsInvalid = true;
+
+    @Ignore
+    private transient Comparator<UserQuestionHistory> comparator = null;
 
     public UserStats() {
         questionHistories = new HashMap<>();
@@ -124,11 +134,53 @@ public class UserStats implements IsSerializable {
         if (firstTimeCorrect) {
             countQuestionsCorrectOnce++;
         }
+
+        cacheIsInvalid = true;
+    }
+
+    private void cacheList() {
+        if (!cacheIsInvalid) {
+            return;
+        }
+
+        if (comparator == null) {
+            // Order the problem questions with the most wrong answers first:
+            // (reverseOrder doesn't seem to be supported in GWT's client-side.)
+            comparator = new Comparator<UserQuestionHistory>() {
+                @Override
+                public int compare(final UserQuestionHistory o1, final UserQuestionHistory o2) {
+                    if (o1 == null) {
+                        if (o2 == null) {
+                            return 0;
+                        }
+                    }
+
+                    if (o2 == null) {
+                        return 1;
+                    }
+
+                    final int c1 = o1.getCountAnsweredWrong();
+                    final int c2 = o2.getCountAnsweredWrong();
+                    if (c1 == c2) {
+                        return 0;
+                    }
+
+                    return (c1 > c2) ?
+                            -1 : 1;
+                }
+            };
+        }
+
+        questionHistoriesInOrder = new ArrayList<UserQuestionHistory>(questionHistories.values());
+
+        Collections.sort(questionHistoriesInOrder, comparator);
+        cacheIsInvalid = false;
     }
 
     @NotNull
-    public Collection<UserQuestionHistory> getQuestionHistories() {
-        return questionHistories.values();
+    public List<UserQuestionHistory> getQuestionHistories() {
+        cacheList();
+        return questionHistoriesInOrder;
     }
 
     public int getAnsweredOnce() {

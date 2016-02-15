@@ -214,7 +214,8 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             detailsPanel.add(problemQuestionsPanel);
             problemQuestionsPanel.addStyleName("panel-problem-questions");
 
-            @NotNull final Collection<UserQuestionHistory> problemQuestions = stats.getQuestionHistories();
+            @NotNull final List<UserQuestionHistory> problemQuestions = stats.getQuestionHistories();
+
             if (problemQuestions == null || problemQuestions.isEmpty()) {
                 Utils.addParagraphWithText(problemQuestionsPanel, constants.problemQuestionsNoneYet(),
                         "problem-answer-score");
