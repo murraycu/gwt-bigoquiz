@@ -22,8 +22,6 @@ import org.jetbrains.annotations.Nullable;
 public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyView>
         implements UserStatusUserEditUiHandlers {
     public interface MyView extends View, HasUiHandlers<UserStatusUserEditUiHandlers> {
-        void setUserStatus(final UserProfile result);
-
         void setLoginInfo(@NotNull final LoginInfo result);
 
         void setUserStatusFailed();
@@ -36,28 +34,6 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
         super(eventBus, view);
 
         getView().setUiHandlers(this);
-
-        @Nullable final AsyncCallback<UserProfile> callback = new AsyncCallback<UserProfile>() {
-            @Override
-            public void onFailure(@NotNull final Throwable caught) {
-                // TODO: create a way to notify users of asynchronous callback failures
-                Log.error("AsyncCallback Failed: getUserProfile(): " + caught.getMessage());
-                getView().setUserStatusFailed();
-            }
-
-            @Override
-            public void onSuccess(@Nullable final UserProfile result) {
-                //TODO: Throw an exception instead of returning null?
-                if(result == null) {
-                    //getView().setServerFailed();
-                } else {
-                    getView().setUserStatus(result);
-                }
-            }
-        };
-
-        QuizServiceAsync.Util.getInstance().getUserProfile(callback);
-
 
         // Check login status using login service.
         LoginServiceAsync.Util.getInstance().login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {

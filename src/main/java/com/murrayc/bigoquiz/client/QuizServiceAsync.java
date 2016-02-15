@@ -22,9 +22,6 @@ public interface QuizServiceAsync {
     void submitDontKnowAnswer(final String questionId, String nextQuestionSectionId, AsyncCallback<QuizService.SubmissionResult> async)
             throws IllegalArgumentException;
 
-    void getUserProfile(AsyncCallback<UserProfile> async)
-            throws IllegalArgumentException;
-
     void getUserRecentHistory(final String requestUri, AsyncCallback<UserRecentHistory> async)
             throws IllegalArgumentException;
 

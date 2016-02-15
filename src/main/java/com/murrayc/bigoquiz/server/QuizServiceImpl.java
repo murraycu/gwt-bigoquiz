@@ -141,12 +141,6 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @Nullable
     @Override
-    public UserProfile getUserProfile() throws IllegalArgumentException {
-        return getUserProfileImpl();
-    }
-
-    @Nullable
-    @Override
     public UserRecentHistory getUserRecentHistory(final String requestUri) throws IllegalArgumentException {
         @Nullable final Quiz quiz = getQuiz();
         @NotNull final QuizSections sections = quiz.getSections();
@@ -415,7 +409,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
      * @return null if the user is not logged in.
      */
     private String getUserId() {
-        @Nullable final UserProfile userProfile = getUserProfile();
+        @Nullable final UserProfile userProfile = getUserProfileImpl();
         if (userProfile == null) {
             //This is normal if the user is not logged in.
             //Log.error("getUserId(): userProfile was null.");

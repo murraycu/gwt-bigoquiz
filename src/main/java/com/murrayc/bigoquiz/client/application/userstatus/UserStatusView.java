@@ -7,7 +7,6 @@ import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
-import com.murrayc.bigoquiz.shared.db.UserProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,8 +28,6 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
 
     @Nullable
     private LoginInfo loginInfo = null;
-    @Nullable
-    private UserProfile userProfile = null;
     private boolean loginServerFailed = false;
 
     UserStatusView() {
@@ -60,42 +57,8 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
         initWidget(mainPanel);
     }
 
-    private void showLogin() {
-        if (loginInfo == null) {
-            Log.error("showLogin(): loginInfo was null.");
-        } else if (!loginInfo.isLoggedIn()) {
-            signInLink.setHref(loginInfo.getLoginUrl());
-            loginPanel.setVisible(true);
-        } else {
-            loginPanel.setVisible(false);
-        }
-
-        loginFailedLabel.setVisible(loginServerFailed);
-    }
-
-    private void showStatus() {
-        //TODO: Avoid duplication with UserProfile.
-        String username = loginInfo == null ? "" : loginInfo.getNickname();
-        if (userProfile != null) {
-            username = userProfile.getName();
-        }
-
-        usernameLabel.setText(username);
-        usernameLabel.setHref("#" + NameTokens.USER_PROFILE);
-    }
-
-    @Override
-    public void setUserStatus(final UserProfile userProfile) {
-        this.userProfile = userProfile;
-        this.loginServerFailed = false;
-
-
-        updateUi();
-    }
-
     @Override
     public void setUserStatusFailed() {
-        this.userProfile = null;
         this.loginServerFailed = true;
 
         updateUi();
@@ -108,7 +71,30 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
     }
 
     private void updateUi() {
-        showLogin();
-        showStatus();
+        //Login status:
+        if (loginInfo == null) {
+            Log.error("showLogin(): loginInfo was null.");
+        } else if (!loginInfo.isLoggedIn()) {
+            signInLink.setHref(loginInfo.getLoginUrl());
+            loginPanel.setVisible(true);
+        } else {
+            loginPanel.setVisible(false);
+        }
+
+        loginFailedLabel.setVisible(loginServerFailed);
+
+        final String username = loginInfo.getNickname();
+        //TODO: If we ever let the user specify their own name just for our website:
+        /*
+        if (userProfile != null) {
+            //TODO: This is
+            username = userProfile.getName();
+        } else {
+            username = loginInfo.getNickname();
+        }
+        */
+
+        usernameLabel.setText(username);
+        usernameLabel.setHref("#" + NameTokens.USER_PROFILE);
     }
 }

@@ -35,8 +35,6 @@ public interface QuizService extends RemoteService {
 
     @NotNull SubmissionResult submitDontKnowAnswer(final String questionId, String nextQuestionSectionId) throws IllegalArgumentException;
 
-    @Nullable UserProfile getUserProfile() throws IllegalArgumentException;
-
     /**
      * Gets the currently logged-in user's statistics,
      * or an empty set of statistics for not-logged in users.
