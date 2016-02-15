@@ -11,8 +11,6 @@ import com.gwtplatform.mvp.client.View;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.LoginServiceAsync;
-import com.murrayc.bigoquiz.client.QuizServiceAsync;
-import com.murrayc.bigoquiz.shared.db.UserProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
