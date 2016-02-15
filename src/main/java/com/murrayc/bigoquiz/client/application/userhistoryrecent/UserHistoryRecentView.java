@@ -64,7 +64,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     //When we skip building of the UI because its hidden (by CSS) anyway,
     //this lets us do that building if necessary later.
     private boolean buildUiPending = false;
-    private Label labelError = Utils.createServerErrorLabel(constants);
+    private final Label labelError = Utils.createServerErrorLabel(constants);
 
     @Inject
     UserHistoryRecentView(PlaceManager placeManager) {

@@ -23,7 +23,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
     private final Label usernameLabel = new InlineLabel();
     private final Anchor logoutLabel = new Anchor(constants.logOut());
-    private Label labelError = Utils.createServerErrorLabel(constants);
+    private final Label labelError = Utils.createServerErrorLabel(constants);
 
     UserProfileView() {
         @NotNull final FlowPanel mainPanel = new FlowPanel();

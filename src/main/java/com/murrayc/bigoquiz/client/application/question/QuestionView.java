@@ -39,7 +39,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private String nextQuestionSectionId;
     private String choiceSelected;
 
-    private Label labelError = Utils.createServerErrorLabel(constants);
+    private final Label labelError = Utils.createServerErrorLabel(constants);
     private final ListBox nextQuestionSectionListBox = new ListBox();
     private final Label sectionTitle = new InlineLabel();
     private final Anchor subSectionTitle = new Anchor();
