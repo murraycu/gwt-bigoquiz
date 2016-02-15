@@ -66,4 +66,14 @@ public class ServiceWithUser extends RemoteServiceServlet {
 
         return loginInfo;
     }
+
+    @NotNull
+    protected UserProfile getUserProfileFromDataStore(final User user) {
+        UserProfile userProfile = EntityManagerFactory.ofy().load().type(UserProfile.class).id(user.getUserId()).now();
+        if (userProfile == null) {
+            userProfile = new UserProfile(user.getUserId(), user.getNickname());
+            EntityManagerFactory.ofy().save().entity(userProfile).now();
+        }
+        return userProfile;
+    }
 }

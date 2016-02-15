@@ -25,7 +25,7 @@ public interface QuizServiceAsync {
     void getUserProfile(AsyncCallback<UserProfile> async)
             throws IllegalArgumentException;
 
-    void getUserRecentHistory(AsyncCallback<UserRecentHistory> async)
+    void getUserRecentHistory(final String requestUri, AsyncCallback<UserRecentHistory> async)
             throws IllegalArgumentException;
 
     void getSections(AsyncCallback<QuizSections> async);

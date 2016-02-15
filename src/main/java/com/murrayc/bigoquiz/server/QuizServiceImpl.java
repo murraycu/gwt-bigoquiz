@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.server;
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.cmd.Query;
 import com.murrayc.bigoquiz.client.Log;
+import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
@@ -146,20 +147,23 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @Nullable
     @Override
-    public UserRecentHistory getUserRecentHistory() throws IllegalArgumentException {
+    public UserRecentHistory getUserRecentHistory(final String requestUri) throws IllegalArgumentException {
         @Nullable final Quiz quiz = getQuiz();
         @NotNull final QuizSections sections = quiz.getSections();
         if (sections == null) {
             return null;
         }
 
+        //Get the stats for this user, for each section:
+        //We also return the LoginInfo, so we can show a sign in link,
+        //and to avoid the need for a seperate call to the server.
+        @NotNull LoginInfo loginInfo = getLoginInfo(requestUri);
+        @NotNull final UserRecentHistory result = new UserRecentHistory(loginInfo, sections);
+
         //This may be null,
         //in which case we will return a mostly-empty set of user statistics,
         //just to show what is possible when the user is logged in:
-        @Nullable final String userId = getUserId();
-
-        //Get the stats for this user, for each section:
-        @NotNull final UserRecentHistory result = new UserRecentHistory(userId, sections);
+        @Nullable final String userId = loginInfo.getUserId();
 
         @NotNull final Map<String, UserStats> mapUserStats = getUserStats(userId);
         for (final String sectionId : sections.getSectionIds()) {
@@ -255,12 +259,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
             return null;
         }
 
-        UserProfile userProfile = EntityManagerFactory.ofy().load().type(UserProfile.class).id(user.getUserId()).now();
-        if (userProfile == null) {
-            userProfile = new UserProfile(user.getUserId(), user.getNickname());
-            EntityManagerFactory.ofy().save().entity(userProfile).now();
-        }
-        return userProfile;
+        return getUserProfileFromDataStore(user);
     }
 
     private Quiz getQuiz() {

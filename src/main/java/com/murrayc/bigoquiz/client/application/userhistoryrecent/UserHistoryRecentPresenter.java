@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.client.application.userhistoryrecent;
 
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -106,7 +107,8 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
             }
         };
 
-        QuizServiceAsync.Util.getInstance().getUserRecentHistory(callback);
+        QuizServiceAsync.Util.getInstance().getUserRecentHistory(
+                GWT.getHostPageBaseURL(), callback);
     }
 
 }

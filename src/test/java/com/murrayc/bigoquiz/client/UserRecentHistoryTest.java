@@ -59,7 +59,9 @@ public class UserRecentHistoryTest {
 
         @NotNull final UserStats stats = new UserStats();
 
-        @NotNull UserRecentHistory history = new UserRecentHistory("userid 1", sections);
+        @NotNull LoginInfo loginInfo = new LoginInfo();
+        loginInfo.setUserId("userid 1");
+        @NotNull UserRecentHistory history = new UserRecentHistory(loginInfo, sections);
         history.setSectionStats("section1", stats);
 
         return history;

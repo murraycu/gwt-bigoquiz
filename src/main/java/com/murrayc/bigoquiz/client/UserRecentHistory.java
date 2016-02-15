@@ -15,27 +15,28 @@ import java.util.*;
  */
 public class UserRecentHistory implements IsSerializable {
     /* Do not make these final, because then GWT cannot serialize them. */
-    private /* final */ String userId;
+    @NotNull
+    private /* final */ LoginInfo loginInfo;
     @NotNull
     private /* final */ QuizSections sections;
     @NotNull
     private Map<String, UserStats> sectionStats = new HashMap<>();
 
     UserRecentHistory() {
-        userId = null;
+        loginInfo = null;
         sections = null;
     }
 
     /**
-     * If @a user Id is null then we create a mostly-empty set of statistics,
+     * If the @a loginInfo's user Id is null then we create a mostly-empty set of statistics,
      * just showing the question sections for which a logged-in
      * user could have statistics
      *
-     * @param userId This may be null,
+     * @param loginInfo
      * @param sections
      */
-    public UserRecentHistory( final String userId, @NotNull final QuizSections sections) {
-        this.userId = userId;
+    public UserRecentHistory(@NotNull final LoginInfo loginInfo, @NotNull final QuizSections sections) {
+        this.loginInfo = loginInfo;
         this.sections = sections;
     }
 
@@ -90,6 +91,7 @@ public class UserRecentHistory implements IsSerializable {
     private UserStats getStatsWithAdd(final String sectionId ) {
         @Nullable UserStats stats = getStats(sectionId);
         if (stats == null) {
+            final String userId = getUserId();
             if (userId == null) {
                 throw new NullPointerException("getStatsWithAdd() needs a userId.");
             }
@@ -106,6 +108,10 @@ public class UserRecentHistory implements IsSerializable {
     }
 
     public boolean hasUser() {
-        return StringUtils.isEmpty(userId);
+        return !StringUtils.isEmpty(getUserId());
+    }
+
+    private String getUserId() {
+        return loginInfo.getUserId();
     }
 }
