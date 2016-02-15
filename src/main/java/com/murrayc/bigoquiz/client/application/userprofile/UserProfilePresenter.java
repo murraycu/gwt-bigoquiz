@@ -29,7 +29,7 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
     interface MyView extends View, HasUiHandlers<UserProfileUserEditUiHandlers> {
         void setUserStatusFailed();
 
-        void setLoginInfo(final LoginInfo result);
+        void setLoginInfo(@NotNull final LoginInfo result);
     }
 
     @ProxyStandard

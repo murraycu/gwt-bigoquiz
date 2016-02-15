@@ -5,6 +5,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.murrayc.bigoquiz.client.BigOQuizMessages;
+import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
@@ -20,10 +22,15 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
     // from BigOQuizConstants.properties
     // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
     private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
+    private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
     private final Label usernameLabel = new InlineLabel();
     private final Anchor logoutLabel = new Anchor(constants.logOut());
     private final Label labelError = Utils.createServerErrorLabel(constants);
+    private final Button buttonResetSections = new Button(constants.buttonResetSections());
+
+    private Panel loginParagraph = null;
+    private final InlineHTML loginLabel = new InlineHTML();
 
     UserProfileView() {
         @NotNull final FlowPanel mainPanel = new FlowPanel();
@@ -33,12 +40,15 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
         mainPanel.add(labelError);
 
+        //This is only visible when necessary:
+        loginParagraph = Utils.addParagraphWithChild(mainPanel, loginLabel);
+        loginParagraph.setVisible(false);
+
         Utils.addParagraphWithText(mainPanel, constants.username(), "username-title-label");
 
         mainPanel.add(logoutLabel);
         logoutLabel.addStyleName("logout-label");
 
-        @NotNull Button buttonResetSections = new Button(constants.buttonResetSections());
         Utils.addParagraphWithChild(mainPanel, buttonResetSections);
         buttonResetSections.addStyleName("button-reset-sections");
         buttonResetSections.addClickHandler(new ClickHandler() {
@@ -69,16 +79,29 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
     }
 
     @Override
-    public void setLoginInfo(@Nullable final LoginInfo loginInfo) {
-        @Nullable String username = null;
-        @Nullable String logoutLink = null;
-        if (loginInfo != null) {
-            username = loginInfo.getNickname();
-            logoutLink = loginInfo.getLogoutUrl();
+    public void setLoginInfo(@NotNull final LoginInfo loginInfo) {
+        //Defaults:
+        usernameLabel.setVisible(false);
+        logoutLabel.setVisible(false);
+        buttonResetSections.setVisible(false);
+        loginParagraph.setVisible(false);
+
+        if (loginInfo == null) {
+            Log.error("setLoginInfo(): loginInfo is null.");
+            return;
         }
 
-        usernameLabel.setText(username);
-        logoutLabel.setHref(logoutLink);
+        if (loginInfo.isLoggedIn()) {
+            usernameLabel.setVisible(true);
+            logoutLabel.setVisible(true);
+            buttonResetSections.setVisible(true);
+
+            usernameLabel.setText(loginInfo.getNickname());
+            logoutLabel.setHref(loginInfo.getLogoutUrl());
+        } else {
+            loginLabel.setHTML(messages.pleaseSignIn(loginInfo.getLoginUrl()));
+            loginParagraph.setVisible(true);
+        }
     }
 
     private void onResetSectionsButton() {
