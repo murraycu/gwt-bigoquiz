@@ -342,10 +342,13 @@ background-color: #B6B2DD;
 .gwt-Button.reset-sections-confirm-dialog-ok-button {
     background: red;
     font-weight: bold;
+    float: right;
 }
 
 .gwt-Button.reset-sections-confirm-dialog-cancel-button {
     font-weight: bold;
+    float: right;
+    margin-right: 1em;
 }
 
 .user-profile-user-history-panel {

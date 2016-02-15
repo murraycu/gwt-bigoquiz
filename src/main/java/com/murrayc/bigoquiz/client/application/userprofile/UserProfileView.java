@@ -107,6 +107,9 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
     private void onResetSectionsButton() {
         //TODO: Do this in the presenter?
         @NotNull final DialogBox dialog = new DialogBox();
+        dialog.setGlassEnabled(true);
+        dialog.setAnimationEnabled(true);
+
         dialog.setText(constants.dialogResetSectionsTitle());
 
         @NotNull final Button buttonOK = new Button(constants.dialogResetSectionsOkButton());
@@ -131,13 +134,14 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
                 "reset-sections-confirm-dialog-text");
         @NotNull final Panel panelButtons = new FlowPanel();
         panelButtons.addStyleName("reset-sections-confirm-dialog-buttons-panel");
-        panelButtons.add(buttonCancel);
-        buttonCancel.addStyleName("reset-sections-confirm-dialog-cancel-button");
         panelButtons.add(buttonOK);
         buttonOK.addStyleName("reset-sections-confirm-dialog-ok-button");
+        panelButtons.add(buttonCancel);
+        buttonCancel.addStyleName("reset-sections-confirm-dialog-cancel-button");
         panelDialog.add(panelButtons);
         dialog.setWidget(panelDialog);
 
+        dialog.center();
         dialog.show();
     }
 }
