@@ -147,18 +147,16 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @Nullable
     @Override
     public UserRecentHistory getUserRecentHistory() throws IllegalArgumentException {
-        @Nullable final String userId = getUserId();
-        if (StringUtils.isEmpty(userId)) {
-            //This is normal, if the user is not logged in.
-            //Log.error("getUserRecentHistory(): userId was null.");
-            return null;
-        }
-
         @Nullable final Quiz quiz = getQuiz();
         @NotNull final QuizSections sections = quiz.getSections();
         if (sections == null) {
             return null;
         }
+
+        //This may be null,
+        //in which case we will return a mostly-empty set of user statistics,
+        //just to show what is possible when the user is logged in:
+        @Nullable final String userId = getUserId();
 
         //Get the stats for this user, for each section:
         @NotNull final UserRecentHistory result = new UserRecentHistory(userId, sections);

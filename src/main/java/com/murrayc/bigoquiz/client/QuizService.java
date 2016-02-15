@@ -37,6 +37,13 @@ public interface QuizService extends RemoteService {
 
     @Nullable UserProfile getUserProfile() throws IllegalArgumentException;
 
+    /**
+     * Gets the currently logged-in user's statistics,
+     * or an empty set of statistics for not-logged in users.
+     *
+     * @return
+     * @throws IllegalArgumentException
+     */
     @Nullable UserRecentHistory getUserRecentHistory() throws IllegalArgumentException;
 
     /**

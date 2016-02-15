@@ -105,16 +105,19 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     }
 
     private void buildUi() {
-        loginLabel.setVisible(userRecentHistory == null);
+        //Some defaults:
+        loginLabel.setVisible(false);
         labelError.setVisible(false);
 
         detailsPanel.clear();
 
-        //This would just mean that the user is not logged in.
-        //TODO: Make this more explicit in the API.
         if (userRecentHistory == null) {
+            Log.error("buildUI(): userRecentHistory is null.");
             return;
         }
+
+        loginLabel.setVisible(userRecentHistory.hasUser());
+
 
         //TODO: Build it if detailsPanel becomes visible later,
         //for instance by changing orientation or resizing of the browser window.
@@ -196,6 +199,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                 */
             } else {
                 Log.error("buildUi(): UserStats is null.");
+                return;
             }
 
             Utils.addHeaderToPanel(4, detailsPanel, constants.problemQuestions());

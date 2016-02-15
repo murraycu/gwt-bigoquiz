@@ -15,7 +15,6 @@ import java.util.*;
  */
 public class UserRecentHistory implements IsSerializable {
     /* Do not make these final, because then GWT cannot serialize them. */
-    @NotNull
     private /* final */ String userId;
     @NotNull
     private /* final */ QuizSections sections;
@@ -27,7 +26,15 @@ public class UserRecentHistory implements IsSerializable {
         sections = null;
     }
 
-    public UserRecentHistory(@NotNull final String userId, @NotNull final QuizSections sections) {
+    /**
+     * If @a user Id is null then we create a mostly-empty set of statistics,
+     * just showing the question sections for which a logged-in
+     * user could have statistics
+     *
+     * @param userId This may be null,
+     * @param sections
+     */
+    public UserRecentHistory( final String userId, @NotNull final QuizSections sections) {
         this.userId = userId;
         this.sections = sections;
     }
@@ -96,5 +103,9 @@ public class UserRecentHistory implements IsSerializable {
 
     private void setStats(final String sectionId, final UserStats stats) {
         sectionStats.put(sectionId, stats);
+    }
+
+    public boolean hasUser() {
+        return StringUtils.isEmpty(userId);
     }
 }
