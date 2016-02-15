@@ -1,5 +1,7 @@
 package com.murrayc.bigoquiz.client;
 
+import com.murrayc.bigoquiz.shared.db.UserProfile;
+
 import java.io.Serializable;
 
 /**
@@ -12,6 +14,7 @@ public class LoginInfo implements Serializable {
     private String userId;
     private String emailAddress;
     private String nickname;
+    private UserProfile userProfile;
 
     public boolean isLoggedIn() {
         return loggedIn;
@@ -51,6 +54,10 @@ public class LoginInfo implements Serializable {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public void setUserProfile(final UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 
     public String getUserId() {

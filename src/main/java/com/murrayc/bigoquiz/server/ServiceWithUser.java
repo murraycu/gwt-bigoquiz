@@ -5,6 +5,9 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.murrayc.bigoquiz.client.Log;
+import com.murrayc.bigoquiz.client.LoginInfo;
+import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
+import com.murrayc.bigoquiz.shared.db.UserProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,5 +33,37 @@ public class ServiceWithUser extends RemoteServiceServlet {
         }
 
         return user;
+    }
+
+    @NotNull
+    protected LoginInfo getLoginInfo(final String requestUri) {
+        @NotNull final LoginInfo loginInfo = new LoginInfo();
+        loginInfo.setLoggedIn(false);
+
+        @Nullable final User user = getUser();
+        final UserService userService = UserServiceFactory.getUserService();
+        if (user != null) {
+            loginInfo.setLoggedIn(true);
+            loginInfo.setUserId(user.getUserId());
+            loginInfo.setEmailAddress(user.getEmail());
+            loginInfo.setNickname(user.getNickname());
+            loginInfo.setLogoutUrl(userService.createLogoutURL(requestUri));
+
+            //This is superfluous, but might contain more data one day:
+            UserProfile userProfile = EntityManagerFactory.ofy().load().type(UserProfile.class).id(user.getUserId()).now();
+            if (userProfile == null) {
+                userProfile = new UserProfile(user.getUserId(), user.getNickname());
+                EntityManagerFactory.ofy().save().entity(userProfile).now();
+            }
+            loginInfo.setUserProfile(userProfile);
+        } else {
+            loginInfo.setLoggedIn(false);
+
+            if (userService != null) {
+                loginInfo.setLoginUrl(userService.createLoginURL(requestUri));
+            }
+        }
+
+        return loginInfo;
     }
 }

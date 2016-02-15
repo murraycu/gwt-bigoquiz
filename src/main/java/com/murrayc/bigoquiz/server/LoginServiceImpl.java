@@ -16,24 +16,6 @@ public class LoginServiceImpl extends ServiceWithUser implements
 
     @NotNull
     public LoginInfo login(final String requestUri) {
-        @NotNull final LoginInfo loginInfo = new LoginInfo();
-        loginInfo.setLoggedIn(false);
-
-        @Nullable final User user = getUser();
-        final UserService userService = UserServiceFactory.getUserService();
-        if (user != null) {
-            loginInfo.setLoggedIn(true);
-            loginInfo.setEmailAddress(user.getEmail());
-            loginInfo.setNickname(user.getNickname());
-            loginInfo.setLogoutUrl(userService.createLogoutURL(requestUri));
-        } else {
-            loginInfo.setLoggedIn(false);
-
-            if (userService != null) {
-                loginInfo.setLoginUrl(userService.createLoginURL(requestUri));
-            }
-        }
-        return loginInfo;
+        return getLoginInfo(requestUri);
     }
-
 }
