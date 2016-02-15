@@ -6,7 +6,7 @@
 	<groupId>com.murrayc.bigoquiz</groupId>
 	<artifactId>gwt-bigoquiz</artifactId>
 	<packaging>war</packaging>
-	<version>0.9.2</version>
+	<version>0.9.3</version>
 	<name>Big-O Quiz</name>
 
 	<!-- Specify a recent maven version, so we can use later plugin versions.
