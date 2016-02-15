@@ -55,6 +55,7 @@
             </question>
         </subsection>
 
+        <!-- bigocheatsheet.com has stack, but bigoref.com does not. -->
         <subsection id="stack">
             <title>Stack</title>
             <link>http://en.wikipedia.org/wiki/Stack_(abstract_data_type)</link>
@@ -343,6 +344,8 @@
                 <answer>O(n)</answer>
             </question>
         </subsection>
+
+        <!-- TODO: bigoref.com has Ternary Search Tree -->
 
         <subsection id="b-tree">
             <title>B-Tree</title>
@@ -678,13 +681,11 @@
                 <text>Time (Best)</text>
                 <answer>O(n)</answer>
             </question>
-            <question id="shell-sort-sort-time-average">
-                <text>Time (Average)</text>
-                <answer>O((n log(n))²)</answer>
-            </question>
+            <!-- No "shell-sort-sort-time-average" because it's an unsolved problem
+                 according to wikipedia. -->
             <question id="shell-sort-sort-time-worst">
                 <text>Time (Worst)</text>
-                <answer>O((n log(n))²)</answer>
+                <answer>O(n²)</answer>
             </question>
             <question id="shell-sort-sort-space-worst">
                 <text>Space (Worst)</text>
@@ -709,7 +710,7 @@
             </question>
             <question id="bucket-sort-sort-space-worst">
                 <text>Space (Worst)</text>
-                <answer>O(n)</answer>
+                <answer>O(nk)</answer>
             </question>
         </subsection>
 
@@ -943,6 +944,7 @@
                 <text>Find Max</text>
                 <answer>O(1)</answer>
             </question>
+            <!-- bigoref.com has O(n log(n)): https://github.com/josem/bigoref/issues/5 -->
             <question id="binary-heap-extract-max">
                 <text>Extract Max</text>
                 <answer>O(log(n))</answer>
@@ -969,10 +971,12 @@
             <title>Binomial Heap</title>
             <link>http://en.wikipedia.org/wiki/Binomial_heap</link>
             <!-- No binomial-heap-heapify -->
+            <!-- bigoref.com has O(n log(n)): https://github.com/josem/bigoref/issues/5 -->
             <question id="binomial-heap-find-max">
                 <text>Find Max</text>
                 <answer>O(1)</answer>
             </question>
+            <!-- bigoref.com has O(n log(n)): https://github.com/josem/bigoref/issues/5 -->
             <question id="binomial-heap-extract-max">
                 <text>Extract Max</text>
                 <answer>O(log(n))</answer>
