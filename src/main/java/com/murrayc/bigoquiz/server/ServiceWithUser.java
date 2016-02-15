@@ -45,7 +45,6 @@ public class ServiceWithUser extends RemoteServiceServlet {
         if (user != null) {
             loginInfo.setLoggedIn(true);
             loginInfo.setUserId(user.getUserId());
-            loginInfo.setEmailAddress(user.getEmail());
             loginInfo.setNickname(user.getNickname());
             loginInfo.setLogoutUrl(userService.createLogoutURL(requestUri));
 
