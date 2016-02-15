@@ -37,7 +37,7 @@ public class AboutView extends ViewWithUiHandlers<AboutUserEditUiHandlers>
 
         //TODO: Internationalization:
         //TODO: Get the number from pom.xml somehow.
-        versionLabel.setText("Version: " + "0.9.3");
+        versionLabel.setText("Version: " + "0.9.4");
 
         initWidget(mainPanel);
     }
