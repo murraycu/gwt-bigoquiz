@@ -8,7 +8,7 @@
             <choice>O(log(n))</choice>
             <choice>O(n)</choice>
             <choice>O(n log(n))</choice>
-            <choice>O(n^2)</choice>
+            <choice>O(n²)</choice>
             <choice>O(nk)</choice>
             <choice>O(n + k)</choice>
         </default_choices>
@@ -519,10 +519,10 @@
             <choice>O(log(n))</choice>
             <choice>O(n)</choice>
             <choice>O(n log(n))</choice>
-            <choice>O(n^2)</choice>
+            <choice>O(n²)</choice>
             <choice>O(nk)</choice>
             <choice>O(n + k)</choice>
-            <choice>O((n log(n))^2)</choice>
+            <choice>O((n log(n))²)</choice>
         </default_choices>
         <subsection id="quicksort">
             <title>Quicksort</title>
@@ -537,7 +537,7 @@
             </question>
             <question id="quicksort-time-worst">
                 <text>Time (Worst)</text>
-                <answer>O(n^2)</answer>
+                <answer>O(n²)</answer>
             </question>
             <question id="quicksort-space-worst">
                 <text>Space (Worst)</text>
@@ -617,11 +617,11 @@
             </question>
             <question id="bubble-sort-time-average">
                 <text>Time (Average)</text>
-                <answer>O(n^2)</answer>
+                <answer>O(n²)</answer>
             </question>
             <question id="bubble-sort-time-worst">
                 <text>Time (Worst)</text>
-                <answer>O(n^2)</answer>
+                <answer>O(n²)</answer>
             </question>
             <question id="bubble-sort-space-worst">
                 <text>Space (Worst)</text>
@@ -638,11 +638,11 @@
             </question>
             <question id="insertion-sort-time-average">
                 <text>Time (Average)</text>
-                <answer>O(n^2)</answer>
+                <answer>O(n²)</answer>
             </question>
             <question id="insertion-sort-time-worst">
                 <text>Time (Worst)</text>
-                <answer>O(n^2)</answer>
+                <answer>O(n²)</answer>
             </question>
             <question id="insertion-sort-space-worst">
                 <text>Space (Worst)</text>
@@ -655,15 +655,15 @@
             <link>http://en.wikipedia.org/wiki/Selection_sort</link>
             <question id="selection-sort-time-best">
                 <text>Time (Best)</text>
-                <answer>O(n^2)</answer>
+                <answer>O(n²)</answer>
             </question>
             <question id="selection-sort-time-average">
                 <text>Time (Average)</text>
-                <answer>O(n^2)</answer>
+                <answer>O(n²)</answer>
             </question>
             <question id="selection-sort-time-worst">
                 <text>Time (Worst)</text>
-                <answer>O(n^2)</answer>
+                <answer>O(n²)</answer>
             </question>
             <question id="selection-sort-space-worst">
                 <text>Space (Worst)</text>
@@ -680,11 +680,11 @@
             </question>
             <question id="shell-sort-sort-time-average">
                 <text>Time (Average)</text>
-                <answer>O((n log(n))^2)</answer>
+                <answer>O((n log(n))²)</answer>
             </question>
             <question id="shell-sort-sort-time-worst">
                 <text>Time (Worst)</text>
-                <answer>O((n log(n))^2)</answer>
+                <answer>O((n log(n))²)</answer>
             </question>
             <question id="shell-sort-sort-space-worst">
                 <text>Space (Worst)</text>
@@ -705,7 +705,7 @@
             </question>
             <question id="bucket-sort-sort-time-worst">
                 <text>Time (Worst)</text>
-                <answer>O(n^2)</answer>
+                <answer>O(n²)</answer>
             </question>
             <question id="bucket-sort-sort-space-worst">
                 <text>Space (Worst)</text>
@@ -743,7 +743,7 @@
             <choice>O(|V|)</choice>
             <choice>O(|V| + |E|)</choice>
             <choice>O(|V| ⋅ |E|)</choice>
-            <choice>O(|V|^2)</choice>
+            <choice>O(|V|²)</choice>
         </default_choices>
         <subsection id="adjacency-list">
             <title>Adjacency List</title>
@@ -808,11 +808,11 @@
             <link>http://en.wikipedia.org/wiki/Adjacency_matrix</link>
             <question id="adjacency-matrix-storage">
                 <text>Storage</text>
-                <answer>O(|V|^2)</answer>
+                <answer>O(|V|²)</answer>
             </question>
             <question id="adjacency-matrix-add-vertex">
                 <text>Add Vertex</text>
-                <answer>O(|V|^2)</answer>
+                <answer>O(|V|²)</answer>
             </question>
             <question id="adjacency-matrix-add-edge">
                 <text>Add Edge</text>
@@ -820,7 +820,7 @@
             </question>
             <question id="adjacency-matrix-remove-vertex">
                 <text>Remove Vertex</text>
-                <answer>O(|V|^2)</answer>
+                <answer>O(|V|²)</answer>
             </question>
             <question id="adjacency-matrix-remove-edge">
                 <text>Remove Edge</text>
@@ -869,7 +869,7 @@
             <choice>O(log(n))</choice>
             <choice>O(n)</choice>
             <choice>O(n log(n))</choice>
-            <choice>O(n^2)</choice>
+            <choice>O(n²)</choice>
             <choice>O(m + n)</choice>
         </default_choices>
         <subsection id="linked-list-sorted">
