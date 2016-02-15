@@ -44,7 +44,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
         loginParagraph = Utils.addParagraphWithChild(mainPanel, loginLabel);
         loginParagraph.setVisible(false);
 
-        Utils.addParagraphWithText(mainPanel, constants.username(), "username-title-label");
+        Utils.addParagraphWithChild(mainPanel, usernameLabel);
 
         mainPanel.add(logoutLabel);
         logoutLabel.addStyleName("logout-label");
@@ -96,7 +96,7 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
             logoutLabel.setVisible(true);
             buttonResetSections.setVisible(true);
 
-            usernameLabel.setText(loginInfo.getNickname());
+            usernameLabel.setText(messages.username(loginInfo.getNickname()));
             logoutLabel.setHref(loginInfo.getLogoutUrl());
         } else {
             loginLabel.setHTML(messages.pleaseSignIn(loginInfo.getLoginUrl()));

@@ -55,4 +55,9 @@ public interface BigOQuizMessages extends com.google.gwt.i18n.client.Messages {
     @DefaultMessage("Please <a href=\"{0}\">sign in</a> to track your progress and identify problem questions.")
     @Key("pleaseSignIn")
     String pleaseSignIn(final String text);
+
+    @NotNull
+    @DefaultMessage("Username: {0}")
+    @Key("username")
+    String username(final String text);
 }
