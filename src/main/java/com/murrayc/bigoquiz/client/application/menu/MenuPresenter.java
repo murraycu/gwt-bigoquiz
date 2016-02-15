@@ -7,7 +7,6 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.murrayc.bigoquiz.client.application.userstatus.UserStatusPresenter;
 
 /**
@@ -18,8 +17,6 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
     private final UserStatusPresenter userStatusPresenter;
     static final SingleSlot SLOT_USER_STATUS = new SingleSlot();
 
-    private final PlaceManager placeManager;
-
     public interface MyView extends View, HasUiHandlers<MenuUserEditUiHandlers> {
     }
 
@@ -27,10 +24,8 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
     MenuPresenter(
             EventBus eventBus,
             MyView view,
-            PlaceManager placeManager,
             UserStatusPresenter userStatusPresenter) {
         super(eventBus, view);
-        this.placeManager = placeManager;
 
         this.userStatusPresenter = userStatusPresenter;
 
