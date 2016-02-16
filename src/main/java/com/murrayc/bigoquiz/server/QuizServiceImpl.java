@@ -195,11 +195,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
     }
 
-    private static Quiz loadQuiz() {
+    private static Quiz loadQuiz(@NotNull final String quizId) {
+        final String filename = quizId + ".xml";
         try(final InputStream is = Thread.currentThread().getContextClassLoader()
-                .getResourceAsStream("bigoquiz.xml")) {
+                .getResourceAsStream(filename)) {
             if (is == null) {
-                Log.fatal("bigoquiz.xml not found.");
+                Log.fatal("quiz XML fie not found: " + filename);
                 return null;
             }
 
@@ -282,24 +283,43 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         quizzes = (HashMap<String, Quiz>)object;
-        if (quizzes != null) {
-            return quizzes.get(quizId);
-        } else {
-            //Load it for the first time:
-            final Quiz quiz;
-            try {
-                //TODO: Load other quizzes.
-                quiz = loadQuiz();
-            } catch (@NotNull final Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-
-            quizzes = new HashMap<>();
-            quizzes.put(quiz.getId(), quiz);
-            context.setAttribute(LOADED_QUIZZES, quizzes);
-            return quiz;
+        if (quizzes == null) {
+            loadQuizzes(context);
         }
+
+        return quizzes.get(quizId);
+    }
+
+    private void loadQuizzes(@NotNull final ServletContext context) {
+        final Map<String, Quiz> quizzes = new HashMap<>();
+
+        //Load it for the first time:
+        if (loadQuizIntoQuizzes("bigoquiz", quizzes)) {
+            return;
+        }
+
+        if (loadQuizIntoQuizzes("testquiz", quizzes)) {
+            return;
+        }
+
+        this.quizzes = quizzes;
+        context.setAttribute(LOADED_QUIZZES, quizzes);
+    }
+
+    private boolean loadQuizIntoQuizzes(final String quizId, Map<String, Quiz> quizzes) {
+        if (quizzes.containsKey(quizId)) {
+            Log.error("loadQuizIntoQuizzes(): quiz already loaded: " + quizId);
+        }
+
+        final Quiz quiz;
+        try {
+            quiz = loadQuiz(quizId);
+            quizzes.put(quizId, quiz);
+        } catch (@NotNull final Exception e) {
+            Log.error("Could not load quiz: " + quizId, e);
+            return true;
+        }
+        return false;
     }
 
     @NotNull
