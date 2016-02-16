@@ -171,7 +171,7 @@ public class UserStats implements IsSerializable {
             };
         }
 
-        questionHistoriesInOrder = new ArrayList<UserQuestionHistory>(questionHistories.values());
+        questionHistoriesInOrder = new ArrayList<>(questionHistories.values());
 
         Collections.sort(questionHistoriesInOrder, comparator);
         cacheIsInvalid = false;
