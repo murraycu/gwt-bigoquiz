@@ -34,6 +34,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     private final PlaceManager placeManager;
     private String quizId;
     private QuizSections sections;
+    private boolean waitingForSections = false;
+    private boolean showQuestionPending = false;
 
     interface MyView extends View, HasUiHandlers<QuestionUserEditUiHandlers> {
         void setSections(final QuizSections sections);
@@ -133,9 +135,9 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             //If we have already cached this one, just show it:
             if (nextQuestion != null && StringUtils.equals(nextQuestion.getId(), questionId)) {
                 //Log.error("prepareFromRequest(): using nextQuestion.");
-                @Nullable final Question question = nextQuestion;
+                question = nextQuestion;
                 nextQuestion = null;
-                showQuestionInView(question);
+                showQuestionInView();
                 return;
             }
 
@@ -318,8 +320,13 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         return quizId;
     }
 
-    private void showQuestionInView(final Question question) {
-        this.question = question;
+    private void showQuestionInView() {
+        //We cannot show the question without the sections.
+        if (waitingForSections) {
+            showQuestionPending = true;
+            return;
+        }
+
         getView().setQuestion(question);
     }
 
@@ -345,19 +352,29 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     }
 
     private void getAndUseSections() {
+        waitingForSections = true;
+
         @NotNull final AsyncCallback<QuizSections> callback = new AsyncCallback<QuizSections>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
                 Log.error("AsyncCallback Failed: getSections(): " + caught.getMessage());
+
+                waitingForSections = false;
             }
 
             @Override
             public void onSuccess(final QuizSections result) {
                 QuestionPresenter.this.sections = result;
                 getView().setSections(result);
+
+                waitingForSections = false;
+                if(showQuestionPending) {
+                    showQuestionInView();
+                }
             }
         };
+
 
         QuizServiceAsync.Util.getInstance().getSections(getQuizId(), callback);
     }
@@ -405,7 +422,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
             @Override
             public void onSuccess(final Question result) {
-                showQuestionInView(result);
+                question = result;
+                showQuestionInView();
             }
 
         };
