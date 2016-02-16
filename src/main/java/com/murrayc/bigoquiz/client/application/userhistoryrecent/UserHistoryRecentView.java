@@ -186,7 +186,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                 continue;
             }
 
-            @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(sectionId);
+            @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(quizId, sectionId);
             final String url = placeManager.buildHistoryToken(placeRequest);
             @NotNull final Hyperlink titleLabel = new InlineHyperlink(section.title, url);
             //titleLabel.addStyleName("user-history-section-title-label");
