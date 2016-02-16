@@ -119,9 +119,6 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         getView().setNextQuestionSectionId(nextQuestionSectionId);
 
-        //Make sure that the sidebar's links are updated too:
-        tellUserHistoryPresenterAboutQuestionContext();
-
         //Question ID:
         final String questionId = request.getParameter(NameTokens.QUESTION_PARAM_QUESTION_ID, null);
         //Log.error("prepareFromRequest(): questionId=" + questionId);
@@ -149,6 +146,12 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             getAndUseNextQuestion(nextQuestionSectionId);
         }
 
+    }
+
+    @Override
+    public void onReset() {
+        //Make sure that the sidebar's links are updated too:
+        tellUserHistoryPresenterAboutQuestionContext();
     }
 
     @Override
