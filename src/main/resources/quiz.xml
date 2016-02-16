@@ -863,6 +863,87 @@
         </subsection>
     </section>
 
+    <!-- This is not in bigocheatsheet.com.
+    This is in bigoref.com in a searching section, along with array and binary search.
+    bigoref.com has both average and worst time, but they are the same for all algorithms,
+     so we only have time here. -->
+    <section id="graph-search">
+        <title>Graph Search</title>
+        <default_choices>
+            <choice>O(1)</choice>
+            <choice>O(|E|)</choice>
+            <choice>O(|V|)</choice>
+            <choice>O(|V| + |E|)</choice>
+            <choice>O(|V| ⋅ |E|)</choice>
+            <choice>O((|V|+|E|) log|V|)</choice>
+            <choice>O(|V|²)</choice>
+        </default_choices>
+        <subsection id="depth-first-search">
+            <title>Depth First Search (DFS)</title>
+            <link>http://en.wikipedia.org/wiki/Depth-first_search</link>
+            <question id="depth-first-search-time">
+                <text>Time</text>
+                <answer>O(|V| + |E|)</answer>
+            </question>
+            <question id="depth-first-search-space">
+                <text>Space (Worst)</text>
+                <answer>O(|V|)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="depth-first-search">
+            <title>Breadth First Search (BFS)</title>
+            <link>http://en.wikipedia.org/wiki/Breadth-first_search</link>
+            <question id="breadth-first-search-time">
+                <text>Time</text>
+                <answer>O(|V| + |E|)</answer>
+            </question>
+            <question id="breadth-first-search-space">
+                <text>Space (Worst)</text>
+                <answer>O(|V|)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="dijkstra-with-min-heap">
+            <title>Dijkstra's Algorithm for Shortest Path (Min-heap as priority queue)</title>
+            <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
+            <question id="dijkstra-with-min-heap-time">
+                <text>Time</text>
+                <answer>O(|V|²)</answer>
+            </question>
+            <question id="dijkstra-with-min-heap-space">
+                <text>Space (Worst)</text>
+                <answer>O(|V|)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="dijkstra-with-unsorted-array">
+            <title>Dijkstra's Algorithm for Shortest Path (Unsorted array as priority queue)</title>
+            <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
+            <question id="dijkstra-with-unsorted-array-time">
+                <text>Time</text>
+                <answer>O((|V|+|E|) log|V|)</answer>
+            </question>
+            <question id="dijkstra-with-unsorted-array-space">
+                <text>Space (Worst)</text>
+                <answer>O(|V|)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="bellmann-ford">
+            <title>Bellmann-Ford algorithm for Shortest Path</title>
+            <link>http://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
+            <question id="bellmann-ford-time">
+                <text>Time</text>
+                <answer>O(|V| ⋅ |E|)</answer>
+            </question>
+            <question id="bellmann-ford-space">
+                <text>Space (Worst)</text>
+                <answer>O(|V|)</answer>
+            </question>
+        </subsection>
+    </section>
+
     <section id="heap-operations">
         <title>Heap Operations</title>
         <default_choices>
