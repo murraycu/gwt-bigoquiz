@@ -292,7 +292,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             return;
         }
 
-        userRecentHistory.addUserAnswerAtStart(question, answerIsCorrect);
+        userRecentHistory.addUserAnswerAtStart(quizId, question, answerIsCorrect);
 
         //Re-generate the whole list in the UI:
         buildUi();

@@ -50,7 +50,7 @@ public class UserRecentHistory implements IsSerializable {
      * there are no more than @max items in that sections's list. If necessary,
      * this removes older items.
      */
-    public void addUserAnswerAtStart(@NotNull final Question question, boolean answerIsCorrect) {
+    public void addUserAnswerAtStart(@NotNull final String quizId, @NotNull final Question question, boolean answerIsCorrect) {
         if (question == null) {
             Log.error("addUserAnswerAtStart(): question was null.");
             return;
@@ -62,7 +62,7 @@ public class UserRecentHistory implements IsSerializable {
             return;
         }
 
-        @NotNull final UserStats userStats = getStatsWithAdd(question.getSectionId());
+        @NotNull final UserStats userStats = getStatsWithAdd(quizId, question.getSectionId());
         userStats.incrementAnswered();
         if (answerIsCorrect) {
             userStats.incrementCorrect();
@@ -88,7 +88,7 @@ public class UserRecentHistory implements IsSerializable {
     }
 
     @NotNull
-    private UserStats getStatsWithAdd(final String sectionId ) {
+    private UserStats getStatsWithAdd(final String quizId, final String sectionId ) {
         @Nullable UserStats stats = getStats(sectionId);
         if (stats == null) {
             final String userId = getUserId();
@@ -96,7 +96,7 @@ public class UserRecentHistory implements IsSerializable {
                 throw new NullPointerException("getStatsWithAdd() needs a userId.");
             }
 
-            stats = new UserStats(userId, sectionId);
+            stats = new UserStats(userId, quizId, sectionId);
             setStats(sectionId, stats);
         }
 

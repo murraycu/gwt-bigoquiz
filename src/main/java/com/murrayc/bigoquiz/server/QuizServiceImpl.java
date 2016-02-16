@@ -60,12 +60,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         if (StringUtils.isEmpty(sectionId)) {
-            @NotNull final Map<String, UserStats> mapUserStats = getUserStats(userId);
+            @NotNull final Map<String, UserStats> mapUserStats = getUserStats(userId, quizId);
             return getNextQuestionFromUserStats(null, quiz, mapUserStats);
         } else {
             //This special case is a bit copy-and-pasty of the general case with the
             //map, but it seems more efficient to avoid an unncessary Map.
-            @Nullable final UserStats userStats = getUserStatsForSection(userId, sectionId);
+            @Nullable final UserStats userStats = getUserStatsForSection(userId, sectionId, quizId);
             return getNextQuestionFromUserStatsForSection(sectionId, quiz, userStats);
         }
     }
@@ -139,7 +139,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //just to show what is possible when the user is logged in:
         @Nullable final String userId = loginInfo.getUserId();
 
-        @NotNull final Map<String, UserStats> mapUserStats = getUserStats(userId);
+        @NotNull final Map<String, UserStats> mapUserStats = getUserStats(userId, quizId);
         for (final String sectionId : sections.getSectionIds()) {
             if (StringUtils.isEmpty(sectionId)) {
                 //This seems wise.
@@ -149,7 +149,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
             @Nullable UserStats userStats = mapUserStats.get(sectionId);
             if (userStats == null) {
                 //So we get the default values:
-                userStats = new UserStats(userId, sectionId);
+                userStats = new UserStats(userId, quizId, sectionId);
             }
 
             //Set the titles.
@@ -216,9 +216,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return null;
     }
 
-    private UserStats getUserStatsForSection(final String userId, final String sectionId) {
-        Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
-        q = q.filter("userId", userId);
+    private UserStats getUserStatsForSection(@NotNull final String userId, @NotNull final String quizId, @NotNull final String sectionId) {
+        Query<UserStats> q = getQueryForUserStats(userId, quizId);
         q = q.filter("sectionId", sectionId);
         q = q.limit(1);
         final List<UserStats> list = q.list();
@@ -236,9 +235,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
      * @return
      */
     @NotNull
-    private Map<String, UserStats> getUserStats(final String userId) {
-        Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
-        q = q.filter("userId", userId);
+    private Map<String, UserStats> getUserStats(@NotNull final String userId, @NotNull final String quizId) {
+        final Query<UserStats> q = getQueryForUserStats(userId, quizId);
 
         @NotNull final Map<String, UserStats> map = new HashMap<>();
         for (@NotNull final UserStats userStats : q.list()) {
@@ -246,6 +244,13 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         return map;
+    }
+
+    private static Query<UserStats> getQueryForUserStats(@NotNull final String userId, @NotNull final String quizId) {
+        Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
+        q = q.filter("userId", userId);
+        q = q.filter("quizId", quizId);
+        return q;
     }
 
     private UserProfile getUserProfileImpl() {
@@ -361,7 +366,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return new SubmissionResult(result, correctAnswer, nextQuestion);
     }
 
-    private void storeAnswer(boolean result, @NotNull final Question question, final String userId, @Nullable final Map<String, UserStats> mapUserStats) {
+    private void storeAnswer(boolean result, @NotNull final String quizId, @NotNull final Question question, final String userId, @Nullable final Map<String, UserStats> mapUserStats) {
         if (StringUtils.isEmpty(userId)) {
             Log.error("storeAnswer(): userId was null.");
             return;
@@ -381,13 +386,13 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
         UserStats userStats = mapUserStats.get(sectionId);
         if (userStats == null) {
-            userStats = new UserStats(userId, sectionId);
+            userStats = new UserStats(userId, quizId, sectionId);
         }
 
-        storeAnswerForSection(result, question, userId, userStats);
+        storeAnswerForSection(result, quizId, question, userId, userStats);
     }
 
-    private void storeAnswerForSection(boolean result, @Nullable final Question question, final String userId, @Nullable UserStats userStats) {
+    private void storeAnswerForSection(boolean result, @NotNull final String quizId, @Nullable final Question question, final String userId, @Nullable UserStats userStats) {
         if (question == null) {
             Log.error("storeAnswerForSection(): question is null.");
             return;
@@ -407,7 +412,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 return;
             }
 
-            userStats = new UserStats(userId, sectionId);
+            userStats = new UserStats(userId, quizId, sectionId);
         }
 
         userStats.incrementAnswered();
@@ -467,16 +472,16 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 StringUtils.equals(nextQuestionSectionId, sectionId)) {
             @Nullable UserStats userStats = null;
             if (!StringUtils.isEmpty(userId)) {
-                userStats = getUserStatsForSection(userId, nextQuestionSectionId);
-                storeAnswerForSection(result, questionAndAnswer.getQuestion(), userId, userStats);
+                userStats = getUserStatsForSection(userId, quizId, nextQuestionSectionId);
+                storeAnswerForSection(result, quizId, questionAndAnswer.getQuestion(), userId, userStats);
             }
 
             return createSubmissionResultForSection(result, quizId, questionId, nextQuestionSectionId, userStats);
         } else {
             @Nullable Map<String, UserStats> mapUserStats = null;
             if (!StringUtils.isEmpty(userId)) {
-                mapUserStats = getUserStats(userId);
-                storeAnswer(result, questionAndAnswer.getQuestion(), userId, mapUserStats);
+                mapUserStats = getUserStats(userId, quizId);
+                storeAnswer(result, quizId, questionAndAnswer.getQuestion(), userId, mapUserStats);
             }
 
             return createSubmissionResult(result, quizId, questionId, nextQuestionSectionId, mapUserStats);

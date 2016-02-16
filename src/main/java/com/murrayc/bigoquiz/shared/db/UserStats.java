@@ -26,6 +26,9 @@ public class UserStats implements IsSerializable {
     private String userId;
 
     @Index
+    private String quizId;
+
+    @Index
     private String sectionId;
 
     int answered;
@@ -49,8 +52,9 @@ public class UserStats implements IsSerializable {
         questionHistories = new HashMap<>();
     }
 
-    public UserStats(final String userId, final String sectionId) {
+    public UserStats(final String userId, final String quizId, final String sectionId) {
         this.userId = userId;
+        this.quizId = quizId;
         this.sectionId = sectionId;
         questionHistories = new HashMap<>();
     }

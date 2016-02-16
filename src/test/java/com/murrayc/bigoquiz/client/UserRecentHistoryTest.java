@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
  */
 public class UserRecentHistoryTest {
 
+    public static final String QUIZ_ID = "somequiz";
     public static final String SECTION_1 = "section1";
     public static final String SUBSECTION_1_1 = "subsection1.1";
 
@@ -27,7 +28,7 @@ public class UserRecentHistoryTest {
         @NotNull UserRecentHistory history = createUserRecentHistory();
 
         @Nullable Question question = createQuestion("question4", SECTION_1, SUBSECTION_1_1);
-        history.addUserAnswerAtStart(question, false);
+        history.addUserAnswerAtStart(QUIZ_ID, question, false);
 
         final UserStats stats = history.getStats(SECTION_1);
         assertNotNull(stats);
@@ -36,13 +37,13 @@ public class UserRecentHistoryTest {
         assertNotNull(problems);
         assertEquals(1, problems.size());
 
-        history.addUserAnswerAtStart(question, false);
+        history.addUserAnswerAtStart(QUIZ_ID, question, false);
         problems = stats.getQuestionHistories();
         assertNotNull(problems);
         assertEquals(1, problems.size());
 
         question = createQuestion("question5", SECTION_1, SUBSECTION_1_1);
-        history.addUserAnswerAtStart(question, false);
+        history.addUserAnswerAtStart(QUIZ_ID, question, false);
 
         problems = stats.getQuestionHistories();
         assertNotNull(problems);
