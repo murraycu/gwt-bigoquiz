@@ -64,7 +64,7 @@ public class QuizLoader {
         } catch (@NotNull final SAXException e) {
             throw new QuizLoaderException("XML parsing failed.", e);
         } catch (@NotNull final IOException e) {
-            throw new QuizLoaderException("XML parsing failed.", e);
+            throw new QuizLoaderException("XML parsing failed with IOException.", e);
         }
 
         final Element rootNode = xmlDocument.getDocumentElement();
