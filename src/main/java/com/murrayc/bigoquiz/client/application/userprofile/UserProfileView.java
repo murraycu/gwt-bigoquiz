@@ -11,7 +11,6 @@ import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by murrayc on 1/21/16.
