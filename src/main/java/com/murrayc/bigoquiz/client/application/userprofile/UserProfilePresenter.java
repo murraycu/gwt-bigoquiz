@@ -14,6 +14,7 @@ import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
+import com.murrayc.bigoquiz.client.application.DefaultUserHistoryRequestEvent;
 import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentPresenter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -75,6 +76,13 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
         super.onBind();
 
         setInSlot(SLOT_USER_HISTORY_RECENT, userHistoryRecentPresenter);
+    }
+
+    @Override
+    public void onReset() {
+        super.onReset();
+
+        DefaultUserHistoryRequestEvent.fire(this);
     }
 
     @Override

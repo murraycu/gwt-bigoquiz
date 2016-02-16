@@ -11,6 +11,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
+import com.murrayc.bigoquiz.client.application.DefaultUserHistoryRequestEvent;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -33,5 +34,12 @@ public class AboutPresenter extends Presenter<AboutPresenter.MyView, AboutPresen
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         getView().setUiHandlers(this);
+    }
+
+    @Override
+    public void onReset() {
+        super.onReset();
+
+        DefaultUserHistoryRequestEvent.fire(this);
     }
 }

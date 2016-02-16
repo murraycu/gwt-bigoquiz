@@ -13,6 +13,7 @@ import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
+import com.murrayc.bigoquiz.client.application.DefaultUserHistoryRequestEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
 import com.murrayc.bigoquiz.client.application.userprofile.UserProfileResetSectionsEvent;
@@ -27,8 +28,10 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         implements UserHistoryRecentUserEditUiHandlers,
         QuestionUserAnswerAddedEvent.QuestionUserAnswerAddedEventHandler,
         QuestionContextEvent.QuestionContextEventHandler,
-        UserProfileResetSectionsEvent.UserProfileResetSectionsEventHandler {
+        UserProfileResetSectionsEvent.UserProfileResetSectionsEventHandler,
+        DefaultUserHistoryRequestEvent.EventHandler {
 
+    public static final String DEFAULT_QUIZ_ID = "bigoquiz";
     private String nextQuestionSectionId;
     private boolean userIsLoggedIn = false;
     private String quizId;
@@ -60,6 +63,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         addRegisteredHandler(QuestionUserAnswerAddedEvent.TYPE, this);
         addRegisteredHandler(QuestionContextEvent.TYPE, this);
         addRegisteredHandler(UserProfileResetSectionsEvent.TYPE, this);
+        addRegisteredHandler(DefaultUserHistoryRequestEvent.TYPE, this);
     }
 
     @ProxyEvent
@@ -102,6 +106,18 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
     public void onUserProfileResetSections(final UserProfileResetSectionsEvent event) {
         //Completely refresh the data from the server:
         getAndShowHistory();
+    }
+
+    @ProxyEvent
+    @Override
+    public void onDefaultUserHistoryRequested(final DefaultUserHistoryRequestEvent event) {
+        //Show _something_ rather than nothing.
+        //TODO: This won't make sense when we really have multiple quizes.
+        //Then we probably won't want to even show this sidebar on the general pages such as About.
+        if (StringUtils.isEmpty(quizId)) {
+            quizId = DEFAULT_QUIZ_ID;
+            getAndShowHistory();
+        }
     }
 
     private void getAndShowHistory() {
