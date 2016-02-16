@@ -9,10 +9,15 @@ import org.jetbrains.annotations.NotNull;
  * Created by murrayc on 1/24/16.
  */
 public class PlaceUtils {
-    public static PlaceRequest getPlaceRequestForQuestion(final String questionId, final String sectionId) {
+    public static PlaceRequest getPlaceRequestForQuestion(final String quizId, final String questionId, final String sectionId) {
 
         @NotNull PlaceRequest.Builder builder = new PlaceRequest.Builder()
                 .nameToken(NameTokens.QUESTION);
+
+        if (!StringUtils.isEmpty(questionId)) {
+            builder = builder.with(NameTokens.QUESTION_PARAM_QUIZ_ID, quizId);
+        }
+
         if (!StringUtils.isEmpty(questionId)) {
             builder = builder.with(NameTokens.QUESTION_PARAM_QUESTION_ID, questionId);
         }

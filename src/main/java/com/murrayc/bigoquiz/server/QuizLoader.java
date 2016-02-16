@@ -72,6 +72,18 @@ public class QuizLoader {
             throw new QuizLoaderException("Unexpected XML root node name found: " + rootNode.getNodeName());
         }
 
+        @Nullable final String quizId = rootNode.getAttribute(ATTR_ID);
+        if (StringUtils.isEmpty(quizId)) {
+            throw new QuizLoaderException("No quiz ID found.");
+        }
+        result.setId(quizId);
+
+        @Nullable final String quizTitle = getTitleNodeText(rootNode);
+        if (StringUtils.isEmpty(quizId)) {
+            throw new QuizLoaderException("No quiz title found.");
+        }
+        result.setTitle(quizTitle);
+
         //Sections:
         @NotNull final List<Node> listSectionNodes = getChildrenByTagName(rootNode, NODE_SECTION);
         for (final Node sectionNode : listSectionNodes) {

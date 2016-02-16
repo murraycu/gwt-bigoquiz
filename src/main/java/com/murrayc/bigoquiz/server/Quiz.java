@@ -14,6 +14,9 @@ import java.util.*;
  * Created by murrayc on 1/18/16.
  */
 public class Quiz {
+    private String id;
+    private String title;
+
     //Map of section ID to (map of question IDs to question):
     @NotNull
     private Map<String, Map<String, QuestionAndAnswer>> questions = new HashMap<>();
@@ -27,9 +30,19 @@ public class Quiz {
     //This is only for getting a random question from a particular section:
     private final Map<String, List<QuestionAndAnswer>> listSectionQuestions = new HashMap<>();
 
-
     public Quiz() {
-        questions = new HashMap<>();
+    }
+
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setTitle(final String title) {
+        this.title = title;
     }
 
     public void addQuestion(final String sectionId, @NotNull final QuestionAndAnswer questionAndAnswer) {

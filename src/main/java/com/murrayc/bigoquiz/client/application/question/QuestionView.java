@@ -195,11 +195,22 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         Window.setTitle(messages.windowTitle(question.getText()));
         questionLabel.setText(question.getText());
 
+        if (sections == null) {
+            Log.error("setQuestion(): sections is null.");
+            return;
+        }
+
         //TODO: Make the
         //( <b>Section:</b> some section title )
         //properly internationalized, without putting the <b> tags in the translatable string.
         final String sectionId = question.getSectionId();
-        sectionTitle.setText(sections.getSectionTitle(sectionId) + ": ");
+        final String sectionTitleStr = sections.getSectionTitle(sectionId);
+        if (StringUtils.isEmpty(sectionTitleStr)) {
+            Log.error("setQuestion(): sectionTitleStr is empty.");
+        } else {
+            //TODO: Internationalization:
+            sectionTitle.setText(sectionTitleStr +": ");
+        }
 
         @Nullable final QuizSections.SubSection subSection = sections.getSubSection(sectionId, question.getSubSectionId());
         if (subSection != null) {

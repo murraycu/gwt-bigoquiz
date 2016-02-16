@@ -32,6 +32,7 @@ import org.jetbrains.annotations.Nullable;
 public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, QuestionPresenter.MyProxy>
         implements QuestionUserEditUiHandlers {
     private final PlaceManager placeManager;
+    private String quizId;
     private QuizSections sections;
 
     interface MyView extends View, HasUiHandlers<QuestionUserEditUiHandlers> {
@@ -84,8 +85,6 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         this.placeManager = placeManager;
 
         getView().setUiHandlers(this);
-
-        getAndUseSections();
     }
 
     private
@@ -97,16 +96,29 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         return question.getId();
     }
 
+
+
     @Override
     public void prepareFromRequest(@NotNull final PlaceRequest request) {
         super.prepareFromRequest(request);
 
+        //Quiz ID:
+        this.quizId = request.getParameter(NameTokens.QUESTION_PARAM_QUIZ_ID, null);
+        if (StringUtils.isEmpty(quizId)) {
+            //Default to bigoquiz.
+            this.quizId = "bigoquiz";
+            //TODO: Take the user to a list of quizzes.
+        }
+
+        getAndUseSections();
+
         //Next question section ID,
         nextQuestionSectionId = request.getParameter(NameTokens.QUESTION_PARAM_NEXT_QUESTION_SECTION_ID, null);
+
         getView().setNextQuestionSectionId(nextQuestionSectionId);
 
         //Make sure that the sidebar's links are updated too:
-        tellUserHistoryPresenterAboutNextQuestionSectionId(nextQuestionSectionId);
+        tellUserHistoryPresenterAboutQuestionContext();
 
         //Question ID:
         final String questionId = request.getParameter(NameTokens.QUESTION_PARAM_QUESTION_ID, null);
@@ -186,7 +198,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         };
 
-        QuizServiceAsync.Util.getInstance().submitAnswer(getQuestionId(), answer, nextQuestionSectionId, callback);
+        QuizServiceAsync.Util.getInstance().submitAnswer(getQuizId(), getQuestionId(), answer, nextQuestionSectionId, callback);
     }
 
     private void tellUserHistoryPresenterAboutNewUserAnswer(boolean answerIsCorrect) {
@@ -205,8 +217,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         QuestionUserAnswerAddedEvent.fire(this, question, answerIsCorrect);
     }
 
-    private void tellUserHistoryPresenterAboutNextQuestionSectionId(final String nextQuestionSectionId) {
-        QuestionNextQuestionSectionIdEvent.fire(this, nextQuestionSectionId);
+    private void tellUserHistoryPresenterAboutQuestionContext() {
+        QuestionContextEvent.fire(this, getQuizId(), nextQuestionSectionId);
     }
 
     @Override
@@ -241,7 +253,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         };
 
-        QuizServiceAsync.Util.getInstance().submitDontKnowAnswer(getQuestionId(), nextQuestionSectionId, callback);
+        QuizServiceAsync.Util.getInstance().submitDontKnowAnswer(getQuizId(), getQuestionId(), nextQuestionSectionId, callback);
     }
 
     @Override
@@ -281,7 +293,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
      * @param question
      */
     private void revealQuestion(@NotNull final Question question) {
-        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(question.getId(), nextQuestionSectionId);
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(quizId, question.getId(), nextQuestionSectionId);
         placeManager.revealPlace(placeRequest);
     }
 
@@ -298,8 +310,12 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     private void revealSection(final String nextQuestionSectionId, final String nextQuestionId) {
         this.nextQuestionSectionId = nextQuestionSectionId;
 
-        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(nextQuestionId, nextQuestionSectionId);
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(getQuizId(), nextQuestionId, nextQuestionSectionId);
         placeManager.revealPlace(placeRequest);
+    }
+
+    private String getQuizId() {
+        return quizId;
     }
 
     private void showQuestionInView(final Question question) {
@@ -341,10 +357,9 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
                 QuestionPresenter.this.sections = result;
                 getView().setSections(result);
             }
-
         };
 
-        QuizServiceAsync.Util.getInstance().getSections(callback);
+        QuizServiceAsync.Util.getInstance().getSections(getQuizId(), callback);
     }
 
     /** Get and show a question from the specified section.
@@ -373,7 +388,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         };
 
-        QuizServiceAsync.Util.getInstance().getNextQuestion(sectionId, callback);
+        QuizServiceAsync.Util.getInstance().getNextQuestion(getQuizId(), sectionId, callback);
     }
 
     private void getAndUseQuestion(final String questionId) {
@@ -395,6 +410,6 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         };
 
-        QuizServiceAsync.Util.getInstance().getQuestion(questionId, callback);
+        QuizServiceAsync.Util.getInstance().getQuestion(getQuizId(), questionId, callback);
     }
 }

@@ -65,6 +65,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     //this lets us do that building if necessary later.
     private boolean buildUiPending = false;
     private final Label labelError = Utils.createServerErrorLabel(constants);
+    private String quizId;
 
     @Inject
     UserHistoryRecentView(PlaceManager placeManager) {
@@ -99,7 +100,8 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     }
 
     @Override
-    public void setUserRecentHistory(final UserRecentHistory userRecentHistory, final String nextQuestionSectionId) {
+    public void setUserRecentHistory(final String quizId, final UserRecentHistory userRecentHistory, final String nextQuestionSectionId) {
+        this.quizId = quizId;
         this.nextQuestionSectionId = nextQuestionSectionId;
         this.userRecentHistory = userRecentHistory;
 
@@ -304,11 +306,15 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     @NotNull
     private Hyperlink createProblemQuestionHyperlink(@NotNull final UserQuestionHistory problemQuestion, final String nextQuestionSectionId) {
-        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(problemQuestion.getQuestionId(), nextQuestionSectionId);
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(getQuizId(), problemQuestion.getQuestionId(), nextQuestionSectionId);
         final String url = placeManager.buildHistoryToken(placeRequest);
         @NotNull final Hyperlink result = new InlineHyperlink(problemQuestion.getSubSectionTitle() + ": " + problemQuestion.getQuestionTitle(), url);
         result.addStyleName("problem-answer-hyperlink");
         return result;
+    }
+
+    private String getQuizId() {
+        return quizId;
     }
 
     @Override

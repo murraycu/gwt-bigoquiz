@@ -13,7 +13,7 @@ import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
-import com.murrayc.bigoquiz.client.application.question.QuestionNextQuestionSectionIdEvent;
+import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
 import com.murrayc.bigoquiz.client.application.userprofile.UserProfileResetSectionsEvent;
 import com.murrayc.bigoquiz.shared.Question;
@@ -26,16 +26,17 @@ import org.jetbrains.annotations.NotNull;
 public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecentPresenter.MyView>
         implements UserHistoryRecentUserEditUiHandlers,
         QuestionUserAnswerAddedEvent.QuestionUserAnswerAddedEventHandler,
-        QuestionNextQuestionSectionIdEvent.QuestionUserAnswerAddedEventHandler,
+        QuestionContextEvent.QuestionContextEventHandler,
         UserProfileResetSectionsEvent.UserProfileResetSectionsEventHandler {
 
     private String nextQuestionSectionId;
     private boolean userIsLoggedIn = false;
+    private String quizId;
 
     public interface MyView extends View, HasUiHandlers<UserHistoryRecentUserEditUiHandlers> {
         /** Set a whole set of history.
          */
-        void setUserRecentHistory(final UserRecentHistory result, final String nextQuestionSectionId);
+        void setUserRecentHistory(final String quizId, final UserRecentHistory result, final String nextQuestionSectionId);
 
         /** Add a single item of history.
          * For instance, to avoid retrieving the whole history from the server,
@@ -57,14 +58,8 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         getView().setUiHandlers(this);
 
         addRegisteredHandler(QuestionUserAnswerAddedEvent.TYPE, this);
-        addRegisteredHandler(QuestionNextQuestionSectionIdEvent.TYPE, this);
+        addRegisteredHandler(QuestionContextEvent.TYPE, this);
         addRegisteredHandler(UserProfileResetSectionsEvent.TYPE, this);
-
-        //TODO: If QUESTION_PARAM_NEXT_QUESTION_SECTION_ID was specified in the URL,
-        //then QuestionPresenter will cause the UI to be rebuilt again,
-        //making this first build of the UI (without a nextQuestionSectionId) a
-        //waste of effort.
-        getAndShowHistory();
     }
 
     @ProxyEvent
@@ -85,16 +80,21 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
 
     @ProxyEvent
     @Override
-    public void onQuestionNextSectionId(@NotNull final QuestionNextQuestionSectionIdEvent event) {
+    public void onQuestionContextChanged(@NotNull final QuestionContextEvent event) {
+        final String quizId = event.getQuizId();
         final String nextQuestionSectionId = event.getNextQuestionSectionId();
-        if (StringUtils.equals(this.nextQuestionSectionId, nextQuestionSectionId)) {
-            //Do nothing.
-            return;
-        }
-
+        final boolean quizChanged = !StringUtils.equals(this.quizId, quizId);
+        final boolean nextSectionChanged = !StringUtils.equals(this.nextQuestionSectionId, nextQuestionSectionId);
+        this.quizId = quizId;
         this.nextQuestionSectionId = nextQuestionSectionId;
 
-        getView().setQuestionNextSectionId(nextQuestionSectionId);
+        if (quizChanged) {
+            //Completely refresh the data from the server:
+            getAndShowHistory();
+        } else if (nextSectionChanged){
+            //Just refresh the links:
+            getView().setQuestionNextSectionId(nextQuestionSectionId);
+        }
     }
 
     @ProxyEvent
@@ -124,7 +124,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
                 }
 
                 userIsLoggedIn = loginInfo.isLoggedIn();
-                getView().setUserRecentHistory(result, nextQuestionSectionId);
+                getView().setUserRecentHistory(getQuizId(), result, nextQuestionSectionId);
             }
 
             private void onFailureGeneric() {
@@ -134,7 +134,11 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         };
 
         QuizServiceAsync.Util.getInstance().getUserRecentHistory(
-                GWT.getHostPageBaseURL(), callback);
+                getQuizId(), GWT.getHostPageBaseURL(), callback);
+    }
+
+    private String getQuizId() {
+        return quizId;
     }
 
 }

@@ -14,11 +14,11 @@ import org.jetbrains.annotations.Nullable;
 @RemoteServiceRelativePath("quiz-service")
 public interface QuizService extends RemoteService {
 
-    @Nullable Question getQuestion(final String questionId) throws IllegalArgumentException;
+    @Nullable Question getQuestion(final String quizId, final String questionId) throws IllegalArgumentException;
 
-    @Nullable Question getNextQuestion(final String sectionId) throws IllegalArgumentException;
+    @Nullable Question getNextQuestion(final String quizId, final String sectionId) throws IllegalArgumentException;
 
-    @NotNull QuizSections getSections() throws IllegalArgumentException;
+    @NotNull QuizSections getSections(final String quizId) throws IllegalArgumentException;
 
     /**
      * submitAnswer() returns the correct correctAnswer (if the supplied correctAnswer was wrong) and the next question.
@@ -30,9 +30,9 @@ public interface QuizService extends RemoteService {
      * @return
      * @throws IllegalArgumentException
      */
-    @NotNull SubmissionResult submitAnswer(final String questionId, final String answer, String nextQuestionSectionId) throws IllegalArgumentException;
+    @NotNull SubmissionResult submitAnswer(final String quizId, final String questionId, final String answer, String nextQuestionSectionId) throws IllegalArgumentException;
 
-    @NotNull SubmissionResult submitDontKnowAnswer(final String questionId, String nextQuestionSectionId) throws IllegalArgumentException;
+    @NotNull SubmissionResult submitDontKnowAnswer(final String quizId, final String questionId, String nextQuestionSectionId) throws IllegalArgumentException;
 
     /**
      * Gets the currently logged-in user's statistics,
@@ -41,7 +41,7 @@ public interface QuizService extends RemoteService {
      * @return
      * @throws IllegalArgumentException
      */
-    @Nullable UserRecentHistory getUserRecentHistory(final String requestUri) throws IllegalArgumentException;
+    @Nullable UserRecentHistory getUserRecentHistory(final String quizId, final String requestUri) throws IllegalArgumentException;
 
     /**
      * Clear all question answer history, progress, scores, etc.

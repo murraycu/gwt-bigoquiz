@@ -30,7 +30,7 @@ public class GwtTestQuizService extends GWTTestCase {
 
         final QuizServiceAsync service = QuizServiceAsync.Util.getInstance();
         assertNotNull(service);
-        service.getQuestion("1", callback);
+        service.getQuestion("quiz1", "question1", callback);
     }
 
     @NotNull

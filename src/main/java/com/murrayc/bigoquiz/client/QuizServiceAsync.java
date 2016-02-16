@@ -9,22 +9,22 @@ import com.murrayc.bigoquiz.shared.QuizSections;
  * The async counterpart of <code>QuizService</code>.
  */
 public interface QuizServiceAsync {
-    void getQuestion(String questionId, AsyncCallback<Question> async)
+    void getQuestion(final String quizId, String questionId, AsyncCallback<Question> async)
             throws IllegalArgumentException;
 
-    void getNextQuestion(final String sectionId, AsyncCallback<Question> async)
+    void getNextQuestion(final String quizId, final String sectionId, AsyncCallback<Question> async)
             throws IllegalArgumentException;
 
-    void submitAnswer(final String questionId, final String answer, String nextQuestionSectionId, AsyncCallback<QuizService.SubmissionResult> async)
+    void submitAnswer(final String quizId, final String questionId, final String answer, String nextQuestionSectionId, AsyncCallback<QuizService.SubmissionResult> async)
             throws IllegalArgumentException;
 
-    void submitDontKnowAnswer(final String questionId, String nextQuestionSectionId, AsyncCallback<QuizService.SubmissionResult> async)
+    void submitDontKnowAnswer(final String quizId, final String questionId, String nextQuestionSectionId, AsyncCallback<QuizService.SubmissionResult> async)
             throws IllegalArgumentException;
 
-    void getUserRecentHistory(final String requestUri, AsyncCallback<UserRecentHistory> async)
+    void getUserRecentHistory(final String quizId, final String requestUri, AsyncCallback<UserRecentHistory> async)
             throws IllegalArgumentException;
 
-    void getSections(AsyncCallback<QuizSections> async);
+    void getSections(final String quizId, AsyncCallback<QuizSections> async);
 
     /**
      * Clear all question answer history, progress, scores, etc.

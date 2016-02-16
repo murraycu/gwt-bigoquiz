@@ -26,66 +26,31 @@ import java.util.*;
 /**
  * The server-side implementation of the RPC service.
  */
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "unchecked"})
 public class QuizServiceImpl extends ServiceWithUser implements
         QuizService {
-    private static final String LOADED_QUIZ = "loaded-quiz";
+    private static final String LOADED_QUIZZES = "loaded-quizzes";
 
-    /*
-    public String greetServer(String input) throws IllegalArgumentException {
-      // Verify that the input is valid.
-      if (!FieldVerifier.isValidName(input)) {
-        // If the input is not valid, throw an IllegalArgumentException back to
-        // the client.
-        throw new IllegalArgumentException(
-            "Name must be at least 4 characters long");
-      }
-
-      String serverInfo = getServletContext().getServerInfo();
-      String userAgent = getThreadLocalRequest().getHeader("UserProfile-Agent");
-
-      // Escape data from the client to avoid cross-site script vulnerabilities.
-      input = escapeHtml(input);
-      userAgent = escapeHtml(userAgent);
-
-      return "Hello, " + input + "!<br><br>I am running " + serverInfo
-          + ".<br><br>It looks like you are using:<br>" + userAgent;
-    }
-    */
     @Nullable
-    public Quiz quiz;
-
-    public static Quiz loadQuiz() {
-        try(final InputStream is = Thread.currentThread().getContextClassLoader()
-                .getResourceAsStream("quiz.xml")) {
-            if (is == null) {
-                Log.fatal("quiz.xml not found.");
-                return null;
-            }
-
-            try {
-                return QuizLoader.loadQuiz(is);
-            } catch (final QuizLoader.QuizLoaderException e) {
-                Log.fatal("loadQuiz() failed", e);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
+    private Map<String, Quiz> quizzes;
 
     @Nullable
     @Override
-    public Question getQuestion(final String questionId) throws IllegalArgumentException {
-        @Nullable final Quiz quiz = getQuiz();
+    public Question getQuestion(@NotNull final String quizId, @NotNull final String questionId) throws IllegalArgumentException {
+        @Nullable final Quiz quiz = getQuiz(quizId);
+        if (quiz == null) {
+            throw new IllegalArgumentException("Unknown quiz ID");
+        }
         return quiz.getQuestion(questionId);
     }
 
     @Nullable
     @Override
-    public Question getNextQuestion(final String sectionId) throws IllegalArgumentException {
-        @Nullable final Quiz quiz = getQuiz();
+    public Question getNextQuestion(@NotNull final String quizId, final String sectionId) throws IllegalArgumentException {
+        @Nullable final Quiz quiz = getQuiz(quizId);
+        if (quiz == null) {
+            throw new IllegalArgumentException("Unknown quiz ID");
+        }
 
         @Nullable final String userId = getUserId();
         if (StringUtils.isEmpty(userId)) {
@@ -107,45 +72,57 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @NotNull
     @Override
-    public QuizSections getSections() throws IllegalArgumentException {
-        @Nullable final Quiz quiz = getQuiz();
+    public QuizSections getSections(final String quizId) throws IllegalArgumentException {
+        @Nullable final Quiz quiz = getQuiz(quizId);
+        if (quiz == null) {
+            throw new IllegalArgumentException("Unknown quiz ID");
+        }
+
         return quiz.getSections();
     }
 
     @NotNull
     @Override
-    public SubmissionResult submitAnswer(final String questionId, final String answer, String nextQuestionSectionId) throws IllegalArgumentException {
-        @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
+    public SubmissionResult submitAnswer(final String quizId, final String questionId, final String answer, String nextQuestionSectionId) throws IllegalArgumentException {
+        @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(quizId, questionId);
         if (questionAndAnswer == null) {
             throw new IllegalArgumentException("Unknown QuestionAndAnswer ID");
         }
 
         final boolean result = StringUtils.equals(questionAndAnswer.getAnswer(), answer);
-        return storeAnswerCorrectnessAndGetSubmissionResult(questionId, nextQuestionSectionId, questionAndAnswer, result);
+        return storeAnswerCorrectnessAndGetSubmissionResult(quizId, questionId, nextQuestionSectionId, questionAndAnswer, result);
     }
 
     @NotNull
     @Override
-    public SubmissionResult submitDontKnowAnswer(final String questionId, final String nextQuestionSectionId) throws IllegalArgumentException {
-        @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
+    public SubmissionResult submitDontKnowAnswer(final String quizId, final String questionId, final String nextQuestionSectionId) throws IllegalArgumentException {
+        @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(quizId, questionId);
         if (questionAndAnswer == null) {
             throw new IllegalArgumentException("Unknown QuestionAndAnswer ID");
         }
 
         //Store this like a don't know answer:
-        return storeAnswerCorrectnessAndGetSubmissionResult(questionId, nextQuestionSectionId, questionAndAnswer, false);
+        return storeAnswerCorrectnessAndGetSubmissionResult(quizId, questionId, nextQuestionSectionId, questionAndAnswer, false);
     }
 
     @Nullable
-    private QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
-        @Nullable final Quiz quiz = getQuiz();
+    private QuestionAndAnswer getQuestionAndAnswer(final String quizId, final String questionId) {
+        @Nullable final Quiz quiz = getQuiz(quizId);
+        if (quiz == null) {
+            throw new IllegalArgumentException("Unknown quiz ID");
+        }
+
         return quiz.getQuestionAndAnswer(questionId);
     }
 
     @Nullable
     @Override
-    public UserRecentHistory getUserRecentHistory(final String requestUri) throws IllegalArgumentException {
-        @Nullable final Quiz quiz = getQuiz();
+    public UserRecentHistory getUserRecentHistory(final String quizId, final String requestUri) throws IllegalArgumentException {
+        @Nullable final Quiz quiz = getQuiz(quizId);
+        if (quiz == null) {
+            throw new IllegalArgumentException("Unknown quiz ID");
+        }
+
         @NotNull final QuizSections sections = quiz.getSections();
         if (sections == null) {
             return null;
@@ -218,6 +195,26 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
     }
 
+    private static Quiz loadQuiz() {
+        try(final InputStream is = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream("quiz.xml")) {
+            if (is == null) {
+                Log.fatal("quiz.xml not found.");
+                return null;
+            }
+
+            try {
+                return QuizLoader.loadQuiz(is);
+            } catch (final QuizLoader.QuizLoaderException e) {
+                Log.fatal("loadQuiz() failed", e);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     private UserStats getUserStatsForSection(final String userId, final String sectionId) {
         Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
         q = q.filter("userId", userId);
@@ -259,9 +256,10 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return getUserProfileFromDataStore(user);
     }
 
-    private Quiz getQuiz() {
-        if (quiz != null) {
-            return quiz;
+    private Quiz getQuiz(final String quizId) {
+        //Return previously-loaded quiz:
+        if (quizzes != null) {
+            return quizzes.get(quizId);
         }
 
         final ServletConfig config = this.getServletConfig();
@@ -277,33 +275,36 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         //Use the existing shared quiz if any:
-        final Object object = context.getAttribute(LOADED_QUIZ);
-        if ((object != null) && !(object instanceof Quiz)) {
-            Log.error("The loaded-quiz attribute is not of the expected type.");
+        final Object object = context.getAttribute(LOADED_QUIZZES);
+        if ((object != null) && !(object instanceof HashMap)) {
+            Log.error("The loaded-quizzes attribute is not of the expected type.");
             return null;
         }
 
-        quiz = (Quiz) object;
-        if (quiz != null) {
+        quizzes = (HashMap<String, Quiz>)object;
+        if (quizzes != null) {
+            return quizzes.get(quizId);
+        } else {
+            //Load it for the first time:
+            final Quiz quiz;
+            try {
+                //TODO: Load other quizzes.
+                quiz = loadQuiz();
+            } catch (@NotNull final Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+
+            quizzes = new HashMap<>();
+            quizzes.put(quiz.getId(), quiz);
+            context.setAttribute(LOADED_QUIZZES, quizzes);
             return quiz;
         }
-
-        //Load it for the first time:
-        try {
-            quiz = loadQuiz();
-        } catch (@NotNull final Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        context.setAttribute(LOADED_QUIZ, quiz);
-
-        return quiz;
     }
 
     @NotNull
-    private SubmissionResult createSubmissionResult(boolean result, @NotNull final String questionId, @Nullable final String nextQuestionSectionId, @Nullable final Map<String, UserStats> mapUserStats) {
-        @Nullable final Quiz quiz = getQuiz();
+    private SubmissionResult createSubmissionResult(boolean result, final String quizId, @NotNull final String questionId, @Nullable final String nextQuestionSectionId, @Nullable final Map<String, UserStats> mapUserStats) {
+        @Nullable final Quiz quiz = getQuiz(quizId);
 
         //We only provide the correct answer if the supplied answer was wrong:
         @Nullable String correctAnswer = null;
@@ -324,8 +325,11 @@ public class QuizServiceImpl extends ServiceWithUser implements
      * @return
      */
     @NotNull
-    private SubmissionResult createSubmissionResultForSection(boolean result, final String questionId, final String nextQuestionSectionId, final UserStats userStats) {
-        @Nullable final Quiz quiz = getQuiz();
+    private SubmissionResult createSubmissionResultForSection(boolean result, final String quizId, final String questionId, final String nextQuestionSectionId, final UserStats userStats) {
+        @Nullable final Quiz quiz = getQuiz(quizId);
+        if (quiz == null) {
+            throw new IllegalArgumentException("Unknown quiz ID");
+        }
 
         //We only provide the correct answer if the supplied answer was wrong:
         @Nullable String correctAnswer = null;
@@ -428,7 +432,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
     }
 
     @NotNull
-    private SubmissionResult storeAnswerCorrectnessAndGetSubmissionResult(final String questionId, final String nextQuestionSectionId, @NotNull final QuestionAndAnswer questionAndAnswer, boolean result) {
+    private SubmissionResult storeAnswerCorrectnessAndGetSubmissionResult(final String quizId, final String questionId, final String nextQuestionSectionId, @NotNull final QuestionAndAnswer questionAndAnswer, boolean result) {
         //If the user is logged in, store whether we got the question right or wrong:
         @Nullable final String userId = getUserId();
 
@@ -447,7 +451,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 storeAnswerForSection(result, questionAndAnswer.getQuestion(), userId, userStats);
             }
 
-            return createSubmissionResultForSection(result, questionId, nextQuestionSectionId, userStats);
+            return createSubmissionResultForSection(result, quizId, questionId, nextQuestionSectionId, userStats);
         } else {
             @Nullable Map<String, UserStats> mapUserStats = null;
             if (!StringUtils.isEmpty(userId)) {
@@ -455,7 +459,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 storeAnswer(result, questionAndAnswer.getQuestion(), userId, mapUserStats);
             }
 
-            return createSubmissionResult(result, questionId, nextQuestionSectionId, mapUserStats);
+            return createSubmissionResult(result, quizId, questionId, nextQuestionSectionId, mapUserStats);
         }
     }
 
