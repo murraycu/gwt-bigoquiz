@@ -197,9 +197,9 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     private static Quiz loadQuiz() {
         try(final InputStream is = Thread.currentThread().getContextClassLoader()
-                .getResourceAsStream("quiz.xml")) {
+                .getResourceAsStream("bigoquiz.xml")) {
             if (is == null) {
-                Log.fatal("quiz.xml not found.");
+                Log.fatal("bigoquiz.xml not found.");
                 return null;
             }
 
