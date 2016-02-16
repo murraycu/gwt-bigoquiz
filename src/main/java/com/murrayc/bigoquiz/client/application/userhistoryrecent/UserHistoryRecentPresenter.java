@@ -10,6 +10,7 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.murrayc.bigoquiz.client.Log;
+import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.client.application.question.QuestionNextQuestionSectionIdEvent;
@@ -29,6 +30,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         UserProfileResetSectionsEvent.UserProfileResetSectionsEventHandler {
 
     private String nextQuestionSectionId;
+    private boolean userIsLoggedIn = false;
 
     public interface MyView extends View, HasUiHandlers<UserHistoryRecentUserEditUiHandlers> {
         /** Set a whole set of history.
@@ -68,7 +70,17 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
     @ProxyEvent
     @Override
     public void onQuestionUserAnswerAdded(@NotNull final QuestionUserAnswerAddedEvent event) {
-        getView().addUserAnswer(event.getQuestion(), event.getAnswerIsCorrect());
+        //Only keep track of the answers if we are logged in.
+        //Otherwise users might be confused when they lose their progress after a refresh or
+        //when coming back later in a separate session.
+        //TODO: Keep a session without requiring a log in?
+        if (userIsLoggedIn()) {
+            getView().addUserAnswer(event.getQuestion(), event.getAnswerIsCorrect());
+        }
+    }
+
+    private boolean userIsLoggedIn() {
+        return userIsLoggedIn;
     }
 
     @ProxyEvent
@@ -96,14 +108,28 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         @NotNull final AsyncCallback<UserRecentHistory> callback = new AsyncCallback<UserRecentHistory>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
-                // TODO: create a way to notify users of asynchronous callback failures
                 Log.error("AsyncCallback Failed: getUserRecentHistory(): " + caught.getMessage());
-                getView().setServerFailed();
+                onFailureGeneric();
             }
 
             @Override
             public void onSuccess(final UserRecentHistory result) {
+                if (result == null) {
+                    onFailureGeneric();
+                }
+
+                final LoginInfo loginInfo = result.getLoginInfo();
+                if (loginInfo == null) {
+                    onFailureGeneric();
+                }
+
+                userIsLoggedIn = loginInfo.isLoggedIn();
                 getView().setUserRecentHistory(result, nextQuestionSectionId);
+            }
+
+            private void onFailureGeneric() {
+                userIsLoggedIn = false;
+                getView().setServerFailed();
             }
         };
 
