@@ -135,6 +135,8 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         this.sections = sections;
 
         if (sections == null) {
+            Log.fatal("setSections(): sections is null");
+
             nextQuestionSectionListBox.clear();
             return;
         }
@@ -150,7 +152,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             }
         }
 
-        setNextQuestionSectionTitle(nextQuestionSectionId);
+        setNextQuestionSectionId(nextQuestionSectionId);
     }
 
     @Override
