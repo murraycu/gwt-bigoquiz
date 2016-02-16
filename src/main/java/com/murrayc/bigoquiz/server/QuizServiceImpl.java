@@ -34,14 +34,20 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @Nullable
     private Map<String, Quiz> quizzes;
 
-    @Nullable
+    @NotNull
     @Override
     public Question getQuestion(@NotNull final String quizId, @NotNull final String questionId) throws IllegalArgumentException {
         @Nullable final Quiz quiz = getQuiz(quizId);
         if (quiz == null) {
             throw new IllegalArgumentException("Unknown quiz ID");
         }
-        return quiz.getQuestion(questionId);
+
+        final Question result = quiz.getQuestion(questionId);
+        if (result == null) {
+            throw new IllegalArgumentException("Unknown question ID");
+        }
+
+        return result;
     }
 
     @Nullable

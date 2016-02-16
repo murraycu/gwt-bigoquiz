@@ -421,16 +421,30 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             public void onFailure(@NotNull final Throwable caught) {
                 // TODO: create a way to notify users of asynchronous callback failures
                 Log.error("AsyncCallback Failed: getNextQuestion(): " + caught.getMessage());
+
+                //Maybe the user tried to view a non-existant question:
+                abandonQuestionAndShowAnother();
             }
 
             @Override
             public void onSuccess(final Question result) {
-                question = result;
-                showQuestionInView();
+                if (result != null) {
+                    question = result;
+                    showQuestionInView();
+                } else {
+                    Log.error("AsyncCallback Failed: getNextQuestion(): result was null.");
+
+                    abandonQuestionAndShowAnother();
+                }
             }
 
         };
 
         QuizServiceAsync.Util.getInstance().getQuestion(getQuizId(), questionId, callback);
+    }
+
+    private void abandonQuestionAndShowAnother() {
+        question = null;
+        getAndUseNextQuestion(nextQuestionSectionId);
     }
 }
