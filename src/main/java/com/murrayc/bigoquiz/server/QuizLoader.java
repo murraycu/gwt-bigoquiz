@@ -36,8 +36,17 @@ public class QuizLoader {
     private static final String NODE_CHOICE = "choice";
     private static final String NODE_DEFAULT_CHOICES = "default_choices";
 
+    public static class QuizLoaderException extends Exception {
+        public QuizLoaderException(final String message) {
+            super(message);
+        }
 
-    public static Quiz loadQuiz(final InputStream is) {
+        public QuizLoaderException(final String message, final Exception cause) {
+            super(message, cause);
+        }
+    }
+
+    public static Quiz loadQuiz(final InputStream is) throws QuizLoaderException {
         @NotNull final Quiz result = new Quiz();
 
         final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -45,28 +54,22 @@ public class QuizLoader {
         try {
             documentBuilder = dbf.newDocumentBuilder();
         } catch (@NotNull final ParserConfigurationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
+            throw new QuizLoaderException("XML parsing failed while creating DocumentBuilder.", e);
+
         }
 
         org.w3c.dom.Document xmlDocument;
         try {
             xmlDocument = documentBuilder.parse(is);
         } catch (@NotNull final SAXException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
+            throw new QuizLoaderException("XML parsing failed.", e);
         } catch (@NotNull final IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
+            throw new QuizLoaderException("XML parsing failed.", e);
         }
 
         final Element rootNode = xmlDocument.getDocumentElement();
         if (!StringUtils.equals(rootNode.getNodeName(), NODE_ROOT)) {
-            Log.error("Unexpected XML root node name found: " + rootNode.getNodeName());
-            return null;
+            throw new QuizLoaderException("Unexpected XML root node name found: " + rootNode.getNodeName());
         }
 
         //Sections:
@@ -129,7 +132,7 @@ public class QuizLoader {
         return sectionTitle;
     }
 
-    private static int addChildQuestions(@NotNull final Quiz quiz, final String sectionId, final String subSectionId, final List<String> defaultChoices, @NotNull final Element parentElement) {
+    private static int addChildQuestions(@NotNull final Quiz quiz, final String sectionId, final String subSectionId, final List<String> defaultChoices, @NotNull final Element parentElement) throws QuizLoaderException {
         int result = 0;
 
         @NotNull final List<Node> listQuestionNodes = getChildrenByTagName(parentElement, NODE_QUESTION);
@@ -154,30 +157,30 @@ public class QuizLoader {
         return result;
     }
 
-    private static QuestionAndAnswer loadQuestionNode(@NotNull final Element element, final String sectionID, final String subSectionId, final List<String> defaultChoices) {
+    private static QuestionAndAnswer loadQuestionNode(@NotNull final Element element, final String sectionID, final String subSectionId, final List<String> defaultChoices) throws QuizLoaderException {
         final String id = element.getAttribute(ATTR_ID);
         if (StringUtils.isEmpty(id)) {
-            return null;
+            throw new QuizLoaderException("loadQuestionNode(): Missing ID.");
         }
 
         @Nullable final Element textElement = getElementByName(element, NODE_TEXT);
         if (textElement == null) {
-            return null;
+            throw new QuizLoaderException("loadQuestionNode(): Missing text.");
         }
 
         @Nullable final Element answerElement = getElementByName(element, NODE_ANSWER);
         if (answerElement == null) {
-            return null;
+            throw new QuizLoaderException("loadQuestionNode(): Missing answer.");
         }
 
         final String questionText = textElement.getTextContent();
         if (questionText == null) {
-            return null;
+            throw new QuizLoaderException("loadQuestionNode(): Missing text content.");
         }
 
         final String answerText = answerElement.getTextContent();
         if (answerText == null) {
-            return null;
+            throw new QuizLoaderException("loadQuestionNode(): Missing answer content.");
         }
 
         @Nullable List<String> choices = null;
@@ -191,8 +194,7 @@ public class QuizLoader {
         }
 
         if (choices != null && !choices.contains(answerText)) {
-            Log.error("QuizLoader.loadQuestionNode(): answer is not in the choices: questionId: " + id);
-            return null;
+            throw new QuizLoaderException("QuizLoader.loadQuestionNode(): answer is not in the choices: questionId: " + id);
         }
 
         return new QuestionAndAnswer(id, sectionID, subSectionId, questionText, answerText, choices);
@@ -257,4 +259,6 @@ public class QuizLoader {
 
         return result;
     }
+
+
 }
