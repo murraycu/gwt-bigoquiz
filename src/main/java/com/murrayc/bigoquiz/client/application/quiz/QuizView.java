@@ -28,8 +28,6 @@ public class QuizView extends ViewImpl
 
     private final Label labelError = Utils.createServerErrorLabel(constants);
     private final Panel panelQuiz = new FlowPanel();
-    private final Label labelTitle = new InlineLabel();
-
 
     QuizView() {
         @NotNull final FlowPanel mainPanel = new FlowPanel();
@@ -37,21 +35,18 @@ public class QuizView extends ViewImpl
 
         mainPanel.add(labelError);
 
-        mainPanel.add(labelTitle);
         mainPanel.add(panelQuiz);
+        panelQuiz.addStyleName("quiz-panel");
 
         initWidget(mainPanel);
     }
 
-
-
-
     @Override
     public void setQuiz(@NotNull final Quiz quiz) {
-        labelTitle.setText(quiz.getTitle());
-        labelTitle.addStyleName("page-title-label");
-
         panelQuiz.clear();
+
+        Utils.addHeaderToPanel(2, panelQuiz, quiz.getTitle());
+
         final QuizSections quizSections = quiz.getSections();
         for(final QuizSections.Section section : quizSections.getSectionsSorted()) {
             if (section == null) {
@@ -60,10 +55,10 @@ public class QuizView extends ViewImpl
             }
 
             final Panel panelSection = new FlowPanel();
+            panelSection.addStyleName("quiz-section");
             panelQuiz.add(panelSection);
-            final Label sectionTitle = new InlineLabel(section.title);
-            sectionTitle.addStyleName("section-title");
-            panelSection.add(sectionTitle);
+
+            Utils.addHeaderToPanel(3, panelSection, section.title);
 
             final List<QuestionAndAnswer> questions = quiz.getQuestionsForSection(section.id);
             if (questions == null) {
@@ -96,13 +91,13 @@ public class QuizView extends ViewImpl
                 }
 
                 final Panel panelSubSection = new FlowPanel();
+                panelSubSection.addStyleName("quiz-sub-section");
                 panelSection.add(panelSubSection);
 
                 final Anchor subSectionTitle = new Anchor();
                 subSectionTitle.setText(subSection.title);
                 subSectionTitle.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
-                //subSectionTitle.addStyleName("sub-section-title");
-                panelSubSection.add(subSectionTitle);
+                Utils.addHeaderToPanel(4, panelSubSection, subSectionTitle);
 
                 for (final QuestionAndAnswer questionAndAnswer : questionsBySubSection.get(subSectionId)) {
                     if (questionAndAnswer == null) {
@@ -116,10 +111,22 @@ public class QuizView extends ViewImpl
                         continue;
                     }
 
-                    final Panel panelQuestion = new FlowPanel();
-                    panelSubSection.add(panelQuestion);
-                    final Label labelTitle = new InlineLabel(question.getText());
-                    panelQuestion.add(labelTitle);
+                    final Panel panelQuestionAnswer = new FlowPanel();
+                    panelQuestionAnswer.addStyleName("quiz-question-answer");
+                    panelSubSection.add(panelQuestionAnswer);
+                    final Label labelQuestion = new Label(messages.question(question.getText()));
+                    labelQuestion.addStyleName("quiz-question");
+                    panelQuestionAnswer.add(labelQuestion);
+
+                    final String answer = questionAndAnswer.getAnswer();
+                    if (answer == null) {
+                        Log.error("QuizView: answer is null.");
+                        continue;
+                    }
+
+                    final Label labelAnswer = new Label(messages.answer(answer));
+                    labelAnswer.addStyleName("quiz-answer");
+                    panelQuestionAnswer.add(labelAnswer);
                 }
             }
 

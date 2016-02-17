@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quiz xmlns="http://bigoquiz.com/document" format_version="1" id="testquiz">
-    <title>Big-O Quiz</title>
+    <title>Test Quiz</title>
     <section id="data-structure-operations">
         <title>Data Structure Operations</title>
         <default_choices>
