@@ -33,7 +33,6 @@ public interface QuizServiceAsync {
      */
     void resetSections(AsyncCallback<Void> async);
 
-    @Nullable
     void getQuiz(final String quizId, AsyncCallback<Quiz> async);
 
 
