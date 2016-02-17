@@ -1,6 +1,5 @@
 package com.murrayc.bigoquiz.client.application.question;
 
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import com.murrayc.bigoquiz.shared.Question;
@@ -9,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by murrayc on 1/25/16.
  */
-public class QuestionUserAnswerAddedEvent extends GwtEvent<QuestionUserAnswerAddedEvent.QuestionUserAnswerAddedEventHandler> {
+public class QuestionUserAnswerAddedEvent extends GwtEvent<QuestionUserAnswerAddedEvent.EventHandler> {
     private final Question question;
     private final boolean answerIsCorrect;
 
@@ -26,11 +25,11 @@ public class QuestionUserAnswerAddedEvent extends GwtEvent<QuestionUserAnswerAdd
         return answerIsCorrect;
     }
 
-    public interface QuestionUserAnswerAddedEventHandler extends EventHandler {
+    public interface EventHandler extends com.google.gwt.event.shared.EventHandler {
         void onQuestionUserAnswerAdded(QuestionUserAnswerAddedEvent event);
     }
 
-    public static final Type<QuestionUserAnswerAddedEventHandler> TYPE = new Type<>();
+    public static final Type<EventHandler> TYPE = new Type<>();
 
     public static void fire(@NotNull final HasHandlers source, final Question question, boolean answerIsCorrect) {
         if (TYPE != null) {
@@ -39,19 +38,19 @@ public class QuestionUserAnswerAddedEvent extends GwtEvent<QuestionUserAnswerAdd
     }
 
     /*
-    public static Type<UserProfileResetSectionsEventHandler> getType() {
+    public static Type<EventHandler> getType() {
         return TYPE;
     }
     */
 
     @NotNull
     @Override
-    public Type<QuestionUserAnswerAddedEventHandler> getAssociatedType() {
+    public Type<EventHandler> getAssociatedType() {
         return TYPE;
     }
 
     @Override
-    protected void dispatch(@NotNull final QuestionUserAnswerAddedEventHandler handler) {
+    protected void dispatch(@NotNull final EventHandler handler) {
         handler.onQuestionUserAnswerAdded(this);
     }
 }

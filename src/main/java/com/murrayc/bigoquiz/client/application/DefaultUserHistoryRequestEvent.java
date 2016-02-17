@@ -24,7 +24,7 @@ public class DefaultUserHistoryRequestEvent extends GwtEvent<DefaultUserHistoryR
     }
 
     /*
-    public static Type<UserProfileResetSectionsEventHandler> getType() {
+    public static Type<EventHandler> getType() {
         return TYPE;
     }
     */

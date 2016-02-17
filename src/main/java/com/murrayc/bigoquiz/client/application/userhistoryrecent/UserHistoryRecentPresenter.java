@@ -26,9 +26,9 @@ import org.jetbrains.annotations.NotNull;
  */
 public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecentPresenter.MyView>
         implements UserHistoryRecentUserEditUiHandlers,
-        QuestionUserAnswerAddedEvent.QuestionUserAnswerAddedEventHandler,
-        QuestionContextEvent.QuestionContextEventHandler,
-        UserProfileResetSectionsEvent.UserProfileResetSectionsEventHandler,
+        QuestionUserAnswerAddedEvent.EventHandler,
+        QuestionContextEvent.EventHandler,
+        UserProfileResetSectionsEvent.EventHandler,
         DefaultUserHistoryRequestEvent.EventHandler {
 
     public static final String DEFAULT_QUIZ_ID = "bigoquiz";

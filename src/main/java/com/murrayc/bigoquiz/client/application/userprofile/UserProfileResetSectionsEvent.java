@@ -1,6 +1,5 @@
 package com.murrayc.bigoquiz.client.application.userprofile;
 
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import org.jetbrains.annotations.NotNull;
@@ -8,16 +7,16 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by murrayc on 1/25/16.
  */
-public class UserProfileResetSectionsEvent extends GwtEvent<UserProfileResetSectionsEvent.UserProfileResetSectionsEventHandler> {
+public class UserProfileResetSectionsEvent extends GwtEvent<UserProfileResetSectionsEvent.EventHandler> {
 
     public UserProfileResetSectionsEvent() {
     }
 
-    public interface UserProfileResetSectionsEventHandler extends EventHandler {
+    public interface EventHandler extends com.google.gwt.event.shared.EventHandler {
         void onUserProfileResetSections(UserProfileResetSectionsEvent event);
     }
 
-    public static final Type<UserProfileResetSectionsEventHandler> TYPE = new Type<>();
+    public static final Type<EventHandler> TYPE = new Type<>();
 
     public static void fire(@NotNull final HasHandlers source) {
         if (TYPE != null) {
@@ -26,19 +25,19 @@ public class UserProfileResetSectionsEvent extends GwtEvent<UserProfileResetSect
     }
 
     /*
-    public static Type<UserProfileResetSectionsEventHandler> getType() {
+    public static Type<EventHandler> getType() {
         return TYPE;
     }
     */
 
     @NotNull
     @Override
-    public Type<UserProfileResetSectionsEventHandler> getAssociatedType() {
+    public Type<EventHandler> getAssociatedType() {
         return TYPE;
     }
 
     @Override
-    protected void dispatch(@NotNull final UserProfileResetSectionsEventHandler handler) {
+    protected void dispatch(@NotNull final EventHandler handler) {
         handler.onUserProfileResetSections(this);
     }
 }
