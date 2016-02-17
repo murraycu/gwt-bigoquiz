@@ -131,7 +131,13 @@ public class QuizServiceImpl extends ServiceWithUser implements
             throw new IllegalArgumentException("Unknown QuestionAndAnswer ID");
         }
 
-        final boolean result = StringUtils.equals(questionAndAnswer.getAnswer(), answer);
+        final String correctAnswer = questionAndAnswer.getAnswer();
+        if (correctAnswer == null) {
+            throw new RuntimeException("submitAnswer(): correctAnswer was null.");
+        }
+
+        final boolean result = QuizUtils.answerIsCorrect(answer, correctAnswer);
+
         return storeAnswerCorrectnessAndGetSubmissionResult(quizId, questionId, nextQuestionSectionId, questionAndAnswer, result);
     }
 
