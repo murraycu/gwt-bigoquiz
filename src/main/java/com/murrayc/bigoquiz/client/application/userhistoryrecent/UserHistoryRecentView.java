@@ -151,30 +151,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             return;
         }
 
-        @NotNull final List<QuizSections.Section> sectionItems = new ArrayList<>(sections.getSections());
-
-        //Do the sorting here on the client-side,
-        //because the titles could (one day) be localized,
-        //and the sorting would need to depend on the user's locale too.
-        Collections.sort(sectionItems,
-                new Comparator<QuizSections.Section>() {
-                    @Override
-                    public int compare(@Nullable final QuizSections.Section o1, @Nullable final QuizSections.Section o2) {
-                        if ((o1 == null) && (o2 == null)) {
-                            return 0;
-                        } else if (o1 == null) {
-                            return -1;
-                        }
-
-                        if ((o1.title == null) && (o2.title == null)) {
-                            return 0;
-                        } else if (o1.title == null) {
-                            return -1;
-                        }
-
-                        return o1.title.compareTo(o2.title);
-                    }
-                });
+        @NotNull final List<QuizSections.Section> sectionItems = sections.getSectionsSorted();
 
         for (@Nullable final QuizSections.Section section : sectionItems) {
             if (section == null) {

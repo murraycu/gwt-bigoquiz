@@ -4,10 +4,16 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
+import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
-import com.murrayc.bigoquiz.shared.Quiz;
+import com.murrayc.bigoquiz.shared.*;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -21,6 +27,7 @@ public class QuizView extends ViewImpl
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
     private final Label labelError = Utils.createServerErrorLabel(constants);
+    private final Panel panelQuiz = new FlowPanel();
     private final Label labelTitle = new InlineLabel();
 
 
@@ -31,6 +38,7 @@ public class QuizView extends ViewImpl
         mainPanel.add(labelError);
 
         mainPanel.add(labelTitle);
+        mainPanel.add(panelQuiz);
 
         initWidget(mainPanel);
     }
@@ -41,6 +49,111 @@ public class QuizView extends ViewImpl
     @Override
     public void setQuiz(@NotNull final Quiz quiz) {
         labelTitle.setText(quiz.getTitle());
+        labelTitle.addStyleName("page-title-label");
+
+        panelQuiz.clear();
+        final QuizSections quizSections = quiz.getSections();
+        for(final QuizSections.Section section : quizSections.getSectionsSorted()) {
+            if (section == null) {
+                Log.error("QuizView: section is null.");
+                continue;
+            }
+
+            final Panel panelSection = new FlowPanel();
+            panelQuiz.add(panelSection);
+            final Label sectionTitle = new InlineLabel(section.title);
+            sectionTitle.addStyleName("section-title");
+            panelSection.add(sectionTitle);
+
+            final List<QuestionAndAnswer> questions = quiz.getQuestionsForSection(section.id);
+            if (questions == null) {
+                Log.error("QuizView: questions is null.");
+                continue;
+            }
+
+            final Map<String, List<QuestionAndAnswer>> questionsBySubSection = groupQuestionsBySubSection(questions);
+            if (questionsBySubSection == null) {
+                Log.error("QuizView: questionsBySubSection is null.");
+                continue;
+            }
+
+            final String sectionId = section.id;
+            if (StringUtils.isEmpty(sectionId)) {
+                Log.error("QuizView: sectionId is null.");
+                continue;
+            }
+
+            for (final QuizSections.SubSection subSection : quizSections.getSubSectionsSorted(sectionId)) {
+                if (subSection == null) {
+                    Log.fatal("QuizView: subSection is null.");
+                    continue;
+                }
+
+                final String subSectionId = subSection.id;
+                if (subSectionId == null) {
+                    Log.fatal("QuizView: subSectionId is null.");
+                    continue;
+                }
+
+                final Panel panelSubSection = new FlowPanel();
+                panelSection.add(panelSubSection);
+
+                final Anchor subSectionTitle = new Anchor();
+                subSectionTitle.setText(subSection.title);
+                subSectionTitle.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
+                //subSectionTitle.addStyleName("sub-section-title");
+                panelSubSection.add(subSectionTitle);
+
+                for (final QuestionAndAnswer questionAndAnswer : questionsBySubSection.get(subSectionId)) {
+                    if (questionAndAnswer == null) {
+                        Log.error("QuizView: questionAndAnswer is null.");
+                        continue;
+                    }
+
+                    final Question question = questionAndAnswer.getQuestion();
+                    if (question == null) {
+                        Log.error("QuizView: question is null.");
+                        continue;
+                    }
+
+                    final Panel panelQuestion = new FlowPanel();
+                    panelSubSection.add(panelQuestion);
+                    final Label labelTitle = new InlineLabel(question.getText());
+                    panelQuestion.add(labelTitle);
+                }
+            }
+
+        }
+    }
+
+    private @NotNull Map<String, List<QuestionAndAnswer>> groupQuestionsBySubSection(final List<QuestionAndAnswer> questions) {
+        final Map<String, List<QuestionAndAnswer>> result = new HashMap<>();
+
+        for (final QuestionAndAnswer questionAndAnswer : questions) {
+            if (questionAndAnswer == null) {
+                continue;
+            }
+
+            final Question question = questionAndAnswer.getQuestion();
+            if (question == null) {
+                continue;
+            }
+
+            final String subSectionId = question.getSubSectionId();
+            if (subSectionId == null) {
+                continue;
+            }
+
+            List<QuestionAndAnswer> list = result.get(subSectionId);
+            if (list == null) {
+                list = new ArrayList<>();
+                result.put(subSectionId, list);
+            }
+
+            list.add(questionAndAnswer);
+        }
+
+        return result;
     }
 
     @Override

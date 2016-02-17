@@ -176,5 +176,33 @@ public class Quiz implements IsSerializable {
         return quizSections;
     }
 
+    public List<QuestionAndAnswer> getQuestionsForSection(@NotNull final String sectionId) {
+        if (listSectionQuestionsIsEmpty()) {
+            fillListSectionQuestions();
+            if (listSectionQuestionsIsEmpty()) {
+                return null;
+            }
+        }
+
+        return listSectionQuestions.get(sectionId);
+    }
+
+    private boolean listSectionQuestionsIsEmpty() {
+        return listSectionQuestions == null ||
+                listSectionQuestions.isEmpty();
+    }
+    /**
+     * Fill the whole listSectionQuestions cache.
+     */
+    private void fillListSectionQuestions() {
+        for (final String sectionId : questions.keySet()) {
+            final Map<String, QuestionAndAnswer> mapQuestions = questions.get(sectionId);
+            if (mapQuestions == null) {
+                continue;
+            }
+
+            listSectionQuestions.put(sectionId, new ArrayList<>(mapQuestions.values()));
+        }
+    }
 
 }
