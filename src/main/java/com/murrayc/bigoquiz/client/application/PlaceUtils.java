@@ -14,7 +14,7 @@ public class PlaceUtils {
         @NotNull PlaceRequest.Builder builder = new PlaceRequest.Builder()
                 .nameToken(NameTokens.QUESTION);
 
-        if (!StringUtils.isEmpty(questionId)) {
+        if (!StringUtils.isEmpty(quizId)) {
             builder = builder.with(NameTokens.PARAM_QUIZ_ID, quizId);
         }
 
