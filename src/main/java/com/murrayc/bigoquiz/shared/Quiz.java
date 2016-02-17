@@ -36,7 +36,7 @@ public class Quiz implements IsSerializable {
         }
     }
 
-    private final QuizDetails details = new QuizDetails();
+    private /* final */ QuizDetails details = new QuizDetails();
 
     //Map of section ID to (map of question IDs to question):
     @NotNull
