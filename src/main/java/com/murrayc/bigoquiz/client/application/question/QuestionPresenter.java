@@ -166,8 +166,17 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         @NotNull final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
-                Log.error("AsyncCallback Failed: onSubmitAnswer(): " + caught.getMessage());
-                getView().setServerFailed();
+                try {
+                    throw caught;
+                } catch (final IllegalArgumentException ex) {
+                    //One of the parameters (quizID, questionId, etc) must be invalid,
+                    //TODO: Handle this properly.
+                    Log.error("AsyncCallback Failed with IllegalArgumentException: onSubmitAnswer(): " + ex.getMessage());
+                    getView().setServerFailed();
+                } catch (final Throwable ex) {
+                    Log.error("AsyncCallback Failed: onSubmitAnswer(): " + ex.getMessage());
+                    getView().setServerFailed();
+                }
             }
 
             @Override
@@ -240,8 +249,16 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         @NotNull final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
-                // TODO: create a way to notify users of asynchronous callback failures
-                Log.error("AsyncCallback Failed: onSubmitAnswer(): " + caught.getMessage());
+                try {
+                    throw caught;
+                } catch (final IllegalArgumentException ex) {
+                    //One of the parameters (quizID, questionId, etc) must be invalid,
+                    //TODO: Handle this properly.
+                    Log.error("AsyncCallback Failed with IllegalArgumentException: submitDontKnowAnswer(): " + ex.getMessage());
+                } catch (final Throwable ex) {
+                    // TODO: create a way to notify users of asynchronous callback failures
+                    Log.error("AsyncCallback Failed: submitDontKnowAnswer(): " + ex.getMessage());
+                }
             }
 
             @Override
@@ -360,8 +377,17 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         @NotNull final AsyncCallback<QuizSections> callback = new AsyncCallback<QuizSections>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
-                // TODO: create a way to notify users of asynchronous callback failures
-                Log.error("AsyncCallback Failed: getSections(): " + caught.getMessage());
+                try {
+                    throw caught;
+                } catch (final IllegalArgumentException ex) {
+                    //One of the parameters (quizID, questionId, etc) must be invalid,
+                    //TODO: Handle this properly.
+                    Log.error("AsyncCallback Failed with IllegalArgumentException: getSections(): " + ex.getMessage());
+                    getView().setServerFailed();
+                } catch (final Throwable ex) {
+                    Log.error("AsyncCallback Failed: getSections(): " + ex.getMessage());
+                    getView().setServerFailed();
+                }
 
                 waitingForSections = false;
             }
@@ -397,8 +423,17 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         @NotNull final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
-                // TODO: create a way to notify users of asynchronous callback failures
-                Log.error("AsyncCallback Failed: getNextQuestion(): " + caught.getMessage());
+                try {
+                    throw caught;
+                } catch (final IllegalArgumentException ex) {
+                    //One of the parameters (quizID, questionId, etc) must be invalid,
+                    //TODO: Handle this properly.
+                    Log.error("AsyncCallback Failed with IllegalArgumentException: getNextQuestion(): " + ex.getMessage());
+                    getView().setServerFailed();
+                } catch (final Throwable ex) {
+                    Log.error("AsyncCallback Failed: getNextQuestion(): " + ex.getMessage());
+                    getView().setServerFailed();
+                }
             }
 
             @Override
@@ -419,11 +454,17 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         @NotNull final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
-                // TODO: create a way to notify users of asynchronous callback failures
-                Log.error("AsyncCallback Failed: getNextQuestion(): " + caught.getMessage());
-
-                //Maybe the user tried to view a non-existant question:
-                abandonQuestionAndShowAnother();
+                try {
+                    throw caught;
+                } catch (final IllegalArgumentException ex) {
+                    //One of the parameters (quizID, questionId, etc) must be invalid,
+                    Log.error("AsyncCallback Failed with IllegalArgumentException: getQuestion(): " + ex.getMessage());
+                    //Maybe the user tried to view a non-existant question:
+                    abandonQuestionAndShowAnother();
+                } catch (final Throwable ex) {
+                    Log.error("AsyncCallback Failed: getQuestion(): " + ex.getMessage());
+                    getView().setServerFailed();
+                }
             }
 
             @Override
@@ -432,7 +473,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
                     question = result;
                     showQuestionInView();
                 } else {
-                    Log.error("AsyncCallback Failed: getNextQuestion(): result was null.");
+                    Log.error("AsyncCallback Failed: getQuestion(): result was null.");
 
                     abandonQuestionAndShowAnother();
                 }

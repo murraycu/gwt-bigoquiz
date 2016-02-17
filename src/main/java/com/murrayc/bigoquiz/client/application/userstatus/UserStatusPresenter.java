@@ -35,10 +35,18 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
 
         // Check login status using login service.
         LoginServiceAsync.Util.getInstance().login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
-            public void onFailure(@NotNull final Throwable error) {
-                Log.error("AsyncCallback Failed: login(): " + error.getMessage());
-
-                getView().setUserStatusFailed();
+            public void onFailure(@NotNull final Throwable caught) {
+                try {
+                    throw caught;
+                } catch (final IllegalArgumentException ex) {
+                    //One of the parameters (quizID, questionId, etc) must be invalid,
+                    //TODO: Handle this properly.
+                    Log.error("AsyncCallback Failed with IllegalArgumentException: login(): " + ex.getMessage());
+                    getView().setUserStatusFailed();
+                } catch (final Throwable ex) {
+                    Log.error("AsyncCallback Failed: login(): " + ex.getMessage());
+                    getView().setUserStatusFailed();
+                }
             }
 
             public void onSuccess(@Nullable final LoginInfo result) {
