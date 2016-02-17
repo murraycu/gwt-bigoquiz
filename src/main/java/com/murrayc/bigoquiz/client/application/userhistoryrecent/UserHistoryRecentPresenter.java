@@ -124,8 +124,20 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         @NotNull final AsyncCallback<UserRecentHistory> callback = new AsyncCallback<UserRecentHistory>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
-                Log.error("AsyncCallback Failed: getUserRecentHistory(): " + caught.getMessage());
-                onFailureGeneric();
+                try {
+                    throw caught;
+                } catch (final IllegalArgumentException ex) {
+                    //The quizID must be invalid,
+                    //so try the default one instead.
+                    //TODO: Do nothing, assuming that the main content presenter will offer a list of quizzes?
+                    if (!StringUtils.equals(quizId, DEFAULT_QUIZ_ID)) {
+                        quizId = DEFAULT_QUIZ_ID;
+                        getAndShowHistory();
+                    }
+                } catch (final Throwable throwable) {
+                    Log.error("AsyncCallback Failed: getUserRecentHistory(): " + caught.getMessage());
+                    onFailureGeneric();
+                }
             }
 
             @Override
