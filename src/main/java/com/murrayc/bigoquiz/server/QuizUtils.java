@@ -1,17 +1,20 @@
 package com.murrayc.bigoquiz.server;
 
+import com.murrayc.bigoquiz.shared.StringUtils;
+
 /**
  * Created by murrayc on 2/17/16.
  */
 public class QuizUtils {
-    static boolean answerIsCorrect(final String answer, final String correctAnswer) {
+    static boolean answerIsCorrect(final String answer, final String correctAnswer, boolean exact) {
         boolean result = false;
         if (answer == null) {
-            result = false;
+            return false;
+        } else if (exact) {
+            return StringUtils.equals(correctAnswer, answer);
         } else {
-            result = canonicalize(answer).equalsIgnoreCase(canonicalize(correctAnswer));
+            return canonicalize(answer).equalsIgnoreCase(canonicalize(correctAnswer));
         }
-        return result;
     }
 
     static String canonicalize(final String str) {
@@ -19,6 +22,7 @@ public class QuizUtils {
             return "";
         }
 
+        //TODO: Performance
         String result = str.replaceAll("\\s+", "");
         result = result.replaceAll("²", "^2");
         result = result.replaceAll("³", "^3");

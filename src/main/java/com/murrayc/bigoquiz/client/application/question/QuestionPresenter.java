@@ -218,7 +218,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         };
 
-        QuizServiceAsync.Util.getInstance().submitAnswer(getQuizId(), getQuestionId(), answer, nextQuestionSectionId, callback);
+        QuizServiceAsync.Util.getInstance().submitAnswer(getQuizId(), getQuestionId(), answer, multipleChoice,
+                nextQuestionSectionId, callback);
     }
 
     private void tellUserHistoryPresenterAboutNewUserAnswer(boolean answerIsCorrect) {

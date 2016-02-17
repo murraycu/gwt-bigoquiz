@@ -34,7 +34,7 @@ public interface QuizService extends RemoteService {
      * @return
      * @throws IllegalArgumentException
      */
-    @NotNull SubmissionResult submitAnswer(final String quizId, final String questionId, final String answer, String nextQuestionSectionId) throws IllegalArgumentException;
+    @NotNull SubmissionResult submitAnswer(final String quizId, final String questionId, final String answer, final boolean exact, String nextQuestionSectionId) throws IllegalArgumentException;
 
     @NotNull SubmissionResult submitDontKnowAnswer(final String quizId, final String questionId, String nextQuestionSectionId) throws IllegalArgumentException;
 

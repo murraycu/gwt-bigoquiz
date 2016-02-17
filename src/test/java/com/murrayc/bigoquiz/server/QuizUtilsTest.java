@@ -47,7 +47,7 @@ public class QuizUtilsTest {
     }
 
     public void testBothWays(final String a, final String b) {
-        assert(QuizUtils.answerIsCorrect(a, b));
-        assert(QuizUtils.answerIsCorrect(b, a));
+        assert(QuizUtils.answerIsCorrect(a, b, false));
+        assert(QuizUtils.answerIsCorrect(b, a, false));
     }
 }
