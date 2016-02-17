@@ -35,18 +35,43 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @Nullable
     private Map<String, Quiz> quizzes;
 
+    @Nullable
+    @Override
+    public List<Quiz.QuizDetails> getQuizList() throws IllegalArgumentException {
+        getOrLoadQuizzes();
+
+        if (quizzes == null) {
+            return null;
+        }
+
+        final List<Quiz.QuizDetails> result = new ArrayList<>();
+        for (final Quiz quiz : quizzes.values()) {
+            result.add(quiz.getDetails());
+        }
+
+        return result;
+    }
 
     @NotNull
     @Override
     public  Quiz getQuiz(final String quizId) throws IllegalArgumentException {
-        //Return previously-loaded quiz:
-        if (quizzes != null) {
-            final Quiz result = quizzes.get(quizId);
-            if (result == null) {
-                throw new IllegalArgumentException("Unknown quiz ID.");
-            }
+        getOrLoadQuizzes();
 
-            return result;
+        if (quizzes == null) {
+            throw new IllegalArgumentException("Unknown quiz ID.");
+        }
+
+        final Quiz result = quizzes.get(quizId);
+        if (result == null) {
+            throw new IllegalArgumentException("Unknown quiz ID.");
+        }
+
+        return result;
+    }
+
+    private void getOrLoadQuizzes() {
+        if (quizzes != null) {
+            return;
         }
 
         final ServletConfig config = this.getServletConfig();
@@ -72,13 +97,6 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 throw new IllegalArgumentException("No quizzes are available.");
             }
         }
-
-        final Quiz result = quizzes.get(quizId);
-        if (result == null) {
-            throw new IllegalArgumentException("Unknown quiz ID.");
-        }
-
-        return result;
     }
 
     @NotNull

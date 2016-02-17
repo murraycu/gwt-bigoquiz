@@ -2,10 +2,6 @@ package com.murrayc.bigoquiz.shared;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.murrayc.bigoquiz.client.Log;
-import com.murrayc.bigoquiz.shared.Question;
-import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
-import com.murrayc.bigoquiz.shared.QuizSections;
-import com.murrayc.bigoquiz.shared.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,8 +11,32 @@ import java.util.*;
  * Created by murrayc on 1/18/16.
  */
 public class Quiz implements IsSerializable {
-    private String id;
-    private String title;
+    /** These are the simple details of the quiz,
+     * without the full details of all the questions and answers,
+     * so we can describe the quiz without providing the whole thing.
+     */
+    public static class QuizDetails implements IsSerializable {
+        private String id;
+        private String title;
+
+        public QuizDetails() {
+        }
+
+        public QuizDetails(final String id, final String title) {
+            this.id = id;
+            this.title = title;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+    }
+
+    private final QuizDetails details = new QuizDetails();
 
     //Map of section ID to (map of question IDs to question):
     @NotNull
@@ -37,19 +57,23 @@ public class Quiz implements IsSerializable {
     }
 
     public void setId(final String id) {
-        this.id = id;
+        this.details.id = id;
     }
 
     public String getId() {
-        return id;
+        return details.id;
     }
 
     public void setTitle(final String title) {
-        this.title = title;
+        this.details.title = title;
     }
 
     public String getTitle() {
-        return title;
+        return details.title;
+    }
+
+    public QuizDetails getDetails() {
+        return details;
     }
 
     public void addQuestion(final String sectionId, @NotNull final QuestionAndAnswer questionAndAnswer) {
@@ -204,5 +228,4 @@ public class Quiz implements IsSerializable {
             listSectionQuestions.put(sectionId, new ArrayList<>(mapQuestions.values()));
         }
     }
-
 }

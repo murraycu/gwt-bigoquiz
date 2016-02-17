@@ -5,11 +5,19 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * The async counterpart of <code>QuizService</code>.
  */
 public interface QuizServiceAsync {
+    @Nullable
+    void getQuizList(AsyncCallback<List<Quiz.QuizDetails>> async);
+
+    void getQuiz(final String quizId, AsyncCallback<Quiz> async);
+
     void getQuestion(final String quizId, String questionId, AsyncCallback<Question> async)
             throws IllegalArgumentException;
 
@@ -31,9 +39,6 @@ public interface QuizServiceAsync {
      * Clear all question answer history, progress, scores, etc.
      */
     void resetSections(AsyncCallback<Void> async);
-
-    void getQuiz(final String quizId, AsyncCallback<Quiz> async);
-
 
     /**
      * Utility class to get the RPC Async interface from client-side code

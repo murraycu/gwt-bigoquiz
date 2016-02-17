@@ -50,7 +50,7 @@ public class QuizView extends ViewImpl
         final QuizSections quizSections = quiz.getSections();
         for(final QuizSections.Section section : quizSections.getSectionsSorted()) {
             if (section == null) {
-                Log.error("QuizView: section is null.");
+                Log.error("QuizListView: section is null.");
                 continue;
             }
 
@@ -62,31 +62,31 @@ public class QuizView extends ViewImpl
 
             final List<QuestionAndAnswer> questions = quiz.getQuestionsForSection(section.id);
             if (questions == null) {
-                Log.error("QuizView: questions is null.");
+                Log.error("QuizListView: questions is null.");
                 continue;
             }
 
             final Map<String, List<QuestionAndAnswer>> questionsBySubSection = groupQuestionsBySubSection(questions);
             if (questionsBySubSection == null) {
-                Log.error("QuizView: questionsBySubSection is null.");
+                Log.error("QuizListView: questionsBySubSection is null.");
                 continue;
             }
 
             final String sectionId = section.id;
             if (StringUtils.isEmpty(sectionId)) {
-                Log.error("QuizView: sectionId is null.");
+                Log.error("QuizListView: sectionId is null.");
                 continue;
             }
 
             for (final QuizSections.SubSection subSection : quizSections.getSubSectionsSorted(sectionId)) {
                 if (subSection == null) {
-                    Log.fatal("QuizView: subSection is null.");
+                    Log.fatal("QuizListView: subSection is null.");
                     continue;
                 }
 
                 final String subSectionId = subSection.id;
                 if (subSectionId == null) {
-                    Log.fatal("QuizView: subSectionId is null.");
+                    Log.fatal("QuizListView: subSectionId is null.");
                     continue;
                 }
 
@@ -101,13 +101,13 @@ public class QuizView extends ViewImpl
 
                 for (final QuestionAndAnswer questionAndAnswer : questionsBySubSection.get(subSectionId)) {
                     if (questionAndAnswer == null) {
-                        Log.error("QuizView: questionAndAnswer is null.");
+                        Log.error("QuizListView: questionAndAnswer is null.");
                         continue;
                     }
 
                     final Question question = questionAndAnswer.getQuestion();
                     if (question == null) {
-                        Log.error("QuizView: question is null.");
+                        Log.error("QuizListView: question is null.");
                         continue;
                     }
 
@@ -120,7 +120,7 @@ public class QuizView extends ViewImpl
 
                     final String answer = questionAndAnswer.getAnswer();
                     if (answer == null) {
-                        Log.error("QuizView: answer is null.");
+                        Log.error("QuizListView: answer is null.");
                         continue;
                     }
 

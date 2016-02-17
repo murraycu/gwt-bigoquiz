@@ -9,11 +9,16 @@ import com.murrayc.bigoquiz.shared.QuizSections;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 /**
  * The client-side stub for the RPC service.
  */
 @RemoteServiceRelativePath("quiz-service")
 public interface QuizService extends RemoteService {
+
+    @Nullable
+    List<Quiz.QuizDetails> getQuizList() throws IllegalArgumentException;
 
     @Nullable
     Quiz getQuiz(final String quizId) throws IllegalArgumentException;

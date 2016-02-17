@@ -7,6 +7,7 @@ import com.murrayc.bigoquiz.client.application.menu.MenuPresenter;
 import com.murrayc.bigoquiz.client.application.menu.MenuView;
 import com.murrayc.bigoquiz.client.application.question.QuestionModule;
 import com.murrayc.bigoquiz.client.application.quiz.QuizModule;
+import com.murrayc.bigoquiz.client.application.quizlist.QuizListModule;
 import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentModule;
 import com.murrayc.bigoquiz.client.application.userprofile.UserProfileModule;
 import com.murrayc.bigoquiz.client.application.userstatus.UserStatusModule;
@@ -20,6 +21,7 @@ public class ApplicationModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
         install(new QuizModule());
+        install(new QuizListModule());
         install(new QuestionModule());
         install(new UserProfileModule());
         install(new AboutModule());
