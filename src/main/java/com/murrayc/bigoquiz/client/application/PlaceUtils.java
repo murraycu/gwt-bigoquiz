@@ -41,11 +41,17 @@ public class PlaceUtils {
      * @param nextQuestionSectionId
      * @return
      */
-    public static PlaceRequest getPlaceRequestForSection(final String quizId, final String nextQuestionSectionId) {
-        return new PlaceRequest.Builder()
+    public static PlaceRequest getPlaceRequestForSection(final String quizId, final String nextQuestionSectionId, final boolean multipleChoice) {
+        PlaceRequest.Builder builder = new PlaceRequest.Builder()
                 .nameToken(NameTokens.QUESTION)
                 .with(NameTokens.PARAM_QUIZ_ID, quizId)
-                .with(NameTokens.QUESTION_PARAM_NEXT_QUESTION_SECTION_ID, nextQuestionSectionId)
-                .build();
+                .with(NameTokens.QUESTION_PARAM_NEXT_QUESTION_SECTION_ID, nextQuestionSectionId);
+
+        //This is on by default.
+        if (!multipleChoice) {
+            builder = builder.with(NameTokens.QUESTION_PARAM_MULTIPLE_CHOICE, NameTokens.QUESTION_PARAM_MULTIPLE_CHOICE_VALUE_OFF);
+        }
+
+        return builder.build();
     }
 }
