@@ -94,16 +94,18 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
     public void onQuestionContextChanged(@NotNull final QuestionContextEvent event) {
         final String quizId = event.getQuizId();
         final String nextQuestionSectionId = event.getNextQuestionSectionId();
+        final boolean multipleChoice = event.getMultipleChoice();
         final boolean quizChanged = !StringUtils.equals(this.quizId, quizId);
         final boolean nextSectionChanged = !StringUtils.equals(this.nextQuestionSectionId, nextQuestionSectionId);
+        final boolean multipleChoiceChanged = this.multipleChoice != multipleChoice;
         this.quizId = quizId;
         this.nextQuestionSectionId = nextQuestionSectionId;
-        this.multipleChoice = event.getMultipleChoice();
+        this.multipleChoice = multipleChoice;
 
         if (quizChanged) {
             //Completely refresh the data from the server:
             getAndShowHistory();
-        } else if (nextSectionChanged){
+        } else if (nextSectionChanged || multipleChoiceChanged) {
             //Just refresh the links:
             getView().setQuestionContext(nextQuestionSectionId, multipleChoice);
         }
