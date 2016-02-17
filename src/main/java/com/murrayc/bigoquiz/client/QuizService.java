@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.client;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import org.jetbrains.annotations.NotNull;
@@ -13,6 +14,9 @@ import org.jetbrains.annotations.Nullable;
  */
 @RemoteServiceRelativePath("quiz-service")
 public interface QuizService extends RemoteService {
+
+    @Nullable
+    Quiz getQuiz(final String quizId) throws IllegalArgumentException;
 
     @Nullable Question getQuestion(final String quizId, final String questionId) throws IllegalArgumentException;
 

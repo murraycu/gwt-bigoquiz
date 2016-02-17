@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.server;
 
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
+import com.murrayc.bigoquiz.shared.Quiz;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

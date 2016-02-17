@@ -1,5 +1,6 @@
-package com.murrayc.bigoquiz.server;
+package com.murrayc.bigoquiz.shared;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
@@ -13,22 +14,24 @@ import java.util.*;
 /**
  * Created by murrayc on 1/18/16.
  */
-public class Quiz {
+public class Quiz implements IsSerializable {
     private String id;
     private String title;
 
     //Map of section ID to (map of question IDs to question):
     @NotNull
-    private Map<String, Map<String, QuestionAndAnswer>> questions = new HashMap<>();
+    private /* final */ Map<String, Map<String, QuestionAndAnswer>> questions = new HashMap<>();
 
-    private final QuizSections quizSections = new QuizSections();
+    private /* final */ QuizSections quizSections = new QuizSections();
 
+    //TODO: This is useless on the client:
     //An extra list, used only for getting a random question,
     //regardless of what section it is in.
-    private final List<QuestionAndAnswer> listQuestions = new ArrayList<>();
+    private transient final List<QuestionAndAnswer> listQuestions = new ArrayList<>();
 
+    //TODO: This is useless on the client:
     //This is only for getting a random question from a particular section:
-    private final Map<String, List<QuestionAndAnswer>> listSectionQuestions = new HashMap<>();
+    private transient final Map<String, List<QuestionAndAnswer>> listSectionQuestions = new HashMap<>();
 
     public Quiz() {
     }
@@ -43,6 +46,10 @@ public class Quiz {
 
     public void setTitle(final String title) {
         this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void addQuestion(final String sectionId, @NotNull final QuestionAndAnswer questionAndAnswer) {
@@ -145,7 +152,8 @@ public class Quiz {
         quizSections.addSubSection(sectionId, subSectionId, subSectionTitle, subSectionLink);
     }
 
-    @Nullable QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
+    @Nullable
+    public QuestionAndAnswer getQuestionAndAnswer(final String questionId) {
         //Look in every section:
         for (@NotNull Map<String, QuestionAndAnswer> section : questions.values()) {
             final QuestionAndAnswer questionAndAnswer = section.get(questionId);

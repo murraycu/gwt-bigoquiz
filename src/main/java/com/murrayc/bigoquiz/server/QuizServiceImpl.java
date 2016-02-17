@@ -7,6 +7,7 @@ import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
+import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
@@ -34,14 +35,56 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @Nullable
     private Map<String, Quiz> quizzes;
 
+
+    @NotNull
+    @Override
+    public  Quiz getQuiz(final String quizId) throws IllegalArgumentException {
+        //Return previously-loaded quiz:
+        if (quizzes != null) {
+            final Quiz result = quizzes.get(quizId);
+            if (result == null) {
+                throw new IllegalArgumentException("Unknown quiz ID.");
+            }
+
+            return result;
+        }
+
+        final ServletConfig config = this.getServletConfig();
+        if (config == null) {
+            throw new RuntimeException("getServletConfig() returned null.");
+        }
+
+        final ServletContext context = config.getServletContext();
+        if (context == null) {
+            throw new RuntimeException("getServletContext() returned null.");
+        }
+
+        //Use the existing shared quiz if any:
+        final Object object = context.getAttribute(LOADED_QUIZZES);
+        if ((object != null) && !(object instanceof HashMap)) {
+            throw new RuntimeException("he loaded-quizzes attribute is not of the expected type.");
+        }
+
+        quizzes = (HashMap<String, Quiz>)object;
+        if (quizzes == null) {
+            loadQuizzes(context);
+            if (quizzes == null) {
+                throw new IllegalArgumentException("No quizzes are available.");
+            }
+        }
+
+        final Quiz result = quizzes.get(quizId);
+        if (result == null) {
+            throw new IllegalArgumentException("Unknown quiz ID.");
+        }
+
+        return result;
+    }
+
     @NotNull
     @Override
     public Question getQuestion(@NotNull final String quizId, @NotNull final String questionId) throws IllegalArgumentException {
-        @Nullable final Quiz quiz = getQuiz(quizId);
-        if (quiz == null) {
-            throw new IllegalArgumentException("Unknown quiz ID");
-        }
-
+        @NotNull final Quiz quiz = getQuiz(quizId);
         final Question result = quiz.getQuestion(questionId);
         if (result == null) {
             throw new IllegalArgumentException("Unknown question ID");
@@ -53,10 +96,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @Nullable
     @Override
     public Question getNextQuestion(@NotNull final String quizId, final String sectionId) throws IllegalArgumentException {
-        @Nullable final Quiz quiz = getQuiz(quizId);
-        if (quiz == null) {
-            throw new IllegalArgumentException("Unknown quiz ID");
-        }
+        @NotNull final Quiz quiz = getQuiz(quizId);
 
         @Nullable final String userId = getUserId();
         if (StringUtils.isEmpty(userId)) {
@@ -79,11 +119,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @NotNull
     @Override
     public QuizSections getSections(final String quizId) throws IllegalArgumentException {
-        @Nullable final Quiz quiz = getQuiz(quizId);
-        if (quiz == null) {
-            throw new IllegalArgumentException("Unknown quiz ID");
-        }
-
+        @NotNull final Quiz quiz = getQuiz(quizId);
         return quiz.getSections();
     }
 
@@ -113,22 +149,14 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @Nullable
     private QuestionAndAnswer getQuestionAndAnswer(final String quizId, final String questionId) {
-        @Nullable final Quiz quiz = getQuiz(quizId);
-        if (quiz == null) {
-            throw new IllegalArgumentException("Unknown quiz ID");
-        }
-
+        @NotNull final Quiz quiz = getQuiz(quizId);
         return quiz.getQuestionAndAnswer(questionId);
     }
 
     @Nullable
     @Override
     public UserRecentHistory getUserRecentHistory(final String quizId, final String requestUri) throws IllegalArgumentException {
-        @Nullable final Quiz quiz = getQuiz(quizId);
-        if (quiz == null) {
-            throw new IllegalArgumentException("Unknown quiz ID");
-        }
-
+        @NotNull final Quiz quiz = getQuiz(quizId);
         @NotNull final QuizSections sections = quiz.getSections();
         if (sections == null) {
             return null;
@@ -268,39 +296,6 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return getUserProfileFromDataStore(user);
     }
 
-    private Quiz getQuiz(final String quizId) {
-        //Return previously-loaded quiz:
-        if (quizzes != null) {
-            return quizzes.get(quizId);
-        }
-
-        final ServletConfig config = this.getServletConfig();
-        if (config == null) {
-            Log.error("getServletConfig() return null");
-            return null;
-        }
-
-        final ServletContext context = config.getServletContext();
-        if (context == null) {
-            Log.error("getServletContext() return null");
-            return null;
-        }
-
-        //Use the existing shared quiz if any:
-        final Object object = context.getAttribute(LOADED_QUIZZES);
-        if ((object != null) && !(object instanceof HashMap)) {
-            Log.error("The loaded-quizzes attribute is not of the expected type.");
-            return null;
-        }
-
-        quizzes = (HashMap<String, Quiz>)object;
-        if (quizzes == null) {
-            loadQuizzes(context);
-        }
-
-        return quizzes.get(quizId);
-    }
-
     private void loadQuizzes(@NotNull final ServletContext context) {
         final Map<String, Quiz> quizzes = new HashMap<>();
 
@@ -335,7 +330,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @NotNull
     private SubmissionResult createSubmissionResult(boolean result, final String quizId, @NotNull final String questionId, @Nullable final String nextQuestionSectionId, @Nullable final Map<String, UserStats> mapUserStats) {
-        @Nullable final Quiz quiz = getQuiz(quizId);
+        @NotNull final Quiz quiz = getQuiz(quizId);
 
         //We only provide the correct answer if the supplied answer was wrong:
         @Nullable String correctAnswer = null;
@@ -357,10 +352,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
      */
     @NotNull
     private SubmissionResult createSubmissionResultForSection(boolean result, final String quizId, final String questionId, final String nextQuestionSectionId, final UserStats userStats) {
-        @Nullable final Quiz quiz = getQuiz(quizId);
-        if (quiz == null) {
-            throw new IllegalArgumentException("Unknown quiz ID");
-        }
+        @NotNull final Quiz quiz = getQuiz(quizId);
 
         //We only provide the correct answer if the supplied answer was wrong:
         @Nullable String correctAnswer = null;

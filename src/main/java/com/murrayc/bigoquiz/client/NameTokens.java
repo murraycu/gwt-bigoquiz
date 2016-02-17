@@ -4,6 +4,7 @@ package com.murrayc.bigoquiz.client;
  * Created by murrayc on 1/21/16.
  */
 public class NameTokens {
+    public static final String QUIZ = "/quiz";
     public static final String QUESTION = "/question";
     public static final String QUESTION_PARAM_QUIZ_ID = "quizId";
     public static final String QUESTION_PARAM_NEXT_QUESTION_SECTION_ID = "sectionId";

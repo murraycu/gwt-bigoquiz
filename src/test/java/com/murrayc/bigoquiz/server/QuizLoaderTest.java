@@ -1,5 +1,6 @@
 package com.murrayc.bigoquiz.server;
 
+import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

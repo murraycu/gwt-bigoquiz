@@ -2,8 +2,10 @@ package com.murrayc.bigoquiz.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * The async counterpart of <code>QuizService</code>.
@@ -30,6 +32,9 @@ public interface QuizServiceAsync {
      * Clear all question answer history, progress, scores, etc.
      */
     void resetSections(AsyncCallback<Void> async);
+
+    @Nullable
+    void getQuiz(final String quizId, AsyncCallback<Quiz> async);
 
 
     /**
