@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter.MyProxy> {
     private final PlaceManager placeManager;
-    private String quizId;;
+    private String quizId;
 
     interface MyView extends View {
         void setQuiz(final Quiz quiz);

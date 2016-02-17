@@ -13,7 +13,7 @@ public class QuestionContextEvent extends GwtEvent<QuestionContextEvent.EventHan
 
     public QuestionContextEvent(@NotNull final String quizId, final String nextQuestionSectionId) {
         this.quizId = quizId;
-        this.nextQuestionSectionId = nextQuestionSectionId;;
+        this.nextQuestionSectionId = nextQuestionSectionId;
     }
 
     public String getQuizId() {
