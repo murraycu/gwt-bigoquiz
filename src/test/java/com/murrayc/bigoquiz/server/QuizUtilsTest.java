@@ -36,6 +36,16 @@ public class QuizUtilsTest {
         testBothWays("O(log(n))", "O( LOG(n))");
     }
 
+    @Test
+    public void testAnswerIsCorrectPowerOf2() {
+        testBothWays("O(n²)", "O(n^2)");
+    }
+
+    @Test
+    public void testAnswerIsCorrectPowerOf3() {
+        testBothWays("O(n³)", "O(n^3)");
+    }
+
     public void testBothWays(final String a, final String b) {
         assert(QuizUtils.answerIsCorrect(a, b));
         assert(QuizUtils.answerIsCorrect(b, a));
