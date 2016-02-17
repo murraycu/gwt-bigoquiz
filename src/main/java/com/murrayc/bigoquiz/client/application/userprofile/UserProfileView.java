@@ -4,40 +4,29 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
-import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
+import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
 import com.murrayc.bigoquiz.client.application.Utils;
-import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by murrayc on 1/21/16.
  */
-public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHandlers>
+public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEditUiHandlers>
         implements UserProfilePresenter.MyView {
-    // BigOQuizConstants.java is generated in the target/ directory,
-    // from BigOQuizConstants.properties
-    // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
-    private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
     private final Label usernameLabel = new InlineLabel();
     private final Anchor logoutLabel = new Anchor(constants.logOut());
-    private final Label labelError = Utils.createServerErrorLabel(constants);
     private final Button buttonResetSections = new Button(constants.buttonResetSections());
 
     private Panel loginParagraph = null;
     private final InlineHTML loginLabel = new InlineHTML();
 
     UserProfileView() {
-        @NotNull final FlowPanel mainPanel = new FlowPanel();
-        mainPanel.addStyleName("content-panel");
-
-        Utils.addHeaderToPanel(2, mainPanel, constants.profileTitle());
-
-        mainPanel.add(labelError);
+        setTitle(constants.profileTitle());
 
         //This is only visible when necessary:
         loginParagraph = Utils.addParagraphWithChild(mainPanel, loginLabel);
@@ -68,13 +57,11 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
         @NotNull final SimplePanel userHistoryRecentPanel = new SimplePanel();
         bindSlot(UserProfilePresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
         userHistoryParent.add(userHistoryRecentPanel);
-
-        initWidget(mainPanel);
     }
 
     @Override
     public void setUserStatusFailed() {
-        labelError.setVisible(true);
+        setErrorLabelVisible(true);
     }
 
     @Override
@@ -87,8 +74,11 @@ public class UserProfileView extends ViewWithUiHandlers<UserProfileUserEditUiHan
 
         if (loginInfo == null) {
             Log.error("setLoginInfo(): loginInfo is null.");
+            setErrorLabelVisible(true);
             return;
         }
+
+        setErrorLabelVisible(false);
 
         if (loginInfo.isLoggedIn()) {
             usernameLabel.setVisible(true);

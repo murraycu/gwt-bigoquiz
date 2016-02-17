@@ -7,12 +7,11 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
-import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.QuizService;
+import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
 import com.murrayc.bigoquiz.client.application.Utils;
-import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
@@ -22,12 +21,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by murrayc on 1/21/16.
  */
-public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
+public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHandlers>
         implements QuestionPresenter.MyView {
     // BigOQuizConstants.java is generated in the target/ directory,
     // from BigOQuizConstants.properties
     // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
-    private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
     //Map of section IDs to section titles.
@@ -36,7 +34,6 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private String nextQuestionSectionId;
     private String choiceSelected;
 
-    private final Label labelError = Utils.createServerErrorLabel(constants);
     private final ListBox nextQuestionSectionListBox = new ListBox();
     private final Label sectionTitle = new InlineLabel();
     private final Anchor subSectionTitle = new Anchor();
@@ -52,10 +49,6 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private TextBox textBox;
 
     QuestionView() {
-        @NotNull final FlowPanel mainPanel = new FlowPanel();
-        mainPanel.addStyleName("content-panel");
-
-        mainPanel.add(labelError);
 
         @NotNull final Panel showingFromPanel = new FlowPanel(ParagraphElement.TAG);
         showingFromPanel.addStyleName("show-from-panel");
@@ -111,8 +104,6 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             }
         });
         mainPanel.add(resultPanel);
-
-        initWidget(mainPanel);
     }
 
     @Nullable
@@ -193,7 +184,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             return;
         }
 
-        labelError.setVisible(false);
+        setErrorLabelVisible(false);
 
         Window.setTitle(messages.windowTitle(question.getText()));
         questionLabel.setText(question.getText());
@@ -304,7 +295,7 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
     @Override
     public void setServerFailed() {
-        labelError.setVisible(true);
+        setErrorLabelVisible(true);
     }
 
     private void submitAnswer(final String answer) {

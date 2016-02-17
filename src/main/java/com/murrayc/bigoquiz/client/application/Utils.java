@@ -43,7 +43,7 @@ public class Utils {
     }
 
     @NotNull
-    public static Panel addParagraphWithChild(@NotNull final FlowPanel mainPanel, final Widget childWidget) {
+    public static Panel addParagraphWithChild(@NotNull final Panel mainPanel, final Widget childWidget) {
         @NotNull final Panel p = addParagraph(mainPanel);
         p.add(childWidget);
         return p;

@@ -2,11 +2,10 @@ package com.murrayc.bigoquiz.client.application.quiz;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.*;
-import com.gwtplatform.mvp.client.ViewImpl;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.client.Log;
+import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
 import com.murrayc.bigoquiz.client.application.Utils;
-import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.shared.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,31 +17,23 @@ import java.util.Map;
 /**
  * Created by murrayc on 1/21/16.
  */
-public class QuizView extends ViewImpl
+public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         implements QuizPresenter.MyView {
-    // BigOQuizConstants.java is generated in the target/ directory,
-    // from BigOQuizConstants.properties
-    // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
-    private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
-    private final Label labelError = Utils.createServerErrorLabel(constants);
     private final Panel panelQuiz = new FlowPanel();
 
     QuizView() {
-        @NotNull final FlowPanel mainPanel = new FlowPanel();
-        mainPanel.addStyleName("content-panel");
-
-        mainPanel.add(labelError);
+        setTitle(constants.quizTitle());
 
         mainPanel.add(panelQuiz);
         panelQuiz.addStyleName("quiz-panel");
-
-        initWidget(mainPanel);
     }
 
     @Override
     public void setQuiz(@NotNull final Quiz quiz) {
+        setErrorLabelVisible(false);
+
         panelQuiz.clear();
 
         Utils.addHeaderToPanel(2, panelQuiz, quiz.getTitle());
@@ -165,6 +156,6 @@ public class QuizView extends ViewImpl
 
     @Override
     public void setServerFailed() {
-        labelError.setVisible(true);
+        setErrorLabelVisible(true);
     }
 }
