@@ -33,6 +33,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         implements QuestionUserEditUiHandlers {
     private final PlaceManager placeManager;
     private String quizId;
+    private boolean multipleChoice = true;
     private QuizSections sections;
     private boolean waitingForSections = false;
     private boolean showQuestionPending = false;
@@ -40,7 +41,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     interface MyView extends View, HasUiHandlers<QuestionUserEditUiHandlers> {
         void setSections(final QuizSections sections);
 
-        void setQuestion(final Question question);
+        void setQuestion(final Question question, boolean multipleChoice);
 
         void setNextQuestionSectionId(final String sectionId);
 
@@ -118,6 +119,11 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         nextQuestionSectionId = request.getParameter(NameTokens.QUESTION_PARAM_NEXT_QUESTION_SECTION_ID, null);
 
         getView().setNextQuestionSectionId(nextQuestionSectionId);
+
+        final String multipleChoiceStr = request.getParameter(NameTokens.QUESTION_PARAM_MULTIPLE_CHOICE,
+                NameTokens.QUESTION_PARAM_MULTIPLE_CHOICE_VALUE_ON);
+        multipleChoice = StringUtils.equals(multipleChoiceStr,
+                NameTokens.QUESTION_PARAM_MULTIPLE_CHOICE_VALUE_ON);
 
         //Question ID:
         final String questionId = request.getParameter(NameTokens.QUESTION_PARAM_QUESTION_ID, null);
@@ -232,7 +238,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     }
 
     private void tellUserHistoryPresenterAboutQuestionContext() {
-        QuestionContextEvent.fire(this, getQuizId(), nextQuestionSectionId);
+        QuestionContextEvent.fire(this, getQuizId(), nextQuestionSectionId, multipleChoice);
     }
 
     @Override
@@ -315,7 +321,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
      * @param question
      */
     private void revealQuestion(@NotNull final Question question) {
-        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(quizId, question.getId(), nextQuestionSectionId);
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(quizId, question.getId(),
+                nextQuestionSectionId, multipleChoice);
         placeManager.revealPlace(placeRequest);
     }
 
@@ -332,7 +339,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     private void revealSection(final String nextQuestionSectionId, final String nextQuestionId) {
         this.nextQuestionSectionId = nextQuestionSectionId;
 
-        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(getQuizId(), nextQuestionId, nextQuestionSectionId);
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(getQuizId(), nextQuestionId, nextQuestionSectionId, multipleChoice);
         placeManager.revealPlace(placeRequest);
     }
 
@@ -347,7 +354,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             return;
         }
 
-        getView().setQuestion(question);
+        getView().setQuestion(question, multipleChoice);
     }
 
     @Override

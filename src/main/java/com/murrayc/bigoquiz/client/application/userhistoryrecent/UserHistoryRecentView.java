@@ -51,6 +51,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
     String nextQuestionSectionId;
+    boolean multipleChoice = true;
 
     final FlowPanel detailsPanel = new FlowPanel();
 
@@ -100,10 +101,11 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     }
 
     @Override
-    public void setUserRecentHistory(final String quizId, final UserRecentHistory userRecentHistory, final String nextQuestionSectionId) {
+    public void setUserRecentHistory(final String quizId, final UserRecentHistory userRecentHistory, final String nextQuestionSectionId, boolean multipleChoice) {
         this.quizId = quizId;
         this.nextQuestionSectionId = nextQuestionSectionId;
         this.userRecentHistory = userRecentHistory;
+        this.multipleChoice = multipleChoice;
 
         buildUi();
     }
@@ -220,7 +222,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                     labelScore.addStyleName("problem-answer-score");
                     paraScore.add(labelScore);
 
-                    @NotNull final Hyperlink link = createProblemQuestionHyperlink(problemQuestion, nextQuestionSectionId);
+                    @NotNull final Hyperlink link = createProblemQuestionHyperlink(problemQuestion, nextQuestionSectionId, multipleChoice);
                     paraScore.add(link);
 
                     count += 1;
@@ -276,14 +278,15 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     }
 
     @Override
-    public void setQuestionNextSectionId(final String nextQuestionSectionId) {
+    public void setQuestionContext(final String nextQuestionSectionId, boolean multipleChoice) {
         this.nextQuestionSectionId = nextQuestionSectionId;
+        this.multipleChoice = multipleChoice;
         buildUi();
     }
 
     @NotNull
-    private Hyperlink createProblemQuestionHyperlink(@NotNull final UserQuestionHistory problemQuestion, final String nextQuestionSectionId) {
-        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(getQuizId(), problemQuestion.getQuestionId(), nextQuestionSectionId);
+    private Hyperlink createProblemQuestionHyperlink(@NotNull final UserQuestionHistory problemQuestion, final String nextQuestionSectionId, final boolean multipleChoice) {
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(getQuizId(), problemQuestion.getQuestionId(), nextQuestionSectionId, multipleChoice);
         final String url = placeManager.buildHistoryToken(placeRequest);
         @NotNull final Hyperlink result = new InlineHyperlink(problemQuestion.getSubSectionTitle() + ": " + problemQuestion.getQuestionTitle(), url);
         result.addStyleName("problem-answer-hyperlink");

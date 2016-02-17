@@ -71,7 +71,7 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
     }
 
     private void tellUserHistoryPresenterAboutQuestionContext() {
-        QuestionContextEvent.fire(this, getQuizId(), null);
+        QuestionContextEvent.fire(this, getQuizId(), null, true);
     }
 
     private String getQuizId() {

@@ -2,10 +2,7 @@ package com.murrayc.bigoquiz.client.application.question;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.ParagraphElement;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.Window;
@@ -51,6 +48,8 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     private final Label resultLabel = new Label();
     @NotNull
     private State state = State.WAITING_INVALID;
+    private boolean multipleChoice = false;
+    private TextBox textBox;
 
     QuestionView() {
         @NotNull final FlowPanel mainPanel = new FlowPanel();
@@ -182,7 +181,9 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
     }
 
     @Override
-    public void setQuestion(@Nullable final Question question) {
+    public void setQuestion(@Nullable final Question question, boolean multipleChoice) {
+        this.multipleChoice = multipleChoice;
+
         choicesPanel.clear();
 
         if (question == null) {
@@ -223,10 +224,36 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
             subSectionTitle.setHref("");
         }
 
+        if (multipleChoice) {
+            buildChoices(question);
+        } else {
+            if (textBox == null) {
+                textBox = new TextBox();
+                textBox.addKeyDownHandler(new KeyDownHandler() {
+
+                    public void onKeyDown(final KeyDownEvent event) {
+                        if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+                            submitAnswer(textBox.getText());
+                        }
+                    }
+                });
+            }
+
+            textBox.setText("");
+            textBox.removeStyleName("question-radio-button-wrong");
+            choicesPanel.add(textBox);
+        }
+
+        updateResultPanelUi(State.WAITING_FOR_ANSWER);
+        resultLabel.setText("");
+    }
+
+    private void buildChoices(@Nullable Question question) {
         if (question.hasChoices()) {
             @NotNull final String GROUP_NAME = "choices";
             for (final String choice : question.getChoices()) {
                 @NotNull final RadioButton radioButton = new RadioButton(GROUP_NAME, choice);
+                //TODO: Disable the handlers when rebuilding the widgets?
                 radioButton.addStyleName("question-radio-button");
                 radioButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
                     @Override
@@ -242,9 +269,6 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
         } else {
             Utils.addParagraphWithText(choicesPanel, constants.errorNoChoices(), "error-label-no-choices");
         }
-
-        updateResultPanelUi(State.WAITING_FOR_ANSWER);
-        resultLabel.setText("");
     }
 
     @Override
@@ -264,7 +288,11 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
 
     @Override
     public void showAnswer(final String correctAnswer) {
-        showCorrectAnswerInChoices(correctAnswer);
+        if (multipleChoice) {
+            showCorrectAnswerInChoices(correctAnswer);
+        } else {
+            showCorrectAnswerWithoutChoices(correctAnswer);
+        }
 
         updateResultPanelUi(State.DONT_KNOW_ANSWER);
     }
@@ -341,6 +369,10 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
                 radioButton.setEnabled(enabled);
             }
         }
+
+        if (textBox != null) {
+            textBox.setEnabled(enabled);
+        }
     }
 
     private void showCorrectAnswerInChoices(final String correctAnswer) {
@@ -353,6 +385,16 @@ public class QuestionView extends ViewWithUiHandlers<QuestionUserEditUiHandlers>
                 }
             }
         }
+    }
+
+    private void showCorrectAnswerWithoutChoices(final String correctAnswer) {
+        if (textBox == null) {
+            Log.error("showCorrectAnswerWithoutChoices(): textBox is null.");
+            return;
+        }
+
+        textBox.setText(correctAnswer);
+        textBox.addStyleName("question-radio-button-correct");
     }
 
     private void showWrongAnswerInChoices(final String wrongAnswer) {

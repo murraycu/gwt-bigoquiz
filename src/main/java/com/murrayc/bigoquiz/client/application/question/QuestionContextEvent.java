@@ -10,10 +10,12 @@ import org.jetbrains.annotations.NotNull;
 public class QuestionContextEvent extends GwtEvent<QuestionContextEvent.EventHandler> {
     private final String quizId;
     private final String nextQuestionSectionId;
+    private final boolean multipleChoice;
 
-    public QuestionContextEvent(@NotNull final String quizId, final String nextQuestionSectionId) {
+    public QuestionContextEvent(@NotNull final String quizId, final String nextQuestionSectionId, boolean multipleChoice) {
         this.quizId = quizId;
         this.nextQuestionSectionId = nextQuestionSectionId;
+        this.multipleChoice = multipleChoice;
     }
 
     public String getQuizId() {
@@ -24,15 +26,21 @@ public class QuestionContextEvent extends GwtEvent<QuestionContextEvent.EventHan
         return nextQuestionSectionId;
     }
 
+    public boolean getMultipleChoice() {
+        return multipleChoice;
+    }
+
     public interface EventHandler extends com.google.gwt.event.shared.EventHandler {
         void onQuestionContextChanged(QuestionContextEvent event);
     }
 
     public static final Type<EventHandler> TYPE = new Type<>();
 
-    public static void fire(@NotNull final HasHandlers source, @NotNull final String quizId, final String nextQuestionSectionId) {
+    public static void fire(@NotNull final HasHandlers source, @NotNull final String quizId,
+                            final String nextQuestionSectionId,
+                            final boolean multipleChoice) {
         if (TYPE != null) {
-            source.fireEvent(new QuestionContextEvent(quizId, nextQuestionSectionId));
+            source.fireEvent(new QuestionContextEvent(quizId, nextQuestionSectionId, multipleChoice));
         }
     }
 

@@ -33,13 +33,14 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
 
     public static final String DEFAULT_QUIZ_ID = "bigoquiz";
     private String nextQuestionSectionId;
+    private boolean multipleChoice = true;
     private boolean userIsLoggedIn = false;
     private String quizId;
 
     public interface MyView extends View, HasUiHandlers<UserHistoryRecentUserEditUiHandlers> {
         /** Set a whole set of history.
          */
-        void setUserRecentHistory(final String quizId, final UserRecentHistory result, final String nextQuestionSectionId);
+        void setUserRecentHistory(final String quizId, final UserRecentHistory result, final String nextQuestionSectionId, boolean multipleChoice);
 
         /** Add a single item of history.
          * For instance, to avoid retrieving the whole history from the server,
@@ -49,7 +50,13 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
 
         void setServerFailed();
 
-        void setQuestionNextSectionId(final String nextQuestionSectionId);
+        /**
+         * Set details about the history presentation/links that are affected by the current question's UI.
+         *
+         * @param nextQuestionSectionId
+         * @param multipleChoice
+         */
+        void setQuestionContext(final String nextQuestionSectionId, boolean multipleChoice);
     }
 
     @Inject
@@ -91,13 +98,14 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         final boolean nextSectionChanged = !StringUtils.equals(this.nextQuestionSectionId, nextQuestionSectionId);
         this.quizId = quizId;
         this.nextQuestionSectionId = nextQuestionSectionId;
+        this.multipleChoice = event.getMultipleChoice();
 
         if (quizChanged) {
             //Completely refresh the data from the server:
             getAndShowHistory();
         } else if (nextSectionChanged){
             //Just refresh the links:
-            getView().setQuestionNextSectionId(nextQuestionSectionId);
+            getView().setQuestionContext(nextQuestionSectionId, multipleChoice);
         }
     }
 
@@ -152,7 +160,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
                 }
 
                 userIsLoggedIn = loginInfo.isLoggedIn();
-                getView().setUserRecentHistory(getQuizId(), result, nextQuestionSectionId);
+                getView().setUserRecentHistory(getQuizId(), result, nextQuestionSectionId, multipleChoice);
             }
 
             private void onFailureGeneric() {

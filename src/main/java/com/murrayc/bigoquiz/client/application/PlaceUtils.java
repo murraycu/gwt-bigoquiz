@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
  * Created by murrayc on 1/24/16.
  */
 public class PlaceUtils {
-    public static PlaceRequest getPlaceRequestForQuestion(final String quizId, final String questionId, final String sectionId) {
+    public static PlaceRequest getPlaceRequestForQuestion(final String quizId, final String questionId, final String sectionId, boolean multipleChoice) {
 
         @NotNull PlaceRequest.Builder builder = new PlaceRequest.Builder()
                 .nameToken(NameTokens.QUESTION);
@@ -24,6 +24,11 @@ public class PlaceUtils {
 
         if (!StringUtils.isEmpty(sectionId)) {
             builder = builder.with(NameTokens.QUESTION_PARAM_NEXT_QUESTION_SECTION_ID, sectionId);
+        }
+
+        //This is on by default.
+        if (!multipleChoice) {
+            builder = builder.with(NameTokens.QUESTION_PARAM_MULTIPLE_CHOICE, NameTokens.QUESTION_PARAM_MULTIPLE_CHOICE_VALUE_OFF);
         }
 
         return builder.build();
