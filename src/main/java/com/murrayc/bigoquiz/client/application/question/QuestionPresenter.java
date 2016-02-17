@@ -105,7 +105,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         super.prepareFromRequest(request);
 
         //Quiz ID:
-        this.quizId = request.getParameter(NameTokens.QUESTION_PARAM_QUIZ_ID, null);
+        this.quizId = request.getParameter(NameTokens.PARAM_QUIZ_ID, null);
         if (StringUtils.isEmpty(quizId)) {
             //Default to bigoquiz.
             this.quizId = "bigoquiz";

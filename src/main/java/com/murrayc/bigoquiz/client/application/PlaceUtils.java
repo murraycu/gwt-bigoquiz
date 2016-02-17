@@ -15,7 +15,7 @@ public class PlaceUtils {
                 .nameToken(NameTokens.QUESTION);
 
         if (!StringUtils.isEmpty(questionId)) {
-            builder = builder.with(NameTokens.QUESTION_PARAM_QUIZ_ID, quizId);
+            builder = builder.with(NameTokens.PARAM_QUIZ_ID, quizId);
         }
 
         if (!StringUtils.isEmpty(questionId)) {
@@ -39,7 +39,7 @@ public class PlaceUtils {
     public static PlaceRequest getPlaceRequestForSection(final String quizId, final String nextQuestionSectionId) {
         return new PlaceRequest.Builder()
                 .nameToken(NameTokens.QUESTION)
-                .with(NameTokens.QUESTION_PARAM_QUIZ_ID, quizId)
+                .with(NameTokens.PARAM_QUIZ_ID, quizId)
                 .with(NameTokens.QUESTION_PARAM_NEXT_QUESTION_SECTION_ID, nextQuestionSectionId)
                 .build();
     }
