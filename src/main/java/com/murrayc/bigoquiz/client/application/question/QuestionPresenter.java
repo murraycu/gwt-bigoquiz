@@ -129,11 +129,15 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         final String questionId = request.getParameter(NameTokens.QUESTION_PARAM_QUESTION_ID, null);
         //Log.error("prepareFromRequest(): questionId=" + questionId);
         if (!StringUtils.isEmpty(questionId)) {
+
+            /* Don't check for this,
+             * because this prepareFromRequest() is presumably an actual new request/refresh.
             if (StringUtils.equals(questionId, getQuestionId())) {
                 //We are already showing the correct question.
                 //Log.error("prepareFromRequest(): already showing.");
                 return;
             }
+            */
 
             //If we have already cached this one, just show it:
             if (nextQuestion != null && StringUtils.equals(nextQuestion.getId(), questionId)) {
