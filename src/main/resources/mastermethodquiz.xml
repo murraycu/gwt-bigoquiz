@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quiz xmlns="http://bigoquiz.com/document" format_version="1" id="mastermethodquiz">
-    <title>Master Theorem Quiz</title>
+    <title>Simplified Master Theorem Quiz</title>
     <section id="using">
-        <title>Using the Master Theorem</title>
+        <title>Using the Simplified Master Theorem</title>
         <default_choices>
             <choice>O(nᵈ log(n))</choice>
             <choice>O(nᵈ)</choice>
@@ -22,6 +22,31 @@
             <question id="parts-greater-than">
                 <text>a &gt; bᵈ</text>
                 <answer>O(n ^ logb(a))</answer>
+            </question>
+        </subsection>
+    </section>
+
+    <section id="parts">
+        <title>The Simplified Master Theorem's Parts</title>
+        <default_choices>
+            <choice>Number of recursive calls</choice>
+            <choice>Input size shrinkage factor</choice>
+            <choice>Exponent in running time of combine step</choice>
+        </default_choices>
+        <subsection id="parts-parts">
+            <title>T(n) &lt;= a T(n / b) + O(nᵈ)</title>
+            <link>https://en.wikipedia.org/wiki/Master_theorem</link>
+            <question id="parts-a">
+                <text>a</text>
+                <answer>Number of recursive calls</answer>
+            </question>
+            <question id="parts-b">
+                <text>b</text>
+                <answer>Input size shrinkage factor</answer>
+            </question>
+            <question id="parts-d">
+                <text>d</text>
+                <answer>Exponent in running time of combine step</answer>
             </question>
         </subsection>
     </section>
