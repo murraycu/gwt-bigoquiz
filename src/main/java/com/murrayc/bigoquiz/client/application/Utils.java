@@ -7,6 +7,7 @@ import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.*;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
+import com.murrayc.bigoquiz.shared.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -30,23 +31,25 @@ public class Utils {
 
     @NotNull
     public static Panel addParagraphWithText(@NotNull final Panel parentPanel, final String text, final String styleName) {
-        @NotNull final Panel para = addParagraph(parentPanel);
+        @NotNull final Panel para = addParagraph(parentPanel, styleName);
         @NotNull final Label label = new InlineLabel(text);
         para.add(label);
-        para.addStyleName(styleName);
         return para;
     }
 
     @NotNull
-    public static Panel addParagraph(@NotNull final Panel mainPanel) {
+    public static Panel addParagraph(@NotNull final Panel mainPanel, final String styleName) {
         @NotNull final Panel p = new FlowPanel(ParagraphElement.TAG);
+        if (!StringUtils.isEmpty(styleName)) {
+            p.addStyleName(styleName);
+        }
         mainPanel.add(p);
         return p;
     }
 
     @NotNull
     public static Panel addParagraphWithChild(@NotNull final Panel mainPanel, final Widget childWidget) {
-        @NotNull final Panel p = addParagraph(mainPanel);
+        @NotNull final Panel p = addParagraph(mainPanel, null);
         p.add(childWidget);
         return p;
     }

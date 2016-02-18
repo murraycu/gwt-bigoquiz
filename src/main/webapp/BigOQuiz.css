@@ -565,6 +565,7 @@ h4 * {
 }
 
 .problem-answer-score {
+    margin-top: 0;
     margin-right: 0.5em;
     background: #B8DBD9;
     color: #2F4550;

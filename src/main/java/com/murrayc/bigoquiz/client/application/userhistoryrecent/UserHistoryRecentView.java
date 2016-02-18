@@ -212,7 +212,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                         continue;
                     }
 
-                    @NotNull final Panel paraScore = Utils.addParagraph(problemQuestionsPanel);
+                    @NotNull final Panel paraScore = addParaScore(problemQuestionsPanel);
 
                     @NotNull final String strScore = "-" + problemQuestion.getCountAnsweredWrong();
                     @NotNull final Label labelScore = new InlineLabel(strScore);
@@ -232,12 +232,23 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             }
 
             if (count == 0) {
-                Utils.addParagraphWithText(problemQuestionsPanel, constants.problemQuestionsNoneYet(),
+                //We put it in a parent paragraph, like the real problem questions,
+                //so it can take up the full width.
+                @NotNull final Panel paraScore = addParaScore(problemQuestionsPanel);
+                Utils.addParagraphWithText(paraScore, constants.problemQuestionsNoneYet(),
                         "problem-answer-score");
             }
 
 
         }
+    }
+
+    @NotNull
+    private static Panel addParaScore(Panel problemQuestionsPanel) {
+        @NotNull final Panel paraScore = Utils.addParagraph(problemQuestionsPanel,
+                "problem-answer");
+        paraScore.addStyleName("clearfix");
+        return paraScore;
     }
 
     private void addStackedProgressBar(@NotNull final FlowPanel parentPanel, int correctOnce, int answeredOnce, int count) {
