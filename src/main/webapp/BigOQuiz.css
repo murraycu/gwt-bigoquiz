@@ -199,6 +199,10 @@ body {
     padding: 0;
 }
 
+.recommended-reading li {
+    margin-bottom: 0.5em;
+}
+
 .gwt-Label {
     margin-bottom: 1em;
 }
