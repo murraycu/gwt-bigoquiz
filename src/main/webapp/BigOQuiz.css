@@ -41,7 +41,7 @@
 
 
 @media screen and (max-height: 600px) {
-    /* TODO: Find some way to do this by justing changing one variable instead.. */
+    /* TODO: Find some way to do this by just changing one variable instead.. */
 
     .menu-panel {
         margin-top: 0.3rem; /* between the banner ad and the menu-panel */
@@ -98,7 +98,12 @@
         margin-bottom: 1rem;
     }
 
-    .sidebar-panel {
+    .sidebar-panel-sections {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .sidebar-panel-links {
         margin-top: 1rem;
         margin-bottom: 1rem;
     }
