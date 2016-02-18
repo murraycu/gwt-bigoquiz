@@ -52,8 +52,8 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
             }
 
             @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuiz(details.getId());
-            final String url = placeManager.buildHistoryToken(placeRequest);
-            @NotNull final Hyperlink link = new Hyperlink(details.getTitle(), url);
+            final String historyToken = placeManager.buildHistoryToken(placeRequest);
+            @NotNull final Hyperlink link = new Hyperlink(details.getTitle(), historyToken);
             panelList.add(link);
         }
     }

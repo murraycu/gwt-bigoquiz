@@ -53,8 +53,8 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         Window.setTitle(messages.windowTitleQuiz(quiz.getTitle()));
 
         @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuizQuestion(quiz.getId());
-        final String url = placeManager.buildHistoryToken(placeRequest);
-        @NotNull final Hyperlink link = new Hyperlink(quiz.getTitle(), url);
+        final String historyToken = placeManager.buildHistoryToken(placeRequest);
+        @NotNull final Hyperlink link = new Hyperlink(quiz.getTitle(), historyToken);
         Utils.addHeaderToPanel(2, panelQuiz, link);
 
         final QuizSections quizSections = quiz.getSections();

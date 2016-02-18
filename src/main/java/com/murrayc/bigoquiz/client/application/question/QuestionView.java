@@ -212,8 +212,8 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         hyperlinkMultipleChoice.setText(onOff);
         @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(quizId,
                 question.getId(), nextQuestionSectionId, !multipleChoice);
-        final String url = placeManager.buildHistoryToken(placeRequest);
-        hyperlinkMultipleChoice.setTargetHistoryToken(url);
+        final String historyToken = placeManager.buildHistoryToken(placeRequest);
+        hyperlinkMultipleChoice.setTargetHistoryToken(historyToken);
 
         if (sections == null) {
             Log.error("setQuestion(): sections is null.");

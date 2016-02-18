@@ -166,8 +166,8 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             }
 
             @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(quizId, sectionId, multipleChoice);
-            final String url = placeManager.buildHistoryToken(placeRequest);
-            @NotNull final Hyperlink titleLabel = new InlineHyperlink(section.title, url);
+            final String historyToken = placeManager.buildHistoryToken(placeRequest);
+            @NotNull final Hyperlink titleLabel = new InlineHyperlink(section.title, historyToken);
             //titleLabel.addStyleName("user-history-section-title-label");
 
             Utils.addHeaderToPanel(3, detailsPanel, titleLabel);
@@ -300,8 +300,9 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     @NotNull
     private Hyperlink createProblemQuestionHyperlink(@NotNull final UserQuestionHistory problemQuestion, final String nextQuestionSectionId, final boolean multipleChoice) {
         @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(getQuizId(), problemQuestion.getQuestionId(), nextQuestionSectionId, multipleChoice);
-        final String url = placeManager.buildHistoryToken(placeRequest);
-        @NotNull final Hyperlink result = new InlineHyperlink(problemQuestion.getSubSectionTitle() + ": " + problemQuestion.getQuestionTitle(), url);
+        final String historyToken = placeManager.buildHistoryToken(placeRequest);
+        final String title = problemQuestion.getSubSectionTitle() + ": " + problemQuestion.getQuestionTitle();
+        @NotNull final Hyperlink result = new InlineHyperlink(title, historyToken);
         result.addStyleName("problem-answer-hyperlink");
         return result;
     }
