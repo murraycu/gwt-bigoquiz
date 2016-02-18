@@ -7,10 +7,14 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
+import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.Question;
@@ -27,6 +31,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     // from BigOQuizConstants.properties
     // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
+    private final PlaceManager placeManager;
 
     //Map of section IDs to section titles.
     @Nullable
@@ -35,6 +40,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private String choiceSelected;
 
     private final ListBox nextQuestionSectionListBox = new ListBox();
+    private @NotNull final Hyperlink hyperlinkMultipleChoice = new InlineHyperlink();
     private final Label sectionTitle = new InlineLabel();
     private final Anchor subSectionTitle = new Anchor();
     private final Label questionLabel = new InlineLabel();
@@ -48,7 +54,9 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private boolean multipleChoice = false;
     private TextBox textBox;
 
-    QuestionView() {
+    @Inject
+    QuestionView(final PlaceManager placeManager) {
+        this.placeManager = placeManager;
 
         @NotNull final Panel showingFromPanel = new FlowPanel(ParagraphElement.TAG);
         showingFromPanel.addStyleName("show-from-panel");
@@ -66,6 +74,16 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             }
         });
         mainPanel.add(showingFromPanel);
+
+        @NotNull final Panel multipleChoicePanel = new FlowPanel(ParagraphElement.TAG);
+        showingFromPanel.addStyleName("show-as-multiple-choice-panel");
+        //TODO: Avoid the " " concatenation:
+        @NotNull final Label labelTitle = new InlineLabel(constants.offerMultipleChoice() + " ");
+        labelTitle.addStyleName("offer-multiple-choice-title-label");
+        multipleChoicePanel.add(labelTitle);
+        hyperlinkMultipleChoice.addStyleName("offer-multiple-choice-label");
+        multipleChoicePanel.add(hyperlinkMultipleChoice);
+        mainPanel.add(multipleChoicePanel);
 
         Utils.addHeaderToPanel(2, mainPanel, constants.questionLabel());
 
@@ -172,7 +190,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     }
 
     @Override
-    public void setQuestion(@Nullable final Question question, boolean multipleChoice) {
+    public void setQuestion(final String quizId, @Nullable final Question question, boolean multipleChoice) {
         this.multipleChoice = multipleChoice;
 
         choicesPanel.clear();
@@ -188,6 +206,14 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         Window.setTitle(messages.windowTitleQuestion(question.getText()));
         questionLabel.setText(question.getText());
+
+        final String onOff = multipleChoice ? constants.offerMultipleChoiceOn() :
+                constants.offerMultipleChoiceOff();
+        hyperlinkMultipleChoice.setText(onOff);
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(quizId,
+                question.getId(), nextQuestionSectionId, !multipleChoice);
+        final String url = placeManager.buildHistoryToken(placeRequest);
+        hyperlinkMultipleChoice.setTargetHistoryToken(url);
 
         if (sections == null) {
             Log.error("setQuestion(): sections is null.");

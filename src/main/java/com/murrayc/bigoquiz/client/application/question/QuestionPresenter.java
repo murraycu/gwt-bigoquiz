@@ -41,7 +41,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     interface MyView extends ContentView, HasUiHandlers<QuestionUserEditUiHandlers> {
         void setSections(final QuizSections sections);
 
-        void setQuestion(final Question question, boolean multipleChoice);
+        void setQuestion(String quizId, final Question question, boolean multipleChoice);
 
         void setNextQuestionSectionId(final String sectionId);
 
@@ -365,7 +365,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             return;
         }
 
-        getView().setQuestion(question, multipleChoice);
+        getView().setQuestion(getQuizId(), question, multipleChoice);
     }
 
     @Override
