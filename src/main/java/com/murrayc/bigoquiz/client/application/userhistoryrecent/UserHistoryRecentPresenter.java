@@ -122,7 +122,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
     @Override
     public void onDefaultUserHistoryRequested(final DefaultUserHistoryRequestEvent event) {
         //Show _something_ rather than nothing.
-        //TODO: This won't make sense when we really have multiple quizes.
+        //TODO: This won't make sense when we really have multiple quizzes.
         //Then we probably won't want to even show this sidebar on the general pages such as About.
         if (StringUtils.isEmpty(quizId)) {
             quizId = DEFAULT_QUIZ_ID;

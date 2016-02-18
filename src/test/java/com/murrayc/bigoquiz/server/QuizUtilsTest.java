@@ -32,7 +32,7 @@ public class QuizUtilsTest {
     }
 
     @Test
-    public void testAnswerIsCorrectCaseInsenstive() {
+    public void testAnswerIsCorrectCaseInsensitive() {
         testBothWays("O(log(n))", "O( LOG(n))");
     }
 

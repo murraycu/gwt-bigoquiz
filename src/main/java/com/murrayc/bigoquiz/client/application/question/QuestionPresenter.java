@@ -481,7 +481,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
                 } catch (final IllegalArgumentException ex) {
                     //One of the parameters (quizID, questionId, etc) must be invalid,
                     Log.error("AsyncCallback Failed with IllegalArgumentException: getQuestion()", ex);
-                    //Maybe the user tried to view a non-existant question:
+                    //Maybe the user tried to view a non-existent question:
                     abandonQuestionAndShowAnother();
                 } catch (final Throwable ex) {
                     Log.error("AsyncCallback Failed: getQuestion()", ex);

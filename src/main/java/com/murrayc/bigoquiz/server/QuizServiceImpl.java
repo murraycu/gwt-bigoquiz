@@ -128,7 +128,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
             return getNextQuestionFromUserStats(null, quiz, mapUserStats);
         } else {
             //This special case is a bit copy-and-pasty of the general case with the
-            //map, but it seems more efficient to avoid an unncessary Map.
+            //map, but it seems more efficient to avoid an unnecessary Map.
             @Nullable final UserStats userStats = getUserStatsForSection(userId, sectionId, quizId);
             return getNextQuestionFromUserStatsForSection(sectionId, quiz, userStats);
         }
@@ -188,7 +188,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
         //Get the stats for this user, for each section:
         //We also return the LoginInfo, so we can show a sign in link,
-        //and to avoid the need for a seperate call to the server.
+        //and to avoid the need for a separate call to the server.
         @NotNull LoginInfo loginInfo = getLoginInfo(requestUri);
         @NotNull final UserRecentHistory result = new UserRecentHistory(loginInfo, sections);
 
