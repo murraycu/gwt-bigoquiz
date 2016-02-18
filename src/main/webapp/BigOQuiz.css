@@ -566,6 +566,8 @@ h4 * {
     background: #B8DBD9;
     color: #2F4550;
     padding: 0.3em;
+    float: left;
+    clear: right;
 }
 
 .about-label {
