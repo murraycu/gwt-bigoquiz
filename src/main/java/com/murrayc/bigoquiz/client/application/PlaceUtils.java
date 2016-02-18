@@ -21,6 +21,18 @@ public class PlaceUtils {
         return builder.build();
     }
 
+    public static PlaceRequest getPlaceRequestForQuizQuestion(final String quizId) {
+
+        @NotNull PlaceRequest.Builder builder = new PlaceRequest.Builder()
+                .nameToken(NameTokens.QUESTION);
+
+        if (!StringUtils.isEmpty(quizId)) {
+            builder = builder.with(NameTokens.PARAM_QUIZ_ID, quizId);
+        }
+
+        return builder.build();
+    }
+
     public static PlaceRequest getPlaceRequestForQuestion(final String quizId, final String questionId, final String sectionId, boolean multipleChoice) {
 
         @NotNull PlaceRequest.Builder builder = new PlaceRequest.Builder()

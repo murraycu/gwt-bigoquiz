@@ -2,9 +2,13 @@ package com.murrayc.bigoquiz.client.application.quiz;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.*;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
+import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.shared.*;
 import org.jetbrains.annotations.NotNull;
@@ -22,8 +26,12 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
     private final Panel panelQuiz = new FlowPanel();
+    private final PlaceManager placeManager;
 
-    QuizView() {
+    @Inject
+    QuizView(final PlaceManager placeManager) {
+        this.placeManager = placeManager;
+
         setTitle(constants.quizTitle());
 
         mainPanel.add(panelQuiz);
@@ -36,7 +44,10 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
 
         panelQuiz.clear();
 
-        Utils.addHeaderToPanel(2, panelQuiz, quiz.getTitle());
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuizQuestion(quiz.getId());
+        final String url = placeManager.buildHistoryToken(placeRequest);
+        @NotNull final Hyperlink link = new Hyperlink(quiz.getTitle(), url);
+        Utils.addHeaderToPanel(2, panelQuiz, link);
 
         final QuizSections quizSections = quiz.getSections();
         for(final QuizSections.Section section : quizSections.getSectionsSorted()) {
