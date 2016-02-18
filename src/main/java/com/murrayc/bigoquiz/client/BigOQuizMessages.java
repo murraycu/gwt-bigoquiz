@@ -41,6 +41,11 @@ public interface BigOQuizMessages extends com.google.gwt.i18n.client.Messages {
     String answeredOnce(int arg0);
 
     @NotNull
+    @DefaultMessage("Big-O Algorithms Quiz : {0}")
+    @Key("windowTitleQuiz")
+    String windowTitleQuiz(String text);
+
+    @NotNull
     @DefaultMessage("Big-O Algorithms Quiz : Question: {0}")
     @Key("windowTitleQuestion")
     String windowTitleQuestion(String text);

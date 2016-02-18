@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.client.application.quiz;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
@@ -43,6 +44,13 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         setErrorLabelVisible(false);
 
         panelQuiz.clear();
+
+        if (quiz == null) {
+            Log.error("setQuiz(): quiz is null.");
+            return;
+        }
+
+        Window.setTitle(messages.windowTitleQuiz(quiz.getTitle()));
 
         @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuizQuestion(quiz.getId());
         final String url = placeManager.buildHistoryToken(placeRequest);

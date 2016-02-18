@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.client.application;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.HeadingElement;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
@@ -46,6 +47,9 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
     public void setTitle(final String title) {
         titleLabel.setText(title);
         setHeadingVisible(!StringUtils.isEmpty(title));
+
+        //A good default:
+        Window.setTitle(title);
     }
 
     @Override
