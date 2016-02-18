@@ -197,14 +197,22 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //just to show what is possible when the user is logged in:
         @Nullable final String userId = loginInfo.getUserId();
 
-        @NotNull final Map<String, UserStats> mapUserStats = getUserStats(userId, quizId);
+        @Nullable Map<String, UserStats> mapUserStats = null;
+        if (!StringUtils.isEmpty(userId)) {
+            mapUserStats = getUserStats(userId, quizId);
+        }
+
         for (final String sectionId : sections.getSectionIds()) {
             if (StringUtils.isEmpty(sectionId)) {
                 //This seems wise.
                 continue;
             }
 
-            @Nullable UserStats userStats = mapUserStats.get(sectionId);
+            @Nullable UserStats userStats = null;
+            if (mapUserStats != null) {
+                userStats = mapUserStats.get(sectionId);
+            }
+
             if (userStats == null) {
                 //So we get the default values:
                 userStats = new UserStats(userId, quizId, sectionId);
