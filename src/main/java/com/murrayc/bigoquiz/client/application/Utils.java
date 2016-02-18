@@ -13,17 +13,19 @@ import org.jetbrains.annotations.NotNull;
  * Created by murrayc on 1/28/16.
  */
 public class Utils {
-    public static void addHeaderToPanel(int level, @NotNull final Panel mainPanel, final String title) {
+    public static HeadingElement addHeaderToPanel(int level, @NotNull final Panel mainPanel, final String title) {
         final HeadingElement headingElement = Document.get().createHElement(level);
         headingElement.setInnerText(title);
         mainPanel.getElement().appendChild(headingElement);
+        return headingElement;
     }
 
-    public static void addHeaderToPanel(int level, @NotNull final Panel mainPanel, @NotNull final Widget widget) {
+    public static HeadingElement addHeaderToPanel(int level, @NotNull final Panel mainPanel, @NotNull final Widget widget) {
         final HeadingElement headingElement = Document.get().createHElement(level);
         mainPanel.getElement().appendChild(headingElement);
 
         DOM.insertChild(headingElement, widget.getElement(), 0);
+        return headingElement;
     }
 
     @NotNull
