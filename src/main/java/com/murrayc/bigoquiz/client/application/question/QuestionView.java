@@ -53,6 +53,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private State state = State.WAITING_INVALID;
     private boolean multipleChoice = false;
     private TextBox textBox;
+    private Button submitButton;
 
     @Inject
     QuestionView(final PlaceManager placeManager) {
@@ -246,6 +247,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         } else {
             if (textBox == null) {
                 textBox = new TextBox();
+                textBox.addStyleName("question-answer-textbox");
                 textBox.addKeyDownHandler(new KeyDownHandler() {
 
                     public void onKeyDown(final KeyDownEvent event) {
@@ -259,6 +261,20 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             textBox.setText("");
             textBox.removeStyleName("question-radio-button-wrong");
             choicesPanel.add(textBox);
+
+            if (submitButton == null) {
+                submitButton = new Button(constants.submitButton());
+
+                submitButton.addStyleName("question-submit-button");
+                submitButton.addClickHandler(new ClickHandler() {
+                    @Override
+                    public void onClick(final ClickEvent event) {
+                        submitAnswer(textBox.getText());
+                    }
+                });
+            }
+
+            choicesPanel.add(submitButton);
         }
 
         updateResultPanelUi(State.WAITING_FOR_ANSWER);

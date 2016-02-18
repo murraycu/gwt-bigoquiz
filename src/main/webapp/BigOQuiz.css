@@ -493,6 +493,15 @@ h4 * {
     line-height: 2em;
 }
 
+.question-answer-textbox {
+    margin-right: 1em;
+    font-size: medium;
+}
+
+.gwt-TextBox.question-answer-textbox {
+    font-size: medium;
+}
+
 .user-history-recent-panel {
     margin-bottom: 1em;
     float: left;
@@ -609,6 +618,16 @@ h4 * {
 }
 
 .gwt-Button.show-answer-button:hover {
+    border-color: #2F4550;
+}
+
+.gwt-Button.question-submit-button {
+    background: #B6B2DD;
+    color: #2F4550;
+    font-family: 'Lato', sans-serif;
+}
+
+.gwt-Button.question-submit-button:hover {
     border-color: #2F4550;
 }
 
