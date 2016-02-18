@@ -143,9 +143,11 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
                     if (!StringUtils.equals(quizId, DEFAULT_QUIZ_ID)) {
                         quizId = DEFAULT_QUIZ_ID;
                         getAndShowHistory();
+                    } else {
+                        Log.error("AsyncCallback Failed: getUserRecentHistory()", ex);
                     }
                 } catch (final Throwable ex) {
-                    Log.error("AsyncCallback Failed: getUserRecentHistory(): " + ex.getMessage());
+                    Log.error("AsyncCallback Failed: getUserRecentHistory()", ex);
                     onFailureGeneric();
                 }
             }
