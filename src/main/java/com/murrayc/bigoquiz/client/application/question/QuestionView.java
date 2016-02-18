@@ -178,7 +178,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         choicesPanel.clear();
 
         if (question == null) {
-            Window.setTitle(messages.windowTitle(""));
+            Window.setTitle(messages.windowTitleQuestion(""));
             questionLabel.setText("");
 
             return;
@@ -186,7 +186,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         setErrorLabelVisible(false);
 
-        Window.setTitle(messages.windowTitle(question.getText()));
+        Window.setTitle(messages.windowTitleQuestion(question.getText()));
         questionLabel.setText(question.getText());
 
         if (sections == null) {
