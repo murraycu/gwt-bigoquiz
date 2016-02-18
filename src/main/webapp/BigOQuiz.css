@@ -40,6 +40,7 @@
 
 
 
+/** Screens with less height: */
 @media screen and (max-height: 600px) {
     /* TODO: Find some way to do this by just changing one variable instead.. */
 
@@ -77,6 +78,7 @@
     }
 }
 
+/* Screens with more height */
 @media screen and (min-height: 601px)  {
     /* TODO: Find some way to do this by justing changing one variable instead.. */
 
@@ -111,6 +113,14 @@
     .quiz-panel {
         margin-top: 1rem;
         margin-bottom: 1rem;
+    }
+
+    body {
+        font-size: medium !important;
+    }
+
+    .gwt-Button {
+        font-size: medium !important;
     }
 }
 
