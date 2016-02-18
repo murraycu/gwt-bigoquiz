@@ -6,7 +6,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
@@ -16,6 +15,7 @@ import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
+import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
@@ -38,7 +38,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     private boolean waitingForSections = false;
     private boolean showQuestionPending = false;
 
-    interface MyView extends View, HasUiHandlers<QuestionUserEditUiHandlers> {
+    interface MyView extends ContentView, HasUiHandlers<QuestionUserEditUiHandlers> {
         void setSections(final QuizSections sections);
 
         void setQuestion(final Question question, boolean multipleChoice);
@@ -176,6 +176,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         @NotNull final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
+                getView().setLoadingLabelVisible(false);
+
                 try {
                     throw caught;
                 } catch (final IllegalArgumentException ex) {
@@ -191,6 +193,8 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
             @Override
             public void onSuccess(@Nullable final QuizService.SubmissionResult result) {
+                getView().setLoadingLabelVisible(false);
+
                 if (result == null) {
                     Log.error("AsyncCallback: onSubmitAnswer: onSuccess: result was null.");
                     return;
@@ -222,6 +226,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         };
 
+        getView().setLoadingLabelVisible(true);
         QuizServiceAsync.Util.getInstance().submitAnswer(getQuizId(), getQuestionId(), answer, multipleChoice,
                 nextQuestionSectionId, callback);
     }
@@ -260,6 +265,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         @NotNull final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
+                getView().setLoadingLabelVisible(false);
                 try {
                     throw caught;
                 } catch (final IllegalArgumentException ex) {
@@ -435,6 +441,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         @NotNull final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
+                getView().setLoadingLabelVisible(false);
                 try {
                     throw caught;
                 } catch (final IllegalArgumentException ex) {
@@ -450,11 +457,13 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
             @Override
             public void onSuccess(@NotNull final Question result) {
+                getView().setLoadingLabelVisible(false);
                 revealQuestion(result);
             }
 
         };
 
+        getView().setLoadingLabelVisible(true);
         QuizServiceAsync.Util.getInstance().getNextQuestion(getQuizId(), sectionId, callback);
     }
 
@@ -466,6 +475,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         @NotNull final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
+                getView().setLoadingLabelVisible(false);
                 try {
                     throw caught;
                 } catch (final IllegalArgumentException ex) {
@@ -481,6 +491,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
             @Override
             public void onSuccess(final Question result) {
+                getView().setLoadingLabelVisible(false);
                 if (result != null) {
                     question = result;
                     showQuestionInView();
@@ -493,6 +504,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         };
 
+        getView().setLoadingLabelVisible(true);
         QuizServiceAsync.Util.getInstance().getQuestion(getQuizId(), questionId, callback);
     }
 

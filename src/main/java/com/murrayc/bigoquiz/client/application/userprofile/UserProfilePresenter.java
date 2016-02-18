@@ -7,13 +7,13 @@ import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
+import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.DefaultUserHistoryRequestEvent;
 import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentPresenter;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +27,7 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
     private final UserHistoryRecentPresenter userHistoryRecentPresenter;
 
 
-    interface MyView extends View, HasUiHandlers<UserProfileUserEditUiHandlers> {
+    interface MyView extends ContentView, HasUiHandlers<UserProfileUserEditUiHandlers> {
         void setUserStatusFailed();
 
         void setLoginInfo(@NotNull final LoginInfo result);
@@ -53,8 +53,11 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
         getView().setUiHandlers(this);
 
         // Check login status using login service.
+        getView().setLoadingLabelVisible(true);
         LoginServiceAsync.Util.getInstance().login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
             public void onFailure(@NotNull final Throwable caught) {
+                getView().setLoadingLabelVisible(false);
+
                 try {
                     throw caught;
                 } catch (final IllegalArgumentException ex) {
@@ -69,6 +72,8 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
             }
 
             public void onSuccess(@Nullable final LoginInfo result) {
+                getView().setLoadingLabelVisible(false);
+
                 //TODO: Throw an exception instead of returning null?
                 if(result == null) {
                     getView().setUserStatusFailed();

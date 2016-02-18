@@ -5,7 +5,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
@@ -15,6 +14,7 @@ import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
+import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.StringUtils;
@@ -27,7 +27,7 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
     private final PlaceManager placeManager;
     private String quizId;
 
-    interface MyView extends View {
+    interface MyView extends ContentView {
         void setQuiz(final Quiz quiz);
 
         void setServerFailed();
@@ -82,6 +82,8 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
         @NotNull final AsyncCallback<Quiz> callback = new AsyncCallback<Quiz>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
+                getView().setLoadingLabelVisible(false);
+
                 try {
                     throw caught;
                 } catch (final IllegalArgumentException ex) {
@@ -97,11 +99,14 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
 
             @Override
             public void onSuccess(final Quiz result) {
+                getView().setLoadingLabelVisible(false);
+
                 getView().setQuiz(result);
             }
         };
 
 
+        getView().setLoadingLabelVisible(true);
         QuizServiceAsync.Util.getInstance().getQuiz(getQuizId(), callback);
     }
 }

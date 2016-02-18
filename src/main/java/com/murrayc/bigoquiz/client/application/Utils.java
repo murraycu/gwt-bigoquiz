@@ -79,6 +79,22 @@ public class Utils {
         return result;
     }
 
+    /**
+     * Creates a Label with generic loading text,
+     * to show that communication with the server is in progress.
+     * It will initially be invisible.
+     *
+     * @return
+     * @param constants
+     */
+    @NotNull
+    public static InlineLabel createServerLoadingLabel(final BigOQuizConstants constants) {
+        final InlineLabel result = new InlineLabel(constants.loading());
+        result.addStyleName("server-loading-label");
+        result.setVisible(false);
+        return result;
+    }
+
     /* This doesn't seem to work:
     public static boolean widgetIsInvisible(Widget w) {
         while (w.getElement().hasParentElement()) {
