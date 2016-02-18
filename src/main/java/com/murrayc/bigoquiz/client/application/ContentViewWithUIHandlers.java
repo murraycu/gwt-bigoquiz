@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.client.application;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.HeadingElement;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
@@ -31,7 +32,8 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
         mainPanel.addStyleName("content-panel");
         titleLabel.addStyleName("page-title-label");
         titleHeading = Utils.addHeaderToPanel(2, mainPanel, titleLabel);
-        titleLabel.setVisible(false); //Do this for titleHeading instead.
+        setHeadingVisible(false);
+        setErrorLabelVisible(false);
 
         mainPanel.add(labelError);
         initWidget(mainPanel);
@@ -39,10 +41,14 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
 
     public void setTitle(final String title) {
         titleLabel.setText(title);
-        titleLabel.setVisible(!StringUtils.isEmpty(title));
+        setHeadingVisible(!StringUtils.isEmpty(title));
     }
 
     protected void setErrorLabelVisible(boolean visible) {
         labelError.setVisible(visible);
+    }
+
+    protected void setHeadingVisible(boolean visible) {
+        titleHeading.getStyle().setProperty("display", visible ? "block" : "none");
     }
 }
