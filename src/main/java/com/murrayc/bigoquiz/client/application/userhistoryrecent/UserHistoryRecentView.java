@@ -197,21 +197,18 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
             @NotNull final List<UserQuestionHistory> problemQuestions = stats.getQuestionHistories();
 
-            if (problemQuestions == null || problemQuestions.isEmpty()) {
-                Utils.addParagraphWithText(problemQuestionsPanel, constants.problemQuestionsNoneYet(),
-                        "problem-answer-score");
-            } else {
-                int count = 0;
+            int count = 0;
+            if (problemQuestions != null) {
                 int extras = 0;
                 final int MAX = 5;
                 for (@NotNull final UserQuestionHistory problemQuestion : problemQuestions) {
-                    if (count >= MAX) {
-                        extras += 1;
+                    if (problemQuestion.getCountAnsweredWrong() <= 0) {
+                        //It's not really a problem question.
                         continue;
                     }
 
-                    if (problemQuestion.getCountAnsweredWrong() <= 0) {
-                        //It's not really a problem question.
+                    if (count >= MAX) {
+                        extras += 1;
                         continue;
                     }
 
@@ -232,6 +229,11 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                     Utils.addParagraphWithText(problemQuestionsPanel, messages.moreProblemQuestions(extras),
                             "problem-questions-more-questions");
                 }
+            }
+
+            if (count == 0) {
+                Utils.addParagraphWithText(problemQuestionsPanel, constants.problemQuestionsNoneYet(),
+                        "problem-answer-score");
             }
 
 
