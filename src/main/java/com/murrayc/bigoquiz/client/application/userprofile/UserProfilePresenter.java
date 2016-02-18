@@ -60,10 +60,10 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
                 } catch (final IllegalArgumentException ex) {
                     //One of the parameters (quizID, questionId, etc) must be invalid,
                     //TODO: Handle this properly.
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: login(): " + ex.getMessage());
+                    Log.error("AsyncCallback Failed with IllegalArgumentException: login()", ex);
                     getView().setUserStatusFailed();
                 } catch (final Throwable ex) {
-                    Log.error("AsyncCallback Failed: login(): " + ex.getMessage());
+                    Log.error("AsyncCallback Failed: login()", ex);
                     getView().setUserStatusFailed();
                 }
             }
@@ -103,10 +103,10 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
                 } catch (final IllegalArgumentException ex) {
                     //One of the parameters (quizID, questionId, etc) must be invalid,
                     //TODO: Handle this properly.
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: resetSections(): " + ex.getMessage());
+                    Log.error("AsyncCallback Failed with IllegalArgumentException: resetSections()", ex);
                     getView().setUserStatusFailed();
                 } catch (final Throwable ex) {
-                    Log.error("AsyncCallback Failed: resetSections(): " + ex.getMessage());
+                    Log.error("AsyncCallback Failed: resetSections()", ex);
                     getView().setUserStatusFailed();
                 }
             }

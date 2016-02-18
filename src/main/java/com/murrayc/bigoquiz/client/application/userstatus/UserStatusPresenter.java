@@ -41,10 +41,10 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
                 } catch (final IllegalArgumentException ex) {
                     //One of the parameters (quizID, questionId, etc) must be invalid,
                     //TODO: Handle this properly.
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: login(): " + ex.getMessage());
+                    Log.error("AsyncCallback Failed with IllegalArgumentException: login()", ex);
                     getView().setUserStatusFailed();
                 } catch (final Throwable ex) {
-                    Log.error("AsyncCallback Failed: login(): " + ex.getMessage());
+                    Log.error("AsyncCallback Failed: login()", ex);
                     getView().setUserStatusFailed();
                 }
             }

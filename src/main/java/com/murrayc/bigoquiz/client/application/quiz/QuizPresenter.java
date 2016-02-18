@@ -87,10 +87,10 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
                 } catch (final IllegalArgumentException ex) {
                     //One of the parameters (quizID, questionId, etc) must be invalid,
                     //TODO: Handle this properly.
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: getQuiz(): " + ex.getMessage());
+                    Log.error("AsyncCallback Failed with IllegalArgumentException: getQuiz()", ex);
                     getView().setServerFailed();
                 } catch (final Throwable ex) {
-                    Log.error("AsyncCallback Failed: getQuiz(): " + ex.getMessage());
+                    Log.error("AsyncCallback Failed: getQuiz()", ex);
                     getView().setServerFailed();
                 }
             }
