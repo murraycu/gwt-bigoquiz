@@ -46,6 +46,10 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
         final List<Quiz.QuizDetails> result = new ArrayList<>();
         for (final Quiz quiz : quizzes.values()) {
+            if (quiz == null) {
+                continue;
+            }
+
             result.add(quiz.getDetails());
         }
 
@@ -352,7 +356,9 @@ public class QuizServiceImpl extends ServiceWithUser implements
         final Quiz quiz;
         try {
             quiz = loadQuiz(quizId);
-            quizzes.put(quizId, quiz);
+            if (quiz != null) {
+                quizzes.put(quizId, quiz);
+            }
         } catch (@NotNull final Exception e) {
             Log.error("Could not load quiz: " + quizId, e);
             return true;

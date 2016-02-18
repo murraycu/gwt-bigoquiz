@@ -56,7 +56,6 @@ public class QuizLoader {
             documentBuilder = dbf.newDocumentBuilder();
         } catch (@NotNull final ParserConfigurationException e) {
             throw new QuizLoaderException("XML parsing failed while creating DocumentBuilder.", e);
-
         }
 
         org.w3c.dom.Document xmlDocument;
