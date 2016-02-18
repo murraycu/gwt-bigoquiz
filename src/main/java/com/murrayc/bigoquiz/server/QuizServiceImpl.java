@@ -336,7 +336,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
             return;
         }
 
-        if (loadQuizIntoQuizzes("testquiz", quizzes)) {
+        if (loadQuizIntoQuizzes("mastermethodquiz", quizzes)) {
             return;
         }
 

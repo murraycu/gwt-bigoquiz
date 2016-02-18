@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="mastermethodquiz">
+    <title>Master Theorem Quiz</title>
+    <section id="using">
+        <title>Using the Master Theorem</title>
+        <default_choices>
+            <choice>O(nᵈ log(n))</choice>
+            <choice>O(nᵈ)</choice>
+            <choice>O(n ^ logb(a))</choice>
+        </default_choices>
+        <subsection id="using-use">
+            <title>T(n) &lt;= a T(n / b) + O(nᵈ)</title>
+            <link>https://en.wikipedia.org/wiki/Master_theorem</link>
+            <question id="parts-equal">
+                <text>a == bᵈ</text>
+                <answer>O(nᵈ log(n))</answer>
+            </question>
+            <question id="parts-less-than">
+                <text>a &lt; bᵈ</text>
+                <answer>O(nᵈ)</answer>
+            </question>
+            <question id="parts-greater-than">
+                <text>a &gt; bᵈ</text>
+                <answer>O(n ^ logb(a))</answer>
+            </question>
+        </subsection>
+    </section>
+
+</quiz>
