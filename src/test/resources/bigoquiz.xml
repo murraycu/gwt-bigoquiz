@@ -677,12 +677,14 @@
         <subsection id="shell-sort">
             <title>Shell Sort</title>
             <link>http://en.wikipedia.org/wiki/Shellsort</link>
+            <!-- This is apparently wrong on bigoref.com:  https://github.com/josem/bigoref/issues/3 -->
             <question id="shell-sort-sort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n)</answer>
             </question>
             <!-- No "shell-sort-sort-time-average" because it's an unsolved problem
                  according to wikipedia. -->
+            <!-- This is apparently wrong in bigocheatsheet.com: https://github.com/ericdrowell/BigOCheatSheet/pull/83 -->
             <question id="shell-sort-sort-time-worst">
                 <text>Time (Worst)</text>
                 <answer>O(n²)</answer>
