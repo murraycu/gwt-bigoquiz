@@ -237,15 +237,8 @@ body {
 
 }
 
-.sign-in-link {
+.sign-in-button {
 
-}
-
-a.gwt-Anchor.sign-in-link {
-    color: #2F4550;
-}
-a.gwt-Anchor.sign-in-link:visited {
-    color: #2F4550;
 }
 
 .about-link {

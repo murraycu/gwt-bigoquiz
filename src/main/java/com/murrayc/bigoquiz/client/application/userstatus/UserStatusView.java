@@ -1,8 +1,12 @@
 package com.murrayc.bigoquiz.client.application.userstatus;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.murrayc.bigoquiz.client.ImageResources;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.NameTokens;
@@ -24,7 +28,7 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
 
     private final Panel loginPanel = new FlowPanel();
     private final Label loginFailedLabel = new Label(constants.errorNoServer());
-    private final Anchor signInLink = new Anchor(constants.signInLinkTitle());
+    private final PushButton signInButton = new PushButton(constants.signInLinkTitle());
 
     @Nullable
     private LoginInfo loginInfo = null;
@@ -43,8 +47,21 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
 
         loginPanel.addStyleName("login-panel");
 
-        loginPanel.add(signInLink);
-        signInLink.addStyleName("sign-in-link");
+        final ImageResources images = GWT.create(ImageResources.class);
+
+        loginPanel.add(signInButton);
+        signInButton.getUpFace().setImage(new Image(images.getGoogleSignInNormal()));
+        signInButton.getDownFace().setImage(new Image(images.getGoogleSignInPressed()));
+        signInButton.getUpHoveringFace().setImage(new Image(images.getGoogleSignInFocus()));
+        //TODO: Set alt text for the button or its image: signInButton.setText(constants.signInLinkTitle());
+        signInButton.removeStyleName("gwt-PushButton"); //We want the hover functionality, but not the borders and margins.
+        signInButton.addStyleName("sign-in-button");
+        signInButton.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(final ClickEvent event) {
+                onSignInClicked();
+            }
+        });
 
         loginPanel.add(loginFailedLabel);
         loginFailedLabel.addStyleName("login-failed");
@@ -56,6 +73,8 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
         mainPanel.add(statusPanel);
         initWidget(mainPanel);
     }
+
+
 
     @Override
     public void setUserStatusFailed() {
@@ -70,12 +89,21 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
         updateUi();
     }
 
+    private void onSignInClicked() {
+        if (loginInfo == null) {
+            Log.error("onSignInClicked(): loginInfo was null.");
+            return;
+        }
+
+        Window.Location.assign(loginInfo.getLoginUrl());
+    }
+
     private void updateUi() {
         //Login status:
         if (loginInfo == null) {
             Log.error("showLogin(): loginInfo was null.");
         } else if (!loginInfo.isLoggedIn()) {
-            signInLink.setHref(loginInfo.getLoginUrl());
+            //signInLink.setHref();
             loginPanel.setVisible(true);
         } else {
             loginPanel.setVisible(false);
