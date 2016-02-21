@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.server;
 
 import com.google.appengine.api.users.User;
+import com.googlecode.objectify.VoidWork;
 import com.googlecode.objectify.cmd.Query;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
@@ -370,99 +371,66 @@ public class QuizServiceImpl extends ServiceWithUser implements
     }
 
     @NotNull
-    private SubmissionResult createSubmissionResult(boolean result, final String quizId, @NotNull final String questionId, @Nullable final String nextQuestionSectionId, @Nullable final Map<String, UserStats> mapUserStats) {
+    private SubmissionResult createSubmissionResult(boolean result, final String quizId, @NotNull final QuestionAndAnswer questionAndAnswer, final String userId, @Nullable final String nextQuestionSectionId) {
         @NotNull final Quiz quiz = getQuiz(quizId);
 
         //We only provide the correct answer if the supplied answer was wrong:
         @Nullable String correctAnswer = null;
         if (!result) {
-            correctAnswer = quiz.getAnswer(questionId);
+            correctAnswer = questionAndAnswer.getAnswer();
         }
 
-        @Nullable final Question nextQuestion = getNextQuestionFromUserStats(nextQuestionSectionId, quiz, mapUserStats);
+        @Nullable final Question nextQuestion;
+        if (nextQuestionSectionId != null) {
+            @Nullable final UserStats userStats = getUserStatsForSection(userId, quizId, nextQuestionSectionId);
+            nextQuestion = getNextQuestionFromUserStatsForSection(nextQuestionSectionId, quiz, userStats);
+        } else {
+            @Nullable final Map<String, UserStats> mapUserStats = getUserStats(userId, quizId);
+            nextQuestion = getNextQuestionFromUserStats(nextQuestionSectionId, quiz, mapUserStats);
+        }
+
         return new SubmissionResult(result, correctAnswer, nextQuestion);
     }
 
-    /**
-     *
-     * @param result
-     * @param questionId
-     * @param nextQuestionSectionId
-     * @param userStats This may be null if nextQuestionSectionId is null.
-     * @return
-     */
-    @NotNull
-    private SubmissionResult createSubmissionResultForSection(boolean result, final String quizId, final String questionId, final String nextQuestionSectionId, final UserStats userStats) {
-        @NotNull final Quiz quiz = getQuiz(quizId);
+    private void storeAnswerForSectionInTransaction(final boolean result, @NotNull final String quizId, @Nullable final Question question, final String userId) {
+        EntityManagerFactory.ofy().transact(new VoidWork() {
+            public void vrun() {
+                if (question == null) {
+                    Log.error("storeAnswerForSection(): question is null.");
+                    return;
+                }
 
-        //We only provide the correct answer if the supplied answer was wrong:
-        @Nullable String correctAnswer = null;
-        if (!result) {
-            correctAnswer = quiz.getAnswer(questionId);
-        }
+                final String sectionId = question.getSectionId();
+                if (StringUtils.isEmpty(sectionId)) {
+                    Log.error("storeAnswerForSection(): question's sectionId is null.");
+                    return;
+                }
 
-        @Nullable final Question nextQuestion = getNextQuestionFromUserStatsForSection(nextQuestionSectionId, quiz, userStats);
-        return new SubmissionResult(result, correctAnswer, nextQuestion);
-    }
+                if (StringUtils.isEmpty(userId)) {
+                    Log.error("setUserStatsImpl(): userId is empty.");
+                    return;
+                }
 
-    private void storeAnswer(boolean result, @NotNull final String quizId, @NotNull final Question question, final String userId, @Nullable final Map<String, UserStats> mapUserStats) {
-        if (StringUtils.isEmpty(userId)) {
-            Log.error("storeAnswer(): userId was null.");
-            return;
-        }
+                //TODO: Combine the rest in a transaction:
+                @Nullable UserStats userStats = getUserStatsForSection(userId, quizId, sectionId);
 
-        if (mapUserStats == null) {
-            Log.error("storeAnswer(): mapUserStats was null.");
-            return;
-        }
+                //Create new UserStats if necessary,
+                //for instance if this is the first time storing an answer for this section.
+                if (userStats == null) {
+                    userStats = new UserStats(userId, quizId, sectionId);
+                }
 
-        //Update the statistics:
-        final String sectionId = question.getSectionId();
-        if (StringUtils.isEmpty(sectionId)) {
-            Log.error("storeAnswer(): sectionId is null.");
-            return;
-        }
+                userStats.incrementAnswered();
 
-        UserStats userStats = mapUserStats.get(sectionId);
-        if (userStats == null) {
-            userStats = new UserStats(userId, quizId, sectionId);
-        }
+                if (result) {
+                    userStats.incrementCorrect();
+                }
 
-        storeAnswerForSection(result, quizId, question, userId, userStats);
-    }
+                userStats.updateProblemQuestion(question, result);
 
-    private void storeAnswerForSection(boolean result, @NotNull final String quizId, @Nullable final Question question, final String userId, @Nullable UserStats userStats) {
-        if (question == null) {
-            Log.error("storeAnswerForSection(): question is null.");
-            return;
-        }
-
-        //Create new UserStats if necessary,
-        //for instance if this is the first time storing an answer for this section.
-        if (userStats == null) {
-            if (StringUtils.isEmpty(userId)) {
-                Log.error("storeAnswerForSection(): userId is empty.");
-                return;
+                EntityManagerFactory.ofy().save().entity(userStats).now();
             }
-
-            final String sectionId = question.getSectionId();
-            if (StringUtils.isEmpty(sectionId)) {
-                Log.error("storeAnswerForSection(): sectionId is empty.");
-                return;
-            }
-
-            userStats = new UserStats(userId, quizId, sectionId);
-        }
-
-        userStats.incrementAnswered();
-
-        if (result) {
-            userStats.incrementCorrect();
-        }
-
-        userStats.updateProblemQuestion(question, result);
-
-        EntityManagerFactory.ofy().save().entity(userStats).now();
+        });
     }
 
     /*
@@ -493,31 +461,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //If the user is logged in, store whether we got the question right or wrong:
         @Nullable final String userId = getUserId();
 
-        final String sectionId = questionAndAnswer.getQuestion().getSectionId();
+        // Store the answer.
+        // Because this happens asynchronously, in a transaction,
+        // we cannot reuse the read of the UserStats for both updating the UserStats and choosing the next question.
+        storeAnswerForSectionInTransaction(result, quizId, questionAndAnswer.getQuestion(), userId);
 
-        // Get the UserStats (or a map of them), and use it for both storing the answer and getting the next question,
-        // to avoid getting the UserStats twice from the datastore.
-        //
-        // Call different methods depending on whether nextQuestionSectionId is specified an as is the same as the
-        // questino's section ID, to avoid allocating a Map just containing one UserStats.
-        if (!StringUtils.isEmpty(nextQuestionSectionId) &&
-                StringUtils.equals(nextQuestionSectionId, sectionId)) {
-            @Nullable UserStats userStats = null;
-            if (!StringUtils.isEmpty(userId)) {
-                userStats = getUserStatsForSection(userId, quizId, nextQuestionSectionId);
-                storeAnswerForSection(result, quizId, questionAndAnswer.getQuestion(), userId, userStats);
-            }
-
-            return createSubmissionResultForSection(result, quizId, questionId, nextQuestionSectionId, userStats);
-        } else {
-            @Nullable Map<String, UserStats> mapUserStats = null;
-            if (!StringUtils.isEmpty(userId)) {
-                mapUserStats = getUserStats(userId, quizId);
-                storeAnswer(result, quizId, questionAndAnswer.getQuestion(), userId, mapUserStats);
-            }
-
-            return createSubmissionResult(result, quizId, questionId, nextQuestionSectionId, mapUserStats);
-        }
+        return createSubmissionResult(result, quizId, questionAndAnswer, userId, nextQuestionSectionId);
     }
 
     /**
