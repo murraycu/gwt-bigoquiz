@@ -32,10 +32,10 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
         DefaultUserHistoryRequestEvent.EventHandler {
 
     public static final String DEFAULT_QUIZ_ID = "bigoquiz";
-    private String nextQuestionSectionId;
+    private String nextQuestionSectionId = null;
     private boolean multipleChoice = true;
     private boolean userIsLoggedIn = false;
-    private String quizId;
+    private String quizId = null;
 
     public interface MyView extends View, HasUiHandlers<UserHistoryRecentUserEditUiHandlers> {
         /** Set a whole set of history.

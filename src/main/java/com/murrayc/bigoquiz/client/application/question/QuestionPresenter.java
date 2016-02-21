@@ -32,9 +32,9 @@ import org.jetbrains.annotations.Nullable;
 public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, QuestionPresenter.MyProxy>
         implements QuestionUserEditUiHandlers {
     private final PlaceManager placeManager;
-    private String quizId;
+    private String quizId = null;
     private boolean multipleChoice = true;
-    private QuizSections sections;
+    private QuizSections sections = null;
     private boolean waitingForSections = false;
     private boolean showQuestionPending = false;
 
@@ -58,12 +58,12 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         void setServerFailed();
     }
 
-    private String nextQuestionSectionId;
-    private Question question;
+    private String nextQuestionSectionId = null;
+    private Question question = null;
     @Nullable
-    private String correctAnswer;
+    private String correctAnswer = null;
     @Nullable
-    private Question nextQuestion;
+    private Question nextQuestion = null;
 
     final Timer autoNextTimer = new Timer() {
         @Override

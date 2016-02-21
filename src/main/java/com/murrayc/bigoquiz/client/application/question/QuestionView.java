@@ -35,9 +35,9 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
     //Map of section IDs to section titles.
     @Nullable
-    private QuizSections sections;
-    private String nextQuestionSectionId;
-    private String choiceSelected;
+    private QuizSections sections = null;
+    private String nextQuestionSectionId = null;
+    private String choiceSelected = null;
 
     private final ListBox nextQuestionSectionListBox = new ListBox();
     private @NotNull final Hyperlink hyperlinkMultipleChoice = new InlineHyperlink();
@@ -52,8 +52,8 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     @NotNull
     private State state = State.WAITING_INVALID;
     private boolean multipleChoice = false;
-    private TextBox textBox;
-    private Button submitButton;
+    private TextBox textBox = null;
+    private Button submitButton = null;
 
     @Inject
     QuestionView(final PlaceManager placeManager) {

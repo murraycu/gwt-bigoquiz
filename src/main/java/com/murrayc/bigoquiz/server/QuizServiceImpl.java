@@ -30,7 +30,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
     private static final String LOADED_QUIZZES = "loaded-quizzes";
 
     @Nullable
-    private Map<String, Quiz> quizzes;
+    private Map<String, Quiz> quizzes = null;
 
     @Nullable
     @Override

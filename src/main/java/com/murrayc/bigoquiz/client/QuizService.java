@@ -58,9 +58,9 @@ public interface QuizService extends RemoteService {
     void resetSections(final String quizId);
 
     class SubmissionResult implements IsSerializable {
-        private boolean result;
-        private String correctAnswer; //If result is false.
-        private Question nextQuestion;
+        private boolean result = false;
+        private String correctAnswer = null; //If result is false.
+        private Question nextQuestion = null;
 
         public SubmissionResult() {
         }

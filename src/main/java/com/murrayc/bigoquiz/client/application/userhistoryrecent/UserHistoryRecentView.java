@@ -50,7 +50,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
-    String nextQuestionSectionId;
+    String nextQuestionSectionId = null;
     boolean multipleChoice = true;
 
     final FlowPanel detailsPanel = new FlowPanel();
@@ -60,13 +60,13 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     private final PlaceManager placeManager;
 
-    private UserRecentHistory userRecentHistory;
+    private UserRecentHistory userRecentHistory = null;
 
     //When we skip building of the UI because its hidden (by CSS) anyway,
     //this lets us do that building if necessary later.
     private boolean buildUiPending = false;
     private final Label labelError = Utils.createServerErrorLabel(constants);
-    private String quizId;
+    private String quizId = null;
 
     @Inject
     UserHistoryRecentView(PlaceManager placeManager) {
