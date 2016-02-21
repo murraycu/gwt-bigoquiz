@@ -71,6 +71,17 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
                 }
             });
             rowPanel.add(buttonResetSections);
+
+
+            final Button buttonPlay = new Button(constants.buttonAnswerQuestions());
+            buttonPlay.addStyleName("button-answer-questions");
+            buttonPlay.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(final ClickEvent event) {
+                    getUiHandlers().onAnswerQuestions(details.getId());
+                }
+            });
+            rowPanel.add(buttonPlay);
         }
     }
 

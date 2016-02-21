@@ -7,4 +7,6 @@ import com.gwtplatform.mvp.client.UiHandlers;
  */
 interface QuizListUserEditUiHandlers extends UiHandlers {
     void onResetSections(final String quizId);
+    void onAnswerQuestions(final String quizId);
+
 }

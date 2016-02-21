@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.client.application.quizlist;
 
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -16,6 +17,8 @@ import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
+import com.murrayc.bigoquiz.client.application.PlaceUtils;
+import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.application.userprofile.UserProfileResetSectionsEvent;
 import com.murrayc.bigoquiz.shared.Quiz;
 import org.jetbrains.annotations.NotNull;
@@ -91,7 +94,7 @@ public class QuizListPresenter extends Presenter<QuizListPresenter.MyView, QuizL
         QuizServiceAsync.Util.getInstance().getQuizList(callback);
     }
 
-    //TODO: When we show other quizzes, this should be per-quiz on the quizzes page,
+    //TODO: When we show other quizzes, this should only be per-quiz on the quizzes page,
     //not on the user profile page.
     @Override
     public void onResetSections(final String quizId) {
@@ -117,6 +120,13 @@ public class QuizListPresenter extends Presenter<QuizListPresenter.MyView, QuizL
             }
         });
     }
+
+    public void onAnswerQuestions(final String quizId) {
+        Log.fatal("debug: onAnswerQuestions(): " + quizId);
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuizQuestion(quizId);
+        placeManager.revealPlace(placeRequest);
+    }
+
 
     private void tellUserHistoryPresenterAboutResetSections() {
         UserProfileResetSectionsEvent.fire(this);

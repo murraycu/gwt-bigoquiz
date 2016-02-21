@@ -367,6 +367,14 @@ background-color: #B6B2DD;
     margin-left: 1em;
 }
 
+.button-answer-questions {
+
+}
+
+.gwt-Button.button-answer-questions {
+    margin-left: 1em;
+}
+
 .dialogMiddleCenterInner.dialogContent {
     margin: 1em;
 }
