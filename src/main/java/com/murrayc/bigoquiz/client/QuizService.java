@@ -55,7 +55,7 @@ public interface QuizService extends RemoteService {
     /**
      * Clear all question answer history, progress, scores, etc.
      */
-    void resetSections();
+    void resetSections(final String quizId);
 
     class SubmissionResult implements IsSerializable {
         private boolean result;

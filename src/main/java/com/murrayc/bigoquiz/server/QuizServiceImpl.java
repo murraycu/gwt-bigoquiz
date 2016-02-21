@@ -7,10 +7,7 @@ import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.UserRecentHistory;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
-import com.murrayc.bigoquiz.shared.Quiz;
-import com.murrayc.bigoquiz.shared.QuizSections;
-import com.murrayc.bigoquiz.shared.Question;
-import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
+import com.murrayc.bigoquiz.shared.*;
 import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 import com.murrayc.bigoquiz.shared.db.UserStats;
@@ -243,16 +240,22 @@ public class QuizServiceImpl extends ServiceWithUser implements
     }
 
     @Override
-    public void resetSections() {
+    public void resetSections(final String quizId) {
         @Nullable final String userId = getUserId();
         if (StringUtils.isEmpty(userId)) {
-            Log.error("resetSections(): userId was null.");
+            //TODO: Throw some NotLoggedIn exception?
+            Log.error("resetSections(): userId is null.");
             return;
+        }
+
+        if (StringUtils.isEmpty(quizId)) {
+            throw new IllegalArgumentException("Empty or null quiz ID.");
         }
 
         //TODO: Get the keys only:
         Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
         q = q.filter("userId", userId);
+        q = q.filter("quizId", quizId);
         final List<UserStats> list = q.list();
         if (list.isEmpty()) {
             //Presumably, they don't exist yet, or have already been deleted.
@@ -336,7 +339,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         final Map<String, Quiz> quizzes = new HashMap<>();
 
         //Load it for the first time:
-        if (loadQuizIntoQuizzes("bigoquiz", quizzes)) {
+        if (loadQuizIntoQuizzes(QuizConstants.DEFAULT_QUIZ_ID, quizzes)) {
             return;
         }
 

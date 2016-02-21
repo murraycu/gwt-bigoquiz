@@ -35,7 +35,7 @@ public interface QuizServiceAsync {
     /**
      * Clear all question answer history, progress, scores, etc.
      */
-    void resetSections(AsyncCallback<Void> async);
+    void resetSections(final String quizId, AsyncCallback<Void> async);
 
     /**
      * Utility class to get the RPC Async interface from client-side code

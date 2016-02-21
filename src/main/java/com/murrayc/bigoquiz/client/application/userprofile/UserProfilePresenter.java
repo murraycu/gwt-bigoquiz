@@ -16,6 +16,7 @@ import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.DefaultUserHistoryRequestEvent;
 import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentPresenter;
+import com.murrayc.bigoquiz.shared.QuizConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -98,9 +99,11 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
         DefaultUserHistoryRequestEvent.fire(this);
     }
 
+    //TODO: When we show other quizzes, this should be per-quiz on the quizzes page,
+    //not on the user profile page.
     @Override
     public void onResetSections() {
-        QuizServiceAsync.Util.getInstance().resetSections(new AsyncCallback<Void>() {
+        QuizServiceAsync.Util.getInstance().resetSections(getQuizId(), new AsyncCallback<Void>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 try {
@@ -125,5 +128,9 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
 
     private void tellUserHistoryPresenterAboutResetSections() {
         UserProfileResetSectionsEvent.fire(this);
+    }
+
+    private String getQuizId() {
+        return QuizConstants.DEFAULT_QUIZ_ID;
     }
 }

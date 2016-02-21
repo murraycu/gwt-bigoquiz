@@ -6,6 +6,7 @@ import com.murrayc.bigoquiz.shared.StringUtils;
  * Created by murrayc on 2/17/16.
  */
 public class QuizUtils {
+
     static boolean answerIsCorrect(final String answer, final String correctAnswer, boolean exact) {
         boolean result = false;
         if (answer == null) {
