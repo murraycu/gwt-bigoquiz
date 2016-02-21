@@ -477,19 +477,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
      * @return null if the user is not logged in.
      */
     private String getUserId() {
-        @Nullable final UserProfile userProfile = getUserProfileImpl();
-        if (userProfile == null) {
-            //This is normal if the user is not logged in.
-            //Log.error("getUserId(): userProfile was null.");
+        @Nullable final User user = getUser();
+        if (user == null) {
             return null;
         }
 
-        final String userId = userProfile.getId();
-        if (StringUtils.isEmpty(userId)) {
-            Log.error("getUserId(): userId was null.");
-        }
-
-        return userId;
+        return user.getUserId();
     }
 
     @NotNull
