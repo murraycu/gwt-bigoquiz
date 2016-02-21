@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.server;
 
 import com.google.appengine.api.users.User;
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.VoidWork;
 import com.googlecode.objectify.cmd.Query;
 import com.murrayc.bigoquiz.client.Log;
@@ -118,20 +119,20 @@ public class QuizServiceImpl extends ServiceWithUser implements
     public Question getNextQuestion(@NotNull final String quizId, final String sectionId) throws IllegalArgumentException {
         @NotNull final Quiz quiz = getQuiz(quizId);
 
-        @Nullable final String userId = getUserId();
-        if (StringUtils.isEmpty(userId)) {
+        @Nullable final Key<UserProfile> userKey = getUserKey();
+        if (userKey == null) {
             //The user is not logged in,
             //so just return a random question:
             return quiz.getRandomQuestion(sectionId);
         }
 
         if (StringUtils.isEmpty(sectionId)) {
-            @NotNull final Map<String, UserStats> mapUserStats = getUserStats(userId, quizId);
+            @NotNull final Map<String, UserStats> mapUserStats = getUserStats(userKey, quizId);
             return getNextQuestionFromUserStats(null, quiz, mapUserStats);
         } else {
             //This special case is a bit copy-and-pasty of the general case with the
             //map, but it seems more efficient to avoid an unnecessary Map.
-            @Nullable final UserStats userStats = getUserStatsForSection(userId, sectionId, quizId);
+            @Nullable final UserStats userStats = getUserStatsForSection(userKey, sectionId, quizId);
             return getNextQuestionFromUserStatsForSection(sectionId, quiz, userStats);
         }
     }
@@ -198,10 +199,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //in which case we will return a mostly-empty set of user statistics,
         //just to show what is possible when the user is logged in:
         @Nullable final String userId = loginInfo.getUserId();
+        Key<UserProfile> userKey = null;
 
         @Nullable Map<String, UserStats> mapUserStats = null;
         if (!StringUtils.isEmpty(userId)) {
-            mapUserStats = getUserStats(userId, quizId);
+            userKey = Key.create(UserProfile.class, userId);
+            mapUserStats = getUserStats(userKey, quizId);
         }
 
         for (final String sectionId : sections.getSectionIds()) {
@@ -217,7 +220,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
             if (userStats == null) {
                 //So we get the default values:
-                userStats = new UserStats(userId, quizId, sectionId);
+                userStats = new UserStats(userKey, quizId, sectionId);
             }
 
             //Set the titles.
@@ -242,11 +245,9 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @Override
     public void resetSections(final String quizId) {
-        @Nullable final String userId = getUserId();
-        if (StringUtils.isEmpty(userId)) {
-            //TODO: Throw some NotLoggedIn exception?
-            Log.error("resetSections(): userId is null.");
-            return;
+        @Nullable final Key<UserProfile> userKey = getUserKey();
+        if (userKey == null) {
+            Log.error("resetSections(): userKey was null.");return;
         }
 
         if (StringUtils.isEmpty(quizId)) {
@@ -254,7 +255,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         //TODO: Get the keys only:
-        final Query q = getQueryForUserStats(userId, quizId);
+        final Query q = getQueryForUserStats(userKey, quizId);
         final List<UserStats> list = q.list();
         if (list.isEmpty()) {
             //Presumably, they don't exist yet, or have already been deleted.
@@ -288,8 +289,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return null;
     }
 
-    private UserStats getUserStatsForSection(@NotNull final String userId, @NotNull final String quizId, @NotNull final String sectionId) {
-        Query<UserStats> q = getQueryForUserStats(userId, quizId);
+    private UserStats getUserStatsForSection(@NotNull final Key<UserProfile> userKey, @NotNull final String quizId, @NotNull final String sectionId) {
+        Query<UserStats> q = getQueryForUserStats(userKey, quizId);
         q = q.filter("details.sectionId", sectionId);
         q = q.limit(1);
         final List<UserStats> list = q.list();
@@ -307,7 +308,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
      * @return
      */
     @NotNull
-    private Map<String, UserStats> getUserStats(@NotNull final String userId, @NotNull final String quizId) {
+    private Map<String, UserStats> getUserStats(@NotNull final Key<UserProfile> userId, @NotNull final String quizId) {
         final Query<UserStats> q = getQueryForUserStats(userId, quizId);
 
         @NotNull final Map<String, UserStats> map = new HashMap<>();
@@ -318,9 +319,9 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return map;
     }
 
-    private static Query<UserStats> getQueryForUserStats(@NotNull final String userId, @NotNull final String quizId) {
+    private static Query<UserStats> getQueryForUserStats(@NotNull final Key<UserProfile> userKey, @NotNull final String quizId) {
         Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
-        q = q.filter("userId", userId);
+        q = q.ancestor(userKey);
         q = q.filter("details.quizId", quizId);
         return q;
     }
@@ -369,7 +370,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
     }
 
     @NotNull
-    private SubmissionResult createSubmissionResult(boolean result, final String quizId, @NotNull final QuestionAndAnswer questionAndAnswer, final String userId, @Nullable final String nextQuestionSectionId) {
+    private SubmissionResult createSubmissionResult(boolean result, final String quizId, @NotNull final QuestionAndAnswer questionAndAnswer, final Key<UserProfile> userId, @Nullable final String nextQuestionSectionId) {
         @NotNull final Quiz quiz = getQuiz(quizId);
 
         //We only provide the correct answer if the supplied answer was wrong:
@@ -390,7 +391,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return new SubmissionResult(result, correctAnswer, nextQuestion);
     }
 
-    private void storeAnswerForSectionInTransaction(final boolean result, @NotNull final String quizId, @Nullable final Question question, final String userId) {
+    private void storeAnswerForSectionInTransaction(final boolean result, @NotNull final String quizId, @Nullable final Question question, final Key<UserProfile> userKey) {
         EntityManagerFactory.ofy().transact(new VoidWork() {
             public void vrun() {
                 if (question == null) {
@@ -404,18 +405,18 @@ public class QuizServiceImpl extends ServiceWithUser implements
                     return;
                 }
 
-                if (StringUtils.isEmpty(userId)) {
-                    Log.error("setUserStatsImpl(): userId is empty.");
+                if (userKey == null) {
+                    Log.error("setUserStatsImpl(): userKey is null.");
                     return;
                 }
 
                 //TODO: Combine the rest in a transaction:
-                @Nullable UserStats userStats = getUserStatsForSection(userId, quizId, sectionId);
+                @Nullable UserStats userStats = getUserStatsForSection(userKey, quizId, sectionId);
 
                 //Create new UserStats if necessary,
                 //for instance if this is the first time storing an answer for this section.
                 if (userStats == null) {
-                    userStats = new UserStats(userId, quizId, sectionId);
+                    userStats = new UserStats(userKey, quizId, sectionId);
                 }
 
                 userStats.incrementAnswered();
@@ -454,17 +455,30 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return user.getUserId();
     }
 
+    /**
+     *
+     * @return null if the user is not logged in.
+     */
+    private Key<UserProfile> getUserKey() {
+        final String userId = getUserId();
+        if (StringUtils.isEmpty(userId)) {
+            return null;
+        }
+
+        return Key.create(UserProfile.class, userId);
+    }
+
     @NotNull
     private SubmissionResult storeAnswerCorrectnessAndGetSubmissionResult(final String quizId, final String questionId, final String nextQuestionSectionId, @NotNull final QuestionAndAnswer questionAndAnswer, boolean result) {
         //If the user is logged in, store whether we got the question right or wrong:
-        @Nullable final String userId = getUserId();
+        @Nullable final Key<UserProfile> userKey = getUserKey();
 
         // Store the answer.
         // Because this happens asynchronously, in a transaction,
         // we cannot reuse the read of the UserStats for both updating the UserStats and choosing the next question.
-        storeAnswerForSectionInTransaction(result, quizId, questionAndAnswer.getQuestion(), userId);
+        storeAnswerForSectionInTransaction(result, quizId, questionAndAnswer.getQuestion(), userKey);
 
-        return createSubmissionResult(result, quizId, questionAndAnswer, userId, nextQuestionSectionId);
+        return createSubmissionResult(result, quizId, questionAndAnswer, userKey, nextQuestionSectionId);
     }
 
     /**

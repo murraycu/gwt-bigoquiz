@@ -1,11 +1,7 @@
 package com.murrayc.bigoquiz.shared.db;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Ignore;
-import com.googlecode.objectify.annotation.Index;
-import com.murrayc.bigoquiz.client.Log;
+import com.googlecode.objectify.Key;
+import com.googlecode.objectify.annotation.*;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.dto.UserStatsDTO;
 import org.jetbrains.annotations.NotNull;
@@ -22,8 +18,8 @@ public class UserStats {
     @Id
     Long id;
 
-    @Index
-    String userId;
+    @Parent
+    Key<UserProfile> user;
 
     UserStatsDTO details = null;
 
@@ -31,8 +27,8 @@ public class UserStats {
         details = new UserStatsDTO();
     }
 
-    public UserStats(final String userId, final String quizId, final String sectionId) {
-        this.userId = userId;
+    public UserStats(final Key<UserProfile> userKey, final String quizId, final String sectionId) {
+        this.user = userKey;
         details = new UserStatsDTO(quizId, sectionId);
     }
 
