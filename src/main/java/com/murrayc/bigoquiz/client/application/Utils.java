@@ -1,8 +1,11 @@
 package com.murrayc.bigoquiz.client.application;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.ParagraphElement;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.*;
@@ -96,6 +99,49 @@ public class Utils {
         result.addStyleName("server-loading-label");
         result.setVisible(false);
         return result;
+    }
+
+    public static void showResetConfirmationDialog(final ClickHandler okClickHandler) {
+        @NotNull final DialogBox dialog = new DialogBox();
+        dialog.setGlassEnabled(true);
+        dialog.setAnimationEnabled(true);
+
+        final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
+
+        dialog.setText(constants.dialogResetSectionsTitle());
+
+        @NotNull final Button buttonOK = new Button(constants.dialogResetSectionsOkButton());
+        buttonOK.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(final ClickEvent event) {
+                dialog.hide();
+
+                okClickHandler.onClick(event);
+            }
+        });
+
+        @NotNull final Button buttonCancel = new Button(constants.dialogResetSectionsCancelButton());
+        buttonCancel.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                dialog.hide();
+            }
+        });
+
+        @NotNull final Panel panelDialog = new FlowPanel();
+        addParagraphWithText(panelDialog, constants.dialogResetSectionsText(),
+                "reset-sections-confirm-dialog-text");
+        @NotNull final Panel panelButtons = new FlowPanel();
+        panelButtons.addStyleName("reset-sections-confirm-dialog-buttons-panel");
+        panelButtons.add(buttonOK);
+        buttonOK.addStyleName("reset-sections-confirm-dialog-ok-button");
+        panelButtons.add(buttonCancel);
+        buttonCancel.addStyleName("reset-sections-confirm-dialog-cancel-button");
+        panelDialog.add(panelButtons);
+        dialog.setWidget(panelDialog);
+
+        dialog.center();
+        dialog.show();
     }
 
     /* This doesn't seem to work:

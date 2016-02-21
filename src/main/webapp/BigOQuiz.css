@@ -363,6 +363,10 @@ background-color: #B6B2DD;
 
 }
 
+.gwt-Button.button-reset-sections {
+    margin-left: 1em;
+}
+
 .dialogMiddleCenterInner.dialogContent {
     margin: 1em;
 }

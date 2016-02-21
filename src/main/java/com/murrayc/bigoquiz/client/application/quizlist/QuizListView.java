@@ -1,6 +1,8 @@
 package com.murrayc.bigoquiz.client.application.quizlist;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
@@ -9,6 +11,7 @@ import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
+import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.shared.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -51,11 +54,34 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
                 continue;
             }
 
+            final Panel rowPanel = Utils.addParagraph(panelList, null);
+            panelList.add(rowPanel);
+
             @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuiz(details.getId());
             final String historyToken = placeManager.buildHistoryToken(placeRequest);
-            @NotNull final Hyperlink link = new Hyperlink(details.getTitle(), historyToken);
-            panelList.add(link);
+            @NotNull final Hyperlink link = new InlineHyperlink(details.getTitle(), historyToken);
+            rowPanel.add(link);
+
+            final Button buttonResetSections = new Button(constants.buttonResetSections());
+            buttonResetSections.addStyleName("button-reset-sections");
+            buttonResetSections.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(final ClickEvent event) {
+                    onResetSectionsButton(details.getId());
+                }
+            });
+            rowPanel.add(buttonResetSections);
         }
+    }
+
+    private void onResetSectionsButton(final String quizId) {
+        //TODO: Do this in the presenter?
+        Utils.showResetConfirmationDialog(new ClickHandler() {
+            @Override
+            public void onClick(final ClickEvent event) {
+                getUiHandlers().onResetSections(quizId);
+            }
+        });
     }
 
     @Override

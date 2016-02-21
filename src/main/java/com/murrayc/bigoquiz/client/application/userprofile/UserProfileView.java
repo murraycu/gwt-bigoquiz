@@ -95,42 +95,12 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
 
     private void onResetSectionsButton() {
         //TODO: Do this in the presenter?
-        @NotNull final DialogBox dialog = new DialogBox();
-        dialog.setGlassEnabled(true);
-        dialog.setAnimationEnabled(true);
-
-        dialog.setText(constants.dialogResetSectionsTitle());
-
-        @NotNull final Button buttonOK = new Button(constants.dialogResetSectionsOkButton());
-        buttonOK.addClickHandler(new ClickHandler() {
+        Utils.showResetConfirmationDialog(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                dialog.hide();
                 getUiHandlers().onResetSections();
             }
         });
 
-        @NotNull final Button buttonCancel = new Button(constants.dialogResetSectionsCancelButton());
-        buttonCancel.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                dialog.hide();
-            }
-        });
-
-        @NotNull final Panel panelDialog = new FlowPanel();
-        Utils.addParagraphWithText(panelDialog, constants.dialogResetSectionsText(),
-                "reset-sections-confirm-dialog-text");
-        @NotNull final Panel panelButtons = new FlowPanel();
-        panelButtons.addStyleName("reset-sections-confirm-dialog-buttons-panel");
-        panelButtons.add(buttonOK);
-        buttonOK.addStyleName("reset-sections-confirm-dialog-ok-button");
-        panelButtons.add(buttonCancel);
-        buttonCancel.addStyleName("reset-sections-confirm-dialog-cancel-button");
-        panelDialog.add(panelButtons);
-        dialog.setWidget(panelDialog);
-
-        dialog.center();
-        dialog.show();
     }
 }

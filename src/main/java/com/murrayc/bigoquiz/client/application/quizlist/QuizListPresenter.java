@@ -4,6 +4,7 @@ package com.murrayc.bigoquiz.client.application.quizlist;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
@@ -15,6 +16,7 @@ import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
+import com.murrayc.bigoquiz.client.application.userprofile.UserProfileResetSectionsEvent;
 import com.murrayc.bigoquiz.shared.Quiz;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,10 +25,11 @@ import java.util.List;
 /**
  * Created by murrayc on 1/21/16.
  */
-public class QuizListPresenter extends Presenter<QuizListPresenter.MyView, QuizListPresenter.MyProxy> {
+public class QuizListPresenter extends Presenter<QuizListPresenter.MyView, QuizListPresenter.MyProxy>
+        implements QuizListUserEditUiHandlers {
     private final PlaceManager placeManager;
 
-    interface MyView extends ContentView {
+    interface MyView extends ContentView, HasUiHandlers<QuizListUserEditUiHandlers> {
         void setQuizList(final List<Quiz.QuizDetails> quizList);
 
         void setServerFailed();
@@ -46,6 +49,7 @@ public class QuizListPresenter extends Presenter<QuizListPresenter.MyView, QuizL
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         this.placeManager = placeManager;
+        getView().setUiHandlers(this);
     }
 
     @Override
@@ -85,5 +89,36 @@ public class QuizListPresenter extends Presenter<QuizListPresenter.MyView, QuizL
 
         getView().setLoadingLabelVisible(true);
         QuizServiceAsync.Util.getInstance().getQuizList(callback);
+    }
+
+    //TODO: When we show other quizzes, this should be per-quiz on the quizzes page,
+    //not on the user profile page.
+    @Override
+    public void onResetSections(final String quizId) {
+        QuizServiceAsync.Util.getInstance().resetSections(quizId, new AsyncCallback<Void>() {
+            @Override
+            public void onFailure(@NotNull final Throwable caught) {
+                try {
+                    throw caught;
+                } catch (final IllegalArgumentException ex) {
+                    //One of the parameters (quizID, questionId, etc) must be invalid,
+                    //TODO: Handle this properly.
+                    Log.error("AsyncCallback Failed with IllegalArgumentException: resetSections()", ex);
+                    //TODO: getView().setUserStatusFailed();
+                } catch (final Throwable ex) {
+                    Log.error("AsyncCallback Failed: resetSections()", ex);
+                    //TODO: getView().setUserStatusFailed();
+                }
+            }
+
+            @Override
+            public void onSuccess(Void result) {
+                tellUserHistoryPresenterAboutResetSections();
+            }
+        });
+    }
+
+    private void tellUserHistoryPresenterAboutResetSections() {
+        UserProfileResetSectionsEvent.fire(this);
     }
 }
