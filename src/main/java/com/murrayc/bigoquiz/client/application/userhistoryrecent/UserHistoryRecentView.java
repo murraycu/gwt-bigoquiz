@@ -14,7 +14,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
-import com.murrayc.bigoquiz.client.UserRecentHistory;
+import com.murrayc.bigoquiz.shared.dto.UserRecentHistory;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
@@ -24,6 +24,7 @@ import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
 import com.murrayc.bigoquiz.shared.db.UserStats;
+import com.murrayc.bigoquiz.shared.dto.UserStatsDTO;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -174,7 +175,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
             final int questionsCount = section.questionsCount;
 
-            final UserStats stats = userRecentHistory.getStats(sectionId);
+            final UserStatsDTO stats = userRecentHistory.getStats(sectionId);
             if (stats != null) {
                 addStackedProgressBar(detailsPanel, stats.getCorrectOnce(), stats.getAnsweredOnce(), questionsCount);
 

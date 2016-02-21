@@ -1,6 +1,8 @@
-package com.murrayc.bigoquiz.client;
+package com.murrayc.bigoquiz.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.murrayc.bigoquiz.client.Log;
+import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.StringUtils;
@@ -20,7 +22,7 @@ public class UserRecentHistory implements IsSerializable {
     @NotNull
     private /* final */ QuizSections sections;
     @NotNull
-    private Map<String, UserStats> sectionStats = new HashMap<>();
+    private Map<String, UserStatsDTO> sectionStats = new HashMap<>();
 
     UserRecentHistory() {
         loginInfo = null;
@@ -40,7 +42,7 @@ public class UserRecentHistory implements IsSerializable {
         this.sections = sections;
     }
 
-    public void setSectionStats(final String sectionId, final UserStats stats) {
+    public void setSectionStats(final String sectionId, final UserStatsDTO stats) {
         sectionStats.put(sectionId, stats);
     }
 
@@ -62,7 +64,7 @@ public class UserRecentHistory implements IsSerializable {
             return;
         }
 
-        @NotNull final UserStats userStats = getStatsWithAdd(quizId, question.getSectionId());
+        @NotNull final UserStatsDTO userStats = getStatsWithAdd(quizId, question.getSectionId());
         userStats.incrementAnswered();
         if (answerIsCorrect) {
             userStats.incrementCorrect();
@@ -77,7 +79,7 @@ public class UserRecentHistory implements IsSerializable {
         userStats.updateProblemQuestion(question, answerIsCorrect);
     }
 
-    public UserStats getStats(final String sectionId ) {
+    public UserStatsDTO getStats(final String sectionId ) {
         return sectionStats.get(sectionId);
     }
 
@@ -88,22 +90,22 @@ public class UserRecentHistory implements IsSerializable {
     }
 
     @NotNull
-    private UserStats getStatsWithAdd(final String quizId, final String sectionId ) {
-        @Nullable UserStats stats = getStats(sectionId);
+    private UserStatsDTO getStatsWithAdd(final String quizId, final String sectionId ) {
+        @Nullable UserStatsDTO stats = getStats(sectionId);
         if (stats == null) {
             final String userId = getUserId();
             if (userId == null) {
                 throw new NullPointerException("getStatsWithAdd() needs a userId.");
             }
 
-            stats = new UserStats(userId, quizId, sectionId);
+            stats = new UserStatsDTO(quizId, sectionId);
             setStats(sectionId, stats);
         }
 
         return stats;
     }
 
-    private void setStats(final String sectionId, final UserStats stats) {
+    private void setStats(final String sectionId, final UserStatsDTO stats) {
         sectionStats.put(sectionId, stats);
     }
 

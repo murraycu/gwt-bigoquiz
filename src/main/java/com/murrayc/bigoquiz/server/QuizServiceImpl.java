@@ -6,7 +6,7 @@ import com.googlecode.objectify.cmd.Query;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.QuizService;
-import com.murrayc.bigoquiz.client.UserRecentHistory;
+import com.murrayc.bigoquiz.shared.dto.UserRecentHistory;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
 import com.murrayc.bigoquiz.shared.*;
 import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
@@ -234,7 +234,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 userQuestionHistory.setSubSectionTitle(subSectionTitle);
             }
 
-            result.setSectionStats(sectionId, userStats);
+            result.setSectionStats(sectionId, userStats.getDetails());
         }
 
         return result;
@@ -254,9 +254,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         //TODO: Get the keys only:
-        Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
-        q = q.filter("userId", userId);
-        q = q.filter("quizId", quizId);
+        final Query q = getQueryForUserStats(userId, quizId);
         final List<UserStats> list = q.list();
         if (list.isEmpty()) {
             //Presumably, they don't exist yet, or have already been deleted.
@@ -292,7 +290,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     private UserStats getUserStatsForSection(@NotNull final String userId, @NotNull final String quizId, @NotNull final String sectionId) {
         Query<UserStats> q = getQueryForUserStats(userId, quizId);
-        q = q.filter("sectionId", sectionId);
+        q = q.filter("details.sectionId", sectionId);
         q = q.limit(1);
         final List<UserStats> list = q.list();
         if (!list.isEmpty()) {
@@ -323,7 +321,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
     private static Query<UserStats> getQueryForUserStats(@NotNull final String userId, @NotNull final String quizId) {
         Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
         q = q.filter("userId", userId);
-        q = q.filter("quizId", quizId);
+        q = q.filter("details.quizId", quizId);
         return q;
     }
 

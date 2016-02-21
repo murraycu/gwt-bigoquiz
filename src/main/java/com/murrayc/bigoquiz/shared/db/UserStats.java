@@ -7,7 +7,7 @@ import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.shared.Question;
-import com.murrayc.bigoquiz.shared.StringUtils;
+import com.murrayc.bigoquiz.shared.dto.UserStatsDTO;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,194 +17,87 @@ import java.util.*;
  * Created by murrayc on 1/27/16.
  */
 @Entity
-public class UserStats implements IsSerializable {
+public class UserStats {
     //TODO: Just use userId as the Id, but then get the query to still work.
     @Id
     Long id;
 
     @Index
-    private String userId;
+    String userId;
 
-    @Index
-    private String quizId;
-
-    @Index
-    private String sectionId;
-
-    int answered;
-    int correct;
-
-    int countQuestionsAnsweredOnce = 0;
-    int countQuestionsCorrectOnce = 0;
-
-    Map<String, UserQuestionHistory> questionHistories;
-
-    @Ignore
-    private transient List<UserQuestionHistory> questionHistoriesInOrder = null;
-
-    @Ignore
-    private transient boolean cacheIsInvalid = true;
-
-    @Ignore
-    private transient Comparator<UserQuestionHistory> comparator = null;
+    UserStatsDTO details = null;
 
     public UserStats() {
-        questionHistories = new HashMap<>();
+        details = new UserStatsDTO();
     }
 
     public UserStats(final String userId, final String quizId, final String sectionId) {
         this.userId = userId;
-        this.quizId = quizId;
-        this.sectionId = sectionId;
-        questionHistories = new HashMap<>();
+        details = new UserStatsDTO(quizId, sectionId);
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void seUserId(final String userId) {
-        this.userId = userId;
-    }
+    //TODO? public String getUserId() {
+    //    return user.getId();
+    //}
 
     public String getSectionId() {
-        return sectionId;
+        return details.getSectionId();
     }
 
     public void setSectionId(final String sectionId) {
-        this.sectionId = sectionId;
+        details.setSectionId(sectionId);
     }
 
     public void incrementAnswered() {
-        answered += 1;
+        details.incrementAnswered();
     }
 
     public void incrementCorrect() {
-        correct += 1;
+        details.incrementCorrect();
     }
 
     public int getAnswered() {
-        return answered;
+        return details.getAnswered();
     }
 
     public void setAnswered(int answered) {
-        this.answered = answered;
+        details.setAnswered(answered);
     }
 
     public int getCorrect() {
-        return correct;
+        return details.getCorrect();
     }
 
     public void setCorrect(int correct) {
-        this.correct = correct;
+        details.setCorrect(correct);
     }
 
     public void updateProblemQuestion(@Nullable final Question question, boolean answerIsCorrect) {
-        if (question == null) {
-            Log.error("updateProblemQuestion(): question is null.");
-            return;
-        }
-
-        final String questionId = question.getId();
-        if (StringUtils.isEmpty(questionId)) {
-            Log.error("updateProblemQuestion(): questionId is empty.");
-            return;
-        }
-
-        boolean firstTimeAsked = false;
-        boolean firstTimeCorrect = false;
-        @Nullable UserQuestionHistory userQuestionHistory = questionHistories.get(questionId);
-
-        //Add a new one, if necessary:
-        if (userQuestionHistory == null) {
-            firstTimeAsked = true;
-            if (answerIsCorrect) {
-                firstTimeCorrect = true;
-            }
-
-            userQuestionHistory = new UserQuestionHistory(question);
-            questionHistories.put(questionId, userQuestionHistory);
-        } else if (answerIsCorrect && !userQuestionHistory.getAnsweredCorrectlyOnce()) {
-            firstTimeCorrect = true;
-        }
-
-        //Increase the wrong-answer count:
-        userQuestionHistory.adjustCount(answerIsCorrect);
-
-        if (firstTimeAsked) {
-            countQuestionsAnsweredOnce++;
-        }
-
-        if (firstTimeCorrect) {
-            countQuestionsCorrectOnce++;
-        }
-
-        cacheIsInvalid = true;
-    }
-
-    private void cacheList() {
-        if (!cacheIsInvalid) {
-            return;
-        }
-
-        if (comparator == null) {
-            // Order the problem questions with the most wrong answers first:
-            // (reverseOrder doesn't seem to be supported in GWT's client-side.)
-            comparator = new Comparator<UserQuestionHistory>() {
-                @Override
-                public int compare(final UserQuestionHistory o1, final UserQuestionHistory o2) {
-                    if (o1 == null) {
-                        if (o2 == null) {
-                            return 0;
-                        }
-                    }
-
-                    if (o2 == null) {
-                        return 1;
-                    }
-
-                    final int c1 = o1.getCountAnsweredWrong();
-                    final int c2 = o2.getCountAnsweredWrong();
-                    if (c1 == c2) {
-                        return 0;
-                    }
-
-                    return (c1 > c2) ?
-                            -1 : 1;
-                }
-            };
-        }
-
-        questionHistoriesInOrder = new ArrayList<>(questionHistories.values());
-
-        Collections.sort(questionHistoriesInOrder, comparator);
-        cacheIsInvalid = false;
+        details.updateProblemQuestion(question, answerIsCorrect);
     }
 
     @NotNull
     public List<UserQuestionHistory> getQuestionHistories() {
-        cacheList();
-        return questionHistoriesInOrder;
+        return details.getQuestionHistories();
     }
 
     public int getAnsweredOnce() {
-        return countQuestionsAnsweredOnce;
+        return details.getAnsweredOnce();
     }
 
     public int getCorrectOnce() {
-        return countQuestionsCorrectOnce;
+        return details.getCorrectOnce();
     }
 
     public boolean getQuestionWasAnswered(final String questionId) {
-        return questionHistories.containsKey(questionId);
+        return details.getQuestionWasAnswered(questionId);
     }
 
     public int getQuestionCountAnsweredWrong(final String questionId) {
-        final UserQuestionHistory history = questionHistories.get(questionId);
-        if (history == null) {
-            return 0;
-        }
+        return details.getQuestionCountAnsweredWrong(questionId);
+    }
 
-        return history.getCountAnsweredWrong();
+    public UserStatsDTO getDetails() {
+        return details;
     }
 }

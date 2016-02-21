@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
+import com.murrayc.bigoquiz.shared.dto.UserRecentHistory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -50,7 +51,8 @@ public interface QuizService extends RemoteService {
      * @return
      * @throws IllegalArgumentException
      */
-    @Nullable UserRecentHistory getUserRecentHistory(final String quizId, final String requestUri) throws IllegalArgumentException;
+    @Nullable
+    UserRecentHistory getUserRecentHistory(final String quizId, final String requestUri) throws IllegalArgumentException;
 
     /**
      * Clear all question answer history, progress, scores, etc.

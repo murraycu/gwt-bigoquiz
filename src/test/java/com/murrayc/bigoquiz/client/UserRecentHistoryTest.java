@@ -2,8 +2,10 @@ package com.murrayc.bigoquiz.client;
 
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
+import com.murrayc.bigoquiz.shared.dto.UserRecentHistory;
 import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
 import com.murrayc.bigoquiz.shared.db.UserStats;
+import com.murrayc.bigoquiz.shared.dto.UserStatsDTO;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
@@ -30,7 +32,7 @@ public class UserRecentHistoryTest {
         @Nullable Question question = createQuestion("question4", SECTION_1, SUBSECTION_1_1);
         history.addUserAnswerAtStart(QUIZ_ID, question, false);
 
-        final UserStats stats = history.getStats(SECTION_1);
+        final UserStatsDTO stats = history.getStats(SECTION_1);
         assertNotNull(stats);
 
         @NotNull Collection<UserQuestionHistory> problems = stats.getQuestionHistories();
@@ -58,7 +60,7 @@ public class UserRecentHistoryTest {
         sections.addSection(SECTION_1, "section 1", null);
         sections.addSection("section2", "section 2", null);
 
-        @NotNull final UserStats stats = new UserStats();
+        @NotNull final UserStatsDTO stats = new UserStatsDTO();
 
         @NotNull LoginInfo loginInfo = new LoginInfo();
         loginInfo.setUserId("userid 1");
