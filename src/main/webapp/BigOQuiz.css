@@ -47,29 +47,39 @@
     .menu-panel {
         margin-top: 0.3rem; /* between the banner ad and the menu-panel */
         padding-bottom: 0.3rem;
+        padding-left: 0.3rem;
+
     }
 
     .menu-title {
         margin-top: 0.3rem;
+        margin-right: 0.3rem;
     }
 
     .menu-others-panel {
         margin-top: 0.3rem;
+        margin-right: 0.3rem;
     }
 
     .content-panel {
         margin-top: 0.3rem;
         margin-bottom: 0.3rem;
+        margin-left: 0.3rem;
+        margin-right: 0.3rem;
     }
 
     .sidebar-panel-sections {
         margin-top: 0.3rem;
         margin-bottom: 0.3rem;
+        margin-left: 0.3rem;
+        margin-right: 0.3rem;
     }
 
     .sidebar-panel-links {
         margin-top: 0.3rem;
         margin-bottom: 0.3rem;
+        margin-left: 0.3rem;
+        margin-right: 0.3rem;
     }
 
     .quiz-panel {
@@ -85,29 +95,38 @@
     .menu-panel {
         margin-top: 1rem; /* between the banner ad and the menu-panel */
         padding-bottom: 1rem;
+        padding-left: 1rem;
     }
 
     .menu-title {
         margin-top: 1rem;
+        margin-right: 1rem;
     }
 
     .menu-others-panel {
         margin-top: 1rem;
+        margin-right: 1rem;
     }
 
     .content-panel {
         margin-top: 1rem;
         margin-bottom: 1rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 
     .sidebar-panel-sections {
         margin-top: 1rem;
         margin-bottom: 1rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 
     .sidebar-panel-links {
         margin-top: 1rem;
         margin-bottom: 1rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 
     .quiz-panel {
@@ -152,10 +171,13 @@ body {
 }
 
 .sidebar-panel-sections {
+
+    /* See media query:
     margin-left: 1rem;
     margin-right: 1rem;
-    /* See media query: margin-top: 1em; */
-    /* See media query: margin-bottom: 1em; */
+    margin-top: 1em;
+    margin-bottom: 1em;
+    */
 
     float: right;
 
@@ -173,10 +195,12 @@ body {
 }
 
 .sidebar-panel-links {
+    /* See media query:
     margin-left: 1rem;
     margin-right: 1rem;
-    /* See media query: margin-top: 1em; */
-    /* See media query: margin-bottom: 1em; */
+    margin-top: 1em;
+    margin-bottom: 1em;
+    */
 
     float: right;
 
@@ -211,12 +235,14 @@ body {
     float: left;
 
     /* same as for menu-title.
-     * We use less space vertically, trying to fit into mobile screens.
+     * We use less space, trying to fit into mobile screens.
      */
+    /* See media query:
     margin-left: 1rem;
     margin-right: 1rem;
-    /* See media query: margin-top: 1rem; */
-    /* See media query: margin-bottom: 1rem; */
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    */
 }
 
 /* TODO: Make this not apply to a h2 inside sub-divs? */
@@ -278,13 +304,18 @@ a.gwt-Anchor.user-name:visited {
      * so that the space between them is never double.
      * Note that margins don't collapse on floated divs.
      */
+    /* See media query:
     padding-left: 1rem;
-    /* See media query: padding-bottom: 1rem; */
+    padding-bottom: 1rem;
+    */
 }
 
 .menu-title {
-    /* See media query: margin-top: 1rem; */
+    /* See media query:
+    margin-top: 1rem;
     margin-right: 1rem;
+    */
+
     display: inline-block; /* Don't stretch the empty rest of the div across the whole screen. */
     font-weight: 900;
     font-family: 'Lato', sans-serif;
@@ -320,8 +351,10 @@ background-color: #B6B2DD;
 }
 
 .menu-others-panel {
-    /* See media query: margin-top: 1rem; */
+    /* See media query:
+    margin-top: 1rem;
     margin-right: 1rem;
+     */
     display: inline-block; /* Don't stretch the empty rest of the div across the whole screen. */
     float: right;
 }
