@@ -284,7 +284,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         //Make sure that the whole question part is visible:
         //This is a little nasty,
         //but it should only happen on screens that need it:
-        Window.scrollTo(0, Window.getScrollTop() + Window.getClientHeight());
+        //TODO: submitButton.getElement().scrollIntoView();
     }
 
     private void buildChoices(@Nullable Question question) {
