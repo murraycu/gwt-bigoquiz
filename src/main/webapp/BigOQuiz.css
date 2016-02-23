@@ -700,3 +700,14 @@ h4 * {
     color: #2F4550;
     font-family: 'Lato', sans-serif;
 }
+
+.userprofile-button-reset-sections {
+
+}
+
+.gwt-Button.userprofile-button-reset-sections {
+    margin-left: 0em;
+    background: #B6B2DD;
+    color: #2F4550;
+    font-family: 'Lato', sans-serif;
+}

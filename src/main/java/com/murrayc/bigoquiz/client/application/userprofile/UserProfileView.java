@@ -38,7 +38,7 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
         logoutLabel.addStyleName("logout-label");
 
         Utils.addParagraphWithChild(mainPanel, buttonResetSections);
-        buttonResetSections.addStyleName("button-reset-sections");
+        buttonResetSections.addStyleName("userprofile-button-reset-sections");
         buttonResetSections.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
