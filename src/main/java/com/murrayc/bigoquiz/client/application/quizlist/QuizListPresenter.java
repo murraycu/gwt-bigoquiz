@@ -120,7 +120,6 @@ public class QuizListPresenter extends Presenter<QuizListPresenter.MyView, QuizL
     }
 
     public void onAnswerQuestions(final String quizId) {
-        Log.fatal("debug: onAnswerQuestions(): " + quizId);
         @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuizQuestion(quizId);
         placeManager.revealPlace(placeRequest);
     }

@@ -273,7 +273,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         try(final InputStream is = Thread.currentThread().getContextClassLoader()
                 .getResourceAsStream(filename)) {
             if (is == null) {
-                Log.fatal("quiz XML fie not found: " + filename);
+                Log.fatal("quiz XML file not found: " + filename);
                 return null;
             }
 

@@ -365,6 +365,9 @@ background-color: #B6B2DD;
 
 .gwt-Button.button-reset-sections {
     margin-left: 1em;
+    background: #B6B2DD;
+    color: #2F4550;
+    font-family: 'Lato', sans-serif;
 }
 
 .button-answer-questions {
@@ -373,6 +376,9 @@ background-color: #B6B2DD;
 
 .gwt-Button.button-answer-questions {
     margin-left: 1em;
+    background: #B6B2DD;
+    color: #2F4550;
+    font-family: 'Lato', sans-serif;
 }
 
 .dialogMiddleCenterInner.dialogContent {
@@ -683,4 +689,14 @@ h4 * {
 
 .quiz-answer {
     margin-bottom: 0.5em;
+}
+
+.home-button-answer-questions {
+
+}
+
+.gwt-Button.home-button-answer-questions {
+    background: #B6B2DD;
+    color: #2F4550;
+    font-family: 'Lato', sans-serif;
 }

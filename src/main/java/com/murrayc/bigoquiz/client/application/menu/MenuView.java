@@ -26,7 +26,7 @@ public class MenuView extends ViewWithUiHandlers<MenuUserEditUiHandlers>
         mainPanel.add(titleLabel);
         titleLabel.addStyleName("menu-title");
         titleLabel.addStyleName("clearfix"); //Stop any other item from ever being in the rectangle of the title text.
-        titleLabel.setHref("#" + NameTokens.QUESTION); //TODO: Or just / ?
+        titleLabel.setHref(""); //Takes us to the main entry point (/).
 
         @NotNull final Panel othersPanel = new FlowPanel();
         othersPanel.addStyleName("menu-others-panel");
