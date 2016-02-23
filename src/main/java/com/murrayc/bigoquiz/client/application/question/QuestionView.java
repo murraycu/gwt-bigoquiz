@@ -279,6 +279,12 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         updateResultPanelUi(State.WAITING_FOR_ANSWER);
         resultLabel.setText("");
+
+
+        //Make sure that the whole question part is visible:
+        //This is a little nasty,
+        //but it should only happen on screens that need it:
+        Window.scrollTo(0, Window.getScrollTop() + Window.getClientHeight());
     }
 
     private void buildChoices(@Nullable Question question) {
