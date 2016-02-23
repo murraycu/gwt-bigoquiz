@@ -41,10 +41,6 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
         statusPanel.add(usernameLabel);
         usernameLabel.addStyleName("user-name");
 
-        @NotNull Label scoreLabel = new Label();
-        statusPanel.add(scoreLabel);
-        scoreLabel.addStyleName("score");
-
         loginPanel.addStyleName("login-panel");
 
         final ImageResources images = GWT.create(ImageResources.class);
