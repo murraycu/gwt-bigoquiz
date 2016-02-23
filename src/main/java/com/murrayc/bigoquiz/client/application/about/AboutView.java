@@ -29,6 +29,6 @@ public class AboutView extends ContentViewWithUIHandlers<AboutUserEditUiHandlers
 
         //TODO: Internationalization:
         //TODO: Get the number from pom.xml somehow.
-        versionLabel.setText("Version: " + "0.9.10");
+        versionLabel.setText("Version: " + "0.9.11");
     }
 }
