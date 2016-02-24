@@ -12,44 +12,87 @@
             <choice>O(nk)</choice>
             <choice>O(n + k)</choice>
         </default_choices>
-        <subsection id="array">
-            <title>Array</title>
+        <subsection id="array-unsorted">
+            <title>Array (unsorted)</title>
             <link>http://en.wikipedia.org/wiki/Array_data_structure</link>
-            <question id="array-access-average">
+            <question id="array-unsorted-access-average">
                 <text>Access (Average)</text>
                 <answer>O(1)</answer>
             </question>
-            <question id="array-search-average">
+            <question id="array-unsorted-search-average">
                 <text>Search (Average)</text>
                 <answer>O(n)</answer>
             </question>
-            <question id="array-insertion-average">
+            <question id="array-unsorted-insertion-average">
                 <text>Insertion (Average)</text>
                 <answer>O(n)</answer>
             </question>
-            <question id="array-deletion-average">
+            <question id="array-unsorted-deletion-average">
                 <text>Deletion (Average)</text>
                 <answer>O(n)</answer>
             </question>
 
-            <question id="array-access-worst">
+            <question id="array-unsorted-access-worst">
                 <text>Access (Worst)</text>
                 <answer>O(1)</answer>
             </question>
-            <question id="array-search-worst">
+            <question id="array-unsorted-search-worst">
                 <text>Search (Worst)</text>
                 <answer>O(n)</answer>
             </question>
-            <question id="array-insertion-worst">
+            <question id="array-unsorted-insertion-worst">
                 <text>Insertion (Worst)</text>
                 <answer>O(n)</answer>
             </question>
-            <question id="array-deletion-worst">
+            <question id="array-unsorted-deletion-worst">
                 <text>Deletion (Worst)</text>
                 <answer>O(n)</answer>
             </question>
 
-            <question id="array-space">
+            <question id="array-unsorted-space">
+                <text>Space Complexity</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="array">
+            <title>Array (sorted)</title>
+            <link>http://en.wikipedia.org/wiki/Array_data_structure</link>
+            <question id="array-sorted-access-average">
+                <text>Access (Average)</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="array-sorted-search-average">
+                <text>(Binary) Search (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="array-sorted-insertion-average">
+                <text>Insertion (Average)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="array-sorted-deletion-average">
+                <text>Deletion (Average)</text>
+                <answer>O(n)</answer>
+            </question>
+
+            <question id="array-sorted-access-worst">
+                <text>Access (Worst)</text>
+                <answer>O(1)</answer>
+            </question>
+            <question id="array-sorted-search-worst">
+                <text>(Binary) Search (Worst)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="array-sorted-insertion-worst">
+                <text>Insertion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="array-sorted-deletion-worst">
+                <text>Deletion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+
+            <question id="array-sorted-space">
                 <text>Space Complexity</text>
                 <answer>O(n)</answer>
             </question>
