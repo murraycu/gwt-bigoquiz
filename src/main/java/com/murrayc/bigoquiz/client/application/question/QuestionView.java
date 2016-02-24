@@ -279,12 +279,6 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         updateResultPanelUi(State.WAITING_FOR_ANSWER);
         resultLabel.setText("");
-
-
-        //Make sure that the whole question part is visible:
-        //This is a little nasty,
-        //but it should only happen on screens that need it:
-        //TODO: submitButton.getElement().scrollIntoView();
     }
 
     private void buildChoices(@Nullable Question question) {
@@ -358,6 +352,8 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         switch (state) {
             case WAITING_FOR_ANSWER: {
                 showAnswerButton.setVisible(true);
+                scrollWidgetIntoView(showAnswerButton);
+
                 nextQuestionButton.setVisible(false);
                 resultLabel.setVisible(false);
                 break;
@@ -368,6 +364,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
                 showAnswerButton.setVisible(false); //No need to click it again.
                 nextQuestionButton.setVisible(true);
+                scrollWidgetIntoView(nextQuestionButton);
 
                 //resultLabel.setText("Don't Know");
                 //resultLabel.setVisible(true);
@@ -376,6 +373,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             }
             case WAITING_AFTER_WRONG_ANSWER: {
                 showAnswerButton.setVisible(true);
+                scrollWidgetIntoView(showAnswerButton);
                 nextQuestionButton.setVisible(false);
                 resultLabel.setText(constants.wrongLabel());
                 resultLabel.setVisible(true);
@@ -390,9 +388,21 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
                 showAnswerButton.setVisible(false);
                 nextQuestionButton.setVisible(true);
+                scrollWidgetIntoView(nextQuestionButton);
                 resultLabel.setText(constants.correctLabel());
                 resultLabel.setVisible(true);
             }
+        }
+    }
+
+    private void scrollWidgetIntoView(final Widget widget) {
+        if (widget == null) {
+            return;
+        }
+
+        //TODO: GWT's Element is deprecated, though getElement() is not.
+        if(widget.getElement() != null) {
+            widget.getElement().scrollIntoView();
         }
     }
 
