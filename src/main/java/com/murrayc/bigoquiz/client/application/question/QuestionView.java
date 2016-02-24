@@ -396,6 +396,8 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     }
 
     private void scrollWidgetIntoView(final Widget widget) {
+        //Disabled because it scrolls the widget into the middle of the view on Google Chrome.
+        /*
         if (widget == null) {
             return;
         }
@@ -404,6 +406,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         if(widget.getElement() != null) {
             widget.getElement().scrollIntoView();
         }
+        */
     }
 
     /** Disable all radio buttons in the the choicesPanel.
