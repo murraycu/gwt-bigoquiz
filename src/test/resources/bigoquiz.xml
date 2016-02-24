@@ -390,7 +390,7 @@
 
         <subsection id="ternary-search-tree">
             <title>Ternary Search Tree</title>
-            <link>http://en.wikipedia.org/wiki/B_tree</link>
+            <link>https://en.wikipedia.org/wiki/B_tree</link>
             <!-- No ternary-search-tree-access-average -->
             <question id="ternary-search-tree-search-average">
                 <text>Search (Average)</text>
@@ -427,7 +427,7 @@
 
         <subsection id="b-tree">
             <title>B-Tree</title>
-            <link>http://en.wikipedia.org/wiki/B_tree</link>
+            <link>https://en.wikipedia.org/wiki/B_tree</link>
             <question id="b-tree-access-average">
                 <text>Access (Average)</text>
                 <answer>O(log(n))</answer>
@@ -470,7 +470,7 @@
 
         <subsection id="red-black-tree">
             <title>Red Black Tree</title>
-            <link>http://en.wikipedia.org/wiki/Red-black_tree</link>
+            <link>https://en.wikipedia.org/wiki/Red-black_tree</link>
             <question id="red-black-tree-access-average">
                 <text>Access (Average)</text>
                 <answer>O(log(n))</answer>
@@ -550,7 +550,7 @@
 
         <subsection id="avl-tree">
             <title>AVL Tree</title>
-            <link>http://en.wikipedia.org/wiki/AVL_tree</link>
+            <link>https://en.wikipedia.org/wiki/AVL_tree</link>
             <question id="avl-tree-access-average">
                 <text>Access (Average)</text>
                 <answer>O(log(n))</answer>
@@ -607,7 +607,7 @@
         </default_choices>
         <subsection id="quicksort">
             <title>Quicksort</title>
-            <link>http://en.wikipedia.org/wiki/Quicksort</link>
+            <link>https://en.wikipedia.org/wiki/Quicksort</link>
             <question id="quicksort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n log(n))</answer>
@@ -628,7 +628,7 @@
 
         <subsection id="mergesort">
             <title>Mergesort</title>
-            <link>http://en.wikipedia.org/wiki/Merge_sort</link>
+            <link>https://en.wikipedia.org/wiki/Merge_sort</link>
             <question id="mergesort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n log(n))</answer>
@@ -649,7 +649,7 @@
 
         <subsection id="timsort">
             <title>Timsort</title>
-            <link>http://en.wikipedia.org/wiki/Timsort</link>
+            <link>https://en.wikipedia.org/wiki/Timsort</link>
             <question id="timsort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n)</answer>
@@ -670,7 +670,7 @@
 
         <subsection id="heapsort">
             <title>Heapsort</title>
-            <link>http://en.wikipedia.org/wiki/Heapsort</link>
+            <link>https://en.wikipedia.org/wiki/Heapsort</link>
             <question id="heapsort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n log(n))</answer>
@@ -691,7 +691,7 @@
 
         <subsection id="bubble-sort">
             <title>Bubble Sort</title>
-            <link>http://en.wikipedia.org/wiki/Bubble_sort</link>
+            <link>https://en.wikipedia.org/wiki/Bubble_sort</link>
             <question id="bubble-sort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n)</answer>
@@ -712,7 +712,7 @@
 
         <subsection id="insertion-sort">
             <title>Insertion Sort</title>
-            <link>http://en.wikipedia.org/wiki/Insertion_sort</link>
+            <link>https://en.wikipedia.org/wiki/Insertion_sort</link>
             <question id="insertion-sort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n)</answer>
@@ -733,7 +733,7 @@
 
         <subsection id="selection-sort">
             <title>Selection Sort</title>
-            <link>http://en.wikipedia.org/wiki/Selection_sort</link>
+            <link>https://en.wikipedia.org/wiki/Selection_sort</link>
             <question id="selection-sort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n²)</answer>
@@ -754,7 +754,7 @@
 
         <subsection id="shell-sort">
             <title>Shell Sort</title>
-            <link>http://en.wikipedia.org/wiki/Shellsort</link>
+            <link>https://en.wikipedia.org/wiki/Shellsort</link>
             <!-- This is apparently wrong on bigoref.com:  https://github.com/josem/bigoref/issues/3 -->
             <question id="shell-sort-sort-time-best">
                 <text>Time (Best)</text>
@@ -775,7 +775,7 @@
 
         <subsection id="bucket-sort">
             <title>Bucket Sort</title>
-            <link>http://en.wikipedia.org/wiki/Bucket_sort</link>
+            <link>https://en.wikipedia.org/wiki/Bucket_sort</link>
             <question id="bucket-sort-sort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(n + k)</answer>
@@ -796,7 +796,7 @@
 
         <subsection id="radix-sort">
             <title>Radix Sort</title>
-            <link>http://en.wikipedia.org/wiki/Radix_sort</link>
+            <link>https://en.wikipedia.org/wiki/Radix_sort</link>
             <question id="radix-sort-sort-time-best">
                 <text>Time (Best)</text>
                 <answer>O(nk)</answer>
@@ -828,7 +828,7 @@
         </default_choices>
         <subsection id="adjacency-list">
             <title>Adjacency List</title>
-            <link>http://en.wikipedia.org/wiki/Adjacency_list</link>
+            <link>https://en.wikipedia.org/wiki/Adjacency_list</link>
             <question id="adjacency-list-storage">
                 <text>Storage</text>
                 <answer>O(|V| + |E|)</answer>
@@ -857,7 +857,7 @@
 
         <subsection id="incidence-list">
             <title>Incidence List</title>
-            <link>http://en.wikipedia.org/wiki/Incidence_list</link>
+            <link>https://en.wikipedia.org/wiki/Incidence_list</link>
             <question id="incidence-list-storage">
                 <text>Storage</text>
                 <answer>O(|V| + |E|)</answer>
@@ -886,7 +886,7 @@
 
         <subsection id="adjacency-matrix">
             <title>Ajacency Matrix</title>
-            <link>http://en.wikipedia.org/wiki/Adjacency_matrix</link>
+            <link>https://en.wikipedia.org/wiki/Adjacency_matrix</link>
             <question id="adjacency-matrix-storage">
                 <text>Storage</text>
                 <answer>O(|V|²)</answer>
@@ -915,7 +915,7 @@
 
         <subsection id="incidence-matrix">
             <title>Incidence Matrix</title>
-            <link>http://en.wikipedia.org/wiki/Incidence_matrix</link>
+            <link>https://en.wikipedia.org/wiki/Incidence_matrix</link>
             <question id="incidence-matrix-storage">
                 <text>Storage</text>
                 <answer>O(|V| ⋅ |E|)</answer>
@@ -963,7 +963,7 @@
         </default_choices>
         <subsection id="depth-first-search">
             <title>Depth First Search (DFS)</title>
-            <link>http://en.wikipedia.org/wiki/Depth-first_search</link>
+            <link>https://en.wikipedia.org/wiki/Depth-first_search</link>
             <question id="depth-first-search-time">
                 <text>Time</text>
                 <answer>O(|V| + |E|)</answer>
@@ -976,7 +976,7 @@
 
         <subsection id="depth-first-search">
             <title>Breadth First Search (BFS)</title>
-            <link>http://en.wikipedia.org/wiki/Breadth-first_search</link>
+            <link>https://en.wikipedia.org/wiki/Breadth-first_search</link>
             <question id="breadth-first-search-time">
                 <text>Time</text>
                 <answer>O(|V| + |E|)</answer>
@@ -1015,7 +1015,7 @@
 
         <subsection id="bellmann-ford">
             <title>Bellmann-Ford algorithm for Shortest Path</title>
-            <link>http://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
+            <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
             <question id="bellmann-ford-time">
                 <text>Time</text>
                 <answer>O(|V| ⋅ |E|)</answer>
@@ -1084,7 +1084,7 @@
         </default_choices>
         <subsection id="linked-list-sorted">
             <title>Linked List (sorted)</title>
-            <link>http://en.wikipedia.org/wiki/Linked_list</link>
+            <link>https://en.wikipedia.org/wiki/Linked_list</link>
             <!-- No linked-list-sorted-heapify -->
             <question id="linked-list-sorted-find-max">
                 <text>Find Max</text>
@@ -1114,7 +1114,7 @@
 
         <subsection id="linked-list-unsorted">
             <title>Linked List (unsorted)</title>
-            <link>http://en.wikipedia.org/wiki/Linked_list</link>
+            <link>https://en.wikipedia.org/wiki/Linked_list</link>
             <!-- No linked-list-unsorted-heapify -->
             <question id="linked-list-unsorted-find-max">
                 <text>Find Max</text>
@@ -1144,7 +1144,7 @@
 
         <subsection id="binary-heap">
             <title>Binary Heap</title>
-            <link>http://en.wikipedia.org/wiki/Binary_heap</link>
+            <link>https://en.wikipedia.org/wiki/Binary_heap</link>
             <question id="binary-heap-heapify">
                 <text>Heapify</text>
                 <answer>O(n)</answer>
@@ -1178,7 +1178,7 @@
 
         <subsection id="binomial-heap">
             <title>Binomial Heap</title>
-            <link>http://en.wikipedia.org/wiki/Binomial_heap</link>
+            <link>https://en.wikipedia.org/wiki/Binomial_heap</link>
             <!-- No binomial-heap-heapify -->
             <!-- bigoref.com has O(n log(n)): https://github.com/josem/bigoref/issues/5 -->
             <question id="binomial-heap-find-max">
@@ -1210,7 +1210,7 @@
 
         <subsection id="fibonacci-heap">
             <title>Fibonacci Heap</title>
-            <link>http://en.wikipedia.org/wiki/Fibonacci_heap</link>
+            <link>https://en.wikipedia.org/wiki/Fibonacci_heap</link>
             <!-- No fibonacci-heap-heapify -->
             <question id="fibonacci-heap-find-max">
                 <text>Find Max</text>
