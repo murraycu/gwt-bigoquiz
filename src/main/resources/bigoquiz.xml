@@ -11,6 +11,8 @@
             <choice>O(n²)</choice>
             <choice>O(nk)</choice>
             <choice>O(n + k)</choice>
+            <choice>O(m)</choice>
+            <choice>O(mn)</choice>
         </default_choices>
         <subsection id="array-unsorted">
             <title>Array (unsorted)</title>
@@ -588,6 +590,92 @@
             <question id="avl-tree-space">
                 <text>Space Complexity</text>
                 <answer>O(n)</answer>
+            </question>
+        </subsection>
+
+        <!-- This is not in bigoref.com, or in bigocheatsheet.com:
+        See https://github.com/josem/bigoref/issues/6 -->
+        <subsection id="trie">
+            <title>Trie (Prefix Tree)</title>
+            <link>https://en.wikipedia.org/wiki/Trie</link>
+            <!-- No trie-access-average -->
+            <question id="trie-search-average">
+                <text>Search (Average)</text>
+                <answer>O(m)</answer>
+            </question>
+            <question id="trie-insertion-average">
+                <text>Insertion (Average)</text>
+                <!-- TODO: Not sure: https://stackoverflow.com/questions/17891442/what-is-the-best-worst-average-case-big-o-runtime-of-a-trie-data-structure -->
+                <answer>O(m)</answer></question>
+            <question id="trie-deletion-average">
+                <text>Deletion (Average)</text>
+                <!-- TODO: Not sure: https://stackoverflow.com/questions/17891442/what-is-the-best-worst-average-case-big-o-runtime-of-a-trie-data-structure -->
+                <answer>O(m)</answer>
+            </question>
+
+            <!-- No trie-access-worst -->
+            <question id="trie-search-worst">
+                <text>Search (Worst)</text>
+                <!-- TODO: Not sure: https://stackoverflow.com/questions/17891442/what-is-the-best-worst-average-case-big-o-runtime-of-a-trie-data-structure -->
+                <answer>O(m)</answer>
+            </question>
+            <question id="trie-insertion-worst">
+                <text>Insertion (Worst)</text>
+                <!-- TODO: Not sure: https://stackoverflow.com/questions/17891442/what-is-the-best-worst-average-case-big-o-runtime-of-a-trie-data-structure -->
+                <answer>O(m)</answer>
+            </question>
+            <question id="trie-deletion-worst">
+                <text>Deletion (Worst)</text>
+                <!-- TODO: Not sure: https://stackoverflow.com/questions/17891442/what-is-the-best-worst-average-case-big-o-runtime-of-a-trie-data-structure -->
+                <answer>O(m)</answer>
+            </question>
+
+            <question id="trie-space">
+                <text>Space Complexity</text>
+                <answer>O(mn)</answer>
+            </question>
+        </subsection>
+
+        <!-- This is not in bigoref.com, or in bigocheatsheet.com:
+        See https://github.com/josem/bigoref/issues/6 -->
+        <subsection id="suffix-tree">
+            <title>Suffix Tree (Compressed Trie)</title>
+            <link>https://en.wikipedia.org/wiki/Suffix_tree</link>
+            <!-- No suffix-tree-access-average -->
+            <question id="suffix-tree-search-average">
+                <text>Search (Average)</text>
+                <answer>O(m)</answer>
+            </question>
+            <question id="suffix-tree-insertion-average">
+                <text>Insertion (Average)</text>
+                <!-- TODO: Not sure. -->
+                <answer>O(m)</answer></question>
+            <question id="suffix-tree-deletion-average">
+                <text>Deletion (Average)</text>
+                <!-- TODO: Not sure. -->
+                <answer>O(m)</answer>
+            </question>
+
+            <!-- No suffix-tree-access-worst -->
+            <question id="suffix-tree-search-worst">
+                <text>Search (Worst)</text>
+                <!-- TODO: Not sure. -->
+                <answer>O(m)</answer>
+            </question>
+            <question id="suffix-tree-insertion-worst">
+                <text>Insertion (Worst)</text>
+                <!-- TODO: Not sure. -->
+                <answer>O(m)</answer>
+            </question>
+            <question id="suffix-tree-deletion-worst">
+                <text>Deletion (Worst)</text>
+                <!-- TODO: Not sure. -->
+                <answer>O(m)</answer>
+            </question>
+
+            <question id="suffix-tree-space">
+                <text>Space Complexity</text>
+                <answer>O(mn)</answer>
             </question>
         </subsection>
 
