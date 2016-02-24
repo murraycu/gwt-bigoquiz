@@ -345,7 +345,42 @@
             </question>
         </subsection>
 
-        <!-- TODO: bigoref.com has Ternary Search Tree -->
+        <subsection id="ternary-search-tree">
+            <title>Ternary Search Tree</title>
+            <link>http://en.wikipedia.org/wiki/B_tree</link>
+            <!-- No ternary-search-tree-access-average -->
+            <question id="ternary-search-tree-search-average">
+                <text>Search (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="ternary-search-tree-insertion-average">
+                <text>Insertion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+            <question id="ternary-search-tree-deletion-average">
+                <text>Deletion (Average)</text>
+                <answer>O(log(n))</answer>
+            </question>
+
+            <!-- No ternary-search-tree-access-worst -->
+            <question id="ternary-search-tree-search-worst">
+                <text>Search (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="ternary-search-tree-insertion-worst">
+                <text>Insertion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+            <question id="ternary-search-tree-deletion-worst">
+                <text>Deletion (Worst)</text>
+                <answer>O(n)</answer>
+            </question>
+
+            <question id="ternary-search-tree-space">
+                <text>Space Complexity</text>
+                <answer>O(n)</answer>
+            </question>
+        </subsection>
 
         <subsection id="b-tree">
             <title>B-Tree</title>
