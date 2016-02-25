@@ -19,6 +19,7 @@ public class HomeView extends ContentViewWithUIHandlers<HomeUserEditUiHandlers>
         //If we just add the HTML directly to mainPanel, we will lose its CSS id.
         final FlowPanel panel = new FlowPanel();
         Utils.addHtmlToPanel(panel, HtmlResources.INSTANCE.getHomeHtml());
+        panel.addStyleName("home-panel");
         mainPanel.add(panel);
 
         final Button buttonPlay = new Button(constants.buttonAnswerQuestions());
