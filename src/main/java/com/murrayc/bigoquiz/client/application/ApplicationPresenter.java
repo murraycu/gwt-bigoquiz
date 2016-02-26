@@ -34,8 +34,8 @@ public class ApplicationPresenter extends Presenter<MyView, MyProxy> {
     public static final NestedSlot SLOT_CONTENT = new NestedSlot();
 
     //The MenuPresenter is are on every page.
-    public static final SingleSlot SLOT_MENU = new SingleSlot();
-    public static final SingleSlot SLOT_USER_HISTORY_RECENT = new SingleSlot();
+    public static final SingleSlot<MenuPresenter> SLOT_MENU = new SingleSlot();
+    public static final SingleSlot<UserHistoryRecentPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot();
 
     @Inject
     ApplicationPresenter(

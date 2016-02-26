@@ -39,7 +39,7 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
     interface MyProxy extends ProxyPlace<UserProfilePresenter> {
     }
 
-    public static final SingleSlot SLOT_USER_HISTORY_RECENT = new SingleSlot();
+    public static final SingleSlot<UserHistoryRecentPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot<>();
 
     @Inject
     UserProfilePresenter(

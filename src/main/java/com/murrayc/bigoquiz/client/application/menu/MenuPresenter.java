@@ -15,7 +15,7 @@ import com.murrayc.bigoquiz.client.application.userstatus.UserStatusPresenter;
 public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
         implements MenuUserEditUiHandlers {
     private final UserStatusPresenter userStatusPresenter;
-    static final SingleSlot SLOT_USER_STATUS = new SingleSlot();
+    static final SingleSlot<UserStatusPresenter> SLOT_USER_STATUS = new SingleSlot();
 
     public interface MyView extends View, HasUiHandlers<MenuUserEditUiHandlers> {
     }
