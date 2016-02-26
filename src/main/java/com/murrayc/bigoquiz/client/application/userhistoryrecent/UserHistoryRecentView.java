@@ -195,21 +195,20 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             detailsPanel.add(problemQuestionsPanel);
             problemQuestionsPanel.addStyleName("panel-problem-questions");
 
-            @NotNull final List<UserQuestionHistory> problemQuestions = stats.getQuestionHistories();
+            @NotNull final List<UserQuestionHistory> problemQuestions = stats.getTopQuestionHistories();
 
             int count = 0;
             if (problemQuestions != null) {
-                int extras = 0;
-                final int MAX = 5;
                 for (@NotNull final UserQuestionHistory problemQuestion : problemQuestions) {
                     if (problemQuestion.getCountAnsweredWrong() <= 0) {
                         //It's not really a problem question.
                         continue;
                     }
 
-                    if (count >= MAX) {
-                        extras += 1;
-                        continue;
+                    //This shouldn't be necessary, because the server should not return to many,
+                    //but let's be sure:
+                    if (count >= UserStats.MAX_PROBLEM_QUESTIONS) {
+                        break;
                     }
 
                     @NotNull final Panel paraScore = addParaScore(problemQuestionsPanel);
@@ -225,9 +224,16 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                     count += 1;
                 }
 
-                if (extras > 0) {
-                    Utils.addParagraphWithText(problemQuestionsPanel, messages.moreProblemQuestions(extras),
-                            "problem-questions-more-questions");
+                final int fullCount = stats.getQuestionHistoriesCount();
+                Log.fatal("debug: fullCount=" + fullCount);
+                if (fullCount > UserStats.MAX_PROBLEM_QUESTIONS) {
+                    final int extras = fullCount - UserStats.MAX_PROBLEM_QUESTIONS;
+                    Log.fatal("debug: extras=" + extras);
+
+                    if (extras > 0) {
+                        Utils.addParagraphWithText(problemQuestionsPanel, messages.moreProblemQuestions(extras),
+                                "problem-questions-more-questions");
+                    }
                 }
             }
 

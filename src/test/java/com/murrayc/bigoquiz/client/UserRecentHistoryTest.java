@@ -33,19 +33,19 @@ public class UserRecentHistoryTest {
         final UserStats stats = history.getStats(SECTION_1);
         assertNotNull(stats);
 
-        @NotNull Collection<UserQuestionHistory> problems = stats.getQuestionHistories();
+        @NotNull Collection<UserQuestionHistory> problems = stats.getTopQuestionHistories();
         assertNotNull(problems);
         assertEquals(1, problems.size());
 
         history.addUserAnswerAtStart(QUIZ_ID, question, false);
-        problems = stats.getQuestionHistories();
+        problems = stats.getTopQuestionHistories();
         assertNotNull(problems);
         assertEquals(1, problems.size());
 
         question = createQuestion("question5", SECTION_1, SUBSECTION_1_1);
         history.addUserAnswerAtStart(QUIZ_ID, question, false);
 
-        problems = stats.getQuestionHistories();
+        problems = stats.getTopQuestionHistories();
         assertNotNull(problems);
         assertEquals(2, problems.size());
 

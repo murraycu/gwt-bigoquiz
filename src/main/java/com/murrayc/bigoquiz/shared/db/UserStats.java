@@ -18,6 +18,8 @@ import java.util.*;
  */
 @Entity
 public class UserStats implements IsSerializable {
+    public static final int MAX_PROBLEM_QUESTIONS = 5;
+
     //TODO: Just use userId as the Id, but then get the query to still work.
     @Id
     Long id;
@@ -177,14 +179,37 @@ public class UserStats implements IsSerializable {
 
         questionHistoriesInOrder = new ArrayList<>(questionHistories.values());
 
+        //The client only wants the first few:
+        final int size = questionHistoriesInOrder.size();
+        final int sublistSize = Math.min(size, MAX_PROBLEM_QUESTIONS );
+        if (sublistSize != size && sublistSize > 0) {
+            questionHistoriesInOrder = questionHistoriesInOrder.subList(0, sublistSize);
+        }
+
         Collections.sort(questionHistoriesInOrder, comparator);
         cacheIsInvalid = false;
     }
 
+    /**
+     * Get the MAX_PROBLEM_QUESTIONS questions that have been answered wrongly the most often.
+     * @return
+     */
     @NotNull
-    public List<UserQuestionHistory> getQuestionHistories() {
+    public List<UserQuestionHistory> getTopQuestionHistories() {
         cacheList();
         return questionHistoriesInOrder;
+    }
+
+    /** Get the count of all the questions that have been answered wrongly.
+     * getTopQuestionHistories() returns just the top few of these.
+     * @return
+     */
+    public int getQuestionHistoriesCount() {
+        if (questionHistories == null) {
+            return 0;
+        }
+
+        return questionHistories.size();
     }
 
     public int getAnsweredOnce() {
