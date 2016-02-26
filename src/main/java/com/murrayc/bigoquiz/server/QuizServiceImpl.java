@@ -282,8 +282,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
             } catch (final QuizLoader.QuizLoaderException e) {
                 Log.fatal("loadQuiz() failed", e);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (final IOException e) {
+            Log.error("loadQuiz(): Could not get file as stream from resouce", e);
         }
 
         return null;
