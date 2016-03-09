@@ -110,6 +110,10 @@ public class QuizServiceImpl extends ServiceWithUser implements
             throw new IllegalArgumentException("Unknown question ID");
         }
 
+        if (result != null) {
+            setQuestionExtraTitles(result, quiz);
+        }
+
         return result;
     }
 
@@ -118,22 +122,28 @@ public class QuizServiceImpl extends ServiceWithUser implements
     public Question getNextQuestion(@NotNull final String quizId, final String sectionId) throws IllegalArgumentException {
         @NotNull final Quiz quiz = getQuiz(quizId);
 
+        Question result = null;
+
         @Nullable final String userId = getUserId();
         if (StringUtils.isEmpty(userId)) {
             //The user is not logged in,
             //so just return a random question:
-            return quiz.getRandomQuestion(sectionId);
-        }
-
-        if (StringUtils.isEmpty(sectionId)) {
+            result = quiz.getRandomQuestion(sectionId);
+        } else if (StringUtils.isEmpty(sectionId)) {
             @NotNull final Map<String, UserStats> mapUserStats = getUserStats(userId, quizId);
-            return getNextQuestionFromUserStats(null, quiz, mapUserStats);
+            result = getNextQuestionFromUserStats(null, quiz, mapUserStats);
         } else {
             //This special case is a bit copy-and-pasty of the general case with the
             //map, but it seems more efficient to avoid an unnecessary Map.
             @Nullable final UserStats userStats = getUserStatsForSection(userId, sectionId, quizId);
-            return getNextQuestionFromUserStatsForSection(sectionId, quiz, userStats);
+            result = getNextQuestionFromUserStatsForSection(sectionId, quiz, userStats);
         }
+
+        if (result != null) {
+            setQuestionExtraTitles(result, quiz);
+        }
+
+        return result;
     }
 
     @NotNull
@@ -403,6 +413,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         @Nullable final Question nextQuestion = getNextQuestionFromUserStatsForSection(nextQuestionSectionId, quiz, userStats);
+        setQuestionExtraTitles(nextQuestion, quiz);
         return new SubmissionResult(result, correctAnswer, nextQuestion);
     }
 
@@ -592,5 +603,15 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         return questionBestSoFar;
+    }
+
+    private void setQuestionExtraTitles(Question questionBestSoFar, @NotNull Quiz quiz) {
+        String subSectionTitle = null;
+        @NotNull final QuizSections sections = quiz.getSections();
+        if (sections != null) {
+            subSectionTitle = sections.getSubSectionTitle(questionBestSoFar.getSectionId(),
+                    questionBestSoFar.getSubSectionId());
+        }
+        questionBestSoFar.setTitles(quiz.getTitle(), subSectionTitle, questionBestSoFar);
     }
 }
