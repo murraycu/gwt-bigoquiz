@@ -192,6 +192,8 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
     @Override
     public void setQuestion(final String quizId, @Nullable final Question question, boolean multipleChoice) {
+        setTitle(question.getQuizTitle());
+
         this.multipleChoice = multipleChoice;
 
         choicesPanel.clear();
