@@ -100,6 +100,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
     }
 
+    //TODO: This seems to be called unnecessarily right after getNextQuestion().
     @NotNull
     @Override
     public Question getQuestion(@NotNull final String quizId, @NotNull final String questionId) throws IllegalArgumentException {
