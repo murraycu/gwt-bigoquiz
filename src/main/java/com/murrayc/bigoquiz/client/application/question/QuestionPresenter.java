@@ -238,11 +238,12 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             return;
         }
 
+        //TODO: Just use the question as it is?
         //Tell the UserHistoryRecent presenter/view that there is a new history item.
         //Otherwise it will only update when the whole page refreshes.
         @Nullable final String subSectionTitle =
                 sections.getSubSectionTitle(question.getSectionId(), question.getSubSectionId());
-        question.setTitles(subSectionTitle, question);
+        question.setTitles(question.getQuizTitle(), subSectionTitle, question);
 
         QuestionUserAnswerAddedEvent.fire(this, question, answerIsCorrect);
     }

@@ -15,7 +15,8 @@ public class Question implements IsSerializable {
     private /* final */ String text;
     private /* final */ List<String> choices;
 
-    private String subSectionTitle;
+    private /* final */ String quizTitle;
+    private /* final */ String subSectionTitle;
 
     public Question() {
     }
@@ -52,14 +53,21 @@ public class Question implements IsSerializable {
         return (choices != null) && !choices.isEmpty();
     }
 
-    /**
-     * @param subSectionTitle
+    /** Set titles, just to save users of Question the bother of having to get them from the Quiz class.
+     *
+     * @param quizTitle The title of the quiz that this Question is from.
+     * @param subSectionTitle The title of the quiz's sub-section that this Question is from.
      * @param question
      */
-    public void setTitles(final String subSectionTitle, @NotNull final Question question) {
+    public void setTitles(final String quizTitle, final String subSectionTitle, @NotNull final Question question) {
+        this.quizTitle = quizTitle;
         this.subSectionTitle = subSectionTitle;
         this.text = question.getText(); //TODO: This is not useful.
 
+    }
+
+    public String getQuizTitle() {
+        return quizTitle;
     }
 
     public String getSubSectionTitle() {
