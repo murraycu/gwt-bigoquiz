@@ -225,10 +225,8 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                 }
 
                 final int fullCount = stats.getQuestionHistoriesCount();
-                Log.fatal("debug: fullCount=" + fullCount);
                 if (fullCount > UserStats.MAX_PROBLEM_QUESTIONS) {
                     final int extras = fullCount - UserStats.MAX_PROBLEM_QUESTIONS;
-                    Log.fatal("debug: extras=" + extras);
 
                     if (extras > 0) {
                         Utils.addParagraphWithText(problemQuestionsPanel, messages.moreProblemQuestions(extras),
