@@ -240,7 +240,9 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             subSectionTitle.setText(subSection.title);
             subSectionTitle.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
         } else {
-            subSectionTitle.setText("error: null subsection for: " + question.getSubSectionId());
+            //Not all questions have to be in a sub-section:
+            //subSectionTitle.setText("error: null subsection for: " + question.getSubSectionId());
+            subSectionTitle.setText("");
             subSectionTitle.setHref("");
         }
 
