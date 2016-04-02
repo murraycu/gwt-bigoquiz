@@ -25,6 +25,7 @@ import java.util.List;
 public class QuizLoader {
     private static final String NODE_ROOT = "quiz";
     private static final String NODE_SECTION = "section";
+    private static final String ATTR_ANSWERS_AS_CHOICES = "answers_as_choices";
     private static final String NODE_SUB_SECTION = "subsection";
 
     private static final String NODE_QUESTION = "question";
@@ -99,6 +100,8 @@ public class QuizLoader {
                 defaultChoices = loadChoices(elementChoices);
             }
 
+            final boolean useAnswersAsChoices = getAttributeAsBoolean(sectionElement, ATTR_ANSWERS_AS_CHOICES);
+
             result.addSection(sectionId, sectionTitle, defaultChoices);
 
             int questionsCount = 0;
@@ -119,9 +122,18 @@ public class QuizLoader {
             questionsCount += addChildQuestions(result, sectionId, null, defaultChoices, sectionElement);
 
             result.setSectionQuestionsCount(sectionId, questionsCount);
+
+            if (useAnswersAsChoices) {
+                result.setSectionDefaultChoicesFromAnswers(sectionId);
+            }
         }
 
         return result;
+    }
+
+    private static boolean getAttributeAsBoolean(final Element element, final String attribute) {
+        final String str = element.getAttribute(attribute);
+        return StringUtils.equals(str, "true");
     }
 
     @Nullable

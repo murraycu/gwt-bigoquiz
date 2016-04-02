@@ -53,6 +53,10 @@ public class Question implements IsSerializable {
         return (choices != null) && !choices.isEmpty();
     }
 
+    public void setChoices(final List<String> choices) {
+        this.choices = choices;
+    }
+
     /** Set titles, just to save users of Question the bother of having to get them from the Quiz class.
      *
      * @param quizTitle The title of the quiz that this Question is from.
