@@ -47,6 +47,10 @@ public class Question implements IsSerializable {
         return text;
     }
 
+    public String getLink() {
+        return link;
+    }
+
     public List<String> getChoices() {
         return choices;
     }

@@ -44,6 +44,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private final Label sectionTitle = new InlineLabel();
     private final Anchor subSectionTitle = new Anchor();
     private final Label questionLabel = new InlineLabel();
+    private final Anchor questionAnchor = new Anchor();
     private final Panel choicesPanel = new FlowPanel();
 
     private final Button showAnswerButton = new Button(constants.showAnswerButton());
@@ -92,8 +93,11 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         paraHeader.add(subSectionTitle);
         Utils.addHeaderToPanel(3, mainPanel, paraHeader);
 
-        Utils.addParagraphWithChild(mainPanel, questionLabel);
+        //We only show one of these (label or anchor) at a time:
+        final Panel p = Utils.addParagraphWithChild(mainPanel, questionLabel);
         questionLabel.addStyleName("question-label");
+        p.add(questionAnchor);
+        questionAnchor.addStyleName("question-anchor");
 
         mainPanel.add(choicesPanel);
         choicesPanel.addStyleName("choices-panel");
@@ -201,6 +205,8 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         if (question == null) {
             Window.setTitle(messages.windowTitleQuestion(""));
             questionLabel.setText("");
+            questionAnchor.setText("");
+            questionAnchor.setHref("");
 
             return;
         }
@@ -208,7 +214,18 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         setErrorLabelVisible(false);
 
         Window.setTitle(messages.windowTitleQuestion(question.getText()));
-        questionLabel.setText(question.getText());
+        final String link = question.getLink();
+        if (StringUtils.isEmpty(link)) {
+            questionLabel.setText(question.getText());
+            questionLabel.setVisible(true);
+            questionAnchor.setVisible(false);
+
+        } else {
+            questionAnchor.setText(question.getText());
+            questionAnchor.setHref(link);
+            questionAnchor.setVisible(true);
+            questionLabel.setVisible(false);
+        }
 
         final String onOff = multipleChoice ? constants.offerMultipleChoiceOn() :
                 constants.offerMultipleChoiceOff();
