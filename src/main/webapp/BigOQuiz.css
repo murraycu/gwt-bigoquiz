@@ -548,6 +548,20 @@ h4 * {
     line-height: 2em;
 }
 
+/* Make sure that the start of the second row of the radio button's' label aligns with the first row,
+ * instead of being underneath the radio button itself.
+ */
+.gwt-RadioButton input {
+    float: left;
+}
+
+.gwt-RadioButton label {
+    margin-left: 2em;
+    display: block;
+    text-align: left;
+    width: 100%;
+}
+
 .question-answer-textbox {
     margin-right: 1em;
     font-size: medium;
