@@ -544,8 +544,18 @@ h4 * {
     animation-duration: 1s;
 }
 
+/*
 .gwt-RadioButton {
     line-height: 2em;
+}
+*/
+
+.choices-panel span{
+    margin-top: 1em;
+}
+
+.choices-panel span:first-child {
+    margin-top: 0;
 }
 
 /* Make sure that the start of the second row of the radio button's' label aligns with the first row,
