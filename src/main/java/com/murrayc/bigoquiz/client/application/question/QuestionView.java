@@ -16,6 +16,7 @@ import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
+import com.murrayc.bigoquiz.client.application.quiz.QuizPresenter;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
@@ -60,6 +61,18 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     QuestionView(final PlaceManager placeManager) {
         this.placeManager = placeManager;
 
+        //Sections sidebar:
+        //We use a CSS media query to only show this on wider screens:
+        @NotNull Panel sidebarPanelSections = new FlowPanel();
+        parentPanel.add(sidebarPanelSections);
+        sidebarPanelSections.addStyleName("sidebar-panel-sections");
+
+        @NotNull SimplePanel userHistoryRecentPanel = new SimplePanel();
+        sidebarPanelSections.add(userHistoryRecentPanel);
+        bindSlot(QuestionPresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
+
+
+        //Question content:
         @NotNull final Panel showingFromPanel = new FlowPanel(ParagraphElement.TAG);
         showingFromPanel.addStyleName("show-from-panel");
         //TODO: Avoid the " " concatenation:

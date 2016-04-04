@@ -20,7 +20,6 @@ import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRece
  */
 public class ApplicationPresenter extends Presenter<MyView, MyProxy> {
     private final MenuPresenter menuPresenter;
-    private final UserHistoryRecentPresenter userHistoryRecentPresenter;
 
     interface MyView extends View {
     }
@@ -35,19 +34,16 @@ public class ApplicationPresenter extends Presenter<MyView, MyProxy> {
 
     //The MenuPresenter is are on every page.
     public static final SingleSlot<MenuPresenter> SLOT_MENU = new SingleSlot();
-    public static final SingleSlot<UserHistoryRecentPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot();
 
     @Inject
     ApplicationPresenter(
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            MenuPresenter menuPresenter,
-            UserHistoryRecentPresenter userHistoryRecentPresenter) {
+            MenuPresenter menuPresenter) {
         super(eventBus, view, proxy, RevealType.Root);
 
         this.menuPresenter = menuPresenter;
-        this.userHistoryRecentPresenter = userHistoryRecentPresenter;
     }
 
     @Override
@@ -55,6 +51,5 @@ public class ApplicationPresenter extends Presenter<MyView, MyProxy> {
         super.onBind();
 
         setInSlot(SLOT_MENU, menuPresenter);
-        setInSlot(SLOT_USER_HISTORY_RECENT, userHistoryRecentPresenter);
     }
 }

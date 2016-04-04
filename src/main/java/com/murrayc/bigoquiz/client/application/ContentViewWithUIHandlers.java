@@ -24,6 +24,8 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
     protected final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
 
     @NotNull
+    protected Panel parentPanel = new FlowPanel();
+    @NotNull
     protected Panel mainPanel = new FlowPanel();
     @NotNull final HeadingElement titleHeading;
     @NotNull final Label titleLabel = new InlineLabel();
@@ -31,7 +33,10 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
     private final Label labelError = Utils.createServerErrorLabel(constants);
 
     public ContentViewWithUIHandlers() {
+        parentPanel.addStyleName("parent-content-panel");
         mainPanel.addStyleName("content-panel");
+        parentPanel.add(mainPanel);
+        
         titleLabel.addStyleName("page-title-label");
         titleHeading = Utils.addHeaderToPanel(2, mainPanel, titleLabel);
         setHeadingVisible(false);
@@ -41,7 +46,7 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
         mainPanel.add(labelError);
         setErrorLabelVisible(false);
 
-        initWidget(mainPanel);
+        initWidget(parentPanel);
     }
 
     public void setTitle(final String title) {

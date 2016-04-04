@@ -233,6 +233,12 @@ body {
     margin-bottom: 1em;
 }
 
+/* Contains content-panel
+   and sometimes contains a sidebar-panel-sections. */
+.parent-content-panel {
+    float: left;
+}
+
 .content-panel {
     float: left;
 

@@ -25,16 +25,6 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
         main.add(sidebarPanelLinks);
         sidebarPanelLinks.addStyleName("sidebar-panel-links");
 
-
-        //We use a CSS media query to only show this on wider screens:
-        @NotNull Panel sidebarPanelSections = new FlowPanel();
-        main.add(sidebarPanelSections);
-        sidebarPanelSections.addStyleName("sidebar-panel-sections");
-
-        @NotNull SimplePanel userHistoryRecentPanel = new SimplePanel();
-        sidebarPanelSections.add(userHistoryRecentPanel);
-
-
         //Add some static HTML in the sidebar:
         //TODO: It would be nicer to have this right in the main .html file,
         //but then we couldn't put it in the correct <div>.
@@ -45,7 +35,6 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
         initWidget(main);
 
         bindSlot(ApplicationPresenter.SLOT_MENU, menuPanel);
-        bindSlot(ApplicationPresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
         bindSlot(ApplicationPresenter.SLOT_CONTENT, contentPanel);
     }
 
