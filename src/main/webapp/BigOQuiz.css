@@ -722,6 +722,20 @@ h4 * {
 
 }
 
+.quiz-list-row {
+
+}
+
+.quiz-list-row .button-answer-questions {
+    float: right;
+    margin-bottom: 1em;
+}
+
+.quiz-list-row .button-reset-sections {
+    float: right;
+    margin-bottom: 1em;
+}
+
 .quiz-panel {
 
 }

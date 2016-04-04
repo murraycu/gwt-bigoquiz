@@ -54,23 +54,15 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
                 continue;
             }
 
-            final Panel rowPanel = Utils.addParagraph(panelList, null);
+            final Panel rowPanel = new FlowPanel();
+            rowPanel.addStyleName("quiz-list-row");
+            rowPanel.addStyleName("clearfix");
             panelList.add(rowPanel);
 
             @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuiz(details.getId());
             final String historyToken = placeManager.buildHistoryToken(placeRequest);
             @NotNull final Hyperlink link = new InlineHyperlink(details.getTitle(), historyToken);
             rowPanel.add(link);
-
-            final Button buttonResetSections = new Button(constants.buttonResetSections());
-            buttonResetSections.addStyleName("button-reset-sections");
-            buttonResetSections.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(final ClickEvent event) {
-                    onResetSectionsButton(details.getId());
-                }
-            });
-            rowPanel.add(buttonResetSections);
 
 
             final Button buttonPlay = new Button(constants.buttonAnswerQuestions());
@@ -82,6 +74,17 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
                 }
             });
             rowPanel.add(buttonPlay);
+
+
+            final Button buttonResetSections = new Button(constants.buttonResetSections());
+            buttonResetSections.addStyleName("button-reset-sections");
+            buttonResetSections.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(final ClickEvent event) {
+                    onResetSectionsButton(details.getId());
+                }
+            });
+            rowPanel.add(buttonResetSections);
         }
     }
 
