@@ -26,6 +26,9 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         implements QuizPresenter.MyView {
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
+    // We use this instead of trying to store null as an ID in a HashMap.
+    public static final String NO_SUBSECTION_ID = "default-subsection";
+
     private final Panel panelQuiz = new FlowPanel();
     private final PlaceManager placeManager;
 
@@ -120,17 +123,32 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
             }
             addSubSection(panelSection, messages, questionsBySubSection.get(subSectionId), subSection);
         }
+
+        //Add questions that have no sub-section:
+        final List<QuestionAndAnswer> questionsWithoutSubSection = questionsBySubSection.get(NO_SUBSECTION_ID);
+        if (questionsWithoutSubSection != null && !questionsWithoutSubSection.isEmpty()) {
+            addSubSection(panelSection, messages, questionsWithoutSubSection, null);
+        }
     }
 
+    /**
+     *
+     * @param panelSection
+     * @param messages
+     * @param questions
+     * @param subSection This may be null.
+     */
     private static void addSubSection(final Panel panelSection, final BigOQuizMessages messages, final List<QuestionAndAnswer> questions, final QuizSections.SubSection subSection) {
         final Panel panelSubSection = new FlowPanel();
         panelSubSection.addStyleName("quiz-sub-section");
         panelSection.add(panelSubSection);
 
-        final Anchor subSectionTitle = new Anchor();
-        subSectionTitle.setText(subSection.title);
-        subSectionTitle.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
-        Utils.addHeaderToPanel(4, panelSubSection, subSectionTitle);
+        if (subSection != null) {
+            final Anchor subSectionTitle = new Anchor();
+            subSectionTitle.setText(subSection.title);
+            subSectionTitle.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
+            Utils.addHeaderToPanel(4, panelSubSection, subSectionTitle);
+        }
 
         for (final QuestionAndAnswer questionAndAnswer : questions) {
             if (questionAndAnswer == null) {
@@ -180,9 +198,9 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
                 continue;
             }
 
-            final String subSectionId = question.getSubSectionId();
+            String subSectionId = question.getSubSectionId();
             if (subSectionId == null) {
-                continue;
+                subSectionId = NO_SUBSECTION_ID;
             }
 
             List<QuestionAndAnswer> list = result.get(subSectionId);
