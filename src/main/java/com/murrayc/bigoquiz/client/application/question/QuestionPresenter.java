@@ -33,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, QuestionPresenter.MyProxy>
         implements QuestionUserEditUiHandlers {
+    //Put this in a shared PresenterWithUserHistoryRecent class, also used by QuizPresenter?
     private final UserHistoryRecentPresenter userHistoryRecentPresenter;
     public static final SingleSlot<UserHistoryRecentPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot();
 

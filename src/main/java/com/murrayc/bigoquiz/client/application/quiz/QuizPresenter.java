@@ -7,6 +7,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
@@ -16,6 +17,7 @@ import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
+import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentPresenter;
 import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -24,6 +26,10 @@ import org.jetbrains.annotations.NotNull;
  * Created by murrayc on 1/21/16.
  */
 public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter.MyProxy> {
+    //Put this in a shared PresenterWithUserHistoryRecent class, also used by QuizPresenter?
+    private final UserHistoryRecentPresenter userHistoryRecentPresenter;
+    public static final SingleSlot<UserHistoryRecentPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot();
+
     private final PlaceManager placeManager;
     private String quizId = null;
 
@@ -43,10 +49,19 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            PlaceManager placeManager) {
+            PlaceManager placeManager,
+            UserHistoryRecentPresenter userHistoryRecentPresenter) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         this.placeManager = placeManager;
+        this.userHistoryRecentPresenter = userHistoryRecentPresenter;
+    }
+
+    @Override
+    protected void onBind() {
+        super.onBind();
+
+        setInSlot(SLOT_USER_HISTORY_RECENT, userHistoryRecentPresenter);
     }
 
     @Override

@@ -40,6 +40,18 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
 
         setTitle(constants.quizTitle());
 
+        //Sections sidebar:
+        //We use a CSS media query to only show this on wider screens:
+        @NotNull Panel sidebarPanelSections = new FlowPanel();
+        parentPanel.add(sidebarPanelSections);
+        sidebarPanelSections.addStyleName("sidebar-panel-sections");
+
+        @NotNull SimplePanel userHistoryRecentPanel = new SimplePanel();
+        sidebarPanelSections.add(userHistoryRecentPanel);
+        bindSlot(QuizPresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
+
+
+        //Quiz content:
         mainPanel.add(panelQuiz);
         panelQuiz.addStyleName("quiz-panel");
     }
