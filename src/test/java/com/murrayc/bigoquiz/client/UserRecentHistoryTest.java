@@ -70,6 +70,6 @@ public class UserRecentHistoryTest {
 
     @Nullable
     private Question createQuestion(final String questionId, final String sectionId, final String subSectionId) {
-        return new Question(questionId, sectionId, subSectionId, "question text", null);
+        return new Question(questionId, sectionId, subSectionId, "question text", "someurl", null);
     }
 }

@@ -202,6 +202,13 @@ public class QuizLoader {
             throw new QuizLoaderException("loadQuestionNode(): Missing text content.");
         }
 
+        //This is optional:
+        String questionLink = null;
+        @Nullable final Element linkElement = getElementByName(element, NODE_LINK);
+        if (linkElement != null) {
+            questionLink = linkElement.getTextContent();
+        }
+
         final String answerText = answerElement.getTextContent();
         if (answerText == null) {
             throw new QuizLoaderException("loadQuestionNode(): Missing answer content.");
@@ -221,7 +228,7 @@ public class QuizLoader {
             throw new QuizLoaderException("QuizLoader.loadQuestionNode(): answer is not in the choices: questionId: " + id);
         }
 
-        return new QuestionAndAnswer(id, sectionID, subSectionId, questionText, answerText, choices);
+        return new QuestionAndAnswer(id, sectionID, subSectionId, questionText, questionLink, answerText, choices);
     }
 
     @NotNull

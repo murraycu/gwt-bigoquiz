@@ -12,8 +12,9 @@ public class Question implements IsSerializable {
     private /* final */ String id;
     private /* final */ String sectionId;
     private /* final */ String subSectionId;
-    private /* final */ String text;
-    private /* final */ List<String> choices;
+    private /* final */ String text; //The actual question text.
+    private /* final */ String link; //An informative URL.
+    private /* final */ List<String> choices; //Possible answers, only one of which is correct.
 
     private /* final */ String quizTitle;
     private /* final */ String subSectionTitle;
@@ -21,11 +22,12 @@ public class Question implements IsSerializable {
     public Question() {
     }
 
-    public Question(final String id, final String sectionId, final String subSectionId, final String text, final List<String> choices) {
+    public Question(final String id, final String sectionId, final String subSectionId, final String text, final String link, final List<String> choices) {
         this.id = id;
         this.sectionId = sectionId;
         this.subSectionId = subSectionId;
         this.text = text;
+        this.link = link;
         this.choices = choices;
     }
 
