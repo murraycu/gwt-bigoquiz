@@ -65,14 +65,4 @@ public interface BigOQuizMessages extends com.google.gwt.i18n.client.Messages {
     @DefaultMessage("Username: {0}")
     @Key("username")
     String username(final String text);
-
-    @NotNull
-    @DefaultMessage("Question: {0}")
-    @Key("question")
-    String question(final String text);
-
-    @NotNull
-    @DefaultMessage("Answer: {0}")
-    @Key("answer")
-    String answer(final String text);
 }

@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.client.application.quiz;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
@@ -11,6 +12,7 @@ import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
+import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.shared.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -67,14 +69,14 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
                 continue;
             }
 
-            addSection(panelQuiz, messages, quiz, quizSections, section.id, section.title);
+            addSection(panelQuiz, constants, quiz, quizSections, section.id, section.title);
         }
 
         //Add questions that are not in a section:
-        addSection(panelQuiz, messages, quiz, quizSections, null, null);
+        addSection(panelQuiz, constants, quiz, quizSections, null, null);
     }
 
-    private static void addSection(final Panel panelQuiz, final BigOQuizMessages messages, @NotNull Quiz quiz, QuizSections quizSections, final String sectionId, final String sectionTitle) {
+    private static void addSection(@NotNull final Panel panelQuiz, final BigOQuizConstants constants, @NotNull final Quiz quiz, QuizSections quizSections, final String sectionId, final String sectionTitle) {
         final Panel panelSection = new FlowPanel();
         panelSection.addStyleName("quiz-section");
         panelQuiz.add(panelSection);
@@ -87,18 +89,17 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
             return;
         }
 
-        addQuestionsForSection(panelSection, messages, sectionId, quizSections, questions);
+        addQuestionsForSection(panelSection, constants, sectionId, quizSections, questions);
     }
 
     /** Add the subsections (and their questions), including questions which are not in a sub-section.
-     *
-     * @param panelSection
-     * @param messages
+     *  @param panelSection
+     * @param constants
      * @param sectionId
      * @param quizSections
      * @param questions
      */
-    private static void addQuestionsForSection(final Panel panelSection, final BigOQuizMessages messages, final String sectionId, final QuizSections quizSections, final List<QuestionAndAnswer> questions) {
+    private static void addQuestionsForSection(final Panel panelSection, final BigOQuizConstants constants, final String sectionId, final QuizSections quizSections, final List<QuestionAndAnswer> questions) {
         final Map<String, List<QuestionAndAnswer>> questionsBySubSection = groupQuestionsBySubSection(questions);
         if (questionsBySubSection == null) {
             Log.error("QuizListView: questionsBySubSection is null.");
@@ -121,24 +122,23 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
                 Log.fatal("QuizListView: subSectionId is null.");
                 continue;
             }
-            addSubSection(panelSection, messages, questionsBySubSection.get(subSectionId), subSection);
+            addSubSection(panelSection, constants, questionsBySubSection.get(subSectionId), subSection);
         }
 
         //Add questions that have no sub-section:
         final List<QuestionAndAnswer> questionsWithoutSubSection = questionsBySubSection.get(NO_SUBSECTION_ID);
         if (questionsWithoutSubSection != null && !questionsWithoutSubSection.isEmpty()) {
-            addSubSection(panelSection, messages, questionsWithoutSubSection, null);
+            addSubSection(panelSection, constants, questionsWithoutSubSection, null);
         }
     }
 
     /**
-     *
-     * @param panelSection
-     * @param messages
+     *  @param panelSection
+     * @param constants
      * @param questions
      * @param subSection This may be null.
      */
-    private static void addSubSection(final Panel panelSection, final BigOQuizMessages messages, final List<QuestionAndAnswer> questions, final QuizSections.SubSection subSection) {
+    private static void addSubSection(final Panel panelSection, final BigOQuizConstants constants, final List<QuestionAndAnswer> questions, final QuizSections.SubSection subSection) {
         final Panel panelSubSection = new FlowPanel();
         panelSubSection.addStyleName("quiz-sub-section");
         panelSection.add(panelSubSection);
@@ -156,11 +156,11 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
                 continue;
             }
 
-            addQuestionAndAnswer(panelSubSection, messages, questionAndAnswer);
+            addQuestionAndAnswer(panelSubSection, constants, questionAndAnswer);
         }
     }
 
-    private static void addQuestionAndAnswer(final Panel panelSubSection, final BigOQuizMessages messages, final QuestionAndAnswer questionAndAnswer) {
+    private static void addQuestionAndAnswer(final Panel panelSubSection, final BigOQuizConstants constants, final QuestionAndAnswer questionAndAnswer) {
         final Question question = questionAndAnswer.getQuestion();
         if (question == null) {
             Log.error("QuizListView: question is null.");
@@ -170,9 +170,24 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         final Panel panelQuestionAnswer = new FlowPanel();
         panelQuestionAnswer.addStyleName("quiz-question-answer");
         panelSubSection.add(panelQuestionAnswer);
-        final Label labelQuestion = new Label(messages.question(question.getText()));
+
+        final Panel paraQuestion = Utils.addParagraph(panelQuestionAnswer, "");
+
+        final Label labelQuestionTitle = new InlineLabel(constants.question());
+        labelQuestionTitle.addStyleName("quiz-question-title");
+        paraQuestion.add(labelQuestionTitle);
+
+        final String link = question.getLink();
+        Widget labelQuestion = null;
+        if (StringUtils.isEmpty(link)) {
+            labelQuestion = new InlineLabel(question.getText());
+        } else {
+            labelQuestion = new Anchor(question.getText(), link);
+        }
         labelQuestion.addStyleName("quiz-question");
-        panelQuestionAnswer.add(labelQuestion);
+        paraQuestion.add(labelQuestion);
+
+        final Panel paraAnswer = Utils.addParagraph(panelQuestionAnswer, "");
 
         final String answer = questionAndAnswer.getAnswer();
         if (answer == null) {
@@ -180,9 +195,13 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
             return;
         }
 
-        final Label labelAnswer = new Label(messages.answer(answer));
+        final Label labelAnswerTitle = new InlineLabel(constants.answer());
+        labelAnswerTitle.addStyleName("quiz-answer-title");
+        paraAnswer.add(labelAnswerTitle);
+
+        final Label labelAnswer = new InlineLabel(answer);
         labelAnswer.addStyleName("quiz-answer");
-        panelQuestionAnswer.add(labelAnswer);
+        paraAnswer.add(labelAnswer);
     }
 
     private static @NotNull Map<String, List<QuestionAndAnswer>> groupQuestionsBySubSection(final List<QuestionAndAnswer> questions) {

@@ -765,12 +765,27 @@ h4 * {
     margin-bottom: 1em;
 }
 
-.quiz-question {
+.quiz-question-answer  p {
+    margin-top: 0;
+    margin-bottom: 0.3em;
+}
+
+.quiz-question-title {
+    font-weight: bold;
+    margin-right: 0.5em; /* TODO: RTL */
+}
+
+.quiz-question p {
     margin-bottom: 0;
 }
 
-.quiz-answer {
-    margin-bottom: 0.5em;
+.quiz-answer-title {
+    font-weight: bold;
+    margin-right: 0.5em; /* TODO: RTL */
+}
+
+.quiz-answer p {
+    margin-bottom: 0;
 }
 
 .home-button-answer-questions {
