@@ -15,5 +15,6 @@ public class NameTokens {
     public static final String QUESTION_PARAM_MULTIPLE_CHOICE_VALUE_ON = "1";
     public static final String QUESTION_PARAM_MULTIPLE_CHOICE_VALUE_OFF = "0";
     public static final String USER_PROFILE = "/user";
+    public static final String USER_HISTORY = "/history";
     public static final String ABOUT = "/about";
 }

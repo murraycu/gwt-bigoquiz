@@ -9,6 +9,7 @@ import com.murrayc.bigoquiz.client.application.menu.MenuView;
 import com.murrayc.bigoquiz.client.application.question.QuestionModule;
 import com.murrayc.bigoquiz.client.application.quiz.QuizModule;
 import com.murrayc.bigoquiz.client.application.quizlist.QuizListModule;
+import com.murrayc.bigoquiz.client.application.userhistory.UserHistoryModule;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsModule;
 import com.murrayc.bigoquiz.client.application.userprofile.UserProfileModule;
 import com.murrayc.bigoquiz.client.application.userstatus.UserStatusModule;
@@ -26,6 +27,7 @@ public class ApplicationModule extends AbstractPresenterModule {
         install(new QuizListModule());
         install(new QuestionModule());
         install(new UserProfileModule());
+        install(new UserHistoryModule());
         install(new AboutModule());
 
         install(new UserStatusModule());
