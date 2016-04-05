@@ -12,7 +12,7 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
-import com.murrayc.bigoquiz.client.UserRecentHistory;
+import com.murrayc.bigoquiz.client.UserHistory;
 import com.murrayc.bigoquiz.client.application.DefaultUserHistoryRequestEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
@@ -40,7 +40,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
     public interface MyView extends View, HasUiHandlers<UserHistoryRecentUserEditUiHandlers> {
         /** Set a whole set of history.
          */
-        void setUserRecentHistory(final String quizId, final UserRecentHistory result, final String nextQuestionSectionId, boolean multipleChoice);
+        void setUserRecentHistory(final String quizId, final UserHistory result, final String nextQuestionSectionId, boolean multipleChoice);
 
         /** Add a single item of history.
          * For instance, to avoid retrieving the whole history from the server,
@@ -131,7 +131,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
     }
 
     private void getAndShowHistory() {
-        @NotNull final AsyncCallback<UserRecentHistory> callback = new AsyncCallback<UserRecentHistory>() {
+        @NotNull final AsyncCallback<UserHistory> callback = new AsyncCallback<UserHistory>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 try {
@@ -153,7 +153,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
             }
 
             @Override
-            public void onSuccess(final UserRecentHistory result) {
+            public void onSuccess(final UserHistory result) {
                 if (result == null) {
                     onFailureGeneric();
                 }

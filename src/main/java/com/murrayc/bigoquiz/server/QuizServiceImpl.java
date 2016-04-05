@@ -5,7 +5,7 @@ import com.googlecode.objectify.cmd.Query;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.QuizService;
-import com.murrayc.bigoquiz.client.UserRecentHistory;
+import com.murrayc.bigoquiz.client.UserHistory;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
 import com.murrayc.bigoquiz.shared.*;
 import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
@@ -191,7 +191,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @Nullable
     @Override
-    public UserRecentHistory getUserRecentHistory(final String quizId, final String requestUri) throws IllegalArgumentException {
+    public UserHistory getUserRecentHistory(final String quizId, final String requestUri) throws IllegalArgumentException {
         @NotNull final Quiz quiz = getQuiz(quizId);
         @NotNull final QuizSections sections = quiz.getSections();
         if (sections == null) {
@@ -202,7 +202,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //We also return the LoginInfo, so we can show a sign in link,
         //and to avoid the need for a separate call to the server.
         @NotNull LoginInfo loginInfo = getLoginInfo(requestUri);
-        @NotNull final UserRecentHistory result = new UserRecentHistory(loginInfo, sections);
+        @NotNull final UserHistory result = new UserHistory(loginInfo, sections);
 
         //This may be null,
         //in which case we will return a mostly-empty set of user statistics,

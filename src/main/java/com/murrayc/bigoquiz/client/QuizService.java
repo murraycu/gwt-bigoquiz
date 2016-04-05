@@ -50,7 +50,8 @@ public interface QuizService extends RemoteService {
      * @return
      * @throws IllegalArgumentException
      */
-    @Nullable UserRecentHistory getUserRecentHistory(final String quizId, final String requestUri) throws IllegalArgumentException;
+    @Nullable
+    UserHistory getUserRecentHistory(final String quizId, final String requestUri) throws IllegalArgumentException;
 
     /**
      * Clear all question answer history, progress, scores, etc.

@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 /**
  * Created by murrayc on 1/27/16.
  */
-public class UserRecentHistoryTest {
+public class UserHistoryTest {
 
     public static final String QUIZ_ID = "somequiz";
     public static final String SECTION_1 = "section1";
@@ -24,8 +24,8 @@ public class UserRecentHistoryTest {
     @Test
     public void testAddUserAnswerAtStart() throws Exception {
         //TODO: Break this up into smaller tests,
-        //when the UserRecentHistory API has settled down.
-        @NotNull UserRecentHistory history = createUserRecentHistory();
+        //when the UserHistory API has settled down.
+        @NotNull UserHistory history = createUserRecentHistory();
 
         @Nullable Question question = createQuestion("question4", SECTION_1, SUBSECTION_1_1);
         history.addUserAnswerAtStart(QUIZ_ID, question, false);
@@ -53,7 +53,7 @@ public class UserRecentHistoryTest {
     }
 
     @NotNull
-    private UserRecentHistory createUserRecentHistory() {
+    private UserHistory createUserRecentHistory() {
         @NotNull final QuizSections sections = new QuizSections();
         sections.addSection(SECTION_1, "section 1", null);
         sections.addSection("section2", "section 2", null);
@@ -62,7 +62,7 @@ public class UserRecentHistoryTest {
 
         @NotNull LoginInfo loginInfo = new LoginInfo();
         loginInfo.setUserId("userid 1");
-        @NotNull UserRecentHistory history = new UserRecentHistory(loginInfo, sections);
+        @NotNull UserHistory history = new UserHistory(loginInfo, sections);
         history.setSectionStats("section1", stats);
 
         return history;

@@ -14,7 +14,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
-import com.murrayc.bigoquiz.client.UserRecentHistory;
+import com.murrayc.bigoquiz.client.UserHistory;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
@@ -60,7 +60,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     private final PlaceManager placeManager;
 
-    private UserRecentHistory userRecentHistory = null;
+    private UserHistory userHistory = null;
 
     //When we skip building of the UI because its hidden (by CSS) anyway,
     //this lets us do that building if necessary later.
@@ -101,10 +101,10 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     }
 
     @Override
-    public void setUserRecentHistory(final String quizId, final UserRecentHistory userRecentHistory, final String nextQuestionSectionId, boolean multipleChoice) {
+    public void setUserRecentHistory(final String quizId, final UserHistory userHistory, final String nextQuestionSectionId, boolean multipleChoice) {
         this.quizId = quizId;
         this.nextQuestionSectionId = nextQuestionSectionId;
-        this.userRecentHistory = userRecentHistory;
+        this.userHistory = userHistory;
         this.multipleChoice = multipleChoice;
 
         buildUi();
@@ -117,13 +117,13 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
         detailsPanel.clear();
 
-        if (userRecentHistory == null) {
-            Log.error("buildUI(): userRecentHistory is null.");
+        if (userHistory == null) {
+            Log.error("buildUI(): userHistory is null.");
             return;
         }
 
-        if (!userRecentHistory.hasUser()) {
-            final LoginInfo loginInfo = userRecentHistory.getLoginInfo();
+        if (!userHistory.hasUser()) {
+            final LoginInfo loginInfo = userHistory.getLoginInfo();
             loginLabel.setHTML(messages.pleaseSignIn(loginInfo.getLoginUrl()));
             loginParagraph.setVisible(true);
         }
@@ -148,7 +148,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
         buildUiPending = false;
 
-        @Nullable final QuizSections sections = userRecentHistory.getSections();
+        @Nullable final QuizSections sections = userHistory.getSections();
         if (sections == null) {
             return;
         }
@@ -174,7 +174,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
             final int questionsCount = section.questionsCount;
 
-            final UserStats stats = userRecentHistory.getStats(sectionId);
+            final UserStats stats = userHistory.getStats(sectionId);
             if (stats != null) {
                 addStackedProgressBar(detailsPanel, stats.getCorrectOnce(), stats.getAnsweredOnce(), questionsCount);
 
@@ -282,13 +282,13 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
 
     @Override
     public void addUserAnswer(final Question question, boolean answerIsCorrect) {
-        if (userRecentHistory == null) {
+        if (userHistory == null) {
             //The user is not logged in, so we don't show history.
             //TODO: See buildUi(), which makes the same assumption.
             return;
         }
 
-        userRecentHistory.addUserAnswerAtStart(quizId, question, answerIsCorrect);
+        userHistory.addUserAnswerAtStart(quizId, question, answerIsCorrect);
 
         //Re-generate the whole list in the UI:
         buildUi();
