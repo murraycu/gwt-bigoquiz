@@ -1,4 +1,4 @@
-package com.murrayc.bigoquiz.client.application.userhistoryrecent;
+package com.murrayc.bigoquiz.client.application.userhistorysections;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ResizeEvent;
@@ -32,8 +32,8 @@ import java.util.*;
 /**
  * Created by murrayc on 1/21/16.
  */
-public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentUserEditUiHandlers>
-        implements UserHistoryRecentPresenter.MyView {
+public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySectionsUserEditUiHandlers>
+        implements UserHistorySectionsPresenter.MyView {
 
     final Timer autoBuildUiTimer = new Timer() {
         @Override
@@ -69,7 +69,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
     private String quizId = null;
 
     @Inject
-    UserHistoryRecentView(PlaceManager placeManager) {
+    UserHistorySectionsView(PlaceManager placeManager) {
         this.placeManager = placeManager;
 
         @NotNull final FlowPanel mainPanel = new FlowPanel();

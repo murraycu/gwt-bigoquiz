@@ -1,4 +1,4 @@
-package com.murrayc.bigoquiz.client.application.userhistoryrecent;
+package com.murrayc.bigoquiz.client.application.userhistorysections;
 
 
 import com.google.gwt.core.client.GWT;
@@ -24,8 +24,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by murrayc on 1/21/16.
  */
-public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecentPresenter.MyView>
-        implements UserHistoryRecentUserEditUiHandlers,
+public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySectionsPresenter.MyView>
+        implements UserHistorySectionsUserEditUiHandlers,
         QuestionUserAnswerAddedEvent.EventHandler,
         QuestionContextEvent.EventHandler,
         UserProfileResetSectionsEvent.EventHandler,
@@ -37,7 +37,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
     private boolean userIsLoggedIn = false;
     private String quizId = null;
 
-    public interface MyView extends View, HasUiHandlers<UserHistoryRecentUserEditUiHandlers> {
+    public interface MyView extends View, HasUiHandlers<UserHistorySectionsUserEditUiHandlers> {
         /** Set a whole set of history.
          */
         void setUserRecentHistory(final String quizId, final UserHistory result, final String nextQuestionSectionId, boolean multipleChoice);
@@ -60,7 +60,7 @@ public class UserHistoryRecentPresenter extends PresenterWidget<UserHistoryRecen
     }
 
     @Inject
-    UserHistoryRecentPresenter(
+    UserHistorySectionsPresenter(
             EventBus eventBus,
             MyView view) {
         super(eventBus, view);

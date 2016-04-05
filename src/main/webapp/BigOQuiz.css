@@ -9,7 +9,7 @@
 
 /* Narrow screens:
  *
- * Only show sections sidebar on wider screens. */
+ * Only show userhistorysections sidebar on wider screens. */
 @media screen and (max-width: 550px)  {
     .sidebar-panel-sections { display: none; }
     .user-profile-user-history-panel { display: block; }
@@ -207,7 +207,7 @@ body {
     float: right;
 
     /* TODO: Avoid this somehow? */
-    width: 330px; /* To avoid any text from making it too wide. Same as for sidebar-panel-sections. */
+    width: 330px; /* To avoid any text from making it too wide. Same as for sidebar-panel-userhistorysections. */
 }
 
 /* TODO: Make this not apply to a h2 inside sub-divs? */
@@ -234,7 +234,7 @@ body {
 }
 
 /* Contains content-panel
-   and sometimes contains a sidebar-panel-sections. */
+   and sometimes contains a sidebar-panel-userhistorysections. */
 .parent-content-panel {
     float: left;
 }

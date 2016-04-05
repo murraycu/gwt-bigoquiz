@@ -47,7 +47,7 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
         });
 
 
-        //Show the sections (user recent history):
+        //Show the userhistorysections (user recent history):
         //Put it in a div with a specific class, so we can hide in on wider
         //screens where it is already visible in the sidebar:
         @NotNull final SimplePanel userHistoryParent = new SimplePanel();

@@ -51,7 +51,7 @@ public class QuizSections implements IsSerializable {
         public int questionsCount;
     }
 
-    //Map of section ID to sections.
+    //Map of section ID to userhistorysections.
     @NotNull
     private Map<String, Section> sections = new HashMap<>();
 
@@ -153,7 +153,7 @@ public class QuizSections implements IsSerializable {
 
     //TODO: This is only used on the client side:
     /**
-     * Generate a sorted List of the sections.
+     * Generate a sorted List of the userhistorysections.
      * @return
      */
     @NotNull
@@ -193,7 +193,7 @@ public class QuizSections implements IsSerializable {
 
     //TODO: This is only used on the client side:
     /**
-     * Generate a sorted List of the sections.
+     * Generate a sorted List of the userhistorysections.
      * @return
      */
     @Nullable

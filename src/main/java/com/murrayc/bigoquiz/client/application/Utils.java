@@ -130,7 +130,7 @@ public class Utils {
 
         @NotNull final Panel panelDialog = new FlowPanel();
         addParagraphWithText(panelDialog, constants.dialogResetSectionsText(),
-                "reset-sections-confirm-dialog-text");
+                "reset-userhistorysections-confirm-dialog-text");
         @NotNull final Panel panelButtons = new FlowPanel();
         panelButtons.addStyleName("reset-sections-confirm-dialog-buttons-panel");
         panelButtons.add(buttonOK);

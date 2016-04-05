@@ -161,7 +161,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         this.sections = sections;
 
         if (sections == null) {
-            Log.fatal("setSections(): sections is null");
+            Log.fatal("setSections(): userhistorysections is null");
 
             nextQuestionSectionListBox.clear();
             return;
@@ -249,7 +249,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         hyperlinkMultipleChoice.setTargetHistoryToken(historyToken);
 
         if (sections == null) {
-            Log.error("setQuestion(): sections is null.");
+            Log.error("setQuestion(): userhistorysections is null.");
             return;
         }
 

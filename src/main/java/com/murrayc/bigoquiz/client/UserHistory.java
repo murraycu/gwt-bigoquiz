@@ -29,7 +29,7 @@ public class UserHistory implements IsSerializable {
 
     /**
      * If the @a loginInfo's user Id is null then we create a mostly-empty set of statistics,
-     * just showing the question sections for which a logged-in
+     * just showing the question userhistorysections for which a logged-in
      * user could have statistics
      *
      * @param loginInfo
@@ -47,7 +47,7 @@ public class UserHistory implements IsSerializable {
     //TODO: Use gwt codesplit because this is only used on the client?
     /**
      * Add @a userAnswer to the beginning of the list for it section, making sure that
-     * there are no more than @max items in that sections's list. If necessary,
+     * there are no more than @max items in that userhistorysections's list. If necessary,
      * this removes older items.
      */
     public void addUserAnswerAtStart(@NotNull final String quizId, @NotNull final Question question, boolean answerIsCorrect) {

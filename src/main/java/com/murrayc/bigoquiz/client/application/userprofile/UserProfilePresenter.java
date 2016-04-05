@@ -15,7 +15,7 @@ import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.DefaultUserHistoryRequestEvent;
-import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentPresenter;
+import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
 import com.murrayc.bigoquiz.shared.QuizConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView, UserProfilePresenter.MyProxy>
         implements UserProfileUserEditUiHandlers {
-    private final UserHistoryRecentPresenter userHistoryRecentPresenter;
+    private final UserHistorySectionsPresenter userHistorySectionsPresenter;
 
 
     interface MyView extends ContentView, HasUiHandlers<UserProfileUserEditUiHandlers> {
@@ -39,17 +39,17 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
     interface MyProxy extends ProxyPlace<UserProfilePresenter> {
     }
 
-    public static final SingleSlot<UserHistoryRecentPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot<>();
+    public static final SingleSlot<UserHistorySectionsPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot<>();
 
     @Inject
     UserProfilePresenter(
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            UserHistoryRecentPresenter userHistoryRecentPresenter) {
+            UserHistorySectionsPresenter userHistorySectionsPresenter) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
-        this.userHistoryRecentPresenter = userHistoryRecentPresenter;
+        this.userHistorySectionsPresenter = userHistorySectionsPresenter;
 
         getView().setUiHandlers(this);
 
@@ -89,7 +89,7 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
     protected void onBind() {
         super.onBind();
 
-        setInSlot(SLOT_USER_HISTORY_RECENT, userHistoryRecentPresenter);
+        setInSlot(SLOT_USER_HISTORY_RECENT, userHistorySectionsPresenter);
     }
 
     @Override

@@ -18,7 +18,7 @@ import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
-import com.murrayc.bigoquiz.client.application.userhistoryrecent.UserHistoryRecentPresenter;
+import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 
@@ -34,8 +34,8 @@ import org.jetbrains.annotations.Nullable;
 public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, QuestionPresenter.MyProxy>
         implements QuestionUserEditUiHandlers {
     //Put this in a shared PresenterWithUserHistoryRecent class, also used by QuizPresenter?
-    private final UserHistoryRecentPresenter userHistoryRecentPresenter;
-    public static final SingleSlot<UserHistoryRecentPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot();
+    private final UserHistorySectionsPresenter userHistorySectionsPresenter;
+    public static final SingleSlot<UserHistorySectionsPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot();
 
     private final PlaceManager placeManager;
     private String quizId = null;
@@ -89,11 +89,11 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
             MyView view,
             MyProxy proxy,
             PlaceManager placeManager,
-            UserHistoryRecentPresenter userHistoryRecentPresenter) {
+            UserHistorySectionsPresenter userHistorySectionsPresenter) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
         this.placeManager = placeManager;
-        this.userHistoryRecentPresenter = userHistoryRecentPresenter;
+        this.userHistorySectionsPresenter = userHistorySectionsPresenter;
 
         getView().setUiHandlers(this);
     }
@@ -102,7 +102,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     protected void onBind() {
         super.onBind();
 
-        setInSlot(SLOT_USER_HISTORY_RECENT, userHistoryRecentPresenter);
+        setInSlot(SLOT_USER_HISTORY_RECENT, userHistorySectionsPresenter);
     }
 
     private
@@ -249,7 +249,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     private void tellUserHistoryPresenterAboutNewUserAnswer(boolean answerIsCorrect) {
         if (sections == null) {
             //We need this to continue, to get the titles.
-            Log.error("tellUserHistoryPresenterAboutNewUserAnswer(): sections is null.");
+            Log.error("tellUserHistoryPresenterAboutNewUserAnswer(): userhistorysections is null.");
             return;
         }
 
@@ -375,7 +375,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     }
 
     private void showQuestionInView() {
-        //We cannot show the question without the sections.
+        //We cannot show the question without the userhistorysections.
         if (waitingForSections) {
             showQuestionPending = true;
             return;
