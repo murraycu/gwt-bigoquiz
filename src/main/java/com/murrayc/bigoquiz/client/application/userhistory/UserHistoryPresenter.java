@@ -9,19 +9,15 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
-import com.murrayc.bigoquiz.client.UserHistory;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
-import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
-import com.murrayc.bigoquiz.client.application.userprofile.UserProfileResetSectionsEvent;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -113,12 +109,12 @@ public class UserHistoryPresenter extends Presenter<UserHistoryPresenter.MyView,
 
             @Override
             public void onSuccess(Void result) {
-                tellUserHistoryPresenterAboutResetSections();
+                tellUserHistorySectionsPresenterAboutResetSections();
             }
         });
     }
 
-    private void tellUserHistoryPresenterAboutResetSections() {
-        UserProfileResetSectionsEvent.fire(this);
+    private void tellUserHistorySectionsPresenterAboutResetSections() {
+        UserHistoryResetSectionsEvent.fire(this);
     }
 }

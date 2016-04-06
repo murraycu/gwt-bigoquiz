@@ -17,7 +17,6 @@ import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
-import com.murrayc.bigoquiz.client.application.userprofile.UserProfileResetSectionsEvent;
 import com.murrayc.bigoquiz.shared.Quiz;
 import org.jetbrains.annotations.NotNull;
 

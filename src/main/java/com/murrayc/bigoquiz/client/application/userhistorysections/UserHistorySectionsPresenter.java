@@ -16,7 +16,7 @@ import com.murrayc.bigoquiz.client.UserHistory;
 import com.murrayc.bigoquiz.client.application.DefaultUserHistoryRequestEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
-import com.murrayc.bigoquiz.client.application.userprofile.UserProfileResetSectionsEvent;
+import com.murrayc.bigoquiz.client.application.userhistory.UserHistoryResetSectionsEvent;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +28,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
         implements UserHistorySectionsUserEditUiHandlers,
         QuestionUserAnswerAddedEvent.EventHandler,
         QuestionContextEvent.EventHandler,
-        UserProfileResetSectionsEvent.EventHandler,
+        UserHistoryResetSectionsEvent.EventHandler,
         DefaultUserHistoryRequestEvent.EventHandler {
 
     public static final String DEFAULT_QUIZ_ID = "bigoquiz";
@@ -69,7 +69,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
 
         addRegisteredHandler(QuestionUserAnswerAddedEvent.TYPE, this);
         addRegisteredHandler(QuestionContextEvent.TYPE, this);
-        addRegisteredHandler(UserProfileResetSectionsEvent.TYPE, this);
+        addRegisteredHandler(UserHistoryResetSectionsEvent.TYPE, this);
         addRegisteredHandler(DefaultUserHistoryRequestEvent.TYPE, this);
     }
 
@@ -113,7 +113,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
 
     @ProxyEvent
     @Override
-    public void onUserProfileResetSections(final UserProfileResetSectionsEvent event) {
+    public void onUserProfileResetSections(final UserHistoryResetSectionsEvent event) {
         //Completely refresh the data from the server:
         getAndShowHistory();
     }
