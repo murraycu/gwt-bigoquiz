@@ -16,7 +16,6 @@ import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
-import com.murrayc.bigoquiz.client.application.quiz.QuizPresenter;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;

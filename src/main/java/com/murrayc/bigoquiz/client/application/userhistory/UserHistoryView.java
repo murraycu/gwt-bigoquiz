@@ -6,18 +6,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
-import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.UserHistory;
 import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
-import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
-import com.murrayc.bigoquiz.client.application.quiz.QuizPresenter;
-import com.murrayc.bigoquiz.shared.Quiz;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Created by murrayc on 1/21/16.

@@ -1,7 +1,6 @@
 package com.murrayc.bigoquiz.client.application.quiz;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;

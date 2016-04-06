@@ -22,11 +22,8 @@ import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
 import com.murrayc.bigoquiz.client.application.userprofile.UserProfileResetSectionsEvent;
-import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Created by murrayc on 1/21/16.
