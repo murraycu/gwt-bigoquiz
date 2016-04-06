@@ -33,7 +33,7 @@ public class UserHistoryView extends ContentViewWithUIHandlers<UserHistoryUserEd
     UserHistoryView(PlaceManager placeManager) {
         this.placeManager = placeManager;
 
-        setTitle(constants.sectionsTitle());
+        setTitle(constants.historyTitle());
 
         //Show the userhistorysections (user recent history):
         @NotNull final SimplePanel userHistoryParent = new SimplePanel();
