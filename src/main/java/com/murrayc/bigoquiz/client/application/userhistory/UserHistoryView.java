@@ -19,8 +19,6 @@ public class UserHistoryView extends ContentViewWithUIHandlers<UserHistoryUserEd
         implements UserHistoryPresenter.MyView {
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
-    private final Panel panelContent = new FlowPanel();
-
     @Inject
     UserHistoryView() {
         setTitle(constants.historyTitle());
