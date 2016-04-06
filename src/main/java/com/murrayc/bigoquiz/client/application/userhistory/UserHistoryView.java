@@ -35,15 +35,14 @@ public class UserHistoryView extends ContentViewWithUIHandlers<UserHistoryUserEd
 
         setTitle(constants.sectionsTitle());
 
-        //Sections sidebar:
-        //We use a CSS media query to only show this on wider screens:
-        @NotNull Panel sidebarPanelSections = new FlowPanel();
-        parentPanel.add(sidebarPanelSections);
-        sidebarPanelSections.addStyleName("sidebar-panel-sections");
+        //Show the userhistorysections (user recent history):
+        @NotNull final SimplePanel userHistoryParent = new SimplePanel();
+        //userHistoryParent.addStyleName("user-history-sections-panel");
+        mainPanel.add(userHistoryParent);
 
-        @NotNull SimplePanel userHistoryRecentPanel = new SimplePanel();
-        sidebarPanelSections.add(userHistoryRecentPanel);
+        @NotNull final SimplePanel userHistoryRecentPanel = new SimplePanel();
         bindSlot(UserHistoryPresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
+        userHistoryParent.add(userHistoryRecentPanel);
     }
 
     private void onResetSectionsButton(final String quizId) {
