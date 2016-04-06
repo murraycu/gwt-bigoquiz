@@ -33,6 +33,18 @@ public class PlaceUtils {
         return builder.build();
     }
 
+    public static PlaceRequest getPlaceRequestForQuizHistory(final String quizId) {
+
+        @NotNull PlaceRequest.Builder builder = new PlaceRequest.Builder()
+                .nameToken(NameTokens.USER_HISTORY);
+
+        if (!StringUtils.isEmpty(quizId)) {
+            builder = builder.with(NameTokens.PARAM_QUIZ_ID, quizId);
+        }
+
+        return builder.build();
+    }
+
     public static PlaceRequest getPlaceRequestForQuestion(final String quizId, final String questionId, final String sectionId, boolean multipleChoice) {
 
         @NotNull PlaceRequest.Builder builder = new PlaceRequest.Builder()

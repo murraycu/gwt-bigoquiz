@@ -75,6 +75,15 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
             });
             rowPanel.add(buttonPlay);
 
+            final Button buttonHistory = new Button(constants.buttonHistory());
+            buttonHistory.addStyleName("button-history");
+            buttonHistory.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(final ClickEvent event) {
+                    getUiHandlers().onHistory(details.getId());
+                }
+            });
+            rowPanel.add(buttonHistory);
 
             final Button buttonResetSections = new Button(constants.buttonResetSections());
             buttonResetSections.addStyleName("button-reset-sections");

@@ -431,6 +431,17 @@ background-color: #B6B2DD;
     font-family: 'Lato', sans-serif;
 }
 
+.button-history {
+
+}
+
+.gwt-Button.button-history {
+    margin-left: 1em;
+    background: #B6B2DD;
+    color: #2F4550;
+    font-family: 'Lato', sans-serif;
+}
+
 .dialogMiddleCenterInner.dialogContent {
     margin: 1em;
 }
@@ -736,6 +747,12 @@ h4 * {
     float: right;
     margin-bottom: 1em;
 }
+
+.quiz-list-row .button-history {
+    float: right;
+    margin-bottom: 1em;
+}
+
 
 .quiz-list-row .button-reset-sections {
     float: right;

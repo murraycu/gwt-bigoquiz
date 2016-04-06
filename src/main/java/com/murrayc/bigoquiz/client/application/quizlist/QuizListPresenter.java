@@ -124,6 +124,10 @@ public class QuizListPresenter extends Presenter<QuizListPresenter.MyView, QuizL
         placeManager.revealPlace(placeRequest);
     }
 
+    public void onHistory(final String quizId) {
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuizHistory(quizId);
+        placeManager.revealPlace(placeRequest);
+    }
 
     private void tellUserHistoryPresenterAboutResetSections() {
         UserProfileResetSectionsEvent.fire(this);
