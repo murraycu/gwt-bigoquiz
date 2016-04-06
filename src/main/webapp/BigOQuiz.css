@@ -9,19 +9,15 @@
 
 /* Narrow screens:
  *
- * Only show userhistorysections sidebar on wider screens. */
+ */
 @media screen and (max-width: 550px)  {
     .sidebar-panel-sections { display: none; }
-    .user-profile-user-history-panel { display: block; }
 }
 
 /* Not-narrow screens:
  *
- * Only show user-profile-user-history-panel on narrower screens.
- * On wider screens, it is already visible in the sidebar.
  */
 @media screen and (min-width: 551px)  {
-    .user-profile-user-history-panel { display: none; }
 }
 
 
@@ -460,10 +456,6 @@ background-color: #B6B2DD;
     font-weight: bold;
     float: right;
     margin-right: 1em;
-}
-
-.user-profile-user-history-panel {
-
 }
 
 h1 {
