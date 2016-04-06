@@ -20,12 +20,9 @@ public class UserHistoryView extends ContentViewWithUIHandlers<UserHistoryUserEd
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
     private final Panel panelContent = new FlowPanel();
-    private final PlaceManager placeManager;
 
     @Inject
-    UserHistoryView(PlaceManager placeManager) {
-        this.placeManager = placeManager;
-
+    UserHistoryView() {
         setTitle(constants.historyTitle());
 
         final Button buttonResetSections = new Button(constants.buttonResetSections());

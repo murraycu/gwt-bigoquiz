@@ -30,7 +30,6 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
     private final UserHistorySectionsPresenter userHistorySectionsPresenter;
     public static final SingleSlot<UserHistorySectionsPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot();
 
-    private final PlaceManager placeManager;
     private String quizId = null;
 
     interface MyView extends ContentView {
@@ -49,11 +48,9 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            PlaceManager placeManager,
             UserHistorySectionsPresenter userHistorySectionsPresenter) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
-        this.placeManager = placeManager;
         this.userHistorySectionsPresenter = userHistorySectionsPresenter;
     }
 

@@ -36,8 +36,6 @@ public class UserHistoryPresenter extends Presenter<UserHistoryPresenter.MyView,
 
     private String quizId;
 
-    private final PlaceManager placeManager;
-
     interface MyView extends ContentView, HasUiHandlers<UserHistoryUserEditUiHandlers> {
         void setServerFailed();
     }
@@ -52,11 +50,9 @@ public class UserHistoryPresenter extends Presenter<UserHistoryPresenter.MyView,
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
-            PlaceManager placeManager,
             UserHistorySectionsPresenter userHistorySectionsPresenter) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
 
-        this.placeManager = placeManager;
         this.userHistorySectionsPresenter = userHistorySectionsPresenter;
 
         getView().setUiHandlers(this);
