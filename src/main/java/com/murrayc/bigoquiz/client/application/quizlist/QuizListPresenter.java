@@ -92,33 +92,6 @@ public class QuizListPresenter extends Presenter<QuizListPresenter.MyView, QuizL
         QuizServiceAsync.Util.getInstance().getQuizList(callback);
     }
 
-    //TODO: When we show other quizzes, this should only be per-quiz on the quizzes page,
-    //not on the user profile page.
-    @Override
-    public void onResetSections(final String quizId) {
-        QuizServiceAsync.Util.getInstance().resetSections(quizId, new AsyncCallback<Void>() {
-            @Override
-            public void onFailure(@NotNull final Throwable caught) {
-                try {
-                    throw caught;
-                } catch (final IllegalArgumentException ex) {
-                    //One of the parameters (quizID, questionId, etc) must be invalid,
-                    //TODO: Handle this properly.
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: resetSections()", ex);
-                    //TODO: getView().setUserStatusFailed();
-                } catch (final Throwable ex) {
-                    Log.error("AsyncCallback Failed: resetSections()", ex);
-                    //TODO: getView().setUserStatusFailed();
-                }
-            }
-
-            @Override
-            public void onSuccess(Void result) {
-                tellUserHistoryPresenterAboutResetSections();
-            }
-        });
-    }
-
     public void onAnswerQuestions(final String quizId) {
         @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuizQuestion(quizId);
         placeManager.revealPlace(placeRequest);
@@ -127,9 +100,5 @@ public class QuizListPresenter extends Presenter<QuizListPresenter.MyView, QuizL
     public void onHistory(final String quizId) {
         @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuizHistory(quizId);
         placeManager.revealPlace(placeRequest);
-    }
-
-    private void tellUserHistoryPresenterAboutResetSections() {
-        UserProfileResetSectionsEvent.fire(this);
     }
 }

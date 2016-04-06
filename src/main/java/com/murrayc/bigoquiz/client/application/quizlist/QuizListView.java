@@ -84,27 +84,7 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
                 }
             });
             rowPanel.add(buttonHistory);
-
-            final Button buttonResetSections = new Button(constants.buttonResetSections());
-            buttonResetSections.addStyleName("button-reset-sections");
-            buttonResetSections.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(final ClickEvent event) {
-                    onResetSectionsButton(details.getId());
-                }
-            });
-            rowPanel.add(buttonResetSections);
         }
-    }
-
-    private void onResetSectionsButton(final String quizId) {
-        //TODO: Do this in the presenter?
-        Utils.showResetConfirmationDialog(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                getUiHandlers().onResetSections(quizId);
-            }
-        });
     }
 
     @Override

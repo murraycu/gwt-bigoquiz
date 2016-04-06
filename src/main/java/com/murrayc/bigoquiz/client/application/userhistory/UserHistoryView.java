@@ -28,6 +28,16 @@ public class UserHistoryView extends ContentViewWithUIHandlers<UserHistoryUserEd
 
         setTitle(constants.historyTitle());
 
+        final Button buttonResetSections = new Button(constants.buttonResetSections());
+        buttonResetSections.addStyleName("button-reset-sections");
+        buttonResetSections.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(final ClickEvent event) {
+                onResetSectionsButton();
+            }
+        });
+        mainPanel.add(buttonResetSections);
+
         //Show the userhistorysections (user recent history):
         @NotNull final SimplePanel userHistoryParent = new SimplePanel();
         //userHistoryParent.addStyleName("user-history-sections-panel");
@@ -38,19 +48,14 @@ public class UserHistoryView extends ContentViewWithUIHandlers<UserHistoryUserEd
         userHistoryParent.add(userHistoryRecentPanel);
     }
 
-    private void onResetSectionsButton(final String quizId) {
+    private void onResetSectionsButton() {
         //TODO: Do this in the presenter?
         Utils.showResetConfirmationDialog(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
-                getUiHandlers().onResetSections(quizId);
+                getUiHandlers().onResetSections();
             }
         });
-    }
-
-    @Override
-    public void setUserHistory(final UserHistory userHistory) {
-        //TODO: Update..
     }
 
     @Override

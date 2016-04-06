@@ -39,7 +39,6 @@ public class UserHistoryPresenter extends Presenter<UserHistoryPresenter.MyView,
     private final PlaceManager placeManager;
 
     interface MyView extends ContentView, HasUiHandlers<UserHistoryUserEditUiHandlers> {
-        void setUserHistory(final UserHistory userHistory);
         void setServerFailed();
     }
 
@@ -99,8 +98,8 @@ public class UserHistoryPresenter extends Presenter<UserHistoryPresenter.MyView,
     }
 
     @Override
-    public void onResetSections(final String quizId) {
-        QuizServiceAsync.Util.getInstance().resetSections(quizId, new AsyncCallback<Void>() {
+    public void onResetSections() {
+        QuizServiceAsync.Util.getInstance().resetSections(getQuizId(), new AsyncCallback<Void>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 try {
@@ -122,12 +121,6 @@ public class UserHistoryPresenter extends Presenter<UserHistoryPresenter.MyView,
             }
         });
     }
-
-    public void onAnswerQuestions(final String quizId) {
-        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuizQuestion(quizId);
-        placeManager.revealPlace(placeRequest);
-    }
-
 
     private void tellUserHistoryPresenterAboutResetSections() {
         UserProfileResetSectionsEvent.fire(this);
