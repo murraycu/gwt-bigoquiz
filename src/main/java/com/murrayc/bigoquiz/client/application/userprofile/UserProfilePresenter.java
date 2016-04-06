@@ -25,8 +25,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView, UserProfilePresenter.MyProxy>
         implements UserProfileUserEditUiHandlers {
-    private final UserHistorySectionsPresenter userHistorySectionsPresenter;
-
 
     interface MyView extends ContentView, HasUiHandlers<UserProfileUserEditUiHandlers> {
         void setUserStatusFailed();
@@ -39,17 +37,12 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
     interface MyProxy extends ProxyPlace<UserProfilePresenter> {
     }
 
-    public static final SingleSlot<UserHistorySectionsPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot<>();
-
     @Inject
     UserProfilePresenter(
             EventBus eventBus,
             MyView view,
-            MyProxy proxy,
-            UserHistorySectionsPresenter userHistorySectionsPresenter) {
+            MyProxy proxy) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
-
-        this.userHistorySectionsPresenter = userHistorySectionsPresenter;
 
         getView().setUiHandlers(this);
 
@@ -83,54 +76,5 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
                 }
             }
         });
-    }
-
-    @Override
-    protected void onBind() {
-        super.onBind();
-
-        setInSlot(SLOT_USER_HISTORY_RECENT, userHistorySectionsPresenter);
-    }
-
-    @Override
-    public void onReset() {
-        super.onReset();
-
-        DefaultUserHistoryRequestEvent.fire(this);
-    }
-
-    //TODO: When we show other quizzes, this should be per-quiz on the quizzes page,
-    //not on the user profile page.
-    @Override
-    public void onResetSections() {
-        QuizServiceAsync.Util.getInstance().resetSections(getQuizId(), new AsyncCallback<Void>() {
-            @Override
-            public void onFailure(@NotNull final Throwable caught) {
-                try {
-                    throw caught;
-                } catch (final IllegalArgumentException ex) {
-                    //One of the parameters (quizID, questionId, etc) must be invalid,
-                    //TODO: Handle this properly.
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: resetSections()", ex);
-                    getView().setUserStatusFailed();
-                } catch (final Throwable ex) {
-                    Log.error("AsyncCallback Failed: resetSections()", ex);
-                    getView().setUserStatusFailed();
-                }
-            }
-
-            @Override
-            public void onSuccess(Void result) {
-                tellUserHistoryPresenterAboutResetSections();
-            }
-        });
-    }
-
-    private void tellUserHistoryPresenterAboutResetSections() {
-        UserProfileResetSectionsEvent.fire(this);
-    }
-
-    private String getQuizId() {
-        return QuizConstants.DEFAULT_QUIZ_ID;
     }
 }

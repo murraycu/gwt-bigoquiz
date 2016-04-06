@@ -12,8 +12,5 @@ public class UserProfileModule extends AbstractPresenterModule {
     protected void configure() {
         bindPresenter(UserProfilePresenter.class, UserProfilePresenter.MyView.class, UserProfileView.class,
                 UserProfilePresenter.MyProxy.class);
-
-        bindPresenterWidget(UserHistorySectionsPresenter.class, UserHistorySectionsPresenter.MyView.class,
-                UserHistorySectionsView.class);
     }
 }

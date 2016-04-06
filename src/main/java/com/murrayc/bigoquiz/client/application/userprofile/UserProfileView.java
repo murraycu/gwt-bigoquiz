@@ -36,27 +36,6 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
 
         mainPanel.add(logoutLabel);
         logoutLabel.addStyleName("logout-label");
-
-        Utils.addParagraphWithChild(mainPanel, buttonResetSections);
-        buttonResetSections.addStyleName("userprofile-button-reset-sections");
-        buttonResetSections.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                onResetSectionsButton();
-            }
-        });
-
-
-        //Show the userhistorysections (user recent history):
-        //Put it in a div with a specific class, so we can hide in on wider
-        //screens where it is already visible in the sidebar:
-        @NotNull final SimplePanel userHistoryParent = new SimplePanel();
-        userHistoryParent.addStyleName("user-profile-user-history-panel");
-        mainPanel.add(userHistoryParent);
-
-        @NotNull final SimplePanel userHistoryRecentPanel = new SimplePanel();
-        bindSlot(UserProfilePresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
-        userHistoryParent.add(userHistoryRecentPanel);
     }
 
     @Override
@@ -91,16 +70,5 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
             loginLabel.setHTML(messages.pleaseSignIn(loginInfo.getLoginUrl()));
             loginParagraph.setVisible(true);
         }
-    }
-
-    private void onResetSectionsButton() {
-        //TODO: Do this in the presenter?
-        Utils.showResetConfirmationDialog(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                getUiHandlers().onResetSections();
-            }
-        });
-
     }
 }
