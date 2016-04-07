@@ -202,7 +202,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //We also return the LoginInfo, so we can show a sign in link,
         //and to avoid the need for a separate call to the server.
         @NotNull LoginInfo loginInfo = getLoginInfo(requestUri);
-        @NotNull final UserHistory result = new UserHistory(loginInfo, sections);
+        @NotNull final UserHistory result = new UserHistory(loginInfo, sections, quiz.getTitle());
 
         //This may be null,
         //in which case we will return a mostly-empty set of user statistics,

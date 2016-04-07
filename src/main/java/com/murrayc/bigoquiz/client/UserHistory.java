@@ -19,12 +19,14 @@ public class UserHistory implements IsSerializable {
     private /* final */ LoginInfo loginInfo;
     @NotNull
     private /* final */ QuizSections sections;
+    private /* final */ String quizTitle; //For convenience.
     @NotNull
     private Map<String, UserStats> sectionStats = new HashMap<>();
 
     UserHistory() {
         loginInfo = null;
         sections = null;
+        quizTitle = null;
     }
 
     /**
@@ -35,9 +37,10 @@ public class UserHistory implements IsSerializable {
      * @param loginInfo
      * @param sections
      */
-    public UserHistory(@NotNull final LoginInfo loginInfo, @NotNull final QuizSections sections) {
+    public UserHistory(@NotNull final LoginInfo loginInfo, @NotNull final QuizSections sections, final String quizTitle) {
         this.loginInfo = loginInfo;
         this.sections = sections;
+        this.quizTitle = quizTitle;
     }
 
     public void setSectionStats(final String sectionId, final UserStats stats) {
@@ -118,5 +121,9 @@ public class UserHistory implements IsSerializable {
     @NotNull
     public LoginInfo getLoginInfo() {
         return loginInfo;
+    }
+
+    public String getQuizTitle() {
+        return quizTitle;
     }
 }

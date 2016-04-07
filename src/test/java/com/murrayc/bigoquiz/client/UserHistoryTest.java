@@ -62,7 +62,7 @@ public class UserHistoryTest {
 
         @NotNull LoginInfo loginInfo = new LoginInfo();
         loginInfo.setUserId("userid 1");
-        @NotNull UserHistory history = new UserHistory(loginInfo, sections);
+        @NotNull UserHistory history = new UserHistory(loginInfo, sections, "some title");
         history.setSectionStats("section1", stats);
 
         return history;
