@@ -12,12 +12,10 @@ import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
-import com.murrayc.bigoquiz.client.Log;
-import com.murrayc.bigoquiz.client.NameTokens;
-import com.murrayc.bigoquiz.client.QuizService;
-import com.murrayc.bigoquiz.client.QuizServiceAsync;
+import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
+import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
@@ -411,8 +409,14 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         @NotNull final AsyncCallback<QuizSections> callback = new AsyncCallback<QuizSections>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
+                Utils.tellUserHistoryPresenterAboutNoQuestionContext(QuestionPresenter.this); //clear the sections sidebar.
+                getView().setQuestion(null, null, false);
+
                 try {
                     throw caught;
+                } catch (final UnknownQuizException ex) {
+                    Log.error("AsyncCallback Failed with UnknownQuizException: getSections()", ex);
+                    getView().setServerFailedUnknownQuiz();
                 } catch (final IllegalArgumentException ex) {
                     //One of the parameters (quizID, questionId, etc) must be invalid,
                     //TODO: Handle this properly.

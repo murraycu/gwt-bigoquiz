@@ -39,6 +39,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private String nextQuestionSectionId = null;
     private String choiceSelected = null;
 
+    private final FlowPanel resultPanel;
     private final ListBox nextQuestionSectionListBox = new ListBox();
     private @NotNull final Hyperlink hyperlinkMultipleChoice = new InlineHyperlink();
     private final Label sectionTitle = new InlineLabel();
@@ -115,7 +116,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         choicesPanel.addStyleName("choices-panel");
         choicesPanel.addStyleName("clearfix"); //So it is as high as its children.
 
-        @NotNull FlowPanel resultPanel = new FlowPanel();
+        resultPanel = new FlowPanel();
         resultPanel.addStyleName("result-panel");
         resultPanel.add(resultLabel);
         resultLabel.addStyleName("result-label");
@@ -208,7 +209,6 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
     @Override
     public void setQuestion(final String quizId, @Nullable final Question question, boolean multipleChoice) {
-        setTitle(question.getQuizTitle());
 
         this.multipleChoice = multipleChoice;
 
@@ -216,12 +216,22 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         if (question == null) {
             Window.setTitle(messages.windowTitleQuestion("", ""));
+            setTitle("");
             questionLabel.setText("");
             questionAnchor.setText("");
             questionAnchor.setHref("");
+            sectionTitle.setText("");
+            subSectionTitle.setText("");
+            subSectionTitle.setHref("");
+            resultPanel.setVisible(false); //TODO: Really clear it?
+            nextQuestionSectionListBox.clear();
 
             return;
         }
+
+        resultPanel.setVisible(true);
+
+        setTitle(question.getQuizTitle());
 
         setErrorLabelVisible(false);
 
