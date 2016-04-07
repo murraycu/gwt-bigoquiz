@@ -13,7 +13,6 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
-import com.murrayc.bigoquiz.client.application.DefaultUserHistoryRequestEvent;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,13 +41,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         this.placeManager = placeManager;
 
         getView().setUiHandlers(this);
-    }
-
-    @Override
-    public void onReset() {
-        super.onReset();
-
-        DefaultUserHistoryRequestEvent.fire(this);
     }
 
     @Override

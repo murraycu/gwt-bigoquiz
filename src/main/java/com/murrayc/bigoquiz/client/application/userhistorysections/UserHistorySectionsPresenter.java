@@ -13,7 +13,6 @@ import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.UserHistory;
-import com.murrayc.bigoquiz.client.application.DefaultUserHistoryRequestEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
 import com.murrayc.bigoquiz.client.application.userhistory.UserHistoryResetSectionsEvent;
@@ -28,10 +27,8 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
         implements UserHistorySectionsUserEditUiHandlers,
         QuestionUserAnswerAddedEvent.EventHandler,
         QuestionContextEvent.EventHandler,
-        UserHistoryResetSectionsEvent.EventHandler,
-        DefaultUserHistoryRequestEvent.EventHandler {
+        UserHistoryResetSectionsEvent.EventHandler {
 
-    public static final String DEFAULT_QUIZ_ID = "bigoquiz";
     private String nextQuestionSectionId = null;
     private boolean multipleChoice = true;
     private boolean userIsLoggedIn = false;
@@ -70,7 +67,6 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
         addRegisteredHandler(QuestionUserAnswerAddedEvent.TYPE, this);
         addRegisteredHandler(QuestionContextEvent.TYPE, this);
         addRegisteredHandler(UserHistoryResetSectionsEvent.TYPE, this);
-        addRegisteredHandler(DefaultUserHistoryRequestEvent.TYPE, this);
     }
 
     @ProxyEvent
@@ -93,6 +89,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
     @Override
     public void onQuestionContextChanged(@NotNull final QuestionContextEvent event) {
         final String quizId = event.getQuizId();
+        Log.fatal("debug: onQuestionContextChanged(): quizId=" + quizId);
         final String nextQuestionSectionId = event.getNextQuestionSectionId();
         final boolean multipleChoice = event.getMultipleChoice();
         final boolean quizChanged = !StringUtils.equals(this.quizId, quizId);
@@ -118,18 +115,6 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
         getAndShowHistory();
     }
 
-    @ProxyEvent
-    @Override
-    public void onDefaultUserHistoryRequested(final DefaultUserHistoryRequestEvent event) {
-        //Show _something_ rather than nothing.
-        //TODO: This won't make sense when we really have multiple quizzes.
-        //Then we probably won't want to even show this sidebar on the general pages such as About.
-        if (StringUtils.isEmpty(quizId)) {
-            setQuizId(DEFAULT_QUIZ_ID);
-            getAndShowHistory();
-        }
-    }
-
     private void getAndShowHistory() {
         final String quizId = getQuizId();
         if (StringUtils.isEmpty(quizId)) {
@@ -146,12 +131,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
                     //The quizID must be invalid,
                     //so try the default one instead.
                     //TODO: Do nothing, assuming that the main content presenter will offer a list of quizzes?
-                    if (!StringUtils.equals(quizId, DEFAULT_QUIZ_ID)) {
-                        UserHistorySectionsPresenter.this.setQuizId(DEFAULT_QUIZ_ID);
-                        getAndShowHistory();
-                    } else {
-                        Log.error("AsyncCallback Failed: getUserRecentHistory()", ex);
-                    }
+                   Log.error("AsyncCallback Failed with IllegalArgumentException: getUserRecentHistory()", ex);
                 } catch (final Throwable ex) {
                     Log.error("AsyncCallback Failed: getUserRecentHistory()", ex);
                     onFailureGeneric();
