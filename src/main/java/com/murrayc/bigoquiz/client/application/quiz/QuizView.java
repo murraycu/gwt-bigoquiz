@@ -5,8 +5,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
-import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
@@ -31,12 +29,8 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
     public static final String NO_SUBSECTION_ID = "default-subsection";
 
     private final Panel panelQuiz = new FlowPanel();
-    private final PlaceManager placeManager;
 
-    @Inject
-    QuizView(final PlaceManager placeManager) {
-        this.placeManager = placeManager;
-
+    QuizView() {
         setTitle(constants.quizTitle());
 
         //Sections sidebar:
