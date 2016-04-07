@@ -11,7 +11,6 @@ import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
-import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.shared.*;
 import org.jetbrains.annotations.NotNull;
 

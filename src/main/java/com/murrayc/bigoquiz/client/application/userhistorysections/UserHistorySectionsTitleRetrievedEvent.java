@@ -2,7 +2,6 @@ package com.murrayc.bigoquiz.client.application.userhistorysections;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
-import com.murrayc.bigoquiz.shared.Question;
 import org.jetbrains.annotations.NotNull;
 
 /**

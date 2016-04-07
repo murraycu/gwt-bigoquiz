@@ -1,8 +1,6 @@
 package com.murrayc.bigoquiz.client.application.userprofile;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
-import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
-import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsView;
 
 /**
  * Created by murrayc on 1/21/16.
