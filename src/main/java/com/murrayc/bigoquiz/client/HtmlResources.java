@@ -26,4 +26,8 @@ public interface HtmlResources extends ClientBundle {
     @NotNull
     @Source("com/murrayc/bigoquiz/client/ui/home.html")
     TextResource getHomeHtml();
+
+    @NotNull
+    @Source("com/murrayc/bigoquiz/client/ui/home-end.html")
+    TextResource getHomeEndHtml();
 }

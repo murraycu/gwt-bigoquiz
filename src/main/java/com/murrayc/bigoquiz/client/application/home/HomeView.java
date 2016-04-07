@@ -1,5 +1,6 @@
 package com.murrayc.bigoquiz.client.application.home;
 
+import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -22,6 +23,8 @@ public class HomeView extends ContentViewWithUIHandlers<HomeUserEditUiHandlers>
         panel.addStyleName("home-panel");
         mainPanel.add(panel);
 
+        //TODO: Find a cleaner way to have a button inbetween the paragraphs of text,
+        //without splitting the HTML into 2 files.
         final Button buttonPlay = new Button(constants.buttonAnswerQuestions());
         buttonPlay.addStyleName("home-button-answer-questions");
         buttonPlay.addClickHandler(new ClickHandler() {
@@ -31,5 +34,11 @@ public class HomeView extends ContentViewWithUIHandlers<HomeUserEditUiHandlers>
             }
         });
         mainPanel.add(buttonPlay);
+
+        final FlowPanel panel2 = new FlowPanel();
+        Utils.addHtmlToPanel(panel2, HtmlResources.INSTANCE.getHomeEndHtml());
+        panel2.addStyleName("home-panel");
+        mainPanel.add(panel2);
+
     }
 }
