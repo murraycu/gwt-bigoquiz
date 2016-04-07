@@ -18,10 +18,14 @@ import org.jetbrains.annotations.NotNull;
 public class UserHistoryView extends ContentViewWithUIHandlers<UserHistoryUserEditUiHandlers>
         implements UserHistoryPresenter.MyView {
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
+    private Label labelQuiz;
 
     @Inject
     UserHistoryView() {
         setTitle(constants.historyTitle());
+
+        labelQuiz = new Label();
+        mainPanel.add(labelQuiz);
 
         final Button buttonResetSections = new Button(constants.buttonResetSections());
         buttonResetSections.addStyleName("button-reset-sections");
@@ -51,6 +55,11 @@ public class UserHistoryView extends ContentViewWithUIHandlers<UserHistoryUserEd
                 getUiHandlers().onResetSections();
             }
         });
+    }
+
+    @Override
+    public void setQuizTitle(final String quizTitle) {
+        labelQuiz.setText(messages.quizTitle(quizTitle));
     }
 
     @Override

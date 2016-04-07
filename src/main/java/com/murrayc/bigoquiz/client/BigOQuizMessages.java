@@ -51,6 +51,11 @@ public interface BigOQuizMessages extends com.google.gwt.i18n.client.Messages {
     String windowTitleQuestion(String text);
 
     @NotNull
+    @DefaultMessage("Quiz : {0}")
+    @Key("quizTitle")
+    String quizTitle(String text);
+
+    @NotNull
     @DefaultMessage("and {0,number} more")
     @AlternateMessage({"one", "and {0,number} more"})
     @Key("moreProblemQuestions")

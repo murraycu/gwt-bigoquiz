@@ -18,6 +18,7 @@ import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
+import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsTitleRetrievedEvent;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +26,8 @@ import org.jetbrains.annotations.NotNull;
  * Created by murrayc on 1/21/16.
  */
 public class UserHistoryPresenter extends Presenter<UserHistoryPresenter.MyView, UserHistoryPresenter.MyProxy>
-        implements UserHistoryUserEditUiHandlers {
+        implements UserHistoryUserEditUiHandlers,
+        UserHistorySectionsTitleRetrievedEvent.EventHandler {
     //Put this in a shared PresenterWithUserHistoryRecent class, also used by QuizPresenter?
     private final UserHistorySectionsPresenter userHistorySectionsPresenter;
     public static final SingleSlot<UserHistorySectionsPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot();
@@ -33,6 +35,7 @@ public class UserHistoryPresenter extends Presenter<UserHistoryPresenter.MyView,
     private String quizId;
 
     interface MyView extends ContentView, HasUiHandlers<UserHistoryUserEditUiHandlers> {
+        void setQuizTitle(final String quizTitle);
         void setServerFailed();
     }
 
@@ -52,6 +55,8 @@ public class UserHistoryPresenter extends Presenter<UserHistoryPresenter.MyView,
         this.userHistorySectionsPresenter = userHistorySectionsPresenter;
 
         getView().setUiHandlers(this);
+
+        addRegisteredHandler(UserHistorySectionsTitleRetrievedEvent.TYPE, this);
     }
 
     @Override
@@ -116,5 +121,15 @@ public class UserHistoryPresenter extends Presenter<UserHistoryPresenter.MyView,
 
     private void tellUserHistorySectionsPresenterAboutResetSections() {
         UserHistoryResetSectionsEvent.fire(this);
+    }
+
+    @Override
+    public void onQuizTitleRetrieved(final UserHistorySectionsTitleRetrievedEvent event) {
+        Log.fatal("debug: onQuizTitleRetrieved: getQuizId=" + getQuizId() + ", event.getQuizId()=" + event.getQuizId());
+        //UserHistorySectionsPresenter knows the title and tells us here.
+        if (StringUtils.equals(getQuizId(), event.getQuizId())) {
+            Log.fatal("debug: onQuizTitleRetrieved2");
+            getView().setQuizTitle(event.getQuizTitle());
+        }
     }
 }
