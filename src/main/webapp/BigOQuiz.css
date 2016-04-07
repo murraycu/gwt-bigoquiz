@@ -709,7 +709,9 @@ h4 * {
 }
 
 .server-error-label {
-
+    font-weight: bold;
+    font-size: larger;
+    color: red;
 }
 
 .server-loading-label {
