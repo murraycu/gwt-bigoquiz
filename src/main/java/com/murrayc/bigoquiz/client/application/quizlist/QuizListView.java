@@ -85,9 +85,4 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
             rowPanel.add(buttonHistory);
         }
     }
-
-    @Override
-    public void setServerFailed() {
-        setErrorLabelVisible(true);
-    }
 }
