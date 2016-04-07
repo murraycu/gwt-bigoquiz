@@ -20,7 +20,7 @@ public class QuizLoaderTest {
     @Nullable
     private static Quiz loadQuiz() throws Exception {
         try (final InputStream is = Thread.currentThread().getContextClassLoader()
-                .getResourceAsStream("bigoquiz.xml")) {
+                .getResourceAsStream("bigo.xml")) {
             assertNotNull(is);
 
             @Nullable final Quiz quiz = QuizLoader.loadQuiz(is);

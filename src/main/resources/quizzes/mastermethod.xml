@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="mastermethodquiz">
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="mastermethod">
     <title>Simplified Master Theorem</title>
     <section id="using">
         <title>Using the Simplified Master Theorem</title>
