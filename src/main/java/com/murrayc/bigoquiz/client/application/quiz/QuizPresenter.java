@@ -4,6 +4,7 @@ package com.murrayc.bigoquiz.client.application.quiz;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
@@ -37,7 +38,7 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
 
     private String quizId = null;
 
-    interface MyView extends ContentView {
+    interface MyView extends ContentView, HasUiHandlers<QuizUserEditUiHandlers> {
         void setQuiz(final Quiz quiz);
     }
 
@@ -57,6 +58,8 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
         this.placeManager = placeManager;
 
         this.userHistorySectionsPresenter = userHistorySectionsPresenter;
+
+        getView().setUiHandlers(this);
     }
 
     @Override
