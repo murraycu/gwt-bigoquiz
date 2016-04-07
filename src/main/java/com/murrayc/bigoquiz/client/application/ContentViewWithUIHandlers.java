@@ -73,4 +73,16 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
     protected void setHeadingVisible(boolean visible) {
         titleHeading.getStyle().setProperty("display", visible ? "block" : "none");
     }
+
+    @Override
+    public void setServerFailed() {
+        setErrorLabel(constants.errorNoServer());
+        setErrorLabelVisible(true);
+    }
+
+    @Override
+    public void setServerFailedUnknownQuiz() {
+        setErrorLabel(constants.errorUnknownQuiz());
+        setErrorLabelVisible(true);
+    }
 }

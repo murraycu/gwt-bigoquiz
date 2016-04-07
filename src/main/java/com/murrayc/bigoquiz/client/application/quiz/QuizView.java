@@ -244,16 +244,4 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
 
         return result;
     }
-
-    @Override
-    public void setServerFailed() {
-        setErrorLabel(constants.errorNoServer());
-        setErrorLabelVisible(true);
-    }
-
-    @Override
-    public void setServerFailedUnknownQuiz() {
-        setErrorLabel(constants.errorUnknownQuiz());
-        setErrorLabelVisible(true);
-    }
 }

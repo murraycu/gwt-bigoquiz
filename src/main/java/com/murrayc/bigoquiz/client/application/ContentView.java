@@ -7,4 +7,7 @@ import com.gwtplatform.mvp.client.View;
  */
 public interface ContentView extends View {
     void setLoadingLabelVisible(boolean visible);
+
+    void setServerFailed();
+    void setServerFailedUnknownQuiz();
 }

@@ -38,10 +38,6 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
 
     interface MyView extends ContentView {
         void setQuiz(final Quiz quiz);
-
-        void setServerFailed();
-        void setServerFailedUnknownQuiz();
-
     }
 
     @ProxyStandard
