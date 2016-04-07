@@ -28,7 +28,6 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
 
     private final Panel loginPanel = new FlowPanel();
     private final Label loginFailedLabel = new Label(constants.errorNoServer());
-    private final PushButton signInButton = new PushButton(constants.signInLinkTitle());
 
     @Nullable
     private LoginInfo loginInfo = null;
@@ -45,6 +44,7 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
 
         final ImageResources images = GWT.create(ImageResources.class);
 
+        PushButton signInButton = new PushButton(constants.signInLinkTitle());
         loginPanel.add(signInButton);
         signInButton.getUpFace().setImage(new Image(images.getGoogleSignInNormal()));
         signInButton.getDownFace().setImage(new Image(images.getGoogleSignInPressed()));
