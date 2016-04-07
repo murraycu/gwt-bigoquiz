@@ -2,6 +2,8 @@ package com.murrayc.bigoquiz.client.application.quiz;
 
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
@@ -16,6 +18,7 @@ import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
+import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
 import com.murrayc.bigoquiz.shared.Quiz;
@@ -25,10 +28,12 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by murrayc on 1/21/16.
  */
-public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter.MyProxy> {
+public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter.MyProxy>
+        implements QuizUserEditUiHandlers {
     //Put this in a shared PresenterWithUserHistoryRecent class, also used by QuizPresenter?
     private final UserHistorySectionsPresenter userHistorySectionsPresenter;
     public static final SingleSlot<UserHistorySectionsPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot();
+    private final PlaceManager placeManager;
 
     private String quizId = null;
 
@@ -48,8 +53,10 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
             EventBus eventBus,
             MyView view,
             MyProxy proxy,
+            PlaceManager placeManager,
             UserHistorySectionsPresenter userHistorySectionsPresenter) {
         super(eventBus, view, proxy, ApplicationPresenter.SLOT_CONTENT);
+        this.placeManager = placeManager;
 
         this.userHistorySectionsPresenter = userHistorySectionsPresenter;
     }
@@ -120,5 +127,11 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
 
         getView().setLoadingLabelVisible(true);
         QuizServiceAsync.Util.getInstance().getQuiz(getQuizId(), callback);
+    }
+
+    @Override
+    public void onAnswerQuestions() {
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuizQuestion(getQuizId());
+        placeManager.revealPlace(placeRequest);
     }
 }

@@ -7,4 +7,5 @@ import com.gwtplatform.mvp.client.UiHandlers;
  */
 interface QuizUserEditUiHandlers extends UiHandlers {
 
+    void onAnswerQuestions();
 }

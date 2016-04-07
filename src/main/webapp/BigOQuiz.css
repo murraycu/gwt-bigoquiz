@@ -796,8 +796,17 @@ h4 * {
     font-family: 'Lato', sans-serif;
 }
 
+.gwt-Button.quiz-list-button-answer-questions {
+    background: #B6B2DD;
+    color: #2F4550;
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 1em;
+}
+
 .gwt-Button.user-history-button-reset-sections {
     background: #B6B2DD;
     color: #2F4550;
     font-family: 'Lato', sans-serif;
+    margin-bottom: 1em;
 }
+

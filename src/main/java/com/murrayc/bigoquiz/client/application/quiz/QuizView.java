@@ -1,6 +1,8 @@
 package com.murrayc.bigoquiz.client.application.quiz;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
@@ -67,11 +69,17 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         }
 
         Window.setTitle(messages.windowTitleQuiz(quiz.getTitle()));
+        Utils.addHeaderToPanel(2, panelQuiz, quiz.getTitle());
 
-        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuizQuestion(quiz.getId());
-        final String historyToken = placeManager.buildHistoryToken(placeRequest);
-        @NotNull final Hyperlink link = new Hyperlink(quiz.getTitle(), historyToken);
-        Utils.addHeaderToPanel(2, panelQuiz, link);
+        final Button buttonPlay = new Button(constants.buttonAnswerQuestions());
+        buttonPlay.addStyleName("quiz-list-button-answer-questions");
+        buttonPlay.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(final ClickEvent event) {
+                getUiHandlers().onAnswerQuestions();
+            }
+        });
+        panelQuiz.add(buttonPlay);
 
         final QuizSections quizSections = quiz.getSections();
         for(final QuizSections.Section section : quizSections.getSectionsSorted()) {
