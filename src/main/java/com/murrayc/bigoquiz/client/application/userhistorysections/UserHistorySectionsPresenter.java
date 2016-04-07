@@ -165,6 +165,8 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
 
                 userIsLoggedIn = loginInfo.isLoggedIn();
                 getView().setUserRecentHistory(getQuizId(), result, nextQuestionSectionId, multipleChoice);
+
+                tellParentPresenterAboutQuizTitle(getQuizId(), result.getQuizTitle());
             }
 
             private void onFailureGeneric() {
@@ -181,4 +183,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
         return quizId;
     }
 
+    private void tellParentPresenterAboutQuizTitle(final String quizId, final String quizTitle) {
+        UserHistorySectionsTitleRetrievedEvent.fire(this, quizId, quizTitle);
+    }
 }
