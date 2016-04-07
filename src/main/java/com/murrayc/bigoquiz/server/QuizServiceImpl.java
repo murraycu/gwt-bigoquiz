@@ -2,10 +2,7 @@ package com.murrayc.bigoquiz.server;
 
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.cmd.Query;
-import com.murrayc.bigoquiz.client.Log;
-import com.murrayc.bigoquiz.client.LoginInfo;
-import com.murrayc.bigoquiz.client.QuizService;
-import com.murrayc.bigoquiz.client.UserHistory;
+import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
 import com.murrayc.bigoquiz.shared.*;
 import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
@@ -56,16 +53,16 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @NotNull
     @Override
-    public  Quiz getQuiz(final String quizId) throws IllegalArgumentException {
+    public  Quiz getQuiz(final String quizId)  throws UnknownQuizException, IllegalArgumentException {
         getOrLoadQuizzes();
 
         if (quizzes == null) {
-            throw new IllegalArgumentException("Unknown quiz ID.");
+            throw new UnknownQuizException();
         }
 
         final Quiz result = quizzes.get(quizId);
         if (result == null) {
-            throw new IllegalArgumentException("Unknown quiz ID.");
+            throw new UnknownQuizException();
         }
 
         return result;

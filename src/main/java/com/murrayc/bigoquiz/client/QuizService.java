@@ -21,7 +21,7 @@ public interface QuizService extends RemoteService {
     List<Quiz.QuizDetails> getQuizList() throws IllegalArgumentException;
 
     @Nullable
-    Quiz getQuiz(final String quizId) throws IllegalArgumentException;
+    Quiz getQuiz(final String quizId) throws UnknownQuizException, IllegalArgumentException;
 
     @Nullable Question getQuestion(final String quizId, final String questionId) throws IllegalArgumentException;
 

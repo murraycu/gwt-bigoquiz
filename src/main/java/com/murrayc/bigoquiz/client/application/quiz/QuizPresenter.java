@@ -14,6 +14,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.QuizServiceAsync;
+import com.murrayc.bigoquiz.client.UnknownQuizException;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
@@ -39,6 +40,8 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
         void setQuiz(final Quiz quiz);
 
         void setServerFailed();
+        void setServerFailedUnknownQuiz();
+
     }
 
     @ProxyStandard
@@ -103,6 +106,9 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
 
                 try {
                     throw caught;
+                } catch (final UnknownQuizException ex) {
+                    Log.error("AsyncCallback Failed with UnknownQuizException: getQuiz()", ex);
+                    getView().setServerFailedUnknownQuiz();
                 } catch (final IllegalArgumentException ex) {
                     //One of the parameters (quizID, questionId, etc) must be invalid,
                     //TODO: Handle this properly.

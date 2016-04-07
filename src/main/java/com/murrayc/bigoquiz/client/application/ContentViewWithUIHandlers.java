@@ -62,6 +62,10 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
         labelLoading.setVisible(visible);
     }
 
+    protected void setErrorLabel(final String message) {
+        labelError.setText(message);
+    }
+
     protected void setErrorLabelVisible(boolean visible) {
         labelError.setVisible(visible);
     }
