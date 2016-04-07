@@ -17,6 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -280,7 +281,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
     }
 
     private static Quiz loadQuiz(@NotNull final String quizId) {
-        final String filename = quizId + ".xml";
+        final String filename = "quizzes" + File.separator + quizId + ".xml";
         try(final InputStream is = Thread.currentThread().getContextClassLoader()
                 .getResourceAsStream(filename)) {
             if (is == null) {
