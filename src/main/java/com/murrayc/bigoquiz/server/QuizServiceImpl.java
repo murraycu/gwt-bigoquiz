@@ -189,8 +189,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @Nullable
     @Override
-    public UserHistory getUserRecentHistory(final String quizId, final String requestUri) throws IllegalArgumentException {
-        @NotNull final Quiz quiz = getQuiz(quizId);
+    public UserHistory getUserRecentHistory(final String quizId, final String requestUri) throws UnknownQuizException, IllegalArgumentException {
+        final Quiz quiz = getQuiz(quizId);
+        if (quiz == null) {
+            throw new UnknownQuizException();
+        }
+
         @NotNull final QuizSections sections = quiz.getSections();
         if (sections == null) {
             return null;

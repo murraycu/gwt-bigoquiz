@@ -9,10 +9,7 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
-import com.murrayc.bigoquiz.client.Log;
-import com.murrayc.bigoquiz.client.LoginInfo;
-import com.murrayc.bigoquiz.client.QuizServiceAsync;
-import com.murrayc.bigoquiz.client.UserHistory;
+import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
 import com.murrayc.bigoquiz.client.application.userhistory.UserHistoryResetSectionsEvent;
@@ -127,7 +124,12 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
             public void onFailure(@NotNull final Throwable caught) {
                 try {
                     throw caught;
-                } catch (final IllegalArgumentException ex) {
+                } catch (final UnknownQuizException ex) {
+                    //The quizID must be invalid,
+                    //so try the default one instead.
+                    //TODO: Do nothing, assuming that the main content presenter will offer a list of quizzes?
+                    Log.error("AsyncCallback Failed with UnknownQuizException: getUserRecentHistory()", ex);
+              } catch (final IllegalArgumentException ex) {
                     //The quizID must be invalid,
                     //so try the default one instead.
                     //TODO: Do nothing, assuming that the main content presenter will offer a list of quizzes?

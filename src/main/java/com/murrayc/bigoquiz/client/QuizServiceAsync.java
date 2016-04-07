@@ -28,7 +28,7 @@ public interface QuizServiceAsync {
             throws IllegalArgumentException;
 
     void getUserRecentHistory(final String quizId, final String requestUri, AsyncCallback<UserHistory> async)
-            throws IllegalArgumentException;
+            throws UnknownQuizException, IllegalArgumentException;
 
     void getSections(final String quizId, AsyncCallback<QuizSections> async);
 
