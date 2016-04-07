@@ -215,7 +215,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         choicesPanel.clear();
 
         if (question == null) {
-            Window.setTitle(messages.windowTitleQuestion(""));
+            Window.setTitle(messages.windowTitleQuestion("", ""));
             questionLabel.setText("");
             questionAnchor.setText("");
             questionAnchor.setHref("");
@@ -225,7 +225,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         setErrorLabelVisible(false);
 
-        Window.setTitle(messages.windowTitleQuestion(question.getText()));
+        Window.setTitle(messages.windowTitleQuestion(question.getQuizTitle(), question.getText()));
         final String link = question.getLink();
         if (StringUtils.isEmpty(link)) {
             questionLabel.setText(question.getText());
