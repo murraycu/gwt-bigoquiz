@@ -98,7 +98,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
         final boolean quizChanged = !StringUtils.equals(this.quizId, quizId);
         final boolean nextSectionChanged = !StringUtils.equals(this.nextQuestionSectionId, nextQuestionSectionId);
         final boolean multipleChoiceChanged = this.multipleChoice != multipleChoice;
-        this.quizId = quizId;
+        setQuizId(quizId);
         this.nextQuestionSectionId = nextQuestionSectionId;
         this.multipleChoice = multipleChoice;
 
@@ -125,7 +125,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
         //TODO: This won't make sense when we really have multiple quizzes.
         //Then we probably won't want to even show this sidebar on the general pages such as About.
         if (StringUtils.isEmpty(quizId)) {
-            quizId = DEFAULT_QUIZ_ID;
+            setQuizId(DEFAULT_QUIZ_ID);
             getAndShowHistory();
         }
     }
@@ -141,7 +141,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
                     //so try the default one instead.
                     //TODO: Do nothing, assuming that the main content presenter will offer a list of quizzes?
                     if (!StringUtils.equals(quizId, DEFAULT_QUIZ_ID)) {
-                        quizId = DEFAULT_QUIZ_ID;
+                        UserHistorySectionsPresenter.this.setQuizId(DEFAULT_QUIZ_ID);
                         getAndShowHistory();
                     } else {
                         Log.error("AsyncCallback Failed: getUserRecentHistory()", ex);
@@ -176,11 +176,15 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
         };
 
         QuizServiceAsync.Util.getInstance().getUserRecentHistory(
-                getQuizId(), GWT.getHostPageBaseURL(), callback);
+                quizId, GWT.getHostPageBaseURL(), callback);
     }
 
     private String getQuizId() {
         return quizId;
+    }
+
+    private void setQuizId(final String quizId) {
+        this.quizId = quizId;
     }
 
     private void tellParentPresenterAboutQuizTitle(final String quizId, final String quizTitle) {
