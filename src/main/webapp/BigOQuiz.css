@@ -409,17 +409,6 @@ background-color: #B6B2DD;
 
 }
 
-.gwt-Button.button-reset-sections {
-    margin-left: 1em;
-    background: #B6B2DD;
-    color: #2F4550;
-    font-family: 'Lato', sans-serif;
-}
-
-.button-answer-questions {
-
-}
-
 .gwt-Button.button-answer-questions {
     margin-left: 1em;
     background: #B6B2DD;
@@ -807,12 +796,7 @@ h4 * {
     font-family: 'Lato', sans-serif;
 }
 
-.userprofile-button-reset-sections {
-
-}
-
-.gwt-Button.userprofile-button-reset-sections {
-    margin-left: 0em;
+.gwt-Button.user-history-button-reset-sections {
     background: #B6B2DD;
     color: #2F4550;
     font-family: 'Lato', sans-serif;

@@ -28,7 +28,7 @@ public class UserHistoryView extends ContentViewWithUIHandlers<UserHistoryUserEd
         mainPanel.add(labelQuiz);
 
         final Button buttonResetSections = new Button(constants.buttonResetSections());
-        buttonResetSections.addStyleName("button-reset-sections");
+        buttonResetSections.addStyleName("user-history-button-reset-sections");
         buttonResetSections.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
