@@ -10,6 +10,7 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.murrayc.bigoquiz.client.*;
+import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
 import com.murrayc.bigoquiz.client.application.userhistory.UserHistoryResetSectionsEvent;
@@ -43,6 +44,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
         void addUserAnswer(final Question question, boolean answerIsCorrect);
 
         void setServerFailed();
+        void setServerFailedUnknownQuiz();
 
         /**
          * Set details about the history presentation/links that are affected by the current question's UI.
@@ -123,17 +125,20 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 try {
+                    userIsLoggedIn = false;
                     throw caught;
                 } catch (final UnknownQuizException ex) {
                     //The quizID must be invalid,
                     //so try the default one instead.
                     //TODO: Do nothing, assuming that the main content presenter will offer a list of quizzes?
                     Log.error("AsyncCallback Failed with UnknownQuizException: getUserRecentHistory()", ex);
+                    onFailureUnknownQuiz();
               } catch (final IllegalArgumentException ex) {
                     //The quizID must be invalid,
                     //so try the default one instead.
                     //TODO: Do nothing, assuming that the main content presenter will offer a list of quizzes?
-                   Log.error("AsyncCallback Failed with IllegalArgumentException: getUserRecentHistory()", ex);
+                    Log.error("AsyncCallback Failed with IllegalArgumentException: getUserRecentHistory()", ex);
+                    onFailureGeneric();
                 } catch (final Throwable ex) {
                     Log.error("AsyncCallback Failed: getUserRecentHistory()", ex);
                     onFailureGeneric();
@@ -160,6 +165,14 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
             private void onFailureGeneric() {
                 userIsLoggedIn = false;
                 getView().setServerFailed();
+                Utils.tellUserHistoryPresenterAboutNoQuestionContext(UserHistorySectionsPresenter.this); //clear the sections sidebar.
+            }
+
+            private void onFailureUnknownQuiz() {
+                userIsLoggedIn = false;
+                getView().setServerFailedUnknownQuiz();
+                Utils.tellUserHistoryPresenterAboutNoQuestionContext(UserHistorySectionsPresenter.this); //clear the sections sidebar.
+
             }
         };
 

@@ -317,6 +317,13 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
 
     @Override
     public void setServerFailed() {
+        labelError.setText(constants.errorNoServer());
+        labelError.setVisible(true);
+    }
+
+    @Override
+    public void setServerFailedUnknownQuiz() {
+        labelError.setText(constants.errorUnknownQuiz());
         labelError.setVisible(true);
     }
 }

@@ -18,6 +18,7 @@ import com.murrayc.bigoquiz.client.UnknownQuizException;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
+import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
 import com.murrayc.bigoquiz.shared.Quiz;
@@ -90,10 +91,6 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
         QuestionContextEvent.fire(this, getQuizId(), null, true);
     }
 
-    private void tellUserHistoryPresenterAboutNoQuestionContext() {
-        QuestionContextEvent.fire(this, null, null, true);
-    }
-
     private String getQuizId() {
         return quizId;
     }
@@ -104,7 +101,7 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
             public void onFailure(@NotNull final Throwable caught) {
                 getView().setLoadingLabelVisible(false);
                 getView().setQuiz(null); //clear the previous quiz.
-                tellUserHistoryPresenterAboutNoQuestionContext(); //clear the sections sidebar.
+                Utils.tellUserHistoryPresenterAboutNoQuestionContext(QuizPresenter.this); //clear the sections sidebar.
 
                 try {
                     throw caught;

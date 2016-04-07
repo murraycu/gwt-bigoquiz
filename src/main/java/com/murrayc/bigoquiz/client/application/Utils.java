@@ -6,9 +6,11 @@ import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.*;
+import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -142,6 +144,10 @@ public class Utils {
 
         dialog.center();
         dialog.show();
+    }
+
+    public static void tellUserHistoryPresenterAboutNoQuestionContext(final HasHandlers source) {
+        QuestionContextEvent.fire(source, null, null, true);
     }
 
     /* This doesn't seem to work:
