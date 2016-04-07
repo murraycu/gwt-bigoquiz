@@ -117,8 +117,8 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
 
         detailsPanel.clear();
 
+        //This is allowed, to clear the panel if the quizId is invalid.
         if (userHistory == null) {
-            Log.error("buildUI(): userHistory is null.");
             return;
         }
 

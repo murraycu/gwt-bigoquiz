@@ -50,15 +50,15 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
     }
 
     @Override
-    public void setQuiz(@NotNull final Quiz quiz) {
-        setErrorLabelVisible(false);
-
+    public void setQuiz(final Quiz quiz) {
         panelQuiz.clear();
 
         if (quiz == null) {
             Log.error("setQuiz(): quiz is null.");
             return;
         }
+
+        setErrorLabelVisible(false);
 
         Window.setTitle(messages.windowTitleQuiz(quiz.getTitle()));
         Utils.addHeaderToPanel(2, panelQuiz, quiz.getTitle());

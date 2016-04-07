@@ -131,6 +131,12 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
     }
 
     private void getAndShowHistory() {
+        final String quizId = getQuizId();
+        if (StringUtils.isEmpty(quizId)) {
+            getView().setUserRecentHistory(null, null, null, false);
+            return;
+        }
+
         @NotNull final AsyncCallback<UserHistory> callback = new AsyncCallback<UserHistory>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
@@ -164,9 +170,9 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
                 }
 
                 userIsLoggedIn = loginInfo.isLoggedIn();
-                getView().setUserRecentHistory(getQuizId(), result, nextQuestionSectionId, multipleChoice);
+                getView().setUserRecentHistory(quizId, result, nextQuestionSectionId, multipleChoice);
 
-                tellParentPresenterAboutQuizTitle(getQuizId(), result.getQuizTitle());
+                tellParentPresenterAboutQuizTitle(quizId, result.getQuizTitle());
             }
 
             private void onFailureGeneric() {

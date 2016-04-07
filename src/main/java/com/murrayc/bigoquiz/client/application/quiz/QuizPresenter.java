@@ -94,6 +94,10 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
         QuestionContextEvent.fire(this, getQuizId(), null, true);
     }
 
+    private void tellUserHistoryPresenterAboutNoQuestionContext() {
+        QuestionContextEvent.fire(this, null, null, true);
+    }
+
     private String getQuizId() {
         return quizId;
     }
@@ -103,6 +107,8 @@ public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 getView().setLoadingLabelVisible(false);
+                getView().setQuiz(null); //clear the previous quiz.
+                tellUserHistoryPresenterAboutNoQuestionContext(); //clear the sections sidebar.
 
                 try {
                     throw caught;
