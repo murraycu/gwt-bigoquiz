@@ -305,7 +305,12 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
     private Hyperlink createProblemQuestionHyperlink(@NotNull final UserQuestionHistory problemQuestion, final String nextQuestionSectionId, final boolean multipleChoice) {
         @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(getQuizId(), problemQuestion.getQuestionId(), nextQuestionSectionId, multipleChoice);
         final String historyToken = placeManager.buildHistoryToken(placeRequest);
-        final String title = problemQuestion.getSubSectionTitle() + ": " + problemQuestion.getQuestionTitle();
+        final String subSectionTitle = problemQuestion.getSubSectionTitle();
+        String title = problemQuestion.getQuestionTitle();
+        if (!StringUtils.isEmpty(subSectionTitle)) {
+            title = subSectionTitle + ": " + title;
+        }
+
         @NotNull final Hyperlink result = new InlineHyperlink(title, historyToken);
         result.addStyleName("problem-answer-hyperlink");
         return result;
