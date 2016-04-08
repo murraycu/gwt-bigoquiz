@@ -364,6 +364,10 @@ public class QuizServiceImpl extends ServiceWithUser implements
             return;
         }
 
+        if (loadQuizIntoQuizzes("graphs", quizzes)) {
+            return;
+        }
+
         this.quizzes = quizzes;
         context.setAttribute(LOADED_QUIZZES, quizzes);
     }
