@@ -33,7 +33,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         implements QuestionUserEditUiHandlers {
     //Put this in a shared PresenterWithUserHistoryRecent class, also used by QuizPresenter?
     private final UserHistorySectionsPresenter userHistorySectionsPresenter;
-    public static final SingleSlot<UserHistorySectionsPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot();
+    public static final SingleSlot<UserHistorySectionsPresenter> SLOT_USER_HISTORY_RECENT = new SingleSlot<>();
 
     private final PlaceManager placeManager;
     private String quizId = null;
