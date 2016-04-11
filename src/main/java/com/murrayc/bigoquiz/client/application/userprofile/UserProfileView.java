@@ -30,10 +30,6 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
 
     private final UserStatusView userStatusView = new UserStatusView();
     final FlowPanel detailsPanel = new FlowPanel();
-    private final Button buttonResetSections = new Button(constants.buttonResetSections());
-
-    private Panel loginParagraph = null;
-    private final InlineHTML loginLabel = new InlineHTML();
 
     private final PlaceManager placeManager;
 
@@ -73,16 +69,14 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
         buildUi(result);
     }
 
-    private void buildUi(final UserHistoryOverall UserHistoryOverall) {
+    private void buildUi(final UserHistoryOverall userHistoryOverall) {
         detailsPanel.clear();
 
-        if (!UserHistoryOverall.hasUser()) {
-            final LoginInfo loginInfo = UserHistoryOverall.getLoginInfo();
-            loginLabel.setHTML(messages.pleaseSignIn(loginInfo.getLoginUrl()));
-            loginParagraph.setVisible(true);
+        if (userHistoryOverall == null) {
+            return;
         }
 
-        @Nullable final Map<String, UserHistoryOverall.QuizDetails> quizzes = UserHistoryOverall.getQuizzes();
+        @Nullable final Map<String, UserHistoryOverall.QuizDetails> quizzes = userHistoryOverall.getQuizzes();
         if (quizzes == null || quizzes.isEmpty()) {
             Utils.addParagraphWithText(detailsPanel, constants.quizHistoryPlaceholder(), "");
         }
@@ -114,7 +108,7 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
 
             final int questionsCount = quizDetails.questionsCount;
 
-            final UserStats stats = UserHistoryOverall.getStats(quizId);
+            final UserStats stats = userHistoryOverall.getStats(quizId);
             if (stats != null) {
                 Utils.addStackedProgressBar(detailsPanel, stats.getCorrectOnce(), stats.getAnsweredOnce(), questionsCount, messages);
             } else {

@@ -14,14 +14,12 @@ import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by murrayc on 1/21/16.
  */
 public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView, UserProfilePresenter.MyProxy>
         implements UserProfileUserEditUiHandlers {
-    private boolean userIsLoggedIn = false;
 
     interface MyView extends ContentView, HasUiHandlers<UserProfileUserEditUiHandlers> {
         void setUserStatusFailed();
@@ -56,7 +54,6 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
                 getView().setLoadingLabelVisible(false);
 
                 try {
-                    userIsLoggedIn = false;
                     throw caught;
                 } catch (final IllegalArgumentException ex) {
                     Log.error("AsyncCallback Failed with IllegalArgumentException: getUserRecentHistory()", ex);
@@ -70,22 +67,11 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
             @Override
             public void onSuccess(final UserHistoryOverall result) {
                 getView().setLoadingLabelVisible(false);
-
-                if (result == null) {
-                    onFailureGeneric();
-                }
-
-                final LoginInfo loginInfo = result.getLoginInfo();
-                if (loginInfo == null) {
-                    onFailureGeneric();
-                }
-
-                userIsLoggedIn = loginInfo.isLoggedIn();
                 getView().setUserRecentHistory(result);
             }
 
             private void onFailureGeneric() {
-                userIsLoggedIn = false;
+                Log.fatal("debug: onFailureGeneric().");
                 getView().setServerFailed();
             }
         };
