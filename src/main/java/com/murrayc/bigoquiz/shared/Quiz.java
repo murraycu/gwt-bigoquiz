@@ -236,6 +236,14 @@ public class Quiz implements IsSerializable {
         return listSectionQuestions.get(sectionId);
     }
 
+    /** Get the count of all questions in all sections.
+     *
+     * @return
+     */
+    public int getQuestionsCount() {
+        return listQuestions.size();
+    }
+
     private boolean listSectionQuestionsIsEmpty() {
         return listSectionQuestions == null ||
                 listSectionQuestions.isEmpty();

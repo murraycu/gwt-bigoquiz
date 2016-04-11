@@ -281,6 +281,34 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
     }
 
+    @Nullable
+    @Override
+    public UserHistoryOverall getUserHistoryOverall(final String requestUri) throws IllegalArgumentException {
+        getOrLoadQuizzes();
+
+        //Get the stats for this user, for each section:
+        //We also return the LoginInfo, so we can show a sign in link,
+        //and to avoid the need for a separate call to the server.
+        @NotNull LoginInfo loginInfo = getLoginInfo(requestUri); //TODO: Check for login
+
+        @NotNull final UserHistoryOverall result = new UserHistoryOverall(loginInfo);
+
+        @Nullable final String userId = loginInfo.getUserId(); //TODO: check.
+        final Map<String, UserStats> mapUserStats = getUserStats(userId);
+
+        for (final Quiz quiz : quizzes.values()) {
+            final String quizId = quiz.getId();
+            final UserStats userStats = mapUserStats.get(quizId);
+            if (userStats == null) {
+                continue;
+            }
+
+            result.setQuizStats(quizId, userStats, quiz.getTitle(), quiz.getQuestionsCount());
+        }
+
+        return result;
+    }
+
     private static Quiz loadQuiz(@NotNull final String quizId) {
         final String filename = "quizzes" + File.separator + quizId + ".xml";
         try(final InputStream is = Thread.currentThread().getContextClassLoader()
@@ -315,6 +343,32 @@ public class QuizServiceImpl extends ServiceWithUser implements
     }
 
     /**
+     * Get a map of quiz ID to UserStats for that quiz, for the specified user.
+     *
+     * @param userId
+     * @return
+     */
+    @NotNull
+    private Map<String, UserStats> getUserStats(@NotNull final String userId) {
+        final Query<UserStats> q = getQueryForUserStats(userId);
+
+        @NotNull List<UserStats> listUserStats = q.list();
+        @NotNull final Map<String, UserStats> map = new HashMap<>();
+        for (@NotNull final UserStats userStats : listUserStats) {
+            final String quizId = userStats.getQuizId();
+            if (!map.containsKey(quizId)) {
+                map.put(quizId, userStats);
+            } else {
+                final UserStats existing = map.get(quizId);
+                final UserStats combinedStats = existing.createCombinedUserStatsWithoutQuestionHistories(userStats);
+                map.put(quizId, combinedStats);
+            }
+        }
+
+        return map;
+    }
+
+    /**
      * Get a map of section ID to UserStats for that section, for the specified user.
      *
      * @param userId
@@ -332,9 +386,14 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return map;
     }
 
-    private static Query<UserStats> getQueryForUserStats(@NotNull final String userId, @NotNull final String quizId) {
+    private static Query<UserStats> getQueryForUserStats(@NotNull final String userId) {
         Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
         q = q.filter("userId", userId);
+        return q;
+    }
+
+    private static Query<UserStats> getQueryForUserStats(@NotNull final String userId, @NotNull final String quizId) {
+        Query<UserStats> q = getQueryForUserStats(userId);
         q = q.filter("quizId", quizId);
         return q;
     }

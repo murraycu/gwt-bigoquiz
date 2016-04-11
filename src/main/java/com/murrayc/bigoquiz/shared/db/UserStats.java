@@ -72,6 +72,10 @@ public class UserStats implements IsSerializable {
         this.userId = userId;
     }
 
+    public String getQuizId() {
+        return quizId;
+    }
+
     public String getSectionId() {
         return sectionId;
     }
@@ -274,5 +278,27 @@ public class UserStats implements IsSerializable {
         for (final String id : idsToRemove) {
             topProblemQuestionHistoriesInOrder.remove(id);
         }
+    }
+
+    /** Add the values from userStat to this instance,
+     * returning a combined UserStats,
+     * ignoring the question histories,
+     * without changing this instance.
+     *
+     * @param userStats
+     */
+    public UserStats createCombinedUserStatsWithoutQuestionHistories(final UserStats userStats) {
+        final UserStats result = new UserStats();
+        result.userId = this.userId;
+        result.quizId = this.quizId;
+        result.sectionId = this.sectionId;
+
+        result.answered = this.answered + userStats.answered;
+        result.correct = this.correct + userStats.correct;
+
+        result.countQuestionsAnsweredOnce = this.countQuestionsAnsweredOnce + userStats.countQuestionsAnsweredOnce;
+        result.countQuestionsCorrectOnce = this.countQuestionsCorrectOnce + userStats.countQuestionsCorrectOnce;
+
+        return result;
     }
 }

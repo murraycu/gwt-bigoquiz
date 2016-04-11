@@ -3,7 +3,6 @@ package com.murrayc.bigoquiz.client.application.userhistorysections;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.Timer;
@@ -176,7 +175,7 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
 
             final UserStats stats = userHistorySections.getStats(sectionId);
             if (stats != null) {
-                addStackedProgressBar(detailsPanel, stats.getCorrectOnce(), stats.getAnsweredOnce(), questionsCount);
+                Utils.addStackedProgressBar(detailsPanel, stats.getCorrectOnce(), stats.getAnsweredOnce(), questionsCount, messages);
 
                 /* This doesn't seem interesting enough to take up the extra space with it:
                 addParagraphWithText(detailsPanel,
@@ -211,7 +210,7 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
                         break;
                     }
 
-                    @NotNull final Panel paraScore = addParaScore(problemQuestionsPanel);
+                    @NotNull final Panel paraScore = Utils.addParaScore(problemQuestionsPanel);
 
                     @NotNull final String strScore = "-" + problemQuestion.getCountAnsweredWrong();
                     @NotNull final Label labelScore = new InlineLabel(strScore);
@@ -238,46 +237,13 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
             if (count == 0) {
                 //We put it in a parent paragraph, like the real problem questions,
                 //so it can take up the full width.
-                @NotNull final Panel paraScore = addParaScore(problemQuestionsPanel);
+                @NotNull final Panel paraScore = Utils.addParaScore(problemQuestionsPanel);
                 Utils.addParagraphWithText(paraScore, constants.problemQuestionsNoneYet(),
                         "problem-answer-score");
             }
 
 
         }
-    }
-
-    @NotNull
-    private static Panel addParaScore(Panel problemQuestionsPanel) {
-        @NotNull final Panel paraScore = Utils.addParagraph(problemQuestionsPanel,
-                "problem-answer");
-        paraScore.addStyleName("clearfix");
-        return paraScore;
-    }
-
-    private void addStackedProgressBar(@NotNull final FlowPanel parentPanel, int correctOnce, int answeredOnce, int count) {
-        @NotNull final FlowPanel panelProgress = new FlowPanel();
-        parentPanel.add(panelProgress);
-        panelProgress.addStyleName("progress-bar");
-        //panelProgress.addStyleName("clearfix");
-
-        @NotNull final String correctStr = messages.correctOnce(correctOnce);
-        @NotNull final String answeredStr = messages.answeredOnce(answeredOnce);
-        @NotNull final String countStr = messages.questionsCount(count);
-
-        @NotNull final Panel partCorrect = Utils.addParagraphWithText(panelProgress, correctStr, "progress-part-correct-once");
-        @NotNull final Panel partAnswered = Utils.addParagraphWithText(panelProgress, answeredStr, "progress-part-answered-once");
-        @NotNull final Panel partCount = Utils.addParagraphWithText(panelProgress, countStr, "progress-part-count");
-
-        final double countDouble = (double)count;
-        final double correctPercentage = (count == 0 ? 0 : (double)correctOnce / countDouble) * 100;
-        @NotNull final String correctWidthStr = NumberFormat.getFormat("#").format(correctPercentage) + "%";
-        final double answeredPercentage = (count == 0 ? 0 : (double)answeredOnce / countDouble) * 100;
-        @NotNull final String answeredWidthStr = NumberFormat.getFormat("#").format(answeredPercentage) + "%";
-
-        partCorrect.setWidth(correctWidthStr);
-        partAnswered.setWidth(answeredWidthStr);
-        partCount.setWidth("100%");
     }
 
     @Override

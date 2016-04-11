@@ -21,11 +21,12 @@ import org.jetbrains.annotations.Nullable;
  */
 public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView, UserProfilePresenter.MyProxy>
         implements UserProfileUserEditUiHandlers {
+    private boolean userIsLoggedIn = false;
 
     interface MyView extends ContentView, HasUiHandlers<UserProfileUserEditUiHandlers> {
         void setUserStatusFailed();
 
-        void setLoginInfo(@NotNull final LoginInfo result);
+        void setUserRecentHistory(final UserHistoryOverall result);
     }
 
     @ProxyStandard
@@ -44,33 +45,52 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
 
         // Check login status using login service.
         getView().setLoadingLabelVisible(true);
-        LoginServiceAsync.Util.getInstance().login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
+
+        getAndShowHistory();
+    }
+
+    private void getAndShowHistory() {
+        @NotNull final AsyncCallback<UserHistoryOverall> callback = new AsyncCallback<UserHistoryOverall>() {
+            @Override
             public void onFailure(@NotNull final Throwable caught) {
                 getView().setLoadingLabelVisible(false);
 
                 try {
+                    userIsLoggedIn = false;
                     throw caught;
                 } catch (final IllegalArgumentException ex) {
-                    //One of the parameters (quizID, questionId, etc) must be invalid,
-                    //TODO: Handle this properly.
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: login()", ex);
-                    getView().setUserStatusFailed();
+                    Log.error("AsyncCallback Failed with IllegalArgumentException: getUserRecentHistory()", ex);
+                    onFailureGeneric();
                 } catch (final Throwable ex) {
-                    Log.error("AsyncCallback Failed: login()", ex);
-                    getView().setUserStatusFailed();
+                    Log.error("AsyncCallback Failed: getUserRecentHistory()", ex);
+                    onFailureGeneric();
                 }
             }
 
-            public void onSuccess(@Nullable final LoginInfo result) {
+            @Override
+            public void onSuccess(final UserHistoryOverall result) {
                 getView().setLoadingLabelVisible(false);
 
-                //TODO: Throw an exception instead of returning null?
-                if(result == null) {
-                    getView().setUserStatusFailed();
-                } else {
-                    getView().setLoginInfo(result);
+                if (result == null) {
+                    onFailureGeneric();
                 }
+
+                final LoginInfo loginInfo = result.getLoginInfo();
+                if (loginInfo == null) {
+                    onFailureGeneric();
+                }
+
+                userIsLoggedIn = loginInfo.isLoggedIn();
+                getView().setUserRecentHistory(result);
             }
-        });
+
+            private void onFailureGeneric() {
+                userIsLoggedIn = false;
+                getView().setServerFailed();
+            }
+        };
+
+        QuizServiceAsync.Util.getInstance().getUserHistoryOverall(
+                GWT.getHostPageBaseURL(), callback);
     }
 }

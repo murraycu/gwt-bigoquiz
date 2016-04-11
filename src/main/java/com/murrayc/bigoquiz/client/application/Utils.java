@@ -7,9 +7,11 @@ import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.*;
+import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import com.murrayc.bigoquiz.shared.StringUtils;
@@ -148,6 +150,39 @@ public class Utils {
 
     public static void tellUserHistoryPresenterAboutNoQuestionContext(final HasHandlers source) {
         QuestionContextEvent.fire(source, null, null, true);
+    }
+
+    @NotNull
+    public static Panel addParaScore(Panel problemQuestionsPanel) {
+        @NotNull final Panel paraScore = addParagraph(problemQuestionsPanel,
+                "problem-answer");
+        paraScore.addStyleName("clearfix");
+        return paraScore;
+    }
+
+    public static void addStackedProgressBar(@NotNull final FlowPanel parentPanel, int correctOnce, int answeredOnce, int count, final BigOQuizMessages messages) {
+        @NotNull final FlowPanel panelProgress = new FlowPanel();
+        parentPanel.add(panelProgress);
+        panelProgress.addStyleName("progress-bar");
+        //panelProgress.addStyleName("clearfix");
+
+        @NotNull final String correctStr = messages.correctOnce(correctOnce);
+        @NotNull final String answeredStr = messages.answeredOnce(answeredOnce);
+        @NotNull final String countStr = messages.questionsCount(count);
+
+        @NotNull final Panel partCorrect = addParagraphWithText(panelProgress, correctStr, "progress-part-correct-once");
+        @NotNull final Panel partAnswered = addParagraphWithText(panelProgress, answeredStr, "progress-part-answered-once");
+        @NotNull final Panel partCount = addParagraphWithText(panelProgress, countStr, "progress-part-count");
+
+        final double countDouble = (double)count;
+        final double correctPercentage = (count == 0 ? 0 : (double)correctOnce / countDouble) * 100;
+        @NotNull final String correctWidthStr = NumberFormat.getFormat("#").format(correctPercentage) + "%";
+        final double answeredPercentage = (count == 0 ? 0 : (double)answeredOnce / countDouble) * 100;
+        @NotNull final String answeredWidthStr = NumberFormat.getFormat("#").format(answeredPercentage) + "%";
+
+        partCorrect.setWidth(correctWidthStr);
+        partAnswered.setWidth(answeredWidthStr);
+        partCount.setWidth("100%");
     }
 
     /* This doesn't seem to work:
