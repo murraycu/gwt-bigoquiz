@@ -293,7 +293,11 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
         @NotNull final UserHistoryOverall result = new UserHistoryOverall(loginInfo);
 
-        @Nullable final String userId = loginInfo.getUserId(); //TODO: check.
+        @Nullable final String userId = loginInfo.getUserId();
+        if (StringUtils.isEmpty(userId)) {
+            return result;
+        }
+
         final Map<String, UserStats> mapUserStats = getUserStats(userId);
 
         for (final Quiz quiz : quizzes.values()) {
