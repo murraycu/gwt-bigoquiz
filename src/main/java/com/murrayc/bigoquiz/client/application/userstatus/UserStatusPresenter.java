@@ -21,6 +21,7 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
         implements UserStatusUserEditUiHandlers {
     public interface MyView extends View, HasUiHandlers<UserStatusUserEditUiHandlers> {
         void setLoginInfo(@NotNull final LoginInfo result);
+        void setShowLogOutWhenAppropriate(boolean show);
 
         void setUserStatusFailed();
     }
@@ -31,7 +32,9 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
             MyView view) {
         super(eventBus, view);
 
-        getView().setUiHandlers(this);
+        final MyView theView = getView();
+        theView.setUiHandlers(this);
+        theView.setShowLogOutWhenAppropriate(false); //Default.
 
         // Check login status using login service.
         LoginServiceAsync.Util.getInstance().login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {

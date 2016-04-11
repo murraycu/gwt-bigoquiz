@@ -372,7 +372,7 @@ background-color: #B6B2DD;
     float: right;
 }
 
-.user-status-panel {
+.menu-others-panel .user-status-panel {
     float: right;
     clear: both;
     color: #2F4550;

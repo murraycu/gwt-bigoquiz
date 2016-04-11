@@ -12,6 +12,7 @@ import com.murrayc.bigoquiz.client.UserHistoryOverall;
 import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
+import com.murrayc.bigoquiz.client.application.userstatus.UserStatusView;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.db.UserStats;
 import org.jetbrains.annotations.NotNull;
@@ -27,8 +28,7 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
         implements UserProfilePresenter.MyView {
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
-    private final Label usernameLabel = new InlineLabel();
-    private final Anchor logoutLabel = new Anchor(constants.logOut());
+    private final UserStatusView userStatusView = new UserStatusView();
     final FlowPanel detailsPanel = new FlowPanel();
     private final Button buttonResetSections = new Button(constants.buttonResetSections());
 
@@ -43,14 +43,8 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
 
         setTitle(constants.profileTitle());
 
-        //This is only visible when necessary:
-        loginParagraph = Utils.addParagraphWithChild(mainPanel, loginLabel);
-        loginParagraph.setVisible(false);
-
-        Utils.addParagraphWithChild(mainPanel, usernameLabel);
-
-        mainPanel.add(logoutLabel);
-        logoutLabel.addStyleName("logout-label");
+        mainPanel.add(userStatusView);
+        userStatusView.setShowLogOutWhenAppropriate(true);
 
         Utils.addHeaderToPanel(2, mainPanel, constants.historyTitle());
         mainPanel.add(detailsPanel);
@@ -63,12 +57,6 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
     }
 
     private void setLoginInfo(final LoginInfo loginInfo) {
-        //Defaults:
-        usernameLabel.setVisible(false);
-        logoutLabel.setVisible(false);
-        buttonResetSections.setVisible(false);
-        loginParagraph.setVisible(false);
-
         if (loginInfo == null) {
             Log.error("setLoginInfo(): loginInfo is null.");
             setErrorLabelVisible(true);
@@ -76,20 +64,7 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
         }
 
         setErrorLabelVisible(false);
-
-        if (loginInfo.isLoggedIn()) {
-            usernameLabel.setVisible(true);
-            logoutLabel.setVisible(true);
-            buttonResetSections.setVisible(true);
-
-            usernameLabel.setText(messages.username(loginInfo.getNickname()));
-            logoutLabel.setHref(loginInfo.getLogoutUrl());
-        } else {
-            loginLabel.setHTML(messages.pleaseSignIn(loginInfo.getLoginUrl()));
-            loginParagraph.setVisible(true);
-
-            logoutLabel.setVisible(false);
-        }
+        userStatusView.setLoginInfo(loginInfo);
     }
 
     @Override

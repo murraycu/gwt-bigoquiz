@@ -29,11 +29,14 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
     private final Panel loginPanel = new FlowPanel();
     private final Label loginFailedLabel = new Label(constants.errorNoServer());
 
+    private final Anchor logoutLabel = new Anchor(constants.logOut());
+
     @Nullable
     private LoginInfo loginInfo = null;
     private boolean loginServerFailed = false;
+    private boolean showLogOutWhenAppropriate = false;
 
-    UserStatusView() {
+    public UserStatusView() {
         @NotNull final FlowPanel statusPanel = new FlowPanel();
         statusPanel.addStyleName("status-panel");
         //box.getElement().setAttribute("id", "titlebox");
@@ -66,11 +69,29 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
         @NotNull final FlowPanel mainPanel = new FlowPanel();
         mainPanel.addStyleName("user-status-panel");
         mainPanel.add(loginPanel);
+
         mainPanel.add(statusPanel);
+
+        logoutLabel.setVisible(false); //by default.
+        mainPanel.add(logoutLabel);
+
         initWidget(mainPanel);
     }
 
+    @Override
+    public void setShowLogOutWhenAppropriate(boolean show) {
+        this.showLogOutWhenAppropriate = show;
+    }
 
+    private void setLogOutVisibility() {
+        boolean visible = false;
+        if (this.showLogOutWhenAppropriate &&
+                loginInfo != null && loginInfo.isLoggedIn()) {
+            visible = true;
+        }
+
+        logoutLabel.setVisible(visible);
+    }
 
     @Override
     public void setUserStatusFailed() {
@@ -120,5 +141,8 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
 
         usernameLabel.setText(username);
         usernameLabel.setHref("#" + NameTokens.USER_PROFILE);
+
+        logoutLabel.setHref(loginInfo.getLogoutUrl());
+        setLogOutVisibility();
     }
 }
