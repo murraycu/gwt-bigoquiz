@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * Created by murrayc on 1/23/16.
  */
-public class UserHistory implements IsSerializable {
+public class UserHistorySections implements IsSerializable {
     /* Do not make these final, because then GWT cannot serialize them. */
     @NotNull
     private /* final */ LoginInfo loginInfo;
@@ -23,7 +23,7 @@ public class UserHistory implements IsSerializable {
     @NotNull
     private Map<String, UserStats> sectionStats = new HashMap<>();
 
-    UserHistory() {
+    UserHistorySections() {
         loginInfo = null;
         sections = null;
         quizTitle = null;
@@ -37,7 +37,7 @@ public class UserHistory implements IsSerializable {
      * @param loginInfo
      * @param sections
      */
-    public UserHistory(@NotNull final LoginInfo loginInfo, @NotNull final QuizSections sections, final String quizTitle) {
+    public UserHistorySections(@NotNull final LoginInfo loginInfo, @NotNull final QuizSections sections, final String quizTitle) {
         this.loginInfo = loginInfo;
         this.sections = sections;
         this.quizTitle = quizTitle;

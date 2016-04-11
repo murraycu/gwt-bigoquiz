@@ -35,7 +35,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
     public interface MyView extends View, HasUiHandlers<UserHistorySectionsUserEditUiHandlers> {
         /** Set a whole set of history.
          */
-        void setUserRecentHistory(final String quizId, final UserHistory result, final String nextQuestionSectionId, boolean multipleChoice);
+        void setUserRecentHistory(final String quizId, final UserHistorySections result, final String nextQuestionSectionId, boolean multipleChoice);
 
         /** Add a single item of history.
          * For instance, to avoid retrieving the whole history from the server,
@@ -121,7 +121,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
             return;
         }
 
-        @NotNull final AsyncCallback<UserHistory> callback = new AsyncCallback<UserHistory>() {
+        @NotNull final AsyncCallback<UserHistorySections> callback = new AsyncCallback<UserHistorySections>() {
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 try {
@@ -146,7 +146,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
             }
 
             @Override
-            public void onSuccess(final UserHistory result) {
+            public void onSuccess(final UserHistorySections result) {
                 if (result == null) {
                     onFailureGeneric();
                 }
@@ -176,7 +176,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
             }
         };
 
-        QuizServiceAsync.Util.getInstance().getUserRecentHistory(
+        QuizServiceAsync.Util.getInstance().getUserHistorySections(
                 quizId, GWT.getHostPageBaseURL(), callback);
     }
 

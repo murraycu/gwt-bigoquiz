@@ -24,8 +24,8 @@ public class UserHistoryTest {
     @Test
     public void testAddUserAnswerAtStart() throws Exception {
         //TODO: Break this up into smaller tests,
-        //when the UserHistory API has settled down.
-        @NotNull UserHistory history = createUserRecentHistory();
+        //when the UserHistorySections API has settled down.
+        @NotNull UserHistorySections history = createUserRecentHistory();
 
         @Nullable Question question = createQuestion("question4", SECTION_1, SUBSECTION_1_1);
         history.addUserAnswerAtStart(QUIZ_ID, question, false);
@@ -53,7 +53,7 @@ public class UserHistoryTest {
     }
 
     @NotNull
-    private UserHistory createUserRecentHistory() {
+    private UserHistorySections createUserRecentHistory() {
         @NotNull final QuizSections sections = new QuizSections();
         sections.addSection(SECTION_1, "section 1", null);
         sections.addSection("section2", "section 2", null);
@@ -62,7 +62,7 @@ public class UserHistoryTest {
 
         @NotNull LoginInfo loginInfo = new LoginInfo();
         loginInfo.setUserId("userid 1");
-        @NotNull UserHistory history = new UserHistory(loginInfo, sections, "some title");
+        @NotNull UserHistorySections history = new UserHistorySections(loginInfo, sections, "some title");
         history.setSectionStats("section1", stats);
 
         return history;

@@ -189,7 +189,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @Nullable
     @Override
-    public UserHistory getUserRecentHistory(final String quizId, final String requestUri) throws UnknownQuizException, IllegalArgumentException {
+    public UserHistorySections getUserHistorySections(final String quizId, final String requestUri) throws UnknownQuizException, IllegalArgumentException {
         final Quiz quiz = getQuiz(quizId);
         if (quiz == null) {
             throw new UnknownQuizException();
@@ -204,7 +204,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //We also return the LoginInfo, so we can show a sign in link,
         //and to avoid the need for a separate call to the server.
         @NotNull LoginInfo loginInfo = getLoginInfo(requestUri);
-        @NotNull final UserHistory result = new UserHistory(loginInfo, sections, quiz.getTitle());
+        @NotNull final UserHistorySections result = new UserHistorySections(loginInfo, sections, quiz.getTitle());
 
         //This may be null,
         //in which case we will return a mostly-empty set of user statistics,
