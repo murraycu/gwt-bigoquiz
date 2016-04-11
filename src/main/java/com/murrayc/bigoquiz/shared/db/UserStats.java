@@ -102,6 +102,9 @@ public class UserStats implements IsSerializable {
     }
 
     public void updateProblemQuestion(@Nullable final Question question, boolean answerIsCorrect) {
+        //This seems as good a time as any to clear out non-problem questions.
+        clearNonProblemQuestions();
+
         if (question == null) {
             Log.error("updateProblemQuestion(): question is null.");
             return;
@@ -145,6 +148,8 @@ public class UserStats implements IsSerializable {
     }
 
     private void cacheList() {
+        clearNonProblemQuestions();
+
         if (!cacheIsInvalid) {
             return;
         }
@@ -231,5 +236,33 @@ public class UserStats implements IsSerializable {
         }
 
         return history.getCountAnsweredWrong();
+    }
+
+    //Forget questions that have not been answered wrong more than correct:
+    protected void clearNonProblemQuestions() {
+        Set<String> idsToRemove = null;
+        for (final UserQuestionHistory history : questionHistories.values()) {
+            if (history == null) {
+                continue;
+            }
+
+            if (history.getCountAnsweredWrong() <= 0) {
+                if (idsToRemove == null) {
+                    idsToRemove = new HashSet<>();
+                }
+
+                idsToRemove.add(history.getQuestionId());
+            }
+        }
+
+        if (idsToRemove == null) {
+            return;
+        }
+
+        for (final String id : idsToRemove) {
+            questionHistories.remove(id);
+        }
+
+        cacheIsInvalid = true;
     }
 }
