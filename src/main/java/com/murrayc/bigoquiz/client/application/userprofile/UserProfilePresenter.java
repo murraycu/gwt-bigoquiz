@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.client.application.userprofile;
 
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -77,6 +78,6 @@ public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView,
         };
 
         QuizServiceAsync.Util.getInstance().getUserHistoryOverall(
-                GWT.getHostPageBaseURL(), callback);
+                Window.Location.getHref(), callback);
     }
 }

@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.client.application.userhistorysections;
 
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -177,7 +178,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
         };
 
         QuizServiceAsync.Util.getInstance().getUserHistorySections(
-                quizId, GWT.getHostPageBaseURL(), callback);
+                quizId, Window.Location.getHref(), callback);
     }
 
     private String getQuizId() {

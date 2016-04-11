@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.client.application.userstatus;
 
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -37,7 +38,7 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
         theView.setShowLogOutWhenAppropriate(false); //Default.
 
         // Check login status using login service.
-        LoginServiceAsync.Util.getInstance().login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
+        LoginServiceAsync.Util.getInstance().login(Window.Location.getHref(), new AsyncCallback<LoginInfo>() {
             public void onFailure(@NotNull final Throwable caught) {
                 try {
                     throw caught;
