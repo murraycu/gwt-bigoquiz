@@ -38,4 +38,9 @@
 
     <!-- allow Super Dev Mode -->
     <add-linker name="xsiframe"/>
+
+    <!-- Fallback User Agent for use by crawlers such as the googlebot.
+     Otherwise they try to use undefined.cache.js, which does not exist,
+     so they don't see any actual content.-->
+    <set-property-fallback name="user.agent" value="gecko1_8" />
 </module>
