@@ -87,6 +87,8 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
         } else {
             loginLabel.setHTML(messages.pleaseSignIn(loginInfo.getLoginUrl()));
             loginParagraph.setVisible(true);
+
+            logoutLabel.setVisible(false);
         }
     }
 
