@@ -10,6 +10,7 @@ import com.murrayc.bigoquiz.client.ImageResources;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.NameTokens;
+import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,6 +30,7 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
     private final Panel loginPanel = new FlowPanel();
     private final Label loginFailedLabel = new Label(constants.errorNoServer());
 
+    private final Panel logoutPanel;
     private final Anchor logoutLabel = new Anchor(constants.logOut());
 
     @Nullable
@@ -72,8 +74,7 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
 
         mainPanel.add(statusPanel);
 
-        logoutLabel.setVisible(false); //by default.
-        mainPanel.add(logoutLabel);
+        logoutPanel = Utils.addParagraphWithChild(mainPanel, logoutLabel);
 
         initWidget(mainPanel);
     }
@@ -90,7 +91,7 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
             visible = true;
         }
 
-        logoutLabel.setVisible(visible);
+        logoutPanel.setVisible(visible);
     }
 
     @Override
