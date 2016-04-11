@@ -22,6 +22,8 @@ import com.murrayc.bigoquiz.shared.QuizSections;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 /**
  * Created by murrayc on 1/21/16.
  */
@@ -38,6 +40,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private QuizSections sections = null;
     private String nextQuestionSectionId = null;
     private String choiceSelected = null;
+    private boolean questionHasOnlyTwoAnswers = false;
 
     private final FlowPanel resultPanel;
     private final ListBox nextQuestionSectionListBox = new ListBox();
@@ -327,7 +330,13 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private void buildChoices(@Nullable Question question) {
         if (question.hasChoices()) {
             @NotNull final String GROUP_NAME = "choices";
-            for (final String choice : question.getChoices()) {
+
+            final List<String> questions = question.getChoices();
+            if (questions.size() <= 2) {
+                questionHasOnlyTwoAnswers = true;
+            }
+
+            for (final String choice : questions) {
                 @NotNull final RadioButton radioButton = new RadioButton(GROUP_NAME, choice);
                 //TODO: Disable the handlers when rebuilding the widgets?
                 radioButton.addStyleName("question-radio-button");
@@ -359,7 +368,13 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             return;
         }
 
-        updateResultPanelUi(submissionResult.getResult() ? State.CORRECT_ANSWER : State.WAITING_AFTER_WRONG_ANSWER);
+        final boolean correct = submissionResult.getResult();
+        State state = correct ? State.CORRECT_ANSWER : State.WAITING_AFTER_WRONG_ANSWER;
+        if (!correct && questionHasOnlyTwoAnswers) {
+            state = State.WRONG_ANSWER_AND_CORRECT_IS_IMPLICITLY_SHOWN;
+        }
+
+        updateResultPanelUi(state);
     }
 
     @Override
@@ -418,6 +433,17 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 showAnswerButton.setVisible(true);
                 scrollWidgetIntoView(showAnswerButton);
                 nextQuestionButton.setVisible(false);
+                resultLabel.setText(constants.wrongLabel());
+                resultLabel.setVisible(true);
+
+                showWrongAnswerInChoices(choiceSelected);
+                break;
+            }
+            case WRONG_ANSWER_AND_CORRECT_IS_IMPLICITLY_SHOWN: {
+                enableChoices(false); //Don't let them choose the correct answer now that it is obvious.
+                showAnswerButton.setVisible(false); //unnecessary
+                //scrollWidgetIntoView(showAnswerButton);
+                nextQuestionButton.setVisible(true);
                 resultLabel.setText(constants.wrongLabel());
                 resultLabel.setVisible(true);
 
@@ -509,6 +535,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         WAITING_INVALID,
         WAITING_FOR_ANSWER,
         WAITING_AFTER_WRONG_ANSWER,
+        WRONG_ANSWER_AND_CORRECT_IS_IMPLICITLY_SHOWN,
         DONT_KNOW_ANSWER,
         CORRECT_ANSWER;
 
