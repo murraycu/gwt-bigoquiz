@@ -195,7 +195,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
             detailsPanel.add(problemQuestionsPanel);
             problemQuestionsPanel.addStyleName("panel-problem-questions");
 
-            @NotNull final List<UserQuestionHistory> problemQuestions = stats.getTopQuestionHistories();
+            @NotNull final List<UserQuestionHistory> problemQuestions = stats.getTopProblemQuestionHistories();
 
             int count = 0;
             if (problemQuestions != null) {
@@ -224,7 +224,7 @@ public class UserHistoryRecentView extends ViewWithUiHandlers<UserHistoryRecentU
                     count += 1;
                 }
 
-                final int fullCount = stats.getQuestionHistoriesCount();
+                final int fullCount = stats.getProblemQuestionHistoriesCount();
                 Log.fatal("debug: fullCount=" + fullCount);
                 if (fullCount > UserStats.MAX_PROBLEM_QUESTIONS) {
                     final int extras = fullCount - UserStats.MAX_PROBLEM_QUESTIONS;

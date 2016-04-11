@@ -41,8 +41,11 @@ public class UserStats implements IsSerializable {
 
     Map<String, UserQuestionHistory> questionHistories;
 
+    //Only the problem questions, and only the top few of those, in order:
     @Ignore
-    private transient List<UserQuestionHistory> questionHistoriesInOrder = null;
+    private transient List<UserQuestionHistory> topProblemQuestionHistoriesInOrder = null;
+    @Ignore
+    private transient int problemQuestionHistoriesCount = 0;
 
     @Ignore
     private transient boolean cacheIsInvalid = true;
@@ -102,9 +105,6 @@ public class UserStats implements IsSerializable {
     }
 
     public void updateProblemQuestion(@Nullable final Question question, boolean answerIsCorrect) {
-        //This seems as good a time as any to clear out non-problem questions.
-        clearNonProblemQuestions();
-
         if (question == null) {
             Log.error("updateProblemQuestion(): question is null.");
             return;
@@ -148,8 +148,6 @@ public class UserStats implements IsSerializable {
     }
 
     private void cacheList() {
-        clearNonProblemQuestions();
-
         if (!cacheIsInvalid) {
             return;
         }
@@ -182,16 +180,28 @@ public class UserStats implements IsSerializable {
             };
         }
 
-        questionHistoriesInOrder = new ArrayList<>(questionHistories.values());
+        problemQuestionHistoriesCount = 0;
+        topProblemQuestionHistoriesInOrder = new ArrayList<>(questionHistories.values());
 
-        //The client only wants the first few:
-        final int size = questionHistoriesInOrder.size();
-        final int sublistSize = Math.min(size, MAX_PROBLEM_QUESTIONS );
-        if (sublistSize != size && sublistSize > 0) {
-            questionHistoriesInOrder = questionHistoriesInOrder.subList(0, sublistSize);
+        Collections.sort(topProblemQuestionHistoriesInOrder, comparator);
+
+        //Cache the count of problem questions:
+        for (final UserQuestionHistory history : topProblemQuestionHistoriesInOrder) {
+            if(history != null && history.getCountAnsweredWrong() > 0) {
+                problemQuestionHistoriesCount++;
+            }
         }
 
-        Collections.sort(questionHistoriesInOrder, comparator);
+        //The client only wants the first few:
+        final int size = topProblemQuestionHistoriesInOrder.size();
+        final int sublistSize = Math.min(size, MAX_PROBLEM_QUESTIONS );
+        if (sublistSize != size && sublistSize > 0) {
+            topProblemQuestionHistoriesInOrder = topProblemQuestionHistoriesInOrder.subList(0, sublistSize);
+        }
+
+        //Don't include questions that are not really problem questions:
+        clearNonProblemQuestions();
+
         cacheIsInvalid = false;
     }
 
@@ -200,21 +210,17 @@ public class UserStats implements IsSerializable {
      * @return
      */
     @NotNull
-    public List<UserQuestionHistory> getTopQuestionHistories() {
+    public List<UserQuestionHistory> getTopProblemQuestionHistories() {
         cacheList();
-        return questionHistoriesInOrder;
+        return topProblemQuestionHistoriesInOrder;
     }
 
     /** Get the count of all the questions that have been answered wrongly.
      * getTopQuestionHistories() returns just the top few of these.
      * @return
      */
-    public int getQuestionHistoriesCount() {
-        if (questionHistories == null) {
-            return 0;
-        }
-
-        return questionHistories.size();
+    public int getProblemQuestionHistoriesCount() {
+        return problemQuestionHistoriesCount;
     }
 
     public int getAnsweredOnce() {
@@ -240,8 +246,14 @@ public class UserStats implements IsSerializable {
 
     //Forget questions that have not been answered wrong more than correct:
     protected void clearNonProblemQuestions() {
+        //TODO: Instead, use streams with Java 8?
+        /*
+        topProblemQuestionHistoriesInOrder = topProblemQuestionHistoriesInOrder.stream()
+                .filter(p -> p.getCountAnsweredWrong() > 0).collect(Collectors.toList());
+        */
+
         Set<String> idsToRemove = null;
-        for (final UserQuestionHistory history : questionHistories.values()) {
+        for (final UserQuestionHistory history : topProblemQuestionHistoriesInOrder) {
             if (history == null) {
                 continue;
             }
@@ -260,9 +272,7 @@ public class UserStats implements IsSerializable {
         }
 
         for (final String id : idsToRemove) {
-            questionHistories.remove(id);
+            topProblemQuestionHistoriesInOrder.remove(id);
         }
-
-        cacheIsInvalid = true;
     }
 }
