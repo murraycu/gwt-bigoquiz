@@ -167,31 +167,6 @@ public class Quiz implements IsSerializable {
         section.questionsCount = questionsCount;
     }
 
-    public void setSectionDefaultChoicesFromAnswers(final String sectionId) {
-        final QuizSections.Section section = quizSections.getSection(sectionId);
-        if (section == null) {
-            Log.error("setSubSectionDefaultChoicesFromAnswers(): section not found.");
-            return;
-        }
-
-        //Use a set to avoid duplicates:
-        final Set<String> choicesSet = new HashSet<>();
-        final List<QuestionAndAnswer> sectionList = listSectionQuestions.get(sectionId);
-        for (final QuestionAndAnswer question : sectionList) {
-            choicesSet.add(question.getAnswer());
-        }
-
-        //TODO: Actually use this instead of setting the choice directly in each question?
-        final List<String> choices = new ArrayList<>(choicesSet);
-        section.defaultChoices = choices;
-
-        for (final QuestionAndAnswer questionAndAnswer : sectionList) {
-            final Question question = questionAndAnswer.getQuestion();
-            question.setChoices(choices);
-        }
-    }
-
-
     public void addSubSection(final String sectionId, final String subSectionId, final String subSectionTitle, final String subSectionLink) {
         if (!quizSections.containsSection(sectionId)) {
             Log.error("Quiz.addSection(): section does not already exist. Failing.");

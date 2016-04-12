@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.server;
 
 import com.murrayc.bigoquiz.client.Log;
+import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
 import com.murrayc.bigoquiz.shared.Quiz;
 import org.apache.commons.lang3.StringUtils;
@@ -16,8 +17,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by murrayc on 1/18/16.
@@ -37,6 +37,32 @@ public class QuizLoader {
     private static final String NODE_CHOICES = "choices";
     private static final String NODE_CHOICE = "choice";
     private static final String NODE_DEFAULT_CHOICES = "default_choices";
+    private static final int MAX_CHOICES_FROM_ANSWERS = 10;
+
+    public static void setSectionDefaultChoicesFromAnswers(final Quiz quiz, final String sectionId) {
+        //Use a set to avoid duplicates:
+        final Set<String> choicesSet = new HashSet<>();
+        final List<QuestionAndAnswer> sectionList = quiz.getQuestionsForSection(sectionId);
+        for (final QuestionAndAnswer question : sectionList) {
+            choicesSet.add(question.getAnswer());
+        }
+
+        //TODO: Actually use this instead of setting the choice directly in each question?
+        final List<String> choices = new ArrayList<>(choicesSet);
+        final boolean too_many_choices = choices.size() > MAX_CHOICES_FROM_ANSWERS;
+
+        for (final QuestionAndAnswer questionAndAnswer : sectionList) {
+            final Question question = questionAndAnswer.getQuestion();
+
+            if (!too_many_choices) {
+                question.setChoices(choices);
+            } else {
+                //Reduce the list:
+                final List<String> less_choices = reduce_choices(choices, questionAndAnswer.getAnswer());
+                question.setChoices(less_choices);
+            }
+        }
+    }
 
     public static class QuizLoaderException extends Exception {
         public QuizLoaderException(final String message) {
@@ -124,7 +150,7 @@ public class QuizLoader {
             result.setSectionQuestionsCount(sectionId, questionsCount);
 
             if (useAnswersAsChoices) {
-                result.setSectionDefaultChoicesFromAnswers(sectionId);
+                setSectionDefaultChoicesFromAnswers(result, sectionId);
             }
         }
 
@@ -291,5 +317,25 @@ public class QuizLoader {
         return result;
     }
 
+    private static List<String> reduce_choices(final List<String> choices, final String answer) {
+        //TODO: The shuffling is inefficient.
+        List<String> result = new ArrayList<>(choices);
+        Collections.shuffle(result);
+        final int answerIndex = result.indexOf(answer);
+        if (answerIndex == -1) {
+            Log.error("reduce_choices(): choices did not contain the answer.");
+            return null;
+        }
 
+        if (answerIndex >= MAX_CHOICES_FROM_ANSWERS) {
+            result = result.subList(0, MAX_CHOICES_FROM_ANSWERS - 1);
+            result.add(answer);
+            Collections.shuffle(result);
+        } else {
+            result = result.subList(0, MAX_CHOICES_FROM_ANSWERS);
+        }
+
+        //We put this in a new ArrayList because subList() returns an ArrayList.SubList, which GWT cannot serialize.
+        return new ArrayList<>(result);
+    }
 }
