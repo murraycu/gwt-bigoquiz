@@ -1,7 +1,6 @@
 package com.murrayc.bigoquiz.client.application.userstatus;
 
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
