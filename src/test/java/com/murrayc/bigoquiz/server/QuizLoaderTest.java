@@ -36,7 +36,7 @@ public class QuizLoaderTest {
 
         @NotNull final QuizSections sections = quiz.getSections();
         assertNotNull(sections);
-        assertEquals(5, sections.getSectionIds().size());
+        assertEquals(6, sections.getSectionIds().size());
 
         assertEquals(sections.getSectionTitle("heap-operations"), "Heap Operations");
 
