@@ -431,6 +431,10 @@ public class QuizServiceImpl extends ServiceWithUser implements
             return;
         }
 
+        if (loadQuizIntoQuizzes("cpp_std_algorithms", quizzes)) {
+            return;
+        }
+
         this.quizzes = quizzes;
         context.setAttribute(LOADED_QUIZZES, quizzes);
     }
