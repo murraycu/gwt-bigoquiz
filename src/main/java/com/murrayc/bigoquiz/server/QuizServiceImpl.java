@@ -86,7 +86,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //Use the existing shared quiz if any:
         final Object object = context.getAttribute(LOADED_QUIZZES);
         if ((object != null) && !(object instanceof HashMap)) {
-            throw new RuntimeException("he loaded-quizzes attribute is not of the expected type.");
+            throw new RuntimeException("The loaded-quizzes attribute is not of the expected type.");
         }
 
         quizzes = (HashMap<String, Quiz>)object;

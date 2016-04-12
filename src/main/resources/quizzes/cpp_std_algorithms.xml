@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="graphs">
+    <title>Graphs</title>
+
+    <section id="polynomial-time-problems-definitions" answers_as_choices="true">
+        <title>Definitions: Polynomial-Time Problems</title>
+        <question id="definition-connected-components">
+            <text>Connected Components</text>
+            <link>https://en.wikipedia.org/wiki/Connected_component_%28graph_theory%29</link>
+            <answer>Subsets of the vertices in which every vertex is reachable from every other vertex and no other vertices are reachable.</answer>
+        </question>
+
+        <question id="definition-weakly-weakly-connected-components">
+            <text>Weakly Connected Components</text>
+            <link>https://en.wikipedia.org/wiki/Connectivity_%28graph_theory%29</link>
+            <answer>Subsets of the vertices in a directed graph in which every vertex is reachable from every other vertex, if the edges are considered as undirected.</answer>
+        </question>
+
+        <question id="definition-strongly-strongly-connected-components">
+            <text>Strongly Connected Components</text>
+            <link>https://en.wikipedia.org/wiki/Strongly_connected_component</link>
+            <answer>Subsets of the vertices in a directed graph in which every vertex is reachable from every other vertex.</answer>
+        </question>
+
+        <question id="definition-topological-sorting">
+            <text>Topological Sorting</text>
+            <link>https://en.wikipedia.org/wiki/Topological_sorting</link>
+            <answer>An ordering of the vertices such that each edge leads only forwards.</answer>
+        </question>
+
+        <question id="definition-minimum-spanning-tree">
+            <text>Minimum Spanning Tree</text>
+            <link>https://en.wikipedia.org/wiki/Minimum_spanning_tree</link>
+            <answer>A tree that connects each vertex, using a subset of edges of the minimum weight.</answer>
+        </question>
+
+        <question id="definition-shortest-path">
+            <text>Shortest Path</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
+            <answer>The shortest path between two specific vertices.</answer>
+        </question>
+
+        <question id="definition-transitive-closure">
+            <text>Transitive Closure</text>
+            <link>https://en.wikipedia.org/wiki/Transitive_reduction</link>
+            <answer>Adds direct edges to each vertex, leading to all reachable nodes, to easily answer reachability questions.</answer>
+        </question>
+
+        <question id="definition-transitive-reduction">
+            <text>Transitive Reduction</text>
+            <link>https://en.wikipedia.org/wiki/Transitive_reduction</link>
+            <answer>Removes as many edges as possible, optionally also adding edges, while maintaining the same reachability from each vertex to other vertices.</answer>
+        </question>
+
+        <question id="definition-matching">
+            <text>Matching</text>
+            <link>https://en.wikipedia.org/wiki/Matching_%28graph_theory%29</link>
+            <answer>The largest subset of edges in which each vertex has at most one of the edges.</answer>
+        </question>
+
+        <question id="definition-eulerian-path">
+            <text>Eulerian Path</text>
+            <link>https://en.wikipedia.org/wiki/Eulerian_path</link>
+            <answer>A tour that visits each edge at least once.</answer>
+        </question>
+
+        <question id="definition-eulerian-cycle">
+            <text>Eulerian Cycle</text>
+            <link>https://en.wikipedia.org/wiki/Eulerian_path</link>
+            <answer>A tour that visits each vertex only once, returning to the start.</answer>
+        </question>
+
+        <question id="definition-edge-connectivity">
+            <text>Edge Connectivity</text>
+            <link>https://en.wikipedia.org/wiki/Connectivity_%28graph_theory%29</link>
+            <answer>The smallest subset of edges whose deletion will disconnect the graph.</answer>
+        </question>
+
+        <question id="definition-vertex-connectivity">
+            <text>Vertex Connectivity</text>
+            <link>https://en.wikipedia.org/wiki/Connectivity_%28graph_theory%29</link>
+            <answer>The smallest subset of vertices whose deletion will disconnect the graph.</answer>
+        </question>
+
+        <question id="definition-network-flow">
+            <text>Network Flow</text>
+            <link>https://en.wikipedia.org/wiki/Flow_network</link>
+            <answer>The maximum flow which can be sent from one specific vertex to another while respecting the maximum capacity of each edge.</answer>
+        </question>
+
+        <!-- Missed a couple of "draw nicely" ones out. -->
+
+        <question id="definition-planarity-detection">
+            <text>Planarity Detection and Embedding</text>
+            <link>https://en.wikipedia.org/wiki/Planarity_testing</link>
+            <answer>Arrange the vertices so no edges cross.</answer>
+        </question>
+
+        <question id="definition-planarity-detection">
+            <text>Planarity Detection and Embedding</text>
+            <link>https://en.wikipedia.org/wiki/Planarity_testing</link>
+            <answer>Arrange the vertices so no edges cross.</answer>
+        </question>
+
+    </section>
+
+    <section id="hard-problems-definitions" answers_as_choices="true">
+        <title>Definitions: Hard Problems</title>
+        <question id="definition-clique">
+            <text>Clique</text>
+            <link>https://en.wikipedia.org/wiki/Clique_%28graph_theory%29</link>
+            <answer>The largest subset of vertices that are all connected to each other by edges.</answer>
+        </question>
+
+        <question id="definition-independent-set">
+            <text>Independent Set</text>
+            <link>https://en.wikipedia.org/wiki/Independent_set_%28graph_theory%29</link>
+            <answer>The largest subset of vertices for which, for each vertex, each edge leads to a vertex not in the subset.</answer>
+        </question>
+
+        <question id="definition-vertex-cover">
+            <text>Vertex Cover</text>
+            <link>https://en.wikipedia.org/wiki/Vertex_cover</link>
+            <answer>The smallest subset of vertices for which, for each vertex, each edge leads to at least one vertex of the subset.</answer>
+        </question>
+
+        <question id="definition-tsp">
+            <text>Traveling Salesman Problem</text>
+            <link>https://en.wikipedia.org/wiki/Travelling_salesman_problem</link>
+            <answer>A cycle of minimum cost, visiting each vertex exactly once.</answer>
+        </question>
+
+        <question id="definition-hamiltonian-cycle">
+            <text>Hamiltonian Cycle</text>
+            <link>https://en.wikipedia.org/wiki/Hamiltonian_path</link>
+            <answer>A tour that visits each vertex only once, returning to the start.</answer>
+        </question>
+
+        <question id="definition-hamiltonian-path">
+            <text>Hamiltonian Path</text>
+            <link>https://en.wikipedia.org/wiki/Hamiltonian_path</link>
+            <answer>A tour that visits each vertex only once.</answer>
+        </question>
+
+        <question id="definition-graph-partition">
+            <text>Graph Partition</text>
+            <link>https://en.wikipedia.org/wiki/Graph_partition</link>
+            <answer>A partition of the vertices into roughly equal-sized subsets with a certain maximum spanning edge cost.</answer>
+        </question>
+
+        <question id="definition-vertex-coloring">
+            <text>Vertex Coloring</text>
+            <link>https://en.wikipedia.org/wiki/Graph_partition</link>
+            <answer>A coloring of each vertex in which no edge leads to the same color, using the minimum number of colors.</answer>
+        </question>
+
+        <question id="definition-edge-coloring">
+            <text>Edge Coloring</text>
+            <link>https://en.wikipedia.org/wiki/Edge_coloring</link>
+            <answer>A coloring of each edge in which no vertex has an edge of the same color, using the minimum number of colors.</answer>
+        </question>
+
+        <question id="definition-graph-isomorphism">
+            <text>Graph Isomorphism</text>
+            <link>https://en.wikipedia.org/wiki/Graph_isomorphism</link>
+            <answer>A mapping from one set of vertices to another, such that the sets are identical.</answer>
+        </question>
+
+        <question id="definition-steiner-tree">
+            <text>Steiner Tree</text>
+            <link>https://en.wikipedia.org/wiki/Steiner_tree_problem</link>
+            <answer>The smallest tree connecting all vertices, adding intermediate vertices if necessary.</answer>
+        </question>
+
+        <question id="definition-feedback-edge">
+            <text>Feedback Edge / Vertex Set</text>
+            <link>https://en.wikipedia.org/wiki/Feedback_vertex_set</link>
+            <answer>The smallest set of vertices whose removal results in no cycles existing.</answer>
+        </question>
+    </section>
+
+    <section id="polynomial-or-np-complete">
+        <title>Polynomial or NP-complete</title>
+        <default_choices>
+            <choice>Polynomial</choice>
+            <choice>NP-complete</choice>
+        </default_choices>
+        <question id="polynomial-or-np-complete-connected-components">
+            <text>Connected Components</text>
+            <link>https://en.wikipedia.org/wiki/Connected_component_%28graph_theory%29</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-weakly-weakly-connected-components">
+            <text>Weakly Connected Components</text>
+            <link>https://en.wikipedia.org/wiki/Connectivity_%28graph_theory%29</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-strongly-strongly-connected-components">
+            <text>Strongly Connected Components</text>
+            <link>https://en.wikipedia.org/wiki/Strongly_connected_component</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-topological-sorting">
+            <text>Topological Sorting</text>
+            <link>https://en.wikipedia.org/wiki/Topological_sorting</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-minimum-spanning-tree">
+            <text>Minimum Spanning Tree</text>
+            <link>https://en.wikipedia.org/wiki/Minimum_spanning_tree</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-shortest-path">
+            <text>Shortest Path</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-transitive-closure">
+            <text>Transitive Closure</text>
+            <link>https://en.wikipedia.org/wiki/Transitive_reduction</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-transitive-reduction">
+            <text>Transitive Reduction</text>
+            <link>https://en.wikipedia.org/wiki/Transitive_reduction</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-matching">
+            <text>Matching</text>
+            <link>https://en.wikipedia.org/wiki/Matching_%28graph_theory%29</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-eulerian-path">
+            <text>Eulerian Path</text>
+            <link>https://en.wikipedia.org/wiki/Eulerian_path</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-eulerian-cycle">
+            <text>Eulerian Cycle</text>
+            <link>https://en.wikipedia.org/wiki/Eulerian_path</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-edge-connectivity">
+            <text>Edge Connectivity</text>
+            <link>https://en.wikipedia.org/wiki/Connectivity_%28graph_theory%29</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-vertex-connectivity">
+            <text>Vertex Connectivity</text>
+            <link>https://en.wikipedia.org/wiki/Connectivity_%28graph_theory%29</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-network-flow">
+            <text>Network Flow</text>
+            <link>https://en.wikipedia.org/wiki/Flow_network</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <!-- Missed a couple of "draw nicely" ones out. -->
+
+        <question id="polynomial-or-np-complete-planarity-detection">
+            <text>Planarity Detection and Embedding</text>
+            <link>https://en.wikipedia.org/wiki/Planarity_testing</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-planarity-detection">
+            <text>Planarity Detection and Embedding</text>
+            <link>https://en.wikipedia.org/wiki/Planarity_testing</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-clique">
+            <text>Clique</text>
+            <link>https://en.wikipedia.org/wiki/Clique_%28graph_theory%29</link>
+            <answer>NP-complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-independent-set">
+            <text>Independent Set</text>
+            <link>https://en.wikipedia.org/wiki/Independent_set_%28graph_theory%29</link>
+            <answer>NP-complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-vertex-cover">
+            <text>Vertex Cover</text>
+            <link>https://en.wikipedia.org/wiki/Vertex_cover</link>
+            <answer>NP-complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-tsp">
+            <text>Traveling Salesman Problem</text>
+            <link>https://en.wikipedia.org/wiki/Travelling_salesman_problem</link>
+            <answer>NP-complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-hamiltonian-cycle">
+            <text>Hamiltonian Cycle</text>
+            <link>https://en.wikipedia.org/wiki/Hamiltonian_path</link>
+            <answer>NP-complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-hamiltonian-path">
+            <text>Hamiltonian Path</text>
+            <link>https://en.wikipedia.org/wiki/Hamiltonian_path</link>
+            <answer>NP-complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-graph-partition">
+            <text>Graph Partition</text>
+            <link>https://en.wikipedia.org/wiki/Graph_partition</link>
+            <answer>NP-complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-vertex-coloring">
+            <text>Vertex Coloring</text>
+            <link>https://en.wikipedia.org/wiki/Graph_partition</link>
+            <answer>NP-complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-edge-coloring">
+            <text>Edge Coloring</text>
+            <link>https://en.wikipedia.org/wiki/Edge_coloring</link>
+            <answer>NP-complete</answer>
+        </question>
+
+        <!-- Recognition of graph isomorphism is considered quasi-polymorphic, as of 2015,
+        so don't bother with this until it's clearer.
+        See https://en.wikipedia.org/wiki/Graph_isomorphism_problem
+
+        <question id="polynomial-or-np-complete-graph-isomorphism">
+            <text>Graph Isomorphism</text>
+            <link>https://en.wikipedia.org/wiki/Graph_isomorphism</link>
+            <answer>NP-complete</answer>
+        </question>
+        -->
+
+        <question id="polynomial-or-np-complete-steiner-tree">
+            <text>Steiner Tree</text>
+            <link>https://en.wikipedia.org/wiki/Steiner_tree_problem</link>
+            <answer>NP-complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-feedback-edge">
+            <text>Feedback Edge / Vertex Set</text>
+            <link>https://en.wikipedia.org/wiki/Feedback_vertex_set</link>
+            <answer>NP-complete</answer>
+        </question>
+    </section>
+</quiz>
