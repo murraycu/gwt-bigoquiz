@@ -116,45 +116,49 @@ public class QuizLoader {
         for (final Node sectionNode : listSectionNodes) {
             @NotNull final Element sectionElement = (Element) sectionNode;
 
-            final String sectionId = sectionElement.getAttribute(ATTR_ID);
-            @Nullable final String sectionTitle = getTitleNodeText(sectionElement);
-
-            //Default choices:
-            @Nullable List<String> defaultChoices = null;
-            @Nullable final Element elementChoices = getElementByName(sectionElement, NODE_DEFAULT_CHOICES);
-            if (elementChoices != null) {
-                defaultChoices = loadChoices(elementChoices);
-            }
-
-            final boolean useAnswersAsChoices = getAttributeAsBoolean(sectionElement, ATTR_ANSWERS_AS_CHOICES);
-
-            result.addSection(sectionId, sectionTitle, defaultChoices);
-
-            int questionsCount = 0;
-            @NotNull final List<Node> listSubSectionNodes = getChildrenByTagName(sectionElement, NODE_SUB_SECTION);
-            for (final Node subSectionNode : listSubSectionNodes) {
-                @NotNull final Element subSectionElement = (Element) subSectionNode;
-                final String subSectionId = subSectionElement.getAttribute(ATTR_ID);
-                @Nullable final String subSectionTitle = getTitleNodeText(subSectionElement);
-                @Nullable final String subSectionLink= getLinkNodeText(subSectionElement);
-
-                result.addSubSection(sectionId, subSectionId, subSectionTitle, subSectionLink);
-
-                //Questions:
-                questionsCount += addChildQuestions(result, sectionId, subSectionId, defaultChoices, subSectionElement);
-            }
-
-            //Add any Questions that are not in a subsection:
-            questionsCount += addChildQuestions(result, sectionId, null, defaultChoices, sectionElement);
-
-            result.setSectionQuestionsCount(sectionId, questionsCount);
-
-            if (useAnswersAsChoices) {
-                setSectionDefaultChoicesFromAnswers(result, sectionId);
-            }
+            loadSectionNode(result, sectionElement);
         }
 
         return result;
+    }
+
+    private static void loadSectionNode(final Quiz result, final Element sectionElement) throws QuizLoaderException {
+        final String sectionId = sectionElement.getAttribute(ATTR_ID);
+        @Nullable final String sectionTitle = getTitleNodeText(sectionElement);
+
+        //Default choices:
+        @Nullable List<String> defaultChoices = null;
+        @Nullable final Element elementChoices = getElementByName(sectionElement, NODE_DEFAULT_CHOICES);
+        if (elementChoices != null) {
+            defaultChoices = loadChoices(elementChoices);
+        }
+
+        final boolean useAnswersAsChoices = getAttributeAsBoolean(sectionElement, ATTR_ANSWERS_AS_CHOICES);
+
+        result.addSection(sectionId, sectionTitle, defaultChoices);
+
+        int questionsCount = 0;
+        @NotNull final List<Node> listSubSectionNodes = getChildrenByTagName(sectionElement, NODE_SUB_SECTION);
+        for (final Node subSectionNode : listSubSectionNodes) {
+            @NotNull final Element subSectionElement = (Element) subSectionNode;
+            final String subSectionId = subSectionElement.getAttribute(ATTR_ID);
+            @Nullable final String subSectionTitle = getTitleNodeText(subSectionElement);
+            @Nullable final String subSectionLink= getLinkNodeText(subSectionElement);
+
+            result.addSubSection(sectionId, subSectionId, subSectionTitle, subSectionLink);
+
+            //Questions:
+            questionsCount += addChildQuestions(result, sectionId, subSectionId, defaultChoices, subSectionElement);
+        }
+
+        //Add any Questions that are not in a subsection:
+        questionsCount += addChildQuestions(result, sectionId, null, defaultChoices, sectionElement);
+
+        result.setSectionQuestionsCount(sectionId, questionsCount);
+
+        if (useAnswersAsChoices) {
+            setSectionDefaultChoicesFromAnswers(result, sectionId);
+        }
     }
 
     private static boolean getAttributeAsBoolean(final Element element, final String attribute) {
