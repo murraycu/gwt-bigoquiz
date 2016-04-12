@@ -119,12 +119,19 @@ public class QuizSections implements IsSerializable {
         return subSection.title;
     }
 
+    /** Get a (sorted) list of section titles.
+     *
+     * @return
+     */
     @NotNull
     public Collection<String> getTitles() {
-        @NotNull final Collection<String> result = new ArrayList<>();
+        @NotNull final ArrayList<String> result = new ArrayList<>();
         for (@NotNull final Section section : sections.values()) {
             result.add(section.title);
         }
+
+        //Sort this instead of the order being arbitrary:
+        Collections.sort(result);
 
         return result;
     }
@@ -153,7 +160,7 @@ public class QuizSections implements IsSerializable {
 
     //TODO: This is only used on the client side:
     /**
-     * Generate a sorted List of the userhistorysections.
+     * Generate a sorted List of the Sections.
      * @return
      */
     @NotNull

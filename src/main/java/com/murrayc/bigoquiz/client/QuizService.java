@@ -27,6 +27,7 @@ public interface QuizService extends RemoteService {
 
     @Nullable Question getNextQuestion(final String quizId, final String sectionId) throws IllegalArgumentException;
 
+    //TODO: Instead make the client reuse the sections list from the retrieved UserHistorySections?
     @NotNull QuizSections getSections(final String quizId) throws IllegalArgumentException;
 
     /**
