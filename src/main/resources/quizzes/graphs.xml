@@ -337,11 +337,16 @@
             <answer>NP-complete</answer>
         </question>
 
+        <!-- Recognition of graph isomorphism is considered quasi-polymorphic, as of 2015,
+        so don't bother with this until it's clearer.
+        See https://en.wikipedia.org/wiki/Graph_isomorphism_problem
+
         <question id="polynomial-or-np-complete-graph-isomorphism">
             <text>Graph Isomorphism</text>
             <link>https://en.wikipedia.org/wiki/Graph_isomorphism</link>
             <answer>NP-complete</answer>
         </question>
+        -->
 
         <question id="polynomial-or-np-complete-steiner-tree">
             <text>Steiner Tree</text>
