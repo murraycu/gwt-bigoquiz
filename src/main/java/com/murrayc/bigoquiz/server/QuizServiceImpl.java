@@ -241,8 +241,9 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 @Nullable final Question question = quiz.getQuestion(questionId);
 
                 //If the question history is invalid, remember that:
-                if (question == null) {
-                    Log.error("question was null for id:" + questionId);
+                if (question == null ||
+                        !StringUtils.equals(question.getSectionId(), sectionId)) {
+                    Log.error("question was null or in the wrong section for id:" + questionId);
 
                     if (toRemove == null) {
                         toRemove = new ArrayList<>();

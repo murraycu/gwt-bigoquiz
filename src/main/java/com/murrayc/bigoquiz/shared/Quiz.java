@@ -129,6 +129,12 @@ public class Quiz implements IsSerializable {
         return questions.containsKey(questionId);
     }
 
+    /**
+     * Get the question by ID.
+     *
+     * @param questionId
+     * @return
+     */
     @Nullable
     public Question getQuestion(final String questionId) {
         @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
