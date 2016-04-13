@@ -19,7 +19,7 @@
         <question id="definition-iterator">
             <text>Iterator</text>
             <link>https://en.wikipedia.org/wiki/Iterator_pattern</link>
-            <answer>Provides a way to traverse a collection of objects without exposing its implementation.</answer>
+            <answer>Lets you traverse a collection of objects without exposing its implementation.</answer>
         </question>
 
         <question id="definition-facade">
@@ -37,7 +37,7 @@
         <question id="definition-strategy">
             <text>Proxy</text>
             <link>https://en.wikipedia.org/wiki/Proxy_pattern</link>
-            <answer>Wrap an object to control access to it.</answer>
+            <answer>Wraps an object to control access to it.</answer>
         </question>
 
         <question id="definition-factory-method">
@@ -79,7 +79,7 @@
         <question id="definition-abstract-factory">
             <text>Abstract Factory</text>
             <link>https://en.wikipedia.org/wiki/Abstract_factory_pattern</link>
-            <answer>Allow a client to create families of objects without specifying their concrete classes.</answer>
+            <answer>Allows a client to create families of objects without specifying their concrete classes.</answer>
         </question>
 
         <question id="definition-command">
@@ -94,13 +94,13 @@
         <question id="definition-bridge">
             <text>Bridge</text>
             <link>https://en.wikipedia.org/wiki/Bridge_pattern</link>
-            <answer>Decouples an abstraction from its implementation so that the two can vary independently.</answer>
+            <answer>Decouples an abstraction from its implementation so they can vary independently.</answer>
         </question>
 
         <question id="definition-builder">
             <text>Builder</text>
             <link>https://en.wikipedia.org/wiki/Builder_pattern</link>
-            <answer>Encapsulates the construction of a product and allows it to be constructed in steps.</answer>
+            <answer>Allows constructing in steps.</answer>
         </question>
 
         <question id="definition-chain-of-responsibility">
@@ -130,7 +130,7 @@
         <question id="definition-memento">
             <text>Memento</text>
             <link>https://en.wikipedia.org/wiki/Memento_pattern</link>
-            <answer>Provides ability to restore an object to its previous state.</answer>
+            <answer>Provides the ability to restore an object to its previous state.</answer>
         </question>
 
         <question id="definition-prototype">
@@ -142,7 +142,7 @@
         <question id="definition-visitor">
             <text>Visitor</text>
             <link>https://en.wikipedia.org/wiki/Visitor_pattern</link>
-            <answer>Allows definition of new operations on objects without changing their structures.</answer>
+            <answer>Allows the definition of new operations on objects without changing their structures.</answer>
         </question>
     </section>
 </quiz>
