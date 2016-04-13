@@ -2,7 +2,7 @@
 <quiz xmlns="http://bigoquiz.com/document" format_version="1" id="designpatterns">
     <title>Design Patterns</title>
 
-    <section id="core-definitions" answers_as_choices="true">
+    <section id="core-definitions" answers_as_choices="true" and_reverse="true">
         <title>Core Definitions</title>
         <question id="definition-decorator">
             <text>Decorator</text>
@@ -89,7 +89,7 @@
         </question>
     </section>
 
-    <section id="extra-definitions" answers_as_choices="true">
+    <section id="extra-definitions" answers_as_choices="true" and_reverse="true">
         <title>Extra Definitions</title>
         <question id="definition-bridge">
             <text>Bridge</text>

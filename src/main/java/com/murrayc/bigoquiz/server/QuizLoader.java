@@ -26,6 +26,7 @@ public class QuizLoader {
     private static final String NODE_ROOT = "quiz";
     private static final String NODE_SECTION = "section";
     private static final String ATTR_ANSWERS_AS_CHOICES = "answers_as_choices";
+    private static final String ATTR_AND_REVERSE = "and_reverse";
     private static final String NODE_SUB_SECTION = "subsection";
 
     private static final String NODE_QUESTION = "question";
@@ -47,7 +48,6 @@ public class QuizLoader {
             choicesSet.add(question.getAnswer());
         }
 
-        //TODO: Actually use this instead of setting the choice directly in each question?
         final List<String> choices = new ArrayList<>(choicesSet);
         final boolean too_many_choices = choices.size() > MAX_CHOICES_FROM_ANSWERS;
 
@@ -123,8 +123,26 @@ public class QuizLoader {
     }
 
     private static void loadSectionNode(final Quiz result, final Element sectionElement) throws QuizLoaderException {
-        final String sectionId = sectionElement.getAttribute(ATTR_ID);
-        @Nullable final String sectionTitle = getTitleNodeText(sectionElement);
+        loadSectionNode(result, sectionElement, false);
+
+        final boolean andReverse = getAttributeAsBoolean(sectionElement, ATTR_AND_REVERSE);
+        if (andReverse) {
+            loadSectionNode(result, sectionElement, true);
+        }
+    }
+
+    private static void loadSectionNode(final Quiz result, final Element sectionElement, boolean reverse) throws QuizLoaderException {
+        String sectionId = sectionElement.getAttribute(ATTR_ID);
+        if (StringUtils.isEmpty(sectionId)) {
+            Log.error("loadSectionNode: sectionId is null.");
+            return;
+        }
+
+        @Nullable String sectionTitle = getTitleNodeText(sectionElement);
+        if (reverse) {
+            sectionId = "reverse-" + sectionId;
+            sectionTitle = "Reverse: " + sectionTitle;
+        }
 
         //Default choices:
         @Nullable List<String> defaultChoices = null;
@@ -148,11 +166,11 @@ public class QuizLoader {
             result.addSubSection(sectionId, subSectionId, subSectionTitle, subSectionLink);
 
             //Questions:
-            questionsCount += addChildQuestions(result, sectionId, subSectionId, defaultChoices, subSectionElement);
+            questionsCount += addChildQuestions(result, sectionId, subSectionId, defaultChoices, subSectionElement, reverse);
         }
 
         //Add any Questions that are not in a subsection:
-        questionsCount += addChildQuestions(result, sectionId, null, defaultChoices, sectionElement);
+        questionsCount += addChildQuestions(result, sectionId, null, defaultChoices, sectionElement, reverse);
 
         result.setSectionQuestionsCount(sectionId, questionsCount);
 
@@ -186,7 +204,7 @@ public class QuizLoader {
         return sectionTitle;
     }
 
-    private static int addChildQuestions(@NotNull final Quiz quiz, final String sectionId, final String subSectionId, final List<String> defaultChoices, @NotNull final Element parentElement) throws QuizLoaderException {
+    private static int addChildQuestions(@NotNull final Quiz quiz, final String sectionId, final String subSectionId, final List<String> defaultChoices, @NotNull final Element parentElement, boolean reverse) throws QuizLoaderException {
         int result = 0;
 
         @NotNull final List<Node> listQuestionNodes = getChildrenByTagName(parentElement, NODE_QUESTION);
@@ -196,7 +214,7 @@ public class QuizLoader {
             }
 
             @NotNull final Element element = (Element) questionNode;
-            @Nullable final QuestionAndAnswer questionAndAnswer = loadQuestionNode(element, sectionId, subSectionId, defaultChoices);
+            @Nullable final QuestionAndAnswer questionAndAnswer = loadQuestionNode(element, sectionId, subSectionId, defaultChoices, reverse);
             if (questionAndAnswer != null) {
                 //warn about duplicates:
                 if (quiz.contains(questionAndAnswer.getId())) {
@@ -211,8 +229,8 @@ public class QuizLoader {
         return result;
     }
 
-    private static QuestionAndAnswer loadQuestionNode(@NotNull final Element element, final String sectionID, final String subSectionId, final List<String> defaultChoices) throws QuizLoaderException {
-        final String id = element.getAttribute(ATTR_ID);
+    private static QuestionAndAnswer loadQuestionNode(@NotNull final Element element, final String sectionID, final String subSectionId, final List<String> defaultChoices, boolean reverse) throws QuizLoaderException {
+        String id = element.getAttribute(ATTR_ID);
         if (StringUtils.isEmpty(id)) {
             throw new QuizLoaderException("loadQuestionNode(): Missing ID.");
         }
@@ -227,7 +245,7 @@ public class QuizLoader {
             throw new QuizLoaderException("loadQuestionNode(): Missing answer.");
         }
 
-        final String questionText = textElement.getTextContent();
+        String questionText = textElement.getTextContent();
         if (questionText == null) {
             throw new QuizLoaderException("loadQuestionNode(): Missing text content.");
         }
@@ -239,7 +257,7 @@ public class QuizLoader {
             questionLink = linkElement.getTextContent();
         }
 
-        final String answerText = answerElement.getTextContent();
+        String answerText = answerElement.getTextContent();
         if (answerText == null) {
             throw new QuizLoaderException("loadQuestionNode(): Missing answer content.");
         }
@@ -258,7 +276,19 @@ public class QuizLoader {
             throw new QuizLoaderException("QuizLoader.loadQuestionNode(): answer is not in the choices: questionId: " + id);
         }
 
+        if (reverse) {
+            //Swap the question and answer text:
+            final String temp = questionText;
+            questionText = answerText;
+            answerText = temp;
+            id = "reverse-" + questionText; //Otherwise the id in the URL will show the answer.
+        }
+
         return new QuestionAndAnswer(id, sectionID, subSectionId, questionText, questionLink, answerText, choices);
+    }
+
+    private static <T> void swap(T a, T b) {
+
     }
 
     @NotNull
