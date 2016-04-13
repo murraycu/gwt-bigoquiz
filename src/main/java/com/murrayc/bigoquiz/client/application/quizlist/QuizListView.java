@@ -63,6 +63,10 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
             @NotNull final Hyperlink link = new InlineHyperlink(details.getTitle(), historyToken);
             rowPanel.add(link);
 
+            final Panel buttonsPanel = new FlowPanel();
+            rowPanel.add(buttonsPanel);
+            buttonsPanel.addStyleName("quiz-list-row-buttons-panel");
+
 
             final Button buttonPlay = new Button(constants.buttonAnswerQuestions());
             buttonPlay.addStyleName("button-answer-questions");
@@ -72,7 +76,7 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
                     getUiHandlers().onAnswerQuestions(details.getId());
                 }
             });
-            rowPanel.add(buttonPlay);
+            buttonsPanel.add(buttonPlay);
 
             final Button buttonHistory = new Button(constants.buttonHistory());
             buttonHistory.addStyleName("button-history");
@@ -82,7 +86,7 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
                     getUiHandlers().onHistory(details.getId());
                 }
             });
-            rowPanel.add(buttonHistory);
+            buttonsPanel.add(buttonHistory);
         }
     }
 }
