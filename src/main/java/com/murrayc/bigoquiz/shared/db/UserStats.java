@@ -151,6 +151,27 @@ public class UserStats implements IsSerializable {
         cacheIsInvalid = true;
     }
 
+    /** Remove a question history, for instance if the caller has
+     * found that the question ID was invalid. This can happen
+     * if question IDs change between runs.
+     *
+     * @param questionId
+     */
+    public void removeQuestionHistory(final String questionId) {
+        @Nullable UserQuestionHistory userQuestionHistory = questionHistories.get(questionId);
+        if (userQuestionHistory == null) {
+            //It's not there so there's no need to remove it.
+            return;
+        }
+
+        questionHistories.remove(questionId);
+        countQuestionsAnsweredOnce--;
+
+        if (userQuestionHistory.getAnsweredCorrectlyOnce()) {
+            countQuestionsAnsweredOnce--;
+        }
+    }
+
     private void cacheList() {
         if (!cacheIsInvalid) {
             return;

@@ -235,10 +235,20 @@ public class QuizServiceImpl extends ServiceWithUser implements
             //Set the titles.
             //We don't store these in the datastore because we can get them easily from the Quiz.
             //TODO: It might really be more efficient to store them in the datastore.
+            List<String> toRemove = null;
             for (@NotNull final UserQuestionHistory userQuestionHistory : userStats.getTopProblemQuestionHistories()) {
-                @Nullable final Question question = quiz.getQuestion(userQuestionHistory.getQuestionId());
+                final String questionId = userQuestionHistory.getQuestionId();
+                @Nullable final Question question = quiz.getQuestion(questionId);
+
+                //If the question history is invalid, remember that:
                 if (question == null) {
-                    Log.error("question was null for id:" + userQuestionHistory.getQuestionId());
+                    Log.error("question was null for id:" + questionId);
+
+                    if (toRemove == null) {
+                        toRemove = new ArrayList<>();
+                    }
+
+                    toRemove.add(questionId);
                     continue;
                 }
 
@@ -247,6 +257,17 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 @Nullable final String subSectionTitle = sections.getSubSectionTitle(question.getSectionId(),
                         question.getSubSectionId());
                 userQuestionHistory.setSubSectionTitle(subSectionTitle);
+            }
+
+            //Remove any invalid question histories:
+            if (toRemove != null) {
+                for (final String questionId : toRemove) {
+                    userStats.removeQuestionHistory(questionId);
+                }
+
+                //Save it so we don't have to remove it next time:
+                //TODO: This doesn't seem to work - we have to remove it again next time.
+                EntityManagerFactory.ofy().save().entity(userStats).now();
             }
 
             result.setSectionStats(sectionId, userStats);
