@@ -14,7 +14,9 @@ public class QuizUtils {
         } else if (exact) {
             return StringUtils.equals(correctAnswer, answer);
         } else {
-            return canonicalize(answer).equalsIgnoreCase(canonicalize(correctAnswer));
+            final String canonicalAnswer = canonicalize(answer);
+            final String canonicalCorrectAnswer = canonicalize(correctAnswer);
+            return canonicalAnswer.equalsIgnoreCase(canonicalCorrectAnswer);
         }
     }
 
@@ -28,6 +30,9 @@ public class QuizUtils {
         result = result.replaceAll("²", "^2");
         result = result.replaceAll("³", "^3");
         result = result.replaceAll("⁴", "^4");
+
+        //For function names:
+        result = result.replaceAll("\\(\\)", "");
         return result;
     }
 }
