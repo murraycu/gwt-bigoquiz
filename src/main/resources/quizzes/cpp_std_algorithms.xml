@@ -2,7 +2,7 @@
 <quiz xmlns="http://bigoquiz.com/document" format_version="1" id="cpp_std_algorithms">
     <title>C++ Standard Algorithms</title>
 
-    <section id="non-modifying-sequence-operations" answers_as_choices="true">
+    <section id="non-modifying-sequence-operations" answers_as_choices="true" and_reverse="true">
         <title>Non-Modifying Sequence Operations</title>
         <link>http://en.cppreference.com/w/cpp/algorithm#Non-modifying_sequence_operations</link>
         <question id="non-modifying-all_of">
@@ -78,7 +78,7 @@
         </question>
     </section>
 
-    <section id="modifying-sequence-operations" answers_as_choices="true">
+    <section id="modifying-sequence-operations" answers_as_choices="true" and_reverse="true">
         <title>Modifying Sequence Operations</title>
         <link>http://en.cppreference.com/w/cpp/algorithm#Modifying_sequence_operations</link>
         <question id="modifying-copy">
@@ -233,7 +233,7 @@
         </question>
     </section>
 
-    <section id="partitioning" answers_as_choices="true">
+    <section id="partitioning" answers_as_choices="true" and_reverse="true">
         <title>Partitioning Operations</title>
         <link>http://en.cppreference.com/w/cpp/algorithm#Partitioning_operations</link>
         <question id="partitioning-is_partitioned">
@@ -267,7 +267,7 @@
         </question>
     </section>
 
-    <section id="sort" answers_as_choices="true">
+    <section id="sort" answers_as_choices="true" and_reverse="true">
         <title>Sorting Operations</title>
         <link>http://en.cppreference.com/w/cpp/algorithm#Sorting_operations</link>
         <question id="sort-is_sorted">
@@ -313,7 +313,7 @@
         </question>
     </section>
 
-    <section id="binary-search" answers_as_choices="true">
+    <section id="binary-search" answers_as_choices="true" and_reverse="true">
         <title>Binary Search Operations (on sorted ranges)</title>
         <link>http://en.cppreference.com/w/cpp/algorithm#Binary_search_operations_.28on_sorted_ranges.29</link>
         <question id="binary-search-lower_bound">
@@ -341,7 +341,7 @@
         </question>
     </section>
 
-    <section id="set-operations" answers_as_choices="true">
+    <section id="set-operations" answers_as_choices="true" and_reverse="true">
         <title>Set operations (on sorted ranges)</title>
         <link>http://en.cppreference.com/w/cpp/algorithm#Set_operations_.28on_sorted_ranges.29</link>
         <question id="set-operations-merge">
@@ -387,7 +387,7 @@
         </question>
     </section>
 
-    <section id="heap-operations" answers_as_choices="true">
+    <section id="heap-operations" answers_as_choices="true" and_reverse="true">
         <title>Heap Operations</title>
         <link>http://en.cppreference.com/w/cpp/algorithm#Heap_operations</link>
         <question id="heap-operations-is_heap">
@@ -427,7 +427,7 @@
         </question>
     </section>
 
-    <section id="min-max-operations" answers_as_choices="true">
+    <section id="min-max-operations" answers_as_choices="true" and_reverse="true">
         <title>Minimum/maximum operations</title>
         <link>http://en.cppreference.com/w/cpp/algorithm#Minimum.2Fmaximum_operations</link>
         <question id="min-max-operations-max">
@@ -497,7 +497,7 @@
         </question>
     </section>
 
-    <section id="numeric-operations" answers_as_choices="true">
+    <section id="numeric-operations" answers_as_choices="true" and_reverse="true">
         <title>Numeric operations</title>
         <link>http://en.cppreference.com/w/cpp/algorithm#Numeric_operations</link>
         <question id="numeric-operations-iota">
@@ -539,7 +539,7 @@
         <!-- TODO: C++17 should have several more, such as exclusive_scan. -->
     </section>
 
-    <section id="operations-on-uninitialized-memory" answers_as_choices="true">
+    <section id="operations-on-uninitialized-memory" answers_as_choices="true" and_reverse="true">
         <title>Operations on uninitialized memory</title>
         <link>http://en.cppreference.com/w/cpp/algorithm#Operations_on_uninitialized_memory</link>
         <question id="perations-on-uninitialized-memory-uninitialized_copy">
