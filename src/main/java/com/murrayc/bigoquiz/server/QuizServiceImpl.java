@@ -237,9 +237,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
             //TODO: It might really be more efficient to store them in the datastore.
             for (@NotNull final UserQuestionHistory userQuestionHistory : userStats.getTopProblemQuestionHistories()) {
                 @Nullable final Question question = quiz.getQuestion(userQuestionHistory.getQuestionId());
-                if (question != null) {
-                    userQuestionHistory.setQuestionTitle(question.getText());
+                if (question == null) {
+                    Log.error("question was null for id:" + userQuestionHistory.getQuestionId());
+                    continue;
                 }
+
+                userQuestionHistory.setQuestionTitle(question.getText());
 
                 @Nullable final String subSectionTitle = sections.getSubSectionTitle(question.getSectionId(),
                         question.getSubSectionId());
