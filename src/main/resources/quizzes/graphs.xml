@@ -172,8 +172,14 @@
             <answer>The smallest tree connecting all vertices, adding intermediate vertices if necessary.</answer>
         </question>
 
-        <question id="definition-feedback-edge">
-            <text>Feedback Edge / Vertex Set</text>
+        <question id="definition-feedback-edge-set">
+            <text>Feedback Edge Set</text>
+            <link>https://en.wikipedia.org/wiki/Feedback_vertex_set</link>
+            <answer>The smallest set of edges whose removal results in no cycles existing.</answer>
+        </question>
+
+        <question id="definition-feedback-vertex-set">
+            <text>Feedback Vertex Set</text>
             <link>https://en.wikipedia.org/wiki/Feedback_vertex_set</link>
             <answer>The smallest set of vertices whose removal results in no cycles existing.</answer>
         </question>
