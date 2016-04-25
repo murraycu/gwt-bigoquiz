@@ -366,4 +366,155 @@
             <answer>NP-complete</answer>
         </question>
     </section>
+
+    <section id="graph-algorithm-purposes" answers_as_choices="true" and_reverse="true">
+        <title>Graph Algorithm Purposes</title>
+        <question id="purpose-prims">
+            <text>Prim's Algorithm</text>
+            <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
+            <answer>Minimum Spanning Tree, for dense graphs.</answer>
+        </question>
+        <question id="purpose-kruskals">
+            <text>Kruskal's Algorithm</text>
+            <link>https://en.wikipedia.org/wiki/Kruskal's_algorithm</link>
+            <answer>Minimum Spanning Tree, for sparse graphs.</answer>
+        </question>
+        <question id="purpose-dijkstras">
+            <text>Dijkstra's Algorithm</text>
+            <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
+            <answer>Shortest Path (no negative edges).</answer>
+        </question>
+        <question id="purpose-bellmann-ford">
+            <text>Bellmann-Ford Algorithm</text>
+            <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
+            <answer>Single-Source Shortest Path (with negative edges).</answer>
+        </question>
+        <question id="purpose-floyd-warshall">
+            <text>Floyd Warshall Algorithm</text>
+            <link>https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm</link>
+            <answer>All Pairs Shortest Path, for dense graphs (with negative edges).</answer>
+        </question>
+        <question id="purpose-johnsons">
+            <text>Johnson's Algorithm</text>
+            <link>https://en.wikipedia.org/wiki/Johnson's_algorithm</link>
+            <answer>All Pairs Shortest Path, for sparse graphs  (with negative edges).</answer>
+        </question>
+    </section>
+
+    <section id="graph-algorithms" answers_as_choices="true" and_reverse="true">
+        <title>Graph Algorithms</title>
+        <question id="definition-prims">
+            <text>Prim's Algorithm for Minimum Spanning Tree</text>
+            <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
+            <answer>Start with an arbitrary vertex. Find the lowest-cost outgoing edge and add its destination to the tree. Repeat until all vertices are in the tree.</answer>
+        </question>
+        <question id="definition-kruskals">
+            <text>Kruskal's Algorithm for Minimum Spanning Tree</text>
+            <link>https://en.wikipedia.org/wiki/Kruskal's_algorithm</link>
+            <answer>Iterate through all edges, in increasing order of their cost. Join each edge's vertices by adding them to a Union-Find (Disjoint Set), if they are not already joined, remembering the edges added.</answer>
+        </question>
+        <question id="definition-dijkstras">
+            <text>Dijkstra's Algorithm for Shortest Path</text>
+            <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
+            <answer>Choose the outgoing edge with the least total path cost, starting with a zero-cost edge to the start vertex. Look at the edge's destination vertex and store the total path costs (and, optionally, the predecessor) for each outgoing edge's vertex. Repeat until we reach the destination. Use, and update, a min heap (priority queue) to choose the outgoing edge with the lowest total cost.</answer>
+        </question>
+        <question id="definition-bellmann-ford">
+            <text>Bellmann-Ford Algorithm for Single-Source Shortest Path</text>
+            <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
+            <answer>Start with 0 cost for the source vertex, and infinity for all other vertices. Then, for each vertex, examine each edge, to calculate the total path cost (or infinity) to reach the adjacent vertices, reducing the stored cost if it is less. Repeat the examination of edges, and recalculation, n-1 times, or until there is no change. Do 1 extra iteration to detect negative cycles.</answer>
+        </question>
+        <question id="definition-floyd-warshall">
+            <text>Floyd Warshall Algorithm for All Pairs Shortest Path</text>
+            <link>https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm</link>
+            <answer>Examine every path from vertex i to vertex j, using k edges, by examining i to j using k-1 edges and examining i to k to j using k-1 edges. To detect negative cycles, check for a negative cost from a node to itself.</answer>
+        </question>
+        <question id="definition-johnsons">
+            <text>Johnson's Algorithm for All Pairs Shortest Path</text>
+            <link>https://en.wikipedia.org/wiki/Johnson's_algorithm</link>
+            <answer>Add one vertex to the graph, with zero-length edges to every other vertex. Run Bellmann-Ford to get the shortest path from the new vertex to every other. Reweight the original graph's edges by adding the difference of the edge's start and end vertices' paths from s. Then call Dijkstra's algorithm for each pair of vertices, subtracting the reweighting difference from the result.</answer>
+        </question>
+
+        <!-- TODO: Kruskal's can be used to find clusters, stopping early. -->
+
+        <!-- TODO: For sparse graphs, n * dijkstra's is better than floyd-warshall for APSP -->
+
+        <!-- TODO: Uses: Floyd-Warshall: Transitive Closure of a binary relation. -->
+    </section>
+
+    <section id="graph-algorithm-choice" answers_as_choices="true" and_reverse="true">
+        <title>Graph Algorithms Choice</title>
+
+        <question id="algorithm-for-connected-components">
+            <text>Connected Components in an undirected graph</text>
+            <link>https://en.wikipedia.org/wiki/Connected_component_%28graph_theory%29</link>
+            <answer>Depth First Search or Breadth First Search.</answer>
+        </question>
+
+        <question id="algorithm-for-weakly-connectec-components">
+            <text>Weakly Connected Components in a directed graph</text>
+            <link>https://en.wikipedia.org/wiki/Connected_component_%28graph_theory%29</link>
+            <answer>Make edges undirected, then Depth First Search or Breadth First Search.</answer>
+        </question>
+
+        <question id="algorithm-for-stongly-connected-components">
+            <text>Strongly Connected Components</text>
+            <link>https://en.wikipedia.org/wiki/Strongly_connected_component</link>
+            <answer>Depth First Search from v, then reverse edges and DFS from the latest-completed vertex.</answer>
+        </question>
+
+        <question id="algorithm-for-topological-sort">
+            <text>Topological Sort</text>
+            <link>https://en.wikipedia.org/wiki/Topological_sorting</link>
+            <answer>Depth First Search to order vertices by their completion time.</answer>
+        </question>
+
+        <question id="algorithm-for-minimum-spanning-tree">
+            <text>Minimum Spanning Tree</text>
+            <link>https://en.wikipedia.org/wiki/Minimum_spanning_tree</link>
+            <answer>Kruskal's, Prim's, or Boruvka's algorithm</answer>
+        </question>
+
+        <question id="algorithm-for-shortest-path">
+            <text>Single Source Shortest Path (unweighted)</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
+            <answer>Breadth First Search</answer>
+        </question>
+
+        <question id="algorithm-for-shortest-path">
+            <text>Single Source Shortest Path (weighted)</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
+            <answer>Dijkstra's algorithm, or the Bellman-Ford algorithm.</answer>
+        </question>
+
+        <question id="algorithm-for-shortest-path">
+            <text>Single Source Shortest Path (weighted)</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
+            <answer>Dijkstra's algorithm, or the Bellman-Ford algorithm.</answer>
+        </question>
+        <!-- TODO: If acyclic (a DAG), it can be linear with topological sort. Page 491 of TADM. -->
+
+        <question id="algorithm-for-all-pairs-shortest-path">
+            <text>All Pairs Shortest Path</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#All-pairs_shortest_paths</link>
+            <answer>Floyd-Warshall, Johnson's, or repeated Dijkstra's algorithm</answer>
+        </question>
+
+        <question id="algorithm-for-transitive-closure">
+            <text>Transitive Closure</text>
+            <link>https://en.wikipedia.org/wiki/Transitive_reduction</link>
+            <answer>BFS or DFS, or modify Floyd-Warshall's algorithm to calcuate only reachability.</answer>
+        </question>
+
+        <!-- TODO:
+        <question id="algorithm-for-bipartite-matching">
+            <text>Bipartite Matching</text>
+            <link>https://en.wikipedia.org/wiki/Matching_%28graph_theory%29</link>
+            <answer>.</answer>
+        </question>
+        -->
+
+
+
+    </section>
+
 </quiz>
