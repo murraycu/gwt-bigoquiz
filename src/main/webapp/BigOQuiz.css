@@ -581,6 +581,8 @@ h4 * {
 
 .user-history-recent-panel {
     margin-bottom: 1em;
+    margin-left: 1rem;
+    margin-right: 0.3rem;
     float: left;
     clear: both;
 }
