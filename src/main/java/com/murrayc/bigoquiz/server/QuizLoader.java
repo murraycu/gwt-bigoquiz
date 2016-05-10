@@ -38,7 +38,7 @@ public class QuizLoader {
     private static final String NODE_CHOICES = "choices";
     private static final String NODE_CHOICE = "choice";
     private static final String NODE_DEFAULT_CHOICES = "default_choices";
-    private static final int MAX_CHOICES_FROM_ANSWERS = 10;
+    private static final int MAX_CHOICES_FROM_ANSWERS = 6;
 
     public static void setSectionDefaultChoicesFromAnswers(final Quiz quiz, final String sectionId) {
         //Use a set to avoid duplicates:
