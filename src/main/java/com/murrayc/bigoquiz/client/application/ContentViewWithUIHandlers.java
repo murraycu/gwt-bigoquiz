@@ -36,7 +36,7 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
         parentPanel.addStyleName("parent-content-panel");
         mainPanel.addStyleName("content-panel");
         parentPanel.add(mainPanel);
-        
+
         titleLabel.addStyleName("page-title-label");
         titleHeading = Utils.addHeaderToPanel(2, mainPanel, titleLabel);
         setHeadingVisible(false);
