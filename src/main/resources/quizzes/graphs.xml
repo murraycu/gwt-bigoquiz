@@ -404,6 +404,21 @@
             <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
             <answer>All Pairs Shortest Path, for sparse graphs (no negative edges).</answer>
         </question>
+        <question id="purpose-ford-fulkerson">
+            <text>Ford-Fulkerson (Edmonds-Karp) Algorithm</text>
+            <link>https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm</link>
+            <answer>Maximum Flow (sparse graphs).</answer>i
+        </question>
+        <question id="purpose-dinic">
+            <text>Dinic's Algorithm</text>
+            <link>https://en.wikipedia.org/wiki/Dinic's_algorithm</link>
+            <answer>Maximum Flow (sparse graphs).</answer>
+        </question>
+        <question id="purpose-push-relabel">
+            <text>Push-Relabel Algorithm</text>
+            <link>https://en.wikipedia.org/wiki/Push%E2%80%93relabel_maximum_flow_algorithm</link>
+            <answer>Maximum Flow (dense graphs).</answer>
+        </question>
     </section>
 
     <section id="graph-algorithms" answers_as_choices="true" and_reverse="true">
@@ -437,6 +452,24 @@
             <text>Johnson's Algorithm for All Pairs Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Johnson's_algorithm</link>
             <answer>Add one vertex to the graph, with zero-length edges to every other vertex. Run Bellmann-Ford to get the shortest path from the new vertex to every other. Reweight the original graph's edges by adding the difference of the edge's start and end vertices' paths from s. Then call Dijkstra's algorithm for each pair of vertices, subtracting the reweighting difference from the result.</answer>
+        </question>
+
+        <question id="definition-ford-fulkerson">
+            <text>Ford-Fulkerson Algorithm for Maximum Flow</text>
+            <link>https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm</link>
+            <answer>Define a residual graph with reverse edges. Find a path in that graph. Augment the path with its bottleneck capacity, decreasing capacity on used edges, increasing on reverse edges. Repeat until there is no path.</answer>
+        </question>
+
+        <question id="definition-dinic">
+            <text>Dinic's Algorithm for Maximum Flow</text>
+            <link>https://en.wikipedia.org/wiki/Dinic's_algorithm</link>
+            <answer>Ford-Fulkerson using BFS to find the path in each iteration.</answer>
+        </question>
+
+        <question id="definition-push-relabel">
+            <text>Push-Relabel Algorithm for Maximum Flow</text>
+            <link>https://en.wikipedia.org/wiki/Push%E2%80%93relabel_maximum_flow_algorithm</link>
+            <answer>Define a residual graph with reverse edges. Define heights for all vertices, starting with n for the source and 0 for others. Define excesses for each vertex. Starting with the source, repeatedly find the highest vertex that has excess and push flow along its downhill edges, increasing the excess on the edges' destination vertices. Repeat until there are no vertices with excess.</answer>
         </question>
 
         <!-- TODO: Kruskal's can be used to find clusters, stopping early. -->
@@ -492,7 +525,7 @@
         <question id="algorithm-for-all-pairs-shortest-path">
             <text>All Pairs Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Shortest_path_problem#All-pairs_shortest_paths</link>
-            <answer>Floyd-Warshall, Johnson's, or repeated Dijkstra's algorithm</answer>
+            <answer>Floyd-Warshall, Johnson's, or repeated Dijkstra's algorithm.</answer>
         </question>
 
         <question id="algorithm-for-transitive-closure">
@@ -508,6 +541,12 @@
             <answer>.</answer>
         </question>
         -->
+
+        <question id="algorithm-for-maximum-flow">
+            <text>Maximum Flow</text>
+            <link>https://en.wikipedia.org/wiki/Maximum_flow_problem</link>
+            <answer>Edmonds-Karp (Ford-Fulkerson), Dinic's, or Push-Relabel.</answer>
+        </question>
 
 
 
