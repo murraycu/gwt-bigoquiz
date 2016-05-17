@@ -67,7 +67,7 @@
         <question id="definition-eulerian-cycle">
             <text>Eulerian Cycle</text>
             <link>https://en.wikipedia.org/wiki/Eulerian_path</link>
-            <answer>A tour that visits each vertex only once, returning to the start.</answer>
+            <answer>A tour that visits each edge only once, returning to the start.</answer>
         </question>
 
         <question id="definition-edge-connectivity">
