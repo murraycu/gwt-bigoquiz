@@ -367,7 +367,7 @@
         </question>
     </section>
 
-    <section id="graph-algorithm-purposes" answers_as_choices="true" and_reverse="true">
+    <section id="graph-algorithm-purposes" answers_as_choices="true">
         <title>Graph Algorithm Purposes</title>
         <question id="purpose-prims">
             <text>Prim's Algorithm</text>
@@ -478,12 +478,6 @@
             <text>Single Source Shortest Path (unweighted)</text>
             <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
             <answer>Breadth First Search</answer>
-        </question>
-
-        <question id="algorithm-for-shortest-path">
-            <text>Single Source Shortest Path (weighted)</text>
-            <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
-            <answer>Dijkstra's algorithm, or the Bellman-Ford algorithm.</answer>
         </question>
 
         <question id="algorithm-for-shortest-path">
