@@ -973,7 +973,7 @@
         </subsection>
 
         <subsection id="adjacency-matrix">
-            <title>Ajacency Matrix</title>
+            <title>Adjacency Matrix</title>
             <link>https://en.wikipedia.org/wiki/Adjacency_matrix</link>
             <question id="adjacency-matrix-storage">
                 <text>Storage</text>

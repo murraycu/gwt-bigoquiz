@@ -542,25 +542,25 @@
     <section id="operations-on-uninitialized-memory" answers_as_choices="true" and_reverse="true">
         <title>Operations on uninitialized memory</title>
         <link>http://en.cppreference.com/w/cpp/algorithm#Operations_on_uninitialized_memory</link>
-        <question id="perations-on-uninitialized-memory-uninitialized_copy">
+        <question id="operations-on-uninitialized-memory-uninitialized_copy">
             <text>uninitialized_copy()</text>
             <link>http://en.cppreference.com/w/cpp/algorithm/uninitialized_copy</link>
             <answer>Copies a range of objects to an uninitialized area of memory.</answer>
         </question>
 
-        <question id="perations-on-uninitialized-memory-uninitialized_copy_n">
+        <question id="operations-on-uninitialized-memory-uninitialized_copy_n">
             <text>uninitialized_copy_n()</text>
             <link>http://en.cppreference.com/w/cpp/algorithm/uninitialized_copy_n</link>
             <answer>Copies a number of objects to an uninitialized area of memory.</answer>
         </question>
 
-        <question id="perations-on-uninitialized-memory-uninitialized_fill">
+        <question id="operations-on-uninitialized-memory-uninitialized_fill">
             <text>uninitialized_fill()</text>
             <link>http://en.cppreference.com/w/cpp/algorithm/uninitialized_fill</link>
             <answer>Copies an object to an uninitialized area of memory, defined by a range.</answer>
         </question>
 
-        <question id="perations-on-uninitialized-memory-uninitialized_fill_n">
+        <question id="operations-on-uninitialized-memory-uninitialized_fill_n">
             <text>uninitialized_fill_n()</text>
             <link>http://en.cppreference.com/w/cpp/algorithm/uninitialized_fill</link>
             <answer>Copies an object to an uninitialized area of memory, defined by a start and a count.</answer>
