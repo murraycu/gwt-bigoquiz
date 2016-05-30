@@ -397,7 +397,12 @@
         <question id="purpose-johnsons">
             <text>Johnson's Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Johnson's_algorithm</link>
-            <answer>All Pairs Shortest Path, for sparse graphs  (with negative edges).</answer>
+            <answer>All Pairs Shortest Path, for sparse graphs (with negative edges).</answer>
+        </question>
+        <question id="purpose-n-dijkstra">
+            <text>n * Dijkstra's Algorithm</text>
+            <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
+            <answer>All Pairs Shortest Path, for sparse graphs (no negative edges).</answer>
         </question>
     </section>
 
@@ -435,9 +440,6 @@
         </question>
 
         <!-- TODO: Kruskal's can be used to find clusters, stopping early. -->
-
-        <!-- TODO: For sparse graphs, n * dijkstra's is better than floyd-warshall for APSP -->
-
         <!-- TODO: Uses: Floyd-Warshall: Transitive Closure of a binary relation. -->
     </section>
 
