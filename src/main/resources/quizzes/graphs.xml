@@ -82,9 +82,9 @@
             <answer>The smallest subset of vertices whose deletion will disconnect the graph.</answer>
         </question>
 
-        <question id="definition-network-flow">
-            <text>Network Flow</text>
-            <link>https://en.wikipedia.org/wiki/Flow_network</link>
+        <question id="definition-max-flow">
+            <text>Maximum Flow</text>
+            <link>https://en.wikipedia.org/wiki/Maximum_flow_problem</link>
             <answer>The maximum flow which can be sent from one specific vertex to another while respecting the maximum capacity of each edge.</answer>
         </question>
 
@@ -269,9 +269,9 @@
             <answer>Polynomial</answer>
         </question>
 
-        <question id="polynomial-or-np-complete-network-flow">
-            <text>Network Flow</text>
-            <link>https://en.wikipedia.org/wiki/Flow_network</link>
+        <question id="polynomial-or-np-complete-max-flow">
+            <text>Maximum Flow</text>
+            <link>https://en.wikipedia.org/wiki/Maximum_flow_problem</link>
             <answer>Polynomial</answer>
         </question>
 
