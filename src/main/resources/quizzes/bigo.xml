@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quiz xmlns="http://bigoquiz.com/document" format_version="1" id="bigo">
     <title>Big-O Algorithms</title>
-    <section id="data-structure-operations">
+    <section id="data-structure-operations" answers_as_choices="true">
         <title>Data Structure Operations</title>
-        <default_choices>
-            <choice>O(1)</choice>
-            <choice>O(log(n))</choice>
-            <choice>O(n)</choice>
-            <choice>O(n log(n))</choice>
-            <choice>O(n²)</choice>
-            <choice>O(nk)</choice>
-            <choice>O(n + k)</choice>
-            <choice>O(m)</choice>
-            <choice>O(mn)</choice>
-        </default_choices>
         <subsection id="array-unsorted">
             <title>Array (unsorted)</title>
             <link>http://en.wikipedia.org/wiki/Array_data_structure</link>
@@ -681,18 +670,8 @@
 
     </section>
 
-    <section id="array-sorting-algorithms">
+    <section id="array-sorting-algorithms" answers_as_choices="true">
         <title>Array Sorting Algorithms</title>
-        <default_choices>
-            <choice>O(1)</choice>
-            <choice>O(log(n))</choice>
-            <choice>O(n)</choice>
-            <choice>O(n log(n))</choice>
-            <choice>O(n²)</choice>
-            <choice>O(nk)</choice>
-            <choice>O(n + k)</choice>
-            <choice>O((n log(n))²)</choice>
-        </default_choices>
         <subsection id="quicksort">
             <title>Quicksort</title>
             <link>https://en.wikipedia.org/wiki/Quicksort</link>
@@ -904,16 +883,8 @@
         </subsection>
     </section>
 
-    <section id="graph-operations">
+    <section id="graph-operations" answers_as_choices="true">
         <title>Graph Operations</title>
-        <default_choices>
-            <choice>O(1)</choice>
-            <choice>O(|E|)</choice>
-            <choice>O(|V|)</choice>
-            <choice>O(|V| + |E|)</choice>
-            <choice>O(|V| ⋅ |E|)</choice>
-            <choice>O(|V|²)</choice>
-        </default_choices>
         <subsection id="adjacency-list">
             <title>Adjacency List</title>
             <link>https://en.wikipedia.org/wiki/Adjacency_list</link>
@@ -1035,20 +1006,8 @@
     This is in bigoref.com in a searching section, along with array and binary search.
     bigoref.com has both average and worst time, but they are the same for all algorithms,
      so we only have time here. -->
-    <section id="graph-search">
+    <section id="graph-search" answers_as_choices="true">
         <title>Graph Search</title>
-        <default_choices>
-            <choice>O(1)</choice>
-            <choice>O(|E|)</choice>
-            <choice>O(|V|)</choice>
-            <choice>O(|V| + |E|)</choice>
-            <choice>O(|V| ⋅ |E|)</choice>
-            <choice>O(|E| log(|V|))</choice>
-            <choice>O((|V|+|E|) log(|V|))</choice>
-            <choice>O(|E| ⋅ |V| log(|V|))</choice>
-            <choice>O(|V|²)</choice>
-            <choice>O(|V|³)</choice>
-        </default_choices>
         <subsection id="depth-first-search">
             <title>Depth First Search (DFS)</title>
             <link>https://en.wikipedia.org/wiki/Depth-first_search</link>
@@ -1189,16 +1148,8 @@
         </subsection>
     </section>
 
-    <section id="heap-operations">
+    <section id="heap-operations" answers_as_choices="true">
         <title>Heap Operations</title>
-        <default_choices>
-            <choice>O(1)</choice>
-            <choice>O(log(n))</choice>
-            <choice>O(n)</choice>
-            <choice>O(n log(n))</choice>
-            <choice>O(n²)</choice>
-            <choice>O(m + n)</choice>
-        </default_choices>
         <subsection id="linked-list-sorted">
             <title>Linked List (sorted)</title>
             <link>https://en.wikipedia.org/wiki/Linked_list</link>

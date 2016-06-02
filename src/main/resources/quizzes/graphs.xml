@@ -191,12 +191,8 @@
         </question>
     </section>
 
-    <section id="polynomial-or-np-complete">
+    <section id="polynomial-or-np-complete" answers_as_choices="true">
         <title>Polynomial or NP-complete</title>
-        <default_choices>
-            <choice>Polynomial</choice>
-            <choice>NP-complete</choice>
-        </default_choices>
         <question id="polynomial-or-np-complete-connected-components">
             <text>Connected Components</text>
             <link>https://en.wikipedia.org/wiki/Connected_component_%28graph_theory%29</link>
