@@ -52,6 +52,12 @@
             <answer>Removes as many edges as possible, optionally also adding edges, while maintaining the same reachability from each vertex to other vertices.</answer>
         </question>
 
+        <question id="definition-bipartite-matching">
+            <text>Bipartite Matching</text>
+            <link>https://en.wikipedia.org/wiki/Matching_%28graph_theory%29</link>
+            <answer>Finds two sets of vertices in which every edge is in both sets.</answer>
+        </question>
+
         <question id="definition-matching">
             <text>Matching</text>
             <link>https://en.wikipedia.org/wiki/Matching_%28graph_theory%29</link>
@@ -534,9 +540,21 @@
             <answer>BFS or DFS, or modify Floyd-Warshall's algorithm to calculate only reachability.</answer>
         </question>
 
-        <!-- TODO:
-        <question id="algorithm-for-bipartite-matching">
-            <text>Bipartite Matching</text>
+        <question id="algorithm-for-bipartite-matching-unweighted">
+            <text>Bipartite Matching (unweighted)</text>
+            <link>https://en.wikipedia.org/wiki/Matching_%28graph_theory%29#In_unweighted_bipartite_graphs</link>
+            <answer>A Maximum Flow algorithm after adding source and sink vertices and setting all edge capacities to 1.</answer>
+        </question>
+
+        <question id="algorithm-for-bipartite-matching-weighted">
+            <text>Bipartite Matching (weighted)</text>
+            <link>https://en.wikipedia.org/wiki/Matching_%28graph_theory%29#In_weighted_bipartite_graphs</link>
+            <answer>Hungarian Algorithm.</answer>
+        </question>
+
+        <!-- TODO?
+         question id="algorithm-for-matching">
+            <text>Graph Matching</text>
             <link>https://en.wikipedia.org/wiki/Matching_%28graph_theory%29</link>
             <answer>.</answer>
         </question>
