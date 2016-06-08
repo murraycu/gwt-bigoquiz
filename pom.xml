@@ -47,7 +47,7 @@
 
 
         <!-- Convenience property to set the AppEngine version -->
-		<appengine.version>1.9.32</appengine.version>
+		<appengine.version>1.9.38</appengine.version>
 		<appengine.application.version>1</appengine.application.version>
 
 		<!-- Make mvn gwt:run use SSL (HTTPS) when running Jetty.
@@ -150,7 +150,7 @@
         <dependency>
           <groupId>com.googlecode.objectify</groupId>
           <artifactId>objectify</artifactId>
-          <version>5.1.12</version>
+          <version>5.1.13</version>
         </dependency>
 
 		<dependency>
