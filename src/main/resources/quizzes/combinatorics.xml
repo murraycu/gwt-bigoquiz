@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="combinatorics">
+    <title>Combinatorics</title>
+
+    <section id="definitions" answers_as_choices="true">
+        <title>Definitions</title>
+        <question id="definition-permutation">
+            <text>Permutation</text>
+            <link>https://en.wikipedia.org/wiki/Permutation</link>
+            <answer>Ordered selection</answer>
+        </question>
+
+        <question id="definition-combination">
+            <text>Combination</text>
+            <link>https://en.wikipedia.org/wiki/Combination</link>
+            <answer>Unordered selection</answer>
+        </question>
+    </section>
+
+    <section id="count" answers_as_choices="true">
+        <title>Counts of Permutations and Combinations</title>
+        <question id="count-permutations">
+            <text>Number of permutations of n items.</text>
+            <link>https://en.wikipedia.org/wiki/Permutation</link>
+            <answer>n!</answer>
+        </question>
+
+        <question id="count-k-permutations">
+            <text>Number of ordered subset combinations (permutations) of k items from n items.</text>
+            <link>https://en.wikipedia.org/wiki/Permutation#k-permutations_of_n</link>
+            <answer>n! / (n - k)!</answer>
+        </question>
+
+        <question id="count-combinations-n-choose-k">
+            <text>Number of unordered subset combinations of k items from n items (n choose k).</text>
+            <link>https://en.wikipedia.org/wiki/Permutation#k-permutations_of_n</link>
+            <answer>n! / ((n - k)! ⋅  k) </answer>
+        </question>
+    </section>
+
+    <section id="count" answers_as_choices="true">
+        <title>Algorithms</title>
+        <question id="algorithms-gospers-hack">
+            <text>Gosper's Hack for iterating combinations.</text>
+            <link>http://read.seas.harvard.edu/cs207/2012/?p=64</link>
+            <answer>y = x & -x;  c = x + y; x = (((x ^ c) >> 2) / y) | c;</answer>
+        </question>
+
+        <question id="algorithms-next-lexographica-permutation">
+            <text>Next Lexographical Permutation.</text>
+            <link>https://en.wikipedia.org/wiki/Permutation#Generation_in_lexicographic_order</link>
+            <answer>Find rightmost a[k] < a[k+1[. Find rightmost a[l] >  a[k] afer k, Swap a[k] and a[l]. Reverse from a[k+1].</answer>
+        </question>
+    </section>
+
+    <!-- TODO: lexographically-next permutation -->
+    <!-- TODO: next n-choose-k combination (subset) -->
+</quiz>
