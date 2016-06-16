@@ -561,9 +561,22 @@
             <link>https://en.wikipedia.org/wiki/Maximum_flow_problem</link>
             <answer>Edmonds-Karp (Ford-Fulkerson), Dinic's, or Push-Relabel.</answer>
         </question>
+    </section>
 
+    <section id="graph-stack-or-queue" answers_as_choices="true" and_reverse="true">
+        <title>Stack or Queue</title>
 
+        <question id="stack-or-queue-bfs">
+            <text>Breadth First Search iterative implementation</text>
+            <link>https://en.wikipedia.org/wiki/Breadth-first_search</link>
+            <answer>Queue</answer>
+        </question>
 
+        <question id="stack-or-queue-dfs">
+            <text>Depth First Search iterative implementation</text>
+            <link>https://en.wikipedia.org/wiki/Depth-first_search</link>
+            <answer>Stack</answer>
+        </question>
     </section>
 
 </quiz>
