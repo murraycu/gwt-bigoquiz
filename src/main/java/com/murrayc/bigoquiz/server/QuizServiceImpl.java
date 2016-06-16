@@ -447,8 +447,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 "cpp_std_algorithms"};
 
         for (final String name : names) {
-            if (loadQuizIntoQuizzes(name, quizzes)) {
-                return;
+            if (!loadQuizIntoQuizzes(name, quizzes)) {
+                continue;
             }
         }
 
@@ -456,6 +456,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
         context.setAttribute(LOADED_QUIZZES, quizzes);
     }
 
+    /**
+     * Returns false if the load failed.
+     * @param quizId
+     * @param quizzes
+     * @return
+     */
     private boolean loadQuizIntoQuizzes(final String quizId, Map<String, Quiz> quizzes) {
         if (quizzes.containsKey(quizId)) {
             Log.error("loadQuizIntoQuizzes(): quiz already loaded: " + quizId);
@@ -469,9 +475,10 @@ public class QuizServiceImpl extends ServiceWithUser implements
             }
         } catch (@NotNull final Exception e) {
             Log.error("Could not load quiz: " + quizId, e);
-            return true;
+            return false;
         }
-        return false;
+
+        return true;
     }
 
     @NotNull
