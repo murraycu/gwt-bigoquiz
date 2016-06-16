@@ -439,25 +439,17 @@ public class QuizServiceImpl extends ServiceWithUser implements
     private void loadQuizzes(@NotNull final ServletContext context) {
         final Map<String, Quiz> quizzes = new HashMap<>();
 
-        //Load it for the first time:
-        if (loadQuizIntoQuizzes(QuizConstants.DEFAULT_QUIZ_ID, quizzes)) {
-            return;
-        }
+        final String[] names = {
+                QuizConstants.DEFAULT_QUIZ_ID,
+                "mastermethod",
+                "designpatterns",
+                "graphs",
+                "cpp_std_algorithms"};
 
-        if (loadQuizIntoQuizzes("mastermethod", quizzes)) {
-            return;
-        }
-
-        if (loadQuizIntoQuizzes("designpatterns", quizzes)) {
-            return;
-        }
-
-        if (loadQuizIntoQuizzes("graphs", quizzes)) {
-            return;
-        }
-
-        if (loadQuizIntoQuizzes("cpp_std_algorithms", quizzes)) {
-            return;
+        for (final String name : names) {
+            if (loadQuizIntoQuizzes(name, quizzes)) {
+                return;
+            }
         }
 
         this.quizzes = quizzes;
