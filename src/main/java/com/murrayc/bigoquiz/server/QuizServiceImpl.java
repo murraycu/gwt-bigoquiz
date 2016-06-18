@@ -444,7 +444,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 "mastermethod",
                 "designpatterns",
                 "graphs",
-                "cpp_std_algorithms"};
+                "cpp_std_algorithms",
+                "notation"};
 
         for (final String name : names) {
             if (!loadQuizIntoQuizzes(name, quizzes)) {
