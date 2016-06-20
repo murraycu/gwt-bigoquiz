@@ -41,17 +41,22 @@ public class QuizLoader {
     private static final int MAX_CHOICES_FROM_ANSWERS = 6;
 
     public static void setSectionDefaultChoicesFromAnswers(final Quiz quiz, final String sectionId) {
+        final List<QuestionAndAnswer> sectionList = quiz.getQuestionsForSection(sectionId);
+
+        setQuestionsChoicesFromAnswers(sectionList);
+    }
+
+    private static void setQuestionsChoicesFromAnswers(final List<QuestionAndAnswer> questions) {
         //Use a set to avoid duplicates:
         final Set<String> choicesSet = new HashSet<>();
-        final List<QuestionAndAnswer> sectionList = quiz.getQuestionsForSection(sectionId);
-        for (final QuestionAndAnswer question : sectionList) {
+        for (final QuestionAndAnswer question : questions) {
             choicesSet.add(question.getAnswer());
         }
 
         final List<String> choices = new ArrayList<>(choicesSet);
         final boolean too_many_choices = choices.size() > MAX_CHOICES_FROM_ANSWERS;
 
-        for (final QuestionAndAnswer questionAndAnswer : sectionList) {
+        for (final QuestionAndAnswer questionAndAnswer : questions) {
             final Question question = questionAndAnswer.getQuestion();
 
             if (!too_many_choices) {
@@ -163,20 +168,27 @@ public class QuizLoader {
             @Nullable final String subSectionTitle = getTitleNodeText(subSectionElement);
             @Nullable final String subSectionLink= getLinkNodeText(subSectionElement);
 
+            //Don't use subsection answers as choices if the parent section wants answers-as-choices.
+            //In that case, all questions will instead share answers from all sub-sections.
+            final boolean subSectionUseAnswersAsChoices = getAttributeAsBoolean(subSectionElement, ATTR_ANSWERS_AS_CHOICES) &&
+                    !useAnswersAsChoices;
+
             result.addSubSection(sectionId, subSectionId, subSectionTitle, subSectionLink);
 
             //Questions:
-            questionsCount += addChildQuestions(result, sectionId, subSectionId, defaultChoices, subSectionElement, reverse);
+            questionsCount += addChildQuestions(result, sectionId, subSectionId, defaultChoices, subSectionElement, reverse, subSectionUseAnswersAsChoices);
         }
 
         //Add any Questions that are not in a subsection:
-        questionsCount += addChildQuestions(result, sectionId, null, defaultChoices, sectionElement, reverse);
+        questionsCount += addChildQuestions(result, sectionId, null, defaultChoices, sectionElement, reverse, false);
 
         result.setSectionQuestionsCount(sectionId, questionsCount);
 
+        //Make sure that we set sub-section choices from the answers from all questions in the whole section:
         if (useAnswersAsChoices) {
             setSectionDefaultChoicesFromAnswers(result, sectionId);
         }
+
     }
 
     private static boolean getAttributeAsBoolean(final Element element, final String attribute) {
@@ -204,8 +216,11 @@ public class QuizLoader {
         return sectionTitle;
     }
 
-    private static int addChildQuestions(@NotNull final Quiz quiz, final String sectionId, final String subSectionId, final List<String> defaultChoices, @NotNull final Element parentElement, boolean reverse) throws QuizLoaderException {
+    private static int addChildQuestions(@NotNull final Quiz quiz, final String sectionId, final String subSectionId, final List<String> defaultChoices, @NotNull final Element parentElement, boolean reverse, boolean useAnswersAsChoices) throws QuizLoaderException {
         int result = 0;
+
+        // We only use this if using answers as choices.
+        final List<QuestionAndAnswer> questions = new ArrayList<>();
 
         @NotNull final List<Node> listQuestionNodes = getChildrenByTagName(parentElement, NODE_QUESTION);
         for (final Node questionNode : listQuestionNodes) {
@@ -222,8 +237,16 @@ public class QuizLoader {
                 } else {
                     quiz.addQuestion(sectionId, questionAndAnswer);
                     result += 1;
+
+                    if (useAnswersAsChoices) {
+                        questions.add(questionAndAnswer);
+                    }
                 }
             }
+        }
+
+        if (useAnswersAsChoices) {
+            setQuestionsChoicesFromAnswers(questions);
         }
 
         return result;
