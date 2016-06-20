@@ -1,30 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quiz xmlns="http://bigoquiz.com/document" format_version="1" id="mastermethod">
-    <title>Simplified Master Theorem</title>
-    <section id="using" answers_as_choices="true">
-        <title>Using the Simplified Master Theorem</title>
-        <subsection id="using-use">
-            <title>T(n) &lt;= a T(n / b) + O(nᵈ)</title>
+    <title>Master Theorem</title>
+
+
+    <section id="master-theorem">
+        <title>Master Theorem</title>
+
+        <subsection id="master-theorem-using" answers_as_choices="true">
+            <title>Using: T(n) = a T(n / b) + f(n)</title>
             <link>https://en.wikipedia.org/wiki/Master_theorem</link>
-            <question id="parts-equal">
-                <text>a == bᵈ</text>
-                <answer>O(nᵈ log(n))</answer>
-            </question>
             <question id="parts-less-than">
-                <text>a &lt; bᵈ</text>
-                <answer>O(nᵈ)</answer>
+                <text>If f(n) ∈ O(n ^ c) where c &lt; logb(a)</text>
+                <answer>Case 1: T(n) ∈ Θ(n ^ logb(a))</answer>
+            </question>
+            <question id="parts-equal">
+                <text>If f(n) ∈ Θ(n ^ c ⋅ (log(n))^k where c = logb(a)</text>
+                <answer>Case 2: T(n) ∈ Θ(n ^ c ⋅ (log(n))^(k+1))</answer>
             </question>
             <question id="parts-greater-than">
-                <text>a &gt; bᵈ</text>
-                <answer>O(n ^ logb(a))</answer>
+                <text>If f(n) ∈ Ω(n ^ c) where c &gt; logb(a)</text>
+                <answer>Case 3: T(n) ∈ Θ(f(n))</answer>
             </question>
         </subsection>
-    </section>
 
-    <section id="parts" answers_as_choices="true">
-        <title>The Simplified Master Theorem's Parts</title>
-        <subsection id="parts-parts">
-            <title>T(n) &lt;= a T(n / b) + O(nᵈ)</title>
+        <!-- See end of Erik Demaine's MIT lecture: http://videolectures.net/mit6046jf05_demaine_lec02/
+        and https://www.quora.com/What-is-an-intuitive-explanation-of-the-Master-Theorem/answer/Brian-Bi -->
+        <subsection id="master-theorem-intution" answers_as_choices="true">
+            <title>Intuition: T(n) = a T(n / b) + f(n), c &lt;/=/&gt; logb(a)</title>
+            <link>https://en.wikipedia.org/wiki/Master_theorem</link>
+            <question id="parts-less-than">
+                <text>Case 1: T(n) ∈ Θ(n ^ logb(a))</text>
+                <answer>Cost increases geometrically. Recursive work dominates. The bottom-most level has a constant fraction of the cost.</answer>
+            </question>
+            <question id="parts-equal">
+                <text>Case 2: T(n) ∈ Θ(n ^ c ⋅ (log(n))^(k+1))</text>
+                <answer>Cost is approximately the same on each level. Total cost is number of levels times first level's cost.</answer>
+            </question>
+            <question id="parts-greater-than">
+                <text>Case 3: T(n) ∈ Θ(f(n))</text>
+                <answer>Cost decreases geometrically. Non-recursive work dominates. The top-most level has a constant fraction of the work.</answer>
+            </question>
+        </subsection>
+
+        <subsection id="master-theorem-parts" answers_as_choices="true">
+            <title>Parts: T(n) &lt;= a T(n / b) + f(n)</title>
             <link>https://en.wikipedia.org/wiki/Master_theorem</link>
             <question id="parts-a">
                 <text>a</text>
@@ -35,8 +54,49 @@
                 <answer>Input size shrinkage factor</answer>
             </question>
             <question id="parts-d">
+                <text>f(n)</text>
+                <answer>Cost of non-recursive work (divide and combine)</answer>
+            </question>
+        </subsection>
+    </section>
+
+    <section id="simplified-master-theorem">
+        <title>Simplified Master Theorem</title>
+
+        <!-- This is based on Tim Roughgarden's description of the master method,
+        apparently based on the description in Sanjoy Dasgupta's "Algorithms" textbook.
+        Note that it lists the cases in a different order, with = first. -->
+        <subsection id="simplified-master-theorem-using" answers_as_choices="true">
+            <title>Using: T(n) = a T(n / b) + f(n)</title>
+            <link>https://en.wikipedia.org/wiki/Master_theorem</link>
+            <question id="simplified-parts-equal">
+                <text>a == bᵈ</text>
+                <answer>O(nᵈ log(n))</answer>
+            </question>
+            <question id="simplified-parts-less-than">
+                <text>a &lt; bᵈ</text>
+                <answer>O(nᵈ)</answer>
+            </question>
+            <question id="simplified-parts-greater-than">
+                <text>a &gt; bᵈ</text>
+                <answer>O(n ^ logb(a))</answer>
+            </question>
+        </subsection>
+
+        <subsection id="simplified-master-theorem-parts" answers_as_choices="true">
+            <title>Parts: T(n) &lt;= a T(n / b) + O(nᵈ)</title>
+            <link>https://en.wikipedia.org/wiki/Master_theorem</link>
+            <question id="simplified-parts-a">
+                <text>a</text>
+                <answer>Number of recursive calls</answer>
+            </question>
+            <question id="simplified-parts-b">
+                <text>b</text>
+                <answer>Input size shrinkage factor</answer>
+            </question>
+            <question id="simplified-parts-d">
                 <text>d</text>
-                <answer>Exponent in running time of combine step</answer>
+                <answer>Exponent in running time of non-recursive work (divide and combine)</answer>
             </question>
         </subsection>
     </section>
