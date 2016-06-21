@@ -183,7 +183,7 @@
     </section>
 
 
-    <section id="algorithms-sort-description" answers_as_choices="true">
+    <section id="algorithms-sort-description" answers_as_choices="true" and_reverse="true">
         <title>Sort Algorithm Description</title>
 
         <question id="algorithms-sort-description-quicksort">
