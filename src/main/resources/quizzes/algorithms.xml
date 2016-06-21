@@ -2,7 +2,7 @@
 <quiz xmlns="http://bigoquiz.com/document" format_version="1" id="algorithms">
     <title>Algorithms</title>
     <section id="algorithms-sort-advantages" answers_as_choices="true">
-        <title>Advantages of Sort Algorithms</title>
+        <title>Advantages of Sorting Algorithms</title>
 
         <question id="algorithms-sort-advantages-quicksort">
             <text>Quicksort</text>
@@ -123,7 +123,7 @@
     </section>
 
     <section id="algorithms-inplace" answers_as_choices="true">
-        <title>Sort Algorithms: In Place or Not</title>
+        <title>Sorting Algorithms: In Place or Not</title>
         <link>https://en.wikipedia.org/wiki/In-place_algorithm</link>
 
         <question id="algorithms-inplace-quicksort">
