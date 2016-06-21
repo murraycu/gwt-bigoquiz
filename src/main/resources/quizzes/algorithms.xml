@@ -62,9 +62,7 @@
         -->
     </section>
 
-    <!-- TODO: Which onese are in-place. -->
     <!-- What do they need space for? -->
-    <!-- Which are comparative? -->
 
     <section id="algorithms-sort-stability" answers_as_choices="true">
         <title>Sort Stability</title>
@@ -125,7 +123,7 @@
     </section>
 
     <section id="algorithms-inplace" answers_as_choices="true">
-        <title>In Place or Not</title>
+        <title>Sort Algorithms: In Place or Not</title>
         <link>https://en.wikipedia.org/wiki/In-place_algorithm</link>
 
         <question id="algorithms-inplace-quicksort">
@@ -182,9 +180,67 @@
         </question>
     </section>
 
+    <section id="algorithms-sort-comparison" answers_as_choices="true">
+        <title>Sorting Algorithms: Comparison or Non-Comparison</title>
+        <link>https://en.wikipedia.org/wiki/Comparison_sort</link>
+
+        <question id="algorithms-sort-comparison-quicksort">
+            <text>Quicksort</text>
+            <link>https://en.wikipedia.org/wiki/Quicksort</link>
+            <answer>Comparison</answer>
+        </question>
+        <question id="algorithms-sort-comparison-mergesort">
+            <text>Mergesort</text>
+            <link>https://en.wikipedia.org/wiki/Merge_sort</link>
+            <answer>Comparison</answer>
+        </question>
+        <question id="algorithms-sort-comparison-heapsort">
+            <text>Heapsort</text>
+            <link>https://en.wikipedia.org/wiki/Heapsort</link>
+            <answer>Comparison</answer>
+        </question>
+        <question id="algorithms-sort-comparison-timsort">
+            <text>Timsort</text>
+            <link>https://en.wikipedia.org/wiki/Timsort</link>
+            <answer>Comparison</answer>
+        </question>
+        <question id="algorithms-sort-comparison-insertion-sort">
+            <text>Insertion Sort</text>
+            <link>https://en.wikipedia.org/wiki/Insertion_sort</link>
+            <answer>Comparison</answer>
+        </question>
+        <question id="algorithms-sort-comparison-selection-sort">
+            <text>Selection Sort</text>
+            <link>https://en.wikipedia.org/wiki/Selection_sort</link>
+            <answer>Comparison</answer>
+        </question>
+        <question id="algorithms-sort-comparison-shellsort">
+            <text>Shellsort</text>
+            <link>https://en.wikipedia.org/wiki/Shellsort</link>
+            <answer>Comparison</answer>
+        </question>
+        <question id="algorithms-sort-comparison-counting-sort">
+            <text>Counting Sort</text>
+            <answer>Non-Comparison</answer>
+        </question>
+        <question id="algorithms-sort-comparison-radix-sort">
+            <text>Radix Sort</text>
+            <link>https://en.wikipedia.org/wiki/Radix_sort</link>
+            <answer>Non-Comparison</answer>
+        </question>
+        <question id="algorithms-sort-comparison-bucket-sort">
+            <text>Bucket Sort</text>
+            <answer>Comparison</answer>
+        </question>
+        <question id="algorithms-sort-comparison-bubble-sort">
+            <text>Bubble Sort</text>
+            <answer>Comparison</answer>
+        </question>
+    </section>
+
 
     <section id="algorithms-sort-description" answers_as_choices="true" and_reverse="true">
-        <title>Sort Algorithm Description</title>
+        <title>Sorting Algorithm Description</title>
 
         <question id="algorithms-sort-description-quicksort">
             <text>Quicksort</text>
