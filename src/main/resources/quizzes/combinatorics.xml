@@ -38,18 +38,18 @@
         </question>
     </section>
 
-    <section id="count" answers_as_choices="true">
+    <section id="algorithms" answers_as_choices="true">
         <title>Algorithms</title>
         <question id="algorithms-gospers-hack">
             <text>Gosper's Hack for iterating combinations.</text>
             <link>http://read.seas.harvard.edu/cs207/2012/?p=64</link>
-            <answer>y = x & -x;  c = x + y; x = (((x ^ c) >> 2) / y) | c;</answer>
+            <answer>y = x &amp; -x;  c = x + y; x = (((x ^ c) &gt;&gt; 2) / y) | c;</answer>
         </question>
 
         <question id="algorithms-next-lexographica-permutation">
             <text>Next Lexographical Permutation.</text>
             <link>https://en.wikipedia.org/wiki/Permutation#Generation_in_lexicographic_order</link>
-            <answer>Find rightmost a[k] < a[k+1[. Find rightmost a[l] >  a[k] afer k, Swap a[k] and a[l]. Reverse from a[k+1].</answer>
+            <answer>Find rightmost a[k] &lt; a[k+1]. Find rightmost a[l] >  a[k] after k, Swap a[k] and a[l]. Reverse from a[k+1].</answer>
         </question>
     </section>
 
