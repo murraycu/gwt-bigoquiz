@@ -11,15 +11,13 @@ public class QuestionAndAnswer implements IsSerializable {
     //Don't make these final, because gwt serialization doesn't support that.
 
     private /* final */ Question question;
-    private /* final */ String answer;
-    private /* final */ boolean answerIsHtml;
+    private /* final */ Question.Text answer;
 
     public QuestionAndAnswer(final String questionId, final String sectionId, final String subSectionId,
-                             final String questionText, boolean questionTextIsHtml, final String questionLink, final String answerText,
-                             boolean answerTextIsHtml, final List<String> choices) {
-        this.question = new Question(questionId, sectionId, subSectionId, questionText, questionTextIsHtml, questionLink, choices);
+                             final Question.Text questionText, final String questionLink, final Question.Text answerText,
+                             final List<Question.Text> choices) {
+        this.question = new Question(questionId, sectionId, subSectionId, questionText, questionLink, choices);
         this.answer = answerText;
-        this.answerIsHtml = answerTextIsHtml;
     }
 
     public QuestionAndAnswer() {
@@ -33,11 +31,7 @@ public class QuestionAndAnswer implements IsSerializable {
         return question;
     }
 
-    public String getAnswer() {
+    public Question.Text getAnswer() {
         return answer;
-    }
-
-    public boolean getAnswerIsHtml() {
-        return answerIsHtml;
     }
 }

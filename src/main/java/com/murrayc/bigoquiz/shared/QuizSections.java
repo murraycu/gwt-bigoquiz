@@ -47,7 +47,7 @@ public class QuizSections implements IsSerializable {
     static public class Section extends HasIdAndTitle {
         @NotNull
         public Map<String, SubSection> subSections = new HashMap<>();
-        public List<String> defaultChoices;
+        public List<Question.Text> defaultChoices;
         public int questionsCount;
     }
 
@@ -55,7 +55,7 @@ public class QuizSections implements IsSerializable {
     @NotNull
     private Map<String, Section> sections = new HashMap<>();
 
-    public void addSection(final String sectionId, final String sectionTitle, final List<String> defaultChoices) {
+    public void addSection(final String sectionId, final String sectionTitle, final List<Question.Text> defaultChoices) {
         @NotNull final Section section = new Section();
         section.id = sectionId;
         section.title = sectionTitle;

@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.client.application.userhistorysections;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.Timer;
@@ -272,12 +273,20 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
         @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(getQuizId(), problemQuestion.getQuestionId(), nextQuestionSectionId, multipleChoice);
         final String historyToken = placeManager.buildHistoryToken(placeRequest);
         final String subSectionTitle = problemQuestion.getSubSectionTitle();
-        String title = problemQuestion.getQuestionTitle();
+        final Question.Text title = problemQuestion.getQuestionTitle();
+        String titleText = title.text;
         if (!StringUtils.isEmpty(subSectionTitle)) {
-            title = subSectionTitle + ": " + title;
+            titleText = subSectionTitle + ": " + titleText;
         }
 
-        @NotNull final Hyperlink result = new InlineHyperlink(title, historyToken);
+        final Hyperlink result;
+        if (title.isHtml) {
+            //TODO: Use modified SimpleHtmlSanitizer?
+            result = new InlineHyperlink(SafeHtmlUtils.fromTrustedString(titleText), historyToken);
+        } else {
+            result = new InlineHyperlink(titleText, historyToken);
+
+        }
         result.addStyleName("problem-answer-hyperlink");
         return result;
     }

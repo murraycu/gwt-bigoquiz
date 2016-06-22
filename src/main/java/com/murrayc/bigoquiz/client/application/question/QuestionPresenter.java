@@ -49,11 +49,11 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
 
         void setNextQuestionSectionId(final String sectionId);
 
-        String getChoiceSelected();
+        Question.Text getChoiceSelected();
 
         void setSubmissionResult(final QuizService.SubmissionResult submissionResult);
 
-        void showAnswer(final String correctAnswer);
+        void showAnswer(final Question.Text correctAnswer);
 
         //TODO: The presenter should know if it is waiting,
         //because it tells the view what to do.
@@ -65,7 +65,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     private String nextQuestionSectionId = null;
     private Question question = null;
     @Nullable
-    private String correctAnswer = null;
+    private Question.Text correctAnswer = null;
     @Nullable
     private Question nextQuestion = null;
 
@@ -180,7 +180,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
     @Override
     public void onSubmitAnswer() {
         //Submit the answer to the server:
-        final String answer = getView().getChoiceSelected();
+        final Question.Text answer = getView().getChoiceSelected();
         if (answer == null) {
             Log.error("onSubmitAnswer(): answer was null.");
             return;
@@ -240,7 +240,7 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
         };
 
         getView().setLoadingLabelVisible(true);
-        QuizServiceAsync.Util.getInstance().submitAnswer(getQuizId(), getQuestionId(), answer, multipleChoice,
+        QuizServiceAsync.Util.getInstance().submitAnswer(getQuizId(), getQuestionId(), answer.text, multipleChoice,
                 nextQuestionSectionId, callback);
     }
 

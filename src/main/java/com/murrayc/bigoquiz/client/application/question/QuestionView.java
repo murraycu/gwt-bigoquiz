@@ -5,7 +5,6 @@ import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
@@ -41,7 +40,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     @Nullable
     private QuizSections sections = null;
     private String nextQuestionSectionId = null;
-    private String choiceSelected = null;
+    private Question.Text choiceSelected = null;
     private boolean questionHasOnlyTwoAnswers = false;
 
     private final FlowPanel resultPanel;
@@ -249,28 +248,28 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         // Show the question title in the window title,
         // but only if it is not markup:
         // TODO: Show section title and sub-section title too/instead?
-        final String windowTitle = question.isHtml() ? question.getQuizTitle() :
-                messages.windowTitleQuestion(question.getQuizTitle(), question.getText());
+        final Question.Text questionText = question.getText();
+        final String windowTitle = questionText.isHtml ? question.getQuizTitle() :
+                messages.windowTitleQuestion(question.getQuizTitle(), questionText.text);
         Window.setTitle(windowTitle);
 
-        final String questionText = question.getText();
         final String link = question.getLink();
         boolean showMarkup = false, showAnchor = false, showLabel = false;
         if (StringUtils.isEmpty(link)) {
-            if (question.isHtml()) {
+            if (questionText.isHtml) {
                 //TODO: Use a modified SimpleHtmlSanitizer?
-                questionMarkup.setHTML(SafeHtmlUtils.fromTrustedString(questionText));
+                questionMarkup.setHTML(SafeHtmlUtils.fromTrustedString(questionText.text));
                 showMarkup = true;
             } else {
-                questionLabel.setText(questionText);
+                questionLabel.setText(questionText.text);
                 showLabel = true;
             }
         } else {
-            if (question.isHtml()) {
+            if (questionText.isHtml) {
                 //TODO: Use a modified SimpleHtmlSanitizer?
-                questionAnchor.setHTML(SafeHtmlUtils.fromTrustedString(questionText));
+                questionAnchor.setHTML(SafeHtmlUtils.fromTrustedString(questionText.text));
             } else {
-                questionAnchor.setText(questionText);
+                questionAnchor.setText(questionText.text);
             }
             questionAnchor.setHref(link);
             showAnchor = true;
@@ -326,7 +325,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
                     public void onKeyDown(final KeyDownEvent event) {
                         if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-                            submitAnswer(textBox.getText());
+                            submitAnswer(new Question.Text(textBox.getText(), false));
                         }
                     }
                 });
@@ -343,7 +342,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 submitButton.addClickHandler(new ClickHandler() {
                     @Override
                     public void onClick(final ClickEvent event) {
-                        submitAnswer(textBox.getText());
+                        submitAnswer(new Question.Text(textBox.getText(), false));
                     }
                 });
             }
@@ -359,13 +358,20 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         if (question.hasChoices()) {
             @NotNull final String GROUP_NAME = "choices";
 
-            final List<String> questions = question.getChoices();
+            final List<Question.Text> questions = question.getChoices();
             if (questions.size() <= 2) {
                 questionHasOnlyTwoAnswers = true;
             }
 
-            for (final String choice : questions) {
-                @NotNull final RadioButton radioButton = new RadioButton(GROUP_NAME, choice);
+            for (final Question.Text choice : questions) {
+                RadioButton radioButton = null;
+                if (choice.isHtml) {
+                    // TOOD: Use modified SimpleHtmlSanitizer
+                    radioButton = new RadioButton(GROUP_NAME, SafeHtmlUtils.fromTrustedString(choice.text));
+                } else {
+                    radioButton = new RadioButton(GROUP_NAME, choice.text);
+                }
+
                 //TODO: Disable the handlers when rebuilding the widgets?
                 radioButton.addStyleName("question-radio-button");
                 radioButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
@@ -385,7 +391,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     }
 
     @Override
-    public String getChoiceSelected() {
+    public Question.Text getChoiceSelected() {
         return choiceSelected;
     }
 
@@ -406,7 +412,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     }
 
     @Override
-    public void showAnswer(final String correctAnswer) {
+    public void showAnswer(final Question.Text correctAnswer) {
         if (multipleChoice) {
             showCorrectAnswerInChoices(correctAnswer);
         } else {
@@ -426,7 +432,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         setErrorLabelVisible(true);
     }
 
-    private void submitAnswer(final String answer) {
+    private void submitAnswer(final Question.Text answer) {
         choiceSelected = answer;
         getUiHandlers().onSubmitAnswer();
     }
@@ -524,11 +530,16 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         }
     }
 
-    private void showCorrectAnswerInChoices(final String correctAnswer) {
+    private void showCorrectAnswerInChoices(final Question.Text correctAnswer) {
+        if (correctAnswer == null) {
+            Log.error("showCorrectAnswerInChoices: correctAnswer is null.");
+            return;
+        }
+
         for (final Widget widget : choicesPanel) {
             if (widget instanceof RadioButton) {
                 @NotNull final RadioButton radioButton = (RadioButton) widget;
-                if (StringUtils.equals(radioButton.getText(), correctAnswer)) {
+                if (StringUtils.equals(radioButton.getText(), correctAnswer.text)) {
                     radioButton.addStyleName("question-radio-button-correct");
                     return;
                 }
@@ -536,21 +547,26 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         }
     }
 
-    private void showCorrectAnswerWithoutChoices(final String correctAnswer) {
+    private void showCorrectAnswerWithoutChoices(final Question.Text correctAnswer) {
         if (textBox == null) {
             Log.error("showCorrectAnswerWithoutChoices(): textBox is null.");
             return;
         }
 
-        textBox.setText(correctAnswer);
+        if (correctAnswer == null) {
+            Log.error("showCorrectAnswerInChoices: correctAnswer is null.");
+            return;
+        }
+
+        textBox.setText(correctAnswer.text);
         textBox.addStyleName("question-radio-button-correct");
     }
 
-    private void showWrongAnswerInChoices(final String wrongAnswer) {
+    private void showWrongAnswerInChoices(final Question.Text wrongAnswer) {
         for (final Widget widget : choicesPanel) {
             if (widget instanceof RadioButton) {
                 @NotNull final RadioButton radioButton = (RadioButton) widget;
-                if (StringUtils.equals(radioButton.getText(), wrongAnswer)) {
+                if (StringUtils.equals(radioButton.getText(), wrongAnswer.text)) {
                     radioButton.addStyleName("question-radio-button-wrong");
                 } else {
                     radioButton.removeStyleName("question-radio-button-wrong");

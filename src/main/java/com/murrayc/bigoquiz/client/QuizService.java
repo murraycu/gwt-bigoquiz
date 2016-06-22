@@ -71,13 +71,13 @@ public interface QuizService extends RemoteService {
 
     class SubmissionResult implements IsSerializable {
         private boolean result = false;
-        private String correctAnswer = null; //If result is false.
+        private Question.Text correctAnswer = null; //If result is false.
         private Question nextQuestion = null;
 
         public SubmissionResult() {
         }
 
-        public SubmissionResult(final boolean result, final String correctAnswer, final Question nextQuestion) {
+        public SubmissionResult(final boolean result, final Question.Text correctAnswer, final Question nextQuestion) {
             this.result = result;
             this.correctAnswer = correctAnswer;
             this.nextQuestion = nextQuestion;
@@ -87,7 +87,7 @@ public interface QuizService extends RemoteService {
             return result;
         }
 
-        public String getCorrectAnswer() {
+        public Question.Text getCorrectAnswer() {
             return correctAnswer;
         }
 

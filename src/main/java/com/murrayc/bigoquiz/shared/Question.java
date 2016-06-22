@@ -12,27 +12,39 @@ public class Question implements IsSerializable {
     private /* final */ String id;
     private /* final */ String sectionId;
     private /* final */ String subSectionId;
-    private /* final */ String text; //The actual question text.
+    private /* final */ Question.Text text; //The actual question text.
     private /* final */ String link; //An informative URL.
-    private /* final */ List<String> choices; //Possible answers, only one of which is correct.
+    private /* final */ List<Text> choices; //Possible answers, only one of which is correct.
 
     private /* final */ String quizTitle;
     private /* final */ String subSectionTitle;
 
-    private /* final */ boolean isHtml; //Whether the answer is mathml markup instead of plain text.
+    public static class Text implements IsSerializable {
+        Text() {
+            this.text = null;
+            this.isHtml = false;
+        }
+
+        public Text(final String text, boolean isHtml) {
+            this.text = text;
+            this.isHtml = isHtml;
+        }
+
+        public /* final */ String text;
+        public /* final */ boolean isHtml;
+    }
 
     public Question() {
     }
 
-    public Question(final String id, final String sectionId, final String subSectionId, final String text,
-                    boolean isHtml, final String link, final List<String> choices) {
+    public Question(final String id, final String sectionId, final String subSectionId, final Question.Text text,
+                    final String link, final List<Question.Text> choices) {
         this.id = id;
         this.sectionId = sectionId;
         this.subSectionId = subSectionId;
         this.text = text;
         this.link = link;
         this.choices = choices;
-        this.isHtml = isHtml;
     }
 
     public String getId() {
@@ -47,19 +59,15 @@ public class Question implements IsSerializable {
         return subSectionId;
     }
 
-    public String getText() {
+    public Question.Text getText() {
         return text;
-    }
-
-    public boolean isHtml() {
-        return isHtml;
     }
 
     public String getLink() {
         return link;
     }
 
-    public List<String> getChoices() {
+    public List<Text> getChoices() {
         return choices;
     }
 
@@ -67,7 +75,7 @@ public class Question implements IsSerializable {
         return (choices != null) && !choices.isEmpty();
     }
 
-    public void setChoices(final List<String> choices) {
+    public void setChoices(final List<Text> choices) {
         this.choices = choices;
     }
 

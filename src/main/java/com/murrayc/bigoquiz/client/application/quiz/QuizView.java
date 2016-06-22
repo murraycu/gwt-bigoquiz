@@ -190,22 +190,21 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         paraQuestion.add(labelQuestionTitle);
 
         final String link = question.getLink();
-        final boolean questionIsHtml = question.isHtml();
-        final String questionText = question.getText();
+        final Question.Text questionText = question.getText();
         Widget labelQuestion = null;
         if (StringUtils.isEmpty(link)) {
-            if (questionIsHtml) {
+            if (questionText.isHtml) {
                 //TODO: Use a modified SimpleHtmlSanitizer?
-                labelQuestion = new InlineHTML(SafeHtmlUtils.fromTrustedString(questionText));
+                labelQuestion = new InlineHTML(SafeHtmlUtils.fromTrustedString(questionText.text));
             } else {
-                labelQuestion = new InlineLabel(questionText);
+                labelQuestion = new InlineLabel(questionText.text);
             }
         } else {
-            if (questionIsHtml) {
+            if (questionText.isHtml) {
                 //TODO: Use a modified SimpleHtmlSanitizer?
-                labelQuestion = new Anchor(SafeHtmlUtils.fromTrustedString(questionText), link);
+                labelQuestion = new Anchor(SafeHtmlUtils.fromTrustedString(questionText.text), link);
             } else {
-                labelQuestion = new Anchor(questionText, link);
+                labelQuestion = new Anchor(questionText.text, link);
             }
         }
         labelQuestion.addStyleName("quiz-question");
@@ -213,8 +212,7 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
 
         final Panel paraAnswer = Utils.addParagraph(panelQuestionAnswer, "");
 
-        final boolean answerIsHtml = questionAndAnswer.getAnswerIsHtml();
-        final String answerText = questionAndAnswer.getAnswer();
+        final Question.Text answerText = questionAndAnswer.getAnswer();
         if (answerText == null) {
             Log.error("QuizListView: answerText is null.");
             return;
@@ -225,10 +223,10 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         paraAnswer.add(labelAnswerTitle);
 
         Widget labelAnswer = null;
-        if (answerIsHtml) {
-            labelAnswer = new InlineHTML(SafeHtmlUtils.fromString(answerText));
+        if (answerText.isHtml) {
+            labelAnswer = new InlineHTML(SafeHtmlUtils.fromTrustedString(answerText.text));
         } else {
-            labelAnswer = new InlineLabel(answerText);
+            labelAnswer = new InlineLabel(answerText.text);
         }
         labelAnswer.addStyleName("quiz-answer");
         paraAnswer.add(labelAnswer);

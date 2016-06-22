@@ -159,12 +159,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
             throw new IllegalArgumentException("Unknown QuestionAndAnswer ID");
         }
 
-        final String correctAnswer = questionAndAnswer.getAnswer();
+        final Question.Text correctAnswer = questionAndAnswer.getAnswer();
         if (correctAnswer == null) {
             throw new RuntimeException("submitAnswer(): correctAnswer was null.");
         }
 
-        final boolean result = QuizUtils.answerIsCorrect(answer, correctAnswer, exact);
+        final boolean result = QuizUtils.answerIsCorrect(answer, correctAnswer.text, exact);
 
         return storeAnswerCorrectnessAndGetSubmissionResult(quizId, questionId, nextQuestionSectionId, questionAndAnswer, result);
     }
@@ -489,7 +489,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         @NotNull final Quiz quiz = getQuiz(quizId);
 
         //We only provide the correct answer if the supplied answer was wrong:
-        @Nullable String correctAnswer = null;
+        @Nullable Question.Text correctAnswer = null;
         if (!result) {
             correctAnswer = quiz.getAnswer(questionId);
         }
@@ -511,7 +511,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         @NotNull final Quiz quiz = getQuiz(quizId);
 
         //We only provide the correct answer if the supplied answer was wrong:
-        @Nullable String correctAnswer = null;
+        @Nullable Question.Text correctAnswer = null;
         if (!result) {
             correctAnswer = quiz.getAnswer(questionId);
         }

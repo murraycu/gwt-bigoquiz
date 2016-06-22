@@ -33,7 +33,7 @@ public class UserQuestionHistory implements IsSerializable {
 
     //TODO: Internationalization.
     @Ignore
-    private String questionTitle;
+    private Question.Text questionTitle;
 
     private boolean answeredCorrectlyOnce;
 
@@ -80,11 +80,11 @@ public class UserQuestionHistory implements IsSerializable {
     }
     */
 
-    public String getQuestionTitle() {
+    public Question.Text getQuestionTitle() {
         return questionTitle;
     }
 
-    public void setQuestionTitle(final String questionTitle) {
+    public void setQuestionTitle(final Question.Text questionTitle) {
         this.questionTitle = questionTitle;
     }
 

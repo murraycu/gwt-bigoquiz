@@ -146,7 +146,7 @@ public class Quiz implements IsSerializable {
     }
 
     @Nullable
-    public String getAnswer(final String questionId) {
+    public Question.Text getAnswer(final String questionId) {
         @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(questionId);
         if (questionAndAnswer != null) {
             return questionAndAnswer.getAnswer();
@@ -155,7 +155,7 @@ public class Quiz implements IsSerializable {
         return null;
     }
 
-    public void addSection(final String sectionId, final String sectionTitle, final List<String> defaultChoices) {
+    public void addSection(final String sectionId, final String sectionTitle, final List<Question.Text> defaultChoices) {
         if (quizSections.containsSection(sectionId)) {
             Log.error("Quiz.addSection(): section already exists. Replacing. sectionId: " + sectionId);
         }

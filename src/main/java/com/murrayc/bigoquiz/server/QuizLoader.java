@@ -49,12 +49,12 @@ public class QuizLoader {
 
     private static void setQuestionsChoicesFromAnswers(final List<QuestionAndAnswer> questions) {
         //Use a set to avoid duplicates:
-        final Set<String> choicesSet = new HashSet<>();
+        final Set<Question.Text> choicesSet = new HashSet<>();
         for (final QuestionAndAnswer question : questions) {
             choicesSet.add(question.getAnswer());
         }
 
-        final List<String> choices = new ArrayList<>(choicesSet);
+        final List<Question.Text> choices = new ArrayList<>(choicesSet);
         final boolean too_many_choices = choices.size() > MAX_CHOICES_FROM_ANSWERS;
 
         for (final QuestionAndAnswer questionAndAnswer : questions) {
@@ -64,7 +64,7 @@ public class QuizLoader {
                 question.setChoices(choices);
             } else {
                 //Reduce the list:
-                final List<String> less_choices = reduce_choices(choices, questionAndAnswer.getAnswer());
+                final List<Question.Text> less_choices = reduce_choices(choices, questionAndAnswer.getAnswer());
                 question.setChoices(less_choices);
             }
         }
@@ -151,7 +151,7 @@ public class QuizLoader {
         }
 
         //Default choices:
-        @Nullable List<String> defaultChoices = null;
+        @Nullable List<Question.Text> defaultChoices = null;
         @Nullable final Element elementChoices = getElementByName(sectionElement, NODE_DEFAULT_CHOICES);
         if (elementChoices != null) {
             defaultChoices = loadChoices(elementChoices);
@@ -217,7 +217,8 @@ public class QuizLoader {
         return sectionTitle;
     }
 
-    private static int addChildQuestions(@NotNull final Quiz quiz, final String sectionId, final String subSectionId, final List<String> defaultChoices, @NotNull final Element parentElement, boolean reverse, boolean useAnswersAsChoices) throws QuizLoaderException {
+    private static int addChildQuestions(@NotNull final Quiz quiz, final String sectionId, final String subSectionId,
+                                         final List<Question.Text> defaultChoices, @NotNull final Element parentElement, boolean reverse, boolean useAnswersAsChoices) throws QuizLoaderException {
         int result = 0;
 
         // We only use this if using answers as choices.
@@ -253,7 +254,9 @@ public class QuizLoader {
         return result;
     }
 
-    private static QuestionAndAnswer loadQuestionNode(@NotNull final Element element, final String sectionID, final String subSectionId, final List<String> defaultChoices, boolean reverse) throws QuizLoaderException {
+    private static QuestionAndAnswer loadQuestionNode(@NotNull final Element element, final String sectionID,
+                                                      final String subSectionId, final List<Question.Text> defaultChoices,
+                                                      boolean reverse) throws QuizLoaderException {
         String id = element.getAttribute(ATTR_ID);
         if (StringUtils.isEmpty(id)) {
             throw new QuizLoaderException("loadQuestionNode(): Missing ID.");
@@ -288,7 +291,7 @@ public class QuizLoader {
             throw new QuizLoaderException("loadQuestionNode(): Missing answer content.");
         }
 
-        @Nullable List<String> choices = null;
+        @Nullable List<Question.Text> choices = null;
         @Nullable final Element elementChoices = getElementByName(element, NODE_CHOICES);
         if (elementChoices != null) {
             choices = loadChoices(elementChoices);
@@ -315,7 +318,8 @@ public class QuizLoader {
             id = "reverse-" + questionText; //Otherwise the id in the URL will show the answer.
         }
 
-        return new QuestionAndAnswer(id, sectionID, subSectionId, questionText, questionTextIsHtml, questionLink, answerText, answerTextIsHtml, choices);
+        return new QuestionAndAnswer(id, sectionID, subSectionId, new Question.Text(questionText, questionTextIsHtml),
+                questionLink, new Question.Text(answerText, answerTextIsHtml), choices);
     }
 
     private static <T> void swap(T a, T b) {
@@ -323,8 +327,8 @@ public class QuizLoader {
     }
 
     @NotNull
-    private static List<String> loadChoices(@NotNull final Element elementChoices) {
-        @NotNull List<String> choices = new ArrayList<>();
+    private static List<Question.Text> loadChoices(@NotNull final Element elementChoices) {
+        @NotNull List<Question.Text> choices = new ArrayList<>();
 
         @NotNull final List<Node> listChoices = getChildrenByTagName(elementChoices, NODE_CHOICE);
         for (final Node choiceNode : listChoices) {
@@ -333,9 +337,10 @@ public class QuizLoader {
             }
 
             @NotNull final Element elementChoice = (Element) choiceNode;
+            boolean choiceIsHtml = getAttributeAsBoolean(elementChoice, ATTR_IS_HTML);
             final String choice = elementChoice.getTextContent();
             if (!StringUtils.isEmpty(choice)) {
-                choices.add(choice);
+                choices.add(new Question.Text(choice, choiceIsHtml));
             }
         }
 
@@ -382,9 +387,9 @@ public class QuizLoader {
         return result;
     }
 
-    private static List<String> reduce_choices(final List<String> choices, final String answer) {
+    private static List<Question.Text> reduce_choices(final List<Question.Text> choices, final Question.Text answer) {
         //TODO: The shuffling is inefficient.
-        List<String> result = new ArrayList<>(choices);
+        List<Question.Text> result = new ArrayList<>(choices);
         Collections.shuffle(result);
         final int answerIndex = result.indexOf(answer);
         if (answerIndex == -1) {

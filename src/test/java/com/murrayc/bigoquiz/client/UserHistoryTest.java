@@ -70,6 +70,7 @@ public class UserHistoryTest {
 
     @Nullable
     private Question createQuestion(final String questionId, final String sectionId, final String subSectionId) {
-        return new Question(questionId, sectionId, subSectionId, "question text", false, "someurl", null);
+        return new Question(questionId, sectionId, subSectionId,
+                new Question.Text("question text", false), "someurl", null);
     }
 }
