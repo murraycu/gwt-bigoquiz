@@ -88,7 +88,6 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
     @Override
     public void onQuestionContextChanged(@NotNull final QuestionContextEvent event) {
         final String quizId = event.getQuizId();
-        Log.fatal("debug: onQuestionContextChanged(): quizId=" + quizId);
         final String nextQuestionSectionId = event.getNextQuestionSectionId();
         final boolean multipleChoice = event.getMultipleChoice();
         final boolean quizChanged = !StringUtils.equals(this.quizId, quizId);
