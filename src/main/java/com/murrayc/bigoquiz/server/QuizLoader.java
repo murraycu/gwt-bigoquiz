@@ -31,6 +31,7 @@ public class QuizLoader {
 
     private static final String NODE_QUESTION = "question";
     private static final String ATTR_ID = "id";
+    private static final String ATTR_IS_HTML = "is_html";
     private static final String NODE_TITLE = "title";
     private static final String NODE_LINK = "link";
     private static final String NODE_TEXT = "text";
@@ -268,6 +269,7 @@ public class QuizLoader {
             throw new QuizLoaderException("loadQuestionNode(): Missing answer.");
         }
 
+        boolean questionTextIsHtml = getAttributeAsBoolean(textElement, ATTR_IS_HTML);
         String questionText = textElement.getTextContent();
         if (questionText == null) {
             throw new QuizLoaderException("loadQuestionNode(): Missing text content.");
@@ -280,6 +282,7 @@ public class QuizLoader {
             questionLink = linkElement.getTextContent();
         }
 
+        boolean answerTextIsHtml = getAttributeAsBoolean(answerElement, ATTR_IS_HTML);
         String answerText = answerElement.getTextContent();
         if (answerText == null) {
             throw new QuizLoaderException("loadQuestionNode(): Missing answer content.");
@@ -304,10 +307,15 @@ public class QuizLoader {
             final String temp = questionText;
             questionText = answerText;
             answerText = temp;
+
+            final boolean tempIsHtml = questionTextIsHtml;
+            questionTextIsHtml = answerTextIsHtml;
+            answerTextIsHtml = questionTextIsHtml;
+
             id = "reverse-" + questionText; //Otherwise the id in the URL will show the answer.
         }
 
-        return new QuestionAndAnswer(id, sectionID, subSectionId, questionText, questionLink, answerText, choices);
+        return new QuestionAndAnswer(id, sectionID, subSectionId, questionText, questionTextIsHtml, questionLink, answerText, answerTextIsHtml, choices);
     }
 
     private static <T> void swap(T a, T b) {

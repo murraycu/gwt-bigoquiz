@@ -19,16 +19,20 @@ public class Question implements IsSerializable {
     private /* final */ String quizTitle;
     private /* final */ String subSectionTitle;
 
+    private /* final */ boolean isHtml; //Whether the answer is mathml markup instead of plain text.
+
     public Question() {
     }
 
-    public Question(final String id, final String sectionId, final String subSectionId, final String text, final String link, final List<String> choices) {
+    public Question(final String id, final String sectionId, final String subSectionId, final String text,
+                    boolean isHtml, final String link, final List<String> choices) {
         this.id = id;
         this.sectionId = sectionId;
         this.subSectionId = subSectionId;
         this.text = text;
         this.link = link;
         this.choices = choices;
+        this.isHtml = isHtml;
     }
 
     public String getId() {
@@ -45,6 +49,10 @@ public class Question implements IsSerializable {
 
     public String getText() {
         return text;
+    }
+
+    public boolean isHtml() {
+        return isHtml;
     }
 
     public String getLink() {

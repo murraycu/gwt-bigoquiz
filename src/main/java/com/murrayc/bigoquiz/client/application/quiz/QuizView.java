@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.client.application.quiz;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
@@ -189,20 +190,33 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         paraQuestion.add(labelQuestionTitle);
 
         final String link = question.getLink();
+        final boolean questionIsHtml = question.isHtml();
+        final String questionText = question.getText();
         Widget labelQuestion = null;
         if (StringUtils.isEmpty(link)) {
-            labelQuestion = new InlineLabel(question.getText());
+            if (questionIsHtml) {
+                //TODO: Use a modified SimpleHtmlSanitizer?
+                labelQuestion = new InlineHTML(SafeHtmlUtils.fromTrustedString(questionText));
+            } else {
+                labelQuestion = new InlineLabel(questionText);
+            }
         } else {
-            labelQuestion = new Anchor(question.getText(), link);
+            if (questionIsHtml) {
+                //TODO: Use a modified SimpleHtmlSanitizer?
+                labelQuestion = new Anchor(SafeHtmlUtils.fromTrustedString(questionText), link);
+            } else {
+                labelQuestion = new Anchor(questionText, link);
+            }
         }
         labelQuestion.addStyleName("quiz-question");
         paraQuestion.add(labelQuestion);
 
         final Panel paraAnswer = Utils.addParagraph(panelQuestionAnswer, "");
 
-        final String answer = questionAndAnswer.getAnswer();
-        if (answer == null) {
-            Log.error("QuizListView: answer is null.");
+        final boolean answerIsHtml = questionAndAnswer.getAnswerIsHtml();
+        final String answerText = questionAndAnswer.getAnswer();
+        if (answerText == null) {
+            Log.error("QuizListView: answerText is null.");
             return;
         }
 
@@ -210,7 +224,12 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         labelAnswerTitle.addStyleName("quiz-answer-title");
         paraAnswer.add(labelAnswerTitle);
 
-        final Label labelAnswer = new InlineLabel(answer);
+        Widget labelAnswer = null;
+        if (answerIsHtml) {
+            labelAnswer = new InlineHTML(SafeHtmlUtils.fromString(answerText));
+        } else {
+            labelAnswer = new InlineLabel(answerText);
+        }
         labelAnswer.addStyleName("quiz-answer");
         paraAnswer.add(labelAnswer);
     }

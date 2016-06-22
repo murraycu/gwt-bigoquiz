@@ -12,11 +12,14 @@ public class QuestionAndAnswer implements IsSerializable {
 
     private /* final */ Question question;
     private /* final */ String answer;
+    private /* final */ boolean answerIsHtml;
 
-
-    public QuestionAndAnswer(final String questionId, final String sectionId, final String subSectionId, final String questionText, final String questionLink, final String answerText, final List<String> choices) {
-        this.question = new Question(questionId, sectionId, subSectionId, questionText, questionLink, choices);
+    public QuestionAndAnswer(final String questionId, final String sectionId, final String subSectionId,
+                             final String questionText, boolean questionTextIsHtml, final String questionLink, final String answerText,
+                             boolean answerTextIsHtml, final List<String> choices) {
+        this.question = new Question(questionId, sectionId, subSectionId, questionText, questionTextIsHtml, questionLink, choices);
         this.answer = answerText;
+        this.answerIsHtml = answerTextIsHtml;
     }
 
     public QuestionAndAnswer() {
@@ -32,5 +35,9 @@ public class QuestionAndAnswer implements IsSerializable {
 
     public String getAnswer() {
         return answer;
+    }
+
+    public boolean getAnswerIsHtml() {
+        return answerIsHtml;
     }
 }

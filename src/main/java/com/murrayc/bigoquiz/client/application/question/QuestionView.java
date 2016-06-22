@@ -5,6 +5,8 @@ import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
@@ -47,8 +49,11 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private @NotNull final Hyperlink hyperlinkMultipleChoice = new InlineHyperlink();
     private final Label sectionTitle = new InlineLabel();
     private final Anchor subSectionTitle = new Anchor();
+
     private final Label questionLabel = new InlineLabel();
     private final Anchor questionAnchor = new Anchor();
+    private final HTML questionMarkup = new InlineHTML();
+
     private final Panel choicesPanel = new FlowPanel();
 
     private final Button showAnswerButton = new Button(constants.showAnswerButton());
@@ -112,6 +117,8 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         //We only show one of these (label or anchor) at a time:
         final Panel p = Utils.addParagraphWithChild(mainPanel, questionLabel);
         questionLabel.addStyleName("question-label");
+        p.add(questionMarkup);
+        questionMarkup.addStyleName("question-label");
         p.add(questionAnchor);
         questionAnchor.addStyleName("question-anchor");
 
@@ -221,6 +228,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             Window.setTitle(messages.windowTitleQuestion("", ""));
             setTitle("");
             questionLabel.setText("");
+            questionMarkup.setHTML("");
             questionAnchor.setText("");
             questionAnchor.setHref("");
             sectionTitle.setText("");
@@ -238,19 +246,39 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         setErrorLabelVisible(false);
 
-        Window.setTitle(messages.windowTitleQuestion(question.getQuizTitle(), question.getText()));
-        final String link = question.getLink();
-        if (StringUtils.isEmpty(link)) {
-            questionLabel.setText(question.getText());
-            questionLabel.setVisible(true);
-            questionAnchor.setVisible(false);
+        // Show the question title in the window title,
+        // but only if it is not markup:
+        // TODO: Show section title and sub-section title too/instead?
+        final String windowTitle = question.isHtml() ? question.getQuizTitle() :
+                messages.windowTitleQuestion(question.getQuizTitle(), question.getText());
+        Window.setTitle(windowTitle);
 
+        final String questionText = question.getText();
+        final String link = question.getLink();
+        boolean showMarkup = false, showAnchor = false, showLabel = false;
+        if (StringUtils.isEmpty(link)) {
+            if (question.isHtml()) {
+                //TODO: Use a modified SimpleHtmlSanitizer?
+                questionMarkup.setHTML(SafeHtmlUtils.fromTrustedString(questionText));
+                showMarkup = true;
+            } else {
+                questionLabel.setText(questionText);
+                showLabel = true;
+            }
         } else {
-            questionAnchor.setText(question.getText());
+            if (question.isHtml()) {
+                //TODO: Use a modified SimpleHtmlSanitizer?
+                questionAnchor.setHTML(SafeHtmlUtils.fromTrustedString(questionText));
+            } else {
+                questionAnchor.setText(questionText);
+            }
             questionAnchor.setHref(link);
-            questionAnchor.setVisible(true);
-            questionLabel.setVisible(false);
+            showAnchor = true;
         }
+
+        questionMarkup.setVisible(showMarkup);
+        questionLabel.setVisible(showLabel);
+        questionAnchor.setVisible(showAnchor);
 
         final String onOff = multipleChoice ? constants.offerMultipleChoiceOn() :
                 constants.offerMultipleChoiceOff();
