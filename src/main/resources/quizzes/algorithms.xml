@@ -295,4 +295,16 @@
             <answer>Compare and swap pairs until no more swaps are necessary.</answer>
         </question>
     </section>
+
+    <!-- Greedy Algorithms: Dijkstra's, Scheduling, Make change (canonical coins). Huffman Codes-->
+    <!--   Scheduling jobs: Length and weight. Completion Time.  Minimise W*C. So sort by -->
+    <!--   Sheduling to avoid conflicts: Choose earliest finish time first. -->
+
+    <!-- Divide and Conquer Algorithms: Quicksort, Mergesort, Hashing?, -->
+
+    <!-- Dynamic Programming Algorithms: Floyd Warshall, Make change (non-canonical coins), String Comparison -->
+
+    <!-- Proofs:
+    Kruskal's MST: Exchange Argument: Order edges in order of increasing cost. TODO-->
+
 </quiz>
