@@ -31,6 +31,7 @@ public class QuizLoader {
 
     private static final String NODE_QUESTION = "question";
     private static final String ATTR_ID = "id";
+    private static final String ATTR_USES_MATHML = "uses_mathml";
     private static final String ATTR_IS_HTML = "is_html";
     private static final String NODE_TITLE = "title";
     private static final String NODE_LINK = "link";
@@ -116,6 +117,9 @@ public class QuizLoader {
             throw new QuizLoaderException("No quiz title found.");
         }
         result.setTitle(quizTitle);
+
+        final boolean usesMathML = getAttributeAsBoolean(rootNode, ATTR_USES_MATHML);
+        result.setUsesMathML(usesMathML);
 
         //Sections:
         @NotNull final List<Node> listSectionNodes = getChildrenByTagName(rootNode, NODE_SECTION);
@@ -301,7 +305,7 @@ public class QuizLoader {
             choices = defaultChoices;
         }
 
-        if (choices != null && !choices.contains(answerText)) {
+        if (choices != null && !choices.contains(new Question.Text(answerText, false))) {
             throw new QuizLoaderException("QuizLoader.loadQuestionNode(): answer is not in the choices: questionId: " + id);
         }
 

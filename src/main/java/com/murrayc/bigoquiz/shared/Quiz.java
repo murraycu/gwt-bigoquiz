@@ -44,6 +44,9 @@ public class Quiz implements IsSerializable {
 
     private /* final */ QuizSections quizSections = new QuizSections();
 
+    // Whether we need extra code to support MathML, such as MathJax.
+    private /* final */ boolean usesMathML;
+
     //TODO: This is useless on the client:
     //An extra list, used only for getting a random question,
     //regardless of what section it is in.
@@ -70,6 +73,14 @@ public class Quiz implements IsSerializable {
 
     public String getTitle() {
         return details.title;
+    }
+
+    public void setUsesMathML(boolean usesMathML) {
+        this.usesMathML = usesMathML;
+    }
+
+    public boolean getUsesMathML() {
+        return usesMathML;
     }
 
     public QuizDetails getDetails() {

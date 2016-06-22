@@ -352,6 +352,12 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         updateResultPanelUi(State.WAITING_FOR_ANSWER);
         resultLabel.setText("");
+
+        if (question.getQuizUsesMathML()) {
+            // Manually ask MathJax to render any MathML,
+            // now that we have put some MathML on the page.
+            useAndReloadMathJax();
+        }
     }
 
     private void buildChoices(@Nullable Question question) {

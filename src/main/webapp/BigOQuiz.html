@@ -43,6 +43,19 @@
         ga('send', 'pageview');
 
     </script>
+
+    <!-- Use MathJax, because Chrome doesn't have native MathML support.
+      -- TODO: Inject this from GWT only when needed. -->
+    <script type="text/javascript" async
+            src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_CHTML">
+    </script>
+
+    <!-- Refresh MathJax syntax -->
+    <script type="text/javascript">
+        function reloadMathJax() {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+    </script>
 </head>
 
 

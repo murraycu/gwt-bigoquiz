@@ -109,7 +109,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         if (result != null) {
-            setQuestionExtraTitles(result, quiz);
+            setQuestionExtras(result, quiz);
         }
 
         return result;
@@ -138,7 +138,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         if (result != null) {
-            setQuestionExtraTitles(result, quiz);
+            setQuestionExtras(result, quiz);
         }
 
         return result;
@@ -517,7 +517,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         @Nullable final Question nextQuestion = getNextQuestionFromUserStatsForSection(nextQuestionSectionId, quiz, userStats);
-        setQuestionExtraTitles(nextQuestion, quiz);
+        setQuestionExtras(nextQuestion, quiz);
         return new SubmissionResult(result, correctAnswer, nextQuestion);
     }
 
@@ -709,13 +709,15 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return questionBestSoFar;
     }
 
-    private void setQuestionExtraTitles(Question questionBestSoFar, @NotNull Quiz quiz) {
+    private void setQuestionExtras(final Question question, @NotNull Quiz quiz) {
         String subSectionTitle = null;
         @NotNull final QuizSections sections = quiz.getSections();
         if (sections != null) {
-            subSectionTitle = sections.getSubSectionTitle(questionBestSoFar.getSectionId(),
-                    questionBestSoFar.getSubSectionId());
+            subSectionTitle = sections.getSubSectionTitle(question.getSectionId(),
+                    question.getSubSectionId());
         }
-        questionBestSoFar.setTitles(quiz.getTitle(), subSectionTitle, questionBestSoFar);
+        question.setTitles(quiz.getTitle(), subSectionTitle, question);
+
+        question.setQuizUsesMathML(quiz.getUsesMathML());
     }
 }

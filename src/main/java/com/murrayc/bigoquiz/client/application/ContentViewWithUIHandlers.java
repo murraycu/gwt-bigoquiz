@@ -32,6 +32,8 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
     private final Label labelLoading = Utils.createServerLoadingLabel(constants);
     private final Label labelError = Utils.createServerErrorLabel(constants);
 
+    private boolean hasMathMLSupport = false;
+
     public ContentViewWithUIHandlers() {
         parentPanel.addStyleName("parent-content-panel");
         mainPanel.addStyleName("content-panel");
@@ -85,4 +87,46 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
         setErrorLabel(constants.errorUnknownQuiz());
         setErrorLabelVisible(true);
     }
+
+    public void useAndReloadMathJax() {
+        reloadMathJax();
+
+        /* TODO: Make this work, instead of loading MathJax JS in every page, even when we don't use it.
+         *  This error currently appears in the browser console:
+         * SEVERE: (ReferenceError) : MathJax is not definedcom.google.gwt.core.client.JavaScriptException: (ReferenceError) : MathJax is not defined
+         */
+        /*
+        if (!hasMathMLSupport) {
+            ScriptInjector.fromUrl("https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML").
+                    setWindow(ScriptInjector.TOP_WINDOW).
+                    setCallback(
+                        new Callback<Void, Exception>() {
+                            @Override
+                            public void onFailure(final Exception reason) {
+                                Log.fatal("Script load failed.");
+                            }
+
+                            @Override
+                            public void onSuccess(final Void result) {
+                                final String scriptBody =
+                                        "function reloadMathJax() {\n" +
+                                                "    MathJax.Hub.Queue([\"Typeset\", MathJax.Hub]);\n" +
+                                                " }";
+                                ScriptInjector.fromString(scriptBody).inject();
+
+                                reloadMathJax();
+
+                                hasMathMLSupport = true;
+                            }
+                        }).inject();
+        } else {
+            reloadMathJax();
+        }
+        */
+    }
+
+    public static final native void reloadMathJax()/*-{
+        $wnd.reloadMathJax();
+        //$wnd.MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }-*/;
 }

@@ -86,6 +86,12 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
 
         //Add questions that are not in a section:
         addSection(panelQuiz, constants, quiz, quizSections, null, null);
+
+        if (quiz.getUsesMathML()) {
+            // Manually ask MathJax to render any MathML,
+            // now that we have put some MathML on the page.
+            useAndReloadMathJax();
+        }
     }
 
     private static void addSection(@NotNull final Panel panelQuiz, final BigOQuizConstants constants, @NotNull final Quiz quiz, QuizSections quizSections, final String sectionId, final String sectionTitle) {

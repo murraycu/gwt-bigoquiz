@@ -19,6 +19,8 @@ public class Question implements IsSerializable {
     private /* final */ String quizTitle;
     private /* final */ String subSectionTitle;
 
+    private /* final */ boolean quizUsesMathML;
+
     public static class Text implements IsSerializable {
         Text() {
             this.text = null;
@@ -89,7 +91,12 @@ public class Question implements IsSerializable {
         this.quizTitle = quizTitle;
         this.subSectionTitle = subSectionTitle;
         this.text = question.getText(); //TODO: This is not useful.
+    }
 
+    /** This is just to save users of Question the bother of having to get it from the Quiz class.
+     */
+    public void setQuizUsesMathML(boolean quizUsesMathML) {
+        this.quizUsesMathML = quizUsesMathML;
     }
 
     public String getQuizTitle() {
@@ -98,5 +105,9 @@ public class Question implements IsSerializable {
 
     public String getSubSectionTitle() {
         return subSectionTitle;
+    }
+
+    public boolean getQuizUsesMathML() {
+        return quizUsesMathML;
     }
 }
