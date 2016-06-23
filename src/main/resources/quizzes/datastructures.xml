@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="datastructures">
+    <title>Algorithms</title>
+    <section id="datastructures-advantages" answers_as_choices="true">
+        <title>Advantages of Data Structures</title>
+
+        <question id="datastructures-advantages-quicksort">
+            <text>Quicksort</text>
+            <link>https://en.wikipedia.org/wiki/Quicksort</link>
+            <answer>O(log(n)) space</answer>
+        </question>
+    </section>
+
+    <!-- Definitions
+    Bloom filter.
+    Union-Find.
+    Adjacency List
+    Adjacency Matrix
+    Singly Linked List
+    Doubly Linked List
+    Hash Table
+    Trie (AKA PrefixTree)
+    Suffix Tree
+    Tree
+    Balanced Binary Tree (advantages of AVL, Red/Black, etc)
+    Skip List
+    Heap (AKA Priority Queue) (advantages of different implementations, including Fibonacci Heap)
+    Treap?
+    -->
+
+    <!-- Implementations:
+    Union-Find: Array. Others.
+    Hash Table: TODO
+    Trie: TODO (Array or node-based tree?)
+
+    -->
+
+    <!-- What data structure to use for problem:
+    Set membership, allowing some mistakes: Bloom filter.
+    Set membership, allowing fast testsing, membership changing ,and set unioning: Union-Find.
+    Sparse Graph: Adjacency List
+    Dense Graph: Adjacency Matrix
+
+    Singly Linked List
+    Doubly Linked List
+    Hash Table
+    Trie (AKA PrefixTree)
+    Suffix Tree
+    Tree
+    Balanced Binary Tree (advantages of AVL, Red/Black, etc)
+    Skip List
+    Heap (AKA Priority Queue) (advantages of different implementations, including Fibonacci Heap)
+    Treap?
+    -->
+
+    <!-- Operations on data structures:
+    Linked List: Find cycle: Slow and Fast stepping.
+    Union-Find: Join a group: Set to same parent.
+
+
+</quiz>
