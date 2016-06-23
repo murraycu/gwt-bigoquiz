@@ -13,35 +13,6 @@ import java.util.*;
 public class QuizSections implements IsSerializable {
     //TODO: Can this be non-public while still being serializable by GWT?
 
-    public static class HasIdAndTitle implements IsSerializable {
-        public HasIdAndTitle() {
-        }
-
-        public HasIdAndTitle(final String id, final String title) {
-            this.id = id;
-            this.title = title;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(final String id) {
-            this.id = id;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(final String title) {
-            this.title = title;
-        }
-
-        private String id;
-        private String title;
-    }
-
     /**
      * Created by murrayc on 1/30/16.
      */
@@ -191,31 +162,9 @@ public class QuizSections implements IsSerializable {
         //because the titles could (one day) be localized,
         //and the sorting would need to depend on the user's locale too.
         Collections.sort(result,
-                generateTitleSortComparator());
+                HasIdAndTitle.generateTitleSortComparator());
 
         return result;
-    }
-
-    @NotNull
-    public static Comparator<HasIdAndTitle> generateTitleSortComparator() {
-        return new Comparator<HasIdAndTitle>() {
-            @Override
-            public int compare(@Nullable final HasIdAndTitle o1, @Nullable final HasIdAndTitle o2) {
-                if ((o1 == null) && (o2 == null)) {
-                    return 0;
-                } else if (o1 == null) {
-                    return -1;
-                }
-
-                if ((o1.title == null) && (o2.title == null)) {
-                    return 0;
-                } else if (o1.title == null) {
-                    return -1;
-                }
-
-                return o1.title.compareTo(o2.title);
-            }
-        };
     }
 
     //TODO: This is only used on the client side:
@@ -240,7 +189,7 @@ public class QuizSections implements IsSerializable {
         //because the titles could (one day) be localized,
         //and the sorting would need to depend on the user's locale too.
         Collections.sort(result,
-                generateTitleSortComparator());
+                HasIdAndTitle.generateTitleSortComparator());
 
         return result;
     }

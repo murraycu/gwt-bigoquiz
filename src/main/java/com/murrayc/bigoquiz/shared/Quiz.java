@@ -15,7 +15,7 @@ public class Quiz implements IsSerializable {
      * without the full details of all the questions and answers,
      * so we can describe the quiz without providing the whole thing.
      */
-    public static class QuizDetails extends QuizSections.HasIdAndTitle
+    public static class QuizDetails extends HasIdAndTitle
             implements IsSerializable {
         public QuizDetails() {
         }
