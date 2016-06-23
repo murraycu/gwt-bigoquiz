@@ -160,14 +160,14 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
                 continue;
             }
 
-            final String sectionId = section.id;
+            final String sectionId = section.getId();
             if (StringUtils.isEmpty(sectionId)) {
                 continue;
             }
 
             @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForSection(quizId, sectionId, multipleChoice);
             final String historyToken = placeManager.buildHistoryToken(placeRequest);
-            @NotNull final Hyperlink titleLabel = new InlineHyperlink(section.title, historyToken);
+            @NotNull final Hyperlink titleLabel = new InlineHyperlink(section.getTitle(), historyToken);
             //titleLabel.addStyleName("user-history-section-title-label");
 
             Utils.addHeaderToPanel(3, detailsPanel, titleLabel);

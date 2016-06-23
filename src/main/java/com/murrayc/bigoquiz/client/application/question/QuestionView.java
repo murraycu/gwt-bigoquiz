@@ -306,7 +306,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         @Nullable final QuizSections.SubSection subSection = sections.getSubSection(sectionId, question.getSubSectionId());
         if (subSection != null) {
-            subSectionTitle.setText(subSection.title);
+            subSectionTitle.setText(subSection.getTitle());
             subSectionTitle.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
         } else {
             //Not all questions have to be in a sub-section:

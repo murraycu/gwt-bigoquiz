@@ -81,7 +81,7 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
                 continue;
             }
 
-            addSection(panelQuiz, constants, quiz, quizSections, section.id, section.title);
+            addSection(panelQuiz, constants, quiz, quizSections, section.getId(), section.getTitle());
         }
 
         //Add questions that are not in a section:
@@ -135,7 +135,7 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
                 continue;
             }
 
-            final String subSectionId = subSection.id;
+            final String subSectionId = subSection.getId();
             if (subSectionId == null) {
                 Log.fatal("QuizListView: subSectionId is null.");
                 continue;
@@ -163,7 +163,7 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
 
         if (subSection != null) {
             final Anchor subSectionTitle = new Anchor();
-            subSectionTitle.setText(subSection.title);
+            subSectionTitle.setText(subSection.getTitle());
             subSectionTitle.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
             Utils.addHeaderToPanel(4, panelSubSection, subSectionTitle);
         }

@@ -22,8 +22,24 @@ public class QuizSections implements IsSerializable {
             this.title = title;
         }
 
-        public String id;
-        public String title;
+        public String getId() {
+            return id;
+        }
+
+        public void setId(final String id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(final String title) {
+            this.title = title;
+        }
+
+        private String id;
+        private String title;
     }
 
     /**
@@ -38,13 +54,19 @@ public class QuizSections implements IsSerializable {
         public SubSection(final String id, final String title, final String link) {
             super(id, title);
 
-            this.title = title;
             this.link = link;
         }
     }
 
     //TODO: Can this be non-public while still being serializable by GWT?
     static public class Section extends HasIdAndTitle {
+        Section() {
+        }
+
+        Section(final String id, final String title) {
+            super(id, title);
+        }
+
         @NotNull
         public Map<String, SubSection> subSections = new HashMap<>();
         public List<Question.Text> defaultChoices;
@@ -56,9 +78,7 @@ public class QuizSections implements IsSerializable {
     private Map<String, Section> sections = new HashMap<>();
 
     public void addSection(final String sectionId, final String sectionTitle, final List<Question.Text> defaultChoices) {
-        @NotNull final Section section = new Section();
-        section.id = sectionId;
-        section.title = sectionTitle;
+        @NotNull final Section section = new Section(sectionId, sectionTitle);
         section.defaultChoices = defaultChoices;
         this.sections.put(sectionId, section);
     }
@@ -87,7 +107,7 @@ public class QuizSections implements IsSerializable {
             return null;
         }
 
-        return section.title;
+        return section.getTitle();
     }
 
     //TODO: Internationalization.
@@ -116,7 +136,7 @@ public class QuizSections implements IsSerializable {
             return null;
         }
 
-        return subSection.title;
+        return subSection.getTitle();
     }
 
     /** Get a (sorted) list of section titles.
@@ -127,7 +147,7 @@ public class QuizSections implements IsSerializable {
     public Collection<String> getTitles() {
         @NotNull final ArrayList<String> result = new ArrayList<>();
         for (@NotNull final Section section : sections.values()) {
-            result.add(section.title);
+            result.add(section.getTitle());
         }
 
         //Sort this instead of the order being arbitrary:
@@ -142,7 +162,7 @@ public class QuizSections implements IsSerializable {
         for (final String sectionId : sections.keySet()) {
             final Section section = sections.get(sectionId);
             if ((section != null) &&
-                    StringUtils.equals(section.title, title)) {
+                    StringUtils.equals(section.getTitle(), title)) {
                 return sectionId;
             }
         }
@@ -177,7 +197,7 @@ public class QuizSections implements IsSerializable {
     }
 
     @NotNull
-    private Comparator<HasIdAndTitle> generateTitleSortComparator() {
+    public static Comparator<HasIdAndTitle> generateTitleSortComparator() {
         return new Comparator<HasIdAndTitle>() {
             @Override
             public int compare(@Nullable final HasIdAndTitle o1, @Nullable final HasIdAndTitle o2) {

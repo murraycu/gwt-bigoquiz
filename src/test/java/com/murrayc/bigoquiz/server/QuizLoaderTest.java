@@ -42,7 +42,7 @@ public class QuizLoaderTest {
 
         @Nullable final QuizSections.SubSection subSection = sections.getSubSection("heap-operations", "fibonacci-heap");
         assertNotNull(subSection);
-        assertEquals(subSection.title, "Fibonacci Heap");
+        assertEquals(subSection.getTitle(), "Fibonacci Heap");
     }
 
     @Test

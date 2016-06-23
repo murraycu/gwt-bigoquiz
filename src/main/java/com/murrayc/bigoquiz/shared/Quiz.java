@@ -15,24 +15,13 @@ public class Quiz implements IsSerializable {
      * without the full details of all the questions and answers,
      * so we can describe the quiz without providing the whole thing.
      */
-    public static class QuizDetails implements IsSerializable {
-        private String id;
-        private String title;
-
+    public static class QuizDetails extends QuizSections.HasIdAndTitle
+            implements IsSerializable {
         public QuizDetails() {
         }
 
         public QuizDetails(final String id, final String title) {
-            this.id = id;
-            this.title = title;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public String getTitle() {
-            return title;
+            super(id, title);
         }
     }
 
@@ -59,20 +48,21 @@ public class Quiz implements IsSerializable {
     public Quiz() {
     }
 
-    public void setId(final String id) {
-        this.details.id = id;
-    }
 
     public String getId() {
-        return details.id;
+        return details.getId();
+    }
+
+    public void setId(final String id) {
+        details.setId(id);
     }
 
     public void setTitle(final String title) {
-        this.details.title = title;
+        this.details.setTitle(title);
     }
 
     public String getTitle() {
-        return details.title;
+        return details.getTitle();
     }
 
     public void setUsesMathML(boolean usesMathML) {
