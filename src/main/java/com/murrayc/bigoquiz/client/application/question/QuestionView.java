@@ -542,14 +542,28 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             return;
         }
 
+        RadioButton correctRadioButton = null;
         for (final Widget widget : choicesPanel) {
             if (widget instanceof RadioButton) {
                 @NotNull final RadioButton radioButton = (RadioButton) widget;
-                if (StringUtils.equals(radioButton.getText(), correctAnswer.text)) {
-                    radioButton.addStyleName("question-radio-button-correct");
-                    return;
+                if (!correctAnswer.isHtml) {
+                    if (StringUtils.equals(radioButton.getText(), correctAnswer.text)) {
+                        correctRadioButton = radioButton;
+                        break;
+                    }
+                } else {
+                    if (StringUtils.equals(radioButton.getHTML(), correctAnswer.text)) {
+                        correctRadioButton = radioButton;
+                        break;
+                    }
                 }
             }
+        }
+
+        if (correctRadioButton != null) {
+            correctRadioButton.addStyleName("question-radio-button-correct");
+        } else {
+            Log.fatal("showCorrectAnswerInChoices(): RadioButton not found.");
         }
     }
 
