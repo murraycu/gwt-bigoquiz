@@ -548,11 +548,11 @@ h4 * {
 }
 */
 
-.choices-panel span{
+.choices-panel .question-radio-button {
     margin-top: 1em;
 }
 
-.choices-panel span:first-child {
+.choices-panel .question-radio-button:first-child {
     margin-top: 0;
 }
 
