@@ -39,6 +39,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
             return null;
         }
 
+        //TODO: Cache this.
         final List<Quiz.QuizDetails> result = new ArrayList<>();
         for (final Quiz quiz : quizzes.values()) {
             if (quiz == null) {
@@ -47,6 +48,9 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
             result.add(quiz.getDetails());
         }
+
+        Collections.sort(result,
+                HasIdAndTitle.generateTitleSortComparator());
 
         return result;
     }
