@@ -102,12 +102,6 @@
             <answer>Arrange the vertices so no edges cross.</answer>
         </question>
 
-        <question id="definition-planarity-detection">
-            <text>Planarity Detection and Embedding</text>
-            <link>https://en.wikipedia.org/wiki/Planarity_testing</link>
-            <answer>Arrange the vertices so no edges cross.</answer>
-        </question>
-
     </section>
 
     <section id="hard-problems-definitions" answers_as_choices="true">
@@ -578,5 +572,8 @@
             <answer>Stack</answer>
         </question>
     </section>
+
+    <!-- Types of graph. This duplicates ideas from the algorithms needed to identify these graphs, but that is helpful.
+    Planar. Hypergraph. Connected -->
 
 </quiz>
