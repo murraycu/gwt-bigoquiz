@@ -46,8 +46,16 @@
 
     <!-- Use MathJax, because Chrome doesn't have native MathML support.
       -- TODO: Inject this from GWT only when needed. -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        "HTML-CSS": {
+          matchFontHeight: ["false"]
+          minScaleAdjust: [100]
+        }
+      });
+    </script>
     <script type="text/javascript" async
-            src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_CHTML">
+            src="https://cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=MML_CHTML">
     </script>
 
     <!-- Refresh MathJax syntax -->
