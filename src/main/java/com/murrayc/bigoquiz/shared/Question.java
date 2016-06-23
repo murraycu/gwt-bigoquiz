@@ -34,6 +34,26 @@ public class Question implements IsSerializable {
 
         public /* final */ String text;
         public /* final */ boolean isHtml;
+
+        // We override equals() and hashode() so we can use this class in a Set.
+        @Override
+        public boolean equals(final Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Text text1 = (Text) o;
+
+            if (isHtml != text1.isHtml) return false;
+            return text != null ? text.equals(text1.text) : text1.text == null;
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = text != null ? text.hashCode() : 0;
+            result = 31 * result + (isHtml ? 1 : 0);
+            return result;
+        }
     }
 
     public Question() {
