@@ -1310,12 +1310,12 @@
     <section id="p-np-etc" answers_as_choices="true">
         <title>P, NP, etc</title>
         <question id="p-no-etc-p">
-            <text>Definition: P</text>
+            <text>Definition: P (Polynomial)</text>
             <answer>Problems whose solutions can be found in polynomial time.</answer>
         </question>
 
         <question id="p-no-etc-np">
-            <text>Definition: NP</text>
+            <text>Definition: NP (Non-deterministic Polynomial)</text>
             <answer>Problems whose solutions can be verified in polynomial time.</answer>
         </question>
 
@@ -1332,6 +1332,31 @@
         <question id="p-no-etc-np-hard-not-complete">
             <text>Definition: NP-hard but not NP-complete</text>
             <answer>Problems that are NP-hard but not in NP.</answer>
+        </question>
+
+        <question id="p-no-etc-exp">
+            <text>Definition: EXP (Exponential)</text>
+            <answer>Problems whose solutions can be found in exponential time.</answer>
+        </question>
+
+        <question id="p-no-etc-exp-hard">
+            <text>Definition: EXP-Hard</text>
+            <answer>Problems at least as hard as any EXP problem.</answer>
+        </question>
+
+        <question id="p-no-etc-exp-complete">
+            <text>Definition: EXP-Complete</text>
+            <answer>Problems that are EXP-hard and in EXP.</answer>
+        </question>
+
+        <question id="p-no-etc-r">
+            <text>Definition: R (Recursive)</text>
+            <answer>Problems whose solutions can be found in finite time.</answer>
+        </question>
+
+        <question id="p-no-etc-space">
+            <text>Definition: PSPACE (Polynomial Space)</text>
+            <answer>Problems whose solutions can be found with polynomial space.</answer>
         </question>
     </section>
 </quiz>
