@@ -302,7 +302,8 @@
 
     <!-- Divide and Conquer Algorithms: Quicksort, Mergesort, Hashing?, -->
 
-    <!-- Dynamic Programming Algorithms: Floyd Warshall, Make change (non-canonical coins), String Comparison -->
+    <!-- Dynamic Programming Algorithms: Floyd Warshall, Make change (non-canonical coins), String Comparison.
+     Building an optimal binary search tree. -->
 
     <!-- Proofs:
     Kruskal's MST: Exchange Argument: Order edges in order of increasing cost. TODO-->

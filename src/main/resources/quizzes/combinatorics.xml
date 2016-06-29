@@ -55,4 +55,10 @@
 
     <!-- TODO: lexographically-next permutation -->
     <!-- TODO: next n-choose-k combination (subset) -->
+
+    <!-- Iterating over permutations.
+      rank/unrank or incremental change. -->
+    <!-- Iterating over subsets
+      lexographic, gray code, binary counting
+      n choose k: Gosper's hack. -->
 </quiz>
