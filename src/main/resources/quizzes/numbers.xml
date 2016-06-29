@@ -162,7 +162,6 @@
         </question>
     </section>
 
-
     <section id="10-to-the-n-as-2-to-the-n" answers_as_choices="true" and_reverse="true">
         <title>10 to the n: Less than power of 2</title>
         <question id="10-to-the-n-as-to-the-n-1">
@@ -406,6 +405,51 @@
         <question id="latency-send-packet-ca-netherlands-ca">
             <text>Send packet CA->Netherlands->CA</text>
             <answer>150,000,000 ns (150,000 μs, 150ms)</answer>
+        </question>
+    </section>
+
+
+    <section id="factorials" answers_as_choices="true">
+        <title>Factorials</title>
+        <question id="factorials-0">
+            <text>0!</text>
+            <answer>1</answer>
+        </question>
+        <question id="factorials-1">
+            <text>1!</text>
+            <answer>1</answer>
+        </question>
+        <question id="factorials-2">
+            <text>2!</text>
+            <answer>2</answer>
+        </question>
+        <question id="factorials-3">
+            <text>3!</text>
+            <answer>6</answer>
+        </question>
+        <question id="factorials-4">
+            <text>4!</text>
+            <answer>24</answer>
+        </question>
+        <question id="factorials-5">
+            <text>5!</text>
+            <answer>120</answer>
+        </question>
+        <question id="factorials-6">
+            <text>6!</text>
+            <answer>720</answer>
+        </question>
+        <question id="factorials-7">
+            <text>7!</text>
+            <answer>5040</answer>
+        </question>
+        <question id="factorials-10">
+            <text>10!</text>
+            <answer>3,628,800</answer>
+        </question>
+        <question id="factorials-20">
+            <text>20!</text>
+            <answer>2,432,902,008,176,640,000</answer>
         </question>
     </section>
 
