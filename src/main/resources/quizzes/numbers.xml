@@ -315,4 +315,41 @@
             <answer>8 billion bits</answer>
         </question>
     </section>
+
+
+    <section id="unit-prefixes" answers_as_choices="true" and_reverse="true">>
+        <title>Unit Prefixes</title>
+        <question id="unit-prefixes-nano">
+            <text>n (nano)</text>
+            <link>https://en.wikipedia.org/wiki/Nano-</link>
+            <answer>10^-9 (billionth)</answer>
+        </question>
+        <question id="unit-prefixes-micro">
+            <text>μ (micro)</text>
+            <link>https://en.wikipedia.org/wiki/Micro-</link>
+            <answer>10^-6 (millionth)</answer>
+        </question>
+        <question id="unit-prefixes-milli">
+            <text>m (milli)</text>
+            <link>https://en.wikipedia.org/wiki/Milli-</link>
+            <answer>10^-3 (thousandth)</answer>
+        </question>
+        <question id="unit-prefixes-kilo">
+            <text>K (Kilo)</text>
+            <link>https://en.wikipedia.org/wiki/Kilo-</link>
+            <answer>10^3 (Thousand)</answer>
+        </question>
+        <question id="unit-prefixes-mega">
+            <text>M (Mega)</text>
+            <link>https://en.wikipedia.org/wiki/Mega-</link>
+            <answer>10^6 (Million)</answer>
+        </question>
+        <question id="unit-prefixes-giga">
+            <text>G (Giga)</text>
+            <link>https://en.wikipedia.org/wiki/Giga-</link>
+            <answer>10^9 (Billion)</answer>
+        </question>
+    </section>
+
+    <!-- Cache access times. Cache misses. -->
 </quiz>
