@@ -296,16 +296,46 @@
         </question>
     </section>
 
-    <!-- Greedy Algorithms: Dijkstra's, Scheduling, Make change (canonical coins). Huffman Codes-->
+    <!-- Greedy Algorithms: Dijkstra's, Scheduling, Make change (canonical coins). Huffman Codes -->
     <!--   Scheduling jobs: Length and weight. Completion Time.  Minimise W*C. So sort by -->
     <!--   Sheduling to avoid conflicts: Choose earliest finish time first. -->
 
-    <!-- Divide and Conquer Algorithms: Quicksort, Mergesort, Hashing?, -->
+    <!-- Divide and Conquer Algorithms:
+    https://en.wikipedia.org/wiki/Divide_and_conquer_algorithms
+    Quicksort, Mergesort, Hashing?, Convex Hull (Divide & Conquer), Strassen Matrix Multiplication,
+    median finding (quickselect, or (better) median of medians),
+    polynomial multiplication, FFT  -->
 
-    <!-- Dynamic Programming Algorithms: Floyd Warshall, Make change (non-canonical coins), String Comparison.
-     Building an optimal binary search tree. -->
+    <!-- Dynamic Programming Algorithms:
+      Interval/Job Scheduling with weights:
+        opt(R) = max 1 <= i <= n (wi + opt(Rfinish(i)))
+        O(n^2) but apparently O(nlog(n)) is possible.
+        Add the requirement that not all jobs can be done on the same machine (or by same person), then it is NP-complete.
+      Floyd Warshall,
+      Make change (non-canonical coins),
+      String Comparison.
+      Building an optimal binary search tree: https://en.wikipedia.org/wiki/Optimal_binary_search_tree#Knuth.27s_dynamic_programming_algorithm -->
+
+    <!-- Convex hull
+    Median Finding -->
+
+    <!-- Strings and sets:
+      Set Cover:
+      Set Packing:
+      String Matching:
+      Approximate string matching:
+        DP with costs for substitution, insertion, and deletion.
+          Longest common subsequence is string distance DP algorithm without substitution.
+          Longest increasing subsequence?
+        Bit-parallel algorithm (page 633 of TADM).
+      Longest Common Subsequence:
+        Difference to Longest Common Substring
+      Shortest Common Substring
+
+    -->
 
     <!-- Proofs:
+    Job/Interval Scheduling: Exchange argument: Order edge in order of duration / finish time.
     Kruskal's MST: Exchange Argument: Order edges in order of increasing cost. TODO-->
 
 </quiz>
