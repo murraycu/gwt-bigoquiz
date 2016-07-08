@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="bitwise">
+    <title>Bitwise Operations</title>
+
+    <!-- Shift left << to multiply by 2. -->
+    <!-- Shift right >> to divide by 2. -->
+    <!-- 16 bits divided and modulo by 4 (sqrt(16)) splits into high and low.
+         64 bits divided and modulo by 8 (sqrt(64)) splits into high and low.
+
+</quiz>
