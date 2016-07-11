@@ -434,6 +434,11 @@
             <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
             <answer>Choose the outgoing edge with the least total path cost, starting with a zero-cost edge to the start vertex. Look at the edge's destination vertex and store the total path costs (and, optionally, the predecessor) for each outgoing edge's vertex. Repeat until we reach the destination. Use, and update, a min heap (priority queue) to choose the outgoing edge with the lowest total cost.</answer>
         </question>
+        <question id="definition-bidirectional-dijkstra">
+            <text>Dijkstra's Algorithm for Shortest Path (Bidirectional)</text>
+            <link>https://en.wikipedia.org/wiki/Bidirectional_search</link> <!-- I learned this in: https://www.youtube.com/watch?v=CHvQ3q_gJ7E -->
+            <answer>Alternate between forward search, from the source, and backward search from the destination. Terminate when the same vertex has been removed from the priority queue. Find the vertex with the minimum forward plus backward length.</answer>
+        </question>
         <question id="definition-bellmann-ford">
             <text>Bellmann-Ford Algorithm for Single-Source Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
