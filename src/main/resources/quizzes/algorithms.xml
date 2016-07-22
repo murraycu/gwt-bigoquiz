@@ -296,7 +296,8 @@
         </question>
     </section>
 
-    <!-- Greedy Algorithms: Dijkstra's, Scheduling, Make change (canonical coins). Huffman Codes -->
+    <!-- Greedy Algorithms: Dijkstra's, Scheduling, Make change (canonical coins).
+      Huffman Codes: Bottom-up. Merge items with least frequency, giving the subtree the sum of their frequencies. Repeat.  -->
     <!--   Scheduling jobs: Length and weight. Completion Time.  Minimise W*C. So sort by -->
     <!--   Sheduling to avoid conflicts: Choose earliest finish time first. -->
 
@@ -314,7 +315,16 @@
       Floyd Warshall,
       Make change (non-canonical coins),
       String Comparison.
-      Building an optimal binary search tree: https://en.wikipedia.org/wiki/Optimal_binary_search_tree#Knuth.27s_dynamic_programming_algorithm -->
+      Building an optimal binary search tree: https://en.wikipedia.org/wiki/Optimal_binary_search_tree#Knuth.27s_dynamic_programming_algorithm
+        (though Huffmann codes can be done with greedy algorithm.)
+      Independent Set of a Path Graph (in Stanford/Coursera course, part 2): https://www.coursera.org/learn/algorithm-design-analysis-2/lecture/TZgJM/wis-in-path-graphs-a-reconstruction-algorithm
+        1 Dimension. (O(n)):
+          A[i] = max(A[i-1], A[i-2] + w)
+      Independent Set of a Tree Graph (in Stanford/Coursera course, part 2, quiz 3)
+        "Recall our dynamic programming algorithm for computing the maximum-weight independent set of a path graph. Consider the following proposed extension to more general graphs. Consider an undirected graph with positive vertex weights. For a vertex v, obtain the graph G′(v) by deleting v and its incident edges from G, and obtain the graph G″(v) from G by deleting v, its neighbors, and all of the corresponding incident edges from G. Let OPT(H) denote the value of a maximum-weight independent set of a graph H. Consider the formula OPT(G)=max{OPT(G′(v)),wv+OPT(G″(v))}, where v is an arbitrary vertex of G of weight wv"
+      Sequence Alignment for Needleman-Wunsch score: https://www.coursera.org/learn/algorithm-design-analysis-2/lecture/QJkyp/optimal-substructure
+        Score, with cost for gaps in either string. 3 cases: No gap, gap in X, or gap in Y. 2 Dimensions.
+          A[i, j] = min(A[i-1, j-1], A[i-1, j] + gap_cost, A[i, j-1] + gap_cost) -->
 
     <!-- Convex hull
     Median Finding -->
@@ -334,6 +344,8 @@
 
     -->
 
+    <!-- Postfix notation evaluation: Push operands on to stack. When we see an operator, we pop 2 items, apply, and push back.
+         (We don't need to care about operator precedence. -->
     <!-- Proofs:
     Job/Interval Scheduling: Exchange argument: Order edge in order of duration / finish time.
     Kruskal's MST: Exchange Argument: Order edges in order of increasing cost. TODO-->
