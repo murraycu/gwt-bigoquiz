@@ -270,7 +270,7 @@
         <question id="algorithms-sort-description-selection-sort">
             <text>Selection Sort</text>
             <link>https://en.wikipedia.org/wiki/Selection_sort</link>
-            <answer>Repeatedly finds smallest item and moves it to the of the sorted section at the start.</answer>
+            <answer>Repeatedly finds smallest item and moves it to the end of the sorted section at the start.</answer>
         </question>
         <question id="algorithms-sort-description-shell-sort">
             <text>Shellsort</text>
@@ -284,7 +284,7 @@
         <question id="algorithms-sort-description-radix-sort">
             <text>Radix Sort</text>
             <link>https://en.wikipedia.org/wiki/Radix_sort</link>
-            <answer>Sort d times, each time examining just b, using counting sort or bucket sort.</answer>
+            <answer>Sort d times, each time examining just b bits, using counting sort or bucket sort.</answer>
         </question>
         <question id="algorithms-sort-description-bucket-sort">
             <text>Bucket Sort</text>
