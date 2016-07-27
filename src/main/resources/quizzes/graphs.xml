@@ -384,6 +384,8 @@
             <text>Bellmann-Ford Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
             <answer>Single-Source Shortest Path (with negative edges).</answer>
+            <!-- TODO: Bellmann-Ford also allows distributed computation. -->
+            <!-- TODO: Optimizations --> <!-- TODO: Uses: Internet Routing -->
         </question>
         <question id="purpose-floyd-warshall">
             <text>Floyd Warshall Algorithm</text>
@@ -442,7 +444,7 @@
         <question id="definition-bellmann-ford">
             <text>Bellmann-Ford Algorithm for Single-Source Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
-            <answer>Start with 0 cost for the source vertex, and infinity for all other vertices. Then, for each vertex, examine each edge, to calculate the total path cost (or infinity) to reach the adjacent vertices, reducing the stored cost if it is less. Repeat the examination of edges, and recalculation, n-1 times, or until there is no change. Do 1 extra iteration to detect negative cycles.</answer>
+            <answer>Start with 0 cost for the source vertex, and infinity for all other vertices. Then, for each vertex, examine each edge, to calculate the total path cost (or infinity) to reach the adjacent vertices, reducing the stored cost if it is less. Repeat the examination of edges, and the recalculation, n-1 times, or until there is no change. Do 1 extra iteration to detect negative cycles.</answer>
         </question>
         <question id="definition-floyd-warshall">
             <text>Floyd Warshall Algorithm for All Pairs Shortest Path</text>
@@ -510,16 +512,25 @@
             <answer>Kruskal's, Prim's, or Boruvka's algorithm</answer>
         </question>
 
-        <question id="algorithm-for-shortest-path">
+        <question id="algorithm-for-shortest-path-unweighted">
             <text>Single Source Shortest Path (unweighted)</text>
-            <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Unweighted_graphs</link>
             <answer>Breadth First Search</answer>
         </question>
 
-        <question id="algorithm-for-shortest-path">
-            <text>Single Source Shortest Path (weighted)</text>
-            <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
-            <answer>Dijkstra's algorithm, or the Bellman-Ford algorithm.</answer>
+        <question id="algorithm-for-shortest-path-weighted-directed-acyclic">
+            <text>Single Source Shortest Path (weighted, directed, acyclic)</text>
+            <link>hhttps://en.wikipedia.org/wiki/Shortest_path_problem#Directed_acyclic_graphs</link>
+            <!-- http://www.geeksforgeeks.org/shortest-path-for-directed-acyclic-graphs/ -->
+            <!-- https://www.youtube.com/watch?v=ePqBaDRHkdk -->
+            <!-- TODO: O(|V| + |E|) -->
+            <answer>Topological sort. Then Find minimum distance to adjacent nodes by examining nodes in order, starting with source, until destination.</answer>
+        </question>
+
+        <question id="algorithm-for-shortest-path-weighted">
+            <text>Single Source Shortest Path (weighted, directed, with non-negative cycles)</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Directed_graphs_with_nonnegative_weights</link>
+            <answer>Dijkstra's algorithm (non-negative weights), or the Bellman-Ford algorithm (with negative weights).</answer>
         </question>
         <!-- TODO: If acyclic (a DAG), it can be linear with topological sort. Page 491 of TADM. -->
 
@@ -545,6 +556,7 @@
             <text>Bipartite Matching (weighted)</text>
             <link>https://en.wikipedia.org/wiki/Matching_%28graph_theory%29#In_weighted_bipartite_graphs</link>
             <answer>Hungarian Algorithm.</answer>
+            <!-- TODO: Application to assignment problem. -->
         </question>
 
         <!-- TODO?
