@@ -1034,6 +1034,23 @@
             </question>
         </subsection>
 
+
+        <!-- This is not mentioned on bigocheatsheet or bigoref:
+             https://github.com/josem/bigoref/issues/9
+        -->
+        <subsection id="topological-sort-sp">
+            <title>Topological sort based algorithm for Shortest path on DAG</title>
+            <link>https://en.wikipedia.org/wiki/Topological_sorting#Application_to_shortest_path_finding</link>
+            <question id="topological-sort-sp-time">
+                <text>Time</text>
+                <answer>O((|V|+|E|)</answer>
+            </question>
+            <question id="topological-sort-sp-space">
+                <text>Space (Worst)</text>
+                <answer>O(|V|)</answer>
+            </question>
+        </subsection>
+
         <subsection id="dijkstra-with-min-heap">
             <title>Dijkstra's Algorithm for Shortest Path (Min-heap as priority queue)</title>
             <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
