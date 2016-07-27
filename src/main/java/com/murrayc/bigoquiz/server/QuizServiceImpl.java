@@ -27,8 +27,14 @@ public class QuizServiceImpl extends ServiceWithUser implements
         QuizService {
     private static final String LOADED_QUIZZES = "loaded-quizzes";
 
-    @Nullable
-    private Map<String, Quiz> quizzes = null;
+
+    private static class QuizzesMap {
+        @Nullable
+        public Map<String, Quiz> map = new HashMap<>();
+        public boolean allTitlesLoaded = false;
+    }
+
+    private QuizzesMap quizzes = null;
 
     @Nullable
     @Override
@@ -41,7 +47,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
         //TODO: Cache this.
         final List<Quiz.QuizDetails> result = new ArrayList<>();
-        for (final Quiz quiz : quizzes.values()) {
+        for (final Quiz quiz : quizzes.map.values()) {
             if (quiz == null) {
                 continue;
             }
@@ -58,13 +64,13 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @NotNull
     @Override
     public  Quiz getQuiz(final String quizId)  throws UnknownQuizException, IllegalArgumentException {
-        getOrLoadQuizzes();
+        getOrLoadQuiz(quizId);
 
         if (quizzes == null) {
             throw new UnknownQuizException();
         }
 
-        final Quiz result = quizzes.get(quizId);
+        final Quiz result = quizzes.map.get(quizId);
         if (result == null) {
             throw new UnknownQuizException();
         }
@@ -72,11 +78,20 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return result;
     }
 
-    private void getOrLoadQuizzes() {
-        if (quizzes != null) {
-            return;
+    private Quiz getOrLoadQuiz(final String quizId) {
+        getQuizzesMap();
+
+        if (!quizzes.map.containsKey(quizId)) {
+            if (!loadQuizIntoQuizzes(quizId, quizzes)) {
+                Log.error("Could not load quiz: " + quizId);
+                return null;
+            }
         }
 
+        return quizzes.map.get(quizId);
+    }
+
+    private void getQuizzesMap() {
         final ServletConfig config = this.getServletConfig();
         if (config == null) {
             throw new RuntimeException("getServletConfig() returned null.");
@@ -87,19 +102,47 @@ public class QuizServiceImpl extends ServiceWithUser implements
             throw new RuntimeException("getServletContext() returned null.");
         }
 
-        //Use the existing shared quiz if any:
+        //Use the existing shared quizzes if any:
         final Object object = context.getAttribute(LOADED_QUIZZES);
-        if ((object != null) && !(object instanceof HashMap)) {
+        if ((object != null) && !(object instanceof QuizzesMap)) {
             throw new RuntimeException("The loaded-quizzes attribute is not of the expected type.");
         }
 
-        quizzes = (HashMap<String, Quiz>)object;
+        quizzes = (QuizzesMap) object;
         if (quizzes == null) {
-            loadQuizzes(context);
-            if (quizzes == null) {
-                throw new IllegalArgumentException("No quizzes are available.");
+            quizzes = new QuizzesMap();
+            context.setAttribute(LOADED_QUIZZES, quizzes);
+        }
+    }
+
+    private void getOrLoadQuizzes() {
+        // Load all quizzes.
+        getQuizzesMap();
+
+        if (quizzes.allTitlesLoaded) {
+            return;
+        }
+
+        final String[] names = {
+                QuizConstants.DEFAULT_QUIZ_ID,
+                "mastermethod",
+                "designpatterns",
+                "graphs",
+                "cpp_std_algorithms",
+                "notation",
+                "numbers",
+                "algorithms",
+                "combinatorics",
+                "math",
+                "datastructures"};
+
+        for (final String name : names) {
+            if (!loadQuizIntoQuizzes(name, quizzes)) {
+                continue;
             }
         }
+
+        quizzes.allTitlesLoaded = true;
     }
 
     //TODO: This seems to be called unnecessarily right after getNextQuestion().
@@ -329,7 +372,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
         final Map<String, UserStats> mapUserStats = getUserStats(userId);
 
-        for (final Quiz quiz : quizzes.values()) {
+        for (final Quiz quiz : quizzes.map.values()) {
             final String quizId = quiz.getId();
             final UserStats userStats = mapUserStats.get(quizId);
             if (userStats == null) {
@@ -440,48 +483,23 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return getUserProfileFromDataStore(user);
     }
 
-    private void loadQuizzes(@NotNull final ServletContext context) {
-        final Map<String, Quiz> quizzes = new HashMap<>();
-
-        final String[] names = {
-                QuizConstants.DEFAULT_QUIZ_ID,
-                "mastermethod",
-                "designpatterns",
-                "graphs",
-                "cpp_std_algorithms",
-                "notation",
-                "numbers",
-                "algorithms",
-                "combinatorics",
-                "math",
-                "datastructures"};
-
-        for (final String name : names) {
-            if (!loadQuizIntoQuizzes(name, quizzes)) {
-                continue;
-            }
-        }
-
-        this.quizzes = quizzes;
-        context.setAttribute(LOADED_QUIZZES, quizzes);
-    }
-
     /**
      * Returns false if the load failed.
      * @param quizId
      * @param quizzes
      * @return
      */
-    private boolean loadQuizIntoQuizzes(final String quizId, Map<String, Quiz> quizzes) {
-        if (quizzes.containsKey(quizId)) {
+    private boolean loadQuizIntoQuizzes(final String quizId, final QuizzesMap quizzes) {
+        if (quizzes.map.containsKey(quizId)) {
             Log.error("loadQuizIntoQuizzes(): quiz already loaded: " + quizId);
+            return true;
         }
 
         final Quiz quiz;
         try {
             quiz = loadQuiz(quizId);
             if (quiz != null) {
-                quizzes.put(quizId, quiz);
+                quizzes.map.put(quizId, quiz);
             }
         } catch (@NotNull final Exception e) {
             Log.error("Could not load quiz: " + quizId, e);
