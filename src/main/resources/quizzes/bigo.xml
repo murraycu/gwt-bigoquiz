@@ -1359,4 +1359,6 @@
             <answer>Problems whose solutions can be found with polynomial space.</answer>
         </question>
     </section>
+    <!-- TODO:Reductions:
+       Vertex cover and independent set are complements. -->
 </quiz>
