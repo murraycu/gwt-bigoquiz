@@ -369,11 +369,13 @@
             <answer>After an insert or deletion, rotates the lowest nodes that do not satisfy the coloring constraints: Root is black. All leaves are black. All children of red nodes are black. All paths to leaves contains the same number of black nodes.</answer>
         </question>
 
+        <!--
         <question id="datastructures-implementation-cartesian-tree">
             <text>Cartesian Tree</text>
             <link>https://en.wikipedia.org/wiki/Cartesian_tree</link>
             <answer>TODO: Construction.</answer>
         </question>
+        -->
 
         <question id="datastructures-implementation-trie">
             <text>Trie (Prefix Tree, Radix Tree)</text>
