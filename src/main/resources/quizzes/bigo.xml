@@ -1021,7 +1021,7 @@
             </question>
         </subsection>
 
-        <subsection id="depth-first-search">
+        <subsection id="breadth-first-search">
             <title>Breadth First Search (BFS)</title>
             <link>https://en.wikipedia.org/wiki/Breadth-first_search</link>
             <question id="breadth-first-search-time">
