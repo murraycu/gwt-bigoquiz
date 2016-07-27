@@ -445,10 +445,10 @@
         </question>
     </section>
 
-    <section id="datastructures-tree-operations" answers_as_choices="true">
+    <section id="datastructures-tree-operations">
         <title>Tree Operations</title>
 
-        <subsection id="datastructures-tree-operations-bst">
+        <subsection id="datastructures-tree-operations-bst" answers_as_choices="true">
             <title>Binary Search Tree</title>
             <link>https://en.wikipedia.org/wiki/Binary_search_tree#Operations</link>
 
@@ -504,8 +504,8 @@
             <!-- Use: wikipedia says: Post-order traversal while deleting or freeing nodes and values can delete or free an entire binary tree. It can also generate a postfix representation of a binary tree. -->
         </subsection>
 
-        <subsection id="datastructures-tree-implementation-bst">
-            <title>Binary Search Tree</title>
+        <subsection id="datastructures-tree-implementation-bst" answers_as_choices="true">
+            <title>Binary Search Tree: Implementations</title>
             <link>https://en.wikipedia.org/wiki/Binary_search_tree#Operations</link>
 
             <question id="datastructures-tree-implementation-bst-search">
@@ -565,7 +565,7 @@
             </question>
 
             <question id="datastructures-tree-implementation-bst-post-order-traversal-recursive">
-                <text>Post-Order Traversal(Recursive)</text>
+                <text>Post-Order Traversal (Recursive)</text>
                 <link>https://en.wikipedia.org/wiki/Tree_traversal#Post-order</link>
                 <answer>Recurse into left tree, recurse into right tree, use the current node.</answer>
             </question>
