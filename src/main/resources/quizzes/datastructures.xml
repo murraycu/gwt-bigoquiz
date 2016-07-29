@@ -596,12 +596,6 @@
     </section>
 
 
-    <!-- Types of tree traversal
-    https://en.wikipedia.org/wiki/Tree_traversal
-      In order (Recursive): Recurse left, print, recurse right.
-      In order (Iterative): while(stack is not empty), add left nodes to stack, pop stack, print, add right node to stack.
-    -->
-
     <!-- Probabilistic data structures?
          https://en.wikipedia.org/wiki/Category:Probabilistic_data_structures
     -->
