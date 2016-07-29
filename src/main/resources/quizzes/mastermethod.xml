@@ -25,7 +25,7 @@
 
         <!-- See end of Erik Demaine's MIT lecture: http://videolectures.net/mit6046jf05_demaine_lec02/
         and https://www.quora.com/What-is-an-intuitive-explanation-of-the-Master-Theorem/answer/Brian-Bi -->
-        <subsection id="master-theorem-intution" answers_as_choices="true">
+        <subsection id="master-theorem-intuition" answers_as_choices="true">
             <title>Intuition: T(n) = a T(n / b) + f(n), c &lt;/=/&gt; logb(a)</title>
             <link>https://en.wikipedia.org/wiki/Master_theorem</link>
             <question id="parts-less-than">

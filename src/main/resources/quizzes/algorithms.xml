@@ -299,7 +299,7 @@
     <!-- Greedy Algorithms: Dijkstra's, Scheduling, Make change (canonical coins).
       Huffman Codes: Bottom-up. Merge items with least frequency, giving the subtree the sum of their frequencies. Repeat.  -->
     <!--   Scheduling jobs: Length and weight. Completion Time.  Minimise W*C. So sort by -->
-    <!--   Sheduling to avoid conflicts: Choose earliest finish time first. -->
+    <!--   Scheduling to avoid conflicts: Choose earliest finish time first. -->
 
     <!-- Divide and Conquer Algorithms:
     https://en.wikipedia.org/wiki/Divide_and_conquer_algorithms

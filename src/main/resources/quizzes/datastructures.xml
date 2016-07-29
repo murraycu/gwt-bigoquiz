@@ -188,7 +188,7 @@
         <question id="datastructures-description-cartesian-tree">
             <text>Cartesian Tree</text>
             <link>https://en.wikipedia.org/wiki/Cartesian_tree</link>
-            <answer>A heap-ordered tree whose in-order traversal rerecreates the original sequence.</answer>
+            <answer>A heap-ordered tree whose in-order traversal recreates the original sequence.</answer>
         </question>
 
         <question id="datastructures-description-trie">
@@ -602,7 +602,7 @@
       In order (Iterative): while(stack is not empty), add left nodes to stack, pop stack, print, add right node to stack.
     -->
 
-    <!-- Probabalistic data structures?
+    <!-- Probabilistic data structures?
          https://en.wikipedia.org/wiki/Category:Probabilistic_data_structures
     -->
 
