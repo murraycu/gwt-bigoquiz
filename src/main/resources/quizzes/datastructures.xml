@@ -192,16 +192,26 @@
         </question>
 
         <question id="datastructures-description-trie">
-            <text>Trie (Prefix Tree, Radix Tree)</text>
+            <text>Trie (Digital Tree, Prefix Tree)</text>
             <link>https://en.wikipedia.org/wiki/Trie</link>
             <answer>Stores all k prefixes of n strings.</answer>
         </question>
+
+        <question id="datastructures-description-radix-tree">
+            <text>Radix Tree (Radix Trie, Compact Prefix Tree)</text>
+            <link>https://en.wikipedia.org/wiki/Radix_tree</link>
+            <answer>Space-optimized Trie.</answer>
+        </question>
+
+        <!-- TODO: https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton -->
 
         <question id="datastructures-description-suffix-tree">
             <text>Suffix Tree</text>
             <link>https://en.wikipedia.org/wiki/Suffix_tree</link>
             <answer>Stores all k suffixes of n strings, allowing searches for all substrings.</answer>
         </question>
+
+        <!-- TODO: Suffix array -->
 
         <question id="datastructures-description-van-emde-boas-tree">
             <text>Van Emde Boas Tree</text>
@@ -378,9 +388,15 @@
         -->
 
         <question id="datastructures-implementation-trie">
-            <text>Trie (Prefix Tree, Radix Tree)</text>
+            <text>Trie (Digital Tree, Prefix Tree)</text>
             <link>https://en.wikipedia.org/wiki/Trie</link>
-            <answer>Keys are defined by their position in the tree, with values associated with leaf nodes.</answer>
+            <answer>Keys are defined by their position in the tree, with each edge being the next character (or bit) of the key, and with values associated with leaf nodes.</answer>
+        </question>
+
+        <question id="datastructures-implementation-radix-tree">
+            <text>Radix Tree (Radix Trie, Compact Prefix Tree)</text>
+            <link>https://en.wikipedia.org/wiki/Radix_tree</link>
+            <answer>Keys are defined by their position in the tree, with each edge being the next chunk of the key, and with values associated with leaf nodes.</answer>
         </question>
 
         <question id="datastructures-implementation-suffix-tree">
@@ -609,7 +625,8 @@
     Singly Linked List
     Doubly Linked List
     Hash Table (TODO: Open Addressing and Chaining, advantages of, such as data locality.)
-    Trie (AKA PrefixTree)
+    Trie (AKA PrefixTree): Text prediction using prefixes. Associative store where the keys share prefixes.
+    Radix Tree: IP Routing (Longest Prefix Matching), Inverted Indices
     Suffix Tree: Find longest repeated substring: https://en.wikipedia.org/wiki/Longest_repeated_substring_problem
       Find longest common substring: https://en.wikipedia.org/wiki/Longest_common_substring_problem
       (Can also be done with dynamic programming)
