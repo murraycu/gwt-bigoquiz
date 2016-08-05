@@ -625,6 +625,10 @@
     Singly Linked List
     Doubly Linked List
     Hash Table (TODO: Open Addressing and Chaining, advantages of, such as data locality.)
+      In this CppCon 2014 talk, Chandler Carruth says never use std::map or std::unordered_map because they use chaining instead of open addressing:
+      https://www.youtube.com/watch?v=fHNmRkzxHWs
+      TODO: Look at Google's densemap/sparsemap.
+      TODO: Load factor definition: = n/m.
     Trie (AKA PrefixTree): Text prediction using prefixes. Associative store where the keys share prefixes.
     Radix Tree: IP Routing (Longest Prefix Matching), Inverted Indices
     Suffix Tree: Find longest repeated substring: https://en.wikipedia.org/wiki/Longest_repeated_substring_problem

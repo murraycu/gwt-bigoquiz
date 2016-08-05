@@ -294,6 +294,8 @@
             <text>Bubble Sort</text>
             <answer>Compare and swap pairs until no more swaps are necessary.</answer>
         </question>
+
+        <!-- TODO? Burstsort (uses a Trie) https://en.wikipedia.org/wiki/Burstsort -->
     </section>
 
     <!-- Greedy Algorithms: Dijkstra's, Scheduling, Make change (canonical coins).
