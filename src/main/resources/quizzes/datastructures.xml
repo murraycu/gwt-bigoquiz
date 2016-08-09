@@ -447,7 +447,7 @@
         <question id="datastructures-implementation-treap">
             <text>Treap</text>
             <link>https://en.wikipedia.org/wiki/Treap</link>
-            <answer>A cartesian tree that satisfies the heap property for random weights. Insert as per node value and then rotate to maintain heap property for the randome weight.</answer>
+            <answer>A cartesian tree that satisfies the heap property for random weights. Insert as per node value and then rotate to maintain heap property for the random weight.</answer>
         </question>
 
         <question id="datastructures-implementation-splay-tree">
