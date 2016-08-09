@@ -634,6 +634,7 @@
     Suffix Tree: Find longest repeated substring: https://en.wikipedia.org/wiki/Longest_repeated_substring_problem
       Find longest common substring: https://en.wikipedia.org/wiki/Longest_common_substring_problem
       (Can also be done with dynamic programming)
+      Find longest palindrome.
     Tree
     Binary Search Tree
     Balanced Binary Tree (advantages of AVL, Red/Black, etc)

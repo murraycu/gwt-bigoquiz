@@ -355,4 +355,8 @@
     Job/Interval Scheduling: Exchange argument: Order edge in order of duration / finish time.
     Kruskal's MST: Exchange Argument: Order edges in order of increasing cost. TODO-->
 
+    <!-- Ukkonen's algorithm for Suffix Tree Construction:
+         https://en.wikipedia.org/wiki/Ukkonen%27s_algorithm
+         an "online algorithm" -->
+
 </quiz>
