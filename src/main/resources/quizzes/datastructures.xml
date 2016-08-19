@@ -198,7 +198,7 @@
         </question>
 
         <question id="datastructures-description-radix-tree">
-            <text>Radix Tree (Radix Trie, Compact Prefix Tree)</text>
+            <text>Radix Tree (Radix Trie, Compact Prefix Tree, Patricia Trie)</text>
             <link>https://en.wikipedia.org/wiki/Radix_tree</link>
             <answer>Space-optimized Trie.</answer>
         </question>
@@ -310,7 +310,7 @@
         <question id="datastructures-implementation-hash-table">
             <text>Hash Table</text>
             <link>https://en.wikipedia.org/wiki/Hash_table</link>
-            <answer>A hash function that maps keys to buckets in an array, resolving collisions either by Separate Chaining (linked list of items in each bucket) or Open Addressing (Items stored in next available bucket).</answer>
+            <answer>A hash function that maps keys to buckets in an array, resolving collisions either by Separate Chaining (linked list of items in each bucket) or Open Addressing (items stored in next available bucket).</answer>
         </question>
 
         <question id="datastructures-implementation-tree">
