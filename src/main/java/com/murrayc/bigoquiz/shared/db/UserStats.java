@@ -296,9 +296,22 @@ public class UserStats implements IsSerializable {
             return;
         }
 
-        for (final String id : idsToRemove) {
-            topProblemQuestionHistoriesInOrder.remove(id);
+
+        // This is very inefficient but we can't use Java 8 or Apache Commons yet in this class
+        // because it is used on the client side too.
+        // Luckily, this list only ever small.
+        final List<UserQuestionHistory> list = new ArrayList<UserQuestionHistory>();
+        for (final UserQuestionHistory item : topProblemQuestionHistoriesInOrder) {
+          if (!idsToRemove.contains(item.getQuestionId())) {
+              list.add(item);
+          }
         }
+        topProblemQuestionHistoriesInOrder = list;
+
+        //TODO: Do this instead when we can use Java 8:
+        //for (final String id : idsToRemove) {
+        //    topProblemQuestionHistoriesInOrder.remove(id);
+        //}
     }
 
     /** Add the values from userStat to this instance,
