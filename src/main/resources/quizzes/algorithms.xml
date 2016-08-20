@@ -26,7 +26,8 @@
         </question>
         <question id="algorithms-sort-advantages-insertion-sort">
             <text>Insertion Sort</text>
-            <answer>Fast for small n, even though it has O(n^2) average time. Fast for nearly-sorted items.</answer>
+            <answer>Fast for small n, even though it has O(n^2) average time. Fast for nearly-sorted items. Online algorithm.</answer>
+            <!-- See other online sorts: https://en.wikipedia.org/wiki/Category:Online_sorts -->
         </question>
         <question id="algorithms-sort-advantages-selection-sort">
             <text>Selection Sort</text>
@@ -345,6 +346,9 @@
         Bit-parallel algorithm (page 633 of TADM).
       Longest Common Subsequence:
         Difference to Longest Common Substring
+        With Suffix Tree: Insert both strings into the same suffix tree. Find the deepest node that is for both strings.
+      Longest Repeated Substring:
+        With Suffix Tree: Put the string in a suffix tree. Find the deepest internal node.
       Shortest Common Substring
 
     -->
@@ -358,5 +362,15 @@
     <!-- Ukkonen's algorithm for Suffix Tree Construction:
          https://en.wikipedia.org/wiki/Ukkonen%27s_algorithm
          an "online algorithm" -->
+
+    <!-- Online algorithms (Processes input piece by piece without having the whole input from the start.)
+    https://en.wikipedia.org/wiki/Online_algorithm
+      Insertion Sort
+      Ukkonen's algorithm for Suffix Tree Construction
+
+    Offline algorithms: Need whole data from the start:
+      Selection Sort
+
+    -->
 
 </quiz>
