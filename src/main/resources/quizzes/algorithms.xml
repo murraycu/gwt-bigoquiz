@@ -300,9 +300,11 @@
     </section>
 
     <!-- Greedy Algorithms: Dijkstra's, Scheduling, Make change (canonical coins).
-      Huffman Codes: Bottom-up. Merge items with least frequency, giving the subtree the sum of their frequencies. Repeat.  -->
-    <!--   Scheduling jobs: Length and weight. Completion Time.  Minimise W*C. So sort by -->
-    <!--   Scheduling to avoid conflicts: Choose earliest finish time first. -->
+       Huffman Codes: (Bottom-up. Merge items (or combined items) with least frequency, at each step, giving the subtree the sum of their frequencies. Repeat.
+          Wrong answer: merge highest frequencies.
+          Wrong answer: Always merge with the sub-tree so far. Instead merge subtrees only when they are the 2 smallest items.
+       Scheduling jobs: Length and weight. Completion Time.  Minimise W*C. So sort by
+       Scheduling to avoid conflicts: Choose earliest finish time first. -->
 
     <!-- Divide and Conquer Algorithms:
     https://en.wikipedia.org/wiki/Divide_and_conquer_algorithms
@@ -315,7 +317,7 @@
         opt(R) = max 1 <= i <= n (wi + opt(Rfinish(i)))
         O(n^2) but apparently O(nlog(n)) is possible.
         Add the requirement that not all jobs can be done on the same machine (or by same person), then it is NP-complete.
-      Bellmann-Ford
+      Bellmann-Ford:
       Floyd Warshall,
       Make change (non-canonical coins),
       String Comparison.
@@ -328,7 +330,10 @@
         "Recall our dynamic programming algorithm for computing the maximum-weight independent set of a path graph. Consider the following proposed extension to more general graphs. Consider an undirected graph with positive vertex weights. For a vertex v, obtain the graph G′(v) by deleting v and its incident edges from G, and obtain the graph G″(v) from G by deleting v, its neighbors, and all of the corresponding incident edges from G. Let OPT(H) denote the value of a maximum-weight independent set of a graph H. Consider the formula OPT(G)=max{OPT(G′(v)),wv+OPT(G″(v))}, where v is an arbitrary vertex of G of weight wv"
       Sequence Alignment for Needleman-Wunsch score: https://www.coursera.org/learn/algorithm-design-analysis-2/lecture/QJkyp/optimal-substructure
         Score, with cost for gaps in either string. 3 cases: No gap, gap in X, or gap in Y. 2 Dimensions.
-          A[i, j] = min(A[i-1, j-1], A[i-1, j] + gap_cost, A[i, j-1] + gap_cost) -->
+          A[i, j] = min(A[i-1, j-1], A[i-1, j] + gap_cost, A[i, j-1] + gap_cost)
+
+      Minimum Spanning Tree: Useful for identifying clusters.
+       -->
 
     <!-- Convex hull
     Median Finding -->
@@ -351,6 +356,47 @@
         With Suffix Tree: Put the string in a suffix tree. Find the deepest internal node.
       Shortest Common Substring
 
+      Find lexographic location of Tk in T1 to Tn: Put them all in a trie, with terminating $ on each string.
+
+      Multiple ($-terminated) strings in a trie, with ordered edges.
+        Lexographic order: in-order traversal gives us lexographic order.
+        Lexographic predecessor: Find node that matches as much as possible. Predecessor is max in left sub-tree.
+          (Maintain sub-tree min/max to make this faster.)
+        Lexographic successor: Find node that matches as much as possible. Successor is min in right sub-tree.
+          (Maintain sub-tree min/max to make this faster.)
+        LCA, LCP.
+
+      ( https://www.youtube.com/watch?v=NinWEPPrkDQ )
+      Tray: (Used for Trie/Suffix-Tree nodes to give O(P + lg(sigma)) lookup with O(T) space.
+
+      ( https://youtu.be/NinWEPPrkDQ?t=3683 )
+      "document retrieval" data structure: To find the matching documents without finding all the individual matches,
+      in O(P + #-of-documents-matching).
+        Uses RMQ.
+
+
+
+
+
+      String matching without pre-processing (for isntance, without suffix tree):
+      (Without string processing it's generally O(T) time (T=length of searched text),
+       but with preprocessing it can be O(P) time (P=length of pattern), often in O(T) space.)
+      Knuth-Morris-Pratt,
+      Boyer-Moore
+      Raymond(?)-Karp
+
+      https://www.youtube.com/watch?v=0rCFkuQS968
+      Range Minimum Query (RMQ): Discover index of minimum value in a range of values:
+        Put the values in a cartesian tree by splitting at the smallest values, recursively. Then the LCA of any two nodes is the RMQ.
+        (You would need to keep an array associating each index with a tree node.)
+        Can construct cartesian tree in (amortized) O(n) time by adding each node and, if necessary, walking up and splitting, making children into left nodes.
+        The RMQ of indices in the the array also tells you the LCA of nodes in the tree.
+        Use Euler Tour (in order traversal) to get RMQ array whose values only differ by 1.
+
+      Level Ancestor (LA): Find kth parent of node in less than O(n) time.
+       Long-path decomposition:
+
+       Ladder decomposition:
     -->
 
     <!-- Postfix notation evaluation: Push operands on to stack. When we see an operator, we pop 2 items, apply, and push back.
