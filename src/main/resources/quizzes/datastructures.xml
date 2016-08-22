@@ -379,13 +379,11 @@
             <answer>After an insert or deletion, rotates the lowest nodes that do not satisfy the coloring constraints: Root is black. All leaves are black. All children of red nodes are black. All paths to leaves contains the same number of black nodes.</answer>
         </question>
 
-        <!--
         <question id="datastructures-implementation-cartesian-tree">
             <text>Cartesian Tree</text>
-            <link>https://en.wikipedia.org/wiki/Cartesian_tree</link>
-            <answer>TODO: Construction.</answer>
+            <link>https://en.wikipedia.org/wiki/Cartesian_tree#Efficient_construction</link>
+            <answer>Construct the tree in (amortized) O(n) time by adding each node to the previous node, walking up the tree and splitting an edge if necessary, making children into left nodes.</answer>
         </question>
-        -->
 
         <question id="datastructures-implementation-trie">
             <text>Trie (Digital Tree, Prefix Tree)</text>
@@ -447,7 +445,7 @@
         <question id="datastructures-implementation-treap">
             <text>Treap</text>
             <link>https://en.wikipedia.org/wiki/Treap</link>
-            <answer>A cartesian tree that satisfies the heap property for random weights. Insert as per node value and then rotate to maintain heap property for the random weight.</answer>
+            <answer>A cartesian tree that satisfies the heap property for random weights. Insert as per node value order and then rotate to maintain heap property for the random weight.</answer>
         </question>
 
         <question id="datastructures-implementation-splay-tree">
