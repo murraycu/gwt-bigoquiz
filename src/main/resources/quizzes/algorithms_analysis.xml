@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="mastermethod">
-    <title>Master Theorem</title>
-
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="algorithms_analysis">
+    <title>Algorithms Analysis</title>
 
     <section id="master-theorem">
         <title>Master Theorem</title>

@@ -125,7 +125,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
         final String[] names = {
                 QuizConstants.DEFAULT_QUIZ_ID,
-                "mastermethod",
+                "algorithms_analysis",
                 "designpatterns",
                 "graphs",
                 "cpp_std_algorithms",
