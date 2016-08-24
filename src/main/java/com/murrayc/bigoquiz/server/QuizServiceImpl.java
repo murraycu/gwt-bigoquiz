@@ -134,7 +134,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 "algorithms",
                 "combinatorics",
                 "math",
-                "datastructures"};
+                "datastructures",
+                "bitwise"};
 
         for (final String name : names) {
             if (!loadQuizIntoQuizzes(name, quizzes)) {
