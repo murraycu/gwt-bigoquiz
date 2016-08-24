@@ -123,6 +123,14 @@ public class QuizLoader {
 
         //Sections:
         @NotNull final List<Node> listSectionNodes = getChildrenByTagName(rootNode, NODE_SECTION);
+        if (listSectionNodes.isEmpty()) {
+            // Add a virtual section, by using the root node,
+            // so we have somewhere to put the questions.
+            // This lets a quiz have just questions with no sections.
+            // The generated section will have the same id and title as the quiz itself.
+            listSectionNodes.add(rootNode);
+        }
+
         for (final Node sectionNode : listSectionNodes) {
             @NotNull final Element sectionElement = (Element) sectionNode;
 
