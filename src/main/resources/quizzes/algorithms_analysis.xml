@@ -100,4 +100,9 @@
         </subsection>
     </section>
 
+    <!-- TODO: Greedy algorithms: Proof by contradiction.
+         TODO: Greedy algorithms: Proof by contradiction: Assume that the subproblem solution is not optimal (not part of the whole solution).
+         -->
+    <!-- TODO: Other proofs by. -->
+
 </quiz>

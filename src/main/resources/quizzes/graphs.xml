@@ -361,22 +361,24 @@
             <link>https://en.wikipedia.org/wiki/Feedback_vertex_set</link>
             <answer>NP-complete</answer>
         </question>
+
+        <question id="polynomial-or-np-complete-longest-path">
+            <text>Longest Path</text>
+            <link>https://en.wikipedia.org/wiki/Longest_path_problem</link>
+            <answer>NP-complete</answer>
+            <!-- Note: It's a bit like the travelling salesman problem. -->
+            <!-- Really it is NP-hard, but the decision problem (is there a path of length k) is NP-complete.) -->
+        </question>
     </section>
 
     <section id="graph-algorithm-purposes-shortest-path" answers_as_choices="true">
-        <title>Graph Algorithm Purposes: Shortest path</title>
-        <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
-        <question id="purpose-dijkstras">
-            <text>Dijkstra's Algorithm</text>
-            <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
-            <answer>Shortest Path (no negative edges).</answer>
-        </question>
         <question id="purpose-bellmann-ford">
             <text>Bellmann-Ford Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
             <answer>Single-Source Shortest Path (with negative edges).</answer>
             <!-- TODO: Bellmann-Ford also allows distributed computation. -->
             <!-- TODO: Optimizations --> <!-- TODO: Uses: Internet Routing -->
+            <!-- TODO: Can detect negative cycles, but cannot then find a shortest path. -->
         </question>
 
         <question id="purpose-floyd-warshall">
@@ -472,6 +474,9 @@
             <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
             <answer>Start with an arbitrary vertex. Find the lowest-cost outgoing edge and add its destination to the tree. Repeat until all vertices are in the tree.</answer>
         </question>
+
+        <!-- Note: Kruskals is like a greedy algorithm for finding clusters, though that aborts early, to leave k clusters.
+             https://www.coursera.org/learn/algorithm-design-analysis-2/lecture/QWubN/application-to-clustering  -->
         <question id="definition-kruskals">
             <text>Kruskal's Algorithm for Minimum Spanning Tree</text>
             <link>https://en.wikipedia.org/wiki/Kruskal's_algorithm</link>
