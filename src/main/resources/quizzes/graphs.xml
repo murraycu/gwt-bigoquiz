@@ -378,16 +378,19 @@
             <!-- TODO: Bellmann-Ford also allows distributed computation. -->
             <!-- TODO: Optimizations --> <!-- TODO: Uses: Internet Routing -->
         </question>
+
         <question id="purpose-floyd-warshall">
             <text>Floyd Warshall Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm</link>
             <answer>All Pairs Shortest Path, for dense graphs (with negative edges).</answer>
         </question>
+
         <question id="purpose-johnsons">
             <text>Johnson's Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Johnson's_algorithm</link>
             <answer>All Pairs Shortest Path, for sparse graphs (with negative edges).</answer>
         </question>
+
         <question id="purpose-n-dijkstra">
             <text>n * Dijkstra's Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
@@ -402,21 +405,25 @@
             <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
             <answer>Minimum Spanning Tree, for dense graphs.</answer>
         </question>
+
         <question id="purpose-kruskals">
             <text>Kruskal's Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Kruskal's_algorithm</link>
             <answer>Minimum Spanning Tree, for sparse graphs.</answer>
         </question>
+
         <question id="purpose-ford-fulkerson">
             <text>Ford-Fulkerson (Edmonds-Karp) Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm</link>
             <answer>Maximum Flow (sparse graphs).</answer>i
         </question>
+
         <question id="purpose-dinic">
             <text>Dinic's Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Dinic's_algorithm</link>
             <answer>Maximum Flow (sparse graphs).</answer>
         </question>
+
         <question id="purpose-push-relabel">
             <text>Push-Relabel Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Push%E2%80%93relabel_maximum_flow_algorithm</link>
@@ -432,21 +439,25 @@
             <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
             <answer>Choose the outgoing edge with the least total path cost, starting with a zero-cost edge to the start vertex. Look at the edge's destination vertex and store the total path costs (and, optionally, the predecessor) for each outgoing edge's vertex. Repeat until we reach the destination. Use, and update, a min heap (priority queue) to choose the outgoing edge with the lowest total cost.</answer>
         </question>
+
         <question id="definition-bidirectional-dijkstra">
             <text>Dijkstra's Algorithm for Shortest Path (Bidirectional)</text>
             <link>https://en.wikipedia.org/wiki/Bidirectional_search</link> <!-- I learned this in: https://www.youtube.com/watch?v=CHvQ3q_gJ7E -->
             <answer>Alternate between forward search, from the source, and backward search from the destination. Terminate when the same vertex has been removed from the priority queue. Find the vertex with the minimum forward plus backward length.</answer>
         </question>
+
         <question id="definition-bellmann-ford">
             <text>Bellmann-Ford Algorithm for Single-Source Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
             <answer>Start with 0 cost for the source vertex, and infinity for all other vertices. Then, for each vertex, examine each edge, to calculate the total path cost (or infinity) to reach the adjacent vertices, reducing the stored cost if it is less. Repeat the examination of edges, and the recalculation, n-1 times, or until there is no change. Do 1 extra iteration to detect negative cycles.</answer>
         </question>
+
         <question id="definition-floyd-warshall">
             <text>Floyd Warshall Algorithm for All Pairs Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm</link>
             <answer>Examine every path from vertex i to vertex j, using k edges, by examining i to j using k-1 edges and examining i to k to j using k-1 edges. To detect negative cycles, check for a negative cost from a node to itself.</answer>
         </question>
+
         <question id="definition-johnsons">
             <text>Johnson's Algorithm for All Pairs Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Johnson's_algorithm</link>
