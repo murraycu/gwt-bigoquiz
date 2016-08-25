@@ -372,6 +372,8 @@
     </section>
 
     <section id="graph-algorithm-purposes-shortest-path" answers_as_choices="true">
+        <title>Graph Algorithm Purposes: Shortest Path</title>
+
         <question id="purpose-bellmann-ford">
             <text>Bellmann-Ford Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
@@ -505,7 +507,68 @@
         <!-- TODO: Uses: Floyd-Warshall: Transitive Closure of a binary relation. -->
     </section>
 
-    <section id="graph-algorithm-choice" answers_as_choices="true" and_reverse="true">
+    <!-- This is much like a reverse of the graph-algorithm-purposes-shortest-path section,
+      but with some useful rewording to really exercise understanding. -->
+    <section id="graph-algorithm-choice-shortest-path" answers_as_choices="true" and_reverse="true">
+        <title>Graph Algorithms Choice: Shortest path</title>
+        <question id="algorithm-for-shortest-path-unweighted">
+            <text>Single Source Shortest Path (unweighted)</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Unweighted_graphs</link>
+            <answer>Breadth First Search</answer>
+        </question>
+
+        <question id="algorithm-for-shortest-path-weighted-directed-acyclic">
+            <text>Single Source Shortest Path (weighted, directed, acyclic)</text>
+            <link>hhttps://en.wikipedia.org/wiki/Shortest_path_problem#Directed_acyclic_graphs</link>
+            <!-- http://www.geeksforgeeks.org/shortest-path-for-directed-acyclic-graphs/ -->
+            <!-- https://www.youtube.com/watch?v=ePqBaDRHkdk -->
+            <!-- Page 491 of TADM. -->
+            <!-- TODO: O(|V| + |E|) -->
+            <answer>Topological sort. Then Find minimum distance to adjacent nodes by examining nodes in order, starting with source, until destination.</answer>
+        </question>
+
+        <question id="algorithm-for-shortest-path-weighted">
+            <text>Single Source Shortest Path (weighted, directed, with non-negative cycles)</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Directed_graphs_with_nonnegative_weights</link>
+            <answer>Dijkstra's algorithm (with non-negative weights), or the Bellman-Ford algorithm (with negative weights).</answer>
+        </question>
+
+        <question id="algorithm-for-all-pairs-shortest-path">
+            <text>All Pairs Shortest Path</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#All-pairs_shortest_paths</link>
+            <answer>Floyd-Warshall, Johnson's, or repeated Dijkstra's algorithm.</answer>
+        </question>
+
+        <question id="algorithm-for-shortest-path-unweighted">
+            <text>Single Source Shortest Path (unweighted)</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Unweighted_graphs</link>
+            <answer>Breadth First Search</answer>
+        </question>
+
+        <question id="algorithm-for-shortest-path-weighted-directed-acyclic">
+            <text>Single Source Shortest Path (weighted, directed, acyclic)</text>
+            <link>hhttps://en.wikipedia.org/wiki/Shortest_path_problem#Directed_acyclic_graphs</link>
+            <!-- http://www.geeksforgeeks.org/shortest-path-for-directed-acyclic-graphs/ -->
+            <!-- https://www.youtube.com/watch?v=ePqBaDRHkdk -->
+            <!-- TODO: O(|V| + |E|) -->
+            <answer>Topological sort. Then Find minimum distance to adjacent nodes by examining nodes in order, starting with source, until destination.</answer>
+        </question>
+
+        <question id="algorithm-for-shortest-path-weighted">
+            <text>Single Source Shortest Path (weighted, directed, with non-negative cycles)</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Directed_graphs_with_nonnegative_weights</link>
+            <answer>Dijkstra's algorithm (non-negative weights), or the Bellman-Ford algorithm (with negative weights).</answer>
+        </question>
+        <!-- TODO: If acyclic (a DAG), it can be linear with topological sort. Page 491 of TADM. -->
+
+        <question id="algorithm-for-all-pairs-shortest-path">
+            <text>All Pairs Shortest Path</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#All-pairs_shortest_paths</link>
+            <answer>Floyd-Warshall, Johnson's, or repeated Dijkstra's algorithm.</answer>
+        </question>
+    </section>
+
+    <section id="graph-algorithm-choice-others" answers_as_choices="true" and_reverse="true">
         <title>Graph Algorithms Choice</title>
 
         <question id="algorithm-for-connected-components">
@@ -536,34 +599,6 @@
             <text>Minimum Spanning Tree</text>
             <link>https://en.wikipedia.org/wiki/Minimum_spanning_tree</link>
             <answer>Kruskal's, Prim's, or Boruvka's algorithm</answer>
-        </question>
-
-        <question id="algorithm-for-shortest-path-unweighted">
-            <text>Single Source Shortest Path (unweighted)</text>
-            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Unweighted_graphs</link>
-            <answer>Breadth First Search</answer>
-        </question>
-
-        <question id="algorithm-for-shortest-path-weighted-directed-acyclic">
-            <text>Single Source Shortest Path (weighted, directed, acyclic)</text>
-            <link>hhttps://en.wikipedia.org/wiki/Shortest_path_problem#Directed_acyclic_graphs</link>
-            <!-- http://www.geeksforgeeks.org/shortest-path-for-directed-acyclic-graphs/ -->
-            <!-- https://www.youtube.com/watch?v=ePqBaDRHkdk -->
-            <!-- TODO: O(|V| + |E|) -->
-            <answer>Topological sort. Then Find minimum distance to adjacent nodes by examining nodes in order, starting with source, until destination.</answer>
-        </question>
-
-        <question id="algorithm-for-shortest-path-weighted">
-            <text>Single Source Shortest Path (weighted, directed, with non-negative cycles)</text>
-            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Directed_graphs_with_nonnegative_weights</link>
-            <answer>Dijkstra's algorithm (non-negative weights), or the Bellman-Ford algorithm (with negative weights).</answer>
-        </question>
-        <!-- TODO: If acyclic (a DAG), it can be linear with topological sort. Page 491 of TADM. -->
-
-        <question id="algorithm-for-all-pairs-shortest-path">
-            <text>All Pairs Shortest Path</text>
-            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#All-pairs_shortest_paths</link>
-            <answer>Floyd-Warshall, Johnson's, or repeated Dijkstra's algorithm.</answer>
         </question>
 
         <question id="algorithm-for-transitive-closure">
