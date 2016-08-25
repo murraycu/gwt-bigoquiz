@@ -435,8 +435,8 @@
         </question>
     </section>
 
-    <section id="graph-algorithms-shortest-path" answers_as_choices="true" and_reverse="true">
-        <title>Graph Algorithms: Shortest Path</title>
+    <section id="graph-algorithm-definitions-shortest-path" answers_as_choices="true" and_reverse="true">
+        <title>Graph Algorithm Definitions: Shortest Path</title>
         <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
         <question id="definition-dijkstras">
             <text>Dijkstra's Algorithm for Shortest Path</text>
@@ -469,8 +469,8 @@
         </question>
     </section>
 
-    <section id="graph-algorithms-othes" answers_as_choices="true" and_reverse="true">
-        <title>Graph Algorithms: Others</title>
+    <section id="graph-algorithm-definitions-others" answers_as_choices="true" and_reverse="true">
+        <title>Graph Algorithm Definitions: Others</title>
         <question id="definition-prims">
             <text>Prim's Algorithm for Minimum Spanning Tree</text>
             <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
@@ -569,7 +569,7 @@
     </section>
 
     <section id="graph-algorithm-choice-others" answers_as_choices="true" and_reverse="true">
-        <title>Graph Algorithms Choice</title>
+        <title>Graph Algorithms Choice: Others</title>
 
         <question id="algorithm-for-connected-components">
             <text>Connected Components in an undirected graph</text>
