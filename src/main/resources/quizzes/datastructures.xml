@@ -77,388 +77,413 @@
     <section id="datastructures-description" answers_as_choices="true">
         <title>Descriptions of Data Structures</title>
 
-        <question id="datastructures-description-bloom-filter">
-            <text>Bloom Filter</text>
-            <link>https://en.wikipedia.org/wiki/Bloom_filter</link>
-            <answer>Tests membership, with possibility of false positives.</answer>
-        </question>
+        <subsection id="datastructures-description-trees">
+            <title>Trees</title>
 
-        <question id="datastructures-description-union-find">
-            <text>Union Find (Disjoint Set)</text>
-            <link>https://en.wikipedia.org/wiki/Disjoint-set_data_structure</link>
-            <answer>Groups items into subsets.</answer>
-        </question>
+            <question id="datastructures-description-tree">
+                <text>Tree</text>
+                <link>https://en.wikipedia.org/wiki/Tree_(data_structure)</link>
+                <answer>Allows traversal of a tree of nodes.</answer>
+            </question>
 
-        <question id="datastructures-description-adjacency-list">
-            <text>Adjacency List</text>
-            <link>https://en.wikipedia.org/wiki/Adjacency_list</link>
-            <answer>Lists nodes and their incident (often only outgoing) edges.</answer>
-        </question>
+            <question id="datastructures-description-binary-search-tree">
+                <text>Binary Search Tree</text>
+                <link>https://en.wikipedia.org/wiki/Binary_search_tree</link>
+                <answer>A tree whose child nodes are in sorted order, allowing binary search of the whole tree.</answer>
+            </question>
 
-        <question id="datastructures-description-adjacency-matrix">
-            <text>Adjacency Matrix</text>
-            <link>https://en.wikipedia.org/wiki/Adjacency_matrix</link>
-            <answer>For any 2 nodes, provides the edge, if any, that connects them.</answer>
-        </question>
+            <question id="datastructures-description-self-balancing-binary-search-tree">
+                <text>Self-Balancing Binary Search Tree (Balanced Binary Search Tree)</text>
+                <link>https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree</link>
+                <answer>A binary search tree that keeps its height small.</answer>
+            </question>
 
-        <question id="datastructures-description-singly-linked-list">
-            <text>Singly Linked List</text>
-            <link>https://en.wikipedia.org/wiki/Linked_list#Singly_linked_list</link>
-            <answer>Allows forward traversal of the items in the list.</answer>
-        </question>
+            <question id="datastructures-description-optimal-binary-search-tree">
+                <text>Optimal Binary Search Tree</text>
+                <link>https://en.wikipedia.org/wiki/Optimal_binary_search_tree</link>
+                <answer>A binary search tree with the smallest possible search time for certain queries.</answer>
+            </question>
 
-        <question id="datastructures-description-doubly-linked-list">
-            <text>Doubly Linked List</text>
-            <link>https://en.wikipedia.org/wiki/Doubly_linked_list</link>
-            <answer>Allows forward and backward traversal of the items in the list.</answer>
-        </question>
+            <question id="datastructures-description-binary-tree">
+                <text>Binary Tree</text>
+                <link>https://en.wikipedia.org/wiki/Binary_tree</link>
+                <answer>A tree whose nodes have no more than 2 children.</answer>
+            </question>
 
-        <question id="datastructures-description-hash-table">
-            <text>Hash Table</text>
-            <link>https://en.wikipedia.org/wiki/Hash_table</link>
-            <answer>Maps keys to values using a hash function.</answer>
-        </question>
+            <question id="datastructures-description-binomial-tree">
+                <text>Binomial Tree</text>
+                <link>https://en.wikipedia.org/wiki/Binomial_heap#Binomial_heap</link> <!-- Update if it gets its own wiki page. -->
+                <answer>A tree in which a node of order k has children who are roots of trees of order k, k-1, ... 0. So each child's tree is deeper than its sibling child's tree. Permits easy merging of trees.</answer>
+            </question>
 
-        <question id="datastructures-description-tree">
-            <text>Tree</text>
-            <link>https://en.wikipedia.org/wiki/Tree_(data_structure)</link>
-            <answer>Allows traversal of a tree of nodes.</answer>
-        </question>
+            <question id="datastructures-description-b-tree">
+                <text>B-Tree</text>
+                <link>https://en.wikipedia.org/wiki/Binary_tree</link>
+                <answer>A self-balancing tree in which each node can have multiple keys, separating multiple child nodes.</answer>
+            </question>
 
-        <question id="datastructures-description-binary-search-tree">
-            <text>Binary Search Tree</text>
-            <link>https://en.wikipedia.org/wiki/Binary_search_tree</link>
-            <answer>A tree whose child nodes are in sorted order, allowing binary search of the whole tree.</answer>
-        </question>
+            <question id="datastructures-description-2-3-tree">
+                <text>2-3 Tree</text>
+                <link>https://en.wikipedia.org/wiki/2%E2%80%933_tree</link>
+                <answer>B-Tree of order 3.</answer>
+            </question>
 
-        <question id="datastructures-description-self-balancing-binary-search-tree">
-            <text>Self-Balancing Binary Search Tree (Balanced Binary Search Tree)</text>
-            <link>https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree</link>
-            <answer>A binary search tree that keeps its height small.</answer>
-        </question>
+            <question id="datastructures-description-2-3-4-tree">
+                <text>2-3-4 Tree</text>
+                <link>https://en.wikipedia.org/wiki/2%E2%80%933%E2%80%934_tree</link>
+                <answer>B-Tree of order 4.</answer>
+            </question>
 
-        <question id="datastructures-description-optimal-binary-search-tree">
-            <text>Optimal Binary Search Tree</text>
-            <link>https://en.wikipedia.org/wiki/Optimal_binary_search_tree</link>
-            <answer>A binary search tree with the smallest possible search time for certain queries.</answer>
-        </question>
+            <question id="datastructures-description-avl-tree">
+                <text>AVL Tree</text>
+                <link>https://en.wikipedia.org/wiki/AVL_tree</link>
+                <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest node whose child nodes' heights differ by more than 1..</answer>
+            </question>
 
-        <question id="datastructures-description-binary-tree">
-            <text>Binary Tree</text>
-            <link>https://en.wikipedia.org/wiki/Binary_tree</link>
-            <answer>A tree whose nodes have no more than 2 children.</answer>
-        </question>
+            <question id="datastructures-description-red-black-tree">
+                <text>Red-Black Tree</text>
+                <link>https://en.wikipedia.org/wiki/Red%E2%80%93black_tree</link>
+                <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest nodes that do not satisfy the coloring constraints: Root is black. All leaves are black. All children of red nodes are black. All paths to leaves contains the same number of black nodes.</answer>
+            </question>
 
-        <question id="datastructures-description-binomial-tree">
-            <text>Binomial Tree</text>
-            <link>https://en.wikipedia.org/wiki/Binomial_heap#Binomial_heap</link> <!-- Update if it gets its own wiki page. -->
-            <answer>A tree in which a node of order k has children who are roots of trees of order k, k-1, ... 0. So each child's tree is deeper than its sibling child's tree. Permits easy merging of trees.</answer>
-        </question>
+            <question id="datastructures-description-cartesian-tree">
+                <text>Cartesian Tree</text>
+                <link>https://en.wikipedia.org/wiki/Cartesian_tree</link>
+                <answer>A heap-ordered tree whose in-order traversal recreates the original sequence.</answer>
+            </question>
 
-        <question id="datastructures-description-b-tree">
-            <text>B-Tree</text>
-            <link>https://en.wikipedia.org/wiki/Binary_tree</link>
-            <answer>A self-balancing tree in which each node can have multiple keys, separating multiple child nodes.</answer>
-        </question>
+            <question id="datastructures-description-trie">
+                <text>Trie (Digital Tree, Prefix Tree)</text>
+                <link>https://en.wikipedia.org/wiki/Trie</link>
+                <answer>Stores all k prefixes of n strings.</answer>
+            </question>
 
-        <question id="datastructures-description-2-3-tree">
-            <text>2-3 Tree</text>
-            <link>https://en.wikipedia.org/wiki/2%E2%80%933_tree</link>
-            <answer>B-Tree of order 3.</answer>
-        </question>
+            <question id="datastructures-description-radix-tree">
+                <text>Radix Tree (Radix Trie, Compact Prefix Tree, Patricia Trie)</text>
+                <link>https://en.wikipedia.org/wiki/Radix_tree</link>
+                <answer>Space-optimized Trie.</answer>
+            </question>
 
-        <question id="datastructures-description-2-3-4-tree">
-            <text>2-3-4 Tree</text>
-            <link>https://en.wikipedia.org/wiki/2%E2%80%933%E2%80%934_tree</link>
-            <answer>B-Tree of order 4.</answer>
-        </question>
+            <!-- TODO: https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton -->
 
-        <question id="datastructures-description-avl-tree">
-            <text>AVL Tree</text>
-            <link>https://en.wikipedia.org/wiki/AVL_tree</link>
-            <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest node whose child nodes' heights differ by more than 1..</answer>
-        </question>
+            <question id="datastructures-description-suffix-tree">
+                <text>Suffix Tree</text>
+                <link>https://en.wikipedia.org/wiki/Suffix_tree</link>
+                <answer>Stores all k suffixes of n strings, allowing searches for all substrings.</answer>
+            </question>
 
-        <question id="datastructures-description-red-black-tree">
-            <text>Red-Black Tree</text>
-            <link>https://en.wikipedia.org/wiki/Red%E2%80%93black_tree</link>
-            <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest nodes that do not satisfy the coloring constraints: Root is black. All leaves are black. All children of red nodes are black. All paths to leaves contains the same number of black nodes.</answer>
-        </question>
+            <!-- TODO: Suffix array -->
 
-        <question id="datastructures-description-cartesian-tree">
-            <text>Cartesian Tree</text>
-            <link>https://en.wikipedia.org/wiki/Cartesian_tree</link>
-            <answer>A heap-ordered tree whose in-order traversal recreates the original sequence.</answer>
-        </question>
+            <question id="datastructures-description-van-emde-boas-tree">
+                <text>Van Emde Boas Tree</text>
+                <link>https://en.wikipedia.org/wiki/Van_Emde_Boas_tree</link>
+                <answer>Associative array allowing fast O(lg lg N) successor/predecessor, and O(1) max/min, on keys of limited range N. by using a hierarchy of of clusters, each with a min and max.</answer>
+            </question>
 
-        <question id="datastructures-description-trie">
-            <text>Trie (Digital Tree, Prefix Tree)</text>
-            <link>https://en.wikipedia.org/wiki/Trie</link>
-            <answer>Stores all k prefixes of n strings.</answer>
-        </question>
+        </subsection>
 
-        <question id="datastructures-description-radix-tree">
-            <text>Radix Tree (Radix Trie, Compact Prefix Tree, Patricia Trie)</text>
-            <link>https://en.wikipedia.org/wiki/Radix_tree</link>
-            <answer>Space-optimized Trie.</answer>
-        </question>
+        <subsection id="datastructures-description-heaps">
+            <title>Heaps</title>
 
-        <!-- TODO: https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton -->
+            <question id="datastructures-description-heap">
+                <text>Heap</text>
+                <link>https://en.wikipedia.org/wiki/Heap_(data_structure)</link>
+                <answer>A tree-based structure whose parent nodes are less (for a min heap) or greater (for a max heap) than their children, allowing fast min (or max) retrieval.</answer>
+            </question>
 
-        <question id="datastructures-description-suffix-tree">
-            <text>Suffix Tree</text>
-            <link>https://en.wikipedia.org/wiki/Suffix_tree</link>
-            <answer>Stores all k suffixes of n strings, allowing searches for all substrings.</answer>
-        </question>
+            <question id="datastructures-description-binary-heap">
+                <text>Binary Heap</text>
+                <link>https://en.wikipedia.org/wiki/Binary_heap</link>
+                <answer>A heap implemented with a binary tree, which is complete (all levels are filled, apart from leaves, which are filled from left to right.)</answer>
+            </question>
 
-        <!-- TODO: Suffix array -->
+            <question id="datastructures-description-binomial-heap">
+                <text>Binomial Heap</text>
+                <link>https://en.wikipedia.org/wiki/Binomial_heap</link>
+                <answer>A mergeable heap, implemented as a collection of binomial trees.</answer>
+            </question>
 
-        <question id="datastructures-description-van-emde-boas-tree">
-            <text>Van Emde Boas Tree</text>
-            <link>https://en.wikipedia.org/wiki/Van_Emde_Boas_tree</link>
-            <answer>Associative array allowing fast O(lg lg N) successor/predecessor, and O(1) max/min, on keys of limited range N. by using a hierarchy of of clusters, each with a min and max.</answer>
-        </question>
+            <question id="datastructures-description-fibonacci-heap">
+                <text>Fibonacci Heap</text>
+                <link>https://en.wikipedia.org/wiki/Fibonacci_heap</link>
+                <answer>A heap implemented as a collection of heaps, allowing fast decrease-key, delete, and merge.</answer>
+            </question>
 
-        <question id="datastructures-description-skip-list">
-            <text>Skip List</text>
-            <link>https://en.wikipedia.org/wiki/Skip_list</link>
-            <answer>A linked hierarchy of ordered elements, starting with the sparsest subsequence.</answer>
-        </question>
+            <question id="datastructures-description-treap">
+                <text>Treap</text>
+                <link>https://en.wikipedia.org/wiki/Treap</link>
+                <answer>A self-balancing binary search tree that is also a min (or max) heap in terms of a random weight for each node, resulting in a random binary search tree that is likely to be balanced..</answer>
+            </question>
+        </subsection>
 
-        <question id="datastructures-description-heap">
-            <text>Heap</text>
-            <link>https://en.wikipedia.org/wiki/Heap_(data_structure)</link>
-            <answer>A tree-based structure whose parent nodes are less (for a min heap) or greater (for a max heap) than their children, allowing fast min (or max) retrieval.</answer>
-        </question>
+        <subsection id="datastructures-description-others">
+            <title>Others</title>
 
-        <question id="datastructures-description-binary-heap">
-            <text>Binary Heap</text>
-            <link>https://en.wikipedia.org/wiki/Binary_heap</link>
-            <answer>A heap implemented with a binary tree, which is complete (all levels are filled, apart from leaves, which are filled from left to right.)</answer>
-        </question>
+            <question id="datastructures-description-bloom-filter">
+                <text>Bloom Filter</text>
+                <link>https://en.wikipedia.org/wiki/Bloom_filter</link>
+                <answer>Tests membership, with possibility of false positives.</answer>
+            </question>
 
-        <question id="datastructures-description-binomial-heap">
-            <text>Binomial Heap</text>
-            <link>https://en.wikipedia.org/wiki/Binomial_heap</link>
-            <answer>A mergeable heap, implemented as a collection of binomial trees.</answer>
-        </question>
+            <question id="datastructures-description-union-find">
+                <text>Union Find (Disjoint Set)</text>
+                <link>https://en.wikipedia.org/wiki/Disjoint-set_data_structure</link>
+                <answer>Groups items into subsets.</answer>
+            </question>
 
-        <question id="datastructures-description-fibonacci-heap">
-            <text>Fibonacci Heap</text>
-            <link>https://en.wikipedia.org/wiki/Fibonacci_heap</link>
-            <answer>A heap implemented as a collection of heaps, allowing fast decrease-key, delete, and merge.</answer>
-        </question>
+            <question id="datastructures-description-adjacency-list">
+                <text>Adjacency List</text>
+                <link>https://en.wikipedia.org/wiki/Adjacency_list</link>
+                <answer>Lists nodes and their incident (often only outgoing) edges.</answer>
+            </question>
 
-        <question id="datastructures-description-treap">
-            <text>Treap</text>
-            <link>https://en.wikipedia.org/wiki/Treap</link>
-            <answer>A self-balancing binary search tree that is also a min (or max) heap in terms of a random weight for each node, resulting in a random binary search tree that is likely to be balanced..</answer>
-        </question>
+            <question id="datastructures-description-adjacency-matrix">
+                <text>Adjacency Matrix</text>
+                <link>https://en.wikipedia.org/wiki/Adjacency_matrix</link>
+                <answer>For any 2 nodes, provides the edge, if any, that connects them.</answer>
+            </question>
 
-        <question id="datastructures-description-splay-tree">
-            <text>Splay Tree</text>
-            <link>https://en.wikipedia.org/wiki/Splay_tree</link>
-            <answer>Binary Search Tree that optimizes itself for recently accessed elements.</answer>
-        </question>
+            <question id="datastructures-description-singly-linked-list">
+                <text>Singly Linked List</text>
+                <link>https://en.wikipedia.org/wiki/Linked_list#Singly_linked_list</link>
+                <answer>Allows forward traversal of the items in the list.</answer>
+            </question>
 
-        <question id="datastructures-description-k-d-tree">
-            <text>K-D Tree</text>
-            <link>https://en.wikipedia.org/wiki/K-d_tree</link>
-            <answer>Allows proximity search in k-dimensional data by partitioning the space.</answer>
-        </question>
+            <question id="datastructures-description-doubly-linked-list">
+                <text>Doubly Linked List</text>
+                <link>https://en.wikipedia.org/wiki/Doubly_linked_list</link>
+                <answer>Allows forward and backward traversal of the items in the list.</answer>
+            </question>
+
+            <question id="datastructures-description-hash-table">
+                <text>Hash Table</text>
+                <link>https://en.wikipedia.org/wiki/Hash_table</link>
+                <answer>Maps keys to values using a hash function.</answer>
+            </question>
+
+            <question id="datastructures-description-skip-list">
+                <text>Skip List</text>
+                <link>https://en.wikipedia.org/wiki/Skip_list</link>
+                <answer>A linked hierarchy of ordered elements, starting with the sparsest subsequence.</answer>
+            </question>
+
+            <question id="datastructures-description-splay-tree">
+                <text>Splay Tree</text>
+                <link>https://en.wikipedia.org/wiki/Splay_tree</link>
+                <answer>Binary Search Tree that optimizes itself for recently accessed elements.</answer>
+            </question>
+
+            <question id="datastructures-description-k-d-tree">
+                <text>K-D Tree</text>
+                <link>https://en.wikipedia.org/wiki/K-d_tree</link>
+                <answer>Allows proximity search in k-dimensional data by partitioning the space.</answer>
+            </question>
+        </subsection>
     </section>
 
     <section id="datastructures-implementations" answers_as_choices="true">
         <title>Implementations of Data Structures</title>
 
-        <question id="datastructures-implementation-bloom-filter">
-            <text>Bloom Filter</text>
-            <link>https://en.wikipedia.org/wiki/Bloom_filter</link>
-            <answer>A bit array and a set of hash functions to map keys to positions.</answer>
-        </question>
+        <subsection id="datastructures-implementations-trees">
+            <title>Trees</title>
 
-        <question id="datastructures-implementation-union-find">
-            <text>Union Find (Disjoint Set)</text>
-            <link>https://en.wikipedia.org/wiki/Disjoint-set_data_structure</link>
-            <answer>A tree-based data struture, for instance in an array. Each position's value is the position of its parent.</answer>
-        </question>
+            <question id="datastructures-implementation-tree">
+                <text>Tree</text>
+                <link>https://en.wikipedia.org/wiki/Tree_(data_structure)</link>
+                <answer>Nodes with a data field and pointers to child nodes.</answer>
+            </question>
 
-        <question id="datastructures-implementation-adjacency-list">
-            <text>Adjacency List</text>
-            <link>https://en.wikipedia.org/wiki/Adjacency_list</link>
-            <answer>A list of each node and its edges.</answer>
-        </question>
+            <question id="datastructures-implementation-binary-search-tree">
+                <text>Binary Search Tree</text>
+                <link>https://en.wikipedia.org/wiki/Binary_search_tree</link>
+                <answer>Array or tree structure.</answer>
+            </question>
 
-        <question id="datastructures-implementation-adjacency-matrix">
-            <text>Adjacency Matrix</text>
-            <link>https://en.wikipedia.org/wiki/Adjacency_matrix</link>
-            <answer>A 2-dimensional array of node connections.</answer>
-        </question>
+            <question id="datastructures-implementation-self-balancing-binary-search-tree">
+                <text>Self-Balancing Binary Search Tree (Balanced Binary Search Tree)</text>
+                <link>https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree</link>
+                <answer>Perform local rotation transformations after changes.</answer>
+            </question>
 
-        <question id="datastructures-implementation-singly-linked-list">
-            <text>Singly Linked List</text>
-            <link>https://en.wikipedia.org/wiki/Linked_list#Singly_linked_list</link>
-            <answer>Nodes with a data field and a pointer to the next node..</answer>
-        </question>
+            <question id="datastructures-implementation-optimal-binary-search-tree">
+                <text>Optimal Binary Search Tree</text>
+                <link>https://en.wikipedia.org/wiki/Optimal_binary_search_tree</link>
+                <answer>Construct initially and prevent modification, using dynamic programming. Or balance optimally (theoretically) after each modification.</answer>
+            </question>
 
-        <question id="datastructures-implementation-doubly-linked-list">
-            <text>Doubly Linked List</text>
-            <link>https://en.wikipedia.org/wiki/Doubly_linked_list</link>
-            <answer>Nodes with a data field and both a pointer to the next node and a pointer to the previous node.</answer>
-        </question>
+            <question id="datastructures-implementation-binary-tree">
+                <text>Binary Tree</text>
+                <link>https://en.wikipedia.org/wiki/Binary_tree</link>
+                <answer>Nodes with a data field and pointers to only 2 child nodes.</answer>
+            </question>
 
-        <question id="datastructures-implementation-hash-table">
-            <text>Hash Table</text>
-            <link>https://en.wikipedia.org/wiki/Hash_table</link>
-            <answer>A hash function that maps keys to buckets in an array, resolving collisions either by Separate Chaining (linked list of items in each bucket) or Open Addressing (items stored in next available bucket).</answer>
-        </question>
+            <question id="datastructures-implementation-binomial-tree">
+                <text>Binomial Tree</text>
+                <link>https://en.wikipedia.org/wiki/Binomial_heap#Binomial_heap</link> <!-- Update if it gets its own wiki page. -->
+                <answer>A tree in which a node of order k has children who are roots of trees of order k, k-1, ... 0. Construct by merging trees of same order, by adding the second tree as a child of the first tree's root.</answer>
+            </question>
 
-        <question id="datastructures-implementation-tree">
-            <text>Tree</text>
-            <link>https://en.wikipedia.org/wiki/Tree_(data_structure)</link>
-            <answer>Nodes with a data field and pointers to child nodes.</answer>
-        </question>
+            <question id="datastructures-implementation-b-tree">
+                <text>B-Tree</text>
+                <link>https://en.wikipedia.org/wiki/Binary_tree</link>
+                <answer>Nodes with multiple keys separating multiple child nodes. Nodes with d keys have d+1 child nodes.</answer>
+            </question>
 
-        <question id="datastructures-implementation-binary-search-tree">
-            <text>Binary Search Tree</text>
-            <link>https://en.wikipedia.org/wiki/Binary_search_tree</link>
-            <answer>Array or tree structure.</answer>
-        </question>
+            <question id="datastructures-implementation-2-3-tree">
+                <text>2-3 Tree</text>
+                <link>https://en.wikipedia.org/wiki/2%E2%80%933_tree</link>
+                <answer>B-Tree of order 3. Nodes with 1 or 2 keys separating 2 or 3 child nodes, respectively.</answer>
+            </question>
 
-        <question id="datastructures-implementation-self-balancing-binary-search-tree">
-            <text>Self-Balancing Binary Search Tree (Balanced Binary Search Tree)</text>
-            <link>https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree</link>
-            <answer>Perform local rotation transformations after changes.</answer>
-        </question>
+            <question id="datastructures-implementation-2-3-4-tree">
+                <text>2-3-4 Tree</text>
+                <link>https://en.wikipedia.org/wiki/2%E2%80%933%E2%80%934_tree</link>
+                <answer>B-Tree of order 4. Nodes with 1, 2, or 3 keys separating 2, 3 or 4 child nodes, respectively.</answer>
+            </question>
 
-        <question id="datastructures-implementation-optimal-binary-search-tree">
-            <text>Optimal Binary Search Tree</text>
-            <link>https://en.wikipedia.org/wiki/Optimal_binary_search_tree</link>
-            <answer>Construct initially and prevent modification, using dynamic programming. Or balance optimally (theoretically) after each modification.</answer>
-        </question>
+            <question id="datastructures-implementation-avl-tree">
+                <text>AVL Tree</text>
+                <link>https://en.wikipedia.org/wiki/AVL_tree</link>
+                <answer>After an insert or deletion, rotates the lowest node whose child nodes' heights differ by more than 1.</answer>
+            </question>
 
-        <question id="datastructures-implementation-binary-tree">
-            <text>Binary Tree</text>
-            <link>https://en.wikipedia.org/wiki/Binary_tree</link>
-            <answer>Nodes with a data field and pointers to only 2 child nodes.</answer>
-        </question>
+            <question id="datastructures-implementation-red-black-tree">
+                <text>Red-Black Tree</text>
+                <link>https://en.wikipedia.org/wiki/Red%E2%80%93black_tree</link>
+                <answer>After an insert or deletion, rotates the lowest nodes that do not satisfy the coloring constraints: Root is black. All leaves are black. All children of red nodes are black. All paths to leaves contains the same number of black nodes.</answer>
+            </question>
 
-        <question id="datastructures-implementation-binomial-tree">
-            <text>Binomial Tree</text>
-            <link>https://en.wikipedia.org/wiki/Binomial_heap#Binomial_heap</link> <!-- Update if it gets its own wiki page. -->
-            <answer>A tree in which a node of order k has children who are roots of trees of order k, k-1, ... 0. Construct by merging trees of same order, by adding the second tree as a child of the first tree's root.</answer>
-        </question>
+            <question id="datastructures-implementation-cartesian-tree">
+                <text>Cartesian Tree</text>
+                <link>https://en.wikipedia.org/wiki/Cartesian_tree#Efficient_construction</link>
+                <answer>Construct the tree in (amortized) O(n) time by adding each node to the previous node, walking up the tree and splitting an edge if necessary, making children into left nodes.</answer>
+            </question>
 
-        <question id="datastructures-implementation-b-tree">
-            <text>B-Tree</text>
-            <link>https://en.wikipedia.org/wiki/Binary_tree</link>
-            <answer>Nodes with multiple keys separating multiple child nodes. Nodes with d keys have d+1 child nodes.</answer>
-        </question>
+            <question id="datastructures-implementation-trie">
+                <text>Trie (Digital Tree, Prefix Tree)</text>
+                <link>https://en.wikipedia.org/wiki/Trie</link>
+                <answer>Keys are defined by their position in the tree, with each edge being the next character (or bit) of the key, and with values associated with leaf nodes.</answer>
+            </question>
 
-        <question id="datastructures-implementation-2-3-tree">
-            <text>2-3 Tree</text>
-            <link>https://en.wikipedia.org/wiki/2%E2%80%933_tree</link>
-            <answer>B-Tree of order 3. Nodes with 1 or 2 keys separating 2 or 3 child nodes, respectively.</answer>
-        </question>
+            <question id="datastructures-implementation-radix-tree">
+                <text>Radix Tree (Radix Trie, Compact Prefix Tree)</text>
+                <link>https://en.wikipedia.org/wiki/Radix_tree</link>
+                <answer>Keys are defined by their position in the tree, with each edge being the next chunk of the key, and with values associated with leaf nodes.</answer>
+            </question>
 
-        <question id="datastructures-implementation-2-3-4-tree">
-            <text>2-3-4 Tree</text>
-            <link>https://en.wikipedia.org/wiki/2%E2%80%933%E2%80%934_tree</link>
-            <answer>B-Tree of order 4. Nodes with 1, 2, or 3 keys separating 2, 3 or 4 child nodes, respectively.</answer>
-        </question>
+            <question id="datastructures-implementation-suffix-tree">
+                <text>Suffix Tree</text>
+                <link>https://en.wikipedia.org/wiki/Suffix_tree</link>
+                <answer>Compressed Trie, with text suffixes as keys and text positions as values.</answer>
+            </question>
 
-        <question id="datastructures-implementation-avl-tree">
-            <text>AVL Tree</text>
-            <link>https://en.wikipedia.org/wiki/AVL_tree</link>
-            <answer>After an insert or deletion, rotates the lowest node whose child nodes' heights differ by more than 1.</answer>
-        </question>
+            <question id="datastructures-implementation-van-emde-boas-tree">
+                <text>Van Emde Boas Tree</text>
+                <link>https://en.wikipedia.org/wiki/Van_Emde_Boas_tree</link>
+                <answer>A hierarchy of of clusters that summarize less sparse clusters, each with a min and max.</answer>
+            </question>
+        </subsection>
 
-        <question id="datastructures-implementation-red-black-tree">
-            <text>Red-Black Tree</text>
-            <link>https://en.wikipedia.org/wiki/Red%E2%80%93black_tree</link>
-            <answer>After an insert or deletion, rotates the lowest nodes that do not satisfy the coloring constraints: Root is black. All leaves are black. All children of red nodes are black. All paths to leaves contains the same number of black nodes.</answer>
-        </question>
+        <subsection id="datastructures-implementations-others">
+            <title>Others</title>
 
-        <question id="datastructures-implementation-cartesian-tree">
-            <text>Cartesian Tree</text>
-            <link>https://en.wikipedia.org/wiki/Cartesian_tree#Efficient_construction</link>
-            <answer>Construct the tree in (amortized) O(n) time by adding each node to the previous node, walking up the tree and splitting an edge if necessary, making children into left nodes.</answer>
-        </question>
+            <question id="datastructures-implementation-bloom-filter">
+                <text>Bloom Filter</text>
+                <link>https://en.wikipedia.org/wiki/Bloom_filter</link>
+                <answer>A bit array and a set of hash functions to map keys to positions.</answer>
+            </question>
 
-        <question id="datastructures-implementation-trie">
-            <text>Trie (Digital Tree, Prefix Tree)</text>
-            <link>https://en.wikipedia.org/wiki/Trie</link>
-            <answer>Keys are defined by their position in the tree, with each edge being the next character (or bit) of the key, and with values associated with leaf nodes.</answer>
-        </question>
+            <question id="datastructures-implementation-union-find">
+                <text>Union Find (Disjoint Set)</text>
+                <link>https://en.wikipedia.org/wiki/Disjoint-set_data_structure</link>
+                <answer>A tree-based data struture, for instance in an array. Each position's value is the position of its parent.</answer>
+            </question>
 
-        <question id="datastructures-implementation-radix-tree">
-            <text>Radix Tree (Radix Trie, Compact Prefix Tree)</text>
-            <link>https://en.wikipedia.org/wiki/Radix_tree</link>
-            <answer>Keys are defined by their position in the tree, with each edge being the next chunk of the key, and with values associated with leaf nodes.</answer>
-        </question>
+            <question id="datastructures-implementation-adjacency-list">
+                <text>Adjacency List</text>
+                <link>https://en.wikipedia.org/wiki/Adjacency_list</link>
+                <answer>A list of each node and its edges.</answer>
+            </question>
 
-        <question id="datastructures-implementation-suffix-tree">
-            <text>Suffix Tree</text>
-            <link>https://en.wikipedia.org/wiki/Suffix_tree</link>
-            <answer>Compressed Trie, with text suffixes as keys and text positions as values.</answer>
-        </question>
+            <question id="datastructures-implementation-adjacency-matrix">
+                <text>Adjacency Matrix</text>
+                <link>https://en.wikipedia.org/wiki/Adjacency_matrix</link>
+                <answer>A 2-dimensional array of node connections.</answer>
+            </question>
 
-        <question id="datastructures-implementation-van-emde-boas-tree">
-            <text>Van Emde Boas Tree</text>
-            <link>https://en.wikipedia.org/wiki/Van_Emde_Boas_tree</link>
-            <answer>A hierarchy of of clusters that summarize less sparse clusters, each with a min and max.</answer>
-        </question>
+            <question id="datastructures-implementation-singly-linked-list">
+                <text>Singly Linked List</text>
+                <link>https://en.wikipedia.org/wiki/Linked_list#Singly_linked_list</link>
+                <answer>Nodes with a data field and a pointer to the next node..</answer>
+            </question>
 
-        <question id="datastructures-implementation-skip-list">
-            <text>Skip List</text>
-            <link>https://en.wikipedia.org/wiki/Skip_list</link>
-            <answer>A linked hierarchy of ordered elements, starting with the sparsest subsequence.</answer>
-        </question>
+            <question id="datastructures-implementation-doubly-linked-list">
+                <text>Doubly Linked List</text>
+                <link>https://en.wikipedia.org/wiki/Doubly_linked_list</link>
+                <answer>Nodes with a data field and both a pointer to the next node and a pointer to the previous node.</answer>
+            </question>
 
-        <question id="datastructures-implementation-heap">
-            <text>Heap</text>
-            <link>https://en.wikipedia.org/wiki/Heap_(data_structure)</link>
-            <answer>Usually implemented with an array. The K children of position i are from Ki+1 to Ki+K.</answer>
-        </question>
+            <question id="datastructures-implementation-hash-table">
+                <text>Hash Table</text>
+                <link>https://en.wikipedia.org/wiki/Hash_table</link>
+                <answer>A hash function that maps keys to buckets in an array, resolving collisions either by Separate Chaining (linked list of items in each bucket) or Open Addressing (items stored in next available bucket).</answer>
+            </question>
 
-        <!-- TODO: How is it kept complete? -->
-        <question id="datastructures-implementation-binary-heap">
-            <text>Binary Heap</text>
-            <link>https://en.wikipedia.org/wiki/Binary_heap</link>
-            <answer>Usually implemented with an array. The children of position i are at 2i+1 and 2i+2.</answer>
-        </question>
+            <question id="datastructures-implementation-skip-list">
+                <text>Skip List</text>
+                <link>https://en.wikipedia.org/wiki/Skip_list</link>
+                <answer>A linked hierarchy of ordered elements, starting with the sparsest subsequence.</answer>
+            </question>
 
-        <question id="datastructures-implementation-binomial-heap">
-            <text>Binomial Heap</text>
-            <link>https://en.wikipedia.org/wiki/Binomial_heap</link>
-            <answer>Store the roots of the binomial trees in an ordered list. Find minimum by finding the minimum root. Merge trees by making the larger root a child of the smaller root.</answer>
-        </question>
+            <question id="datastructures-implementation-splay-tree">
+                <text>Splay Tree</text>
+                <link>https://en.wikipedia.org/wiki/Splay_tree</link>
+                <answer>A binary search tree. After insertion, deletion, or searching, the node is rotated to become the root.</answer>
+            </question>
 
-        <!-- TODO: Binomial heap takes O(log n) time in all operations while Fibonacci heap takes amortized running time O(1) in Insert, find, decrease key operations and O(log n) time in delete min, delete operations. -->
-        <!-- TODO: every Binomial heap is a Fibonacci heap but every Fibonacci heap isn't Binomial heap. -->
-        <question id="datastructures-implementation-fibonacci-heap">
-            <text>Fibonacci Heap</text>
-            <link>https://en.wikipedia.org/wiki/Fibonacci_heap</link> <!-- This is good: http://www.growingwiththeweb.com/2014/06/fibonacci-heap.html -->
-            <answer>A collection of heap-ordered trees, which are like binomial trees, but do not need to be restructured upon node removal. Each node has a doubly-linked list of its children. The roots of the trees are in a circular doubly-linked list. Nodes are marked when restructuring is necessary but that cleanup operations are deferred.</answer>
-        </question>
+            <question id="datastructures-implementation-k-d-tree">
+                <text>K-D Tree</text>
+                <link>https://en.wikipedia.org/wiki/K-d_tree</link>
+                <answer>A binary tree. Each node defines a hyperplane and its left and right children are either side of that hyperplane. Typically the hyperplane will be chosen by cycling through the axes as we move down the tree. Each node is the median of the points in its subtree.</answer>
+            </question>
+        </subsection>
 
-        <question id="datastructures-implementation-treap">
-            <text>Treap</text>
-            <link>https://en.wikipedia.org/wiki/Treap</link>
-            <answer>A cartesian tree that satisfies the heap property for random weights. Insert as per node value order and then rotate to maintain heap property for the random weight.</answer>
-        </question>
+        <subsection id="datastructures-implementations-heaps">
+            <title>Heaps</title>
 
-        <question id="datastructures-implementation-splay-tree">
-            <text>Splay Tree</text>
-            <link>https://en.wikipedia.org/wiki/Splay_tree</link>
-            <answer>A binary search tree. After insertion, deletion, or searching, the node is rotated to become the root.</answer>
-        </question>
+            <question id="datastructures-implementation-heap">
+                <text>Heap</text>
+                <link>https://en.wikipedia.org/wiki/Heap_(data_structure)</link>
+                <answer>Usually implemented with an array. The K children of position i are from Ki+1 to Ki+K.</answer>
+            </question>
 
-        <question id="datastructures-implementation-k-d-tree">
-            <text>K-D Tree</text>
-            <link>https://en.wikipedia.org/wiki/K-d_tree</link>
-            <answer>A binary tree. Each node defines a hyperplane and its left and right children are either side of that hyperplane. Typically the hyperplane will be chosen by cycling through the axes as we move down the tree. Each node is the median of the points in its subtree.</answer>
-        </question>
+            <!-- TODO: How is it kept complete? -->
+            <question id="datastructures-implementation-binary-heap">
+                <text>Binary Heap</text>
+                <link>https://en.wikipedia.org/wiki/Binary_heap</link>
+                <answer>Usually implemented with an array. The children of position i are at 2i+1 and 2i+2.</answer>
+            </question>
+
+            <question id="datastructures-implementation-binomial-heap">
+                <text>Binomial Heap</text>
+                <link>https://en.wikipedia.org/wiki/Binomial_heap</link>
+                <answer>Store the roots of the binomial trees in an ordered list. Find minimum by finding the minimum root. Merge trees by making the larger root a child of the smaller root.</answer>
+            </question>
+
+            <!-- TODO: Binomial heap takes O(log n) time in all operations while Fibonacci heap takes amortized running time O(1) in Insert, find, decrease key operations and O(log n) time in delete min, delete operations. -->
+            <!-- TODO: every Binomial heap is a Fibonacci heap but every Fibonacci heap isn't Binomial heap. -->
+            <question id="datastructures-implementation-fibonacci-heap">
+                <text>Fibonacci Heap</text>
+                <link>https://en.wikipedia.org/wiki/Fibonacci_heap</link> <!-- This is good: http://www.growingwiththeweb.com/2014/06/fibonacci-heap.html -->
+                <answer>A collection of heap-ordered trees, which are like binomial trees, but do not need to be restructured upon node removal. Each node has a doubly-linked list of its children. The roots of the trees are in a circular doubly-linked list. Nodes are marked when restructuring is necessary but that cleanup operations are deferred.</answer>
+            </question>
+
+            <question id="datastructures-implementation-treap">
+                <text>Treap</text>
+                <link>https://en.wikipedia.org/wiki/Treap</link>
+                <answer>A cartesian tree that satisfies the heap property for random weights. Insert as per node value order and then rotate to maintain heap property for the random weight.</answer>
+            </question>
+        </subsection>
     </section>
 
     <section id="datastructures-tree-operations">
@@ -609,7 +634,6 @@
 
         </subsection>
     </section>
-
 
     <!-- Probabilistic data structures?
          https://en.wikipedia.org/wiki/Category:Probabilistic_data_structures
