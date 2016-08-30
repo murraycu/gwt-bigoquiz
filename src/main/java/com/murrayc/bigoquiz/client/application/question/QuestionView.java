@@ -272,16 +272,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             sectionTitle.setText(sectionTitleStr +": ");
         }
 
-        @Nullable final QuizSections.SubSection subSection = sections.getSubSection(sectionId, question.getSubSectionId());
-        if (subSection != null) {
-            subSectionTitle.setText(subSection.getTitle());
-            subSectionTitle.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
-        } else {
-            //Not all questions have to be in a sub-section:
-            //subSectionTitle.setText("error: null subsection for: " + question.getSubSectionId());
-            subSectionTitle.setText("");
-            subSectionTitle.setHref("");
-        }
+        setQuestionSubSectionTitle(question);
 
         if (multipleChoice) {
             buildChoices(question);
@@ -328,7 +319,21 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         }
     }
 
-    private void setQuestionText(@Nullable Question question) {
+    private void setQuestionSubSectionTitle(@Nullable final Question question) {
+        final String sectionId = question.getSectionId();
+        @Nullable final QuizSections.SubSection subSection = sections.getSubSection(sectionId, question.getSubSectionId());
+        if (subSection != null) {
+            subSectionTitle.setText(subSection.getTitle());
+            subSectionTitle.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
+        } else {
+            //Not all questions have to be in a sub-section:
+            //subSectionTitle.setText("error: null subsection for: " + question.getSubSectionId());
+            subSectionTitle.setText("");
+            subSectionTitle.setHref("");
+        }
+    }
+
+    private void setQuestionText(@Nullable final Question question) {
         // Show the question title in the window title,
         // but only if it is not markup:
         // TODO: Show section title and sub-section title too/instead?
