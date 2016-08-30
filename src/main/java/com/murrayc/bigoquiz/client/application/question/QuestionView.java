@@ -47,7 +47,8 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private final ListBox nextQuestionSectionListBox = new ListBox();
     private @NotNull final Hyperlink hyperlinkMultipleChoice = new InlineHyperlink();
     private final Label sectionTitle = new InlineLabel();
-    private final Anchor subSectionTitle = new Anchor();
+    private final Label subSectionTitleLabel = new InlineLabel();
+    private final Anchor subSectionTitleAnchor = new Anchor();
 
     private final Label questionLabel = new InlineLabel();
     private final Anchor questionAnchor = new Anchor();
@@ -110,7 +111,8 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         Utils.addHeaderToPanel(2, mainPanel, constants.questionLabel());
 
         @NotNull final Panel paraHeader = Utils.addParagraphWithChild(mainPanel, sectionTitle);
-        paraHeader.add(subSectionTitle);
+        paraHeader.add(subSectionTitleLabel);
+        paraHeader.add(subSectionTitleAnchor);
         Utils.addHeaderToPanel(3, mainPanel, paraHeader);
 
         //We only show one of these (label or anchor) at a time:
@@ -231,8 +233,9 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             questionAnchor.setText("");
             questionAnchor.setHref("");
             sectionTitle.setText("");
-            subSectionTitle.setText("");
-            subSectionTitle.setHref("");
+            subSectionTitleLabel.setText("");
+            subSectionTitleAnchor.setText("");
+            subSectionTitleAnchor.setHref("");
             resultPanel.setVisible(false); //TODO: Really clear it?
             nextQuestionSectionListBox.clear();
 
@@ -320,17 +323,29 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     }
 
     private void setQuestionSubSectionTitle(@Nullable final Question question) {
+        boolean showAnchor = false, showLabel = false;
+
         final String sectionId = question.getSectionId();
         @Nullable final QuizSections.SubSection subSection = sections.getSubSection(sectionId, question.getSubSectionId());
         if (subSection != null) {
-            subSectionTitle.setText(subSection.getTitle());
-            subSectionTitle.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
+            if (StringUtils.isEmpty(subSection.link)) {
+                subSectionTitleLabel.setText(subSection.getTitle());
+                showLabel = true;
+            } else {
+                subSectionTitleAnchor.setText(subSection.getTitle());
+                subSectionTitleAnchor.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
+                showAnchor = true;
+            }
         } else {
             //Not all questions have to be in a sub-section:
-            //subSectionTitle.setText("error: null subsection for: " + question.getSubSectionId());
-            subSectionTitle.setText("");
-            subSectionTitle.setHref("");
+            //subSectionTitleAnchor.setText("error: null subsection for: " + question.getSubSectionId());
+            subSectionTitleLabel.setText("");
+            subSectionTitleAnchor.setText("");
+            subSectionTitleAnchor.setHref("");
         }
+
+        subSectionTitleLabel.setVisible(showLabel);
+        subSectionTitleAnchor.setVisible(showAnchor);
     }
 
     private void setQuestionText(@Nullable final Question question) {
