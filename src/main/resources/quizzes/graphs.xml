@@ -33,6 +33,7 @@
             <link>https://en.wikipedia.org/wiki/Minimum_spanning_tree</link>
             <answer>A tree that connects each vertex, using a subset of edges of the minimum weight.</answer>
         </question>
+        <!-- TODO: Maximum Spanning Tree, Bottleneck, Cut Property -->
 
         <question id="definition-shortest-path">
             <text>Shortest Path</text>
@@ -475,6 +476,7 @@
             <text>Prim's Algorithm for Minimum Spanning Tree</text>
             <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
             <answer>Start with an arbitrary vertex. Find the lowest-cost outgoing edge and add its destination to the tree. Repeat until all vertices are in the tree.</answer>
+            <!-- TODO: Mention use of Heap / Priority Queue -->
         </question>
 
         <!-- Note: Kruskals is like a greedy algorithm for finding clusters, though that aborts early, to leave k clusters.
