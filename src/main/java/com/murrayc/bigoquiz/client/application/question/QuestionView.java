@@ -245,39 +245,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         setErrorLabelVisible(false);
 
-        // Show the question title in the window title,
-        // but only if it is not markup:
-        // TODO: Show section title and sub-section title too/instead?
-        final Question.Text questionText = question.getText();
-        final String windowTitle = questionText.isHtml ? question.getQuizTitle() :
-                messages.windowTitleQuestion(question.getQuizTitle(), questionText.text);
-        Window.setTitle(windowTitle);
-
-        final String link = question.getLink();
-        boolean showMarkup = false, showAnchor = false, showLabel = false;
-        if (StringUtils.isEmpty(link)) {
-            if (questionText.isHtml) {
-                //TODO: Use a modified SimpleHtmlSanitizer?
-                questionMarkup.setHTML(SafeHtmlUtils.fromTrustedString(questionText.text));
-                showMarkup = true;
-            } else {
-                questionLabel.setText(questionText.text);
-                showLabel = true;
-            }
-        } else {
-            if (questionText.isHtml) {
-                //TODO: Use a modified SimpleHtmlSanitizer?
-                questionAnchor.setHTML(SafeHtmlUtils.fromTrustedString(questionText.text));
-            } else {
-                questionAnchor.setText(questionText.text);
-            }
-            questionAnchor.setHref(link);
-            showAnchor = true;
-        }
-
-        questionMarkup.setVisible(showMarkup);
-        questionLabel.setVisible(showLabel);
-        questionAnchor.setVisible(showAnchor);
+        setQuestionText(question);
 
         final String onOff = multipleChoice ? constants.offerMultipleChoiceOn() :
                 constants.offerMultipleChoiceOff();
@@ -358,6 +326,42 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             // now that we have put some MathML on the page.
             useAndReloadMathJax();
         }
+    }
+
+    private void setQuestionText(@Nullable Question question) {
+        // Show the question title in the window title,
+        // but only if it is not markup:
+        // TODO: Show section title and sub-section title too/instead?
+        final Question.Text questionText = question.getText();
+        final String windowTitle = questionText.isHtml ? question.getQuizTitle() :
+                messages.windowTitleQuestion(question.getQuizTitle(), questionText.text);
+        Window.setTitle(windowTitle);
+
+        final String link = question.getLink();
+        boolean showMarkup = false, showAnchor = false, showLabel = false;
+        if (StringUtils.isEmpty(link)) {
+            if (questionText.isHtml) {
+                //TODO: Use a modified SimpleHtmlSanitizer?
+                questionMarkup.setHTML(SafeHtmlUtils.fromTrustedString(questionText.text));
+                showMarkup = true;
+            } else {
+                questionLabel.setText(questionText.text);
+                showLabel = true;
+            }
+        } else {
+            if (questionText.isHtml) {
+                //TODO: Use a modified SimpleHtmlSanitizer?
+                questionAnchor.setHTML(SafeHtmlUtils.fromTrustedString(questionText.text));
+            } else {
+                questionAnchor.setText(questionText.text);
+            }
+            questionAnchor.setHref(link);
+            showAnchor = true;
+        }
+
+        questionMarkup.setVisible(showMarkup);
+        questionLabel.setVisible(showLabel);
+        questionAnchor.setVisible(showAnchor);
     }
 
     private void buildChoices(@Nullable Question question) {
