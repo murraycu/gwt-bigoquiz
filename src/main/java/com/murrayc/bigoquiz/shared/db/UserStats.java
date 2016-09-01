@@ -335,4 +335,16 @@ public class UserStats implements IsSerializable {
 
         return result;
     }
+
+    /** Make sure that the values make sense.
+     */
+    public void makeSane() {
+        if (countQuestionsCorrectOnce > countQuestionsAnsweredOnce) {
+            countQuestionsCorrectOnce = countQuestionsAnsweredOnce;
+        }
+
+        if (correct > answered) {
+            correct = answered;
+        }
+    }
 }

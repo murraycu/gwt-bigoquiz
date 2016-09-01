@@ -434,10 +434,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
         for (@NotNull final UserStats userStats : listUserStats) {
             final String quizId = userStats.getQuizId();
             if (!map.containsKey(quizId)) {
+                userStats.makeSane();
                 map.put(quizId, userStats);
             } else {
                 final UserStats existing = map.get(quizId);
                 final UserStats combinedStats = existing.createCombinedUserStatsWithoutQuestionHistories(userStats);
+                combinedStats.makeSane();
                 map.put(quizId, combinedStats);
             }
         }
