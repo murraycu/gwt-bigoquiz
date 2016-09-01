@@ -635,6 +635,141 @@
         </subsection>
     </section>
 
+
+    <section id="datastructures-hash-tables">
+        <title>Hash Tables</title>
+        <link>https://en.wikipedia.org/wiki/Hash_table</link>
+
+        <subsection id="datastructures-hash-tables-collision-resolution" answers_as_choices="true">
+            <title>Collision Resolution</title>
+            <link>https://en.wikipedia.org/wiki/Hash_table#Collision_resolution</link>
+
+            <question id="datastructures-hash-tables-collision-resolution-chaining">
+                <text>Separate chaining (open hashing)</text>
+                <link>https://en.wikipedia.org/wiki/Hash_table#Separate_chaining</link>
+                <answer>Each bucket is independent, and has a list of entries with the same index.</answer>
+            </question>
+
+            <question id="datastructures-hash-tables-collision-resolution-open-addressing">
+                <text>Open addressing (closed hashing)</text>
+                <link>https://en.wikipedia.org/wiki/Hash_table#Open_addressing</link>
+                <answer>All entry records are stored in the bucket array itself. Lookups may examine a series of buckets.</answer>
+            </question>
+
+            <question id="datastructures-hash-tables-collision-resolution-robin-hood-hashing">
+                <text>Robin Hood hashing</text>
+                <link>https://en.wikipedia.org/wiki/Hash_table#Robin_Hood_hashing</link>
+                <answer>A key will be relocated if its probe count is higher than for the new key.</answer>
+            </question>
+
+            <question id="datastructures-hash-tables-collision-resolution-2-choice-hashing">
+                <text>2-choice hashing</text>
+                <link>https://en.wikipedia.org/wiki/2-choice_hashing</link>
+                <answer>2 hash functions provide 2 potential positions for a key. The key is placed where there would be fewer collisions.</answer>
+            </question>
+        </subsection>
+
+        <subsection id="datastructures-hash-tables-open-addressing-strategies" answers_as_choices="true">
+            <title>Open addressing strategies</title>
+            <link>https://en.wikipedia.org/wiki/Open_addressing</link>
+
+            <question id="datastructures-hash-tables-open-addressing-strategy-probe-sequence">
+                <text>Probe sequence</text>
+                <link>https://en.wikipedia.org/wiki/Open_addressing</link>
+                <answer>The buckets are examined, starting with the hashed-to slot and proceeding in some probe sequence, until an unoccupied slot is found.</answer>
+            </question>
+
+            <question id="datastructures-hash-tables-open-addressing-strategy-coalesced-hashing">
+                <text>Coalesced hashing</text>
+                <link>https://en.wikipedia.org/wiki/Coalesced_hashing</link>
+                <answer>Hybrid of separate chaining and open addressing, chaining from filled buckets to unused buckets.</answer>
+            </question>
+            <!-- TODO: Wikipedia says: Like chaining, it does not exhibit clustering effects; in fact, the table can be efficiently filled to a high density. Unlike chaining, it cannot have more elements than table slots  -->
+
+            <question id="datastructures-hash-tables-open-addressing-strategy-cuckoo-hashing">
+                <text>Cuckoo hashing</text>
+                <link>https://en.wikipedia.org/wiki/Cuckoo_hashing</link>
+                <answer>The key is re-hashed with other hash functions to find an empty bucket. (All hashes may be tried during lookup.) If all collide, the existing key is re-hashed, possibly causing further re-hashing. If this eventually fails, the table is resized.</answer>
+            </question>
+            <!-- TODO: Wikipedia says: ensures constant lookup time in the worst case, and constant amortized time for insertions and deletions -->
+
+            <question id="datastructures-hash-tables-open-addressing-strategy-hopscotch-hashing">
+                <text>Hopscotch hashing</text>
+                <link>https://en.wikipedia.org/wiki/Hopscotch_hashing</link>
+                <answer>The key is always in the neighborhood of the original bucket. If necessary, existing items are moved, though without moving them outside of their neighbourhoods.</answer>
+            </question>
+            <!-- TODO: Wikipedia says: n particular it works well even when the load factor grows beyond 0.9. -->
+        </subsection>
+
+        <!-- TODO: Good load factor. -->
+
+        <subsection id="datastructures-hash-tables-open-addressing-probing" answers_as_choices="true">
+            <title>Open addressing probe sequences: Description</title>
+            <link>https://en.wikipedia.org/wiki/Open_addressing</link>
+
+            <question id="datastructures-hash-tables-open-addressing-probing-linear-probing">
+                <text>Linear probing</text>
+                <link>https://en.wikipedia.org/wiki/Linear_probing</link>
+                <answer>The interval between probes is fixed — often at 1.</answer>
+            </question>
+
+            <question id="datastructures-hash-tables-open-addressing-probing-quadratic-probing">
+                <text>Quadratic probing</text>
+                <link>https://en.wikipedia.org/wiki/Quadratic_probing</link>
+                <answer>The interval between probes increases linearly (the indices are described by a quadratic function).</answer>
+            </question>
+
+            <question id="datastructures-hash-tables-open-addressing-probing-double-hashing">
+                <text>Double hashing</text>
+                <link>https://en.wikipedia.org/wiki/Double_hashing</link>
+                <answer>The interval between probes is computed by another hash function.</answer>
+            </question>
+        </subsection>
+
+        <subsection id="datastructures-hash-tables-open-addressing-probing-advantages" answers_as_choices="true">
+            <title>Open addressing probe sequences: Advantages/Disadvantages</title>
+            <link>https://en.wikipedia.org/wiki/Open_addressing</link>
+
+            <question id="datastructures-hash-tables-open-addressing-probing-advantage-linear-probing">
+                <text>Linear probing</text>
+                <link>https://en.wikipedia.org/wiki/Linear_probing</link>
+                <answer>Advantage: best cache performance. Disadvantage: worst clustering.</answer>
+            </question>
+
+            <question id="datastructures-hash-tables-open-addressing-probing-advantage-quadratic-probing">
+                <text>Quadratic probing</text>
+                <link>https://en.wikipedia.org/wiki/Quadratic_probing</link>
+                <answer>Advantage: good cache performance and minimal clustering.</answer>
+            </question>
+
+            <question id="datastructures-hash-tables-open-addressing-probing-advantage-double-hashing">
+                <text>Double hashing</text>
+                <link>https://en.wikipedia.org/wiki/Double_hashing</link>
+                <answer>Advantage: no clustering. Disadvantage: worst cache performance.</answer>
+            </question>
+        </subsection>
+        <!-- TODO: Load factor definition: = n/m. -->
+
+        <!-- Open Addressng methods:
+        last-come first served hashing
+        cuckoo hashing -->
+
+        <!-- TODO: Hash functions
+        https://en.wikipedia.org/wiki/Category:Hash_function_(non-cryptographic)
+        https://en.wikipedia.org/wiki/Jenkins_hash_function#one-at-a-time
+        https://en.wikipedia.org/wiki/CityHash
+        https://en.wikipedia.org/wiki/Fowler_Noll_Vo_hash
+        https://en.wikipedia.org/wiki/MurmurHash
+        https://en.wikipedia.org/wiki/Jenkins_hash_function
+        https://en.wikipedia.org/wiki/HighwayHash
+        https://en.wikipedia.org/wiki/Java_hashCode()
+        https://en.wikipedia.org/wiki/Pearson_hashing
+        https://en.wikipedia.org/wiki/PJW_hash_function
+        -->
+
+    </section>
+
+
     <!-- Probabilistic data structures?
          https://en.wikipedia.org/wiki/Category:Probabilistic_data_structures
     -->
@@ -647,11 +782,7 @@
 
     Singly Linked List
     Doubly Linked List
-    Hash Table (TODO: Open Addressing and Chaining, advantages of, such as data locality.)
-      In this CppCon 2014 talk, Chandler Carruth says never use std::map or std::unordered_map because they use chaining instead of open addressing:
-      https://www.youtube.com/watch?v=fHNmRkzxHWs
-      TODO: Look at Google's densemap/sparsemap.
-      TODO: Load factor definition: = n/m.
+
     Trie (AKA PrefixTree): Text prediction using prefixes. Associative store where the keys share prefixes.
     Radix Tree: IP Routing (Longest Prefix Matching), Inverted Indices
     Suffix Tree: Find longest repeated substring: https://en.wikipedia.org/wiki/Longest_repeated_substring_problem
