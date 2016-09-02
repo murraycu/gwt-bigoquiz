@@ -669,6 +669,38 @@
             </question>
         </subsection>
 
+        <!-- TODO: Need to find better advantages/disadvantages for these. -->
+        <subsection id="datastructures-hash-tables-collision-resolution-advantages" answers_as_choices="true">
+            <title>Collision Resolution: Advantages/Disadvantages</title>
+            <link>https://en.wikipedia.org/wiki/Hash_table#Collision_resolution</link>
+
+            <question id="datastructures-hash-tables-collision-resolution-advantages-chaining">
+                <text>Separate chaining (open hashing)</text>
+                <link>https://en.wikipedia.org/wiki/Hash_table#Separate_chaining</link>
+                <answer>Advantages: Simple implementation. Avoids rehashing. Disadvantage: Pointer chasing causes cache misses. Extra space.</answer>
+            </question>
+
+            <question id="datastructures-hash-tables-collision-resolution-advantages-open-addressing">
+                <text>Open addressing (closed hashing)</text>
+                <link>https://en.wikipedia.org/wiki/Hash_table#Open_addressing</link>
+                <answer>Advantage: Data locality gives good cache performance. Disdvantage: Requires reallocation and rehashing.</answer>
+            </question>
+
+            <question id="datastructures-hash-tables-collision-resolution-advantages-robin-hood-hashing">
+                <text>Robin Hood hashing</text>
+                <link>https://en.wikipedia.org/wiki/Hash_table#Robin_Hood_hashing</link>
+                <answer>Advantage: Reduces worst case search times.</answer>
+            </question>
+
+            <!-- TODO:
+            <question id="datastructures-hash-tables-collision-resolution-advantages-2-choice-hashing">
+                <text>2-choice hashing</text>
+                <link>https://en.wikipedia.org/wiki/2-choice_hashing</link>
+                <answer>TODO</answer>
+            </question>
+            -->
+        </subsection>
+
         <subsection id="datastructures-hash-tables-open-addressing-strategies" answers_as_choices="true">
             <title>Open addressing strategies</title>
             <link>https://en.wikipedia.org/wiki/Open_addressing</link>
@@ -684,23 +716,51 @@
                 <link>https://en.wikipedia.org/wiki/Coalesced_hashing</link>
                 <answer>Hybrid of separate chaining and open addressing, chaining from filled buckets to unused buckets.</answer>
             </question>
-            <!-- TODO: Wikipedia says: Like chaining, it does not exhibit clustering effects; in fact, the table can be efficiently filled to a high density. Unlike chaining, it cannot have more elements than table slots  -->
 
             <question id="datastructures-hash-tables-open-addressing-strategy-cuckoo-hashing">
                 <text>Cuckoo hashing</text>
                 <link>https://en.wikipedia.org/wiki/Cuckoo_hashing</link>
                 <answer>The key is re-hashed with other hash functions to find an empty bucket. (All hashes may be tried during lookup.) If all collide, the existing key is re-hashed, possibly causing further re-hashing. If this eventually fails, the table is resized.</answer>
             </question>
-            <!-- TODO: Wikipedia says: ensures constant lookup time in the worst case, and constant amortized time for insertions and deletions -->
 
             <question id="datastructures-hash-tables-open-addressing-strategy-hopscotch-hashing">
                 <text>Hopscotch hashing</text>
                 <link>https://en.wikipedia.org/wiki/Hopscotch_hashing</link>
                 <answer>The key is always in the neighborhood of the original bucket. If necessary, existing items are moved, though without moving them outside of their neighbourhoods.</answer>
             </question>
-            <!-- TODO: Wikipedia says: n particular it works well even when the load factor grows beyond 0.9. -->
         </subsection>
 
+        <!-- TODO: Need to find better advantages/disadvantages for these. -->
+        <subsection id="datastructures-hash-tables-open-addressing-strategies-advantages" answers_as_choices="true">
+            <title>Open addressing strategies: Advantages</title>
+            <link>https://en.wikipedia.org/wiki/Open_addressing</link>
+
+            <question id="datastructures-hash-tables-open-addressing-strategy-advantage-probe-sequence">
+                <text>Probe sequence</text>
+                <link>https://en.wikipedia.org/wiki/Open_addressing</link>
+                <answer>Fast insertion and fast search.</answer>
+            </question>
+
+            <question id="datastructures-hash-tables-open-addressing-strategy-advantage-coalesced-hashing">
+                <text>Coalesced hashing</text>
+                <link>https://en.wikipedia.org/wiki/Coalesced_hashing</link>
+                <answer>No clustering effects; in fact, the table can be efficiently filled to a high density.</answer>
+            </question>
+
+            <question id="datastructures-hash-tables-open-addressing-strategy-advantage-cuckoo-hashing">
+                <text>Cuckoo hashing</text>
+                <link>https://en.wikipedia.org/wiki/Cuckoo_hashing</link>
+                <answer>Constant lookup time in the worst case, and constant amortized time for insertions and deletions.</answer>
+            </question>
+
+            <question id="datastructures-hash-tables-open-addressing-strategy-advantage-hopscotch-hashing">
+                <text>Hopscotch hashing</text>
+                <link>https://en.wikipedia.org/wiki/Hopscotch_hashing</link>
+                <answer>Works well even when the load factor grows beyond 0.9. Allows use of simple hash function.</answer>
+            </question>
+        </subsection>
+
+        <!-- TODO: Deletion in open addressing and coalesced hashing: Use of sentinel. -->
         <!-- TODO: Good load factor. -->
 
         <subsection id="datastructures-hash-tables-open-addressing-probing" answers_as_choices="true">
