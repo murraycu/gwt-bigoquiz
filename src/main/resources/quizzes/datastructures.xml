@@ -489,8 +489,34 @@
     <section id="datastructures-tree-operations">
         <title>Tree Operations</title>
 
-        <subsection id="datastructures-tree-operations-bst" answers_as_choices="true">
-            <title>Binary Search Tree</title>
+        <subsection id="datastructures-tree-operations-bst-traversal" answers_as_choices="true">
+        <title>Binary Search Tree: Traversal</title>
+        <link>https://en.wikipedia.org/wiki/Binary_search_tree#Operations</link>
+
+            <question id="datastructures-tree-operations-bst-pre-order-traversal">
+                <text>Pre-Order Traversal</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#Pre-order</link>
+                <answer>List the nodes first from the root down the left to the leaf, then back up from left to right.</answer>
+            </question>
+            <!-- Uses: Duplicate a tree. Build a prefix expression. -->
+
+            <question id="datastructures-tree-operations-bst-in-order-traversal">
+                <text>In-Order Traversal</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#In-order</link>
+                <answer>Lists the items in sorted order.</answer>
+            </question>
+            <!-- Uses: List nodes in order -->
+
+            <question id="datastructures-tree-operations-bst-post-order-traversal">
+                <text>Post-Order Traversal</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#Post-order</link>
+                <answer>List the nodes from the bottom of each path up to the root, listing shared nodes last, from left to right.</answer>
+            </question>
+            <!-- Use: wikipedia says: Post-order traversal while deleting or freeing nodes and values can delete or free an entire binary tree. It can also generate a postfix representation of a binary tree. -->
+        </subsection>
+
+        <subsection id="datastructures-tree-operations-bst-others" answers_as_choices="true">
+            <title>Binary Search Tree: Others</title>
             <link>https://en.wikipedia.org/wiki/Binary_search_tree#Operations</link>
 
             <question id="datastructures-tree-operations-bst-search">
@@ -522,65 +548,11 @@
                 <link>https://en.wikipedia.org/wiki/Binary_search_tree#Deletion</link>
                 <answer>Remove a node with the specified key.</answer>
             </question>
-
-            <question id="datastructures-tree-operations-bst-pre-order-traversal">
-                <text>Pre-Order Traversal</text>
-                <link>https://en.wikipedia.org/wiki/Tree_traversal#Pre-order</link>
-                <answer>List the nodes first from the root down the left to the leaf, then back up from left to right.</answer>
-            </question>
-            <!-- Uses: Duplicate a tree. Build a prefix expression. -->
-
-            <question id="datastructures-tree-operations-bst-in-order-traversal">
-                <text>In-Order Traversal</text>
-                <link>https://en.wikipedia.org/wiki/Tree_traversal#In-order</link>
-                <answer>Lists the items in sorted order.</answer>
-            </question>
-            <!-- Uses: List nodes in order -->
-
-            <question id="datastructures-tree-operations-bst-post-order-traversal">
-                <text>Post-Order Traversal</text>
-                <link>https://en.wikipedia.org/wiki/Tree_traversal#Post-order</link>
-                <answer>List the nodes from the bottom of each path up to the root, listing shared nodes last, from left to right.</answer>
-            </question>
-            <!-- Use: wikipedia says: Post-order traversal while deleting or freeing nodes and values can delete or free an entire binary tree. It can also generate a postfix representation of a binary tree. -->
         </subsection>
 
-        <subsection id="datastructures-tree-implementation-bst" answers_as_choices="true">
-            <title>Binary Search Tree: Implementations</title>
+        <subsection id="datastructures-tree-implementation-bst-traversal" answers_as_choices="true">
+            <title>Binary Search Tree: Implementations: Traversal</title>
             <link>https://en.wikipedia.org/wiki/Binary_search_tree#Operations</link>
-
-            <question id="datastructures-tree-implementation-bst-search">
-                <text>Search</text>
-                <link>https://en.wikipedia.org/wiki/Binary_search_tree#Searching</link>
-                <answer>Compare with root's key and then search in the left or right subtree, comparing each node's key and then going left or right.</answer>
-            </question>
-
-            <question id="datastructures-tree-implementation-bst-successor">
-                <text>Successor</text>
-                <link>https://en.wikipedia.org/wiki/Binary_search_tree#Searching</link>
-                <answer>Find left-most child of right child. Or if there is no right child, find the nearest ancestor that is an ancestor's left child.</answer>
-            </question>
-
-            <question id="datastructures-tree-implementation-bst-predecessor">
-                <text>Predecessor</text>
-                <link>https://en.wikipedia.org/wiki/Binary_search_tree</link>
-                <answer>Find right-most child of left child. Or if there is no left child, find the nearest ancestor that is an ancestor's right child.</answer>
-            </question>
-            <!-- TODO: recursive and iterative implementations? -->
-
-            <question id="datastructures-tree-implementation-bst-insert">
-                <text>Insert</text>
-                <link>https://en.wikipedia.org/wiki/Binary_search_tree#Insertion</link>
-                <answer>Search for the node's key until we find a null child. Put the node in that position.</answer>
-            </question>
-
-            <!-- TODO: 2 versions of delete. One changing values, and one moving nodes. Only earlier CLRS versions copied values.
-                 For copying values, see wikipedia or http://www.algolist.net/Data_structures/Binary_search_tree/Removal -->
-            <question id="datastructures-tree-implementation-bst-delete">
-                <text>Delete</text>
-                <link>https://en.wikipedia.org/wiki/Binary_search_tree#Deletion</link>
-                <answer>If there are 2 child nodes: Find the successor. If there is no successor then there is no right child, so replace the node with the left child. If there is a successor, replace the node with the successor, making the node's left child be the successor's left node, making the sucessor's original parent be the successor's right child and making the successor's original right child be the successor's original parent's left child.</answer>
-            </question>
 
             <question id="datastructures-tree-implementation-bst-pre-order-traversal-recursive">
                 <text>Pre-Order Traversal (Recursive)</text>
@@ -617,6 +589,44 @@
                 <link>https://en.wikipedia.org/wiki/Tree_traversal#Post-order</link>
                 <answer>Use 2 stacks. Put root on stack1. while(stack1 not empty), take from stack1, put on stack2, put left and right on stack1. while(stack2 not empty), take from stack and use.</answer>
             </question>
+        </subsection>
+
+        <subsection id="datastructures-tree-implementation-bst-others" answers_as_choices="true">
+            <title>Binary Search Tree: Implementations: Other</title>
+            <link>https://en.wikipedia.org/wiki/Binary_search_tree#Operations</link>
+
+            <question id="datastructures-tree-implementation-bst-search">
+                <text>Search</text>
+                <link>https://en.wikipedia.org/wiki/Binary_search_tree#Searching</link>
+                <answer>Compare with root's key and then search in the left or right subtree, comparing each node's key and then going left or right.</answer>
+            </question>
+
+            <question id="datastructures-tree-implementation-bst-successor">
+                <text>Successor</text>
+                <link>https://en.wikipedia.org/wiki/Binary_search_tree#Searching</link>
+                <answer>Find left-most child of right child. Or if there is no right child, find the nearest ancestor that is an ancestor's left child.</answer>
+            </question>
+
+            <question id="datastructures-tree-implementation-bst-predecessor">
+                <text>Predecessor</text>
+                <link>https://en.wikipedia.org/wiki/Binary_search_tree</link>
+                <answer>Find right-most child of left child. Or if there is no left child, find the nearest ancestor that is an ancestor's right child.</answer>
+            </question>
+            <!-- TODO: recursive and iterative implementations? -->
+
+            <question id="datastructures-tree-implementation-bst-insert">
+                <text>Insert</text>
+                <link>https://en.wikipedia.org/wiki/Binary_search_tree#Insertion</link>
+                <answer>Search for the node's key until we find a null child. Put the node in that position.</answer>
+            </question>
+
+            <!-- TODO: 2 versions of delete. One changing values, and one moving nodes. Only earlier CLRS versions copied values.
+                 For copying values, see wikipedia or http://www.algolist.net/Data_structures/Binary_search_tree/Removal -->
+            <question id="datastructures-tree-implementation-bst-delete">
+                <text>Delete</text>
+                <link>https://en.wikipedia.org/wiki/Binary_search_tree#Deletion</link>
+                <answer>If there are 2 child nodes: Find the successor. If there is no successor then there is no right child, so replace the node with the left child. If there is a successor, replace the node with the successor, making the node's left child be the successor's left node, making the sucessor's original parent be the successor's right child and making the successor's original right child be the successor's original parent's left child.</answer>
+            </question>
 
             <question id="datastructures-tree-implementation-bst-left-rotation">
                 <text>Left Rotation</text>
@@ -632,6 +642,29 @@
 
             <!-- TODO: BST Order/Rank. -->
 
+        </subsection>
+
+        <subsection id="datastructures-tree-operations-uses-bst-traversal" answers_as_choices="true">
+            <title>Binary Search Tree: Traversal Uses</title>
+            <link>https://en.wikipedia.org/wiki/Binary_search_tree#Operations</link>
+
+            <question id="datastructures-tree-operations-bst-pre-order-traversal">
+                <text>Pre-Order Traversal</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#Pre-order</link>
+                <answer>Duplicate the tree. Generate a prefix representation of an expression tree.</answer>
+            </question>
+
+            <question id="datastructures-tree-operations-bst-in-order-traversal">
+                <text>In-Order Traversal</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#In-order</link>
+                <answer>List the nodes in order.</answer>
+            </question>
+
+            <question id="datastructures-tree-operations-bst-post-order-traversal">
+                <text>Post-Order Traversal</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#Post-order</link>
+                <answer>Delete the entire tree, by deleting children before parents. Generate a postfix representation of an expression tree.</answer>
+            </question>
         </subsection>
     </section>
 
