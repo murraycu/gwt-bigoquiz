@@ -323,6 +323,8 @@
       String Comparison.
       Building an optimal binary search tree: https://en.wikipedia.org/wiki/Optimal_binary_search_tree#Knuth.27s_dynamic_programming_algorithm
         (though Huffmann codes can be done with greedy algorithm.)
+        DP Algorithm chooses roots of left and right subtrees of subproblems. O(n^3) or O(n^2) if we check only between the left and right roots:
+          https://stackoverflow.com/questions/16987670/dynamic-programming-why-knuths-improvement-to-optimal-binary-search-tree-on2
       Independent Set of a Path Graph (in Stanford/Coursera course, part 2): https://www.coursera.org/learn/algorithm-design-analysis-2/lecture/TZgJM/wis-in-path-graphs-a-reconstruction-algorithm
         1 Dimension. (O(n)):
           A[i] = max(A[i-1], A[i-2] + w)
@@ -346,12 +348,13 @@
       String Matching:
       Approximate string matching:
         DP with costs for substitution, insertion, and deletion.
-          Longest common subsequence is string distance DP algorithm without substitution.
+          Longest Common subsequence (LCS) is string distance DP algorithm without substitution.
           Longest increasing subsequence?
         Bit-parallel algorithm (page 633 of TADM).
       Longest Common Subsequence:
         Difference to Longest Common Substring
-        With Suffix Tree: Insert both strings into the same suffix tree. Find the deepest node that is for both strings.
+        With Suffix Tree: Insert both strings into the same suffix tree. Find the deepest node that is for both strings. O(n + m).
+        The DP algorithm is O(nm).
       Longest Repeated Substring:
         With Suffix Tree: Put the string in a suffix tree. Find the deepest internal node.
       Shortest Common Substring
@@ -378,12 +381,23 @@
 
 
 
-      String matching without pre-processing (for isntance, without suffix tree):
+      String matching without pre-processing (for instance, without suffix tree):
       (Without string processing it's generally O(T) time (T=length of searched text),
        but with preprocessing it can be O(P) time (P=length of pattern), often in O(T) space.)
-      Knuth-Morris-Pratt,
-      Boyer-Moore
-      Raymond(?)-Karp
+      Knuth-Morris-Pratt Algorithm
+        https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
+        "using precomputation to examine each text character only once"
+      Boyer-Moore Algorithm
+        https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm
+        "Skips forward as many as possible for the search to succeed,"
+      Rabin-Karp Algorithm
+        https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm
+        Uses a rolling hash.
+        Uses: Detect plagiarism. Multiple pattern search.
+          Wikipedia says "Inferior for single pattern searching to Knuth–Morris–Pratt algorithm, Boyer–Moore string search algorithm"
+      Aho-Corasick Algorithm
+        https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm
+        "constructs a finite state machine that resembles a trie with additional links between the various internal nodes"
 
       https://www.youtube.com/watch?v=0rCFkuQS968
       Range Minimum Query (RMQ): Discover index of minimum value in a range of values:

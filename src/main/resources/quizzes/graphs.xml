@@ -333,6 +333,7 @@
             <link>https://en.wikipedia.org/wiki/Graph_partition</link>
             <answer>NP-complete</answer>
         </question>
+        <!-- TODO: O(n) to discover if it can be colored with 2 colors: https://en.wikipedia.org/wiki/Graph_coloring#Polynomial_time -->
 
         <question id="polynomial-or-np-complete-edge-coloring">
             <text>Edge Coloring</text>
@@ -370,6 +371,7 @@
             <!-- Note: It's a bit like the travelling salesman problem. -->
             <!-- Really it is NP-hard, but the decision problem (is there a path of length k) is NP-complete.) -->
         </question>
+        <!-- TODO: Longest simple weighted path (involving bitonic?) v. longest simple unweighted path. -->
     </section>
 
     <section id="graph-algorithm-purposes-shortest-path" answers_as_choices="true">
@@ -650,8 +652,37 @@
             <text>Depth First Search iterative implementation</text>
             <link>https://en.wikipedia.org/wiki/Depth-first_search</link>
             <answer>Stack</answer>
+            <!-- Note: Or recursion, using the call stack. -->
         </question>
     </section>
+
+    <!-- TODO: This needs an example of a dense graph that occurs naturally,
+    instead of being a subset of a sparse graph.
+    Note: In sparse graphs, the number of edges increases linearly with the number of vertices.
+    <section  id="graph-sparse-or-dense" answers_as_choices="true" >
+        <title>Sparse or Dense Graphs</title>
+
+        <question id="graph-sparse-or-dense-list">
+            <text>Linked List</text>
+            <answer>Sparse</answer>
+        </question>
+
+        <question id="graph-sparse-or-dense-tree">
+            <text>Tree</text>
+            <answer>Sparse</answer>
+        </question>
+
+        <question id="graph-sparse-or-dense-transport-network">
+            <text>Transport network</text>
+            <answer>Sparse</answer>
+        </question>
+
+        <question id="graph-sparse-or-dense-social-network">
+            <text>Social network</text>
+            <answer>Sparse</answer>
+        </question>
+    </section>
+    -->
 
     <!-- Types of graph. This duplicates ideas from the algorithms needed to identify these graphs, but that is helpful.
     Planar. Hypergraph. Connected -->
