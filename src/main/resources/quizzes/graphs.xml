@@ -472,8 +472,8 @@
         </question>
     </section>
 
-    <section id="graph-algorithm-definitions-others" answers_as_choices="true" and_reverse="true">
-        <title>Graph Algorithm Definitions: Others</title>
+    <section id="graph-algorithm-definitions-mst" answers_as_choices="true" and_reverse="true">
+        <title>Graph Algorithm Definitions: MST</title>
         <question id="definition-prims">
             <text>Prim's Algorithm for Minimum Spanning Tree</text>
             <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
@@ -488,7 +488,10 @@
             <link>https://en.wikipedia.org/wiki/Kruskal's_algorithm</link>
             <answer>Iterate through all edges, in increasing order of their cost. Join each edge's vertices by adding them to a Union-Find (Disjoint Set), if they are not already joined, remembering the edges added.</answer>
         </question>
+    </section>
 
+    <section id="graph-algorithm-definitions-max-flow" answers_as_choices="true" and_reverse="true">
+        <title>Graph Algorithm Definitions: Max Flow</title>
         <question id="definition-ford-fulkerson">
             <text>Ford-Fulkerson Algorithm for Maximum Flow</text>
             <link>https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm</link>
@@ -572,8 +575,8 @@
         </question>
     </section>
 
-    <section id="graph-algorithm-choice-others" answers_as_choices="true" and_reverse="true">
-        <title>Graph Algorithms Choice: Others</title>
+    <section id="graph-algorithm-choice-connected-components" answers_as_choices="true" and_reverse="true">
+        <title>Graph Algorithms Choice: Connected Components</title>
 
         <question id="algorithm-for-connected-components">
             <text>Connected Components in an undirected graph</text>
@@ -592,6 +595,10 @@
             <link>https://en.wikipedia.org/wiki/Strongly_connected_component</link>
             <answer>Depth First Search from v, then reverse edges and DFS from the latest-completed vertex.</answer>
         </question>
+    </section>
+
+    <section id="graph-algorithm-choice-others" answers_as_choices="true" and_reverse="true">
+        <title>Graph Algorithms Choice: Others</title>
 
         <question id="algorithm-for-topological-sort">
             <text>Topological Sort</text>
