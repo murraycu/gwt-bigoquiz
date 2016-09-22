@@ -593,7 +593,8 @@
         <question id="algorithm-for-stongly-connected-components">
             <text>Strongly Connected Components</text>
             <link>https://en.wikipedia.org/wiki/Strongly_connected_component</link>
-            <answer>Depth First Search from v, then reverse edges and DFS from the latest-completed vertex.</answer>
+            <answer>Depth First Search from v, then reverse edges and DFS from the latest-completed vertex (Kosaraju's Algorithm).</answer>
+            <!-- Note: In the second DFS, pop from the first DFS's stack. -->
         </question>
     </section>
 
