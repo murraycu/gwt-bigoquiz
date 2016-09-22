@@ -603,7 +603,8 @@
         <question id="algorithm-for-topological-sort">
             <text>Topological Sort</text>
             <link>https://en.wikipedia.org/wiki/Topological_sorting</link>
-            <answer>Depth First Search to order vertices by their completion time.</answer>
+            <answer>Depth First Search to order vertices by their completion time, starting from each still unexplored vertex. Then reverse that order.</answer>
+            <!-- Only possible on DAGs (Directed Acyclic Graphs) -->
         </question>
 
         <question id="algorithm-for-minimum-spanning-tree">
