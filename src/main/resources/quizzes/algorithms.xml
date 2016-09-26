@@ -1,388 +1,393 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quiz xmlns="http://bigoquiz.com/document" format_version="1" id="algorithms">
     <title>Algorithms</title>
-    <section id="algorithms-sort-advantages" answers_as_choices="true">
-        <title>Advantages of Sorting Algorithms</title>
+    <section id="algorithms-sort">
+        <title>Sorting Algorithms</title>
+        <subsection id="algorithms-sort-advantages" answers_as_choices="true">
+            <title>Advantages</title>
 
-        <question id="algorithms-sort-advantages-quicksort">
-            <text>Quicksort</text>
-            <link>https://en.wikipedia.org/wiki/Quicksort</link>
-            <answer>In-place (O(log(n)) space). Data Locality. Small coefficient of O(n log(n)).</answer>
-        </question>
-        <question id="algorithms-sort-advantages-mergesort">
-            <text>Mergesort</text>
-            <link>https://en.wikipedia.org/wiki/Merge_sort</link>
-            <answer>O(n log(n)) worst case time. Stable. Data Locality. Parallelizable. Can be External.</answer>
-        </question>
-        <question id="algorithms-sort-advantages-heapsort">
-            <text>Heapsort</text>
-            <link>https://en.wikipedia.org/wiki/Heapsort</link>
-            <answer>O(n log(n)) worst case time. O(1) space.</answer>
-        </question>
-        <question id="algorithms-sort-advantages-timsort">
-            <text>Timsort</text>
-            <link>https://en.wikipedia.org/wiki/Timsort</link>
-            <answer>O(n) best case time.</answer>
-        </question>
-        <question id="algorithms-sort-advantages-insertion-sort">
-            <text>Insertion Sort</text>
-            <answer>Fast for small n, even though it has O(n^2) average time. Fast for nearly-sorted items. Online algorithm.</answer>
-            <!-- See other online sorts: https://en.wikipedia.org/wiki/Category:Online_sorts -->
-        </question>
-        <question id="algorithms-sort-advantages-selection-sort">
-            <text>Selection Sort</text>
-            <answer>Minimal swaps.</answer>
-        </question>
-        <!-- None?
-        <question id="algorithms-sort-advantages-shell-sort">
-            <text>Shell Sort</text>
-            <answer></answer>
-        </question>
-        -->
-        <!-- TODO: Don't use when range m is much greater than n: -->
-        <question id="algorithms-sort-advantages-counting-sort">
-            <text>Counting Sort</text>
-            <link>https://en.wikipedia.org/wiki/Counting_sort</link>
-            <answer>O(n) time, but with O(m) space</answer>
-        </question>
-        <question id="algorithms-sort-advantages-radix-sort">
-            <text>Radix Sort</text>
-            <link>https://en.wikipedia.org/wiki/Radix_sort</link>
-            <answer>O(n) time. Minimal space.</answer>
-        </question>
-        <question id="algorithms-sort-advantages-bucket-sort">
-            <text>Bucket Sort</text>
-            <link>https://en.wikipedia.org/wiki/Bucket_sort</link>
-            <answer>Like Counting Sort, but uses O(n) space instead of O(m) space,</answer>
-        </question>
-        <!-- None?
-        <question id="algorithms-sort-advantages-bubble-sort">
-            <text>Bubble Sort</text>
-            <answer></answer>
-        </question>
-        -->
+            <question id="algorithms-sort-advantages-quicksort">
+                <text>Quicksort</text>
+                <link>https://en.wikipedia.org/wiki/Quicksort</link>
+                <answer>In-place (O(log(n)) space). Data Locality. Small coefficient of O(n log(n)).</answer>
+            </question>
+            <question id="algorithms-sort-advantages-mergesort">
+                <text>Mergesort</text>
+                <link>https://en.wikipedia.org/wiki/Merge_sort</link>
+                <answer>O(n log(n)) worst case time. Stable. Data Locality. Parallelizable. Can be External.</answer>
+            </question>
+            <question id="algorithms-sort-advantages-heapsort">
+                <text>Heapsort</text>
+                <link>https://en.wikipedia.org/wiki/Heapsort</link>
+                <answer>O(n log(n)) worst case time. O(1) space.</answer>
+            </question>
+            <question id="algorithms-sort-advantages-timsort">
+                <text>Timsort</text>
+                <link>https://en.wikipedia.org/wiki/Timsort</link>
+                <answer>O(n) best case time.</answer>
+            </question>
+            <question id="algorithms-sort-advantages-insertion-sort">
+                <text>Insertion Sort</text>
+                <answer>Fast for small n, even though it has O(n^2) average time. Fast for nearly-sorted items. Online algorithm.</answer>
+                <!-- See other online sorts: https://en.wikipedia.org/wiki/Category:Online_sorts -->
+            </question>
+            <question id="algorithms-sort-advantages-selection-sort">
+                <text>Selection Sort</text>
+                <answer>Minimal swaps.</answer>
+            </question>
+            <!-- None?
+            <question id="algorithms-sort-advantages-shell-sort">
+                <text>Shell Sort</text>
+                <answer></answer>
+            </question>
+            -->
+            <!-- TODO: Don't use when range m is much greater than n: -->
+            <question id="algorithms-sort-advantages-counting-sort">
+                <text>Counting Sort</text>
+                <link>https://en.wikipedia.org/wiki/Counting_sort</link>
+                <answer>O(n) time, but with O(m) space</answer>
+            </question>
+            <question id="algorithms-sort-advantages-radix-sort">
+                <text>Radix Sort</text>
+                <link>https://en.wikipedia.org/wiki/Radix_sort</link>
+                <answer>O(n) time. Minimal space.</answer>
+            </question>
+            <question id="algorithms-sort-advantages-bucket-sort">
+                <text>Bucket Sort</text>
+                <link>https://en.wikipedia.org/wiki/Bucket_sort</link>
+                <answer>Like Counting Sort, but uses O(n) space instead of O(m) space,</answer>
+            </question>
+            <!-- None?
+            <question id="algorithms-sort-advantages-bubble-sort">
+                <text>Bubble Sort</text>
+                <answer></answer>
+            </question>
+            -->
+        </subsection>
+
+        <!-- TODO: What do they need space for? -->
+
+        <subsection id="algorithms-sort-stability" answers_as_choices="true">
+            <title>Sort Stability</title>
+            <link>https://en.wikipedia.org/wiki/Stable_sort</link>
+
+            <question id="algorithms-sort-stability-quicksort">
+                <text>Quicksort</text>
+                <link>https://en.wikipedia.org/wiki/Quicksort</link>
+                <answer>Unstable</answer>
+            </question>
+            <question id="algorithms-sort-stability-mergesort">
+                <text>Mergesort</text>
+                <link>https://en.wikipedia.org/wiki/Merge_sort</link>
+                <answer>Stable</answer>
+            </question>
+            <question id="algorithms-sort-stability-heapsort">
+                <text>Heapsort</text>
+                <link>https://en.wikipedia.org/wiki/Heapsort</link>
+                <answer>Unstable</answer>
+            </question>
+            <question id="algorithms-sort-stability-timsort">
+                <text>Timsort</text>
+                <link>https://en.wikipedia.org/wiki/Timsort</link>
+                <answer>Stable</answer>
+            </question>
+            <question id="algorithms-sort-stability-insertion-sort">
+                <text>Insertion Sort</text>
+                <link>https://en.wikipedia.org/wiki/Insertion_sort</link>
+                <answer>Stable</answer>
+            </question>
+            <question id="algorithms-sort-stability-selection-sort">
+                <text>Selection Sort</text>
+                <link>https://en.wikipedia.org/wiki/Selection_sort</link>
+                <answer>Unstable</answer>
+            </question>
+            <question id="algorithms-sort-stability-shellsort">
+                <text>Shellsort</text>
+                <link>https://en.wikipedia.org/wiki/Shellsort</link>
+                <answer>Unstable</answer>
+            </question>
+            <question id="algorithms-sort-stability-counting-sort">
+                <text>Counting Sort</text>
+                <answer>Stable</answer>
+            </question>
+            <question id="algorithms-sort-stability-radix-sort">
+                <text>Radix Sort</text>
+                <link>https://en.wikipedia.org/wiki/Radix_sort</link>
+                <answer>Stable</answer>
+            </question>
+            <question id="algorithms-sort-stability-bucket-sort">
+                <text>Bucket Sort</text>
+                <answer>Stable</answer>
+            </question>
+            <question id="algorithms-sort-stability-bubble-sort">
+                <text>Bubble Sort</text>
+                <answer>Stable</answer>
+            </question>
+        </subsection>
+
+        <subsection id="algorithms-sort-inplace" answers_as_choices="true">
+            <title>In Place or Not</title>
+            <link>https://en.wikipedia.org/wiki/In-place_algorithm</link>
+
+            <question id="algorithms-sort-inplace-quicksort">
+                <text>Quicksort</text>
+                <link>https://en.wikipedia.org/wiki/Quicksort</link>
+                <answer>In-place (but small additional space needed)</answer>
+            </question>
+            <question id="algorithms-sort-inplace-mergesort">
+                <text>Mergesort</text>
+                <link>https://en.wikipedia.org/wiki/Merge_sort</link>
+                <answer>Not in-place</answer>
+            </question>
+            <question id="algorithms-sort-inplace-heapsort">
+                <text>Heapsort</text>
+                <link>https://en.wikipedia.org/wiki/Heapsort</link>
+                <answer>In-place</answer>
+            </question>
+            <question id="algorithms-sort-inplace-timsort">
+                <text>Timsort</text>
+                <link>https://en.wikipedia.org/wiki/Timsort</link>
+                <answer>Not in-place</answer>
+            </question>
+            <question id="algorithms-sort-inplace-insertion-sort">
+                <text>Insertion Sort</text>
+                <link>https://en.wikipedia.org/wiki/Insertion_sort</link>
+                <answer>In-place</answer>
+            </question>
+            <question id="algorithms-sort-inplace-selection-sort">
+                <text>Selection Sort</text>
+                <link>https://en.wikipedia.org/wiki/Selection_sort</link>
+                <answer>In-place</answer>
+            </question>
+            <question id="algorithms-sort-inplace-shellsort">
+                <text>Shellsort</text>
+                <link>https://en.wikipedia.org/wiki/Shellsort</link>
+                <answer>In-place</answer>
+            </question>
+            <question id="algorithms-sort-inplace-counting-sort">
+                <text>Counting Sort</text>
+                <answer>Not in-place</answer>
+            </question>
+            <question id="algorithms-sort-inplace-radix-sort">
+                <text>Radix Sort</text>
+                <link>https://en.wikipedia.org/wiki/Radix_sort</link>
+                <answer>Not in-place</answer>
+            </question>
+            <question id="algorithms-sort-inplace-bucket-sort">
+                <text>Bucket Sort</text>
+                <answer>Not in-place</answer>
+            </question>
+            <question id="algorithms-sort-inplace-bubble-sort">
+                <text>Bubble Sort</text>
+                <answer>In-place</answer>
+            </question>
+        </subsection>
+
+        <subsection id="algorithms-sort-comparison" answers_as_choices="true">
+            <title>Comparison or Non-Comparison</title>
+            <link>https://en.wikipedia.org/wiki/Comparison_sort</link>
+
+            <question id="algorithms-sort-comparison-quicksort">
+                <text>Quicksort</text>
+                <link>https://en.wikipedia.org/wiki/Quicksort</link>
+                <answer>Comparison</answer>
+            </question>
+            <question id="algorithms-sort-comparison-mergesort">
+                <text>Mergesort</text>
+                <link>https://en.wikipedia.org/wiki/Merge_sort</link>
+                <answer>Comparison</answer>
+            </question>
+            <question id="algorithms-sort-comparison-heapsort">
+                <text>Heapsort</text>
+                <link>https://en.wikipedia.org/wiki/Heapsort</link>
+                <answer>Comparison</answer>
+            </question>
+            <question id="algorithms-sort-comparison-timsort">
+                <text>Timsort</text>
+                <link>https://en.wikipedia.org/wiki/Timsort</link>
+                <answer>Comparison</answer>
+            </question>
+            <question id="algorithms-sort-comparison-insertion-sort">
+                <text>Insertion Sort</text>
+                <link>https://en.wikipedia.org/wiki/Insertion_sort</link>
+                <answer>Comparison</answer>
+            </question>
+            <question id="algorithms-sort-comparison-selection-sort">
+                <text>Selection Sort</text>
+                <link>https://en.wikipedia.org/wiki/Selection_sort</link>
+                <answer>Comparison</answer>
+            </question>
+            <question id="algorithms-sort-comparison-shellsort">
+                <text>Shellsort</text>
+                <link>https://en.wikipedia.org/wiki/Shellsort</link>
+                <answer>Comparison</answer>
+            </question>
+            <question id="algorithms-sort-comparison-counting-sort">
+                <text>Counting Sort</text>
+                <answer>Non-Comparison</answer>
+            </question>
+            <question id="algorithms-sort-comparison-radix-sort">
+                <text>Radix Sort</text>
+                <link>https://en.wikipedia.org/wiki/Radix_sort</link>
+                <answer>Non-Comparison</answer>
+            </question>
+            <question id="algorithms-sort-comparison-bucket-sort">
+                <text>Bucket Sort</text>
+                <answer>Comparison</answer>
+            </question>
+            <question id="algorithms-sort-comparison-bubble-sort">
+                <text>Bubble Sort</text>
+                <answer>Comparison</answer>
+            </question>
+        </subsection>
+
+        <subsection id="algorithms-sort-description" answers_as_choices="true" and_reverse="true">
+            <title>Description</title>
+
+            <question id="algorithms-sort-description-quicksort">
+                <text>Quicksort</text>
+                <link>https://en.wikipedia.org/wiki/Quicksort</link>
+                <answer>Find partition and recurse.</answer>
+            </question>
+            <question id="algorithms-sort-description-mergesort">
+                <text>Mergesort</text>
+                <link>https://en.wikipedia.org/wiki/Merge_sort</link>
+                <answer>Divide, sort, merge, recurse.</answer>
+            </question>
+            <question id="algorithms-sort-description-heapsort">
+                <text>Heapsort</text>
+                <link>https://en.wikipedia.org/wiki/Heapsort</link>
+                <answer>Like Selection Sort, but first heapifies the array and then chooses the largest values.</answer>
+            </question>
+            <question id="algorithms-sort-description-timsort">
+                <text>Timsort</text>
+                <link>https://en.wikipedia.org/wiki/Timsort</link>
+                <answer>Hybrid of Mergesort and Insertion Sort. Finds ordered subsequences.</answer>
+            </question>
+            <question id="algorithms-sort-description-insertion-sort">
+                <text>Insertion Sort</text>
+                <link>https://en.wikipedia.org/wiki/Insertion_sort</link>
+                <answer>Move each item, by neighbour swaps, to its location in the sorted list. Like sorting a hand of cards.</answer>
+            </question>
+            <question id="algorithms-sort-description-selection-sort">
+                <text>Selection Sort</text>
+                <link>https://en.wikipedia.org/wiki/Selection_sort</link>
+                <answer>Repeatedly finds smallest item and moves it to the end of the sorted section at the start.</answer>
+            </question>
+            <question id="algorithms-sort-description-shell-sort">
+                <text>Shellsort</text>
+                <link>https://en.wikipedia.org/wiki/Shellsort</link>
+                <answer>Like Insertion Sort, but considering every hth element, then again for lower h, until h is 1.</answer>
+            </question>
+            <question id="algorithms-sort-description-counting-sort">
+                <text>Counting Sort</text>
+                <answer>Count how often each value appears. Calculate the start index for each value. Copy each value to the start index in the output, decrementing the start index each time for each value.</answer>
+            </question>
+            <question id="algorithms-sort-description-radix-sort">
+                <text>Radix Sort</text>
+                <link>https://en.wikipedia.org/wiki/Radix_sort</link>
+                <answer>Sort d times, each time examining just b bits, using counting sort or bucket sort.</answer>
+            </question>
+            <question id="algorithms-sort-description-bucket-sort">
+                <text>Bucket Sort</text>
+                <answer>Scatter items into buckets for ranges. Sort each bucket. Fill the array from the sorted buckets.</answer>
+            </question>
+            <question id="algorithms-sort-description-bubble-sort">
+                <text>Bubble Sort</text>
+                <answer>Compare and swap pairs until no more swaps are necessary.</answer>
+            </question>
+
+            <!-- TODO? Burstsort (uses a Trie) https://en.wikipedia.org/wiki/Burstsort -->
+        </subsection>
     </section>
 
-    <!-- What do they need space for? -->
+    <section id="algorithms-substring-search">
+        <title>Substring Search Algorithms</title>
+        <subsection id="algorithms-substring-search-description" answers_as_choices="true" and_reverse="true">
+            <title>Description</title>
+            <question id="algorithms-substring-search-description-kmp">
+                <text>Knuth-Morris-Pratt (KMP)</text>
+                <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
+                <answer>Pre-calculate a Deterministic Finite Automata (DFA), (also known as &quot;partial match table&quot; or &quot;failure function&quot;) that tells us, for each mismatch, where in the pattern we would need to start comparing characters again. For instance, this avoids re-comparing a prefix of the pattern that is identical to a suffix of the part of the pattern compared so far.</answer>
+            </question>
 
-    <section id="algorithms-sort-stability" answers_as_choices="true">
-        <title>Sort Stability</title>
-        <link>https://en.wikipedia.org/wiki/Stable_sort</link>
+            <question id="algorithms-substring-search-description-boyer-moore">
+                <text>Boyer-Moore</text>
+                <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
+                <answer>Pre-calculate the right-most position of each character in the pattern. When there is a mismatch, skip ahead that much and compare again from the start of the pattern.</answer>
+            </question>
 
-        <question id="algorithms-sort-stability-quicksort">
-            <text>Quicksort</text>
-            <link>https://en.wikipedia.org/wiki/Quicksort</link>
-            <answer>Unstable</answer>
-        </question>
-        <question id="algorithms-sort-stability-mergesort">
-            <text>Mergesort</text>
-            <link>https://en.wikipedia.org/wiki/Merge_sort</link>
-            <answer>Stable</answer>
-        </question>
-        <question id="algorithms-sort-stability-heapsort">
-            <text>Heapsort</text>
-            <link>https://en.wikipedia.org/wiki/Heapsort</link>
-            <answer>Unstable</answer>
-        </question>
-        <question id="algorithms-sort-stability-timsort">
-            <text>Timsort</text>
-            <link>https://en.wikipedia.org/wiki/Timsort</link>
-            <answer>Stable</answer>
-        </question>
-        <question id="algorithms-sort-stability-insertion-sort">
-            <text>Insertion Sort</text>
-            <link>https://en.wikipedia.org/wiki/Insertion_sort</link>
-            <answer>Stable</answer>
-        </question>
-        <question id="algorithms-sort-stability-selection-sort">
-            <text>Selection Sort</text>
-            <link>https://en.wikipedia.org/wiki/Selection_sort</link>
-            <answer>Unstable</answer>
-        </question>
-        <question id="algorithms-sort-stability-shellsort">
-            <text>Shellsort</text>
-            <link>https://en.wikipedia.org/wiki/Shellsort</link>
-            <answer>Unstable</answer>
-        </question>
-        <question id="algorithms-sort-stability-counting-sort">
-            <text>Counting Sort</text>
-            <answer>Stable</answer>
-        </question>
-        <question id="algorithms-sort-stability-radix-sort">
-            <text>Radix Sort</text>
-            <link>https://en.wikipedia.org/wiki/Radix_sort</link>
-            <answer>Stable</answer>
-        </question>
-        <question id="algorithms-sort-stability-bucket-sort">
-            <text>Bucket Sort</text>
-            <answer>Stable</answer>
-        </question>
-        <question id="algorithms-sort-stability-bubble-sort">
-            <text>Bubble Sort</text>
-            <answer>Stable</answer>
-        </question>
-    </section>
+            <question id="algorithms-substring-search-description-rabin-karp">
+                <text>Rabin-Karp</text>
+                <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
+                <answer>Compare hashes of the substrings, generating the next hash based on the previous hash.</answer>
+            </question>
+        </subsection>
 
-    <section id="algorithms-inplace" answers_as_choices="true">
-        <title>Sorting Algorithms: In Place or Not</title>
-        <link>https://en.wikipedia.org/wiki/In-place_algorithm</link>
+        <subsection id="algorithms-substring-search-time-complexity" answers_as_choices="true" and_reverse="true">
+            <title>Time Complexity</title>
+            <!-- These are based on page 779 of Sedgewicks's Algorithms book, 4th edition. -->
+            <question id="algorithms-substring-search-time-kmp">
+                <text>Knuth-Morris-Pratt (KMP)</text>
+                <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
+                <answer>O(2N), typically 1.1N</answer>
+            </question>
 
-        <question id="algorithms-inplace-quicksort">
-            <text>Quicksort</text>
-            <link>https://en.wikipedia.org/wiki/Quicksort</link>
-            <answer>In-place (but small additional space needed)</answer>
-        </question>
-        <question id="algorithms-inplace-mergesort">
-            <text>Mergesort</text>
-            <link>https://en.wikipedia.org/wiki/Merge_sort</link>
-            <answer>Not in-place</answer>
-        </question>
-        <question id="algorithms-inplace-heapsort">
-            <text>Heapsort</text>
-            <link>https://en.wikipedia.org/wiki/Heapsort</link>
-            <answer>In-place</answer>
-        </question>
-        <question id="algorithms-inplace-timsort">
-            <text>Timsort</text>
-            <link>https://en.wikipedia.org/wiki/Timsort</link>
-            <answer>Not in-place</answer>
-        </question>
-        <question id="algorithms-inplace-insertion-sort">
-            <text>Insertion Sort</text>
-            <link>https://en.wikipedia.org/wiki/Insertion_sort</link>
-            <answer>In-place</answer>
-        </question>
-        <question id="algorithms-inplace-selection-sort">
-            <text>Selection Sort</text>
-            <link>https://en.wikipedia.org/wiki/Selection_sort</link>
-            <answer>In-place</answer>
-        </question>
-        <question id="algorithms-inplace-shellsort">
-            <text>Shellsort</text>
-            <link>https://en.wikipedia.org/wiki/Shellsort</link>
-            <answer>In-place</answer>
-        </question>
-        <question id="algorithms-inplace-counting-sort">
-            <text>Counting Sort</text>
-            <answer>Not in-place</answer>
-        </question>
-        <question id="algorithms-inplace-radix-sort">
-            <text>Radix Sort</text>
-            <link>https://en.wikipedia.org/wiki/Radix_sort</link>
-            <answer>Not in-place</answer>
-        </question>
-        <question id="algorithms-inplace-bucket-sort">
-            <text>Bucket Sort</text>
-            <answer>Not in-place</answer>
-        </question>
-        <question id="algorithms-inplace-bubble-sort">
-            <text>Bubble Sort</text>
-            <answer>In-place</answer>
-        </question>
-    </section>
+            <question id="algorithms-substring-search-time-boyer-moore">
+                <text>Boyer-Moore</text>
+                <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
+                <answer>O(3N), typically N/M</answer>
+            </question>
 
-    <section id="algorithms-sort-comparison" answers_as_choices="true">
-        <title>Sorting Algorithms: Comparison or Non-Comparison</title>
-        <link>https://en.wikipedia.org/wiki/Comparison_sort</link>
+            <question id="algorithms-substring-search-time-rabin-karp">
+                <text>Rabin-Karp</text>
+                <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
+                <answer>O(7N), typically 7N</answer>
+            </question>
+        </subsection>
 
-        <question id="algorithms-sort-comparison-quicksort">
-            <text>Quicksort</text>
-            <link>https://en.wikipedia.org/wiki/Quicksort</link>
-            <answer>Comparison</answer>
-        </question>
-        <question id="algorithms-sort-comparison-mergesort">
-            <text>Mergesort</text>
-            <link>https://en.wikipedia.org/wiki/Merge_sort</link>
-            <answer>Comparison</answer>
-        </question>
-        <question id="algorithms-sort-comparison-heapsort">
-            <text>Heapsort</text>
-            <link>https://en.wikipedia.org/wiki/Heapsort</link>
-            <answer>Comparison</answer>
-        </question>
-        <question id="algorithms-sort-comparison-timsort">
-            <text>Timsort</text>
-            <link>https://en.wikipedia.org/wiki/Timsort</link>
-            <answer>Comparison</answer>
-        </question>
-        <question id="algorithms-sort-comparison-insertion-sort">
-            <text>Insertion Sort</text>
-            <link>https://en.wikipedia.org/wiki/Insertion_sort</link>
-            <answer>Comparison</answer>
-        </question>
-        <question id="algorithms-sort-comparison-selection-sort">
-            <text>Selection Sort</text>
-            <link>https://en.wikipedia.org/wiki/Selection_sort</link>
-            <answer>Comparison</answer>
-        </question>
-        <question id="algorithms-sort-comparison-shellsort">
-            <text>Shellsort</text>
-            <link>https://en.wikipedia.org/wiki/Shellsort</link>
-            <answer>Comparison</answer>
-        </question>
-        <question id="algorithms-sort-comparison-counting-sort">
-            <text>Counting Sort</text>
-            <answer>Non-Comparison</answer>
-        </question>
-        <question id="algorithms-sort-comparison-radix-sort">
-            <text>Radix Sort</text>
-            <link>https://en.wikipedia.org/wiki/Radix_sort</link>
-            <answer>Non-Comparison</answer>
-        </question>
-        <question id="algorithms-sort-comparison-bucket-sort">
-            <text>Bucket Sort</text>
-            <answer>Comparison</answer>
-        </question>
-        <question id="algorithms-sort-comparison-bubble-sort">
-            <text>Bubble Sort</text>
-            <answer>Comparison</answer>
-        </question>
-    </section>
+        <subsection id="algorithms-substring-search-extra-space" answers_as_choices="true" and_reverse="true">
+            <title>Extra space</title>
+            <!-- These are based on page 779 of Sedgewicks's Algorithms book, 4th edition. -->
+            <question id="algorithms-substring-search-extra-space-kmp">
+                <text>Knuth-Morris-Pratt (KMP)m</text>
+                <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
+                <answer>MR (substring length * alphabet size)</answer>
+            </question>
 
+            <question id="algorithms-substring-search-extra-space-boyer-moore">
+                <text>Boyer-Moore</text>
+                <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
+                <answer>R (alphabet size)</answer>
+            </question>
 
-    <section id="algorithms-sort-description" answers_as_choices="true" and_reverse="true">
-        <title>Sorting Algorithm Description</title>
+            <question id="algorithms-substring-search-extra-space-rabin-karp">
+                <text>Rabin-Karp</text>
+                <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
+                <answer>1</answer>
+            </question>
+        </subsection>
 
-        <question id="algorithms-sort-description-quicksort">
-            <text>Quicksort</text>
-            <link>https://en.wikipedia.org/wiki/Quicksort</link>
-            <answer>Find partition and recurse.</answer>
-        </question>
-        <question id="algorithms-sort-description-mergesort">
-            <text>Mergesort</text>
-            <link>https://en.wikipedia.org/wiki/Merge_sort</link>
-            <answer>Divide, sort, merge, recurse.</answer>
-        </question>
-        <question id="algorithms-sort-description-heapsort">
-            <text>Heapsort</text>
-            <link>https://en.wikipedia.org/wiki/Heapsort</link>
-            <answer>Like Selection Sort, but first heapifies the array and then chooses the largest values.</answer>
-        </question>
-        <question id="algorithms-sort-description-timsort">
-            <text>Timsort</text>
-            <link>https://en.wikipedia.org/wiki/Timsort</link>
-            <answer>Hybrid of Mergesort and Insertion Sort. Finds ordered subsequences.</answer>
-        </question>
-        <question id="algorithms-sort-description-insertion-sort">
-            <text>Insertion Sort</text>
-            <link>https://en.wikipedia.org/wiki/Insertion_sort</link>
-            <answer>Move each item, by neighbour swaps, to its location in the sorted list. Like sorting a hand of cards.</answer>
-        </question>
-        <question id="algorithms-sort-description-selection-sort">
-            <text>Selection Sort</text>
-            <link>https://en.wikipedia.org/wiki/Selection_sort</link>
-            <answer>Repeatedly finds smallest item and moves it to the end of the sorted section at the start.</answer>
-        </question>
-        <question id="algorithms-sort-description-shell-sort">
-            <text>Shellsort</text>
-            <link>https://en.wikipedia.org/wiki/Shellsort</link>
-            <answer>Like Insertion Sort, but considering every hth element, then again for lower h, until h is 1.</answer>
-        </question>
-        <question id="algorithms-sort-description-counting-sort">
-            <text>Counting Sort</text>
-            <answer>Count how often each value appears. Calculate the start index for each value. Copy each value to the start index in the output, decrementing the start index each time for each value.</answer>
-        </question>
-        <question id="algorithms-sort-description-radix-sort">
-            <text>Radix Sort</text>
-            <link>https://en.wikipedia.org/wiki/Radix_sort</link>
-            <answer>Sort d times, each time examining just b bits, using counting sort or bucket sort.</answer>
-        </question>
-        <question id="algorithms-sort-description-bucket-sort">
-            <text>Bucket Sort</text>
-            <answer>Scatter items into buckets for ranges. Sort each bucket. Fill the array from the sorted buckets.</answer>
-        </question>
-        <question id="algorithms-sort-description-bubble-sort">
-            <text>Bubble Sort</text>
-            <answer>Compare and swap pairs until no more swaps are necessary.</answer>
-        </question>
+        <subsection id="algorithms-substring-search-backtracking" answers_as_choices="true">
+            <title>Backup in input?</title>
+            <question id="algorithms-substring-search-backtracking-kmp">
+                <text>Knuth-Morris-Pratt (KMP)m</text>
+                <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
+                <answer>No backup required</answer>
+            </question>
 
-        <!-- TODO? Burstsort (uses a Trie) https://en.wikipedia.org/wiki/Burstsort -->
-    </section>
+            <question id="algorithms-substring-search-backtracking-boyer-moore">
+                <text>Boyer-Moore</text>
+                <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
+                <answer>Backup required</answer>
+            </question>
 
-    <section id="algorithms-substring-search-description" answers_as_choices="true" and_reverse="true">
-        <title>Substring Search Algorithm Description</title>
-        <question id="algorithms-substring-search-description-kmp">
-            <text>Knuth-Morris-Pratt (KMP)</text>
-            <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
-            <answer>Pre-calculate a Deterministic Finite Automata (DFA), (also known as &quot;partial match table&quot; or &quot;failure function&quot;) that tells us, for each mismatch, where in the pattern we would need to start comparing characters again. For instance, this avoids re-comparing a prefix of the pattern that is identical to a suffix of the part of the pattern compared so far.</answer>
-        </question>
-
-        <question id="algorithms-substring-search-description-boyer-moore">
-            <text>Boyer-Moore</text>
-            <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
-            <answer>Pre-calculate the right-most position of each character in the pattern. When there is a mismatch, skip ahead that much and compare again from the start of the pattern.</answer>
-        </question>
-
-        <question id="algorithms-substring-search-description-rabin-karp">
-            <text>Rabin-Karp</text>
-            <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
-            <answer>Compare hashes of the substrings, generating the next hash based on the previous hash.</answer>
-        </question>
-    </section>
-
-    <section id="algorithms-substring-search-time-complexity" answers_as_choices="true" and_reverse="true">
-        <title>Substring Search Algorithm: Time Complexity</title>
-        <!-- These are based on page 779 of Sedgewicks's Algorithms book, 4th edition. -->
-        <question id="algorithms-substring-search-time-kmp">
-            <text>Knuth-Morris-Pratt (KMP)m</text>
-            <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
-            <answer>O(2N), typically 1.1N</answer>
-        </question>
-
-        <question id="algorithms-substring-search-time-boyer-moore">
-            <text>Boyer-Moore</text>
-            <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
-            <answer>O(3N), typically N/M</answer>
-        </question>
-
-        <question id="algorithms-substring-search-time-rabin-karp">
-            <text>Rabin-Karp</text>
-            <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
-            <answer>O(7N), typically 7N</answer>
-        </question>
-    </section>
-
-    <section id="algorithms-substring-search-extra-space" answers_as_choices="true" and_reverse="true">
-        <title>Substring Search Algorithm: Extra space</title>
-        <!-- These are based on page 779 of Sedgewicks's Algorithms book, 4th edition. -->
-        <question id="algorithms-substring-search-extra-space-kmp">
-            <text>Knuth-Morris-Pratt (KMP)m</text>
-            <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
-            <answer>MR (substring length * alphabet size)</answer>
-        </question>
-
-        <question id="algorithms-substring-search-extra-space-boyer-moore">
-            <text>Boyer-Moore</text>
-            <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
-            <answer>R (alphabet size)</answer>
-        </question>
-
-        <question id="algorithms-substring-search-extra-space-rabin-karp">
-            <text>Rabin-Karp</text>
-            <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
-            <answer>1</answer>
-        </question>
-    </section>
-
-    <section id="algorithms-substring-search-backtracking" answers_as_choices="true">
-        <title>Substring Search Algorithm: Backup in input</title>
-        <question id="algorithms-substring-search-backtracking-kmp">
-            <text>Knuth-Morris-Pratt (KMP)m</text>
-            <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
-            <answer>No backup required</answer>
-        </question>
-
-        <question id="algorithms-substring-search-backtracking-boyer-moore">
-            <text>Boyer-Moore</text>
-            <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
-            <answer>Backup required</answer>
-        </question>
-
-        <question id="algorithms-substring-search-backtracking-rabin-karp">
-            <text>Rabin-Karp</text>
-            <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
-            <answer>No backup required</answer>
-        </question>
+            <question id="algorithms-substring-search-backtracking-rabin-karp">
+                <text>Rabin-Karp</text>
+                <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
+                <answer>No backup required</answer>
+            </question>
+        </subsection>
     </section>
 
     <!-- Greedy Algorithms: Dijkstra's, Scheduling, Make change (canonical coins).
