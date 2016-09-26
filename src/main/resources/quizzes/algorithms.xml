@@ -426,7 +426,6 @@
     <!-- Convex hull
     Median Finding -->
 
-    <!-- Online algorithms -->
 
     <!-- Strings and sets:
       Set Cover:
@@ -513,9 +512,13 @@
     https://en.wikipedia.org/wiki/Online_algorithm
       Insertion Sort
       Ukkonen's algorithm for Suffix Tree Construction
+      Farach's algorithm for Suffix Tree Construction
+      Insertion Sort
+      Boyer-Moore?
 
     Offline algorithms: Need whole data from the start:
       Selection Sort
+      McCreights's algorithm for Suffix Tree Construction
 
     -->
 

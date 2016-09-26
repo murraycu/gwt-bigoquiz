@@ -105,4 +105,16 @@
          -->
     <!-- TODO: Other proofs by. -->
 
+    <!-- Time complexity of recursive algorithms:
+      Factorial: O(n): Just reduces n by 1 each time, doing same amount of work each time. n * k -> O(n).
+      Fibonacci (naive): Increases work by 2 each time: O(phi ^ n).
+    -->
+
+    <!-- Space complexity of recursive algorithms: (TODO: Just the max depth?)
+     Factorial: O(n): Each call results in 1 recursive call, until they all unwind.
+     Fibonacci (naive): Increases work by 2 each time: O(phi ^ n).
+   -->
+
+    <!-- TODO: Amortized Analysis -->
+
 </quiz>
