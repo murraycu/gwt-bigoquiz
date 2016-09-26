@@ -299,6 +299,92 @@
         <!-- TODO? Burstsort (uses a Trie) https://en.wikipedia.org/wiki/Burstsort -->
     </section>
 
+    <section id="algorithms-substring-search-description" answers_as_choices="true" and_reverse="true">
+        <title>Substring Search Algorithm Description</title>
+        <question id="algorithms-substring-search-description-kmp">
+            <text>Knuth-Morris-Pratt (KMP)</text>
+            <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
+            <answer>Pre-calculate a Deterministic Finite Automata (DFA), (also known as &quot;partial match table&quot; or &quot;failure function&quot;) that tells us, for each mismatch, where in the pattern we would need to start comparing characters again. For instance, this avoids re-comparing a prefix of the pattern that is identical to a suffix of the part of the pattern compared so far.</answer>
+        </question>
+
+        <question id="algorithms-substring-search-description-boyer-moore">
+            <text>Boyer-Moore</text>
+            <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
+            <answer>Pre-calculate the right-most position of each character in the pattern. When there is a mismatch, skip ahead that much and compare again from the start of the pattern.</answer>
+        </question>
+
+        <question id="algorithms-substring-search-description-rabin-karp">
+            <text>Rabin-Karp</text>
+            <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
+            <answer>Compare hashes of the substrings, generating the next hash based on the previous hash.</answer>
+        </question>
+    </section>
+
+    <section id="algorithms-substring-search-time-complexity" answers_as_choices="true" and_reverse="true">
+        <title>Substring Search Algorithm: Time Complexity</title>
+        <!-- These are based on page 779 of Sedgewicks's Algorithms book, 4th edition. -->
+        <question id="algorithms-substring-search-time-kmp">
+            <text>Knuth-Morris-Pratt (KMP)m</text>
+            <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
+            <answer>O(2N), typically 1.1N</answer>
+        </question>
+
+        <question id="algorithms-substring-search-time-boyer-moore">
+            <text>Boyer-Moore</text>
+            <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
+            <answer>O(3N), typically N/M</answer>
+        </question>
+
+        <question id="algorithms-substring-search-time-rabin-karp">
+            <text>Rabin-Karp</text>
+            <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
+            <answer>O(7N), typically 7N</answer>
+        </question>
+    </section>
+
+    <section id="algorithms-substring-search-extra-space" answers_as_choices="true" and_reverse="true">
+        <title>Substring Search Algorithm: Extra space</title>
+        <!-- These are based on page 779 of Sedgewicks's Algorithms book, 4th edition. -->
+        <question id="algorithms-substring-search-extra-space-kmp">
+            <text>Knuth-Morris-Pratt (KMP)m</text>
+            <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
+            <answer>MR (substring length * alphabet size)</answer>
+        </question>
+
+        <question id="algorithms-substring-search-extra-space-boyer-moore">
+            <text>Boyer-Moore</text>
+            <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
+            <answer>R (alphabet size)</answer>
+        </question>
+
+        <question id="algorithms-substring-search-extra-space-rabin-karp">
+            <text>Rabin-Karp</text>
+            <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
+            <answer>1</answer>
+        </question>
+    </section>
+
+    <section id="algorithms-substring-search-backtracking" answers_as_choices="true">
+        <title>Substring Search Algorithm: Backup in input</title>
+        <question id="algorithms-substring-search-backtracking-kmp">
+            <text>Knuth-Morris-Pratt (KMP)m</text>
+            <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
+            <answer>No backup required</answer>
+        </question>
+
+        <question id="algorithms-substring-search-backtracking-boyer-moore">
+            <text>Boyer-Moore</text>
+            <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
+            <answer>Backup required</answer>
+        </question>
+
+        <question id="algorithms-substring-search-backtracking-rabin-karp">
+            <text>Rabin-Karp</text>
+            <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
+            <answer>No backup required</answer>
+        </question>
+    </section>
+
     <!-- Greedy Algorithms: Dijkstra's, Scheduling, Make change (canonical coins).
        Huffman Codes: (Bottom-up. Merge items (or combined items) with least frequency, at each step, giving the subtree the sum of their frequencies. Repeat.
           Wrong answer: merge highest frequencies.
