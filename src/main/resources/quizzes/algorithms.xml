@@ -322,6 +322,10 @@
                 <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
                 <answer>Compare hashes of the substrings, generating the next hash based on the previous hash.</answer>
             </question>
+
+            <!-- TODO: Boyer-Moore-Horspool -->
+            <!-- TODO: Aho-Corasick -->
+            <!-- TODO: Z Algorithm -->
         </subsection>
 
         <subsection id="algorithms-substring-search-time-complexity" answers_as_choices="true" and_reverse="true">
