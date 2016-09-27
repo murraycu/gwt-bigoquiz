@@ -540,9 +540,9 @@
       If a neighbour is labelled, but the pixel is not yet labelled, label the pixel with the neighbour's label.
       If a neighbour has a higher label than the pixel, join the pixel's label  and the neighbour label in the UnionFind.
       Second pass:
-      Count the distint roots in the UnionFind of labels.
+      Count the distinct roots in the UnionFind of labels.
     -->
 
-    -->
+    <!-- subset sum -->
 
 </quiz>
