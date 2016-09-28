@@ -428,14 +428,195 @@
                     &lt;/math&gt;</answer>
             </question>
         </subsection>
-
     </section>
 
-    <!-- Geometric series:
-       https://en.wikipedia.org/wiki/Geometric_series#Formula
-       -->
+
+    <section id="series-approximations" answers_as_choices="true">
+        <title>Series: Approximations</title>
+        <question id="series-harmonic-sum">
+            <text is_html="true">Harmonic Sum: H(n): &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;
+                &lt;mtable displaystyle=&quot;true&quot;&gt;
+                &lt;mtr&gt;
+                &lt;mtd&gt;
+                &lt;mn&gt;1&lt;/mn&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mfrac&gt;
+                &lt;mn&gt;1&lt;/mn&gt;
+                &lt;mn&gt;2&lt;/mn&gt;
+                &lt;/mfrac&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mfrac&gt;
+                &lt;mn&gt;1&lt;/mn&gt;
+                &lt;mn&gt;3&lt;/mn&gt;
+                &lt;/mfrac&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mfrac&gt;
+                &lt;mn&gt;1&lt;/mn&gt;
+                &lt;mn&gt;4&lt;/mn&gt;
+                &lt;/mfrac&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mo&gt;&amp;#x22EF;&lt;/mo&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mfrac&gt;
+                &lt;mn&gt;1&lt;/mn&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;/mfrac&gt;
+                &lt;/mtd&gt;
+                &lt;/mtr&gt;
+                &lt;/mtable&gt;
+                &lt;/math&gt;</text>
+            <link>https://en.wikipedia.org/wiki/Harmonic_number</link>
+            <answer is_html="true">&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;
+                &lt;mrow&gt;
+                &lt;mi&gt;ln&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;/mrow
+                &lt;/math&gt;</answer>
+        </question>
+
+        <!-- This is Gauss' trick. -->
+        <question id="series-triangular-sum">
+            <text is_html="true">Triangular Sum: &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;
+                &lt;mtable displaystyle=&quot;true&quot;&gt;
+                &lt;mtr&gt;
+                &lt;mtd&gt;
+                &lt;mn&gt;1&lt;/mn&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mn&gt;2&lt;/mn&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mn&gt;3&lt;/mn&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mn&gt;4&lt;/mn&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mo&gt;&amp;#x22EF;&lt;/mo&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mo&gt;=&lt;/mo&gt;
+                &lt;mfrac&gt;
+                &lt;mrow&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;&lt;/mo&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mo&gt;&amp;#x2062;&lt;/mo&gt;
+                &lt;mrow&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mrow&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mn&gt;1&lt;/mn&gt;
+                &lt;/mrow&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;/mrow&gt;
+                &lt;/mrow&gt;
+                &lt;mi&gt;2&lt;/mi&gt;
+                &lt;/mfrac&gt;
+                &lt;/mtd&gt;
+                &lt;/mtr&gt;
+                &lt;/mtable&gt;
+                &lt;/math&gt;</text>
+            <link>https://en.wikipedia.org/wiki/Triangular_number</link>
+            <answer is_html="true">&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;
+                &lt;mrow&gt;
+                &lt;msup&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mn&gt;2&lt;/mn&gt;
+                &lt;/msup&gt;
+                &lt;/mrow
+                &lt;/math&gt;</answer>
+        </question>
+
+        <!-- TODO: This is just one variation. -->
+        <question id="series-geometric-sum">
+            <text is_html="true">Geometric Sum: &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;
+                &lt;mtable displaystyle=&quot;true&quot;&gt;
+                &lt;mtr&gt;
+                &lt;mtd&gt;
+                &lt;mn&gt;1&lt;/mn&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mn&gt;2&lt;/mn&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mn&gt;4&lt;/mn&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mn&gt;8&lt;/mn&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mo&gt;&amp;#x22EF;&lt;/mo&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mo&gt;=&lt;/mo&gt;
+                &lt;mn&gt;2&lt;/mn&gt;
+                &lt;mo&gt;&amp;#x2062;&lt;/mo&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mo&gt;-&lt;/mo&gt;
+                &lt;mn&gt;1&lt;/mn&gt;
+                &lt;/mtd&gt;
+                &lt;/mtr&gt;
+                &lt;/mtable&gt;
+                &lt;/math&gt;</text>
+            <link>https://en.wikipedia.org/wiki/Geometric_series#Formula</link>
+            <answer is_html="true">&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;
+                &lt;mrow&gt;
+                &lt;mn&gt;2&lt;/mn&gt;
+                &lt;mo&gt;&amp;#x2062;&lt;/mo&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;/mrow
+                &lt;/math&gt;</answer>
+        </question>
+
+        <question id="series-stirlings-approximation">
+            <text is_html="true">Stirling's Approximation: &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;
+                &lt;mtable displaystyle=&quot;true&quot;&gt;
+                &lt;mtr&gt;
+                &lt;mtd&gt;
+                &lt;mi&gt;lg&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mi&gt;n!&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;mo&gt;=&lt;/mo&gt;
+                &lt;mi&gt;lg&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mn&gt;1&lt;/mn&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mi&gt;lg&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mn&gt;2&lt;/mn&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mi&gt;lg&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mn&gt;3&lt;/mn&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mi&gt;lg&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mn&gt;4&lt;/mn&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mo&gt;&amp;#x22EF;&lt;!-- &#8943; --&gt;&lt;/mo&gt;
+                &lt;mo&gt;+&lt;/mo&gt;
+                &lt;mi&gt;lg&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;/mtd&gt;
+                &lt;/mtr&gt;
+                &lt;/mtable&gt;
+                &lt;/math&gt;</text>
+            <link>https://en.wikipedia.org/wiki/Stirling%27s_approximation</link>
+            <answer is_html="true">&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;
+                &lt;mrow&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mo&gt;&amp;#x2062;&lt;/mo&gt;
+                &lt;mi&gt;lg&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;/mrow
+                &lt;/math&gt;</answer>
+        </question>
+    </section>
+
     <!-- Stirling Numbers -->
     <!-- Taylor Series -->
-
-
 </quiz>
