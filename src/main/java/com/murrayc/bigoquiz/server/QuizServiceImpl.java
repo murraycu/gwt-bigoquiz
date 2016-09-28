@@ -523,6 +523,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         @Nullable final Question nextQuestion = getNextQuestionFromUserStats(nextQuestionSectionId, quiz, mapUserStats);
+        setQuestionExtras(nextQuestion, quiz);
         return new SubmissionResult(result, correctAnswer, nextQuestion);
     }
 
