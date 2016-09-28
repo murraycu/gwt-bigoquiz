@@ -100,6 +100,27 @@
         </subsection>
     </section>
 
+    <!-- TODO: I am not satisfied with these explanations. murrayc -->
+    <section id="amortized-analysis" answers_as_choices="true">
+        <title>Amortized Analysis</title>
+        <link>https://en.wikipedia.org/wiki/Amortized_analysis</link>
+        <question id="amortized-analysis-aggregate-analysis">
+            <text>Aggregate Analysis</text>
+            <link>https://en.wikipedia.org/wiki/Aggregate_analysis</link>
+            <answer>Determines an average worst case time for each operation based on the worst case time for n operations of any type.</answer>
+        </question>
+        <question id="amortized-analysis-accounting-method">
+            <text>Accounting Method</text>
+            <link>https://en.wikipedia.org/wiki/Accounting_method</link>
+            <answer>Assigns a cost for each operation that includes the cost of affected future operations. For instance, the cost of each insert would include the cost of each subsequent delete.</answer>
+        </question>
+        <question id="amortized-analysis-potential-method">
+            <text>Potential Method</text>
+            <link>https://en.wikipedia.org/wiki/Potential_method</link>
+            <answer>Chooses a potential function that associates a potential with each state of the data structure. The amortized cost of each operation is the actual cost plus the change in potential.</answer>
+        </question>
+    </section>
+
     <!-- TODO: Greedy algorithms: Proof by contradiction.
          TODO: Greedy algorithms: Proof by contradiction: Assume that the subproblem solution is not optimal (not part of the whole solution).
          -->
