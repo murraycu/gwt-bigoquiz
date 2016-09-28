@@ -172,11 +172,16 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
 
             Utils.addHeaderToPanel(3, detailsPanel, titleLabel);
 
-            final int questionsCount = section.questionsCount;
-
             final UserStats stats = userHistorySections.getStats(sectionId);
             if (stats != null) {
-                Utils.addStackedProgressBar(detailsPanel, stats.getCorrectOnce(), stats.getAnsweredOnce(), questionsCount, messages);
+                // We limit answeredOnce and correctOnce because these can be bigger than
+                // the actual available count of questions, if we change the question DIs after they've been answered,
+                // but this would look strange to people.
+                // TODO: Actually forget now-invalid answered questions.
+                final int questionsCount = section.questionsCount;
+                final int answeredOnce = Math.min(stats.getAnsweredOnce(), questionsCount);
+                final int correctOnce = Math.min(stats.getCorrectOnce(), questionsCount);
+                Utils.addStackedProgressBar(detailsPanel, correctOnce, answeredOnce, questionsCount, messages);
 
                 /* This doesn't seem interesting enough to take up the extra space with it:
                 addParagraphWithText(detailsPanel,
