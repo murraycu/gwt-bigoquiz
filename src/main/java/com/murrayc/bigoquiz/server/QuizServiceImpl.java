@@ -523,6 +523,11 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         @Nullable final Question nextQuestion = getNextQuestionFromUserStats(nextQuestionSectionId, quiz, mapUserStats);
+        return generateSubmissionResult(result, quiz, correctAnswer, nextQuestion);
+    }
+
+    @NotNull
+    private SubmissionResult generateSubmissionResult(boolean result, Quiz quiz, Question.Text correctAnswer, Question nextQuestion) {
         setQuestionExtras(nextQuestion, quiz);
         return new SubmissionResult(result, correctAnswer, nextQuestion);
     }
@@ -546,8 +551,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         @Nullable final Question nextQuestion = getNextQuestionFromUserStatsForSection(nextQuestionSectionId, quiz, userStats);
-        setQuestionExtras(nextQuestion, quiz);
-        return new SubmissionResult(result, correctAnswer, nextQuestion);
+        return generateSubmissionResult(result, quiz, correctAnswer, nextQuestion);
     }
 
     private void storeAnswer(boolean result, @NotNull final String quizId, @NotNull final Question question, final String userId, @Nullable final Map<String, UserStats> mapUserStats) {
