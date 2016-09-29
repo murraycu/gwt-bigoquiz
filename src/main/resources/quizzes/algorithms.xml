@@ -100,7 +100,7 @@
                 <question id="algorithms-sort-time-shell-sort">
                     <text>Shellsort</text>
                     <link>https://en.wikipedia.org/wiki/Shellsort</link>
-                    <answer>O(n log(n)^2</answer>
+                    <answer>O(n log(n)^2)</answer>
                 </question>
                 <question id="algorithms-sort-time-counting-sort">
                     <text>Counting Sort</text>
