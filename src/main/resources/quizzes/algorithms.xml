@@ -6,6 +6,127 @@
         <subsection id="algorithms-sort-advantages" answers_as_choices="true">
             <title>Advantages</title>
 
+
+            <subsection id="algorithms-sort-description" answers_as_choices="true" and_reverse="true">
+                <title>Description</title>
+
+                <question id="algorithms-sort-description-quicksort">
+                    <text>Quicksort</text>
+                    <link>https://en.wikipedia.org/wiki/Quicksort</link>
+                    <answer>Find partition and recurse.</answer>
+                </question>
+                <question id="algorithms-sort-description-mergesort">
+                    <text>Mergesort</text>
+                    <link>https://en.wikipedia.org/wiki/Merge_sort</link>
+                    <answer>Divide, sort, merge, recurse.</answer>
+                </question>
+                <question id="algorithms-sort-description-heapsort">
+                    <text>Heapsort</text>
+                    <link>https://en.wikipedia.org/wiki/Heapsort</link>
+                    <answer>Like Selection Sort, but first heapifies the array and then chooses the largest values.</answer>
+                </question>
+                <question id="algorithms-sort-description-timsort">
+                    <text>Timsort</text>
+                    <link>https://en.wikipedia.org/wiki/Timsort</link>
+                    <answer>Hybrid of Mergesort and Insertion Sort. Finds ordered subsequences.</answer>
+                </question>
+                <question id="algorithms-sort-description-insertion-sort">
+                    <text>Insertion Sort</text>
+                    <link>https://en.wikipedia.org/wiki/Insertion_sort</link>
+                    <answer>Move each item, by neighbour swaps, to its location in the sorted list. Like sorting a hand of cards.</answer>
+                </question>
+                <question id="algorithms-sort-description-selection-sort">
+                    <text>Selection Sort</text>
+                    <link>https://en.wikipedia.org/wiki/Selection_sort</link>
+                    <answer>Repeatedly finds smallest item and moves it to the end of the sorted section at the start.</answer>
+                </question>
+                <question id="algorithms-sort-description-shell-sort">
+                    <text>Shellsort</text>
+                    <link>https://en.wikipedia.org/wiki/Shellsort</link>
+                    <answer>Like Insertion Sort, but considering every hth element, then again for lower h, until h is 1.</answer>
+                </question>
+                <question id="algorithms-sort-description-counting-sort">
+                    <text>Counting Sort</text>
+                    <answer>Count how often each value appears. Calculate the start index for each value. Copy each value to the start index in the output, decrementing the start index each time for each value.</answer>
+                </question>
+                <question id="algorithms-sort-description-radix-sort">
+                    <text>Radix Sort</text>
+                    <link>https://en.wikipedia.org/wiki/Radix_sort</link>
+                    <answer>Sort d times, each time examining just b bits, using counting sort or bucket sort.</answer>
+                </question>
+                <question id="algorithms-sort-description-bucket-sort">
+                    <text>Bucket Sort</text>
+                    <answer>Scatter items into buckets for ranges. Sort each bucket. Fill the array from the sorted buckets.</answer>
+                </question>
+                <question id="algorithms-sort-description-bubble-sort">
+                    <text>Bubble Sort</text>
+                    <answer>Compare and swap pairs until no more swaps are necessary.</answer>
+                </question>
+
+                <!-- TODO? Burstsort (uses a Trie) https://en.wikipedia.org/wiki/Burstsort -->
+            </subsection>
+
+            <!-- This is a duplication of the more complete information in bigo.xml,
+            but it seems useful to have it here too. -->
+            <subsection id="algorithms-sort-time" answers_as_choices="true" and_reverse="true">
+                <title>Average Time</title>
+
+                <question id="algorithms-sort-time-quicksort">
+                    <text>Quicksort</text>
+                    <link>https://en.wikipedia.org/wiki/Quicksort</link>
+                    <answer>O(n log(n))</answer>
+                </question>
+                <question id="algorithms-sort-time-mergesort">
+                    <text>Mergesort</text>
+                    <link>https://en.wikipedia.org/wiki/Merge_sort</link>
+                    <answer>O(n log(n))</answer>
+                </question>
+                <question id="algorithms-sort-time-heapsort">
+                    <text>Heapsort</text>
+                    <link>https://en.wikipedia.org/wiki/Heapsort</link>
+                    <answer>O(n log(n))</answer>
+                </question>
+                <question id="algorithms-sort-time-timsort">
+                    <text>Timsort</text>
+                    <link>https://en.wikipedia.org/wiki/Timsort</link>
+                    <answer>O(n log(n))</answer>
+                </question>
+                <question id="algorithms-sort-time-insertion-sort">
+                    <text>Insertion Sort</text>
+                    <link>https://en.wikipedia.org/wiki/Insertion_sort</link>
+                    <answer>O(n ^ 2)</answer>
+                </question>
+                <question id="algorithms-sort-time-selection-sort">
+                    <text>Selection Sort</text>
+                    <link>https://en.wikipedia.org/wiki/Selection_sort</link>
+                    <answer>O(n ^ 2)</answer>
+                </question>
+                <question id="algorithms-sort-time-shell-sort">
+                    <text>Shellsort</text>
+                    <link>https://en.wikipedia.org/wiki/Shellsort</link>
+                    <answer>O(n log(n)^2</answer>
+                </question>
+                <question id="algorithms-sort-time-counting-sort">
+                    <text>Counting Sort</text>
+                    <answer>O(n + k)</answer>
+                </question>
+                <question id="algorithms-sort-time-radix-sort">
+                    <text>Radix Sort</text>
+                    <link>https://en.wikipedia.org/wiki/Radix_sort</link>
+                    <answer>O(nk)</answer>
+                </question>
+                <question id="algorithms-sort-time-bucket-sort">
+                    <text>Bucket Sort</text>
+                    <answer>O(n + k)</answer>
+                </question>
+                <question id="algorithms-sort-time-bubble-sort">
+                    <text>Bubble Sort</text>
+                    <answer>O(n ^ 2)</answer>
+                </question>
+
+                <!-- TODO? Burstsort (uses a Trie) https://en.wikipedia.org/wiki/Burstsort -->
+            </subsection>
+
             <question id="algorithms-sort-advantages-quicksort">
                 <text>Quicksort</text>
                 <link>https://en.wikipedia.org/wiki/Quicksort</link>
@@ -239,65 +360,6 @@
                 <text>Bubble Sort</text>
                 <answer>Comparison</answer>
             </question>
-        </subsection>
-
-        <subsection id="algorithms-sort-description" answers_as_choices="true" and_reverse="true">
-            <title>Description</title>
-
-            <question id="algorithms-sort-description-quicksort">
-                <text>Quicksort</text>
-                <link>https://en.wikipedia.org/wiki/Quicksort</link>
-                <answer>Find partition and recurse.</answer>
-            </question>
-            <question id="algorithms-sort-description-mergesort">
-                <text>Mergesort</text>
-                <link>https://en.wikipedia.org/wiki/Merge_sort</link>
-                <answer>Divide, sort, merge, recurse.</answer>
-            </question>
-            <question id="algorithms-sort-description-heapsort">
-                <text>Heapsort</text>
-                <link>https://en.wikipedia.org/wiki/Heapsort</link>
-                <answer>Like Selection Sort, but first heapifies the array and then chooses the largest values.</answer>
-            </question>
-            <question id="algorithms-sort-description-timsort">
-                <text>Timsort</text>
-                <link>https://en.wikipedia.org/wiki/Timsort</link>
-                <answer>Hybrid of Mergesort and Insertion Sort. Finds ordered subsequences.</answer>
-            </question>
-            <question id="algorithms-sort-description-insertion-sort">
-                <text>Insertion Sort</text>
-                <link>https://en.wikipedia.org/wiki/Insertion_sort</link>
-                <answer>Move each item, by neighbour swaps, to its location in the sorted list. Like sorting a hand of cards.</answer>
-            </question>
-            <question id="algorithms-sort-description-selection-sort">
-                <text>Selection Sort</text>
-                <link>https://en.wikipedia.org/wiki/Selection_sort</link>
-                <answer>Repeatedly finds smallest item and moves it to the end of the sorted section at the start.</answer>
-            </question>
-            <question id="algorithms-sort-description-shell-sort">
-                <text>Shellsort</text>
-                <link>https://en.wikipedia.org/wiki/Shellsort</link>
-                <answer>Like Insertion Sort, but considering every hth element, then again for lower h, until h is 1.</answer>
-            </question>
-            <question id="algorithms-sort-description-counting-sort">
-                <text>Counting Sort</text>
-                <answer>Count how often each value appears. Calculate the start index for each value. Copy each value to the start index in the output, decrementing the start index each time for each value.</answer>
-            </question>
-            <question id="algorithms-sort-description-radix-sort">
-                <text>Radix Sort</text>
-                <link>https://en.wikipedia.org/wiki/Radix_sort</link>
-                <answer>Sort d times, each time examining just b bits, using counting sort or bucket sort.</answer>
-            </question>
-            <question id="algorithms-sort-description-bucket-sort">
-                <text>Bucket Sort</text>
-                <answer>Scatter items into buckets for ranges. Sort each bucket. Fill the array from the sorted buckets.</answer>
-            </question>
-            <question id="algorithms-sort-description-bubble-sort">
-                <text>Bubble Sort</text>
-                <answer>Compare and swap pairs until no more swaps are necessary.</answer>
-            </question>
-
-            <!-- TODO? Burstsort (uses a Trie) https://en.wikipedia.org/wiki/Burstsort -->
         </subsection>
     </section>
 
