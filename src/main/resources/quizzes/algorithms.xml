@@ -3,10 +3,6 @@
     <title>Algorithms</title>
     <section id="algorithms-sort">
         <title>Sorting Algorithms</title>
-        <subsection id="algorithms-sort-advantages" answers_as_choices="true">
-            <title>Advantages</title>
-
-
             <subsection id="algorithms-sort-description" answers_as_choices="true" and_reverse="true">
                 <title>Description</title>
 
@@ -126,6 +122,10 @@
 
                 <!-- TODO? Burstsort (uses a Trie) https://en.wikipedia.org/wiki/Burstsort -->
             </subsection>
+
+
+        <subsection id="algorithms-sort-advantages" answers_as_choices="true">
+            <title>Advantages</title>
 
             <question id="algorithms-sort-advantages-quicksort">
                 <text>Quicksort</text>

@@ -563,6 +563,8 @@
                 &lt;/math&gt;</answer>
         </question>
 
+        <!-- Apparently this is an explanation for comparison sorts being O(n log(n)):
+        https://en.wikipedia.org/wiki/Time_complexity#Linearithmic_time -->
         <question id="series-stirlings-approximation">
             <text is_html="true">Stirling's Approximation: &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;
                 &lt;mtable displaystyle=&quot;true&quot;&gt;
