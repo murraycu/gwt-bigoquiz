@@ -121,6 +121,33 @@
         </question>
     </section>
 
+    <section id="probabalistic-algorithms-types" answers_as_choices="true" and_reverse="true">
+        <title>Types of probabalistic algorithms</title>
+        <link>https://en.wikipedia.org/wiki/Amortized_analysis</link>
+        <question id="probabalistic-algorithms-types-monte-carlo">
+            <text>Monte Carlo algorithms</text>
+            <link>https://en.wikipedia.org/wiki/Monte_Carlo_algorithm</link>
+            <answer>Fast but only probably correct.</answer>
+        </question>
+        <question id="probabalistic-algorithms-types-las-vegas">
+            <text>Las Vegas algorithms</text>
+            <link>https://en.wikipedia.org/wiki/Las_Vegas_algorithm</link>
+            <answer>Correct but only probably fast.</answer>
+        </question>
+        <question id="probabalistic-algorithms-types-atlantic-city">
+            <text>Atlantic City algorithms</text>
+            <link>https://en.wikipedia.org/wiki/Atlantic_City_algorithm</link>
+            <answer>Probably correct and probably fast.</answer>
+        </question>
+    </section>
+    <!-- TODO: examples:
+      Quicksort: Las Vegas
+      Solovay–Strassen primality test: Monte Carlo
+      Baillie-PSW primality test: Monte Carlo
+      Miller–Rabin primality test: Monte Carlo
+      Karger's Min-Cut Algorithm: Monte Carlo
+    -->
+
     <!-- TODO: Greedy algorithms: Proof by contradiction.
          TODO: Greedy algorithms: Proof by contradiction: Assume that the subproblem solution is not optimal (not part of the whole solution).
          -->
