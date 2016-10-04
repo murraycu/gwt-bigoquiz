@@ -589,6 +589,12 @@
                 <link>https://en.wikipedia.org/wiki/Tree_traversal#Post-order</link>
                 <answer>Use 2 stacks. Put root on stack1. while(stack1 not empty), take from stack1, put on stack2, put left and right on stack1. while(stack2 not empty), take from stack and use.</answer>
             </question>
+
+            <question id="datastructures-tree-implementation-bst-level-order-traversal-iterative">
+                <text>Level-Order Traversal (BFS) (Iterative)</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#Breadth-first_search_2</link>
+                <answer>Add root to a queue. While(queue not empty), pop a node from the queue, use it, add left to the queue, add right to the queue.</answer>
+            </question>
         </subsection>
 
         <subsection id="datastructures-tree-implementation-bst-others" answers_as_choices="true">
