@@ -575,7 +575,7 @@
             <question id="datastructures-tree-implementation-bst-in-order-traversal-iterative">
                 <text>In-Order Traversal (Iterative)</text>
                 <link>https://en.wikipedia.org/wiki/Tree_traversal#In-order</link>
-                <answer>While(current and stack not empty), if current is null, take from stack, otherwise travel leftwards, adding nodes to the stack. Use the current node. Set current = right node.</answer>
+                <answer>While(stack not empty), while(current is null), travel leftwards, adding nodes to the stack. Pop and use the left-most node. Put the right node on the stack and set it as current.</answer>
             </question>
 
             <question id="datastructures-tree-implementation-bst-post-order-traversal-recursive">
