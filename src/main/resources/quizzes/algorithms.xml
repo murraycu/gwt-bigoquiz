@@ -162,11 +162,11 @@
                 <answer></answer>
             </question>
             -->
-            <!-- TODO: Don't use when range m is much greater than n: -->
             <question id="algorithms-sort-advantages-counting-sort">
                 <text>Counting Sort</text>
                 <link>https://en.wikipedia.org/wiki/Counting_sort</link>
                 <answer>O(n) time, but with O(m) space</answer>
+                <note>Therefore, this is unsuitable when the range m is much greater than n.</note>
             </question>
             <question id="algorithms-sort-advantages-radix-sort">
                 <text>Radix Sort</text>

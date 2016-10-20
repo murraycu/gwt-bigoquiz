@@ -476,7 +476,6 @@
                 &lt;/math&gt;</answer>
         </question>
 
-        <!-- This is Gauss' trick. -->
         <question id="series-triangular-sum">
             <text is_html="true">Triangular Sum: &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;
                 &lt;mtable displaystyle=&quot;true&quot;&gt;
@@ -524,6 +523,7 @@
                 &lt;/msup&gt;
                 &lt;/mrow
                 &lt;/math&gt;</answer>
+            <note>This is Gauss' trick.</note>
         </question>
 
         <!-- TODO: This is just one variation. -->

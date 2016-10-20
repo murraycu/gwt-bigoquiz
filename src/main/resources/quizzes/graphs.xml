@@ -478,7 +478,7 @@
             <text>Prim's Algorithm for Minimum Spanning Tree</text>
             <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
             <answer>Start with an arbitrary vertex. Find the lowest-cost outgoing edge and add its destination to the tree. Repeat until all vertices are in the tree.</answer>
-            <!-- TODO: Mention use of Heap / Priority Queue -->
+            <note>This is usually implemented with a priority queue (heap).</note>
         </question>
 
         <!-- Note: Kruskals is like a greedy algorithm for finding clusters, though that aborts early, to leave k clusters.
@@ -594,7 +594,7 @@
             <text>Strongly Connected Components</text>
             <link>https://en.wikipedia.org/wiki/Strongly_connected_component</link>
             <answer>Depth First Search from v, then reverse edges and DFS from the latest-completed vertex (Kosaraju's Algorithm).</answer>
-            <!-- Note: In the second DFS, pop from the first DFS's stack. -->
+            <note>In the second DFS, pop from the first DFS's stack.</note>
         </question>
     </section>
 
@@ -605,7 +605,7 @@
             <text>Topological Sort</text>
             <link>https://en.wikipedia.org/wiki/Topological_sorting</link>
             <answer>Depth First Search to order vertices by their completion time, starting from each still unexplored vertex. Then reverse that order.</answer>
-            <!-- Only possible on DAGs (Directed Acyclic Graphs) -->
+            <note>This is only possible on DAGs (Directed Acyclic Graphs)</note>
         </question>
 
         <question id="algorithm-for-minimum-spanning-tree">
@@ -661,7 +661,7 @@
             <text>Depth First Search iterative implementation</text>
             <link>https://en.wikipedia.org/wiki/Depth-first_search</link>
             <answer>Stack</answer>
-            <!-- Note: Or recursion, using the call stack. -->
+            <note>Or via recursion, using the implicit call stack.</note>
         </question>
     </section>
 
