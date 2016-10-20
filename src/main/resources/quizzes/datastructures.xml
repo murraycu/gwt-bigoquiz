@@ -870,7 +870,7 @@
         </subsection>
         <!-- TODO: Load factor definition: = n/m. -->
 
-        <!-- Open Addressng methods:
+        <!-- Open Addressing methods:
         last-come first served hashing
         cuckoo hashing -->
 
