@@ -31,9 +31,9 @@
         </question>
     </section>
 
-    <!-- See https://www.mathsisfun.com/sets/symbols.html -->
     <section id="set-notation" answers_as_choices="true">
-    <title>Set Notation</title>
+        <title>Set Notation</title>
+        <link>https://www.mathsisfun.com/sets/symbols.html</link>
         <question id="set-notation-union">
             <text>∪</text>
             <answer>Union</answer>
