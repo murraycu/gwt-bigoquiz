@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.shared;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -87,6 +88,7 @@ public class Question implements IsSerializable {
         return text;
     }
 
+    @Nullable
     public String getLink() {
         return link;
     }
@@ -103,6 +105,7 @@ public class Question implements IsSerializable {
         this.choices = choices;
     }
 
+    @Nullable
     public String getNote() {
         return note;
     }
