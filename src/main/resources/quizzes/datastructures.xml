@@ -180,6 +180,21 @@
                 <answer>Associative array allowing fast O(lg lg N) successor/predecessor, and O(1) max/min, on keys of limited range N. by using a hierarchy of of clusters, each with a min and max.</answer>
             </question>
 
+            <!-- See "How does Binary Indexed Tree work?" here: http://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/
+            and Tushar Roy's walk-through: https://www.youtube.com/watch?v=CWDQJGaN1gY -->
+            <question id="datastructures-description-binary-indexed-tree">
+                <text>Binary Indexed Tree (Fenwick Tree)</text>
+                <link>https://en.wikipedia.org/wiki/Fenwick_tree</link>
+                <answer>Stores prefix sums (running totals). Has O(n log(n)) construction time, O(log(n)) update time, and O(log(n)) retrieval time.</answer>
+            </question>
+
+            <!-- TODO: Segment tree.
+            https://en.wikipedia.org/wiki/Segment_tree
+            -->
+
+            <!-- TODO: Interval Tree
+            https://en.wikipedia.org/wiki/Interval_tree-->
+
         </subsection>
 
         <subsection id="datastructures-description-heaps">
@@ -381,6 +396,12 @@
                 <text>Van Emde Boas Tree</text>
                 <link>https://en.wikipedia.org/wiki/Van_Emde_Boas_tree</link>
                 <answer>A hierarchy of of clusters that summarize less sparse clusters, each with a min and max.</answer>
+            </question>
+
+            <question id="datastructures-implementation-binary-indexed-tree">
+                <text>Binary Indexed Tree (Fenwick Tree)</text>
+                <link>https://en.wikipedia.org/wiki/Fenwick_tree</link>
+                <answer>Array in which the index of child, parent, and next nodes are calculated using bitwise operations. The prefix sum is the sum of the node and its parent nodes.</answer>
             </question>
         </subsection>
 
