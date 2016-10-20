@@ -236,6 +236,18 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         }
         labelAnswer.addStyleName("quiz-answer");
         paraAnswer.add(labelAnswer);
+
+        final String note = question.getNote();
+        if (note != null) {
+            final Panel paraNote = Utils.addParagraph(panelQuestionAnswer, "");
+            final Label labelNoteTitle = new InlineLabel(constants.note());
+            labelNoteTitle.addStyleName("quiz-note-title");
+            paraNote.add(labelNoteTitle);
+
+            final Widget labelNote = new InlineLabel(note);
+            labelNote.addStyleName("quiz-note");
+            paraNote.add(labelNote);
+        }
     }
 
     private static @NotNull Map<String, List<QuestionAndAnswer>> groupQuestionsBySubSection(final List<QuestionAndAnswer> questions) {

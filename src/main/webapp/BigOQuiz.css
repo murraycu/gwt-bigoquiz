@@ -790,8 +790,18 @@ h4 * {
     margin-right: 0.5em; /* TODO: RTL */
 }
 
+.quiz-note-title {
+    font-weight: bold;
+    font-size: 80%;
+    margin-right: 0.5em; /* TODO: RTL */
+}
+
 .quiz-answer p {
     margin-bottom: 0;
+}
+
+.quiz-note {
+    font-size: 80%;
 }
 
 .home-button-answer-questions {
