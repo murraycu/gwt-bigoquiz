@@ -59,6 +59,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private final Button showAnswerButton = new Button(constants.showAnswerButton());
     private final Button nextQuestionButton = new Button(constants.nextButton());
     private final Label resultLabel = new Label();
+    private final Label noteLabel = new Label();
     @NotNull
     private State state = State.WAITING_INVALID;
     private boolean multipleChoice = false;
@@ -143,6 +144,9 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         resultPanel.add(nextQuestionButton);
         nextQuestionButton.addStyleName("next-question-button");
+
+        resultPanel.add(noteLabel);
+        noteLabel.addStyleName("note-label");
 
         nextQuestionButton.addClickHandler(new ClickHandler() {
             @Override
@@ -382,6 +386,14 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         questionMarkup.setVisible(showMarkup);
         questionLabel.setVisible(showLabel);
         questionAnchor.setVisible(showAnchor);
+
+        final String note = question.getNote();
+        Log.fatal("note: " + note);
+        if (StringUtils.isEmpty(note)) {
+            noteLabel.setText("");
+        } else {
+            noteLabel.setText(note);
+        }
     }
 
     private void buildChoices(@Nullable Question question) {
@@ -478,6 +490,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
                 nextQuestionButton.setVisible(false);
                 resultLabel.setVisible(false);
+                noteLabel.setVisible(false);
                 break;
             }
             case DONT_KNOW_ANSWER: {
@@ -491,6 +504,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 //resultLabel.setText("Don't Know");
                 //resultLabel.setVisible(true);
                 resultLabel.setVisible(false); //Showing "Don't Know" is annoying to the user.
+                noteLabel.setVisible(false);
                 break;
             }
             case WAITING_AFTER_WRONG_ANSWER: {
@@ -499,6 +513,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 nextQuestionButton.setVisible(false);
                 resultLabel.setText(constants.wrongLabel());
                 resultLabel.setVisible(true);
+                noteLabel.setVisible(false);
 
                 showWrongAnswerInChoices(choiceSelected);
                 break;
@@ -510,6 +525,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 nextQuestionButton.setVisible(true);
                 resultLabel.setText(constants.wrongLabel());
                 resultLabel.setVisible(true);
+                noteLabel.setVisible(true);
 
                 showWrongAnswerInChoices(choiceSelected);
                 break;
@@ -524,6 +540,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 scrollWidgetIntoView(nextQuestionButton);
                 resultLabel.setText(constants.correctLabel());
                 resultLabel.setVisible(true);
+                noteLabel.setVisible(true);
             }
         }
     }

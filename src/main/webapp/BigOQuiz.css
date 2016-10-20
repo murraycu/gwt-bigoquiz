@@ -525,6 +525,10 @@ h4 * {
     font-weight: bold;
 }
 
+.note-label {
+    padding-top: 0.6rem;
+}
+
 .question-radio-button {
     float: left;
     clear: left;
