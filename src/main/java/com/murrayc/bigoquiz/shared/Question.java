@@ -15,6 +15,7 @@ public class Question implements IsSerializable {
     private /* final */ Question.Text text; //The actual question text.
     private /* final */ String link; //An informative URL.
     private /* final */ List<Text> choices; //Possible answers, only one of which is correct.
+    private /* final */ String note;
 
     private /* final */ String quizTitle;
     private /* final */ String subSectionTitle;
@@ -60,13 +61,14 @@ public class Question implements IsSerializable {
     }
 
     public Question(final String id, final String sectionId, final String subSectionId, final Question.Text text,
-                    final String link, final List<Question.Text> choices) {
+                    final String link, final List<Question.Text> choices, final String note) {
         this.id = id;
         this.sectionId = sectionId;
         this.subSectionId = subSectionId;
         this.text = text;
         this.link = link;
         this.choices = choices;
+        this.note = note;
     }
 
     public String getId() {
@@ -100,6 +102,11 @@ public class Question implements IsSerializable {
     public void setChoices(final List<Text> choices) {
         this.choices = choices;
     }
+
+    public String getNote() {
+        return note;
+    }
+
 
     /** Set titles, just to save users of Question the bother of having to get them from the Quiz class.
      *

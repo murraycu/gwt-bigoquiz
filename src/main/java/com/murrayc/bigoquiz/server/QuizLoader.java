@@ -40,6 +40,7 @@ public class QuizLoader {
     private static final String NODE_CHOICES = "choices";
     private static final String NODE_CHOICE = "choice";
     private static final String NODE_DEFAULT_CHOICES = "default_choices";
+    private static final String NODE_NOTE = "note";
     private static final int MAX_CHOICES_FROM_ANSWERS = 6;
 
     public static void setSectionDefaultChoicesFromAnswers(final Quiz quiz, final String sectionId) {
@@ -317,6 +318,13 @@ public class QuizLoader {
             throw new QuizLoaderException("QuizLoader.loadQuestionNode(): answer is not in the choices: questionId: " + id);
         }
 
+        //This is optional:
+        String noteText = null;
+        @Nullable final Element noteElement = getElementByName(element, NODE_NOTE);
+        if (noteElement != null) {
+            noteText = noteElement.getTextContent();
+        }
+
         if (reverse) {
             //Swap the question and answer text:
             final String temp = questionText;
@@ -331,7 +339,7 @@ public class QuizLoader {
         }
 
         return new QuestionAndAnswer(id, sectionID, subSectionId, new Question.Text(questionText, questionTextIsHtml),
-                questionLink, new Question.Text(answerText, answerTextIsHtml), choices);
+                questionLink, new Question.Text(answerText, answerTextIsHtml), choices, noteText);
     }
 
     private static <T> void swap(T a, T b) {
