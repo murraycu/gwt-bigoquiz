@@ -526,7 +526,7 @@
 
         <question id="algorithm-for-shortest-path-weighted-directed-acyclic">
             <text>Single Source Shortest Path (weighted, directed, acyclic)</text>
-            <link>hhttps://en.wikipedia.org/wiki/Shortest_path_problem#Directed_acyclic_graphs</link>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Directed_acyclic_graphs</link>
             <!-- http://www.geeksforgeeks.org/shortest-path-for-directed-acyclic-graphs/ -->
             <!-- https://www.youtube.com/watch?v=ePqBaDRHkdk -->
             <!-- Page 491 of TADM. -->
@@ -554,7 +554,7 @@
 
         <question id="algorithm-for-shortest-path-weighted-directed-acyclic">
             <text>Single Source Shortest Path (weighted, directed, acyclic)</text>
-            <link>hhttps://en.wikipedia.org/wiki/Shortest_path_problem#Directed_acyclic_graphs</link>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Directed_acyclic_graphs</link>
             <!-- http://www.geeksforgeeks.org/shortest-path-for-directed-acyclic-graphs/ -->
             <!-- https://www.youtube.com/watch?v=ePqBaDRHkdk -->
             <!-- TODO: O(|V| + |E|) -->
