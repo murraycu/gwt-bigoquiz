@@ -534,16 +534,28 @@
             <answer>Topological sort. Then Find minimum distance to adjacent nodes by examining nodes in order, starting with source, until destination.</answer>
         </question>
 
-        <question id="algorithm-for-shortest-path-weighted-directed-with-non-negative-cycles">
-            <text>Single Source Shortest Path (weighted, directed, with non-negative cycles)</text>
+        <question id="algorithm-for-shortest-path-weighted-directed-non-negative-weights">
+            <text>Single Source Shortest Path (weighted, directed, with non-negative weights)</text>
             <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Directed_graphs_with_nonnegative_weights</link>
-            <answer>Dijkstra's algorithm (with non-negative weights), or the Bellman-Ford algorithm (with negative weights).</answer>
+            <answer>Dijkstra's algorithm</answer>
         </question>
 
-        <question id="algorithm-for-all-pairs-shortest-path">
-            <text>All Pairs Shortest Path</text>
+        <question id="algorithm-for-shortest-path-weighted-directed-with-negative-weights">
+            <text>Single Source Shortest Path (weighted, directed, with negative weights but no negative cycles)</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Directed_graphs_with_nonnegative_weights</link>
+            <answer>Bellman-Ford algorithm</answer>
+        </question>
+
+        <question id="algorithm-for-all-pairs-shortest-path-with-non-negative-weights">
+            <text>All Pairs Shortest Path (with non-negative weights)</text>
             <link>https://en.wikipedia.org/wiki/Shortest_path_problem#All-pairs_shortest_paths</link>
-            <answer>Floyd-Warshall, Johnson's, or repeated Dijkstra's algorithm.</answer>
+            <answer>Floyd-Warshall (for dense graphs) or repeated Dijkstra's algorithm (for sparse graphs).</answer>
+        </question>
+
+        <question id="algorithm-for-all-pairs-shortest-path-with-negative-weights">
+            <text>All Pairs Shortest Path (with negative weights but no negative cycles)</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#All-pairs_shortest_paths</link>
+            <answer>Floyd-Warshall (for dense graphs) or Johnson's (for sparse graphs).</answer>
         </question>
     </section>
 
