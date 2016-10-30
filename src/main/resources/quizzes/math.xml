@@ -561,6 +561,7 @@
                 &lt;mi&gt;n&lt;/mi&gt;
                 &lt;/mrow
                 &lt;/math&gt;</answer>
+            <note>These are pyramid numbers. Each square is a layer of the square-based pyramid.</note>
         </question>
 
         <!-- Apparently this is an explanation for comparison sorts being O(n log(n)):
