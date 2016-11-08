@@ -16,14 +16,6 @@
 		<maven>3.3.9</maven>
 	</prerequisites>
 
-	<!-- gwt-test-utils is not in the regular maven repository: -->
-	<repositories>
-		<repository>
-		  <id>objectify-appengine</id>
-		  <url>http://objectify-appengine.googlecode.com/svn/maven</url>
-		</repository>
-	</repositories>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
