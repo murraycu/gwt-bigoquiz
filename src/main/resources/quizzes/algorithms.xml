@@ -567,6 +567,8 @@
        Long-path decomposition:
 
        Ladder decomposition:
+
+      Lowest Common Ancestor (LCA): https://en.wikipedia.org/wiki/Lowest_common_ancestor
     -->
 
     <!-- Postfix notation evaluation: Push operands on to stack. When we see an operator, we pop 2 items, apply, and push back.
@@ -605,6 +607,24 @@
       Count the distinct roots in the UnionFind of labels.
     -->
 
-    <!-- subset sum -->
+    <!-- array problems:
+      subset sum:
+        Dynamic programming? TODO
+      subset range:
+        TODO: Modification of mergesort.
+        TODO: Use of Fenwick Tree?
+      2-sum: Loop over n, checking in a hash table for the other half of the pair. O(n).
+        Sedgewick's Algorithms book says it's O(n log(n)), using binary search after sorting, which would at least use constant space.
+      3-sum: Loop over n, loop over n,  checking in a hash table for the third part of the triple.
+        Sedgewick's Algorithms book says it's O(n^2 log(n)), using binary search after sorting, which would at least use constant space.
+      -->
+
+    <!-- encoding:
+    huffman encoding
+    arithmetic encoding (uses Fenwick Tree): https://en.wikipedia.org/wiki/Arithmetic_coding
+
+    Gray codes: Successive values differ by only one bit.
+    -->
+
 
 </quiz>

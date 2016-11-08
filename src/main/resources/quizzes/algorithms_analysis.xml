@@ -165,4 +165,9 @@
 
     <!-- TODO: Amortized Analysis -->
 
+    <!-- Recurrence relation examples:
+    T(n) = 2 T(n/2) + O(n)
+      O(n log(n)) ?
+    -->
+
 </quiz>

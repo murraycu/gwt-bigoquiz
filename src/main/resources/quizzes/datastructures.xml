@@ -897,6 +897,13 @@
     <!-- What data structure to use for problem:
     Set membership, allowing some mistakes: Bloom filter.
     Set membership, allowing fast testing, membership changing ,and set unioning: Union-Find.
+
+    Sedgewick: https://youtu.be/fJe11uNfLJw?list=PLrNmXMVD0XDSBFQZk48NfzLO1MWxhXZEB&t=41 :
+    Dynamic Connectivity: Union-Find
+    LCA: Union-Find: https://en.wikipedia.org/wiki/Tarjan%27s_off-line_lowest_common_ancestors_algorithm
+    Percolation: Union-Find
+    Kruskal's MST: Union-Find
+
     Sparse Graph: Adjacency List
     Dense Graph: Adjacency Matrix
 
