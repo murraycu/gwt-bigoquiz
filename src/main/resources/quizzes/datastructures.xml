@@ -158,10 +158,16 @@
                 <answer>Stores all k prefixes of n strings.</answer>
             </question>
 
+            <question id="datastructures-description-ternary-search-tree">
+                <text>Ternary Search Tree</text>
+                <link>https://en.wikipedia.org/wiki/Ternary_search_tree</link>
+                <answer>A trie that uses less space by having 3 BST-like branches at each node.</answer>
+            </question>
+
             <question id="datastructures-description-radix-tree">
                 <text>Radix Tree (Radix Trie, Compact Prefix Tree, Patricia Trie)</text>
                 <link>https://en.wikipedia.org/wiki/Radix_tree</link>
-                <answer>Space-optimized Trie.</answer>
+                <answer>Space-optimized trie.</answer>
             </question>
 
             <!-- TODO: https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton -->
@@ -378,6 +384,12 @@
                 <text>Trie (Digital Tree, Prefix Tree)</text>
                 <link>https://en.wikipedia.org/wiki/Trie</link>
                 <answer>Keys are defined by their position in the tree, with each edge being the next character (or bit) of the key, and with values associated with leaf nodes.</answer>
+            </question>
+
+            <question id="datastructures-implementation-ternary-search-tree">
+                <text>Ternary Search Tree</text>
+                <link>https://en.wikipedia.org/wiki/Ternary_search_tree</link>
+                <answer>Keys are defined by their position in the tree, with each node having a character and three links to nodes for the subsequent character - either a lesser, greater, or equal character.</answer>
             </question>
 
             <question id="datastructures-implementation-radix-tree">
