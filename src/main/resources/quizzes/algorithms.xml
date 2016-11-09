@@ -416,7 +416,7 @@
             <title>Extra space</title>
             <!-- These are based on page 779 of Sedgewicks's Algorithms book, 4th edition. -->
             <question id="algorithms-substring-search-extra-space-kmp">
-                <text>Knuth-Morris-Pratt (KMP)m</text>
+                <text>Knuth-Morris-Pratt (KMP)</text>
                 <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
                 <answer>MR (substring length * alphabet size)</answer>
             </question>
@@ -437,7 +437,7 @@
         <subsection id="algorithms-substring-search-backtracking" answers_as_choices="true">
             <title>Backup in input?</title>
             <question id="algorithms-substring-search-backtracking-kmp">
-                <text>Knuth-Morris-Pratt (KMP)m</text>
+                <text>Knuth-Morris-Pratt (KMP)</text>
                 <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
                 <answer>No backup required</answer>
             </question>
