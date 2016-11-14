@@ -227,7 +227,7 @@
             <question id="datastructures-description-treap">
                 <text>Treap</text>
                 <link>https://en.wikipedia.org/wiki/Treap</link>
-                <answer>A self-balancing binary search tree that is also a min (or max) heap in terms of a random weight for each node, resulting in a random binary search tree that is likely to be balanced..</answer>
+                <answer>A self-balancing binary search tree that is also a min (or max) heap in terms of a random weight for each node, resulting in a random binary search tree that is likely to be balanced.</answer>
             </question>
         </subsection>
 
@@ -435,7 +435,7 @@
             <question id="datastructures-implementation-singly-linked-list">
                 <text>Singly Linked List</text>
                 <link>https://en.wikipedia.org/wiki/Linked_list#Singly_linked_list</link>
-                <answer>Nodes with a data field and a pointer to the next node..</answer>
+                <answer>Nodes with a data field and a pointer to the next node.</answer>
             </question>
 
             <question id="datastructures-implementation-doubly-linked-list">
