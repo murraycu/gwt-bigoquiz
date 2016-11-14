@@ -432,7 +432,7 @@
         </question>
 
         <question id="purpose-push-relabel">
-            <text>Push-Relabel Algorithm</text>
+            <text>Push-Relabel Algorithm (Preflow-Push)</text>
             <link>https://en.wikipedia.org/wiki/Push%E2%80%93relabel_maximum_flow_algorithm</link>
             <answer>Maximum Flow (dense graphs).</answer>
         </question>
@@ -505,7 +505,7 @@
         </question>
 
         <question id="definition-push-relabel">
-            <text>Push-Relabel Algorithm for Maximum Flow</text>
+            <text>Push-Relabel Algorithm for Maximum Flow (Preflow-Push)</text>
             <link>https://en.wikipedia.org/wiki/Push%E2%80%93relabel_maximum_flow_algorithm</link>
             <answer>Define a residual graph with reverse edges. Define heights for all vertices, starting with n for the source and 0 for others. Define excesses for each vertex. Starting with the source, repeatedly find the highest vertex that has excess and push flow along its downhill edges, increasing the excess on the edges' destination vertices. Repeat until there are no vertices with excess.</answer>
         </question>
