@@ -320,7 +320,7 @@
             </question>
 
             <question id="datastructures-description-k-d-tree">
-                <text>K-D Tree</text>
+                <text>k-d Tree</text>
                 <link>https://en.wikipedia.org/wiki/K-d_tree</link>
                 <answer>Allows proximity search in k-dimensional data by partitioning the space.</answer>
             </question>
@@ -540,7 +540,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             </question>
 
             <question id="datastructures-implementation-k-d-tree">
-                <text>K-D Tree</text>
+                <text>k-d Tree</text>
                 <link>https://en.wikipedia.org/wiki/K-d_tree</link>
                 <answer>A binary tree. Each node defines a hyperplane and its left and right children are either side of that hyperplane. Typically the hyperplane will be chosen by cycling through the axes as we move down the tree. Each node is the median of the points in its subtree.</answer>
             </question>
