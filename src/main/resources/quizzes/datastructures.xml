@@ -193,14 +193,39 @@
                 <link>https://en.wikipedia.org/wiki/Fenwick_tree</link>
                 <answer>Stores prefix sums (running totals). Has O(n log(n)) construction time, O(log(n)) update time, and O(log(n)) retrieval time.</answer>
             </question>
+            <!-- Note: stores items-count per index, and optimized for "how many items are there between index m and n" queries.
+            See https://stackoverflow.com/questions/17466218/what-are-the-differences-between-segment-trees-interval-trees-binary-indexed-t/17504505#17504505 -->
 
-            <!-- TODO: Segment tree.
-            https://en.wikipedia.org/wiki/Segment_tree
-            -->
+            <question id="datastructures-description-segment-tree">
+                <text>Segment Tree</text>
+                <link>https://en.wikipedia.org/wiki/Segment_tree</link>
+                <answer>Stores intervals or segments and allows efficient searching for intervals that contain a certain point, or to query for a range sum or range minium.</answer>
+                <!-- TODO: Find a clear, but more general, description, without just mentioning the specific sum and minimum range queries. -->
+            </question>
 
-            <!-- TODO: Interval Tree
-            https://en.wikipedia.org/wiki/Interval_tree-->
+            <question id="datastructures-description-interval-tree">
+                <text>Interval Tree</text>
+                <link>https://en.wikipedia.org/wiki/Interval_tree</link>
+                <answer>Stores intervals or segments and allows efficient searching for intervals that overlap a certain interval.</answer>
+            </question>
 
+            <question id="datastructures-description-range-tree">
+                <text>Range Tree</text>
+                <link>https://en.wikipedia.org/wiki/Range_tree</link>
+                <answer>Allows efficient O((log n)^d + k) time searching for points that are within a certain interval. (Orthogonal Range Search). Particularly for searching in multiple dimensions. Using O(n(log n)^d-1) space.</answer>
+            </question>
+
+            <question id="datastructures-description-order-statistic-tree">
+                <text>Order Statistic Tree</text>
+                <link>https://en.wikipedia.org/wiki/Order_statistic_tree</link>
+                <answer>Supports rank() and select() in O(log n) time.</answer>.
+            </question>
+
+            <question id="datastructures-description-finger-search-tree">
+                <text>Finger Search Tree</text>
+                <link>https://en.wikipedia.org/wiki/Finger_search_tree</link>
+                <answer>Allows fast search to nearby keys, in O(log(rank(x) - rank(y))) time.</answer>.
+            </question>
         </subsection>
 
         <subsection id="datastructures-description-heaps">
@@ -415,6 +440,46 @@
                 <link>https://en.wikipedia.org/wiki/Fenwick_tree</link>
                 <answer>Array in which the index of child, parent, and next nodes are calculated using bitwise operations. The prefix sum is the sum of the node and its parent nodes.</answer>
             </question>
+
+            <question id="datastructures-implementation-segment-tree">
+                <text>Segment Tree</text>
+                <link>https://en.wikipedia.org/wiki/Segment_tree</link>
+                <answer>Store the node values as an array, as in a binary heap, using the start of the range as the node's key. Each node summarizes its child nodes.</answer>
+                <!-- TODO: Find a clear, but more general, description, without just mentioning the specific sum and minimum range queries. -->
+                <!-- TODO: Describe the recursion properly, ideally not just for a range minimum query. -->
+                <!-- Tushar Roy's walkthough: https://www.youtube.com/watch?v=ZBHKZF5w4YU -->
+            </question>
+
+            <question id="datastructures-implementation-interval-tree">
+                <text>Interval Tree</text>
+                <link>https://en.wikipedia.org/wiki/Interval_tree</link>
+                <answer>A ternary tree, in which each node has a center point and links to nodes whose intervals are completely before or completely after the interval, as well as lists of overlapping intervals, in order of their start, and in order of their end.
+Or alternatively, a (balanced) binary tree with intervals in each node, using the interval's start as the key. Each node is augmented with the maximum interval end for itself and its children.</answer>
+            </question>
+            <!-- This is the CLRS description, though not the primary one on wikipedia:
+            https://en.wikipedia.org/wiki/Interval_tree#Augmented_tree -->
+
+            <question id="datastructures-implementation-range-tree">
+                <text>Range Tree</text>
+                <link>https://en.wikipedia.org/wiki/Range_tree</link>
+                <answer>A complete balanced binary tree with points in the nodes. Examine right parents of the start and left parents of the end, listing all the parent nodes, and their subtrees, to the right of the start and to the left of the end. Each subtree has a range tree of the points by another dimension.</answer>
+            </question>
+            <!-- https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-design-and-analysis-of-algorithms-spring-2015/lecture-notes/MIT6_046JS15_lec09.pdf
+            and https://www.youtube.com/watch?v=xVka6z1hu-I -->
+            <!-- TODO: Is this an inorder traversal from start to end? -->
+
+            <question id="datastructures-implementation-order-statistic-tree">
+                <text>Order Statistic Tree</text>
+                <link>https://en.wikipedia.org/wiki/Order_statistic_tree</link>
+                <answer>Augment a (balanced) binary search tree, maintaining the size of each node's subtree in the node.</answer>.
+            </question>
+
+            <question id="datastructures-implementation-finger-search-tree">
+                <text>Finger Search Tree</text>
+                <link>https://en.wikipedia.org/wiki/Finger_search_tree</link>
+                <answer>A level-linked 2-3 tree in which each node has links to next and previous nodes on the same level, and each node maintains the min and max in its subtree.</answer>.
+            </question>
+            <!-- https://www.youtube.com/watch?v=xVka6z1hu-I -->
         </subsection>
 
         <subsection id="datastructures-implementations-others">
