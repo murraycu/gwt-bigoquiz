@@ -463,6 +463,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <text>Range Tree</text>
                 <link>https://en.wikipedia.org/wiki/Range_tree</link>
                 <answer>A complete balanced binary tree with points in the nodes. Examine right parents of the start and left parents of the end, listing all the parent nodes, and their subtrees, to the right of the start and to the left of the end. Each subtree has a range tree of the points by another dimension.</answer>
+                <note>Range trees have faster query times than k-d trees, but use more space.</note>
             </question>
             <!-- https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-design-and-analysis-of-algorithms-spring-2015/lecture-notes/MIT6_046JS15_lec09.pdf
             and https://www.youtube.com/watch?v=xVka6z1hu-I -->
@@ -543,6 +544,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <text>k-d Tree</text>
                 <link>https://en.wikipedia.org/wiki/K-d_tree</link>
                 <answer>A binary tree. Each node defines a hyperplane and its left and right children are either side of that hyperplane. Typically the hyperplane will be chosen by cycling through the axes as we move down the tree. Each node is the median of the points in its subtree.</answer>
+                <note>k-d trees use less space than range-trees, but have slower query times.</note>
             </question>
         </subsection>
 
