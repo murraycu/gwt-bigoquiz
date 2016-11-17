@@ -209,7 +209,7 @@
         <question id="polynomial-or-np-complete-topological-sorting">
             <text>Topological Sorting</text>
             <link>https://en.wikipedia.org/wiki/Topological_sorting</link>
-            <answer>Polynomial</answer>
+            <answer>Polynomial (linear)</answer>
         </question>
 
         <question id="polynomial-or-np-complete-minimum-spanning-tree">
