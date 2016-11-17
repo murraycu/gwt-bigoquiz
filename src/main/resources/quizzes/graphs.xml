@@ -280,12 +280,6 @@
             <answer>Polynomial</answer>
         </question>
 
-        <question id="polynomial-or-np-complete-planarity-detection">
-            <text>Planarity Detection and Embedding</text>
-            <link>https://en.wikipedia.org/wiki/Planarity_testing</link>
-            <answer>Polynomial</answer>
-        </question>
-
         <question id="polynomial-or-np-complete-clique">
             <text>Clique</text>
             <link>https://en.wikipedia.org/wiki/Clique_%28graph_theory%29</link>
