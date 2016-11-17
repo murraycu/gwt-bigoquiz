@@ -2,6 +2,69 @@
 <quiz xmlns="http://bigoquiz.com/document" format_version="1" id="graphs">
     <title>Graphs</title>
 
+    <section id="terminology" answers_as_choices="true">
+        <title>Terminology</title>
+        <question id="terminology-undirected-graph">
+            <text>Undirected Graph</text>
+            <answer>A graph whose edges are all bidirectional.</answer>
+        </question>
+
+        <question id="terminology-directed-graph">
+            <text>Directed Graph (Digraph)</text>
+            <answer>A graph whose edges go only in one direction.</answer>
+        </question>
+
+        <question id="terminology-dag">
+            <text>Directed Acylic Graph (DAG)</text>
+            <answer>A directed graph with no cycles.</answer>
+        </question>
+
+        <question id="terminology-adjacent-vertices">
+            <text>Adjacent vertices</text>
+            <answer>Vertices joined by an edge.</answer>
+        </question>
+
+        <question id="terminology-incident-edges">
+            <text>Incident edges</text>
+            <answer>Edges that share a vertex.</answer>
+        </question>
+
+        <question id="terminology-incident-vertex-of-edge">
+            <text>Incident vertex of an edge</text>
+            <answer>A vertex connected by the edge.</answer>
+        </question>
+
+        <question id="terminology-incident-edge-of-vertex">
+            <text>Incident edge of a vertex</text>
+            <answer>An edge connected to the vertex.</answer>
+        </question>
+
+        <question id="terminology-incident-degree-of-vertex">
+            <text>Degree of a vertex</text>
+            <answer>The number of edges incident to the vertex.</answer>
+        </question>
+
+        <question id="terminology-incident-indegree-of-vertex">
+            <text>Indegree of a vertex in a directed graph</text>
+            <answer>The number of edges leading to the vertex.</answer>
+        </question>
+
+        <question id="terminology-incident-outdegree-of-vertex">
+            <text>Outdegree of a vertex in a directed graph</text>
+            <answer>The number of edges leading from the vertex.</answer>
+        </question>
+
+        <question id="terminology-transpose-graph">
+            <text>Transpose Graph (Reverse Graph)</text>
+            <answer>A version of a directed graph, with each edge reversed.</answer>
+        </question>
+
+        <question id="terminology-kernel-dag">
+            <text>Kernal DAG (condensation digraph)</text>
+            <answer>A directed graph in which the strongly connected components are contracted to become single vertices.</answer>
+        </question>
+    </section>
+
     <section id="polynomial-time-problems-definitions" answers_as_choices="true">
         <title>Definitions: Polynomial-Time Problems</title>
         <question id="definition-connected-components">
