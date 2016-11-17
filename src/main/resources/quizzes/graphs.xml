@@ -183,6 +183,12 @@
             <answer>The largest subset of vertices for which, for each vertex, each edge leads to a vertex not in the subset.</answer>
         </question>
 
+        <question id="definition-dominating-set">
+            <text>Dominating Set</text>
+            <link>https://en.wikipedia.org/wiki/Dominating_set</link>
+            <answer>A subset of vertices for which every vertex not in the subset is adjacent to a vertex in the subset.</answer>
+        </question>
+
         <question id="definition-vertex-cover">
             <text>Vertex Cover</text>
             <link>https://en.wikipedia.org/wiki/Vertex_cover</link>
@@ -353,6 +359,12 @@
         <question id="polynomial-or-np-complete-independent-set">
             <text>Independent Set</text>
             <link>https://en.wikipedia.org/wiki/Independent_set_%28graph_theory%29</link>
+            <answer>NP-complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-dominating-set">
+            <text>Dominating Set</text>
+            <link>https://en.wikipedia.org/wiki/Dominating_set</link>
             <answer>NP-complete</answer>
         </question>
 
