@@ -333,12 +333,25 @@
             <link>https://en.wikipedia.org/wiki/Graph_partition</link>
             <answer>NP-complete</answer>
         </question>
-        <!-- TODO: O(n) to discover if it can be colored with 2 colors: https://en.wikipedia.org/wiki/Graph_coloring#Polynomial_time -->
+
+        <question id="polynomial-or-np-complete-2-color-vertex-coloring">
+            <text>2-Color Vertex Coloring</text>
+            <link>https://en.wikipedia.org/wiki/Graph_coloring#Polynomial_time</link>
+            <answer>Polynomial (linear)</answer>
+            <note>If a graph can be colored with 2 colors then it is bipartite.</note>
+        </question>
 
         <question id="polynomial-or-np-complete-edge-coloring">
             <text>Edge Coloring</text>
             <link>https://en.wikipedia.org/wiki/Edge_coloring</link>
             <answer>NP-complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-2-color-edge-coloring">
+            <text>2-Color Edge Coloring</text>
+            <link>https://en.wikipedia.org/wiki/Graph_coloring#Polynomial_time</link>
+            <answer>Polynomial (linear)</answer>
+            <note>If a graph can be colored with 2 colors then it is bipartite.</note>
         </question>
 
         <!-- Recognition of graph isomorphism is considered quasi-polymorphic, as of 2015,
