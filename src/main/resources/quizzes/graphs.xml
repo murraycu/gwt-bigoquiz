@@ -20,6 +20,7 @@
             <text>Strongly Connected Components</text>
             <link>https://en.wikipedia.org/wiki/Strongly_connected_component</link>
             <answer>Subsets of the vertices in a directed graph in which every vertex is reachable from every other vertex.</answer>
+            <note>Strongly connected components must have cycles. A DAG of N nodes will have N strongly connected components.</note>
         </question>
 
         <question id="definition-topological-sorting">
