@@ -456,6 +456,40 @@
         </subsection>
     </section>
 
+    <!-- TODO: Link to the similar section in the graphs quiz? -->
+    <section id="polynomial-or-np-complete" answers_as_choices="true">
+        <title>Polynomial or NP-complete</title>
+        <question id="polynomial-or-np-complete-2-sat">
+            <text>2-satisfiability (2-SAT)</text>
+            <link>https://en.wikipedia.org/wiki/2-satisfiability#Resolution_and_transitive_closure</link>
+            <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-boolean-satisfiability">
+            <text>Boolean satisfiability</text>
+            <link>https://en.wikipedia.org/wiki/Boolean_satisfiability_problem</link>
+            <answer>NP-Complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-subset-sum">
+            <text>Subset Sum</text>
+            <link>https://en.wikipedia.org/wiki/Subset_sum_problem</link>
+            <answer>NP-Complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-bin-packing">
+            <text>Bin Packing</text>
+            <link>https://en.wikipedia.org/wiki/Bin_packing_problem</link>
+            <answer>NP-Complete</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-knapsack-problem">
+            <text>Knapsack Problem</text>
+            <link>https://en.wikipedia.org/wiki/Knapsack_problem</link>
+            <answer>NP-Complete</answer>
+        </question>
+    </section>
+
     <!-- Greedy Algorithms: Dijkstra's, Scheduling, Make change (canonical coins).
        Huffman Codes: (Bottom-up. Merge items (or combined items) with least frequency, at each step, giving the subtree the sum of their frequencies. Repeat.
           Wrong answer: merge highest frequencies.
