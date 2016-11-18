@@ -660,8 +660,11 @@
         <question id="algorithm-for-stongly-connected-components">
             <text>Strongly Connected Components</text>
             <link>https://en.wikipedia.org/wiki/Strongly_connected_component</link>
-            <answer>Depth First Search from v, then reverse edges and DFS from the latest-completed vertex (Kosaraju's Algorithm).</answer>
+            <answer>Kosaraju's Algorithm: Depth First Search on the reversed graph, to get a topological sort, then call DFS on each vertex in that order, assigning a new ID for eaach DFS call.</answer>
             <note>In the second DFS, pop from the first DFS's stack.</note>
+            <!-- TODO: Sedgewick's Algorithms book says to DFS on the reversed graph first: https://www.youtube.com/watch?v=PH4L30XRhJE
+            and Tim Roughgarden's course says this too: https://www.youtube.com/watch?v=PZQ0Pdk15RA
+            but other descriptions DFS first on the real graph and then on a reversed graph. -->
         </question>
     </section>
 
