@@ -54,6 +54,16 @@
             <answer>The number of edges leading from the vertex.</answer>
         </question>
 
+        <question id="terminology-incident-dfs">
+            <text>Depth First Search (DFS)</text>
+            <answer>Examine unexplored child vertices first, before examining sibling vertices.</answer>
+        </question>
+
+        <question id="terminology-incident-bfs">
+            <text>Breadth First Search (BFS)</text>
+            <answer>Examine unexplored sibling vertices first, before examining child vertices.</answer>
+        </question>
+
         <question id="terminology-transpose-graph">
             <text>Transpose Graph (Reverse Graph)</text>
             <answer>A version of a directed graph, with each edge reversed.</answer>
