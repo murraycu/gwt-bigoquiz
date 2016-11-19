@@ -1097,8 +1097,7 @@
             <link>https://en.wikipedia.org/wiki/Kruskal's_algorithm</link>
             <question id="kruskal-mst-time">
                 <text>Time</text>
-                <!-- This is equivalent: O(|E| log(|E|)) -->
-                <answer>O(|E| log(|V|))</answer>
+                <answer>O(|E| log(|E|))</answer>
             </question>
         </subsection>
         <subsection id="prims-mst">
@@ -1106,8 +1105,8 @@
             <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
             <question id="prims-mst-time">
                 <text>Time</text>
-                <!-- This is equivalent: O(|E| log(|E|)) -->
                 <answer>O(|E| log(|V|))</answer>
+                <note>When using a binary heap (priority queue). Or O(|E| + |V| log(|V|)) with a fibonacci heap (Fredman-Tarjan).</note>
             </question>
         </subsection>
         <subsection id="floyd-warshall-apsp">
