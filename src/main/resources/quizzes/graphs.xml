@@ -105,9 +105,17 @@
         <question id="definition-minimum-spanning-tree">
             <text>Minimum Spanning Tree</text>
             <link>https://en.wikipedia.org/wiki/Minimum_spanning_tree</link>
-            <answer>A tree that connects each vertex, using a subset of edges of the minimum weight.</answer>
+            <answer>A tree that connects each vertex in an undirected graph, using a subset of edges of the minimum weight.</answer>
         </question>
         <!-- TODO: Maximum Spanning Tree, Bottleneck, Cut Property -->
+
+        <!-- An Arborescence is a bit like a spanning tree, but for directed graphs.
+             So says Sedgewick on page 630. -->
+        <question id="definition-minimum-cost-arborescence">
+            <text>Minimum Cost Arborescence</text>
+            <link>https://en.wikipedia.org/wiki/Arborescence_(graph_theory)</link>
+            <answer>A subgraph that has a directed path from a specific root to every other vertex, using a subset of edges of the minimum weight.</answer>
+        </question>
 
         <question id="definition-shortest-path">
             <text>Shortest Path</text>
