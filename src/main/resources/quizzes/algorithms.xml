@@ -490,12 +490,15 @@
         </question>
     </section>
 
-    <!-- Greedy Algorithms: Dijkstra's, Scheduling, Make change (canonical coins).
+    <!-- Types of algorithms: https://www.cs.princeton.edu/~wayne/kleinberg-tardos/ -->
+
+    <!-- Greedy Algorithms: Dijkstra's, Scheduling (interval scheduling, minimizing lateness), Make change (canonical coins).
        Huffman Codes: (Bottom-up. Merge items (or combined items) with least frequency, at each step, giving the subtree the sum of their frequencies. Repeat.
           Wrong answer: merge highest frequencies.
           Wrong answer: Always merge with the sub-tree so far. Instead merge subtrees only when they are the 2 smallest items.
        Scheduling jobs: Length and weight. Completion Time.  Minimise W*C. So sort by
-       Scheduling to avoid conflicts: Choose earliest finish time first. -->
+       Scheduling to avoid conflicts: Choose earliest finish time first.
+       Prim's/Kruskal's MST.-->
 
     <!-- Divide and Conquer Algorithms:
     https://en.wikipedia.org/wiki/Divide_and_conquer_algorithms
