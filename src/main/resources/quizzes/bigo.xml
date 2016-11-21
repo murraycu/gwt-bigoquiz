@@ -1037,9 +1037,11 @@
 
         <!-- This is not mentioned on bigocheatsheet or bigoref:
              https://github.com/josem/bigoref/issues/9
+
+             This is mentioned in Sedgewick's Algorithms book (4th edition) on page 658.
         -->
         <subsection id="topological-sort-sp">
-            <title>Topological sort based algorithm for Shortest path on DAG</title>
+            <title>Topological sort based algorithm for shortest path on DAG (weighted, but without cycles)</title>
             <link>https://en.wikipedia.org/wiki/Topological_sorting#Application_to_shortest_path_finding</link>
             <question id="topological-sort-sp-time">
                 <text>Time</text>
