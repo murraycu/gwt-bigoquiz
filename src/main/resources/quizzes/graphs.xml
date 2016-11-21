@@ -753,6 +753,21 @@
         </question>
     </section>
 
+    <section id="graph-directed-or-undirected" answers_as_choices="true" and_reverse="true">
+        <title>For directed or undirected graphs</title>
+        <question id="directed-or-undirected-shortest-path">
+            <text>Shortest path (BFS, Dijkstra's, Bellman-Ford, Floyd Warshall, etc.)</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
+            <answer>Undirected or directed</answer>
+        </question>
+
+        <question id="directed-or-undirected-msp">
+            <text>Minimum Spanning Tree (Prim's, Kruskal's, etc.)</text>
+            <link>https://en.wikipedia.org/wiki/Minimum_spanning_tree</link>
+            <answer>Undirected</answer>
+        </question>
+    </section>
+
     <!-- TODO: This needs an example of a dense graph that occurs naturally,
     instead of being a subset of a sparse graph.
     Note: In sparse graphs, the number of edges increases linearly with the number of vertices.
