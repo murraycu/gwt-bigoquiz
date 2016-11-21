@@ -39,27 +39,27 @@
             <answer>An edge connected to the vertex.</answer>
         </question>
 
-        <question id="terminology-incident-degree-of-vertex">
+        <question id="terminology-degree-of-vertex">
             <text>Degree of a vertex</text>
             <answer>The number of edges incident to the vertex.</answer>
         </question>
 
-        <question id="terminology-incident-indegree-of-vertex">
+        <question id="terminology-t-indegree-of-vertex">
             <text>Indegree of a vertex in a directed graph</text>
             <answer>The number of edges leading to the vertex.</answer>
         </question>
 
-        <question id="terminology-incident-outdegree-of-vertex">
+        <question id="terminology-outdegree-of-vertex">
             <text>Outdegree of a vertex in a directed graph</text>
             <answer>The number of edges leading from the vertex.</answer>
         </question>
 
-        <question id="terminology-incident-dfs">
+        <question id="terminology-dfs">
             <text>Depth First Search (DFS)</text>
             <answer>Examine unexplored child vertices first, before examining sibling vertices.</answer>
         </question>
 
-        <question id="terminology-incident-bfs">
+        <question id="terminology-bfs">
             <text>Breadth First Search (BFS)</text>
             <answer>Examine unexplored sibling vertices first, before examining child vertices.</answer>
         </question>
