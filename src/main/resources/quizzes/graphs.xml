@@ -482,6 +482,7 @@
             <text>Bellmann-Ford Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
             <answer>Single-Source Shortest Path (with negative edges).</answer>
+            <note>Dijkstra's algorithm won't work with negative weights because it assumes that adding an edge always makes the path longer.</note>
             <!-- TODO: Bellmann-Ford also allows distributed computation. -->
             <!-- TODO: Optimizations --> <!-- TODO: Uses: Internet Routing -->
             <!-- TODO: Can detect negative cycles, but cannot then find a shortest path. -->
@@ -644,8 +645,9 @@
 
         <question id="algorithm-for-shortest-path-weighted-directed-with-negative-weights">
             <text>Single Source Shortest Path (weighted, directed, with negative weights but no negative cycles)</text>
-            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Directed_graphs_with_nonnegative_weights</link>
-            <answer>Bellman-Ford algorithm</answer>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Directed_graphs_with_arbitrary_weights_without_negative_cycles</link>
+            <answer>Bellmann-Ford algorithm</answer>
+            <note>Dijkstra's algorithm won't work with negative weights because it assumes that adding an edge always makes the path longer.</note>
         </question>
 
         <question id="algorithm-for-all-pairs-shortest-path-with-non-negative-weights">
@@ -757,7 +759,7 @@
     <section id="graph-directed-or-undirected" answers_as_choices="true" and_reverse="true">
         <title>For directed or undirected graphs</title>
         <question id="directed-or-undirected-shortest-path">
-            <text>Shortest path (BFS, Dijkstra's, Bellman-Ford, Floyd Warshall, etc.)</text>
+            <text>Shortest path (BFS, Dijkstra's, Bellmann-Ford, Floyd Warshall, etc.)</text>
             <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
             <answer>Undirected or directed</answer>
         </question>
