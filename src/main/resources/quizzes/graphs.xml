@@ -73,6 +73,11 @@
             <text>Kernal DAG (condensation digraph)</text>
             <answer>A directed graph in which the strongly connected components are contracted to become single vertices.</answer>
         </question>
+
+        <question id="terminology-simple-path">
+            <text>Simple Path</text>
+            <answer>A path with no repeated vertices - therefore, with no cycle.</answer>
+        </question>
     </section>
 
     <section id="polynomial-time-problems-definitions" answers_as_choices="true">
@@ -310,6 +315,13 @@
             <text>Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
             <answer>Polynomial</answer>
+        </question>
+
+        <question id="polynomial-or-np-complete-shortest-simple-path">
+            <text>Shortest Simple Path avoiding negative cycles</text>
+            <!-- TODO: <link></link> -->
+            <answer>NP-Complete</answer>
+            <!-- TODO: Or just NP-hard? -->
         </question>
 
         <question id="polynomial-or-np-complete-transitive-closure">
