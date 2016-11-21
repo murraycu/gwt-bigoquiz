@@ -466,13 +466,21 @@
         </question>
 
         <question id="polynomial-or-np-complete-longest-path">
-            <text>Longest Path</text>
+            <text>Longest Path in a generic graph</text>
             <link>https://en.wikipedia.org/wiki/Longest_path_problem</link>
             <answer>NP-complete</answer>
             <!-- Note: It's a bit like the travelling salesman problem. -->
             <!-- Really it is NP-hard, but the decision problem (is there a path of length k) is NP-complete.) -->
         </question>
+
+        <question id="polynomial-or-np-complete-longest-path-in-dag">
+            <text>Longest Path in a directed acyclic graph (DAG)</text>
+            <link>https://en.wikipedia.org/wiki/Longest_path_problem#Acyclic_graphs_and_critical_paths</link>
+            <answer>Polynomial (linear)</answer>
+            <note>By inverting the comparison in a shortest path algorithm. For instance, when examining the vertices in topological order.</note>
+        </question>
         <!-- TODO: Longest simple weighted path (involving bitonic?) v. longest simple unweighted path. -->
+        <!-- TODO: Mention the critical path method. Pages 663 and 666 of Sedgewick. -->
     </section>
 
     <section id="graph-algorithm-purposes-shortest-path" answers_as_choices="true">
