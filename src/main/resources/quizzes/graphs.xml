@@ -546,6 +546,7 @@
             <text>Dijkstra's Algorithm for Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
             <answer>Choose the outgoing edge with the least total path cost, starting with a zero-cost edge to the start vertex. Look at the edge's destination vertex and store the total path costs (and, optionally, the predecessor) for each outgoing edge's vertex. Repeat until we reach the destination. Use, and update, a min heap (priority queue) to choose the outgoing edge with the lowest total cost.</answer>
+            <note>This is usually implemented with a priority queue (heap). This is like Prim's MST algorithm, but the relax step chooses the shortest path from the source, instead of the shortest edge from the tree. Use the inverse comparison to get the longest path.</note>
         </question>
 
         <question id="definition-bidirectional-dijkstra">
@@ -579,7 +580,7 @@
             <text>Prim's Algorithm for Minimum Spanning Tree</text>
             <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
             <answer>Start with an arbitrary vertex. Find the lowest-cost outgoing edge and add its destination to the tree. Repeat until all vertices are in the tree.</answer>
-            <note>This is usually implemented with a priority queue (heap). Use the inverse comparison to get a maximum spanning tree.</note>
+            <note>This is usually implemented with a priority queue (heap). This is like Dijkstra's shortest path algorithm, but the relax step chooses the shortest edge from the tree, instead of from the source. Use the inverse comparison to get a maximum spanning tree.</note>
         </question>
 
         <!-- Note: Kruskals is like a greedy algorithm for finding clusters, though that aborts early, to leave k clusters.
