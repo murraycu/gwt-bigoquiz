@@ -320,7 +320,7 @@
         <question id="polynomial-or-np-complete-shortest-simple-path">
             <text>Shortest Simple Path avoiding negative cycles</text>
             <!-- TODO: <link></link> -->
-            <answer>NP-Complete</answer>
+            <answer>NP-complete</answer>
             <!-- TODO: Or just NP-hard? -->
         </question>
 
