@@ -511,7 +511,7 @@
         opt(R) = max 1 <= i <= n (wi + opt(Rfinish(i)))
         O(n^2) but apparently O(nlog(n)) is possible.
         Add the requirement that not all jobs can be done on the same machine (or by same person), then it is NP-complete.
-      Bellmann-Ford:
+      Bellman-Ford:
       Floyd Warshall,
       Make change (non-canonical coins),
       String Comparison.

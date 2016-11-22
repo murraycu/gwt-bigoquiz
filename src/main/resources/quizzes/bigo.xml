@@ -1079,14 +1079,14 @@
             </question>
         </subsection>
 
-        <subsection id="bellmann-ford">
-            <title>Bellmann-Ford algorithm for Shortest Path</title>
+        <subsection id="bellman-ford">
+            <title>Bellman-Ford algorithm for Shortest Path</title>
             <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
-            <question id="bellmann-ford-time">
+            <question id="bellman-ford-time">
                 <text>Time</text>
                 <answer>O(|V| ⋅ |E|)</answer>
             </question>
-            <question id="bellmann-ford-space">
+            <question id="bellman-ford-space">
                 <text>Space (Worst)</text>
                 <answer>O(|V|)</answer>
             </question>

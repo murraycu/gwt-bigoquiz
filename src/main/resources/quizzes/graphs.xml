@@ -498,12 +498,12 @@
     <section id="graph-algorithm-purposes-shortest-path" answers_as_choices="true">
         <title>Graph Algorithm Purposes: Shortest Path</title>
 
-        <question id="purpose-bellmann-ford">
-            <text>Bellmann-Ford Algorithm</text>
+        <question id="purpose-bellman-ford">
+            <text>Bellman-Ford Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
             <answer>Single-Source Shortest Path (with negative edges).</answer>
             <note>Dijkstra's algorithm won't work with negative weights because it assumes that adding an edge always makes the path longer.</note>
-            <!-- TODO: Bellmann-Ford also allows distributed computation. -->
+            <!-- TODO: Bellman-Ford also allows distributed computation. -->
             <!-- TODO: Optimizations --> <!-- TODO: Uses: Internet Routing -->
             <!-- TODO: Can detect negative cycles, but cannot then find a shortest path. -->
         </question>
@@ -576,8 +576,8 @@
             <answer>Alternate between forward search, from the source, and backward search from the destination. Terminate when the same vertex has been removed from the priority queue. Find the vertex with the minimum forward plus backward length.</answer>
         </question>
 
-        <question id="definition-bellmann-ford">
-            <text>Bellmann-Ford Algorithm for Single-Source Shortest Path</text>
+        <question id="definition-bellman-ford">
+            <text>Bellman-Ford Algorithm for Single-Source Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
             <answer>Start with 0 cost for the source vertex, and infinity for all other vertices. Then, for each vertex, examine each edge, to calculate the total path cost (or infinity) to reach the adjacent vertices, reducing the stored cost if it is less. Repeat the examination of edges, and the recalculation, n-1 times, or until there is no change. Do 1 extra iteration to detect negative cycles.</answer>
         </question>
@@ -591,7 +591,7 @@
         <question id="definition-johnsons">
             <text>Johnson's Algorithm for All Pairs Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Johnson's_algorithm</link>
-            <answer>Add one vertex to the graph, with zero-length edges to every other vertex. Run Bellmann-Ford to get the shortest path from the new vertex to every other. Reweight the original graph's edges by adding the difference of the edge's start and end vertices' paths from s. Then call Dijkstra's algorithm for each pair of vertices, subtracting the reweighting difference from the result.</answer>
+            <answer>Add one vertex to the graph, with zero-length edges to every other vertex. Run Bellman-Ford to get the shortest path from the new vertex to every other. Reweight the original graph's edges by adding the difference of the edge's start and end vertices' paths from s. Then call Dijkstra's algorithm for each pair of vertices, subtracting the reweighting difference from the result.</answer>
         </question>
     </section>
 
@@ -666,7 +666,7 @@
         <question id="algorithm-for-shortest-path-weighted-directed-with-negative-weights">
             <text>Single Source Shortest Path (weighted, directed, with negative weights but no negative cycles)</text>
             <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Directed_graphs_with_arbitrary_weights_without_negative_cycles</link>
-            <answer>Bellmann-Ford algorithm</answer>
+            <answer>Bellman-Ford algorithm</answer>
             <note>Dijkstra's algorithm won't work with negative weights because it assumes that adding an edge always makes the path longer.</note>
         </question>
 
@@ -779,7 +779,7 @@
     <section id="graph-directed-or-undirected" answers_as_choices="true" and_reverse="true">
         <title>For directed or undirected graphs</title>
         <question id="directed-or-undirected-shortest-path">
-            <text>Shortest path (BFS, Dijkstra's, Bellmann-Ford, Floyd Warshall, etc.)</text>
+            <text>Shortest path (BFS, Dijkstra's, Bellman-Ford, Floyd Warshall, etc.)</text>
             <link>https://en.wikipedia.org/wiki/Shortest_path_problem</link>
             <answer>Undirected or directed</answer>
         </question>
