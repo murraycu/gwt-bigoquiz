@@ -511,7 +511,8 @@
         opt(R) = max 1 <= i <= n (wi + opt(Rfinish(i)))
         O(n^2) but apparently O(nlog(n)) is possible.
         Add the requirement that not all jobs can be done on the same machine (or by same person), then it is NP-complete.
-      Bellman-Ford:
+      Bellman-Ford: (Bellman invented the term "Dynamic Programming".)
+        Uses: Internet Routing: Doesn't need to know the whole graph - Information about local paths can be sent to other servers.
       Floyd Warshall,
       Make change (non-canonical coins),
       String Comparison.
