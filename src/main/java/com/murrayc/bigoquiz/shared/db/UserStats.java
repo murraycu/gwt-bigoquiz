@@ -270,7 +270,7 @@ public class UserStats implements IsSerializable {
     }
 
     //Forget questions that have not been answered wrong more than correct:
-    protected void clearNonProblemQuestions() {
+    private void clearNonProblemQuestions() {
         //TODO: Instead, use streams with Java 8?
         /*
         topProblemQuestionHistoriesInOrder = topProblemQuestionHistoriesInOrder.stream()

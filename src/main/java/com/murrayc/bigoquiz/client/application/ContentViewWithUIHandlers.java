@@ -36,7 +36,7 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
 
     private boolean hasMathMLSupport = false;
 
-    public ContentViewWithUIHandlers() {
+    protected ContentViewWithUIHandlers() {
         parentPanel.addStyleName("parent-content-panel");
         mainPanel.addStyleName("content-panel");
         parentPanel.add(mainPanel);
@@ -53,7 +53,7 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
         initWidget(parentPanel);
     }
 
-    public void setTitle(final String title) {
+    protected void setTitle(final String title) {
         titleLabel.setText(title);
         setHeadingVisible(!StringUtils.isEmpty(title));
 
@@ -66,7 +66,7 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
         labelLoading.setVisible(visible);
     }
 
-    protected void setErrorLabel(final String message) {
+    private void setErrorLabel(final String message) {
         labelError.setText(message);
     }
 
@@ -74,7 +74,7 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
         labelError.setVisible(visible);
     }
 
-    protected void setHeadingVisible(boolean visible) {
+    private void setHeadingVisible(boolean visible) {
         titleHeading.getStyle().setProperty("display", visible ? "block" : "none");
     }
 
@@ -90,7 +90,7 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
         setErrorLabelVisible(true);
     }
 
-    public void useAndReloadMathJax() {
+    protected void useAndReloadMathJax() {
         reloadMathJax();
 
         /* TODO: Make this work, instead of loading MathJax JS in every page, even when we don't use it.
