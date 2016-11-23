@@ -58,24 +58,15 @@
     }
 
     .content-panel {
-        margin-top: 0.3rem;
-        margin-bottom: 0.3rem;
-        margin-left: 0.3rem;
-        margin-right: 0.3rem;
+        margin: 0.3rem;
     }
 
     .sidebar-panel-sections {
-        margin-top: 0.3rem;
-        margin-bottom: 0.3rem;
-        margin-left: 0.3rem;
-        margin-right: 0.3rem;
+        margin: 0.3rem;
     }
 
     .sidebar-panel-links {
-        margin-top: 0.3rem;
-        margin-bottom: 0.3rem;
-        margin-left: 0.3rem;
-        margin-right: 0.3rem;
+        margin: 0.3rem;
     }
 
     .quiz-panel {
@@ -105,24 +96,15 @@
     }
 
     .content-panel {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        margin-left: 1rem;
-        margin-right: 1rem;
+        margin: 1rem;
     }
 
     .sidebar-panel-sections {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        margin-left: 1rem;
-        margin-right: 1rem;
+        margin: 1rem;
     }
 
     .sidebar-panel-links {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        margin-left: 1rem;
-        margin-right: 1rem;
+        margin: 1rem;
     }
 
     .quiz-panel {
