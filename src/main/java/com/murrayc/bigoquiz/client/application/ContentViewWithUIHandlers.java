@@ -24,11 +24,13 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
     protected final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
 
     @NotNull
-    protected Panel parentPanel = new FlowPanel();
+    protected final Panel parentPanel = new FlowPanel();
     @NotNull
-    protected Panel mainPanel = new FlowPanel();
-    @NotNull final HeadingElement titleHeading;
-    @NotNull final Label titleLabel = new InlineLabel();
+    protected final Panel mainPanel = new FlowPanel();
+    @NotNull
+    private final HeadingElement titleHeading;
+    @NotNull
+    private final Label titleLabel = new InlineLabel();
     private final Label labelLoading = Utils.createServerLoadingLabel(constants);
     private final Label labelError = Utils.createServerErrorLabel(constants);
 

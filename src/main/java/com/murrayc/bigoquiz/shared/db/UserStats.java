@@ -33,13 +33,13 @@ public class UserStats implements IsSerializable {
     @Index
     private String sectionId;
 
-    int answered;
-    int correct;
+    private int answered;
+    private int correct;
 
-    int countQuestionsAnsweredOnce = 0;
-    int countQuestionsCorrectOnce = 0;
+    private int countQuestionsAnsweredOnce = 0;
+    private int countQuestionsCorrectOnce = 0;
 
-    Map<String, UserQuestionHistory> questionHistories;
+    private Map<String, UserQuestionHistory> questionHistories;
 
     //Only the problem questions, and only the top few of those, in order:
     @Ignore

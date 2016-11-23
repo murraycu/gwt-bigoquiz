@@ -30,7 +30,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     private static class QuizzesMap {
         @Nullable
-        public Map<String, Quiz> map = new HashMap<>();
+        public final Map<String, Quiz> map = new HashMap<>();
         public boolean allTitlesLoaded = false;
     }
 

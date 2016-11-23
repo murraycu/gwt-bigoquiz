@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 public class UserHistoryView extends ContentViewWithUIHandlers<UserHistoryUserEditUiHandlers>
         implements UserHistoryPresenter.MyView {
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
-    private Label labelQuiz;
+    private final Label labelQuiz;
 
     @Inject
     UserHistoryView() {
