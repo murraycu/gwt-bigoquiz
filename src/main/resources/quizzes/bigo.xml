@@ -1053,27 +1053,27 @@
             </question>
         </subsection>
 
-        <subsection id="dijkstra-with-min-heap">
-            <title>Dijkstra's Algorithm for Shortest Path (Min-heap as priority queue)</title>
-            <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
-            <question id="dijkstra-with-min-heap-time">
-                <text>Time</text>
-                <answer>O(|V|²)</answer>
-            </question>
-            <question id="dijkstra-with-min-heap-space">
-                <text>Space (Worst)</text>
-                <answer>O(|V|)</answer>
-            </question>
-        </subsection>
-
         <subsection id="dijkstra-with-unsorted-array">
             <title>Dijkstra's Algorithm for Shortest Path (Unsorted array as priority queue)</title>
             <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
             <question id="dijkstra-with-unsorted-array-time">
                 <text>Time</text>
-                <answer>O((|V|+|E|) log(|V|))</answer>
+                <answer>O(|V|²)</answer>
             </question>
             <question id="dijkstra-with-unsorted-array-space">
+                <text>Space (Worst)</text>
+                <answer>O(|V|)</answer>
+            </question>
+        </subsection>
+
+        <subsection id="dijkstra-with-min-heap">
+        <title>Dijkstra's Algorithm for Shortest Path (Min-heap as priority queue)</title>
+            <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
+            <question id="dijkstra-with-min-heap-time">
+                <text>Time</text>
+                <answer>O((|V|+|E|) log(|V|))</answer>
+            </question>
+            <question id="dijkstra-with-min-heap-space">
                 <text>Space (Worst)</text>
                 <answer>O(|V|)</answer>
             </question>
