@@ -580,6 +580,7 @@
             <text>Bellman-Ford Algorithm for Single-Source Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
             <answer>Start with 0 cost for the source vertex, and infinity for all other vertices. Then, for each vertex, examine each edge, to calculate the total path cost (or infinity) to reach the adjacent vertices, reducing the stored cost if it is less. Repeat the examination of edges, and the recalculation, n-1 times, or until there is no change. Do 1 extra iteration to detect negative cycles.</answer>
+            <note>Alternatively, use a queue to examine only the vertices whose paths changed last time, checking regularly for negative cycles via DFS.</note>
         </question>
 
         <question id="definition-floyd-warshall">
