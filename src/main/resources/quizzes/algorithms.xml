@@ -488,6 +488,20 @@
             <link>https://en.wikipedia.org/wiki/Knapsack_problem</link>
             <answer>NP-Complete</answer>
         </question>
+
+        <!-- TODO: Mention that this is hard, though we don't know if it's really NP-complete.
+        <question id="polynomial-or-np-complete-factoring">
+            <text>Integer Factorization</text>
+            <link>https://en.wikipedia.org/wiki/Integer_factorization#Difficulty_and_complexity</link>
+            <answer>NP-Complete</answer>
+        </question>
+        -->
+
+        <question id="polynomial-or-np-complete-sorting">
+            <text>Sorting</text>
+            <link>https://en.wikipedia.org/wiki/Sorting_algorithm</link>
+            <answer>Polynomial</answer>
+        </question>
     </section>
 
     <!-- Types of algorithms: https://www.cs.princeton.edu/~wayne/kleinberg-tardos/ -->
