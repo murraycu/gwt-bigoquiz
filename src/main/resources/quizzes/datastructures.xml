@@ -947,6 +947,18 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <answer>Advantage: no clustering. Disadvantage: worst cache performance.</answer>
             </question>
         </subsection>
+
+        <!-- TODO: Best data structure for string searches:
+        See page 752 of Sedgewick's Algorithms book:
+        Binary Search Tree: Randomly ordered keys.
+        Red-Black Tree: Guaranteed performance.
+        Hash Table (Open Addressing): ?
+        Trie: Short keys and small alphabets.
+        Ternary Search Tree (TST): Non-random keys.
+
+        Suffix tree / suffix array: sub-strings (not just from the start of the string).
+        -->
+
         <!-- TODO: Load factor definition: = n/m. -->
 
         <!-- Open Addressing methods:
