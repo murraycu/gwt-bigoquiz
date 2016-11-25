@@ -861,8 +861,10 @@
             </question>
         </subsection>
 
+        <!-- Note: Sedgewick's Algorithms text book (section 5.1) calls this string sort,
+        but everyone else seems to call it radix sort. -->
         <subsection id="radix-sort">
-            <title>Radix Sort</title>
+            <title>Radix Sort (LSD or MSD String Sort)</title>
             <link>https://en.wikipedia.org/wiki/Radix_sort</link>
             <question id="radix-sort-sort-time-best">
                 <text>Time (Best)</text>

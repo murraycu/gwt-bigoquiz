@@ -51,7 +51,7 @@
                     <answer>Count how often each value appears. Calculate the start index for each value. Copy each value to the start index in the output, decrementing the start index each time for each value.</answer>
                 </question>
                 <question id="algorithms-sort-description-radix-sort">
-                    <text>Radix Sort</text>
+                    <text>Radix Sort (LSD or MSD string sort)</text>
                     <link>https://en.wikipedia.org/wiki/Radix_sort</link>
                     <answer>Sort d times, each time examining just b bits, using counting sort or bucket sort.</answer>
                 </question>
@@ -117,7 +117,7 @@
                     <answer>O(n + k)</answer>
                 </question>
                 <question id="algorithms-sort-time-radix-sort">
-                    <text>Radix Sort</text>
+                    <text>Radix Sort (LSD or MSD string sort)</text>
                     <link>https://en.wikipedia.org/wiki/Radix_sort</link>
                     <answer>O(nk)</answer>
                 </question>
@@ -184,7 +184,7 @@
                 <note>Therefore, this is unsuitable when the range m is much greater than n.</note>
             </question>
             <question id="algorithms-sort-advantages-radix-sort">
-                <text>Radix Sort</text>
+                <text>Radix Sort (LSD or MSD string sort)</text>
                 <link>https://en.wikipedia.org/wiki/Radix_sort</link>
                 <answer>O(n) time. Minimal space.</answer>
             </question>
@@ -252,7 +252,7 @@
                 <answer>Stable</answer>
             </question>
             <question id="algorithms-sort-stability-radix-sort">
-                <text>Radix Sort</text>
+                <text>Radix Sort (LSD or MSD string sort)</text>
                 <link>https://en.wikipedia.org/wiki/Radix_sort</link>
                 <answer>Stable</answer>
             </question>
@@ -315,7 +315,7 @@
                 <answer>Not in-place</answer>
             </question>
             <question id="algorithms-sort-inplace-radix-sort">
-                <text>Radix Sort</text>
+                <text>Radix Sort (LSD or MSD string sort)</text>
                 <link>https://en.wikipedia.org/wiki/Radix_sort</link>
                 <answer>Not in-place</answer>
             </question>
@@ -378,7 +378,7 @@
                 <answer>Non-Comparison</answer>
             </question>
             <question id="algorithms-sort-comparison-radix-sort">
-                <text>Radix Sort</text>
+                <text>Radix Sort (LSD or MSD string sort)</text>
                 <link>https://en.wikipedia.org/wiki/Radix_sort</link>
                 <answer>Non-Comparison</answer>
             </question>
