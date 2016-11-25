@@ -11,6 +11,11 @@
                     <link>https://en.wikipedia.org/wiki/Quicksort</link>
                     <answer>Find partition and recurse.</answer>
                 </question>
+                <question id="algorithms-sort-description-3-way-quicksort">
+                    <text>3-Way Quicksort</text>
+                    <link>https://en.wikipedia.org/wiki/Quicksort#Repeated_elementst</link>
+                    <answer>Find partition and recurse, partitioning into less, equal, and greater than the pivot.</answer>
+                </question>
                 <question id="algorithms-sort-description-mergesort">
                     <text>Mergesort</text>
                     <link>https://en.wikipedia.org/wiki/Merge_sort</link>
@@ -72,6 +77,11 @@
                     <link>https://en.wikipedia.org/wiki/Quicksort</link>
                     <answer>O(n log(n))</answer>
                 </question>
+                <question id="algorithms-sort-time-3-way-quicksort">
+                    <text>Quicksort</text>
+                    <link>https://en.wikipedia.org/wiki/Quicksort#Repeated_elements</link>
+                    <answer>O(n log(n))</answer>
+                </question>
                 <question id="algorithms-sort-time-mergesort">
                     <text>Mergesort</text>
                     <link>https://en.wikipedia.org/wiki/Merge_sort</link>
@@ -131,6 +141,11 @@
                 <text>Quicksort</text>
                 <link>https://en.wikipedia.org/wiki/Quicksort</link>
                 <answer>In-place (O(log(n)) space). Data Locality. Small coefficient of O(n log(n)).</answer>
+            </question>
+            <question id="algorithms-sort-advantages-3-way-quicksort">
+                <text>3-Way Quicksort</text>
+                <link>https://en.wikipedia.org/wiki/Quicksort#Repeated_elements</link>
+                <answer>In-place (O(log(n)) space). Data Locality. Small coefficient of O(n log(n)). Linear on equal values.</answer>
             </question>
             <question id="algorithms-sort-advantages-mergesort">
                 <text>Mergesort</text>
@@ -197,6 +212,11 @@
                 <link>https://en.wikipedia.org/wiki/Quicksort</link>
                 <answer>Unstable</answer>
             </question>
+            <question id="algorithms-sort-stability-3-way-quicksort">
+                <text>3-Way Quicksort</text>
+                <link>https://en.wikipedia.org/wiki/Quicksort#Repeated_elements</link>
+                <answer>Unstable</answer>
+            </question>
             <question id="algorithms-sort-stability-mergesort">
                 <text>Mergesort</text>
                 <link>https://en.wikipedia.org/wiki/Merge_sort</link>
@@ -255,6 +275,11 @@
                 <link>https://en.wikipedia.org/wiki/Quicksort</link>
                 <answer>In-place (but small additional space needed)</answer>
             </question>
+            <question id="algorithms-sort-inplace-3-way-quicksort">
+                <text>3-Way Quicksort</text>
+                <link>https://en.wikipedia.org/wiki/Quicksort#Repeated_elements</link>
+                <answer>In-place (but small additional space needed)</answer>
+            </question>
             <question id="algorithms-sort-inplace-mergesort">
                 <text>Mergesort</text>
                 <link>https://en.wikipedia.org/wiki/Merge_sort</link>
@@ -311,6 +336,11 @@
             <question id="algorithms-sort-comparison-quicksort">
                 <text>Quicksort</text>
                 <link>https://en.wikipedia.org/wiki/Quicksort</link>
+                <answer>Comparison</answer>
+            </question>
+            <question id="algorithms-sort-comparison-3-way-quicksort">
+                <text>3-Way Quicksort</text>
+                <link>https://en.wikipedia.org/wiki/Quicksort#Repeated_elementst</link>
                 <answer>Comparison</answer>
             </question>
             <question id="algorithms-sort-comparison-mergesort">
