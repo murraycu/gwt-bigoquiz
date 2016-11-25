@@ -1079,6 +1079,19 @@
             </question>
         </subsection>
 
+        <subsection id="dijkstra-with-fibonacci-heap">
+            <title>Dijkstra's Algorithm for Shortest Path (Fibonacci heap as priority queue)</title>
+            <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
+            <question id="dijkstra-with-fibonacci-time">
+                <text>Time</text>
+                <answer>O(|E| + |V| log(|V|))</answer>
+            </question>
+            <question id="dijkstra-with-fibonacci-space">
+                <text>Space (Worst)</text>
+                <answer>O(|V|)</answer>
+            </question>
+        </subsection>
+
         <subsection id="bellman-ford">
             <title>Bellman-Ford algorithm for Shortest Path</title>
             <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
