@@ -567,7 +567,7 @@
             <text>Dijkstra's Algorithm for Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
             <answer>Choose the outgoing edge with the least total path cost, starting with a zero-cost edge to the start vertex. Look at the edge's destination vertex and store the total path costs (and, optionally, the predecessor) for each outgoing edge's vertex. Repeat until we reach the destination. Use, and update, a min heap (priority queue) to choose the outgoing edge with the lowest total cost.</answer>
-            <note>This is usually implemented with a priority queue (heap). This is like Prim's MST algorithm, but the relax step chooses the shortest path from the source, instead of the shortest edge from the tree. Use the inverse comparison to get the longest path.</note>
+            <note>This is usually implemented with a priority queue (heap) or, even better, a Fibonacci heap. This is like Prim's MST algorithm, but the relax step chooses the shortest path from the source, instead of the shortest edge from the tree. Use the inverse comparison to get the longest path.</note>
         </question>
 
         <question id="definition-bidirectional-dijkstra">
