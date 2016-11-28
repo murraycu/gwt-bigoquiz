@@ -395,8 +395,21 @@
 
     <section id="algorithms-substring-search">
         <title>Substring Search Algorithms</title>
+        <link>https://en.wikipedia.org/wiki/String_searching_algorithm</link>
         <subsection id="algorithms-substring-search-description" answers_as_choices="true" and_reverse="true">
             <title>Description</title>
+
+            <!--TODO: The Z algorithm is mentioned in chapter 1 of Dan Gusfield's
+                "Algorithms on Strings, Trees and Sequences: Computer Science and Computational Biology" book,
+                and subsequently on several web site,
+                but that doesn't seem to say who invented the algorithm.
+            -->
+            <question id="algorithms-substring-search-description-z-algorithm">
+                <text>Z Algorithm</text>
+                <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
+                <answer>Concatenate the pattern, a special character, and the text. For each index, calculate the prefix length, if any, that starts at that position. After finding a prefix, subsequently reuse previously calculated values from the prefix itself.</answer>
+            </question>
+
             <question id="algorithms-substring-search-description-kmp">
                 <text>Knuth-Morris-Pratt (KMP)</text>
                 <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
@@ -422,6 +435,14 @@
 
         <subsection id="algorithms-substring-search-time-complexity" answers_as_choices="true" and_reverse="true">
             <title>Time Complexity</title>
+
+            <!-- TODO: Z algorithm
+            <question id="algorithms-substring-search-time-z-algorithm">
+                <text>Z Algorithm</text>
+                <answer></answer>
+            </question>
+            -->
+
             <!-- These are based on page 779 of Sedgewicks's Algorithms book, 4th edition. -->
             <question id="algorithms-substring-search-time-kmp">
                 <text>Knuth-Morris-Pratt (KMP)</text>
@@ -444,28 +465,39 @@
 
         <subsection id="algorithms-substring-search-extra-space" answers_as_choices="true" and_reverse="true">
             <title>Extra space</title>
+
+            <question id="algorithms-substring-search-extra-space-z-algorithm">
+                <text>Z Algorithm</text>
+                <answer>O(M + N) (substring length + text length)</answer>
+            </question>
+
             <!-- These are based on page 779 of Sedgewicks's Algorithms book, 4th edition. -->
             <question id="algorithms-substring-search-extra-space-kmp">
                 <text>Knuth-Morris-Pratt (KMP)</text>
                 <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
-                <answer>MR (substring length * alphabet size)</answer>
+                <answer>O(MR) (substring length * alphabet size)</answer>
             </question>
 
             <question id="algorithms-substring-search-extra-space-boyer-moore">
                 <text>Boyer-Moore</text>
                 <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
-                <answer>R (alphabet size)</answer>
+                <answer>O(R) (alphabet size)</answer>
             </question>
 
             <question id="algorithms-substring-search-extra-space-rabin-karp">
                 <text>Rabin-Karp</text>
                 <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
-                <answer>1</answer>
+                <answer>O(1)</answer>
             </question>
         </subsection>
 
         <subsection id="algorithms-substring-search-backtracking" answers_as_choices="true">
             <title>Backup in input?</title>
+            <question id="algorithms-substring-search-backtracking-z-algorithm">
+                <text>Z Algorithm</text>
+                <answer>No backup required</answer>
+            </question>
+
             <question id="algorithms-substring-search-backtracking-kmp">
                 <text>Knuth-Morris-Pratt (KMP)</text>
                 <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
