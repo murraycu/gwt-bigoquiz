@@ -132,6 +132,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 "notation",
                 "numbers",
                 "algorithms",
+                "string_algorithms",
                 "combinatorics",
                 "math",
                 "datastructures",
