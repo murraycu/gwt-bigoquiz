@@ -792,6 +792,46 @@
         </question>
     </section>
 
+    <section id="graph-bfs-or-dfs" answers_as_choices="true" and_reverse="true">
+        <title>Breadth First Search (BFS) or Depth First Search (DFS)</title>
+        <question id="bfs-or-dfs-shortest-path">
+            <text>Single Source Shortest Path (unweighted)</text>
+            <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Unweighted_graphs</link>
+            <answer>Breadth First Search</answer>
+        </question>
+
+        <question id="bfs-or-dfs-topological-sort">
+            <text>Topological Sort</text>
+            <link>https://en.wikipedia.org/wiki/Topological_sorting</link>
+            <answer>Depth First Search</answer>
+            <note>This is only possible on DAGs (Directed Acyclic Graphs)</note>
+        </question>
+
+        <question id="bfs-or-dfs-connected-components">
+            <text>Connected Components in an undirected graph</text>
+            <link>https://en.wikipedia.org/wiki/Connected_component_%28graph_theory%29</link>
+            <answer>Breadth First Search or Depth First Search</answer>
+        </question>
+
+        <question id="bfs-or-dfs-strongly-connected-components">
+            <text>Strongly Connected Components in a directed graph</text>
+            <link>https://en.wikipedia.org/wiki/Strongly_connected_component#Algorithms</link>
+            <answer>Depth First Search</answer>
+        </question>
+
+        <question id="bfs-or-dfs-level-order">
+            <text>Level-Order Traversal</text>
+            <link>https://en.wikipedia.org/wiki/Tree_traversal#Breadth-first_search</link>
+            <answer>Breadth First Search</answer>
+        </question>
+
+        <question id="bfs-or-dfs-testing-bipartiteness">
+            <text>Testing bipartiteness</text>
+            <link>https://en.wikipedia.org/wiki/Bipartite_graph#Testing_bipartiteness</link>
+            <answer>Depth First Search or Breadth First Search</answer>
+        </question>
+    </section>
+
     <!-- TODO: This needs an example of a dense graph that occurs naturally,
     instead of being a subset of a sparse graph.
     Note: In sparse graphs, the number of edges increases linearly with the number of vertices.
