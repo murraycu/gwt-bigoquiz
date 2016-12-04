@@ -127,6 +127,41 @@
         </subsection>
     </section>
 
+    <section id="string-algorithms-similarity">
+        <title>Similarity</title>
+        <link>https://en.wikipedia.org/wiki/Category:String_similarity_measures</link>
+        <subsection id="string-algorithms-similarity-description" answers_as_choices="true" and_reverse="true">
+            <title>Description</title>
+
+            <question id="string-algorithms-similarity-description-needleman-wunsch">
+                <text>Needleman-Wunsch Sequence Algorithm</text>
+                <link>https://en.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm</link>
+                <answer>Align two strings by inserting as few spaces as possible so that characters match.</answer>
+            </question>
+
+            <question id="string-algorithms-similarity-description-levenshtein-distance">
+                <text>Levenshtein Distance</text>
+                <link>https://en.wikipedia.org/wiki/Levenshtein_distance</link>
+                <answer>Count the number of character edits (removal, insertion, or substitution) needed to make two strings identical.</answer>
+            </question>
+        </subsection>
+
+        <subsection id="string-algorithms-similarity-implementation" answers_as_choices="true" and_reverse="true">
+            <title>Implementation</title>
+
+            <question id="string-algorithms-similarity-implementation-needleman-wunsch">
+                <text>Needleman-Wunsch Sequence Algorithm</text>
+                <link>https://en.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm</link>
+                <answer>Dynamic Programming. Subproblem is score for matching i characters in a with j characters in b, which is the minimum cost of matching one less character from either a or b, or from both, matching, inserting, or deleting a character.</answer>
+            </question>
+
+            <question id="string-algorithms-similarity-implementation-levenshtein-distance">
+                <text>Levenshtein Distance</text>
+                <link>https://en.wikipedia.org/wiki/Levenshtein_distance</link>
+                <answer>Dynamic Programming. Subproblem is score for aligning i characters in a with j characters in b, which is the minimum cost of using one less character from either a or b, or from both, adding a space or mismatch if necessary.</answer>
+            </question>
+        </subsection>
+    </section>
 
 
     <!-- Strings and sets:
