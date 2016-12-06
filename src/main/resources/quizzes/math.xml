@@ -620,6 +620,46 @@
         </question>
     </section>
 
+    <section id="terminology" answers_as_choices="true">
+        <title>Terminology</title>
+
+        <question id="terminology-rules-of-replacement-associative">
+            <text>Associative</text>
+            <link>https://en.wikipedia.org/wiki/Associative_property</link>
+            <answer>Grouping can change. For instance, addition: (a + b) + c == a + (b + c).</answer>
+        </question>
+
+        <question id="terminology-rules-of-replacement-commutative">
+            <text>Commutative</text>
+            <link>https://en.wikipedia.org/wiki/Commutative_property</link>
+            <answer>Order can change. For instance, addition: a + b == b + a.</answer>
+        </question>
+
+        <question id="terminology-rules-of-replacement-distributive">
+            <text>Distributive</text>
+            <link>https://en.wikipedia.org/wiki/Distributive_property</link>
+            <answer>Operations can be applied to members of a group. For instance, multiplication over addition: a × (b + c)  =  a × b + a × c.</answer>
+        </question>
+
+        <question id="terminology-transitive">
+            <text>Transitive</text>
+            <link>https://en.wikipedia.org/wiki/Transitive_relation</link>
+            <answer>a related to b and b related to c implies a related to c. For instance, less than: If a &lt; b and b &lt; c, then a &lt; c.</answer>
+        </question>
+
+        <question id="terminology-reflexive">
+            <text>Reflexive</text>
+            <link>https://en.wikipedia.org/wiki/Reflexive_relation</link>
+            <answer>Related to itself. For instance, equality: a == a.</answer>
+        </question>
+
+        <question id="terminology-symmetric">
+            <text>Symmetric</text>
+            <link>https://en.wikipedia.org/wiki/Symmetric_relation</link>
+            <answer>Related in both directions. For instance, equality: if a == b then b == a.</answer>
+        </question>
+    </section>
+
     <!-- Stirling Numbers -->
     <!-- Taylor Series -->
 </quiz>
