@@ -219,7 +219,79 @@
      Fibonacci (naive): Increases work by 2 each time: O(phi ^ n).
    -->
 
-    <!-- TODO: Amortized Analysis -->
+    <section id="recurrence-examples" answers_as_choices="true">
+        <title>Recurrence Relation Examples</title>
+        <question id="recurrence-example-n-log-n-case-2">
+            <text>T(n) = 2 T(n/2) + O(n)</text>
+            <answer>O(n log(n))</answer>
+            <note>For instance, mergesort. Master Method case 2: a = 2, b = 2, d = 1. a = b^d</note>
+        </question>
+
+        <question id="recurrence-example-n-sq-log-n-case-2">
+            <text>T(n) = 4 T(n/2) + O(n^2)</text>
+            <answer>O(n^2 log(n))</answer>
+            <note>Master Method case 2: a = 4, b = 2, d = 2. a = b^d</note>
+        </question>
+
+        <!-- From http://cse.unl.edu/~choueiry/S06-235/files/MasterTheorem.pdf -->
+        <question id="recurrence-example-n-squared-case-1a">
+            <text>T(n) = T(n/2) + O(n^2)</text>
+            <answer>O(n^2))</answer>
+            <note>Master Method case 1: a = 1, b = 2, d = 2. a &lt; b^d</note>
+        </question>
+
+        <!-- From http://cse.unl.edu/~choueiry/S06-235/files/MasterTheorem.pdf -->
+        <question id="recurrence-example-n-squared-case-2">
+            <text>T(n) = 2 T(n/4) + O(sqrt(n))</text>
+            <answer>O(sqrt(n) log(n))</answer>
+            <note>Master Method case 2: a = 2, b = 4, d = 1/2. a = b^d</note>
+        </question>
+
+        <!-- From http://cse.unl.edu/~choueiry/S06-235/files/MasterTheorem.pdf -->
+        <question id="recurrence-example-n-to-log-case-3">
+            <text>T(n) = 3 T(n/2) + O(n)</text>
+            <answer>O(n^(log2(3)))</answer>
+            <note>Master Method case 3: a = 3, b = 2, d = 1. a &gt; b^d</note>
+        </question>
+
+        <question id="recurrence-example-n-squared-case-1b">
+            <text>T(n) = 2 T(n/2) + O(n^2)</text>
+            <answer>O(n^2))</answer>
+            <note>Master Method case 1: a = 2, b = 2, d = 2. a &lt; b^d</note>
+        </question>
+
+        <question id="recurrence-example-n-sq-to-n-cubed">
+            <text>T(n) = T(n ^ 2) + O(1)</text>
+            <answer>O(n^3)</answer>
+        </question>
+
+        <question id="recurrence-example-n-cubed-case-3">
+            <text>T(n) = 8 T(n/2) + O(n^2)</text>
+            <answer>O(n^3)</answer>
+            <note>Master Method case 3: a = 8, b = 2, d = 2. a &gt; b^d</note>
+        </question>
+
+        <question id="recurrence-example-n-cubed-case-1">
+            <text>T(n) = 4 T(n/2) + O(n^3)</text>
+            <answer>O(n^3)</answer>
+            <note>Master Method case 1: a = 4, b = 2, d = 3. a &lt; b^d</note>
+        </question>
+
+        <question id="recurrence-example-sqrt-to-log-n">
+            <text>T(n) = 2 T(sqrt(n)) + O(1)</text>
+            <answer>O(log(n))</answer>
+            <note>For instance, operations on the proto-vEB in CLRS.</note>
+        </question>
+
+        <!-- TODO?
+        <question id="recurrence-example-sqrt-to-log-log-n">
+            <text>T(n) = 2 T(upper-sqrt(n)) + O(1)</text>
+            <answer>O(log(log(n)))</answer>
+            <note>For instance, the operations in a van Emde Boas tree. See CLRS.</note>
+        </question>
+        -->
+    </section>
+
 
     <!-- Recurrence relation examples:
     T(n) = 2 T(n/2) + O(n)
