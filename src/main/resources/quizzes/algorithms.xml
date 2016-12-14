@@ -442,44 +442,121 @@
     </section>
 
     <!-- Types of algorithms: https://www.cs.princeton.edu/~wayne/kleinberg-tardos/ -->
+    <section id="algorithms-types" answers_as_choices="true">
+        <title>Types of Algorithms</title>
+        <question id="type-dijkstra">
+            <text>Dijkstra's shortest path algorithm</text>
+            <answer>Greedy</answer>
+        </question>
 
-    <!-- Greedy Algorithms: Dijkstra's, Scheduling (interval scheduling, minimizing lateness), Make change (canonical coins).
-       Huffman Codes: (Bottom-up. Merge items (or combined items) with least frequency, at each step, giving the subtree the sum of their frequencies. Repeat.
+        <question id="type-huffman-codes">
+            <!-- TODO: Actual name? -->
+            <text>Algorithm for building Huffman Codes</text>
+            <answer>Greedy</answer>
+            <note>Bottom-up. Merge items (or combined items) with least frequency, at each step, giving the subtree the sum of their frequencies. Repeat.</note>
+        </question>
+        <!--
           Wrong answer: merge highest frequencies.
           Wrong answer: Always merge with the sub-tree so far. Instead merge subtrees only when they are the 2 smallest items.
-       Scheduling jobs: Length and weight. Completion Time.  Minimise W*C. So sort by
-       Scheduling to avoid conflicts: Choose earliest finish time first.
-       Prim's/Kruskal's MST.-->
+          -->
 
-    <!-- Divide and Conquer Algorithms:
-    https://en.wikipedia.org/wiki/Divide_and_conquer_algorithms
-    Quicksort, Mergesort, Hashing?, Convex Hull (Divide & Conquer), Strassen Matrix Multiplication,
-    median finding (quickselect, or (better) median of medians),
-    polynomial multiplication, FFT  -->
+        <question id="type-make-change-canonical">
+            <text>Make change (with canonical coins)</text>
+            <answer>Greedy</answer>
+        </question>
 
-    <!-- Dynamic Programming Algorithms:
-      Interval/Job Scheduling with weights:
-        opt(R) = max 1 <= i <= n (wi + opt(Rfinish(i)))
-        O(n^2) but apparently O(nlog(n)) is possible.
-        Add the requirement that not all jobs can be done on the same machine (or by same person), then it is NP-complete.
-      Bellman-Ford: (Bellman invented the term "Dynamic Programming".)
-        Uses: Internet Routing: Doesn't need to know the whole graph - Information about local paths can be sent to other servers.
-      Floyd Warshall,
-      Make change (non-canonical coins),
-      String Comparison.
-      Building an optimal binary search tree: https://en.wikipedia.org/wiki/Optimal_binary_search_tree#Knuth.27s_dynamic_programming_algorithm
-        (though Huffmann codes can be done with greedy algorithm.)
+        <question id="type-prims">
+            <text>Prim's Algorithm for Minimum Spanning Tree</text>
+            <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
+            <answer>Greedy</answer>
+        </question>
+
+        <question id="type-kruskals">
+            <text>Kruskal's Algorithm for Minimum Spanning Tree</text>
+            <link>https://en.wikipedia.org/wiki/Kruskal's_algorithm</link>
+            <answer>Greedy</answer>
+        </question>
+
+        <!-- TODO: Greedy Algorithms: Scheduling (interval scheduling, minimizing lateness),
+        Scheduling jobs: Length and weight. Completion Time.  Minimise W*C. So sort by
+        Scheduling to avoid conflicts: Choose earliest finish time first.
+        -->
+
+        <question id="type-quicksort">
+            <text>Quicksort</text>
+            <answer>Divide and Conquer</answer>
+        </question>
+
+        <question id="type-mergesort">
+            <text>Mergesort</text>
+            <answer>Divide and Conquer</answer>
+        </question>
+
+        <question id="type-quickselect">
+            <text>QuickSelect</text>
+            <answer>Divide and Conquer</answer>
+        </question>
+
+        <question id="type-strassen">
+            <text>Strassen Matrix Multiplication</text>
+            <answer>Divide and Conquer</answer>
+        </question>
+
+        <!-- TODO: Divide and Conquer Algorithms:
+        https://en.wikHashing?, Convex Hull (Divide & Conquer),
+        median finding (quickselect, or (better) median of medians),
+        polynomial multiplication, FFT  -->
+
+        <question id="type-bellmann-ford">
+            <text>Bellmann-Ford Single-Source Shortest Path</text>
+            <link>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</link>
+            <answer>Dynamic Programming</answer>
+            <note>Bellmann invented the term "Dynamic Programming".</note>
+        </question>
+        <!-- TODO: Uses: Internet Routing: Doesn't need to know the whole graph - Information about local paths can be sent to other servers. -->
+
+        <question id="type-floyd-warshall">
+            <text>Floyd Warshall Algorithm</text>
+            <link>https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm</link>
+            <answer>Dynamic Programming</answer>
+        </question>
+
+        <question id="type-make-change-non-canonical">
+            <text>Make change (with non-canonical coins)</text>
+            <answer>Dynamic Programming</answer>
+        </question>
+
+        <question id="type-build-optimal-bst">
+            <!-- TODO: Actual name? -->
+            <text>Build an optimal binary search tree</text>
+            <link>https://en.wikipedia.org/wiki/Optimal_binary_search_tree#Knuth.27s_dynamic_programming_algorithm</link>
+            <answer>Dynamic Programming</answer>
+            <note>Huffmann codes, which seem similar, can be built with a greedy algorithm.</note>
+        </question>
+        <!--
         DP Algorithm chooses roots of left and right subtrees of subproblems. O(n^3) or O(n^2) if we check only between the left and right roots:
-          https://stackoverflow.com/questions/16987670/dynamic-programming-why-knuths-improvement-to-optimal-binary-search-tree-on2
-      Independent Set of a Path Graph (in Stanford/Coursera course, part 2): https://www.coursera.org/learn/algorithm-design-analysis-2/lecture/TZgJM/wis-in-path-graphs-a-reconstruction-algorithm
-        1 Dimension. (O(n)):
-          A[i] = max(A[i-1], A[i-2] + w)
-      Independent Set of a Tree Graph (in Stanford/Coursera course, part 2, quiz 3)
-        "Recall our dynamic programming algorithm for computing the maximum-weight independent set of a path graph. Consider the following proposed extension to more general graphs. Consider an undirected graph with positive vertex weights. For a vertex v, obtain the graph G′(v) by deleting v and its incident edges from G, and obtain the graph G″(v) from G by deleting v, its neighbors, and all of the corresponding incident edges from G. Let OPT(H) denote the value of a maximum-weight independent set of a graph H. Consider the formula OPT(G)=max{OPT(G′(v)),wv+OPT(G″(v))}, where v is an arbitrary vertex of G of weight wv"
-      Sequence Alignment for Needleman-Wunsch score: https://www.coursera.org/learn/algorithm-design-analysis-2/lecture/QJkyp/optimal-substructure
-        Score, with cost for gaps in either string. 3 cases: No gap, gap in X, or gap in Y. 2 Dimensions.
-          A[i, j] = min(A[i-1, j-1], A[i-1, j] + gap_cost, A[i, j-1] + gap_cost)
+        https://stackoverflow.com/questions/16987670/dynamic-programming-why-knuths-improvement-to-optimal-binary-search-tree-on2
+        -->
 
+        <!-- TODO: Dynamic Programming Algorithms:
+          Interval/Job Scheduling with weights:
+            opt(R) = max 1 <= i <= n (wi + opt(Rfinish(i)))
+            O(n^2) but apparently O(nlog(n)) is possible.
+            Add the requirement that not all jobs can be done on the same machine (or by same person), then it is NP-complete.
+          String Comparison.
+          Independent Set of a Path Graph (in Stanford/Coursera course, part 2): https://www.coursera.org/learn/algorithm-design-analysis-2/lecture/TZgJM/wis-in-path-graphs-a-reconstruction-algorithm
+            1 Dimension. (O(n)):
+              A[i] = max(A[i-1], A[i-2] + w)
+          Independent Set of a Tree Graph (in Stanford/Coursera course, part 2, quiz 3)
+            "Recall our dynamic programming algorithm for computing the maximum-weight independent set of a path graph. Consider the following proposed extension to more general graphs. Consider an undirected graph with positive vertex weights. For a vertex v, obtain the graph G′(v) by deleting v and its incident edges from G, and obtain the graph G″(v) from G by deleting v, its neighbors, and all of the corresponding incident edges from G. Let OPT(H) denote the value of a maximum-weight independent set of a graph H. Consider the formula OPT(G)=max{OPT(G′(v)),wv+OPT(G″(v))}, where v is an arbitrary vertex of G of weight wv"
+          Sequence Alignment for Needleman-Wunsch score: https://www.coursera.org/learn/algorithm-design-analysis-2/lecture/QJkyp/optimal-substructure
+            Score, with cost for gaps in either string. 3 cases: No gap, gap in X, or gap in Y. 2 Dimensions.
+              A[i, j] = min(A[i-1, j-1], A[i-1, j] + gap_cost, A[i, j-1] + gap_cost)
+         -->
+    </section>
+
+
+    <!--
       Minimum Spanning Tree: Useful for identifying clusters.
        -->
 
@@ -551,5 +628,10 @@
       3-sum: Loop over n, loop over n,  checking in a hash table for the third part of the triple.
         Sedgewick's Algorithms book says it's O(n^2 log(n)), using binary search after sorting, which would at least use constant space.
       -->
+
+    <!-- Get smallest k items in O(log(n)) time: quickselect.
+         Get largest k items in O(log(n)) time: quickselect.
+         Get items in range with quickselect?
+     -->
 
 </quiz>
