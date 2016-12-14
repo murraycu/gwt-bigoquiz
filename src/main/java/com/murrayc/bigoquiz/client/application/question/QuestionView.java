@@ -388,7 +388,6 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         questionAnchor.setVisible(showAnchor);
 
         final String note = question.getNote();
-        Log.fatal("note: " + note);
         if (StringUtils.isEmpty(note)) {
             noteLabel.setText("");
         } else {
