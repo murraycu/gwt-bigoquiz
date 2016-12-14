@@ -120,16 +120,27 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
     private static void addQuestionsForSection(final Panel panelSection, final BigOQuizConstants constants, final String sectionId, final QuizSections quizSections, final List<QuestionAndAnswer> questions) {
         final Map<String, List<QuestionAndAnswer>> questionsBySubSection = groupQuestionsBySubSection(questions);
         if (questionsBySubSection == null) {
-            Log.error("QuizListView: questionsBySubSection is null.");
+            Log.error("QuizView: addQuestionsForSection(): questionsBySubSection is null.");
             return;
         }
 
         if (StringUtils.isEmpty(sectionId)) {
-            Log.error("QuizListView: sectionId is null.");
+            Log.error("QuizView: addQuestionsForSection(): sectionId is null.");
             return;
         }
 
-        for (final QuizSections.SubSection subSection : quizSections.getSubSectionsSorted(sectionId)) {
+        if (quizSections == null) {
+            Log.error("QuizView: addQuestionsForSection(): quizSections is null.");
+            return;
+        }
+
+        final List<QuizSections.SubSection> sorted = quizSections.getSubSectionsSorted(sectionId);
+        if (sorted == null) {
+            Log.error("QuizView: addQuestionsForSection(): sorted is null.");
+            return;
+        }
+
+        for (final QuizSections.SubSection subSection : sorted) {
             if (subSection == null) {
                 Log.fatal("QuizListView: subSection is null.");
                 continue;
@@ -175,6 +186,11 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
                 subSectionTitle = anchor;
             }
             Utils.addHeaderToPanel(4, panelSubSection, subSectionTitle);
+        }
+
+        if (questions == null) {
+            Log.error("addSubSection: questions is null.");
+            return;
         }
 
         for (final QuestionAndAnswer questionAndAnswer : questions) {
