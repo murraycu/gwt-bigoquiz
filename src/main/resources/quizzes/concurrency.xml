@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="concurrency">
+    <title>Concurrency</title>
+    <link>https://en.wikipedia.org/wiki/Concurrency_(computer_science)</link>
+
+    <section id="definitions" answers_as_choices="true" and_reverse="true">
+        <title>Definitions</title>
+
+        <question id="definition-parallelism">
+            <text>Parallelism</text>
+            <link>https://en.wikipedia.org/wiki/Parallel_computing</link>
+            <answer>Tasks are executed simultaneously in parallel, on separate CPUs.</answer>
+        </question>
+
+        <question id="definition-concurrency">
+            <text>Concurrency</text>
+            <link>https://en.wikipedia.org/wiki/Concurrency_(computer_science)</link>
+            <answer>Multiple tasks may make progress, for instance, but not necessarily, in separate threads on the same CPU.</answer>
+        </question>
+
+        <question id="definition-deadlock">
+            <text>Deadlock</text>
+            <link>https://en.wikipedia.org/wiki/Deadlock</link>
+            <answer>Multiple threads waiting on each other to release their locks.</answer>
+        </question>
+
+        <question id="definition-livelock">
+            <text>Livelock</text>
+            <link>https://en.wikipedia.org/wiki/Deadlock#Livelock</link>
+            <answer>Multiple threads responding to each other but not making progress.</answer>
+        </question>
+
+        <question id="definition-starvation">
+            <text>Starvation</text>
+            <link>https://en.wikipedia.org/wiki/Starvation_(computer_science)</link>
+            <answer>A thread, or process, is perpetually denied access to a resource.</answer>
+        </question>
+
+        <question id="definition-race-condition">
+            <text>Race Condition</text>
+            <link>https://en.wikipedia.org/wiki/Race_condition</link>
+            <answer>Unintended behaviour due to unexpected ordering of events.</answer>
+        </question>
+    </section>
+
+    <section id="examples" answers_as_choices="true" and_reverse="true">
+        <title>Examples</title>
+
+        <question id="example-deadlock">
+            <text>Deadlock</text>
+            <link>https://en.wikipedia.org/wiki/Deadlock</link>
+            <answer>One thread is waiting for another thread to release a resource, but that thread cannot release the resource without using another resource that is locked by the first thread.</answer>
+            <!-- See https://docs.oracle.com/javase/tutorial/essential/concurrency/deadlock.html -->
+        </question>
+
+        <question id="example-livelock">
+            <text>Livelock</text>
+            <link>https://en.wikipedia.org/wiki/Deadlock#Livelock</link>
+            <answer>2 people passing in a corridor. Each one moves to allow the other to pass. But the other moves in the same direction.</answer>
+        </question>
+
+        <question id="example-starvation">
+            <text>Starvation</text>
+            <link>https://en.wikipedia.org/wiki/Starvation_(computer_science)</link>
+            <answer>A scheduler never allows a lower-priority process to continue, always giving resources to newer higher-priority processes.</answer>
+        </question>
+    </section>
+</quiz>
