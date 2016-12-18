@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="sre">
+    <title>SRE (Site Reliability Engineering)</title>
+    <link>https://en.wikipedia.org/wiki/Site_reliability_engineering</link>
+
+    <section id="golden-signals" answers_as_choices="true" and_reverse="true">
+        <title>Four Golden Signals</title>
+
+        <question id="golden-signals-latency">
+            <text>Latency</text>
+            <link>https://en.wikipedia.org/wiki/Latency_(engineering)</link>
+            <answer>Time needed to service a request.</answer>
+            <note>Different requests to the same service may have different latencies.</note>
+        </question>
+
+        <question id="golden-signals-traffix">
+            <text>Traffic (throughout)</text>
+            <link>https://en.wikipedia.org/wiki/Throughput</link>
+            <answer>Rate of requests.</answer>
+        </question>
+
+        <question id="golden-signals-errors">
+            <text>Errors</text>
+            <answer>Rate of failing requests.</answer>
+        </question>
+
+        <question id="golden-signals-saturation">
+            <text>Saturation</text>
+            <answer>How fully a system's resources are used.</answer>
+        </question>
+    </section>
+
+    <section id="hierarchy-of-reliability" answers_as_choices="true">
+        <title>Mikey Dickerson's Hierarchy of Reliability</title>
+        <link>https://docs.google.com/drawings/d/1kshrK2RLkW-XV8enmWZxeRFRgADj6d4Ru_w5txz_k9I/edit</link>
+        <!-- TODO: Find a better link -->
+
+        <question id="hierarchy-of-reliability-order">
+            <text>Most fundamental first</text>
+            <answer>Monitoring, Incident Response, Postmortem/Root Cause Analysis, Testing &amp; Release Procedures, Capacity Planning, Development, Product</answer>
+        </question>
+
+        <question id="hierarchy-of-reliability-reverse-order">
+            <text>Most dependent first</text>
+            <answer>Product, Capacity Planning, Development, Testing &amp; Release Procedures, Postmortem/Root Cause Analysis, Incident Response, Monitoring</answer>
+        </question>
+    </section>
+
+    <section id="other-terminology" answers_as_choices="true">
+        <title>Other Terminology</title>
+
+        <question id="terminology-slo">
+            <text>SLO</text>
+            <answer>Service Level Objective</answer>
+            <!-- TODO: How is it measured, for instance? -->
+        </question>
+
+        <question id="terminology-sla">
+            <text>SLA</text>
+            <answer>Service Level Agreement</answer>
+        </question>
+
+        <question id="terminology-failure-modes">
+            <text>Failure Modes</text>
+            <answer>The various things that can go wrong and how the overall service will behave.</answer>
+            <note>For instance, when a machine dies, when a rack fails, when a cluster fails, when a datacenter fails, when a network fails between datacenters.</note>
+        </question>
+        <!-- TODO: Single point of failure. Unavailable dependencies. Request Deadlines. Load Shedding -->
+
+        <question id="terminology-load-balancing">
+            <text>Load Balancing</text>
+            <answer>TODO</answer>
+            <note>For instance, using DNS, or at the virtual IP address.</note>
+        </question>
+
+        <question id="terminology-rate-limiting">
+            <text>Rate Limiting</text>
+            <answer>TODO</answer>
+        </question>
+
+        <question id="terminology-sharding">
+            <text>Sharding</text>
+            <answer>Splitting databases across servers.</answer>
+        </question>
+
+        <question id="terminology-rollback">
+            <text>Rollback</text>
+            <answer>TODO</answer>
+        </question>
+
+        <question id="terminology-exponential-backoff">
+            <text>Exponential Backoff</text>
+            <link>https://en.wikipedia.org/wiki/Exponential_backoff</link>
+            <answer>Clients delay retries by increasing (by multiplication) intervals.</answer>
+            <note>See also Jitter</note>
+        </question>
+
+        <question id="terminology-jitter">
+            <text>Jitter</text>
+            <link>https://www.awsarchitectureblog.com/2015/03/backoff.html</link>
+            <answer>Adds randomness to retry delays to avoid clustering of requests.</answer>
+            <note>See also Exponential Backoff</note>
+        </question>
+
+        <question id="terminology-vertical-scaling">
+            <text>Vertical Scaling</text>
+            <link></link>
+            <answer>Add resources (CPU, RAM, disk) to existing servers.</answer>
+        </question>
+
+        <question id="terminology-vertical-scaling">
+            <text>Horizontal Scaling</text>
+            <link></link>
+            <answer>Add servers.</answer>
+        </question>
+
+    </section>
+
+    <!-- This is not really a Google SRE theme: -->
+    <!-- The answer text here is directly from the Wikipedia article. -->
+    <section id="cap" answers_as_choices="true">
+        <title>CAP Theorem</title>
+        <link>https://en.wikipedia.org/wiki/CAP_theorem</link>
+
+        <question id="cap-consistency">
+            <text>Consistency</text>
+            <answer>Every read receives the most recent write or an error.</answer>
+        </question>
+
+        <question id="cap-availibility">
+            <text>Availability</text>
+            <answer>Every request receives a response, without guarantee that it contains the most recent version of the information.</answer>
+        </question>
+
+        <question id="cap-parition-tolerance">
+            <text>Partition Tolerance</text>
+            <answer>The system continues to operate despite an arbitrary number of messages being dropped by the network between nodes.</answer>
+        </question>
+    </section>
+
+    <!-- This is not really a Google SRE theme: -->
+    <section id="acid" answers_as_choices="true">
+        <title>ACID</title>
+        <link>https://en.wikipedia.org/wiki/ACID</link>
+
+        <question id="acid-atomicity">
+            <text>Atomicity</text>
+            <link>https://en.wikipedia.org/wiki/ACID#Atomicity</link>
+            <answer>Either all operations, or no operations, in a transaction succeed.</answer>
+        </question>
+
+        <question id="acid-consistency">
+            <text>Consistency</text>
+            <link>https://en.wikipedia.org/wiki/ACID#Consistency</link>
+            <answer>Each transaction changes the state only to another valid state.</answer>
+        </question>
+
+        <question id="acid-isolation">
+            <text>Isolation</text>
+            <link>https://en.wikipedia.org/wiki/ACID#Isolation</link>
+            <answer>Concurrent transaction execution results in the same state as if the transactions were executed serially.</answer>
+        </question>
+
+        <question id="acid-durability">
+            <text>Durability</text>
+            <link>https://en.wikipedia.org/wiki/ACID#Durability</link>
+            <answer>Once a transaction is committed, the change of state will remain.</answer>
+        </question>
+    </section>
+
+    <!--
+    Availability
+
+    Testing:
+      Black box, white box.
+      Load Testing
+      Failure Modes
+      Cascading Failures
+
+    Monitoring: Black box, white box.
+
+    Paxos, Kubernetes/Borg
+
+    CAP
+
+    exponential backoff and jitter
+
+    Subsetting
+    Throttling
+    Round Robin
+    Load Shedding
+    Graceful Degradation
+
+    Cascading Failures:
+     - Server Overload
+     - Resource Exhaustion
+     - Service Unavailability.
+
+    Retries
+
+    Distributed Consensus
+
+
+    -->
+</quiz>
