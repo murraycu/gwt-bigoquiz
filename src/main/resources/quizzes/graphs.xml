@@ -78,6 +78,19 @@
             <text>Simple Path</text>
             <answer>A path with no repeated vertices - therefore, with no cycle.</answer>
         </question>
+
+        <question id="terminology-multigraph">
+            <text>Multigraph</text>
+            <link>https://en.wikipedia.org/wiki/Multigraph</link>
+            <answer>A graph with parallel edges.</answer>
+            <note>Sometimes known as a pseudograph.</note>
+        </question>
+
+        <question id="terminology-hypergraph">
+            <text>Hypergraph</text>
+            <link>https://en.wikipedia.org/wiki/Hypergraph</link>
+            <answer>A graph whose edges can connect more than 2 nodes.</answer>
+        </question>
     </section>
 
     <section id="polynomial-time-problems-definitions" answers_as_choices="true">
@@ -863,4 +876,8 @@
     <!-- Types of graph. This duplicates ideas from the algorithms needed to identify these graphs, but that is helpful.
     Planar. Hypergraph. Connected -->
 
+    <!-- TODO: Examples:
+      Hamiltonian Path: Open Knights Tour
+      Hamiltonian Cycle: Closed Knights Tour
+    -->
 </quiz>
