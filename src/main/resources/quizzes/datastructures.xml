@@ -586,6 +586,269 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
         </subsection>
     </section>
 
+    <section id="datastructures-uses" answers_as_choices="true">
+        <title>Uses of Data Structures</title>
+
+            <!-- TODO?
+            <question id="datastructures-uses-tree">
+                <text>Tree</text>
+                <link>https://en.wikipedia.org/wiki/Tree_(data_structure)</link>
+                <answer>Allows traversal of a tree of nodes.</answer>
+            </question>
+
+            <question id="datastructures-uses-binary-search-tree">
+                <text>Binary Search Tree</text>
+                <link>https://en.wikipedia.org/wiki/Binary_search_tree</link>
+                <answer>A tree whose child nodes are in sorted order, allowing binary search of the whole tree.</answer>
+            </question>
+            -->
+
+            <question id="datastructures-uses-self-balancing-binary-search-tree">
+                <text>Self-Balancing Binary Search Tree (Balanced Binary Search Tree)</text>
+                <link>https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree</link>
+                <answer>Key-value association. std::map.</answer>
+                <!-- Advantages to hash_table. Use in computational gemometry. -->
+            </question>
+
+            <question id="datastructures-uses-optimal-binary-search-tree">
+                <text>Optimal Binary Search Tree</text>
+                <link>https://en.wikipedia.org/wiki/Optimal_binary_search_tree</link>
+                <answer>Optimal searching of a static set of data.</answer>
+            </question>
+
+            <!--
+
+            <question id="datastructures-uses-binary-tree">
+                <text>Binary Tree</text>
+                <link>https://en.wikipedia.org/wiki/Binary_tree</link>
+                <answer>A tree whose nodes have no more than 2 children.</answer>
+            </question>
+
+            <question id="datastructures-uses-binomial-tree">
+                <text>Binomial Tree</text>
+                <link>https://en.wikipedia.org/wiki/Binomial_heap#Binomial_heap</link>
+                <answer>A tree in which a node of order k has children who are roots of trees of order k, k-1, ... 0. So each child's tree is deeper than its sibling child's tree. Permits easy merging of trees.</answer>
+            </question>
+            -->
+
+            <question id="datastructures-uses-b-tree">
+                <text>B-Tree</text>
+                <link>https://en.wikipedia.org/wiki/Binary_tree</link>
+                <answer>On-disk databases.</answer>
+            </question>
+
+            <!--
+            <question id="datastructures-uses-2-3-tree">
+                <text>2-3 Tree</text>
+                <link>https://en.wikipedia.org/wiki/2%E2%80%933_tree</link>
+                <answer>B-Tree of order 3.</answer>
+            </question>
+
+            <question id="datastructures-uses-2-3-4-tree">
+                <text>2-3-4 Tree</text>
+                <link>https://en.wikipedia.org/wiki/2%E2%80%933%E2%80%934_tree</link>
+                <answer>B-Tree of order 4.</answer>
+            </question>
+            -->
+
+            <!-- Don't bother mentioning uses of these as well as uses of generic
+                 self-balancing binary search trees.
+            <question id="datastructures-uses-avl-tree">
+                <text>AVL Tree</text>
+                <link>https://en.wikipedia.org/wiki/AVL_tree</link>
+                <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest node whose child nodes' heights differ by more than 1..</answer>
+            </question>
+
+            <question id="datastructures-uses-red-black-tree">
+                <text>Red-Black Tree</text>
+                <link>https://en.wikipedia.org/wiki/Red%E2%80%93black_tree</link>
+                <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest nodes that do not satisfy the coloring constraints: Root is black. All leaves are black. All children of red nodes are black. All paths to leaves contains the same number of black nodes.</answer>
+            </question>
+            -->
+
+            <!--
+            <question id="datastructures-uses-cartesian-tree">
+                <text>Cartesian Tree</text>
+                <link>https://en.wikipedia.org/wiki/Cartesian_tree</link>
+                <answer>A heap-ordered tree whose in-order traversal recreates the original sequence.</answer>
+            </question>
+
+            <question id="datastructures-uses-trie">
+                <text>Trie (Digital Tree, Prefix Tree)</text>
+                <link>https://en.wikipedia.org/wiki/Trie</link>
+                <answer>Stores all k prefixes of n strings.</answer>
+            </question>
+
+            <question id="datastructures-uses-ternary-search-tree">
+                <text>Ternary Search Tree</text>
+                <link>https://en.wikipedia.org/wiki/Ternary_search_tree</link>
+                <answer>A trie that uses less space by having 3 BST-like branches at each node.</answer>
+            </question>
+
+            <question id="datastructures-uses-radix-tree">
+                <text>Radix Tree (Radix Trie, Compact Prefix Tree, Patricia Trie)</text>
+                <link>https://en.wikipedia.org/wiki/Radix_tree</link>
+                <answer>Space-optimized trie.</answer>
+            </question>
+            -->
+
+            <question id="datastructures-uses-suffix-tree">
+                <text>Suffix Tree</text>
+                <link>https://en.wikipedia.org/wiki/Suffix_tree</link>
+                <answer>Full text search. Matching genes in DNA.</answer>
+            </question>
+
+            <!-- TODO
+
+            <question id="datastructures-uses-van-emde-boas-tree">
+                <text>Van Emde Boas Tree</text>
+                <link>https://en.wikipedia.org/wiki/Van_Emde_Boas_tree</link>
+                <answer>Associative array allowing fast O(lg lg N) successor/predecessor, and O(1) max/min, on keys of limited range N. by using a hierarchy of of clusters, each with a min and max.</answer>
+            </question>
+            -->
+
+            <question id="datastructures-uses-binary-indexed-tree">
+                <text>Binary Indexed Tree (Fenwick Tree)</text>
+                <link>https://en.wikipedia.org/wiki/Fenwick_tree</link>
+                <answer>Arithmetic coding algorithm. Maintaining a cumulative sum (prefix sums).</answer>
+            </question>
+
+             <!--
+            <question id="datastructures-uses-segment-tree">
+                <text>Segment Tree</text>
+                <link>https://en.wikipedia.org/wiki/Segment_tree</link>
+                <answer>Stores intervals or segments and allows efficient searching for intervals that contain a certain point, or to query for a range sum or range minium.</answer>
+            </question>
+
+            <question id="datastructures-uses-interval-tree">
+                <text>Interval Tree</text>
+                <link>https://en.wikipedia.org/wiki/Interval_tree</link>
+                <answer>Stores intervals or segments and allows efficient searching for intervals that overlap a certain interval.</answer>
+            </question>
+
+            <question id="datastructures-uses-range-tree">
+                <text>Range Tree</text>
+                <link>https://en.wikipedia.org/wiki/Range_tree</link>
+                <answer>Allows efficient O((log n)^d + k) time searching for points that are within a certain interval. (Orthogonal Range Search). Particularly for searching in multiple dimensions. Using O(n(log n)^d-1) space.</answer>
+            </question>
+
+            <question id="datastructures-uses-order-statistic-tree">
+                <text>Order Statistic Tree</text>
+                <link>https://en.wikipedia.org/wiki/Order_statistic_tree</link>
+                <answer>Supports rank() and select() in O(log n) time.</answer>.
+            </question>
+
+            <question id="datastructures-uses-finger-search-tree">
+                <text>Finger Search Tree</text>
+                <link>https://en.wikipedia.org/wiki/Finger_search_tree</link>
+                <answer>Allows fast search to nearby keys, in O(log(rank(x) - rank(y))) time.</answer>.
+            </question>
+            -->
+
+            <question id="datastructures-uses-heap">
+                <text>Heap</text>
+                <link>https://en.wikipedia.org/wiki/Heap_(data_structure)</link>
+                <answer>Dijkstra's shortest-path algorithm. Prim's minimum spanning tree algorithm. Running Median.</answer>
+            </question>
+
+            <!-- Don't bother mentioning uses of binary heaps as well as uses of generic heaps.
+            <question id="datastructures-uses-binary-heap">
+                <text>Binary Heap</text>
+                <link>https://en.wikipedia.org/wiki/Binary_heap</link>
+                <answer>Dijkstra's shortest-path algorithm. Prim's minimum spanning tree algorithm. Running Median.</answer>
+            </question>
+            -->
+
+            <!--
+            <question id="datastructures-uses-binomial-heap">
+                <text>Binomial Heap</text>
+                <link>https://en.wikipedia.org/wiki/Binomial_heap</link>
+                <answer>A mergeable heap, implemented as a collection of binomial trees.</answer>
+            </question>
+            -->
+
+            <question id="datastructures-uses-fibonacci-heap">
+                <text>Fibonacci Heap</text>
+                <link>https://en.wikipedia.org/wiki/Fibonacci_heap</link>
+                <answer>Dijkstra's shortest-path algorithm.</answer>
+            </question>
+
+            <!--
+            <question id="datastructures-uses-treap">
+                <text>Treap</text>
+                <link>https://en.wikipedia.org/wiki/Treap</link>
+                <answer>A self-balancing binary search tree that is also a min (or max) heap in terms of a random weight for each node, resulting in a random binary search tree that is likely to be balanced.</answer>
+            </question>
+            -->
+
+            <question id="datastructures-uses-bloom-filter">
+                <text>Bloom Filter</text>
+                <link>https://en.wikipedia.org/wiki/Bloom_filter</link>
+                <answer>Quick filtering where false positives are acceptable. For instance, web cache filtering.</answer>
+            </question>
+
+            <question id="datastructures-uses-union-find">
+                <text>Union Find (Disjoint Set)</text>
+                <link>https://en.wikipedia.org/wiki/Disjoint-set_data_structure</link>
+                <answer>Kruskal's minimum spanning tree algorithm. Connected-component Labeling.</answer>
+            </question>
+
+            <!--
+            <question id="datastructures-uses-adjacency-list">
+                <text>Adjacency List</text>
+                <link>https://en.wikipedia.org/wiki/Adjacency_list</link>
+                <answer>Lists nodes and their incident (often only outgoing) edges.</answer>
+            </question>
+
+            <question id="datastructures-uses-adjacency-matrix">
+                <text>Adjacency Matrix</text>
+                <link>https://en.wikipedia.org/wiki/Adjacency_matrix</link>
+                <answer>For any 2 nodes, provides the edge, if any, that connects them.</answer>
+            </question>
+
+            <question id="datastructures-uses-singly-linked-list">
+                <text>Singly Linked List</text>
+                <link>https://en.wikipedia.org/wiki/Linked_list#Singly_linked_list</link>
+                <answer>Allows forward traversal of the items in the list.</answer>
+            </question>
+
+            <question id="datastructures-uses-doubly-linked-list">
+                <text>Doubly Linked List</text>
+                <link>https://en.wikipedia.org/wiki/Doubly_linked_list</link>
+                <answer>Allows forward and backward traversal of the items in the list.</answer>
+            </question>
+            -->
+
+            <question id="datastructures-uses-hash-table">
+                <text>Hash Table</text>
+                <link>https://en.wikipedia.org/wiki/Hash_table</link>
+                <answer>The 2-sum and 3-sum problems. std::unordered_map.</answer>
+                <!-- See http://algs4.cs.princeton.edu/14analysis/ for 2-sum and 3-sum. -->
+            </question>
+
+            <question id="datastructures-uses-skip-list">
+                <text>Skip List</text>
+                <link>https://en.wikipedia.org/wiki/Skip_list</link>
+                <answer>Database indexing.</answer>
+            </question>
+
+            <!--
+            <question id="datastructures-uses-splay-tree">
+                <text>Splay Tree</text>
+                <link>https://en.wikipedia.org/wiki/Splay_tree</link>
+                <answer>Binary Search Tree that optimizes itself for recently accessed elements.</answer>
+            </question>
+
+            <question id="datastructures-uses-k-d-tree">
+                <text>k-d Tree</text>
+                <link>https://en.wikipedia.org/wiki/K-d_tree</link>
+                <answer>Allows proximity search in k-dimensional data by partitioning the space.</answer>
+            </question>
+            -->
+    </section>
+
+
+
     <section id="datastructures-tree-operations">
         <title>Tree Operations</title>
 
