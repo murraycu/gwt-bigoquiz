@@ -306,6 +306,33 @@
         -->
     </section>
 
+    <section id="time-complexity-code-examples" answers_as_choices="true">
+        <title>Time Complexity: Code Examples</title>
+        <question id="time-complexity-code-example-log-n">
+            <text>for (i = 1; i &lt;= n; i = i * 2) {
+  for (int j = 0; j &lt; n; j++) {
+    ... }
+}</text>
+            <answer>O(n log(n))</answer>
+        </question>
+
+        <question id="time-complexity-code-example-n-log-n">
+            <text>for (i = 1; i &lt;= n; i = i * 2) {
+                ... }</text>
+            <answer>O(log(n))</answer>
+        </question>
+
+        <question id="time-complexity-code-example-n-via-geometric-sum">
+            <text>for (i = 1; i &lt;= n; i = i * 2) {
+  for (int j = 0; j &lt; i; j++) {
+    ... }
+  }</text>
+            <answer>O(n)</answer>
+            <note>The inner loop runs 1, 2, 4, 8, ... n times. That geometric sum is equal to 2n -1.</note>
+        </question>
+    </section>
+
+
 
     <!-- Recurrence relation examples:
     T(n) = 2 T(n/2) + O(n)
