@@ -53,6 +53,8 @@
         </question>
     </section>
 
+    <!-- TODO: Number of ways to rearrange letters: N! / product of (number of each letter)! . For instance: aabbbccc: n! / (2! * 3! * 4!) -->
+
     <!-- TODO: lexographically-next permutation -->
     <!-- TODO: next n-choose-k combination (subset) -->
 
