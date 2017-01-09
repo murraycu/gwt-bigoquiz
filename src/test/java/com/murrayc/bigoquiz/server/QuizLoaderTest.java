@@ -19,14 +19,13 @@ import static org.junit.Assert.assertNotNull;
 public class QuizLoaderTest {
     @Nullable
     private static Quiz loadQuiz() throws Exception {
-        try (final InputStream is = Thread.currentThread().getContextClassLoader()
-                .getResourceAsStream("bigo.xml")) {
-            assertNotNull(is);
+        final InputStream is = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream("bigo.xml");
+        assertNotNull(is);
 
-            @Nullable final Quiz quiz = QuizLoader.loadQuiz(is);
-            assertNotNull(quiz);
-            return quiz;
-        }
+        @Nullable final Quiz quiz = QuizLoader.loadQuiz(is);
+        assertNotNull(quiz);
+        return quiz;
     }
 
     @Test
