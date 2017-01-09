@@ -163,6 +163,11 @@ public class QuizServiceImpl extends ServiceWithUser implements
             setQuestionExtras(result, quiz);
         }
 
+        if (!result.hasChoices()) {
+            // This would be OK if multiple-choice should not be used with this choice.
+            Log.error("getQuestion(): The result has no answer choices: " + result.getId());
+        }
+
         return result;
     }
 
