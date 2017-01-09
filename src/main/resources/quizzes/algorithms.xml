@@ -555,6 +555,39 @@
          -->
     </section>
 
+    <section id="algorithms-on-arrays" answers_as_choices="true">
+        <title>Algorithms on Arrays</title>
+        <question id="algorithms-on-arrays-max-subarray-with-empty">
+            <text>Maximum Subarray (allowing an empty subarray)</text>
+            <link>https://en.wikipedia.org/wiki/Maximum_subarray_problem</link>
+            <answer>Calculate the sum so far, not allowing the sum to be less than 0. Maintain the maximum. (Kadane's Algorithm)</answer>
+        </question>
+
+        <question id="algorithms-on-arrays-max-subarray-without-empty">
+            <text>Maximum Subarray (not allowing an empty subarray)</text>
+            <answer>Calculate the sum so far, not allowing the sum to be less than the current item. Maintain the maximum. (Kadane's Algorithm)</answer>
+        </question>
+
+    </section>
+
+    <section id="algorithms-uses" answers_as_choices="true">
+        <title>Algorithms on Arrays</title>
+        <question id="algorithms-uses-max-subarray-with-empty">
+            <text>Maximum profit when buying and selling at prices changing over time.</text>
+            <answer>Kadane's Maximum subarray (with empty sets) algorithm.</answer>
+        </question>
+
+        <question id="algorithms-uses-max-subarray-without-empty">
+            <text>Maximum rectangular subarray.</text>
+            <link>http://www.geeksforgeeks.org/dynamic-programming-set-27-max-sum-rectangle-in-a-2d-matrix/</link>
+            <answer>Kadane's Maximum subarray (without empty sets) algorithm.</answer>
+            <note>Try every group of columns, finding the rows within that have the maximum subarray.</note>
+        </question>
+
+        <!-- Gas Station Problem: Find the first position that does not take the sum to minus. -->
+
+    </section>
+
 
     <!--
       Minimum Spanning Tree: Useful for identifying clusters.
