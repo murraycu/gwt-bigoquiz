@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="book_stepanov_fmtgp">
+    <title>Book: Alexander Stepanov's From Mathematics To Generic Programming</title>
+    <link>http://amzn.to/2iXit1Q</link>
+
+    <section id="fmtgp-numbers" answers_as_choices="true">
+        <title>Numbers</title>
+
+        <question id="fmtgp-numbers-proper-divisor">
+            <text>Proper Divisor</text>
+            <link>https://en.wikipedia.org/wiki/Divisor</link>
+            <answer>A divisor of n other than n itself.</answer>
+        </question>
+
+        <question id="fmtgp-numbers-aliquot-sum">
+            <text>Aliquot Sum</text>
+            <link>https://en.wikipedia.org/wiki/Aliquot_sum</link>
+            <answer>The sum of all proper divisors of n.</answer>
+        </question>
+
+        <question id="fmtgp-numbers-perfect">
+            <text>Perfect Number</text>
+            <link>https://en.wikipedia.org/wiki/Perfect_number</link>
+            <answer>A number that is the sum of its proper divisors.</answer>
+        </question>
+
+        <question id="fmtgp-triangular-number">
+            <text>Triangular Number</text>
+            <link>https://en.wikipedia.org/wiki/Triangular_number</link>
+            <answer>Sum of the first n positive integers.</answer>
+        </question>
+
+        <question id="fmtgp-numbers-prime-number">
+            <text>Prime Number</text>
+            <link>https://en.wikipedia.org/wiki/Prime_number</link>
+            <answer>A number greater than 1 that has no positive divisors other than 1 and itself.</answer>
+        </question>
+
+        <question id="fmtgp-numbers-composite-number">
+            <text>Composite Number</text>
+            <link>https://en.wikipedia.org/wiki/Composite_number</link>
+            <answer>A number that has positive divisors other than 1 and itself.</answer>
+        </question>
+
+        <question id="fmtgp-numbers-mersenne-prime">
+            <text>Mersenne Prime</text>
+            <link>https://en.wikipedia.org/wiki/Mersenne_prime</link>
+            <answer>A prime number that is one less than a power of two.</answer>
+        </question>
+
+        <!-- TODO:
+        <question id="fmtgp-numbers-fermat-prime">
+            <text>Fermat Number</text>
+            <link>https://en.wikipedia.org/wiki/Fermat_number</link>
+            <answer></answer>
+        </question>
+        -->
+
+        <question id="fmtgp-numbers-fermat-prime">
+            <text>Fermat Prime</text>
+            <link>https://en.wikipedia.org/wiki/Fermat_number#Generalized_Fermat_primes</link>
+            <answer>A prime number that is one more than a power of two.</answer>
+            <note>The power will itself be a power of 2.</note>
+        </question>
+
+        <question id="fmtgp-numbers-coprime">
+            <text>Coprime Number</text>
+            <link>https://en.wikipedia.org/wiki/Coprime_integers</link>
+            <answer>Two numbers that have no common divisors greater than 1.</answer>
+        </question>
+
+        <question id="fmtgp-numbers-totient">
+            <text>Totient</text>
+            <link>https://en.wikipedia.org/wiki/Euler's_totient_function</link>
+            <answer>The number of positive integers less than n that are coprime with n.</answer>
+        </question>
+    </section>
+
+    <section id="fmtgp-number-theorems" answers_as_choices="true">
+        <title>Number Theorems</title>
+
+        <question id="fmtgp-number-theorems-eulers">
+            <text>Euler's Theorem</text>
+            <link>https://en.wikipedia.org/wiki/Euler's_theorem</link>
+            <answer is_html="true">If n and a are coprime positive integers, then &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;
+                &lt;semantics&gt;
+                &lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;
+                &lt;mstyle displaystyle=&quot;true&quot; scriptlevel=&quot;0&quot;&gt;
+                &lt;msup&gt;
+                &lt;mi&gt;a&lt;/mi&gt;
+                &lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;
+                &lt;mi&gt;φ&lt;!-- φ --&gt;&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;/mrow&gt;
+                &lt;/msup&gt;
+                &lt;mo&gt;≡&lt;!-- ≡ --&gt;&lt;/mo&gt;
+                &lt;mn&gt;1&lt;/mn&gt;
+                &lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;
+                &lt;mspace width=&quot;1em&quot;&gt;&lt;/mspace&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mi&gt;mod&lt;/mi&gt;
+                &lt;mspace width=&quot;0.333em&quot;&gt;&lt;/mspace&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;/mrow&gt;
+                &lt;/mstyle&gt;
+                &lt;/mrow&gt;
+                &lt;/semantics&gt;
+                &lt;/math&gt;</answer>
+        </question>
+
+        <question id="fmtgp-number-theorems-fermats-little">
+            <text>Fermat's Little Theorem</text>
+            <link>https://en.wikipedia.org/wiki/Fermat%27s_little_theorem</link>
+            <answer is_html="true">If p is a prime number, then for any integer a, &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;
+                &lt;semantics&gt;
+                &lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;
+                &lt;mstyle displaystyle=&quot;true&quot; scriptlevel=&quot;0&quot;&gt;
+                &lt;msup&gt;
+                &lt;mi&gt;a&lt;/mi&gt;
+                &lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;
+                &lt;mi&gt;p&lt;/mi&gt;
+                &lt;/mrow&gt;
+                &lt;/msup&gt;
+                &lt;mo&gt;≡&lt;!-- ≡ --&gt;&lt;/mo&gt;
+                &lt;mi&gt;a&lt;/mi&gt;
+                &lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;
+                &lt;mspace width=&quot;1em&quot;&gt;&lt;/mspace&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mi&gt;mod&lt;/mi&gt;
+                &lt;mspace width=&quot;0.333em&quot;&gt;&lt;/mspace&gt;
+                &lt;mi&gt;p&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;/mrow&gt;
+                &lt;mo&gt;.&lt;/mo&gt;
+                &lt;/mstyle&gt;
+                &lt;/mrow&gt;
+                &lt;/semantics&gt;
+                &lt;/math&gt;</answer>
+        </question>
+
+        <question id="fmtgp-number-theorems-wilsons">
+            <text>Wilson's Theorem</text>
+            <link>https://en.wikipedia.org/wiki/Wilson's_theorem</link>
+            <answer is_html="true">A natural number n > 1 is a prime number if and only if &lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;
+                &lt;semantics&gt;
+                &lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;
+                &lt;mstyle displaystyle=&quot;true&quot; scriptlevel=&quot;0&quot;&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mo&gt;−&lt;!-- − --&gt;&lt;/mo&gt;
+                &lt;mn&gt;1&lt;/mn&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;mo&gt;!&lt;/mo&gt;
+                &lt;mtext&gt; &lt;/mtext&gt;
+                &lt;mo&gt;≡&lt;!-- ≡ --&gt;&lt;/mo&gt;
+                &lt;mtext&gt; &lt;/mtext&gt;
+                &lt;mo&gt;−&lt;!-- − --&gt;&lt;/mo&gt;
+                &lt;mn&gt;1&lt;/mn&gt;
+                &lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;
+                &lt;mspace width=&quot;1em&quot;&gt;&lt;/mspace&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;
+                &lt;mi&gt;mod&lt;/mi&gt;
+                &lt;mspace width=&quot;0.333em&quot;&gt;&lt;/mspace&gt;
+                &lt;mi&gt;n&lt;/mi&gt;
+                &lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;
+                &lt;/mrow&gt;
+                &lt;/mstyle&gt;
+                &lt;/mrow&gt;
+                &lt;/semantics&gt;
+                &lt;/math&gt;</answer>
+        </question>
+    </section>
+
+    <section id="fmtgp-groups" answers_as_choices="true">
+        <title>Groups</title>
+
+        <question id="fmtgp-groups-group">
+            <text>Group</text>
+            <link>https://en.wikipedia.org/wiki/Group_(mathematics)</link>
+            <answer>A set with an operation, an inverse operation, an identity constant e, and with associativity, identity and cancellation axioms.</answer>
+            <note>Like a monoid, but with the inverse operation, and the cancellation axiom.</note>
+        </question>
+
+        <question id="fmtgp-groups-abelian">
+            <text>Abelian Group</text>
+            <link>https://en.wikipedia.org/wiki/Abelian_group</link>
+            <answer>A group whose operation is commutative.</answer>
+        </question>
+
+        <question id="fmtgp-groups-additive">
+            <text>Additive Group</text>
+            <link>https://en.wikipedia.org/wiki/Additive_group</link>
+            <answer>An abelian group whose operation is addition.</answer>
+        </question>
+
+        <question id="fmtgp-groups-additive">
+            <text>Multiplicative Group</text>
+            <link>https://en.wikipedia.org/wiki/Multiplicative_group</link>
+            <answer>An abelian group whose operation is multiplication.</answer>
+        </question>
+
+        <question id="fmtgp-groups-monoid">
+            <text>Monoid</text>
+            <link>https://en.wikipedia.org/wiki/Monoid</link>
+            <answer>A set with an operation, an identity constant e, and with associativity and identity axioms.</answer>
+            <note>Like a group, but without the inverse operation, and the cancellation axiom.</note>
+        </question>
+
+        <question id="fmtgp-groups-semigroup">
+            <text>Semigroup</text>
+            <link>https://en.wikipedia.org/wiki/Semigroup</link>
+            <answer>A set with an operation, and with associativity.</answer>
+            <note>Like a monoid, but without the identity element, and the identity axiom.</note>
+        </question>
+
+        <question id="fmtgp-groups-subgroup">
+            <text>Subgroup</text>
+            <link>https://en.wikipedia.org/wiki/Subgroup</link>
+            <answer>A subset of a group that is itself a group.</answer>
+        </question>
+
+        <question id="fmtgp-groups-cyclic">
+            <text>Cyclic Group</text>
+            <link>https://en.wikipedia.org/wiki/Cyclic_group</link>
+            <answer>A subset of a group that is itself a group.</answer>
+        </question>
+
+        <question id="fmtgp-groups-finite">
+            <text>Finite Group</text>
+            <link>https://en.wikipedia.org/wiki/Finite_group</link>
+            <answer>A group with a finite number of elements.</answer>
+        </question>
+    </section>
+    
+    <section id="fmtgp-group-theorems" answers_as_choices="true">
+        <title>Group Theorems</title>
+    
+        <question id="fmtgp-group-theorems-lagrange">
+            <text>Lagrange's Theorem</text>
+            <link>https://en.wikipedia.org/wiki/Lagrange's_theorem_(group_theory)</link>
+            <answer>For any finite group G, the order (number of elements) of every subgroup H of G divides the order of G.</answer>
+        </question>
+        
+    </section>
+
+
+
+
+</quiz>

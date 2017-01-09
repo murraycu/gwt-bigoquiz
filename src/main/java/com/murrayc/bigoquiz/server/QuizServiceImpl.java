@@ -138,7 +138,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 "datastructures",
                 "bitwise",
                 "concurrency",
-                "sre"};
+                "sre",
+                "book_stepanov_fmtgp"};
 
         for (final String name : names) {
             if (!loadQuizIntoQuizzes(name, quizzes)) {
