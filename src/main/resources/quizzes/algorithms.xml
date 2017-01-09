@@ -384,7 +384,7 @@
             </question>
             <question id="algorithms-sort-comparison-bucket-sort">
                 <text>Bucket Sort</text>
-                <answer>Comparison</answer>
+                <answer>Non-Comparison</answer>
             </question>
             <question id="algorithms-sort-comparison-bubble-sort">
                 <text>Bubble Sort</text>
