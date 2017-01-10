@@ -137,7 +137,7 @@
             <question id="datastructures-description-avl-tree">
                 <text>AVL Tree</text>
                 <link>https://en.wikipedia.org/wiki/AVL_tree</link>
-                <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest node whose child nodes' heights differ by more than 1..</answer>
+                <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest node whose child nodes' heights differ by more than 1.</answer>
             </question>
 
             <question id="datastructures-description-red-black-tree">
@@ -656,7 +656,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             <question id="datastructures-uses-avl-tree">
                 <text>AVL Tree</text>
                 <link>https://en.wikipedia.org/wiki/AVL_tree</link>
-                <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest node whose child nodes' heights differ by more than 1..</answer>
+                <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest node whose child nodes' heights differ by more than 1.</answer>
             </question>
 
             <question id="datastructures-uses-red-black-tree">
