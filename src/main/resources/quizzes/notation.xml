@@ -26,7 +26,7 @@
         </question>
 
         <question id="asymptotic-notation-little-omega">
-            <text>ω (Lttle Omega)</text>
+            <text>ω (Little Omega)</text>
             <answer>Strict Lower bound</answer>
         </question>
     </section>

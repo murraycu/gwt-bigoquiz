@@ -52,7 +52,7 @@
             </question>
             -->
 
-            <!-- These are based on page 779 of Sedgewicks's Algorithms book, 4th edition. -->
+            <!-- These are based on page 779 of Sedgewick's Algorithms book, 4th edition. -->
             <question id="string-algorithms-substring-search-time-kmp">
                 <text>Knuth-Morris-Pratt (KMP)</text>
                 <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
@@ -80,7 +80,7 @@
                 <answer>O(M + N) (substring length + text length)</answer>
             </question>
 
-            <!-- These are based on page 779 of Sedgewicks's Algorithms book, 4th edition. -->
+            <!-- These are based on page 779 of Sedgewick's Algorithms book, 4th edition. -->
             <question id="string-algorithms-substring-search-extra-space-kmp">
                 <text>Knuth-Morris-Pratt (KMP)</text>
                 <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>

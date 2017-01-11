@@ -127,12 +127,12 @@
             <answer>Every read receives the most recent write or an error.</answer>
         </question>
 
-        <question id="cap-availibility">
+        <question id="cap-availability">
             <text>Availability</text>
             <answer>Every request receives a response, without guarantee that it contains the most recent version of the information.</answer>
         </question>
 
-        <question id="cap-parition-tolerance">
+        <question id="cap-partition-tolerance">
             <text>Partition Tolerance</text>
             <answer>The system continues to operate despite an arbitrary number of messages being dropped by the network between nodes.</answer>
         </question>

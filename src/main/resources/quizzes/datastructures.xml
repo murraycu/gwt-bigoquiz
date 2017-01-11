@@ -199,7 +199,7 @@
             <question id="datastructures-description-segment-tree">
                 <text>Segment Tree</text>
                 <link>https://en.wikipedia.org/wiki/Segment_tree</link>
-                <answer>Stores intervals or segments and allows efficient searching for intervals that contain a certain point, or to query for a range sum or range minium.</answer>
+                <answer>Stores intervals or segments and allows efficient searching for intervals that contain a certain point, or to query for a range sum or range minimum.</answer>
                 <!-- TODO: Find a clear, but more general, description, without just mentioning the specific sum and minimum range queries. -->
             </question>
 
@@ -495,7 +495,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             <question id="datastructures-implementation-union-find">
                 <text>Union Find (Disjoint Set)</text>
                 <link>https://en.wikipedia.org/wiki/Disjoint-set_data_structure</link>
-                <answer>A tree-based data struture, for instance in an array. Each position's value is the position of its parent.</answer>
+                <answer>A tree-based data structure, for instance in an array. Each position's value is the position of its parent.</answer>
             </question>
 
             <question id="datastructures-implementation-adjacency-list">
@@ -607,7 +607,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <text>Self-Balancing Binary Search Tree (Balanced Binary Search Tree)</text>
                 <link>https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree</link>
                 <answer>Key-value association. std::map.</answer>
-                <!-- Advantages to hash_table. Use in computational gemometry. -->
+                <!-- Advantages to hash_table. Use in computational geometry. -->
             </question>
 
             <question id="datastructures-uses-optimal-binary-search-tree">
@@ -717,7 +717,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             <question id="datastructures-uses-segment-tree">
                 <text>Segment Tree</text>
                 <link>https://en.wikipedia.org/wiki/Segment_tree</link>
-                <answer>Stores intervals or segments and allows efficient searching for intervals that contain a certain point, or to query for a range sum or range minium.</answer>
+                <answer>Stores intervals or segments and allows efficient searching for intervals that contain a certain point, or to query for a range sum or range minimum.</answer>
             </question>
 
             <question id="datastructures-uses-interval-tree">
@@ -994,7 +994,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             <question id="datastructures-tree-implementation-bst-delete">
                 <text>Delete</text>
                 <link>https://en.wikipedia.org/wiki/Binary_search_tree#Deletion</link>
-                <answer>If there are 2 child nodes: Find the successor. If there is no successor then there is no right child, so replace the node with the left child. If there is a successor, replace the node with the successor, making the node's left child be the successor's left node, making the sucessor's original parent be the successor's right child and making the successor's original right child be the successor's original parent's left child.</answer>
+                <answer>If there are 2 child nodes: Find the successor. If there is no successor then there is no right child, so replace the node with the left child. If there is a successor, replace the node with the successor, making the node's left child be the successor's left node, making the successor's original parent be the successor's right child and making the successor's original right child be the successor's original parent's left child.</answer>
             </question>
 
             <question id="datastructures-tree-implementation-bst-left-rotation">
@@ -1085,7 +1085,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             <question id="datastructures-hash-tables-collision-resolution-advantages-open-addressing">
                 <text>Open addressing (closed hashing)</text>
                 <link>https://en.wikipedia.org/wiki/Hash_table#Open_addressing</link>
-                <answer>Advantage: Data locality gives good cache performance. Disdvantage: Requires reallocation and rehashing.</answer>
+                <answer>Advantage: Data locality gives good cache performance. Disadvantage: Requires reallocation and rehashing.</answer>
             </question>
 
             <question id="datastructures-hash-tables-collision-resolution-advantages-robin-hood-hashing">

@@ -15,7 +15,7 @@
         </question>
 
         <question id="terminology-dag">
-            <text>Directed Acylic Graph (DAG)</text>
+            <text>Directed Acyclic Graph (DAG)</text>
             <answer>A directed graph with no cycles.</answer>
         </question>
 
@@ -70,7 +70,7 @@
         </question>
 
         <question id="terminology-kernel-dag">
-            <text>Kernal DAG (condensation digraph)</text>
+            <text>Kernel DAG (condensation digraph)</text>
             <answer>A directed graph in which the strongly connected components are contracted to become single vertices.</answer>
         </question>
 
@@ -715,7 +715,7 @@
         <question id="algorithm-for-stongly-connected-components">
             <text>Strongly Connected Components</text>
             <link>https://en.wikipedia.org/wiki/Strongly_connected_component</link>
-            <answer>Kosaraju's Algorithm: Depth First Search on the reversed graph, to get a topological sort, then call DFS on each vertex in that order, assigning a new ID for eaach DFS call.</answer>
+            <answer>Kosaraju's Algorithm: Depth First Search on the reversed graph, to get a topological sort, then call DFS on each vertex in that order, assigning a new ID for each DFS call.</answer>
             <note>In the second DFS, pop from the first DFS's stack.</note>
             <!-- TODO: Sedgewick's Algorithms book says to DFS on the reversed graph first: https://www.youtube.com/watch?v=PH4L30XRhJE
             and Tim Roughgarden's course says this too: https://www.youtube.com/watch?v=PZQ0Pdk15RA
