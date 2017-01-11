@@ -143,7 +143,7 @@
             <question id="datastructures-description-red-black-tree">
                 <text>Red-Black Tree</text>
                 <link>https://en.wikipedia.org/wiki/Red%E2%80%93black_tree</link>
-                <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest nodes that do not satisfy the coloring constraints: Root is black. All leaves are black. All children of red nodes are black. All paths to leaves contains the same number of black nodes.</answer>
+                <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest nodes that do not satisfy the coloring constraints: Root is black. All leaves are black. All children of red nodes are black. All paths to leaves contain the same number of black nodes.</answer>
             </question>
 
             <question id="datastructures-description-cartesian-tree">
@@ -396,7 +396,7 @@
             <question id="datastructures-implementation-red-black-tree">
                 <text>Red-Black Tree</text>
                 <link>https://en.wikipedia.org/wiki/Red%E2%80%93black_tree</link>
-                <answer>After an insert or deletion, rotates the lowest nodes that do not satisfy the coloring constraints: Root is black. All leaves are black. All children of red nodes are black. All paths to leaves contains the same number of black nodes.</answer>
+                <answer>After an insert or deletion, rotates the lowest nodes that do not satisfy the coloring constraints: Root is black. All leaves are black. All children of red nodes are black. All paths to leaves contain the same number of black nodes.</answer>
             </question>
 
             <question id="datastructures-implementation-cartesian-tree">
@@ -662,7 +662,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             <question id="datastructures-uses-red-black-tree">
                 <text>Red-Black Tree</text>
                 <link>https://en.wikipedia.org/wiki/Red%E2%80%93black_tree</link>
-                <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest nodes that do not satisfy the coloring constraints: Root is black. All leaves are black. All children of red nodes are black. All paths to leaves contains the same number of black nodes.</answer>
+                <answer>A self-balancing binary search tree that, after an insert or deletion, rotates the lowest nodes that do not satisfy the coloring constraints: Root is black. All leaves are black. All children of red nodes are black. All paths to leaves contain the same number of black nodes.</answer>
             </question>
             -->
 
