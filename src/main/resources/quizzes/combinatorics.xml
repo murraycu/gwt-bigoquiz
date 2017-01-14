@@ -2,7 +2,7 @@
 <quiz xmlns="http://bigoquiz.com/document" format_version="1" id="combinatorics">
     <title>Combinatorics</title>
 
-    <section id="definitions" answers_as_choices="true">
+    <section id="definitions" answers_as_choices="true" and_reverse="true">
         <title>Definitions</title>
         <question id="definition-permutation">
             <text>Permutation</text>
@@ -35,7 +35,7 @@
         </question>
     </section>
 
-    <section id="count" answers_as_choices="true">
+    <section id="count" answers_as_choices="true" and_reverse="true">
         <title>Counts of Permutations and Combinations</title>
         <question id="count-permutations">
             <text>Number of permutations of n items.</text>
@@ -56,7 +56,7 @@
         </question>
     </section>
 
-    <section id="algorithms" answers_as_choices="true">
+    <section id="algorithms" answers_as_choices="true" and_reverse="true">
         <title>Algorithms</title>
         <question id="algorithms-gospers-hack">
             <text>Gosper's Hack for iterating combinations.</text>
