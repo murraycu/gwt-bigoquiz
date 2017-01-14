@@ -17,11 +17,22 @@ public class Quiz implements IsSerializable {
      */
     public static class QuizDetails extends HasIdAndTitle
             implements IsSerializable {
+
+        private /* final */ boolean isPrivate = false;
+
         public QuizDetails() {
         }
 
         public QuizDetails(final String id, final String title) {
             super(id, title, null);
+        }
+
+        public boolean getIsPrivate() {
+            return isPrivate;
+        }
+
+        private void setIsPrivate(boolean isPrivate) {
+            this.isPrivate = isPrivate;
         }
     }
 
@@ -71,6 +82,14 @@ public class Quiz implements IsSerializable {
 
     public boolean getUsesMathML() {
         return usesMathML;
+    }
+
+    public void setIsPrivate(boolean isPrivate) {
+        details.setIsPrivate(isPrivate);
+    }
+
+    public boolean getIsPrivate() {
+        return details.isPrivate;
     }
 
     public QuizDetails getDetails() {

@@ -31,6 +31,7 @@ public class QuizLoader {
 
     private static final String NODE_QUESTION = "question";
     private static final String ATTR_ID = "id";
+    private static final String ATTR_PRIVATE = "private";
     private static final String ATTR_USES_MATHML = "uses_mathml";
     private static final String ATTR_IS_HTML = "is_html";
     private static final String NODE_TITLE = "title";
@@ -119,6 +120,9 @@ public class QuizLoader {
             throw new QuizLoaderException("No quiz title found.");
         }
         result.setTitle(quizTitle);
+
+        final boolean isPrivate = getAttributeAsBoolean(rootNode, ATTR_PRIVATE);
+        result.setIsPrivate(isPrivate);
 
         final boolean usesMathML = getAttributeAsBoolean(rootNode, ATTR_USES_MATHML);
         result.setUsesMathML(usesMathML);

@@ -53,6 +53,10 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
                 continue;
             }
 
+            if (details.getIsPrivate()) {
+                continue;
+            }
+
             final Panel rowPanel = new FlowPanel();
             rowPanel.addStyleName("quiz-list-row");
             rowPanel.addStyleName("clearfix");
