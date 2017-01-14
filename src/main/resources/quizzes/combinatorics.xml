@@ -15,6 +15,24 @@
             <link>https://en.wikipedia.org/wiki/Combination</link>
             <answer>Unordered selection</answer>
         </question>
+
+        <question id="definition-subsequence">
+            <text>Subsequence</text>
+            <link>https://en.wikipedia.org/wiki/Combination</link>
+            <answer>Elements in sequence but not contiguous.</answer>
+        </question>
+
+        <question id="definition-subarray">
+            <text>Subarray / Substring</text>
+            <link>https://en.wikipedia.org/wiki/Combination</link>
+            <answer>Elements in sequence and contiguous.</answer>
+        </question>
+
+        <question id="definition-subset">
+            <text>Subset</text>
+            <link>https://en.wikipedia.org/wiki/Combination</link>
+            <answer>Elements must not be in sequence or contiguous.</answer>
+        </question>
     </section>
 
     <section id="count" answers_as_choices="true">
