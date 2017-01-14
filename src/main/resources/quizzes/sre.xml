@@ -13,7 +13,7 @@
             <note>Different requests to the same service may have different latencies.</note>
         </question>
 
-        <question id="golden-signals-traffix">
+        <question id="golden-signals-traffic">
             <text>Traffic (throughout)</text>
             <link>https://en.wikipedia.org/wiki/Throughput</link>
             <answer>Rate of requests.</answer>

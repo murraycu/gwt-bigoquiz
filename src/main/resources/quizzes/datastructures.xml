@@ -447,7 +447,7 @@
                 <answer>Store the node values as an array, as in a binary heap, using the start of the range as the node's key. Each node summarizes its child nodes.</answer>
                 <!-- TODO: Find a clear, but more general, description, without just mentioning the specific sum and minimum range queries. -->
                 <!-- TODO: Describe the recursion properly, ideally not just for a range minimum query. -->
-                <!-- Tushar Roy's walkthough: https://www.youtube.com/watch?v=ZBHKZF5w4YU -->
+                <!-- Tushar Roy's walkthrough: https://www.youtube.com/watch?v=ZBHKZF5w4YU -->
             </question>
 
             <question id="datastructures-implementation-interval-tree">
