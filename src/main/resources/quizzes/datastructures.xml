@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quiz xmlns="http://bigoquiz.com/document" format_version="1" id="datastructures">
     <title>Data Structures</title>
-    <section id="datastructures-abstract-data-types" answers_as_choices="true">
+    <section id="datastructures-abstract-data-types" answers_as_choices="true" and_reverse="true">
         <title>Abstract Data Types</title>
         <link>https://en.wikipedia.org/wiki/Abstract_data_type</link>
 
@@ -74,7 +74,7 @@
         </question>
     </section>
 
-    <section id="datastructures-description" answers_as_choices="true">
+    <section id="datastructures-description" answers_as_choices="true" and_reverse="true">
         <title>Descriptions of Data Structures</title>
 
         <subsection id="datastructures-description-trees">
@@ -327,7 +327,7 @@
         </subsection>
     </section>
 
-    <section id="datastructures-implementations" answers_as_choices="true">
+    <section id="datastructures-implementations" answers_as_choices="true" and_reverse="true">
         <title>Implementations of Data Structures</title>
 
         <subsection id="datastructures-implementations-trees">
@@ -586,7 +586,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
         </subsection>
     </section>
 
-    <section id="datastructures-uses" answers_as_choices="true">
+    <section id="datastructures-uses" answers_as_choices="true" and_reverse="true">
         <title>Uses of Data Structures</title>
 
             <!-- TODO?
@@ -849,7 +849,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
 
 
 
-    <section id="datastructures-tree-operations">
+    <section id="datastructures-tree-operations" and_reverse="true">
         <title>Tree Operations</title>
 
         <subsection id="datastructures-tree-operations-bst-traversal" answers_as_choices="true">
@@ -1038,7 +1038,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
     </section>
 
 
-    <section id="datastructures-hash-tables">
+    <section id="datastructures-hash-tables" and_reverse="true">
         <title>Hash Tables</title>
         <link>https://en.wikipedia.org/wiki/Hash_table</link>
 

@@ -2,7 +2,7 @@
 <quiz xmlns="http://bigoquiz.com/document" format_version="1" id="notation">
     <title>Notation</title>
 
-    <section id="asymptotic-notation" answers_as_choices="true">
+    <section id="asymptotic-notation" answers_as_choices="true" and_reverse="true">
         <title>Asymptotic Notation</title>
         <question id="asymptotic-notation-big-theta">
             <text>Θ (Big Theta)</text>
@@ -31,7 +31,7 @@
         </question>
     </section>
 
-    <section id="set-notation" answers_as_choices="true">
+    <section id="set-notation" answers_as_choices="true" and_reverse="true">
         <title>Set Notation</title>
         <link>https://www.mathsisfun.com/sets/symbols.html</link>
         <question id="set-notation-union">

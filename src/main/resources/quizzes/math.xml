@@ -620,7 +620,7 @@
         </question>
     </section>
 
-    <section id="terminology" answers_as_choices="true">
+    <section id="terminology" answers_as_choices="true" and_reverse="true">
         <title>Terminology</title>
 
         <question id="terminology-rules-of-replacement-associative">
