@@ -54,7 +54,8 @@
             <link>https://en.wikipedia.org/wiki/Permutation#k-permutations_of_n</link>
             <answer>n! / ((n - k)! ⋅  k) </answer>
         </question>
-        <note>This is also the number of ways to set only k out of n bits.</note>
+        <note>This is also the number of ways to set only k out of n bits.
+To avoid integer overflow, calculate via the recurrence: n choose k = (n / k) * (n-1 choose k-1), dividing by lower divisors first.</note>
     </section>
 
     <section id="algorithms" answers_as_choices="true" and_reverse="true">
