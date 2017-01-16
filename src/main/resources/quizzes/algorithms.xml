@@ -571,7 +571,7 @@
     </section>
 
     <section id="algorithms-uses" answers_as_choices="true">
-        <title>Algorithms on Arrays</title>
+        <title>Algorithms on Arrays: Uses</title>
         <question id="algorithms-uses-max-subarray-with-empty">
             <text>Maximum profit when buying and selling at prices changing over time.</text>
             <answer>Kadane's Maximum subarray (with empty sets) algorithm.</answer>
