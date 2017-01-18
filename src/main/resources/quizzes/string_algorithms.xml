@@ -17,12 +17,15 @@
                 <text>Z Algorithm</text>
                 <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
                 <answer>Concatenate the pattern, a special character, and the text. For each index, calculate the prefix length, if any, that starts at that position. After finding a prefix, subsequently reuse previously calculated values from the prefix itself.</answer>
+                <!-- Tushar Roy's walkthrough, starting at linear-time Z Array construction:: https://youtu.be/CpZh4eF8QBw?t=5m45s -->
+                <!-- TODO: When is this useful, compared to KMP, BM, RK, etc? -->
             </question>
 
             <question id="string-algorithms-substring-search-description-kmp">
                 <text>Knuth-Morris-Pratt (KMP)</text>
                 <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
                 <answer>Pre-calculate a Deterministic Finite Automata (DFA), (also known as &quot;partial match table&quot; or &quot;failure function&quot;) that tells us, for each mismatch, where in the pattern we would need to start comparing characters again. For instance, this avoids re-comparing a prefix of the pattern that is identical to a suffix of the part of the pattern compared so far.</answer>
+                <note>Or, to use less space than a DFA, create a prefix array, and step through it more than once each time.</note>
             </question>
 
             <question id="string-algorithms-substring-search-description-boyer-moore">
@@ -39,7 +42,40 @@
 
             <!-- TODO: Boyer-Moore-Horspool -->
             <!-- TODO: Aho-Corasick -->
-            <!-- TODO: Z Algorithm -->
+        </subsection>
+
+        <subsection id="string-algorithms-substring-search-preprocessing" answers_as_choices="true" and_reverse="true">
+            <title>Preprocessing</title>
+
+            <question id="string-algorithms-substring-search-preprocessing-z-algorithm">
+                <text>Z Algorithm</text>
+                <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
+                <answer>Build an array of length pattern + $ + text. For each index, calculate the prefix length, if any, that starts at that position. After finding a prefix (a Z box), reuse previous Z values from the start. But if the previous Z value is as large as the remaining Z box, continue checking for the rest of a matching prefix after the Z box.</answer>
+            </question>
+
+            <question id="string-algorithms-substring-search-preprocessing-kmp-with-dfa">
+                <text>Knuth-Morris-Pratt (KMP) with a DFA</text>
+                <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
+                <answer>Build a 2D array of pattern-size * alphabet-size. With x initially 0, set all dfa[pattern-pos][] to the values at dfa[x], then set dfa[pattern-pos][character-code] = pattern-pos + 1, update x to this value, and move to the next pattern position. </answer>
+            </question>
+
+            <question id="string-algorithms-substring-search-preprocessing-kmp-with-prefix-array">
+                <text>Knuth-Morris-Pratt (KMP) with a Prefix Array</text>
+                <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
+                <answer>Build an array the same length as the pattern. With x initially 0, if pa[pattern-pos] == pa[x] then pa[pattern-pos] = pa[x] + 1 and increment x, else x = pa[x-1] and try again.</answer>
+            </question>
+
+            <question id="string-algorithms-substring-search-preprocessing-boyer-moore">
+                <text>Boyer-Moore</text>
+                <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
+                <answer>Build an array of alphabet-size. Iterate over the pattern, from left to right, marking the (rightmost so far) position of the character in the array.</answer>
+            </question>
+
+            <question id="string-algorithms-substring-search-preprocessing-rabin-karp">
+                <text>Rabin-Karp</text>
+                <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
+                <answer>Generate a hash of the pattern.</answer>
+            </question>
         </subsection>
 
         <subsection id="string-algorithms-substring-search-time-complexity" answers_as_choices="true" and_reverse="true">
