@@ -457,7 +457,8 @@
 Or alternatively, a (balanced) binary tree with intervals in each node, using the interval's start as the key. Each node is augmented with the maximum interval end for itself and its children.</answer>
             </question>
             <!-- This is the CLRS description, though not the primary one on wikipedia:
-            https://en.wikipedia.org/wiki/Interval_tree#Augmented_tree -->
+            https://en.wikipedia.org/wiki/Interval_tree#Augmented_tree
+            Sedgewick suggests the alternative: https://www.youtube.com/watch?v=f4mXJGEKBaA-->
 
             <question id="datastructures-implementation-range-tree">
                 <text>Range Tree</text>
