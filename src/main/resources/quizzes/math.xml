@@ -660,6 +660,24 @@
         </question>
     </section>
 
+    <section id="modulo" answers_as_choices="true" and_reverse="true">
+    <title>Modulo Equivalencies</title>
+        <question id="modulo-distibutive-with-multiplication">
+            <text>xy % d</text>
+            <link>https://en.wikipedia.org/wiki/Modulo_operation#Equivalencies</link>
+            <answer>((x % d) * (y % d)) % d</answer>
+            <note>Because modulo is distributive with multiplication.</note>
+        </question>
+
+        <question id="modulo-distibutive-with-addition">
+            <text>(x + y) % d</text>
+            <link>https://en.wikipedia.org/wiki/Modulo_operation#Equivalencies</link>
+            <answer>((x % d) + (y % d)) % d</answer>
+            <note>Because modulo is distributive with addition.</note>
+        </question>
+
+    </section>
+
     <!-- Stirling Numbers -->
     <!-- Taylor Series -->
 </quiz>
