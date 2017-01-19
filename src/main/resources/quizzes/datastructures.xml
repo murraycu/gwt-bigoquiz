@@ -846,6 +846,28 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <answer>Allows proximity search in k-dimensional data by partitioning the space.</answer>
             </question>
             -->
+
+            <!-- See Sedgewick's summary: https://youtu.be/NeU3SY21aMA?t=7m50s
+            TODO: Rephrase this as coding problems.-->
+            <question id="datastructures-uses-bst">
+                <text>Binary Search Tree</text>
+                <link>https://en.wikipedia.org/wiki/Binary_search_tree</link>
+                <answer>Range search over points. For instance, finding points in a line that are in a range.</answer>
+                <note>To find intersections of horizontal and vertical line segments, sort the start and end points of the horizontal lines, then sweep horizontally, maintaining a BST of horizontal points, allowing a range search according to any vertical line encountered.</note>
+            </question>
+
+            <question id="datastructures-uses-k-d-tree">
+                <text>k-d Tree</text>
+                <link>https://en.wikipedia.org/wiki/K-d_tree</link>
+                <answer>Find points in a plane that are contained by a rectangular range.</answer>
+            </question>
+
+            <question id="datastructures-uses-interval-tree">
+                <text>Interval Tree</text>
+                <link>https://en.wikipedia.org/wiki/Interval_tree</link>
+                <answer>Intersection search over intervals. For instance, finding lines in a line that intersect with a range.</answer>
+                <note>To find intersections of rectangles, sort the start and end points of the rectangles, then sweep horizontally, maintaining an interval tree of horizontal points, allowing a range search according to any vertical line encountered.</note>
+            </question>
     </section>
 
 
