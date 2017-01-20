@@ -66,4 +66,34 @@
             <note>Maybe think of this as starvation due to neglect?</note>
         </question>
     </section>
+
+    <section id="synchronization-devices" answers_as_choices="true" and_reverse="true">
+        <title>Synchronization Devices</title>
+
+        <question id="synchronization-devices-lock">
+            <text>Lock / Mutex</text>
+            <link>https://en.wikipedia.org/wiki/Lock_(computer_science)</link>
+            <answer>Enforces a limit on access to a resource shared between threads. For instance, allowing only one thread to access the resource at once.</answer>
+            <note>Mutex is an abbreviation of Mutual Exclusion</note>
+        </question>
+
+        <question id="synchronization-devices-semaphore">
+            <text>Semaphore</text>
+            <link>https://en.wikipedia.org/wiki/Semaphore_(programming)</link>
+            <answer>A variable used to limit access to a resource shared between threads. For instance, by recording how many units of the resource are available.</answer>
+        </question>
+
+        <question id="synchronization-devices-binary-semaphore">
+            <text>Binary Semaphore</text>
+            <link>https://en.wikipedia.org/wiki/Semaphore_(programming)</link>
+            <answer>Semaphore which can have only the values 0 or 1. Often used to implement locks.</answer>
+        </question>
+
+        <question id="synchronization-devices-condition-variable">
+            <text>Condition Variable / Monitor</text>
+            <link>https://en.wikipedia.org/wiki/Monitor_(synchronization)</link>
+            <answer>Allows both mutual exclusion and waiting for a condition to become true, letting a thread signal to another thread.</answer>
+        </question>
+    </section>
+
 </quiz>
