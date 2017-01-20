@@ -63,6 +63,7 @@
             <text>Starvation</text>
             <link>https://en.wikipedia.org/wiki/Starvation_(computer_science)</link>
             <answer>A scheduler never allows a lower-priority process to continue, always giving resources to newer higher-priority processes.</answer>
+            <note>Maybe think of this as starvation due to neglect?</note>
         </question>
     </section>
 </quiz>
