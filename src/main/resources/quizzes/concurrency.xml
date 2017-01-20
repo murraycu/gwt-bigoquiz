@@ -41,6 +41,12 @@
             <link>https://en.wikipedia.org/wiki/Race_condition</link>
             <answer>Unintended behaviour due to unexpected ordering of events.</answer>
         </question>
+
+        <question id="definition-priority-inversion">
+            <text>Priority Inversion</text>
+            <link>https://en.wikipedia.org/wiki/Priority_inversion</link>
+            <answer>A high priority task is unexpectedly preempted by a lower priority task.</answer>
+        </question>
     </section>
 
     <section id="examples" answers_as_choices="true" and_reverse="true">
@@ -64,6 +70,14 @@
             <link>https://en.wikipedia.org/wiki/Starvation_(computer_science)</link>
             <answer>A scheduler never allows a lower-priority process to continue, always giving resources to newer higher-priority processes.</answer>
             <note>Maybe think of this as starvation due to neglect?</note>
+        </question>
+
+        <question id="example-priority-inversion">
+            <text>Priority Inversion</text>
+            <link>https://en.wikipedia.org/wiki/Priority_inversion</link>
+            <answer>High priority task is waiting for a low priority task. But before it receives the lock, held by the low priority task, a medium priority task interrupts the low priority task, indirectly holding the lock for longer, and preventing the higher-priority task from running according to its actual priority.</answer>
+            <note>The Mars Pathfinder rover had a famous case of priority inversion. Priority inheritance is a solution for this problem - it temporarily gives the lower priority thread (holding the lock) the priority of the high priority thread (requesting the lock), allowing the low priority thread to be scheduled, so the high priority thread can continue.</note>
+            <!-- See http://www.drdobbs.com/jvm/what-is-priority-inversion-and-how-do-yo/230600008 -->
         </question>
     </section>
 
