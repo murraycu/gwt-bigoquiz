@@ -23,7 +23,7 @@
 		<gwt.version>2.7.0</gwt.version>
 
         <!-- Convenience property to set the GWTP version -->
-        <gwtp.version>1.6</gwtp.version>
+        <gwtp.version>1.5.3</gwtp.version>
         <!-- <gin.version>2.1.2</gin.version> -->
         <!-- <gwt.style>OBF</gwt.style> -->
 
