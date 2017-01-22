@@ -21,7 +21,7 @@ public class Quiz implements IsSerializable {
         }
 
         public QuizDetails(final String id, final String title) {
-            super(id, title);
+            super(id, title, null);
         }
     }
 

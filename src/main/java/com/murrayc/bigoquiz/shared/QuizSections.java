@@ -17,21 +17,14 @@ public class QuizSections implements IsSerializable {
      * Created by murrayc on 1/30/16.
      */
     public static class SubSection extends HasIdAndTitle {
-        private String link;
 
         public SubSection() {
         }
 
         public SubSection(final String id, final String title, final String link) {
-            super(id, title);
+            super(id, title, link);
 
-            this.link = link;
         }
-
-        public String getLink() {
-            return link;
-        }
-
     }
 
     //TODO: Can this be non-public while still being serializable by GWT?
@@ -41,19 +34,11 @@ public class QuizSections implements IsSerializable {
         public List<Question.Text> defaultChoices;
         public int questionsCount;
 
-        private String link;
-
         Section() {
         }
 
         Section(final String id, final String title, final String link) {
-            super(id, title);
-
-            this.link = link;
-        }
-
-        public String getLink() {
-            return link;
+            super(id, title, link);
         }
     }
 

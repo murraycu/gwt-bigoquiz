@@ -12,12 +12,15 @@ import java.util.Comparator;
  * Created by murrayc on 23.06.16.
  */
 public class HasIdAndTitle implements IsSerializable {
+    protected String link;
+
     public HasIdAndTitle() {
     }
 
-    public HasIdAndTitle(final String id, final String title) {
+    public HasIdAndTitle(final String id, final String title, final String link) {
         this.id = id;
         this.title = title;
+        this.link = link;
     }
 
     @NotNull
@@ -60,4 +63,8 @@ public class HasIdAndTitle implements IsSerializable {
 
     private String id;
     private String title;
+
+    public String getLink() {
+        return link;
+    }
 }
