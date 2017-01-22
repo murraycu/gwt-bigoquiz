@@ -47,7 +47,8 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private final FlowPanel resultPanel;
     private final ListBox nextQuestionSectionListBox = new ListBox();
     private @NotNull final Hyperlink hyperlinkMultipleChoice = new InlineHyperlink();
-    private final Label sectionTitle = new InlineLabel();
+    private final Label sectionTitleLabel = new InlineLabel();
+    private final Anchor sectionTitleAnchor = new Anchor();
     private final Label subSectionTitleLabel = new InlineLabel();
     private final Anchor subSectionTitleAnchor = new Anchor();
 
@@ -112,7 +113,9 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         Utils.addHeaderToPanel(2, mainPanel, constants.questionLabel());
 
-        @NotNull final Panel paraHeader = Utils.addParagraphWithChild(mainPanel, sectionTitle);
+        @NotNull final Panel paraHeader = Utils.addParagraph(mainPanel, null);
+        paraHeader.add(sectionTitleLabel);
+        paraHeader.add(sectionTitleAnchor);
         paraHeader.add(subSectionTitleLabel);
         paraHeader.add(subSectionTitleAnchor);
         Utils.addHeaderToPanel(3, mainPanel, paraHeader);
@@ -237,8 +240,9 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             questionMarkup.setHTML("");
             questionAnchor.setText("");
             questionAnchor.setHref("");
-            sectionTitle.setText("");
+            sectionTitleLabel.setText("");
             subSectionTitleLabel.setText("");
+            sectionTitleAnchor.setText("");
             subSectionTitleAnchor.setText("");
             subSectionTitleAnchor.setHref("");
             resultPanel.setVisible(false); //TODO: Really clear it?
@@ -268,17 +272,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             return;
         }
 
-        //TODO: Make the
-        //( <b>Section:</b> some section title )
-        //properly internationalized, without putting the <b> tags in the translatable string.
-        final String sectionId = question.getSectionId();
-        final String sectionTitleStr = sections.getSectionTitle(sectionId);
-        if (StringUtils.isEmpty(sectionTitleStr)) {
-            Log.error("setQuestion(): sectionTitleStr is empty.");
-        } else {
-            //TODO: Internationalization:
-            sectionTitle.setText(sectionTitleStr +": ");
-        }
+        setQuestionSectionTitle(question);
 
         setQuestionSubSectionTitle(question);
 
@@ -327,35 +321,50 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         }
     }
 
+    private void setQuestionSectionTitle(@Nullable final Question question) {
+        //TODO: Make the
+        //( <b>Section:</b> some section title )
+        //properly internationalized, without putting the <b> tags in the translatable string.
+        //TODO: Internationalization:
+        final String sectionId = question.getSectionId();
+        final QuizSections.Section section = sections.getSection(sectionId);
+        fillLabelOrAnchor(section, sectionTitleLabel, sectionTitleAnchor, ": ");
+    }
+
     private void setQuestionSubSectionTitle(@Nullable final Question question) {
         final String sectionId = question.getSectionId();
         @Nullable final QuizSections.SubSection subSection = sections.getSubSection(sectionId, question.getSubSectionId());
-        fillLabelOrAnchor(subSection, subSectionTitleLabel, subSectionTitleAnchor);
+        fillLabelOrAnchor(subSection, subSectionTitleLabel, subSectionTitleAnchor, null);
     }
 
     /** Fill the label if there is no link.
      * Otherwise fill the anchor with the title and href.
      *
-     * @param subSection
+     * @param section
      * @param label
      * @param anchor
      * @return Whether the Anchor was used.
      */
-    private static void fillLabelOrAnchor(final @Nullable HasIdAndTitle subSection, final Label label, final Anchor anchor) {
+    private static void fillLabelOrAnchor(final @Nullable HasIdAndTitle section, final Label label, final Anchor anchor, final String suffix) {
         boolean showAnchor = false;
 
-        if (subSection == null) {
+        if (section == null) {
             //Not all questions have to be in a sub-section:
             //subSectionTitleAnchor.setText("error: null subsection for: " + question.getSubSectionId());
             label.setText("");
             anchor.setText("");
             anchor.setHref("");
         } else {
-            final String link = subSection.getLink();
+            final String link = section.getLink();
+            String title = section.getTitle();
+            if (!StringUtils.isEmpty(title) && !StringUtils.isEmpty(suffix)) {
+                title += suffix;
+            }
+
             if (StringUtils.isEmpty(link)) {
-                label.setText(subSection.getTitle());
+                label.setText(title);
             } else {
-                anchor.setText(subSection.getTitle());
+                anchor.setText(title);
                 anchor.setHref(link); //TODO: Sanitize this HTML that comes from our XML file.
                 showAnchor = true;
             }
