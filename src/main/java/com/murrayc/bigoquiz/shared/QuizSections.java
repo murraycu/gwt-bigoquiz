@@ -17,7 +17,7 @@ public class QuizSections implements IsSerializable {
      * Created by murrayc on 1/30/16.
      */
     public static class SubSection extends HasIdAndTitle {
-        public String link;
+        private String link;
 
         public SubSection() {
         }
@@ -27,6 +27,11 @@ public class QuizSections implements IsSerializable {
 
             this.link = link;
         }
+
+        public String getLink() {
+            return link;
+        }
+
     }
 
     //TODO: Can this be non-public while still being serializable by GWT?

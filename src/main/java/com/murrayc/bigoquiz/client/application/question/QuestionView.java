@@ -332,12 +332,13 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         final String sectionId = question.getSectionId();
         @Nullable final QuizSections.SubSection subSection = sections.getSubSection(sectionId, question.getSubSectionId());
         if (subSection != null) {
-            if (StringUtils.isEmpty(subSection.link)) {
+            final String link = subSection.getLink();
+            if (StringUtils.isEmpty(link)) {
                 subSectionTitleLabel.setText(subSection.getTitle());
                 showLabel = true;
             } else {
                 subSectionTitleAnchor.setText(subSection.getTitle());
-                subSectionTitleAnchor.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
+                subSectionTitleAnchor.setHref(link); //TODO: Sanitize this HTML that comes from our XML file.
                 showAnchor = true;
             }
         } else {

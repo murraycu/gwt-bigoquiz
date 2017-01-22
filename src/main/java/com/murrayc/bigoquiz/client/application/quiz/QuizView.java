@@ -175,14 +175,15 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         if (subSection != null) {
             // We can't use an Anchor with a null href - that creates a link to /null.
             Widget subSectionTitle = null;
-            if (StringUtils.isEmpty(subSection.link)) {
+            final String link = subSection.getLink();
+            if (StringUtils.isEmpty(link)) {
                 final InlineLabel label = new InlineLabel();
                 label.setText(subSection.getTitle());
                 subSectionTitle = label;
             } else {
                 final Anchor anchor = new Anchor();
                 anchor.setText(subSection.getTitle());
-                anchor.setHref(subSection.link); //TODO: Sanitize this HTML that comes from our XML file.
+                anchor.setHref(link); //TODO: Sanitize this HTML that comes from our XML file.
                 subSectionTitle = anchor;
             }
             Utils.addHeaderToPanel(4, panelSubSection, subSectionTitle);
