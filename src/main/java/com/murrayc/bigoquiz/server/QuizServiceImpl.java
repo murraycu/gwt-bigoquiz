@@ -138,7 +138,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 "datastructures",
                 "bitwise",
                 "concurrency",
-                "sre",
+                "system_architecture",
                 "book_stepanov_fmtgp"};
 
         for (final String name : names) {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="sre">
-    <title>SRE (Site Reliability Engineering)</title>
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="system_architecture">
+    <title>System Architecture and SRE (Site Reliability Engineering)</title>
     <link>https://en.wikipedia.org/wiki/Site_reliability_engineering</link>
 
     <section id="golden-signals" answers_as_choices="true" and_reverse="true">
