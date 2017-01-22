@@ -55,8 +55,8 @@ public class UserHistoryTest {
     @NotNull
     private UserHistorySections createUserRecentHistory() {
         @NotNull final QuizSections sections = new QuizSections();
-        sections.addSection(SECTION_1, "section 1", null);
-        sections.addSection("section2", "section 2", null);
+        sections.addSection(SECTION_1, "section 1", null,null);
+        sections.addSection("section2", "section 2", null, null);
 
         @NotNull final UserStats stats = new UserStats();
 

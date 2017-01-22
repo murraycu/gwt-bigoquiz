@@ -36,25 +36,33 @@ public class QuizSections implements IsSerializable {
 
     //TODO: Can this be non-public while still being serializable by GWT?
     static public class Section extends HasIdAndTitle {
-        Section() {
-        }
-
-        Section(final String id, final String title) {
-            super(id, title);
-        }
-
         @NotNull
         public Map<String, SubSection> subSections = new HashMap<>();
         public List<Question.Text> defaultChoices;
         public int questionsCount;
+
+        private String link;
+
+        Section() {
+        }
+
+        Section(final String id, final String title, final String link) {
+            super(id, title);
+
+            this.link = link;
+        }
+
+        public String getLink() {
+            return link;
+        }
     }
 
     //Map of section ID to userhistorysections.
     @NotNull
     private Map<String, Section> sections = new HashMap<>();
 
-    public void addSection(final String sectionId, final String sectionTitle, final List<Question.Text> defaultChoices) {
-        @NotNull final Section section = new Section(sectionId, sectionTitle);
+    public void addSection(final String sectionId, final String sectionTitle, final String sectionLink, final List<Question.Text> defaultChoices) {
+        @NotNull final Section section = new Section(sectionId, sectionTitle, sectionLink);
         section.defaultChoices = defaultChoices;
         this.sections.put(sectionId, section);
     }

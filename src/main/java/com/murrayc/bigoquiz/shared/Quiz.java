@@ -156,12 +156,12 @@ public class Quiz implements IsSerializable {
         return null;
     }
 
-    public void addSection(final String sectionId, final String sectionTitle, final List<Question.Text> defaultChoices) {
+    public void addSection(final String sectionId, final String sectionTitle, final String sectionLink, final List<Question.Text> defaultChoices) {
         if (quizSections.containsSection(sectionId)) {
             Log.error("Quiz.addSection(): section already exists. Replacing. sectionId: " + sectionId);
         }
 
-        quizSections.addSection(sectionId, sectionTitle, defaultChoices);
+        quizSections.addSection(sectionId, sectionTitle, sectionLink, defaultChoices);
     }
 
     public void setSectionQuestionsCount(final String sectionId, int questionsCount) {

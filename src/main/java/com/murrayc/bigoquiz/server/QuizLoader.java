@@ -163,6 +163,8 @@ public class QuizLoader {
             sectionTitle = "Reverse: " + sectionTitle;
         }
 
+        @Nullable String sectionLink = getLinkNodeText(sectionElement);
+
         //Default choices:
         @Nullable List<Question.Text> defaultChoices = null;
         @Nullable final Element elementChoices = getElementByName(sectionElement, NODE_DEFAULT_CHOICES);
@@ -172,7 +174,7 @@ public class QuizLoader {
 
         final boolean useAnswersAsChoices = getAttributeAsBoolean(sectionElement, ATTR_ANSWERS_AS_CHOICES);
 
-        result.addSection(sectionId, sectionTitle, defaultChoices);
+        result.addSection(sectionId, sectionTitle, sectionLink, defaultChoices);
 
         int questionsCount = 0;
         @NotNull final List<Node> listSubSectionNodes = getChildrenByTagName(sectionElement, NODE_SUB_SECTION);
