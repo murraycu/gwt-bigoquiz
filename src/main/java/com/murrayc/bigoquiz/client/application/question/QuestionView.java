@@ -327,30 +327,41 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     }
 
     private void setQuestionSubSectionTitle(@Nullable final Question question) {
-        boolean showAnchor = false, showLabel = false;
-
         final String sectionId = question.getSectionId();
         @Nullable final QuizSections.SubSection subSection = sections.getSubSection(sectionId, question.getSubSectionId());
-        if (subSection != null) {
-            final String link = subSection.getLink();
-            if (StringUtils.isEmpty(link)) {
-                subSectionTitleLabel.setText(subSection.getTitle());
-                showLabel = true;
-            } else {
-                subSectionTitleAnchor.setText(subSection.getTitle());
-                subSectionTitleAnchor.setHref(link); //TODO: Sanitize this HTML that comes from our XML file.
-                showAnchor = true;
-            }
-        } else {
+        fillLabelOrAnchor(subSection, subSectionTitleLabel, subSectionTitleAnchor);
+    }
+
+    /** Fill the label if there is no link.
+     * Otherwise fill the anchor with the title and href.
+     *
+     * @param subSection
+     * @param label
+     * @param anchor
+     * @return Whether the Anchor was used.
+     */
+    private static void fillLabelOrAnchor(final @Nullable QuizSections.SubSection subSection, final Label label, final Anchor anchor) {
+        boolean showAnchor = false;
+
+        if (subSection == null) {
             //Not all questions have to be in a sub-section:
             //subSectionTitleAnchor.setText("error: null subsection for: " + question.getSubSectionId());
-            subSectionTitleLabel.setText("");
-            subSectionTitleAnchor.setText("");
-            subSectionTitleAnchor.setHref("");
+            label.setText("");
+            anchor.setText("");
+            anchor.setHref("");
+        } else {
+            final String link = subSection.getLink();
+            if (StringUtils.isEmpty(link)) {
+                label.setText(subSection.getTitle());
+            } else {
+                anchor.setText(subSection.getTitle());
+                anchor.setHref(link); //TODO: Sanitize this HTML that comes from our XML file.
+                showAnchor = true;
+            }
         }
 
-        subSectionTitleLabel.setVisible(showLabel);
-        subSectionTitleAnchor.setVisible(showAnchor);
+        label.setVisible(!showAnchor);
+        anchor.setVisible(showAnchor);
     }
 
     private void setQuestionText(@Nullable final Question question) {
