@@ -81,11 +81,11 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
                 continue;
             }
 
-            addSection(panelQuiz, constants, quiz, quizSections, section.getId(), section.getTitle());
+            addSection(panelQuiz, constants, quiz, quizSections, section);
         }
 
         //Add questions that are not in a section:
-        addSection(panelQuiz, constants, quiz, quizSections, null, null);
+        addSection(panelQuiz, constants, quiz, quizSections, null);
 
         if (quiz.getUsesMathML()) {
             // Manually ask MathJax to render any MathML,
@@ -94,13 +94,15 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         }
     }
 
-    private static void addSection(@NotNull final Panel panelQuiz, final BigOQuizConstants constants, @NotNull final Quiz quiz, QuizSections quizSections, final String sectionId, final String sectionTitle) {
+    private static void addSection(@NotNull final Panel panelQuiz, final BigOQuizConstants constants, @NotNull final Quiz quiz, QuizSections quizSections, final QuizSections.Section section) {
         final Panel panelSection = new FlowPanel();
         panelSection.addStyleName("quiz-section");
         panelQuiz.add(panelSection);
 
+        final Widget sectionTitle = createTitleWidget(section);
         Utils.addHeaderToPanel(3, panelSection, sectionTitle);
 
+        final String sectionId = section.getId();
         final List<QuestionAndAnswer> questions = quiz.getQuestionsForSection(sectionId);
         if (questions == null) {
             Log.error("QuizListView: questions is null.");
@@ -173,7 +175,7 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         panelSection.add(panelSubSection);
 
         if (subSection != null) {
-            Widget subSectionTitle = createTitleWidget(subSection);
+            final Widget subSectionTitle = createTitleWidget(subSection);
             Utils.addHeaderToPanel(4, panelSubSection, subSectionTitle);
         }
 
