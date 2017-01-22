@@ -173,19 +173,7 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         panelSection.add(panelSubSection);
 
         if (subSection != null) {
-            // We can't use an Anchor with a null href - that creates a link to /null.
-            Widget subSectionTitle = null;
-            final String link = subSection.getLink();
-            if (StringUtils.isEmpty(link)) {
-                final InlineLabel label = new InlineLabel();
-                label.setText(subSection.getTitle());
-                subSectionTitle = label;
-            } else {
-                final Anchor anchor = new Anchor();
-                anchor.setText(subSection.getTitle());
-                anchor.setHref(link); //TODO: Sanitize this HTML that comes from our XML file.
-                subSectionTitle = anchor;
-            }
+            Widget subSectionTitle = createTitleWidget(subSection);
             Utils.addHeaderToPanel(4, panelSubSection, subSectionTitle);
         }
 
@@ -202,6 +190,24 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
 
             addQuestionAndAnswer(panelSubSection, constants, questionAndAnswer);
         }
+    }
+
+    @NotNull
+    private static Widget createTitleWidget(HasIdAndTitle section) {
+        // We can't use an Anchor with a null href - that creates a link to /null.
+        Widget title = null;
+        final String link = section.getLink();
+        if (StringUtils.isEmpty(link)) {
+            final InlineLabel label = new InlineLabel();
+            label.setText(section.getTitle());
+            title = label;
+        } else {
+            final Anchor anchor = new Anchor();
+            anchor.setText(section.getTitle());
+            anchor.setHref(link); //TODO: Sanitize this HTML that comes from our XML file.
+            title = anchor;
+        }
+        return title;
     }
 
     private static void addQuestionAndAnswer(final Panel panelSubSection, final BigOQuizConstants constants, final QuestionAndAnswer questionAndAnswer) {
