@@ -611,6 +611,27 @@
         </question>
     </section>
 
+    <!-- TODO: Put this in datastructures.xml ? -->
+    <section id="algorithms-on-linked-lists" answers_as_choices="true">
+        <title>Algorithms on Linked Lists</title>
+        <question id="algorithms-on-linked-lists-reverse">
+            <text>Reverse a linked list</text>
+            <answer>while (node) { next = node->next; node->next = prev; prev = node; node = next; }</answer>
+        </question>
+
+        <question id="algorithms-on-linked-lists-find-intersection">
+            <text>Find where two lists interesect.</text>
+            <answer>Discover the length of both lists. Use two pointers. Advance one by the difference. Step both forward until they match.</answer>
+        </question>
+
+        <question id="algorithms-on-linked-lists-find-cycle">
+            <text>Find a Cycle</text>
+            <link>https://en.wikipedia.org/wiki/Cycle_detection#Tortoise_and_hare</link>
+            <answer>Use both slow and fast pointers - one stepping once each time, and once stepping twice each time. If they are ever equal then there is a cycle. To find the start of the cycle, move fast back to the start and move it slowly until fast and slow are equal again. Check for a match before moving, in case the cycle is at the start.</answer>
+            <note>This is Floyd's Tortoise and Hare cycle-finding algorithm.</note>
+        </question>
+    </section>
+
 
     <!--
       Minimum Spanning Tree: Useful for identifying clusters.
