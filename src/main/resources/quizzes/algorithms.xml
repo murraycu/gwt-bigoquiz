@@ -569,14 +569,15 @@
         </question>
     </section>
 
-    <section id="algorithms-uses" answers_as_choices="true">
+    <section id="algorithms-on-arrays-uses" answers_as_choices="true">
         <title>Algorithms on Arrays: Uses</title>
-        <question id="algorithms-uses-max-subarray-with-empty">
+        <question id="algorithms-on-arrays-uses-max-subarray-with-empty">
             <text>Maximum profit when buying and selling at prices changing over time.</text>
             <answer>Kadane's Maximum subarray (with empty sets) algorithm.</answer>
+            <note>The empty subset lets us start at 0 again, allowing 0 profit when otherwise only losses would be possible.</note>
         </question>
 
-        <question id="algorithms-uses-max-subarray-without-empty">
+        <question id="algorithms-on-arrays-uses-max-subarray-without-empty">
             <text>Maximum rectangular subarray.</text>
             <link>http://www.geeksforgeeks.org/dynamic-programming-set-27-max-sum-rectangle-in-a-2d-matrix/</link>
             <answer>Kadane's Maximum subarray (without empty sets) algorithm.</answer>
