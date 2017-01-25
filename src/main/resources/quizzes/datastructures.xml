@@ -1073,6 +1073,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <text>Separate chaining (open hashing)</text>
                 <link>https://en.wikipedia.org/wiki/Hash_table#Separate_chaining</link>
                 <answer>Each bucket is independent, and has a list of entries with the same index.</answer>
+                <note>In a concurrent hash table, each list could have its own lock.</note>
             </question>
 
             <question id="datastructures-hash-tables-collision-resolution-open-addressing">
@@ -1102,7 +1103,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             <question id="datastructures-hash-tables-collision-resolution-advantages-chaining">
                 <text>Separate chaining (open hashing)</text>
                 <link>https://en.wikipedia.org/wiki/Hash_table#Separate_chaining</link>
-                <answer>Advantages: Simple implementation. Avoids rehashing. Disadvantage: Pointer chasing causes cache misses. Extra space.</answer>
+                <answer>Advantages: Simple implementation. Avoids rehashing. Each list can have its own lock in a concurrent hash table. Disadvantage: Pointer chasing causes cache misses. Extra space.</answer>
             </question>
 
             <question id="datastructures-hash-tables-collision-resolution-advantages-open-addressing">
@@ -1152,6 +1153,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <text>Hopscotch hashing</text>
                 <link>https://en.wikipedia.org/wiki/Hopscotch_hashing</link>
                 <answer>The key is always in the neighborhood of the original bucket. If necessary, existing items are moved, though without moving them outside of their neighbourhoods.</answer>
+                <note>This is suitable for a concurrent hash table because neighbourhoods can be locked individually, instead of having one lock on the whole table.</note>
             </question>
         </subsection>
 
@@ -1181,7 +1183,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             <question id="datastructures-hash-tables-open-addressing-strategy-advantage-hopscotch-hashing">
                 <text>Hopscotch hashing</text>
                 <link>https://en.wikipedia.org/wiki/Hopscotch_hashing</link>
-                <answer>Works well even when the load factor grows beyond 0.9. Allows use of simple hash function.</answer>
+                <answer>Works well even when the load factor grows beyond 0.9. Allows use of simple hash function. Neighbourhoods can be locked separately in a concurrent hash table.</answer>
             </question>
         </subsection>
 
