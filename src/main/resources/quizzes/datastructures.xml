@@ -806,19 +806,19 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <link>https://en.wikipedia.org/wiki/Adjacency_matrix</link>
                 <answer>For any 2 nodes, provides the edge, if any, that connects them.</answer>
             </question>
+            -->
 
             <question id="datastructures-uses-singly-linked-list">
                 <text>Singly Linked List</text>
                 <link>https://en.wikipedia.org/wiki/Linked_list#Singly_linked_list</link>
-                <answer>Allows forward traversal of the items in the list.</answer>
+                <answer>Buckets in a separate chaining hash table.</answer>
             </question>
 
             <question id="datastructures-uses-doubly-linked-list">
                 <text>Doubly Linked List</text>
                 <link>https://en.wikipedia.org/wiki/Doubly_linked_list</link>
-                <answer>Allows forward and backward traversal of the items in the list.</answer>
+                <answer>A LRU cache. Implement the cache with a doubly-linked list as a queue, and store pointers to the nodes in the hash table. Items can be removed from the queue via that single node pointer.</answer>
             </question>
-            -->
 
             <question id="datastructures-uses-hash-table">
                 <text>Hash Table</text>
