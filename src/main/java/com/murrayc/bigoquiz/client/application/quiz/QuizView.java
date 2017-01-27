@@ -282,6 +282,14 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
             labelNote.addStyleName("quiz-note");
             paraNote.add(labelNote);
         }
+
+        final String videoUrl = question.getVideoUrl();
+        if (videoUrl != null) {
+            final Anchor anchor = new Anchor();
+            anchor.setText(constants.video());
+            anchor.setHref(videoUrl);
+            panelQuestionAnswer.add(anchor);
+        }
     }
 
     private static @NotNull Map<String, List<QuestionAndAnswer>> groupQuestionsBySubSection(final List<QuestionAndAnswer> questions) {
