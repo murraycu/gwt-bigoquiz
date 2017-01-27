@@ -41,6 +41,7 @@ public class QuizLoader {
     private static final String NODE_CHOICE = "choice";
     private static final String NODE_DEFAULT_CHOICES = "default_choices";
     private static final String NODE_NOTE = "note";
+    private static final String NODE_VIDEO_URL = "video_url";
     private static final int MAX_CHOICES_FROM_ANSWERS = 6;
 
     public static void setSectionDefaultChoicesFromAnswers(final Quiz quiz, final String sectionId) {
@@ -327,6 +328,13 @@ public class QuizLoader {
             noteText = noteElement.getTextContent();
         }
 
+        //This is optional:
+        String videoUrl = null;
+        @Nullable final Element videoUrlElement = getElementByName(element, NODE_VIDEO_URL);
+        if (videoUrlElement != null) {
+            videoUrl = videoUrlElement.getTextContent();
+        }
+
         if (reverse) {
             //Swap the question and answer text:
             final String temp = questionText;
@@ -341,7 +349,7 @@ public class QuizLoader {
         }
 
         return new QuestionAndAnswer(id, sectionID, subSectionId, new Question.Text(questionText, questionTextIsHtml),
-                questionLink, new Question.Text(answerText, answerTextIsHtml), choices, noteText);
+                questionLink, new Question.Text(answerText, answerTextIsHtml), choices, noteText, videoUrl);
     }
 
     private static <T> void swap(T a, T b) {
