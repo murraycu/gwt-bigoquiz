@@ -665,7 +665,7 @@
             <text>Single Source Shortest Path (weighted, directed, acyclic - weighted DAG)</text>
             <link>https://en.wikipedia.org/wiki/Shortest_path_problem#Directed_acyclic_graphs</link>
             <!-- http://www.geeksforgeeks.org/shortest-path-for-directed-acyclic-graphs/ -->
-            <!-- https://www.youtube.com/watch?v=ePqBaDRHkdk -->
+            <video_url>https://www.youtube.com/watch?v=ePqBaDRHkdk</video_url>
             <!-- Page 491 of TADM. -->
             <!-- TODO: O(|V| + |E|) -->
             <answer>Topological sort. Then Find minimum distance to adjacent nodes by examining nodes in topological order, starting with source, until destination.</answer>

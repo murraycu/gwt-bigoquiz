@@ -205,6 +205,7 @@
         <question id="string-algorithms-misc-manachers-algorithm">
             <text>Manacher's Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Longest_palindromic_substring#Manacher.27s_algorithm</link>
+            <video_url>https://www.youtube.com/watch?v=V-sEwsca1ak</video_url>
             <answer>Longest Palindromic Substring</answer>
             <note>This is linear O(n).</note>
             <!--
@@ -214,7 +215,6 @@
             Start checking again from the following position with the largest such known minimum palindrome.
             For even-length palindromes, either consider the center to be between characters, or insert a $ between characters and reuse the same algorithm, dividing the answer by 2.
             -->
-            <!-- Tushar Roy's walkthrough: https://www.youtube.com/watch?v=V-sEwsca1ak -->
         </question>
         <!-- TODO: Longest Palindromic Subsequence -->
     </section>

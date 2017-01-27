@@ -187,10 +187,11 @@
             </question>
 
             <!-- See "How does Binary Indexed Tree work?" here: http://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/
-            and Tushar Roy's walk-through: https://www.youtube.com/watch?v=CWDQJGaN1gY -->
+            and Tushar Roy's walk-through, in the video_url. -->
             <question id="datastructures-description-binary-indexed-tree">
                 <text>Binary Indexed Tree (Fenwick Tree)</text>
                 <link>https://en.wikipedia.org/wiki/Fenwick_tree</link>
+                <video_url>https://www.youtube.com/watch?v=CWDQJGaN1gY</video_url>
                 <answer>Stores prefix sums (running totals). Has O(n log(n)) construction time, O(log(n)) update time, and O(log(n)) retrieval time.</answer>
             </question>
             <!-- Note: stores items-count per index, and optimized for "how many items are there between index m and n" queries.
@@ -201,6 +202,7 @@
                 <link>https://en.wikipedia.org/wiki/Segment_tree</link>
                 <answer>Stores intervals or segments and allows efficient searching for intervals that contain a certain point, or to query for a range sum or range minimum.</answer>
                 <!-- TODO: Find a clear, but more general, description, without just mentioning the specific sum and minimum range queries. -->
+                <video_url>https://youtu.be/ZBHKZF5w4YU</video_url>
             </question>
 
             <question id="datastructures-description-interval-tree">
@@ -444,10 +446,10 @@
             <question id="datastructures-implementation-segment-tree">
                 <text>Segment Tree</text>
                 <link>https://en.wikipedia.org/wiki/Segment_tree</link>
+                <video_url>https://www.youtube.com/watch?v=ZBHKZF5w4YU</video_url>
                 <answer>Store the node values as an array, as in a binary heap, using the start of the range as the node's key. Each node summarizes its child nodes.</answer>
                 <!-- TODO: Find a clear, but more general, description, without just mentioning the specific sum and minimum range queries. -->
                 <!-- TODO: Describe the recursion properly, ideally not just for a range minimum query. -->
-                <!-- Tushar Roy's walkthrough: https://www.youtube.com/watch?v=ZBHKZF5w4YU -->
             </question>
 
             <question id="datastructures-implementation-interval-tree">
@@ -465,9 +467,10 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <link>https://en.wikipedia.org/wiki/Range_tree</link>
                 <answer>A complete balanced binary tree with points in the nodes. Examine right parents of the start and left parents of the end, listing all the parent nodes, and their subtrees, to the right of the start and to the left of the end. Each subtree has a range tree of the points by another dimension.</answer>
                 <note>Range trees have faster query times than k-d trees, but use more space.</note>
+                <video_url>https://www.youtube.com/watch?v=xVka6z1hu-I</video_url>
             </question>
             <!-- https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-design-and-analysis-of-algorithms-spring-2015/lecture-notes/MIT6_046JS15_lec09.pdf
-            and https://www.youtube.com/watch?v=xVka6z1hu-I -->
+            -->
             <!-- TODO: Is this an inorder traversal from start to end? -->
 
             <question id="datastructures-implementation-order-statistic-tree">
@@ -481,7 +484,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <link>https://en.wikipedia.org/wiki/Finger_search_tree</link>
                 <answer>A level-linked 2-3 tree in which each node has links to next and previous nodes on the same level, and each node maintains the min and max in its subtree.</answer>.
             </question>
-            <!-- https://www.youtube.com/watch?v=xVka6z1hu-I -->
+            <video_url>https://www.youtube.com/watch?v=xVka6z1hu-I</video_url>
         </subsection>
 
         <subsection id="datastructures-implementations-others">
