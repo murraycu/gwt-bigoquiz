@@ -62,6 +62,8 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private final Button nextQuestionButton = new Button(constants.nextButton());
     private final Label resultLabel = new Label();
     private final Label noteLabel = new Label();
+    private final Anchor videoAnchor = new Anchor(constants.video());
+    private boolean hasVideoUrl = false;
     @NotNull
     private State state = State.WAITING_INVALID;
     private boolean multipleChoice = false;
@@ -151,6 +153,9 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         resultPanel.add(noteLabel);
         noteLabel.addStyleName("note-label");
+
+        resultPanel.add(videoAnchor);
+        videoAnchor.addStyleName("video-anchor");
 
         nextQuestionButton.addClickHandler(new ClickHandler() {
             @Override
@@ -415,6 +420,15 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         } else {
             noteLabel.setText(note);
         }
+
+        final String videoUrl = question.getVideoUrl();
+        if (StringUtils.isEmpty(videoUrl)) {
+            videoAnchor.setHref("");
+            hasVideoUrl = false;
+        } else {
+            videoAnchor.setHref(videoUrl);
+            hasVideoUrl = true;
+        }
     }
 
     private void buildChoices(@Nullable Question question) {
@@ -512,6 +526,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 nextQuestionButton.setVisible(false);
                 resultLabel.setVisible(false);
                 noteLabel.setVisible(false);
+                setAnchorVisibility(videoAnchor, false);
                 break;
             }
             case DONT_KNOW_ANSWER: {
@@ -526,6 +541,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 //resultLabel.setVisible(true);
                 resultLabel.setVisible(false); //Showing "Don't Know" is annoying to the user.
                 noteLabel.setVisible(false);
+                setAnchorVisibility(videoAnchor, false);
                 break;
             }
             case WAITING_AFTER_WRONG_ANSWER: {
@@ -535,6 +551,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 resultLabel.setText(constants.wrongLabel());
                 resultLabel.setVisible(true);
                 noteLabel.setVisible(false);
+                setAnchorVisibility(videoAnchor, false);
 
                 showWrongAnswerInChoices(choiceSelected);
                 break;
@@ -547,6 +564,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 resultLabel.setText(constants.wrongLabel());
                 resultLabel.setVisible(true);
                 noteLabel.setVisible(true);
+                setAnchorVisibility(videoAnchor, hasVideoUrl);
 
                 showWrongAnswerInChoices(choiceSelected);
                 break;
@@ -562,8 +580,25 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 resultLabel.setText(constants.correctLabel());
                 resultLabel.setVisible(true);
                 noteLabel.setVisible(true);
+                setAnchorVisibility(videoAnchor, hasVideoUrl);
             }
         }
+    }
+
+    /** Set the visibility of the Anchor,
+     * always making it invisible if it has no link.
+     *
+     * @param anchor
+     * @param visible
+     */
+    private void setAnchorVisibility(final Anchor anchor, boolean visible) {
+        // TODO: Anchor.getHref() never returns an empty string,
+        // so this doesn't actually work:
+        if (visible && StringUtils.isEmpty(anchor.getHref())) {
+            visible = false;
+        }
+
+        anchor.setVisible(visible);
     }
 
     private void scrollWidgetIntoView(final Widget widget) {
