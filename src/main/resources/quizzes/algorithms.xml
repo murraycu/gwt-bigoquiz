@@ -452,14 +452,17 @@
     <!-- Types of algorithms: https://www.cs.princeton.edu/~wayne/kleinberg-tardos/ -->
     <section id="algorithms-types" answers_as_choices="true">
         <title>Types of Algorithms</title>
+
         <question id="type-dijkstra">
             <text>Dijkstra's shortest path algorithm</text>
+            <link>https://en.wikipedia.org/wiki/Dijkstra's_algorithm</link>
             <answer>Greedy</answer>
         </question>
 
         <question id="type-huffman-codes">
             <!-- TODO: Actual name? -->
             <text>Algorithm for building Huffman Codes</text>
+            <link>https://en.wikipedia.org/wiki/Huffman_coding#Basic_technique</link>
             <answer>Greedy</answer>
             <note>Bottom-up. Merge items (or combined items) with least frequency, at each step, giving the subtree the sum of their frequencies. Repeat.</note>
         </question>
@@ -470,6 +473,7 @@
 
         <question id="type-make-change-canonical">
             <text>Make change (with canonical coins)</text>
+            <link>https://en.wikipedia.org/wiki/Change-making_problem#Greedy_method</link>
             <answer>Greedy</answer>
         </question>
 
@@ -492,21 +496,25 @@
 
         <question id="type-quicksort">
             <text>Quicksort</text>
+            <link>https://en.wikipedia.org/wiki/Quicksort</link>
             <answer>Divide and Conquer</answer>
         </question>
 
         <question id="type-mergesort">
             <text>Mergesort</text>
+            <link>https://en.wikipedia.org/wiki/Merge_sort</link>
             <answer>Divide and Conquer</answer>
         </question>
 
         <question id="type-quickselect">
             <text>QuickSelect</text>
+            <link>https://en.wikipedia.org/wiki/Quickselect</link>
             <answer>Divide and Conquer</answer>
         </question>
 
         <question id="type-strassen">
             <text>Strassen Matrix Multiplication</text>
+            <link>https://en.wikipedia.org/wiki/Strassen_algorithm</link>
             <answer>Divide and Conquer</answer>
         </question>
 
