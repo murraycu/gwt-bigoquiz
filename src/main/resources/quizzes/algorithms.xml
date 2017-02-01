@@ -557,6 +557,11 @@
             <!-- TODO: This seems like a greedy algorithm, making local choices to achieve a global optimum, but it is not widely mentioned as a greedy algorithm. -->
         </question>
 
+        <question id="type-activity-selection-problem">
+            <text>Activity Selection Problem (Maximum number of activities with start and end times)</text>
+            <link>https://en.wikipedia.org/wiki/Activity_selection_problem</link>
+            <answer>Greedy</answer>
+        </question>
 
         <!--
         DP Algorithm chooses roots of left and right subtrees of subproblems. O(n^3) or O(n^2) if we check only between the left and right roots:
