@@ -6,7 +6,7 @@
         <title>2 to the n</title>
         <question id="2-to-the-1">
             <text>2^1</text>
-            <answer>4</answer>
+            <answer>2</answer>
         </question>
         <question id="2-to-the-2">
             <text>2^2</text>
