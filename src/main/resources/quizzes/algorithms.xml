@@ -421,7 +421,7 @@
         </question>
 
         <question id="polynomial-or-np-complete-knapsack-problem">
-            <text>Knapsack Problem</text>
+            <text>(O-1) Knapsack Problem</text>
             <link>https://en.wikipedia.org/wiki/Knapsack_problem</link>
             <answer>NP-Complete</answer>
             <note>This is solvable by dynamic programming. The normal Knapsack problem is NP-Complete, and solvable via dynamic programming.</note>
