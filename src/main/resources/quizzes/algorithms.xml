@@ -549,6 +549,15 @@
             <answer>Dynamic Programming</answer>
             <note>Huffmann codes, which seem similar, can be built with a greedy algorithm.</note>
         </question>
+
+        <question id="type-boyer-moore-voting-algorithm">
+            <text>Boyer-Moore Voting Algorithm (Find majority element)</text>
+            <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm</link>
+            <answer>Greedy</answer>
+            <!-- TODO: This seems like a greedy algorithm, making local choices to achieve a global optimum, but it is not widely mentioned as a greedy algorithm. -->
+        </question>
+
+
         <!--
         DP Algorithm chooses roots of left and right subtrees of subproblems. O(n^3) or O(n^2) if we check only between the left and right roots:
         https://stackoverflow.com/questions/16987670/dynamic-programming-why-knuths-improvement-to-optimal-binary-search-tree-on2
