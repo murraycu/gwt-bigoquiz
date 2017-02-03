@@ -163,6 +163,78 @@
         -->
     </section>
 
+    <section id="greedy-v-dp" and_reverse="true">
+        <title>Greedy versus Dynamic Programming</title>
+        <!-- Page 424 and 425 of CLRS. -->
+
+        <subsection id="greedy-v-dp-properties" answers_as_choices="true">
+            <title>Problem Properties</title>
+
+            <question id="greedy-v-dp-properties-greedy">
+                <text>Greedy Algorithms</text>
+                <link>https://en.wikipedia.org/wiki/Greedy_algorithm</link>
+                <answer>Have optimal substructure and can make locally optimal choices).</answer>
+                <note>Being able to make locally optimal choices to achieve a globally optimum solution is the Greedy Choice Property.</note>
+            </question>
+
+            <question id="greedy-v-dp-properties-dp">
+                <text>Dynamic Programming Algorithms</text>
+                <link>https://en.wikipedia.org/wiki/Dynamic_programming</link>
+                <answer>Have optimal substructure but cannot make locally optiomal choices.</answer>
+            </question>
+        </subsection>
+
+        <subsection id="greedy-v-dp-subproblem-sequence" answers_as_choices="true">
+            <title>Subproblem Sequence</title>
+
+            <question id="greedy-v-dp-sequence-greedy">
+                <text>Greedy Algorithms</text>
+                <link>https://en.wikipedia.org/wiki/Greedy_algorithm</link>
+                <answer>Choose a subproblem, solve it and then choose the next subproblem to solve, for which there is usually only one choice.</answer>
+            </question>
+
+            <question id="greedy-v-dp-sequence-dp">
+                <text>Dynamic Programming Algorithms</text>
+                <link>https://en.wikipedia.org/wiki/Dynamic_programming</link>
+                <answer>Solve a subproblem by using the results of previously-computed subproblems.</answer>
+            </question>
+        </subsection>
+
+        <!-- TODO:
+        <subsection id="greedy-v-dp-proofs" answers_as_choices="true">
+            <title>Proofs</title>
+
+            <question id="greedy-v-dp-proofs-greedy">
+                <text>Greedy Algorithms</text>
+                <link>https://en.wikipedia.org/wiki/Greedy_algorithm</link>
+                <answer>Induction: An optimal solution to a subproblem, plus a choice, leads to an optimal solution to the original problem. TODO: Or an exchange argument.</answer>
+            </question>
+
+            <question id="greedy-v-dp-proofs-dp">
+                <text>Dynamic Programming Algorithms</text>
+                <link>https://en.wikipedia.org/wiki/Dynamic_programming</link>
+                <answer>TODO: Prove optimality of substructure?.</answer>
+            </question>
+        </subsection>
+        -->
+
+        <subsection id="greedy-v-dp-recalculation" answers_as_choices="true">
+            <title>Recalculation</title>
+
+            <question id="greedy-v-dp-recalculation-greedy">
+                <text>Greedy Algorithms</text>
+                <link>https://en.wikipedia.org/wiki/Greedy_algorithm</link>
+                <answer>Never reconsiders previously-calculated subproblems.</answer>
+            </question>
+
+            <question id="greedy-v-dp-recalculation-dp">
+                <text>Dynamic Programming Algorithms</text>
+                <link>https://en.wikipedia.org/wiki/Dynamic_programming</link>
+                <answer>Reuses previously-calculated subproblems.</answer>
+            </question>
+        </subsection>
+    </section>
+
     <section id="p-np-etc" answers_as_choices="true">
         <title>P, NP, etc</title>
         <question id="p-no-etc-p">
