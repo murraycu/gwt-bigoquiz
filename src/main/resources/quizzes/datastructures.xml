@@ -1104,6 +1104,25 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <answer>Delete the entire tree, by deleting children before parents. Generate a postfix representation of an expression tree.</answer>
             </question>
         </subsection>
+
+        <subsection id="datastructures-tree-lca-and-rmq" answers_as_choices="true">
+            <title>LCA (Lowest Common Ancestor) and RMQ (Range Minimum Query) Reduction</title>
+            <link>https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/</link>
+
+            <question id="datastructures-tree-lca-and-rmq-lca">
+                <text>LCA via RMQ</text>
+                <link>https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/#Reduction%20from%20LCA%20to%20RMQ</link>
+                <answer>Build the Euler tour of the tree, storing the level of each node visited and storing the first occurrence of each node. Do RMQ on the levels array in the range defined by the first appearances of each node. Then use the index of the RMQ to find the node in the Euler tour.</answer>
+                <video_url>https://www.youtube.com/watch?v=0rCFkuQS968</video_url>
+            </question>
+
+            <question id="datastructures-tree-lca-and-lca-rmq">
+                <text>RMQ via LCA</text>
+                <link>https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/#From%20RMQ%20to%20LCA</link>
+                <answer>Build a Cartesian Tree of the array. The LCA of nodes in this tree is the RMQ of the values in the array.</answer>
+                <video_url>https://www.youtube.com/watch?v=0rCFkuQS968</video_url>
+            </question>
+        </subsection>
     </section>
 
 

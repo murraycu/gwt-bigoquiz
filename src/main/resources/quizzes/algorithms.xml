@@ -671,14 +671,7 @@
     Median Finding -->
 
 
-    <!--
-      https://www.youtube.com/watch?v=0rCFkuQS968
-      Range Minimum Query (RMQ): Discover index of minimum value in a range of values:
-        Put the values in a cartesian tree by splitting at the smallest values, recursively. Then the LCA of any two nodes is the RMQ.
-        (You would need to keep an array associating each index with a tree node.)
-        Can construct cartesian tree in (amortized) O(n) time by adding each node and, if necessary, walking up and splitting, making children into left nodes.
-        The RMQ of indices in the the array also tells you the LCA of nodes in the tree.
-        Use Euler Tour (in order traversal) to get RMQ array whose values only differ by 1.
+    <!--.
 
       Level Ancestor (LA): Find kth parent of node in less than O(n) time.
        Long-path decomposition:
