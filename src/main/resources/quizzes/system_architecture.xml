@@ -65,17 +65,32 @@
             <answer>The various things that can go wrong and how the overall service will behave.</answer>
             <note>For instance, when a machine dies, when a rack fails, when a cluster fails, when a datacenter fails, when a network fails between datacenters.</note>
         </question>
-        <!-- TODO: Single point of failure. Unavailable dependencies. Request Deadlines. Load Shedding -->
+        <!-- TODO: Single point of failure. Unavailable dependencies. Request Deadlines. Deadline Propagation -->
 
         <question id="terminology-load-balancing">
             <text>Load Balancing</text>
-            <answer>TODO</answer>
+            <link>https://en.wikipedia.org/wiki/Load_balancing_(computing)</link>
+            <answer>Distributes incoming network traffic across several backend servers.</answer>
             <note>For instance, using DNS, or at the virtual IP address.</note>
+        </question>
+
+        <question id="terminology-load-shedding">
+            <text>Load Shedding</text>
+            <link>https://en.wikipedia.org/wiki/Load_Shedding</link>
+            <answer>Ignore some requests to reduce load on a server so it may serve at least some requests.</answer>
+        </question>
+
+        <question id="terminology-graceful-degradation">
+            <text>Graceful Degradation</text>
+            <link>https://en.wikipedia.org/w/index.php?title=Graceful_degradation</link>
+            <answer>Reduce the amount of work to be performed for each request.</answer>
         </question>
 
         <question id="terminology-rate-limiting">
             <text>Rate Limiting</text>
-            <answer>TODO</answer>
+            <link>https://en.wikipedia.org/wiki/Rate_limiting</link>
+            <answer>Controls the rate of traffic.</answer>
+            <note>Can happen at reverse proxies or at the load balancers.</note>
         </question>
 
         <question id="terminology-sharding">
@@ -85,7 +100,8 @@
 
         <question id="terminology-rollback">
             <text>Rollback</text>
-            <answer>TODO</answer>
+            <link>https://en.wikipedia.org/wiki/Rollback_(data_management)</link>
+            <answer>Returning data or software to previous states or versions.</answer>
         </question>
 
         <question id="terminology-exponential-backoff">
@@ -104,14 +120,20 @@
 
         <question id="terminology-vertical-scaling">
             <text>Vertical Scaling</text>
-            <link></link>
+            <link>https://en.wikipedia.org/wiki/Scalability#Horizontal_and_vertical_scaling</link>
             <answer>Add resources (CPU, RAM, disk) to existing servers.</answer>
         </question>
 
-        <question id="terminology-vertical-scaling">
+        <question id="terminology-horizontal-scaling">
             <text>Horizontal Scaling</text>
-            <link></link>
+            <link>https://en.wikipedia.org/wiki/Scalability#Horizontal_and_vertical_scaling</link>
             <answer>Add servers.</answer>
+        </question>
+
+        <question id="terminology-cascading-failure">
+            <text>Cascading Failure</text>
+            <link>https://en.wikipedia.org/wiki/Cascading_failure</link>
+            <answer>When a failure triggers failures of successive parts of a system.</answer>
         </question>
 
     </section>
@@ -181,15 +203,9 @@
 
     Paxos, Kubernetes/Borg
 
-    CAP
-
-    exponential backoff and jitter
-
     Subsetting
     Throttling
     Round Robin
-    Load Shedding
-    Graceful Degradation
 
     Cascading Failures:
      - Server Overload
