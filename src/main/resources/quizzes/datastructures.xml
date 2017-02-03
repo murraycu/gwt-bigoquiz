@@ -887,21 +887,64 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <link>https://en.wikipedia.org/wiki/Tree_traversal#Pre-order</link>
                 <answer>List the nodes first from the root down the left to the leaf, then back up from left to right.</answer>
             </question>
-            <!-- Uses: Duplicate a tree. Build a prefix expression. -->
 
             <question id="datastructures-tree-operations-bst-in-order-traversal">
                 <text>In-Order Traversal</text>
                 <link>https://en.wikipedia.org/wiki/Tree_traversal#In-order</link>
                 <answer>Lists the items in sorted order.</answer>
             </question>
-            <!-- Uses: List nodes in order -->
 
             <question id="datastructures-tree-operations-bst-post-order-traversal">
                 <text>Post-Order Traversal</text>
                 <link>https://en.wikipedia.org/wiki/Tree_traversal#Post-order</link>
                 <answer>List the nodes from the bottom of each path up to the root, listing shared nodes last, from left to right.</answer>
             </question>
-            <!-- Use: wikipedia says: Post-order traversal while deleting or freeing nodes and values can delete or free an entire binary tree. It can also generate a postfix representation of a binary tree. -->
+        </subsection>
+
+        <subsection id="datastructures-tree-operations-bst-traversal-roots-position" answers_as_choices="true">
+            <title>Binary Search Tree: Traversal: Positions of roots</title>
+            <link>https://en.wikipedia.org/wiki/Binary_search_tree#Operations</link>
+
+            <question id="datastructures-tree-operations-bst-pre-order-traversal-roots-position">
+                <text>Pre-Order Traversal</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#Pre-order</link>
+                <answer>Roots appear first.</answer>
+            </question>
+
+            <question id="datastructures-tree-operations-bst-in-order-traversal-roots-position">
+                <text>In-Order Traversal</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#In-order</link>
+                <answer>Roots appear in order.</answer>
+            </question>
+
+            <question id="datastructures-tree-operations-bst-post-order-traversal-roots-position">
+                <text>Post-Order Traversal</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#Post-order</link>
+                <answer>Roots appear last.</answer>
+            </question>
+        </subsection>
+
+        <subsection id="datastructures-tree-operations-bst-construction" answers_as_choices="true">
+            <title>Binary Search Tree: Construction in liner time.</title>
+
+            <question id="datastructures-tree-operations-bst-construction-from-preorder">
+                <text>From a pre-order traversal</text>
+                <link>http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/</link>
+                <answer>Recursively build. Use the first item as the root if it is within the expected min/max (and advance), then build the left tree, using the root to specify its min/max (and advance), then build the right tree, using the root to specify its min/max (and advance).</answer>
+            </question>
+
+            <question id="datastructures-tree-operations-construction-from-inorder">
+                <text>From an in-order traversal</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#In-order</link>
+                <answer>Discover the overall count. Then recursively build the left tree (and advance), then the root (and advance), then the right tree (and advance). By halving the count each time, and subtracting 1 for the root.</answer>
+                <note>This technique proceeds regularly through the array, so it is also suitable for a linked list.</note>
+            </question>
+
+            <question id="datastructures-tree-operations-construction-from-postorder">
+                <text>From a post-order traversal</text>
+                <link>http://www.geeksforgeeks.org/construct-a-binary-search-tree-from-given-postorder/</link>
+                <answer>Discover the overall count. Recursively build. Use the last item as the root (and advance the root pointer backwards), then build the left tree, using the root to specify its min/max (and advance the main pointer forwards), then build the right tree, using the root to specify its min/max (and advance the main pointer forwards).</answer>
+            </question>
         </subsection>
 
         <subsection id="datastructures-tree-operations-bst-others" answers_as_choices="true">
