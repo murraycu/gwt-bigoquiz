@@ -597,6 +597,12 @@
             <text>Maximum Subarray (not allowing an empty subarray)</text>
             <answer>Calculate the sum so far, not allowing the sum to be less than the current item. Maintain the maximum. (Kadane's Algorithm)</answer>
         </question>
+
+        <question id="algorithms-on-arrays-rmq">
+            <text>Smallest value in a range (RMQ, Range Minimum Query)</text>
+            <link>https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/</link>
+            <answer>Use a segment tree augmented with minimums. Or do LCA on a cartesian tree built from the array.</answer>
+        </question>
     </section>
 
     <section id="algorithms-on-arrays-uses" answers_as_choices="true">
@@ -612,6 +618,13 @@
             <link>http://www.geeksforgeeks.org/dynamic-programming-set-27-max-sum-rectangle-in-a-2d-matrix/</link>
             <answer>Kadane's Maximum subarray (without empty sets) algorithm.</answer>
             <note>Try every group of columns, finding the rows within that have the maximum subarray.</note>
+        </question>
+
+        <question id="algorithms-on-arrays-uses-rmq">
+            <text>Smallest value in a range (RMQ, Range Minimum Query)</text>
+            <link>https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/</link>
+            <answer>Find the LCA of 2 nodes in a tree, via an Euler Tour. Find the LCP (longest common prefix).</answer>
+            <!-- TODO: Properly understand and explain the use of RMQ to do LCP: https://en.wikipedia.org/wiki/Range_minimum_query#Computing_the_longest_common_prefix_in_a_string -->
         </question>
 
         <!-- Gas Station Problem: Find the first position that does not take the sum to minus. -->
