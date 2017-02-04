@@ -675,6 +675,19 @@
         </question>
     </section>
 
+    <!-- TODO: Study this properly: http://www.partow.net/programming/hashfunctions/index.html
+    <section id="algorithms-hash-functions" answers_as_choices="true">
+        <title>Hash Functions</title>
+        <link>https://en.wikipedia.org/wiki/Hash_function</link>
+
+        <question id="algorithms-hash-functions-multiply-and-modulo">
+            <text>Multiply and modulo</text>
+            <answer>hash = (hash * R + character) % Q, where R is the alphabet size and Q is a large prime.</answer>
+            <note>This is suitable for a rolling hash. See the Rabin-Karp substring search algorithm.</note>
+        </question>
+    </section>
+    -->
+
 
     <!--
       Minimum Spanning Tree: Useful for identifying clusters.
@@ -736,13 +749,8 @@
       subset range:
         TODO: Modification of mergesort.
         TODO: Use of Fenwick Tree?
-      2-sum: Loop over n, checking in a hash table for the other half of the pair. O(n).
-        Sedgewick's Algorithms book says it's O(n log(n)), using binary search after sorting, which would at least use constant space.
-      3-sum: Loop over n, loop over n,  checking in a hash table for the third part of the triple.
-        Sedgewick's Algorithms book says it's O(n^2 log(n)), using binary search after sorting, which would at least use constant space.
-      -->
 
-    <!-- Get smallest k items in O(log(n)) time: quickselect.
+         Get smallest k items in O(log(n)) time: quickselect.
          Get largest k items in O(log(n)) time: quickselect.
          Get items in range with quickselect?
      -->
