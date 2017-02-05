@@ -48,14 +48,6 @@
             <answer>A prime number that is one less than a power of two.</answer>
         </question>
 
-        <!-- TODO:
-        <question id="fmtgp-numbers-fermat-prime">
-            <text>Fermat Number</text>
-            <link>https://en.wikipedia.org/wiki/Fermat_number</link>
-            <answer></answer>
-        </question>
-        -->
-
         <question id="fmtgp-numbers-fermat-prime">
             <text>Fermat Prime</text>
             <link>https://en.wikipedia.org/wiki/Fermat_number#Generalized_Fermat_primes</link>
@@ -174,6 +166,62 @@
         </question>
     </section>
 
+    <section id="fmtgp-properties-of-operations" answers_as_choices="true" and_reverse="true">
+        <title>Properties of Operations</title>
+
+        <question id="fmtgp-properties-of-operations-associative">
+            <text>Associative</text>
+            <link>https://en.wikipedia.org/wiki/Associative_property</link>
+            <answer>Grouping can change. For instance, addition: (a + b) + c == a + (b + c).</answer>
+        </question>
+
+        <question id="fmtgp-properties-of-operations-commutative">
+            <text>Commutative</text>
+            <link>https://en.wikipedia.org/wiki/Commutative_property</link>
+            <answer>Order can change. For instance, addition: a + b == b + a.</answer>
+        </question>
+
+        <question id="fmtgp-properties-of-operations-distributive">
+            <text>Distributive</text>
+            <link>https://en.wikipedia.org/wiki/Distributive_property</link>
+            <answer>Operations can be applied to members of a group. For instance, multiplication over addition: a × (b + c)  =  a × b + a × c.</answer>
+        </question>
+
+        <question id="fmtgp-properties-of-operationstransitive">
+            <text>Transitive</text>
+            <link>https://en.wikipedia.org/wiki/Transitive_relation</link>
+            <answer>a related to b and b related to c implies a related to c. For instance, less than: If a &lt; b and b &lt; c, then a &lt; c.</answer>
+        </question>
+
+        <question id="fmtgp-properties-of-operations-reflexive">
+            <text>Reflexive</text>
+            <link>https://en.wikipedia.org/wiki/Reflexive_relation</link>
+            <answer>Related to itself. For instance, equality: a == a.</answer>
+        </question>
+
+        <question id="fmtgp-properties-of-operations-symmetric">
+            <text>Symmetric</text>
+            <link>https://en.wikipedia.org/wiki/Symmetric_relation</link>
+            <answer>Related in both directions. For instance, equality: if a == b then b == a.</answer>
+        </question>
+    </section>
+
+    <section id="fmtgp-operations" answers_as_choices="true" and_reverse="true">
+        <title>Operations</title>
+
+        <question id="fmtgp-operations-additive">
+            <text>Addition: ⊕</text>
+            <link>https://en.wikipedia.org/wiki/Direct_sum</link>
+            <answer>Associative, Commutative</answer>
+        </question>
+
+        <question id="fmtgp-operations-multiplicative">
+            <text>Multiplicative: ⊗</text>
+            <link>https://en.wikipedia.org/wiki/Tensor_product</link>
+            <answer>Associative, Commutative, Distributive (over addition).</answer>
+        </question>
+    </section>
+
     <section id="fmtgp-groups" answers_as_choices="true">
         <title>Groups</title>
 
@@ -243,8 +291,135 @@
             <link>https://en.wikipedia.org/wiki/Lagrange's_theorem_(group_theory)</link>
             <answer>For any finite group G, the order (number of elements) of every subgroup H of G divides the order of G.</answer>
         </question>
-        
     </section>
+
+    <section id="fmtgp-symbols">
+        <title>Symbols</title>
+        <link>https://en.wikipedia.org/wiki/List_of_mathematical_symbols</link>
+
+        <question id="fmtgp-symbols-integers">
+            <text>ℤ</text>
+            <link>https://en.wikipedia.org/wiki/Integer</link>
+            <answer>Integers</answer>
+            <note>A number that can be written without a fractional component. Z for Zahlen, the German word for numbers.</note>
+        </question>
+
+        <question id="fmtgp-symbols-natural-numbers">
+            <text>ℕ</text>
+            <link>https://en.wikipedia.org/wiki/Natural_number</link>
+            <answer>Natural Numbers</answer>
+            <note>Numbers used for counting (cardinal numbers) and ordering (ordinal numbers).</note>
+        </question>
+
+        <question id="fmtgp-symbols-real-numbers">
+            <text>ℝ</text>
+            <link>https://en.wikipedia.org/wiki/Real_number</link>
+            <answer>Real Numbers</answer>
+            <note>A quantity along a line.</note>
+        </question>
+
+        <question id="fmtgp-symbols-rational-numbers">
+            <text>ℚ</text>
+            <link>https://en.wikipedia.org/wiki/Rational_number</link>
+            <answer>Rational Numbers</answer>
+            <note>A number that can be a fraction of two integers. Q is for Quotient.</note>
+        </question>
+    </section>
+
+    <section id="fmtgp-integers">
+        <title>Integers</title>
+
+        <question id="fmtgp-integers-gaussian">
+            <text>Gaussian Integer</text>
+            <link>https://en.wikipedia.org/wiki/Gaussian_integer</link>
+            <answer>A complex number whose real and imaginary parts are both integers.</answer>
+        </question>
+
+        <question id="fmtgp-integers-algebraic">
+            <text>Algebraic Integer</text>
+            <link>https://en.wikipedia.org/wiki/Algebraic_integer</link>
+            <answer>A complex number that is a root of some monic polynomial with coefficients in the set of integers.</answer>
+            <note>Meaning, they have integer coefficients.</note>
+        </question>
+
+        <!-- TODO: Use mathml to define this.
+        <question id="fmtgp-integers-eisenstein">
+            <text>Eisenstein Integer (Eulerian Integer)</text>
+            <link>https://en.wikipedia.org/wiki/Eisenstein_integer</link>
+            <answer>A complex number whose real and imaginary parts are both integers.</answer>
+        </question>
+        -->
+    </section>
+
+    <section id="fmtgp-rings">
+        <title>Rings</title>
+
+        <question id="fmtgp-rings-ring">
+            <text>Ring</text>
+            <link>https://en.wikipedia.org/wiki/Ring_(mathematics)</link>
+            <answer>A set with the addition and multiplication operations.</answer>
+            <note>Ring as in a group of people. See page 142 for a detailed definition.</note>
+        </question>
+
+        <question id="fmtgp-rings-commutative-ring">
+            <text>Commutative Ring</text>
+            <link>https://en.wikipedia.org/wiki/Commutative_ring</link>
+            <answer>A ring for which xy = yx.</answer>
+        </question>
+
+        <!-- TODO: This is only mentioned in passing on page 143.
+        <question id="fmtgp-rings-polynomial-ring">
+            <text>Polynomial Ring</text>
+            <link>https://en.wikipedia.org/wiki/Polynomial_ring</link>
+            <answer>A ring for which xy = yx.</answer>
+        </question>
+        -->
+
+        <question id="fmtgp-rings-euclidean-ring">
+            <text>Euclidean Ring (Euclidean Domain)</text>
+            <link>https://en.wikipedia.org/wiki/Euclidean_domain</link>
+            <answer>A commutative ring that can be endowed with an Euclidean function.</answer>
+            <note>See page 150 for a detailed definition.</note>
+        </question>
+    </section>
+
+    <section id="fmtgp-norm">
+        <title>Norm</title>
+        <link>https://en.wikipedia.org/wiki/Norm_(mathematics)</link>
+
+        <question id="fmtgp-others-norm-integers">
+            <text>Integers</text>
+            <answer>Absolute value</answer>
+        </question>
+
+        <question id="fmtgp-others-norm-polynomials">
+            <text>Polynomials</text>
+            <answer>The degree</answer>
+        </question>
+
+        <question id="fmtgp-others-norm-guassian-integers">
+            <text>Gaussian Integers</text>
+            <answer>The complex norm</answer>
+        </question>
+
+        <question id="fmtgp-others-norm-complex-number">
+            <text>Complex Number</text>
+            <answer>x^2 + y^2</answer>
+            <note>The Euclidian Norm of a complex number (the absolute value) is sqrt(x^2 + y^2).</note>
+        </question>
+    </section>
+
+    <section id="fmtgp-others">
+        <title>Others</title>
+
+        <question id="fmtgp-others-monic-polynomial">
+            <text>Monic Polynomial</text>
+            <link>https://en.wikipedia.org/wiki/Monic_polynomial</link>
+            <answer>A polynomial where the coefficient of the highest order term is 1.</answer>
+        </question>
+    </section>
+
+    <!-- TODO: Fields -->
 
 
 
