@@ -699,7 +699,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             <question id="datastructures-uses-suffix-tree">
                 <text>Suffix Tree</text>
                 <link>https://en.wikipedia.org/wiki/Suffix_tree</link>
-                <answer>Full text search. Matching genes in DNA.</answer>
+                <answer>Full text search. Matching genes in DNA. Longest Repeated Substring. Longest Common Substring.</answer>
             </question>
 
             <!-- TODO
