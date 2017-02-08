@@ -682,7 +682,7 @@
         </question>
 
         <question id="algorithms-on-linked-lists-find-intersection">
-            <text>Find where two lists interesect.</text>
+            <text>Find where two lists intersect.</text>
             <answer>Discover the length of both lists. Use two pointers. Advance one by the difference. Step both forward until they match.</answer>
         </question>
 
