@@ -494,6 +494,12 @@
         Scheduling to avoid conflicts: Choose earliest finish time first.
         -->
 
+        <question id="type-binary-search">
+            <text>Binary Search</text>
+            <link>https://en.wikipedia.org/wiki/Binary_search_algorithm</link>
+            <answer>Divide and Conquer</answer>
+        </question>
+
         <question id="type-quicksort">
             <text>Quicksort</text>
             <link>https://en.wikipedia.org/wiki/Quicksort</link>
@@ -519,9 +525,9 @@
         </question>
 
         <!-- TODO: Divide and Conquer Algorithms:
-        https://en.wikHashing?, Convex Hull (Divide & Conquer),
+        Hashing?, Convex Hull (Divide & Conquer, but there are others),
         median finding (quickselect, or (better) median of medians),
-        polynomial multiplication, FFT  -->
+        polynomial multiplication -->
 
         <question id="type-bellmann-ford">
             <text>Bellmann-Ford Single-Source Shortest Path</text>
@@ -561,6 +567,19 @@
             <text>Activity Selection Problem (Maximum number of activities with start and end times)</text>
             <link>https://en.wikipedia.org/wiki/Activity_selection_problem</link>
             <answer>Greedy</answer>
+        </question>
+
+        <question id="type-fft-cooley-tukey">
+            <text>Fast Fourier Transform (FFT) (Cooley-Tukey Algorithm)</text>
+            <link>https://en.wikipedia.org/wiki/Fast_Fourier_transform#Algorithms</link>
+            <answer>Divide and Conquer</answer>
+            <video_url>https://www.youtube.com/watch?v=iTMn0Kt18tg</video_url>
+        </question>
+
+        <question id="type-closest-pair-of-points">
+            <text>Closest Pair of Points in a Plane</text>
+            <link>https://en.wikipedia.org/wiki/Closest_pair_of_points_problem#Planar_case</link>
+            <answer>Divide and Conquer</answer>
         </question>
 
         <!--
