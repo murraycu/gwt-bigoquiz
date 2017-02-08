@@ -47,6 +47,13 @@
             <link>https://en.wikipedia.org/wiki/Priority_inversion</link>
             <answer>A high priority task is unexpectedly preempted by a lower priority task.</answer>
         </question>
+
+        <question id="definition-reentrant">
+            <text>Reentrant Function</text>
+            <link>https://en.wikipedia.org/wiki/Reentrancy_(computing)</link>
+            <answer>Can be interrupted and called again before completion, or can cause itself to be called again.</answer>
+            <note>A function can be re-entered even in single-threaded code so even thread-local static data is a problem. A function can be reentrant without being thread safe.</note>
+        </question>
     </section>
 
     <section id="examples" answers_as_choices="true" and_reverse="true">
