@@ -593,6 +593,18 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
     <section id="datastructures-uses" answers_as_choices="true" and_reverse="true">
         <title>Uses of Data Structures</title>
 
+            <question id="datastructures-uses-queue">
+                <text>Queue</text>
+                <link>https://en.wikipedia.org/wiki/Queue_(abstract_data_type)</link>
+                <answer>Breadth First Search</answer>
+            </question>
+
+            <question id="datastructures-uses-stack">
+                <text>Stack</text>
+                <link>https://en.wikipedia.org/wiki/Stack_(abstract_data_type)</link>
+                <answer>Depth First Search. Expression parsing. Backtracking.</answer>
+            </question>
+
             <!-- TODO?
             <question id="datastructures-uses-tree">
                 <text>Tree</text>
