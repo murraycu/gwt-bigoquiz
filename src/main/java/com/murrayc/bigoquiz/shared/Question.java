@@ -112,6 +112,10 @@ public class Question implements IsSerializable {
         return note;
     }
 
+    public boolean hasNote() {
+        return !StringUtils.isEmpty(note);
+    }
+
     @Nullable
     public String getVideoUrl() {
         return videoUrl;

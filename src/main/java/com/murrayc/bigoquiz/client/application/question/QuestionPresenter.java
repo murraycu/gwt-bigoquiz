@@ -231,7 +231,9 @@ public class QuestionPresenter extends Presenter<QuestionPresenter.MyView, Quest
                 //Show the user:
                 getView().setSubmissionResult(result);
 
-                if (result.getResult()) {
+                // Show the next question automatically,
+                // unless there is a note that the user should see.
+                if (result.getResult() && !question.hasNote()) {
                     //Automatically show the next question after a delay.
                     autoNextTimer.schedule(5000);
                 }
