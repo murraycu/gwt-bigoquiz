@@ -1031,7 +1031,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             <question id="datastructures-tree-implementation-bst-post-order-traversal-iterative">
                 <text>Post-Order Traversal (Iterative)</text>
                 <link>https://en.wikipedia.org/wiki/Tree_traversal#Post-order</link>
-                <answer>Use 2 stacks. Put root on stack1. while(stack1 not empty), take from stack1, put on stack2, put left and right on stack1. while(stack2 not empty), take from stack and use.</answer>
+                <answer>Use 2 stacks. Put root on stack1. while(stack1 not empty), take from stack1, put on stack2, put left and right on stack1. while(stack2 not empty), take from stack and use.  Alternatively, modify the pre-order algorithm, to reverse th order of putting the children on the stack, then reverse the whole result at the end.</answer>
             </question>
 
             <question id="datastructures-tree-implementation-bst-level-order-traversal-iterative">
