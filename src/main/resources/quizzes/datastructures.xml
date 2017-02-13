@@ -832,7 +832,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             <question id="datastructures-uses-doubly-linked-list">
                 <text>Doubly Linked List</text>
                 <link>https://en.wikipedia.org/wiki/Doubly_linked_list</link>
-                <answer>A LRU cache. Implement the cache with a doubly-linked list as a queue, and store pointers to the nodes in the hash table. Items can be removed from the queue via that single node pointer.</answer>
+                <answer>An LRU cache. Implement the cache with a doubly-linked list as a queue, and store pointers to the nodes in the hash table. Old items can be removed from the end of the queue, or items can be moved to the head of the queue, via that node pointer</answer>
             </question>
 
             <question id="datastructures-uses-hash-table">
