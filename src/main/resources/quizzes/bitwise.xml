@@ -43,13 +43,13 @@
     <question id="bitwise-get-least-significant-set-bit">
         <text>Get the least significant (lowest, rightmost) set bit</text>
         <link>http://www.catonmat.net/blog/low-level-bit-hacks-you-absolutely-must-know/#bithack7</link>
-        <answer>x ^ (-x)</answer>
+        <answer>x &amp; (-x)</answer>
     </question>
 
     <question id="bitwise-get-least-significant-unset-bit">
         <text>Get the least significant (lowest, rightmost) unset bit</text>
         <link>http://www.catonmat.net/blog/low-level-bit-hacks-you-absolutely-must-know/#bithack9</link>
-        <answer>~x &amp; ( x + 1)</answer>
+        <answer>~x &amp; (x + 1)</answer>
     </question>
 
     <!-- TODO: Set the highest unset bit. -->
