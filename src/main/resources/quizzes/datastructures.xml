@@ -885,6 +885,19 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             </question>
     </section>
 
+    <section id="datastructures-linked-list-operations" and_reverse="true">
+        <title>Linked List Operations</title>
+
+        <question id="datastructures-linked-list-operations-sort-">
+            <text>Best sort algorithm</text>
+            <choices>
+                <choice>Mergesort</choice>
+                <choice>Quicksort</choice>
+            </choices>
+            <answer>Mergesort</answer>
+            <note>Mergesort has guaranteed O(n log(n)) time. Quicksort only has that with a random choice of pivot, but that is not possible without random access.</note>
+        </question>
+    </section>
 
 
     <section id="datastructures-tree-operations" and_reverse="true">
