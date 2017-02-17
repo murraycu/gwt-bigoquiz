@@ -30,8 +30,15 @@
 
         <question id="definition-subset">
             <text>Subset</text>
-            <link>https://en.wikipedia.org/wiki/Combination</link>
+            <link>https://en.wikipedia.org/wiki/Subset</link>
             <answer>Elements must not be in sequence or contiguous.</answer>
+            <!-- TODO: Do they really not need to be in sequence/order? -->
+        </question>
+
+        <question id="definition-power-set">
+            <text>Power Set</text>
+            <link>https://en.wikipedia.org/wiki/Power_set</link>
+            <answer>All (unordered) subsets, of any size, of n items. Including the empty subset.</answer>
         </question>
     </section>
 
