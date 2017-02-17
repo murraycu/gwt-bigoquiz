@@ -958,14 +958,14 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <answer>Recursively build. Use the first item as the root if it is within the expected min/max (and advance), then build the left tree, using the root to specify its min/max (and advance), then build the right tree, using the root to specify its min/max (and advance).</answer>
             </question>
 
-            <question id="datastructures-tree-operations-construction-from-inorder">
+            <question id="datastructures-tree-operations-bst-construction-from-inorder">
                 <text>From an in-order traversal</text>
                 <link>https://en.wikipedia.org/wiki/Tree_traversal#In-order</link>
                 <answer>Discover the overall count. Then recursively build the left tree (and advance), then the root (and advance), then the right tree (and advance). By halving the count each time, and subtracting 1 for the root.</answer>
                 <note>This technique proceeds regularly through the array, so it is also suitable for a linked list.</note>
             </question>
 
-            <question id="datastructures-tree-operations-construction-from-postorder">
+            <question id="datastructures-tree-operations-bst-construction-from-postorder">
                 <text>From a post-order traversal</text>
                 <link>http://www.geeksforgeeks.org/construct-a-binary-search-tree-from-given-postorder/</link>
                 <answer>Discover the overall count. Recursively build. Use the last item as the root (and advance the root pointer backwards), then build the left tree, using the root to specify its min/max (and advance the main pointer forwards), then build the right tree, using the root to specify its min/max (and advance the main pointer forwards).</answer>
