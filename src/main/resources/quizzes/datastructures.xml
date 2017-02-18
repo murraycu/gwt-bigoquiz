@@ -949,8 +949,24 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             </question>
         </subsection>
 
-        <subsection id="datastructures-tree-operations-bst-construction" answers_as_choices="true">
-            <title>Binary Search Tree: Construction in linear time.</title>
+        <subsection id="datastructures-tree-operations-construction-from-traversal" answers_as_choices="true">
+            <title>Construction from traversals (generic trees, not BSTs), assuming distinct keys.</title>
+
+            <question id="datastructures-tree-operations-construction-from-preorder-and-inorder">
+                <text>From a pre-order traversal and an inorder traversal</text>
+                <link>http://www.geeksforgeeks.org/construct-tree-from-given-inorder-and-preorder-traversal/</link>
+                <answer>Build a hash table mapping values to their positions in the inorder traversal. Recurse, passing the full range for both inorder and preorder traversals. Use the first preorder item as the root. Find that value's position in the inorder traversal, which lets us discover the sizes of the left and right trees to either side of it in the range. The same values are in the preorder after the root item: first the left items and then the right items. Build the left and right trees by recursing, passing these new ranges for inorder and postorder.</answer>
+            </question>
+
+            <question id="datastructures-tree-operations-construction-from-postorder-and-inorder">
+                <text>From a post-order traversal and an in-order traversal</text>
+                <link>http://www.geeksforgeeks.org/construct-a-binary-tree-from-postorder-and-inorder/</link>
+                <answer>Build a hash table mapping values to their positions in the inorder traversal. Recurse, passing the full range for both inorder and postorder traversals. Use the last postorder item as the root. Find that value's position in the inorder traversal, which lets us discover the sizes of the left and right trees to either side of it in the range. The same values are in the postorder before the root item: first the left items and then the right items. Build the left and right trees by recursing, passing these new ranges for inorder and postorder.</answer>
+            </question>
+        </subsection>
+
+        <subsection id="datastructures-tree-operations-bst-construction-from-traversal" answers_as_choices="true">
+            <title>Binary Search Tree: Construction from traversals in linear time.</title>
 
             <question id="datastructures-tree-operations-bst-construction-from-preorder">
                 <text>From a pre-order traversal</text>
