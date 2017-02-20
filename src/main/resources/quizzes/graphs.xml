@@ -845,6 +845,31 @@
         </question>
     </section>
 
+    <section id="graph-dfs-edge-classifications" answers_as_choices="true" and_reverse="true">
+        <title>Depth First Search: Edge Classifications</title>
+        <link>https://en.wikipedia.org/wiki/Depth-first_search#Output_of_a_depth-first_search</link>
+
+        <question id="graph-dfs-edge-classifications-tree">
+            <text>Tree edge</text>
+            <answer>An edge in the depth-first search, from a vertex to a later-discovered vertex.</answer>
+        </question>
+
+        <question id="graph-dfs-edge-classifications-back">
+            <text>Back edge</text>
+            <answer>A non-tree edge from a vertex to an ancestor.</answer>
+        </question>
+
+        <question id="graph-dfs-edge-classifications-forward">
+            <text>Forward edge</text>
+            <answer>A non-tree edge from a vertex to a descendant.</answer>
+        </question>
+
+        <question id="graph-dfs-edge-classifications-cross">
+            <text>Cross edge</text>
+            <answer>All other edges, such as edges between vertices that are neither descendants nor ancestors of each other.</answer>
+        </question>
+    </section>
+
     <!-- TODO: This needs an example of a dense graph that occurs naturally,
     instead of being a subset of a sparse graph.
     Note: In sparse graphs, the number of edges increases linearly with the number of vertices.
