@@ -402,6 +402,23 @@
             <answer>O(n)</answer>
             <note>The inner loop runs 1, 2, 4, 8, ... n times. That geometric sum is equal to 2n -1.</note>
         </question>
+
+        <question id="time-complexity-code-example-n-sq">
+            <text>for (i = 0; i &lt; n; ++i) {
+                for (int j = 0; j &lt; n; ++j) {
+                ... }
+                }</text>
+            <answer>O(n ^ 2)</answer>
+        </question>
+
+        <question id="time-complexity-code-example-n-sq-avoid-duplicates">
+            <text>for (i = 0; i &lt; n; ++i) {
+                for (int j = i + 1; j &lt; n; ++j) {
+                ... }
+                }</text>
+            <answer>O(n ^ 2)</answer>
+        </question>
+        <note>Even when we avoid duplicates (an i,j thas is the reverse of an earlier i,j), it's still O(n ^ 2).</note>
     </section>
 
 
