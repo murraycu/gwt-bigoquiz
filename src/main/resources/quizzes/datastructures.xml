@@ -110,6 +110,12 @@
                 <answer>A tree whose nodes have no more than 2 children.</answer>
             </question>
 
+            <question id="datastructures-description-threaded-binary-tree">
+                <text>Threaded Binary Tree</text>
+                <link>https://en.wikipedia.org/wiki/Threaded_binary_tree</link>
+                <answer>A binary tree in which normally-null left and right pointers lead to predecessors and successors.</answer>
+            </question>
+
             <question id="datastructures-description-binomial-tree">
                 <text>Binomial Tree</text>
                 <link>https://en.wikipedia.org/wiki/Binomial_heap#Binomial_heap</link> <!-- Update if it gets its own wiki page. -->
@@ -1048,6 +1054,13 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <answer>Put root on stack. while(stack not empty), take from stack, use current node, put right then left on stack.</answer>
             </question>
 
+            <question id="datastructures-tree-implementation-bst-pre-order-traversal-morris">
+                <text>Pre-Order Traversal (Morris Traversal)</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#Morris_in-order_traversal_using_threading</link>
+                <answer>If there is no left child, use the current node and go right (possibly using a temporary right link to reach an ancestor successor). If there is a left child, find the predecessor (left child's rightmost node). Set a temporary right link from that predecessor to the current node (its successor), use the current node, and go left. But if the temporary link already exists, clear it and go right.</answer>
+                <video>https://youtu.be/wGXB9OWhPTg?t=1m22s</video>
+            </question>
+
             <question id="datastructures-tree-implementation-bst-in-order-traversal-recursive">
                 <text>In-Order Traversal (Recursive)</text>
                 <link>https://en.wikipedia.org/wiki/Tree_traversal#In-order</link>
@@ -1058,6 +1071,13 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <text>In-Order Traversal (Iterative)</text>
                 <link>https://en.wikipedia.org/wiki/Tree_traversal#In-order</link>
                 <answer>While(stack not empty), while(current is null), travel leftwards, adding nodes to the stack. Pop and use the left-most node. Put the right node on the stack and set it as current.</answer>
+            </question>
+
+            <question id="datastructures-tree-implementation-bst-in-order-traversal-morris">
+                <text>In-Order Traversal (Morris Traversal)</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#Morris_in-order_traversal_using_threading</link>
+                <answer>If there is no left child, use the current node and go right (possibly using a temporary right link to reach an ancestor successor). If there is a left child, find the predecessor (left child's rightmost node). Set a temporary right link from that predecessor to the current node (its successor) and go left. But if the temporary link already exists, clear it, use the current node, and go right.</answer>
+                <video>https://youtu.be/wGXB9OWhPTg?t=1m22s</video>
             </question>
 
             <question id="datastructures-tree-implementation-bst-post-order-traversal-recursive">
@@ -1071,6 +1091,14 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <link>https://en.wikipedia.org/wiki/Tree_traversal#Post-order</link>
                 <answer>Use 2 stacks. Put root on stack1. while(stack1 not empty), take from stack1, put on stack2, put left and right on stack1. while(stack2 not empty), take from stack and use.  Alternatively, modify the pre-order algorithm, to reverse th order of putting the children on the stack, then reverse the whole result at the end.</answer>
             </question>
+
+            <!-- TODO: See https://www.quora.com/What-is-a-good-way-to-implement-stackless-recursion-less-post-order-traversal-for-a-non-threaded-binary-tree-using-Morris-method
+            <question id="datastructures-tree-implementation-bst-post-order-traversal-morris">
+                <text>Post-Order Traversal (Morris Traversal)</text>
+                <link>https://en.wikipedia.org/wiki/Tree_traversal#Morris_in-order_traversal_using_threading</link>
+                <answer>TODO</answer>
+            </question>
+            -->
 
             <question id="datastructures-tree-implementation-bst-level-order-traversal-iterative">
                 <text>Level-Order Traversal (BFS) (Iterative)</text>
