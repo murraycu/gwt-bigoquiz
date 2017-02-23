@@ -64,6 +64,8 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private final Label noteLabel = new Label();
     private final Anchor videoAnchor = new Anchor(constants.video());
     private boolean hasVideoUrl = false;
+    private final Anchor codeAnchor = new Anchor(constants.exampleCode());
+    private boolean hasCodeUrl = false;
     @NotNull
     private State state = State.WAITING_INVALID;
     private boolean multipleChoice = false;
@@ -156,6 +158,9 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         resultPanel.add(videoAnchor);
         videoAnchor.addStyleName("video-anchor");
+
+        resultPanel.add(codeAnchor);
+        codeAnchor.addStyleName("code-anchor");
 
         nextQuestionButton.addClickHandler(new ClickHandler() {
             @Override
@@ -429,6 +434,15 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             videoAnchor.setHref(videoUrl);
             hasVideoUrl = true;
         }
+
+        final String codeUrl = question.getCodeUrl();
+        if (StringUtils.isEmpty(codeUrl)) {
+            codeAnchor.setHref("");
+            hasCodeUrl = false;
+        } else {
+            codeAnchor.setHref(codeUrl);
+            hasCodeUrl = true;
+        }
     }
 
     private void buildChoices(@Nullable Question question) {
@@ -527,6 +541,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 resultLabel.setVisible(false);
                 noteLabel.setVisible(false);
                 setAnchorVisibility(videoAnchor, false);
+                setAnchorVisibility(codeAnchor, false);
                 break;
             }
             case DONT_KNOW_ANSWER: {
@@ -542,6 +557,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 resultLabel.setVisible(false); //Showing "Don't Know" is annoying to the user.
                 noteLabel.setVisible(false);
                 setAnchorVisibility(videoAnchor, false);
+                setAnchorVisibility(codeAnchor, false);
                 break;
             }
             case WAITING_AFTER_WRONG_ANSWER: {
@@ -552,6 +568,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 resultLabel.setVisible(true);
                 noteLabel.setVisible(false);
                 setAnchorVisibility(videoAnchor, false);
+                setAnchorVisibility(codeAnchor, false);
 
                 showWrongAnswerInChoices(choiceSelected);
                 break;
@@ -565,6 +582,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 resultLabel.setVisible(true);
                 noteLabel.setVisible(true);
                 setAnchorVisibility(videoAnchor, hasVideoUrl);
+                setAnchorVisibility(codeAnchor, hasCodeUrl);
 
                 showWrongAnswerInChoices(choiceSelected);
                 break;
@@ -581,6 +599,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 resultLabel.setVisible(true);
                 noteLabel.setVisible(true);
                 setAnchorVisibility(videoAnchor, hasVideoUrl);
+                setAnchorVisibility(codeAnchor, hasCodeUrl);
             }
         }
     }
