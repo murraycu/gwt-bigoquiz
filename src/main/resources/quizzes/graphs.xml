@@ -91,6 +91,40 @@
             <link>https://en.wikipedia.org/wiki/Hypergraph</link>
             <answer>A graph whose edges can connect more than 2 nodes.</answer>
         </question>
+
+        <question id="terminology-articulation-point">
+            <text>Articulation Point (Cut Vertex / Cut Point)</text>
+            <link>https://en.wikipedia.org/wiki/Biconnected_component</link>
+            <answer>A vertex whose removal disconnects the graph.</answer>
+            <note>Removing the cut vertex increases the number of connected components.</note>
+        </question>
+
+        <question id="terminology-bridge">
+            <text>Bridge (Cut Edge / Cut Arc)</text>
+            <link>https://en.wikipedia.org/wiki/Bridge_(graph_theory)</link>
+            <answer>An edge whose removal disconnects the graph.</answer>
+            <note>Removing the cut edge increases the number of connected components.</note>
+        </question>
+
+        <question id="terminology-biconnected-graph">
+            <text>Biconnected Graph (2-Connected Graph) </text>
+            <link>https://en.wikipedia.org/wiki/Biconnected_graph</link>
+            <answer>A connected graph which will remain connected if any one vertex is removed.</answer>
+            <note>A biconnected graph has no articulation vertices (cut points).</note>
+        </question>
+
+        <question id="terminology-k-connected-graph">
+            <text>K-Connected Graph (k-vertex-connected Graph) </text>
+            <link>https://en.wikipedia.org/wiki/K-vertex-connected_graph</link>
+            <answer>A connected graph which will remain connected if fewer than k vertices are removed.</answer>
+            <note>A 2-connected graph is called biconnected. A 3-connected graph is called triconnected.</note>
+        </question>
+
+        <question id="terminology-biconnected-component">
+            <text>Biconnected Component</text>
+            <link>https://en.wikipedia.org/wiki/Biconnected_component</link>
+            <answer>A maximal set of edges such that any two edges lie on a common simple cycle.</answer>
+        </question>
     </section>
 
     <section id="polynomial-time-problems-definitions" answers_as_choices="true">
