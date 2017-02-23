@@ -290,6 +290,14 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
             anchor.setHref(videoUrl);
             panelQuestionAnswer.add(anchor);
         }
+
+        final String codeUrl = question.getCodeUrl();
+        if (codeUrl != null) {
+            final Anchor anchor = new Anchor();
+            anchor.setText(constants.exampleCode());
+            anchor.setHref(codeUrl);
+            panelQuestionAnswer.add(anchor);
+        }
     }
 
     private static @NotNull Map<String, List<QuestionAndAnswer>> groupQuestionsBySubSection(final List<QuestionAndAnswer> questions) {
