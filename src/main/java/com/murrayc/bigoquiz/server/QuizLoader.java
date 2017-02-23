@@ -219,22 +219,13 @@ public class QuizLoader {
 
     @Nullable
     private static String getTitleNodeText(@NotNull final Element sectionElement) {
-        @Nullable String sectionTitle = null;
-        @Nullable final Element sectionTitleElement = getElementByName(sectionElement, NODE_TITLE);
-        if (sectionTitleElement != null) {
-            sectionTitle = sectionTitleElement.getTextContent();
-        }
-        return sectionTitle;
+        return getNodeTextContent(sectionElement, NODE_TITLE);
     }
 
     @Nullable
-    private static String getLinkNodeText(@NotNull final Element sectionElement) {
-        @Nullable String sectionTitle = null;
-        @Nullable final Element sectionTitleElement = getElementByName(sectionElement, NODE_LINK);
-        if (sectionTitleElement != null) {
-            sectionTitle = sectionTitleElement.getTextContent();
-        }
-        return sectionTitle;
+    private static String getLinkNodeText(@NotNull final Element parentElement) {
+        return getNodeTextContent(parentElement, NODE_LINK);
+
     }
 
     private static int addChildQuestions(@NotNull final Quiz quiz, final String sectionId, final String subSectionId,
@@ -299,11 +290,7 @@ public class QuizLoader {
         }
 
         //This is optional:
-        String questionLink = null;
-        @Nullable final Element linkElement = getElementByName(element, NODE_LINK);
-        if (linkElement != null) {
-            questionLink = linkElement.getTextContent();
-        }
+        final String questionLink = getLinkNodeText(element);
 
         boolean answerTextIsHtml = getAttributeAsBoolean(answerElement, ATTR_IS_HTML);
         String answerText = answerElement.getTextContent();
@@ -325,19 +312,9 @@ public class QuizLoader {
             throw new QuizLoaderException("QuizLoader.loadQuestionNode(): answer is not in the choices: questionId: " + id);
         }
 
-        //This is optional:
-        String noteText = null;
-        @Nullable final Element noteElement = getElementByName(element, NODE_NOTE);
-        if (noteElement != null) {
-            noteText = noteElement.getTextContent();
-        }
-
-        //This is optional:
-        String videoUrl = null;
-        @Nullable final Element videoUrlElement = getElementByName(element, NODE_VIDEO_URL);
-        if (videoUrlElement != null) {
-            videoUrl = videoUrlElement.getTextContent();
-        }
+        //These are optional:
+        final String noteText = getNodeTextContent(element, NODE_NOTE);
+        final String videoUrl = getNodeTextContent(element, NODE_VIDEO_URL);
 
         if (reverse) {
             //Swap the question and answer text:
@@ -354,6 +331,16 @@ public class QuizLoader {
 
         return new QuestionAndAnswer(id, sectionID, subSectionId, new Question.Text(questionText, questionTextIsHtml),
                 questionLink, new Question.Text(answerText, answerTextIsHtml), choices, noteText, videoUrl);
+    }
+
+    @Nullable
+    private static String getNodeTextContent(final @NotNull Element parentElement, final String tagName) {
+        String result = null;
+        @Nullable final Element element = getElementByName(parentElement, tagName);
+        if (element != null) {
+            result = element.getTextContent();
+        }
+        return result;
     }
 
     private static <T> void swap(T a, T b) {
