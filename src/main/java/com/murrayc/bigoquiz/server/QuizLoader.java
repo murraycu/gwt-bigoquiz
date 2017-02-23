@@ -43,6 +43,7 @@ public class QuizLoader {
     private static final String NODE_DEFAULT_CHOICES = "default_choices";
     private static final String NODE_NOTE = "note";
     private static final String NODE_VIDEO_URL = "video_url";
+    private static final String NODE_CODE_URL = "code_url"; // For source code examples.
     private static final int MAX_CHOICES_FROM_ANSWERS = 6;
 
     public static void setSectionDefaultChoicesFromAnswers(final Quiz quiz, final String sectionId) {
@@ -315,6 +316,7 @@ public class QuizLoader {
         //These are optional:
         final String noteText = getNodeTextContent(element, NODE_NOTE);
         final String videoUrl = getNodeTextContent(element, NODE_VIDEO_URL);
+        final String codeUrl = getNodeTextContent(element, NODE_CODE_URL);
 
         if (reverse) {
             //Swap the question and answer text:
@@ -330,7 +332,7 @@ public class QuizLoader {
         }
 
         return new QuestionAndAnswer(id, sectionID, subSectionId, new Question.Text(questionText, questionTextIsHtml),
-                questionLink, new Question.Text(answerText, answerTextIsHtml), choices, noteText, videoUrl);
+                questionLink, new Question.Text(answerText, answerTextIsHtml), choices, noteText, videoUrl, codeUrl);
     }
 
     @Nullable
