@@ -655,20 +655,22 @@
         <question id="algorithms-on-sorted-arrays-binary-search">
             <text>Binary Search for matching value</text>
             <link>https://en.wikipedia.org/wiki/Binary_search_algorithm</link>
-            <answer>while (lo &lt;= hi) { Examine middle value, setting hi/lo 1 before or after it. }</answer>
+            <answer>while (lo &lt;= hi) { Examine middle value, setting hi/lo 1 before or after it, or returning the index if mid is equal to the target value. }</answer>
+            <note>To find the first value, instead move hi to mid, not mid - 1 (therefore change the loop check from &lt;= to &lt;), and do that also if mid is equal to the target value. Check for equality only after the loop finishes.</note>
+            <!--- To find the last value, move lo to mid not mid + 1, and do that if mid is equal. -->
         </question>
 
         <question id="algorithms-on-sorted-arrays-binary-search-first">
             <text>Binary Search for first matching value</text>
             <link>https://en.wikipedia.org/wiki/Binary_search_algorithm</link>
-            <answer>while (lo &lt; hi) { Examine middle value, setting lo to mid+1, or hi to mid. }</answer>
-            <note>For instance, std::lower_bound() finds the position of the lowest matching value.</note>
+            <answer>while (lo &lt; hi) { Examine middle value, setting lo to mid+1, or hi to mid. }. Check that the value at lo is equal to the target at the end, instead of checking for equality during the loop.</answer>
+            <note>For instance, std::lower_bound() finds the position of the first matching value.</note>
         </question>
 
         <question id="algorithms-on-sorted-arrays-binary-search-last">
             <text>Binary Search for last matching value</text>
             <link>https://en.wikipedia.org/wiki/Binary_search_algorithm</link>
-            <answer>while (lo &lt; hi) { Examine middle value, setting hi to mid-1, or lo to mid. Round mid up, by adding 1 before division. }</answer>
+            <answer>while (lo &lt; hi) { Examine middle value, setting lo to mid, or hi to mid-1. Round mid up by adding 1 before division. }. Check that the value at lo is equal to the target at the end, instead of checking for equality during the loop.</answer>
             <note>For instance, std::upper_bound(), though this gives the position after the highest matching value.</note>
         </question>
     </section>
