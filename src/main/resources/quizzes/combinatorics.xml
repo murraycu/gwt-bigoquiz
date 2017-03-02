@@ -82,8 +82,8 @@
             <answer>y = x &amp; -x;  c = x + y; x = (((x ^ c) &gt;&gt; 2) / y) | c;</answer>
         </question>
 
-        <question id="algorithms-next-lexographical-permutation">
-            <text>Next Lexographical Permutation.</text>
+        <question id="algorithms-next-lexicographical-permutation">
+            <text>Next Lexicographical Permutation.</text>
             <link>https://en.wikipedia.org/wiki/Permutation#Generation_in_lexicographic_order</link>
             <answer>Find rightmost a[k] &lt; a[k+1]. Find rightmost a[l] >  a[k] after k, Swap a[k] and a[l]. Reverse from a[k+1].</answer>
         </question>
@@ -109,12 +109,12 @@
 
     <!-- TODO: Number of ways to rearrange letters: N! / product of (number of each letter)! . For instance: aabbbccc: n! / (2! * 3! * 4!) -->
 
-    <!-- TODO: lexographically-next permutation -->
+    <!-- TODO: lexicographically-next permutation -->
     <!-- TODO: next n-choose-k combination (subset) -->
 
     <!-- Iterating over permutations.
       rank/unrank or incremental change. -->
     <!-- Iterating over subsets
-      lexographic, gray code, binary counting
+      lexicographic, gray code, binary counting
       n choose k: Gosper's hack. -->
 </quiz>

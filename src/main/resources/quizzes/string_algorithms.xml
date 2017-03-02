@@ -237,13 +237,13 @@
         With Suffix Tree: Put the string in a suffix tree. Find the deepest internal node.
       Shortest Common Substring
 
-      Find lexographic location of Tk in T1 to Tn: Put them all in a trie, with terminating $ on each string.
+      Find lexicographic location of Tk in T1 to Tn: Put them all in a trie, with terminating $ on each string.
 
       Multiple ($-terminated) strings in a trie, with ordered edges.
-        Lexographic order: in-order traversal gives us lexographic order.
-        Lexographic predecessor: Find node that matches as much as possible. Predecessor is max in left sub-tree.
+        Lexicographic order: in-order traversal gives us lexicographic order.
+        Lexicographic predecessor: Find node that matches as much as possible. Predecessor is max in left sub-tree.
           (Maintain sub-tree min/max to make this faster.)
-        Lexographic successor: Find node that matches as much as possible. Successor is min in right sub-tree.
+        Lexicographic successor: Find node that matches as much as possible. Successor is min in right sub-tree.
           (Maintain sub-tree min/max to make this faster.)
         LCA, LCP.
 
