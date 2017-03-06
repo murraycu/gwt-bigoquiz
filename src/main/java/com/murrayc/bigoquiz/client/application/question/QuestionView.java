@@ -156,11 +156,18 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         resultPanel.add(noteLabel);
         noteLabel.addStyleName("note-label");
 
-        resultPanel.add(videoAnchor);
-        videoAnchor.addStyleName("video-anchor");
+        // Put the video anchor and code anchor in panels, so they have their own divs,
+        // so they appear on separate lines.
+        // A Label or Button gets a div automatically, but not an Anchor.
+        FlowPanel panel = new FlowPanel();
+        panel.addStyleName("video-anchor");
+        panel.add(videoAnchor);
+        resultPanel.add(panel);
 
-        resultPanel.add(codeAnchor);
-        codeAnchor.addStyleName("code-anchor");
+        panel = new FlowPanel();
+        panel.addStyleName("code-anchor");
+        panel.add(codeAnchor);
+        resultPanel.add(panel);
 
         nextQuestionButton.addClickHandler(new ClickHandler() {
             @Override

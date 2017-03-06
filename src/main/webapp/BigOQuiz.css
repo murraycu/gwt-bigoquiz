@@ -511,6 +511,14 @@ h4 * {
     padding-top: 0.6rem;
 }
 
+.video-anchor {
+    padding-top: 0.6rem;
+}
+
+.code-anchor {
+    padding-top: 0.6rem;
+}
+
 .question-radio-button {
     float: left;
     clear: left;
