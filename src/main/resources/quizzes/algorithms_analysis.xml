@@ -310,7 +310,7 @@
         <question id="recurrence-example-n-log-n-case-2">
             <text>T(n) = 2 T(n/2) + O(n)</text>
             <answer>O(n log(n))</answer>
-            <note>For instance, mergesort. Master Method case 2: a = 2, b = 2, d = 1. a = b^d</note>
+            <note>For instance, mergesort, or divide and conquer convex hull algorithm. Master Method case 2: a = 2, b = 2, d = 1. a = b^d</note>
         </question>
 
         <question id="recurrence-example-n-sq-log-n-case-2">

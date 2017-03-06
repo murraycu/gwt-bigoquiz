@@ -524,9 +524,24 @@
             <answer>Divide and Conquer</answer>
         </question>
 
+        <question id="type-median-of-medians">
+            <text>Median of Medians</text>
+            <link>https://en.wikipedia.org/wiki/Strassen_algorithm</link>
+            <answer>Divide and Conquer</answer>
+            <video_url>https://youtu.be/EzeYI7p9MjU?t=55m26s</video_url>
+        </question>
+
+        <!-- TODO: but there are others.
+        <question id="type-convex-hull">
+            <text>Convex Hull</text>
+            <link>https://en.wikipedia.org/wiki/Convex_hull_algorithms</link>
+            <answer>Divide and Conquer</answer>
+            <video_url>https://youtu.be/EzeYI7p9MjU?t=6m57s</video_url>
+        </question>
+        -->
+
         <!-- TODO: Divide and Conquer Algorithms:
-        Hashing?, Convex Hull (Divide & Conquer, but there are others),
-        median finding (quickselect, or (better) median of medians),
+        Hashing?,
         polynomial multiplication -->
 
         <question id="type-bellmann-ford">
