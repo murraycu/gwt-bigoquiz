@@ -594,12 +594,14 @@
             <text>Prim's Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
             <answer>Minimum Spanning Tree, for dense graphs.</answer>
+            <note>Prim's is better than Kruskal's for dense graphs (more edges than nodes) only when using, for instance, a Fibonacci Heap rather than a simple binary heap.</note>
         </question>
 
         <question id="purpose-kruskals">
             <text>Kruskal's Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Kruskal's_algorithm</link>
             <answer>Minimum Spanning Tree, for sparse graphs.</answer>
+            <note>Prim's is better than Kruskal's for dense graphs (more edges than nodes) only when using, for instance, a Fibonacci Heap rather than a simple binary heap.</note>
         </question>
 
         <question id="purpose-ford-fulkerson">
@@ -663,7 +665,7 @@
             <text>Prim's Algorithm for Minimum Spanning Tree</text>
             <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
             <answer>Start with an arbitrary vertex. Find the lowest-cost outgoing edge and add its destination to the tree. Repeat until all vertices are in the tree.</answer>
-            <note>This is usually implemented with a priority queue (heap). This is like Dijkstra's shortest path algorithm, but the relax step chooses the shortest edge from the tree, instead of from the source. Use the inverse comparison to get a maximum spanning tree.</note>
+            <note>This is usually implemented with a priority queue (heap), or even better, a Fibonacci Heap. This is like Dijkstra's shortest path algorithm, but the relax step chooses the shortest edge from the tree, instead of from the source. Use the inverse comparison to get a maximum spanning tree.</note>
         </question>
 
         <!-- Note: Kruskals is like a greedy algorithm for finding clusters, though that aborts early, to leave k clusters.
