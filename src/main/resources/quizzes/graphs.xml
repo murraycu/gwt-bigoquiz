@@ -6,16 +6,20 @@
         <title>Terminology</title>
         <question id="terminology-undirected-graph">
             <text>Undirected Graph</text>
+            <link>https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)#Undirected_graph</link>
+            <link></link>
             <answer>A graph whose edges are all bidirectional.</answer>
         </question>
 
         <question id="terminology-directed-graph">
             <text>Directed Graph (Digraph)</text>
+            <link>https://en.wikipedia.org/wiki/Directed_graph</link>
             <answer>A graph whose edges go only in one direction.</answer>
         </question>
 
         <question id="terminology-dag">
             <text>Directed Acyclic Graph (DAG)</text>
+            <link>https://en.wikipedia.org/wiki/Directed_acyclic_graph</link>
             <answer>A directed graph with no cycles.</answer>
         </question>
 
@@ -41,31 +45,39 @@
 
         <question id="terminology-degree-of-vertex">
             <text>Degree of a vertex</text>
+            <link>https://en.wikipedia.org/wiki/Degree_(graph_theory)</link>
             <answer>The number of edges incident to the vertex.</answer>
+            <note>In undirected connected graphs, if there are 0 vertices with odd degree, there can be an Euler tour. If there are only 0 or 2 vertices with odd degree, there can be an Euler path.</note>
+            <!-- See the Eulerian Path and Eulerian Cycle items for details about undirected graphs. -->
         </question>
 
         <question id="terminology-t-indegree-of-vertex">
             <text>Indegree of a vertex in a directed graph</text>
+            <link>https://en.wikipedia.org/wiki/Degree_(graph_theory)</link>
             <answer>The number of edges leading to the vertex.</answer>
         </question>
 
         <question id="terminology-outdegree-of-vertex">
             <text>Outdegree of a vertex in a directed graph</text>
+            <link>https://en.wikipedia.org/wiki/Degree_(graph_theory)</link>
             <answer>The number of edges leading from the vertex.</answer>
         </question>
 
         <question id="terminology-dfs">
             <text>Depth First Search (DFS)</text>
+            <link>https://en.wikipedia.org/wiki/Depth-first_search</link>
             <answer>Examine unexplored child vertices first, before examining sibling vertices.</answer>
         </question>
 
         <question id="terminology-bfs">
             <text>Breadth First Search (BFS)</text>
+            <link>https://en.wikipedia.org/wiki/Breadth-first_search</link>
             <answer>Examine unexplored sibling vertices first, before examining child vertices.</answer>
         </question>
 
         <question id="terminology-transpose-graph">
             <text>Transpose Graph (Reverse Graph)</text>
+            <link>https://en.wikipedia.org/wiki/Transpose_graph</link>
             <answer>A version of a directed graph, with each edge reversed.</answer>
         </question>
 
@@ -203,12 +215,14 @@
             <text>Eulerian Path</text>
             <link>https://en.wikipedia.org/wiki/Eulerian_path</link>
             <answer>A tour that visits each edge at least once.</answer>
+            <note>For undirected graphs, only possible if it has 0 or 2 vertices with odd degree. For directed graphs, only possible if 0 or 1 vertices have an out degree - in degree difference of 1.</note>
         </question>
 
         <question id="definition-eulerian-cycle">
-            <text>Eulerian Cycle</text>
+            <text>Eulerian Cycle (Euler Tour)</text>
             <link>https://en.wikipedia.org/wiki/Eulerian_path</link>
             <answer>A tour that visits each edge only once, returning to the start.</answer>
+            <note>For undirected graphs, only possible if every vertex has even degree (even number of edges), meaning there are 0 vertices with odd degree. For directed graphs, only possible if every vertex has in degree equal to its out degree (same number of incoming edges as outgoing edges).</note>
         </question>
 
         <question id="definition-edge-connectivity">
