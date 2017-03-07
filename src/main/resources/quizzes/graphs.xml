@@ -780,7 +780,7 @@
             <text>Topological Sort</text>
             <link>https://en.wikipedia.org/wiki/Topological_sorting</link>
             <answer>Depth First Search to order vertices by their completion time, starting from each still unexplored vertex. Then reverse that order.</answer>
-            <note>This is only possible on DAGs (Directed Acyclic Graphs)</note>
+            <note>This is only possible on DAGs (Directed Acyclic Graphs). So there can't be a topological sort if the graph is undirected, or if the graph has a cycle.</note>
         </question>
 
         <question id="algorithm-for-minimum-spanning-tree">
