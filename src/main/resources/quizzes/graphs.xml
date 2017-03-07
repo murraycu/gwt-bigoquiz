@@ -857,7 +857,7 @@
         <question id="bfs-or-dfs-connected-components">
             <text>Connected Components in an undirected graph</text>
             <link>https://en.wikipedia.org/wiki/Connected_component_%28graph_theory%29</link>
-            <answer>Breadth First Search or Depth First Search</answer>
+            <answer>Depth First Search or Breadth First Search</answer>
         </question>
 
         <question id="bfs-or-dfs-strongly-connected-components">
