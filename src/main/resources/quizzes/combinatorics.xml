@@ -68,10 +68,8 @@
         <question id="count-combinations-n-choose-k">
             <text>Number of unordered subset combinations of k items from n items (n choose k).</text>
             <link>https://en.wikipedia.org/wiki/Permutation#k-permutations_of_n</link>
-            <answer>n! / ((n - k)! ⋅  k) </answer>
+            <answer>n! / ((n - k)! ⋅  k)</answer>
         </question>
-
-
     </section>
 
     <section id="algorithms" answers_as_choices="true" and_reverse="true">
