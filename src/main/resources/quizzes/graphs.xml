@@ -63,6 +63,36 @@
             <answer>The number of edges leading from the vertex.</answer>
         </question>
 
+        <question id="terminology-leaf-vertex">
+            <text>Leaf Vertex (pendant vertex)</text>
+            <link>https://en.wikipedia.org/wiki/Vertex_(graph_theory)#Types_of_vertices</link>
+            <answer>Vertex with degree 1.</answer>
+        </question>
+
+        <question id="terminology-source-vertex">
+            <text>Source Vertex</text>
+            <link>https://en.wikipedia.org/wiki/Vertex_(graph_theory)#Types_of_vertices</link>
+            <answer>Vertex with in degree 0.</answer>
+        </question>
+
+        <question id="terminology-sink-vertex">
+            <text>Source Vertex</text>
+            <link>https://en.wikipedia.org/wiki/Vertex_(graph_theory)#Types_of_vertices</link>
+            <answer>Vertex with out degree 0.</answer>
+        </question>
+
+        <question id="terminology-simplicial-vertex">
+            <text>Simplicial Vertex</text>
+            <link>https://en.wikipedia.org/wiki/Vertex_(graph_theory)#Types_of_vertices</link>
+            <answer>Vertex whose neighbours form a clique.</answer>
+        </question>
+
+        <question id="terminology-universal-vertex">
+            <text>Universal Vertex</text>
+            <link>https://en.wikipedia.org/wiki/Vertex_(graph_theory)#Types_of_vertices</link>
+            <answer>Vertex that is adjacent to every other vertex.</answer>
+        </question>
+
         <question id="terminology-dfs">
             <text>Depth First Search (DFS)</text>
             <link>https://en.wikipedia.org/wiki/Depth-first_search</link>
