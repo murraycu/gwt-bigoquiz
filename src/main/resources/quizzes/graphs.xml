@@ -937,6 +937,7 @@
         <question id="graph-dfs-edge-classifications-back">
             <text>Back edge</text>
             <answer>A non-tree edge from a vertex to an ancestor.</answer>
+            <note>A directed acyclic graph (DAG) has no back edges. So finding a back edge during a depth first search, from a source vertex (indegree zero), means we've found a cycle.</note>
         </question>
 
         <question id="graph-dfs-edge-classifications-forward">
