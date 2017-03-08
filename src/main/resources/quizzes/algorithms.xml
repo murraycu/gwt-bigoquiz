@@ -274,11 +274,13 @@
                 <text>Quicksort</text>
                 <link>https://en.wikipedia.org/wiki/Quicksort</link>
                 <answer>In-place (but small additional space needed)</answer>
+                <note>The call stack requires O(log(n)) space.</note>
             </question>
             <question id="algorithms-sort-inplace-3-way-quicksort">
                 <text>3-Way Quicksort</text>
                 <link>https://en.wikipedia.org/wiki/Quicksort#Repeated_elements</link>
                 <answer>In-place (but small additional space needed)</answer>
+                <note>The call stack requires O(log(n)) space.</note>
             </question>
             <question id="algorithms-sort-inplace-mergesort">
                 <text>Mergesort</text>
