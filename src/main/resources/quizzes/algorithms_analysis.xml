@@ -180,7 +180,7 @@
             <question id="greedy-v-dp-properties-dp">
                 <text>Dynamic Programming Algorithms</text>
                 <link>https://en.wikipedia.org/wiki/Dynamic_programming</link>
-                <answer>Have optimal substructure but cannot make locally optiomal choices.</answer>
+                <answer>Have optimal substructure but cannot make locally optimal choices.</answer>
             </question>
         </subsection>
 
@@ -418,7 +418,7 @@
                 }</text>
             <answer>O(n ^ 2)</answer>
         </question>
-        <note>Even when we avoid duplicates (an i,j thas is the reverse of an earlier i,j), it's still O(n ^ 2).</note>
+        <note>Even when we avoid duplicates (an i,j that is the reverse of an earlier i,j), it's still O(n ^ 2).</note>
     </section>
 
 
