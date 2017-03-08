@@ -19,7 +19,7 @@
                 <question id="algorithms-sort-description-mergesort">
                     <text>Mergesort</text>
                     <link>https://en.wikipedia.org/wiki/Merge_sort</link>
-                    <answer>Divide, sort, merge, recurse.</answer>
+                    <answer>Divide, sort (recurse), merge.</answer>
                 </question>
                 <question id="algorithms-sort-description-heapsort">
                     <text>Heapsort</text>
@@ -81,11 +81,13 @@
                     <text>Quicksort</text>
                     <link>https://en.wikipedia.org/wiki/Quicksort#Repeated_elements</link>
                     <answer>O(n log(n))</answer>
+                    <note>But worst time is O(n^2). O(n log(n)) time requires randomization.</note>
                 </question>
                 <question id="algorithms-sort-time-mergesort">
                     <text>Mergesort</text>
                     <link>https://en.wikipedia.org/wiki/Merge_sort</link>
                     <answer>O(n log(n))</answer>
+                    <note>The worst time is also O(n log(n)).</note>
                 </question>
                 <question id="algorithms-sort-time-heapsort">
                     <text>Heapsort</text>
