@@ -115,15 +115,19 @@
                 <question id="algorithms-sort-time-counting-sort">
                     <text>Counting Sort</text>
                     <answer>O(n + k)</answer>
+                    <note>This is the time to examine n items and then the time to examine each value in the range k.</note>
                 </question>
                 <question id="algorithms-sort-time-radix-sort">
                     <text>Radix Sort (LSD or MSD string sort)</text>
                     <link>https://en.wikipedia.org/wiki/Radix_sort</link>
                     <answer>O(nk)</answer>
+                    <note>This is the time to do d (k) counting sorts (each O(n + b), where b is the range, for instance, of a single digit), where d is the number of digits. This is only really O(nc) if the range k is a polynomial of k, so k &lt;= n^c.</note>
+                    <video_url>https://youtu.be/Nz1KZXbghj8?t=44m41s</video_url>
                 </question>
                 <question id="algorithms-sort-time-bucket-sort">
                     <text>Bucket Sort</text>
                     <answer>O(n + k)</answer>
+                    <note>This is the time to put n keys in n buckets of size k and then to go through each bucket putting the items back. This only works if the values are evenly distributed in the range.</note>
                 </question>
                 <question id="algorithms-sort-time-bubble-sort">
                     <text>Bubble Sort</text>
@@ -191,7 +195,7 @@
             <question id="algorithms-sort-advantages-bucket-sort">
                 <text>Bucket Sort</text>
                 <link>https://en.wikipedia.org/wiki/Bucket_sort</link>
-                <answer>Like Counting Sort, but uses O(n) space instead of O(m) space,</answer>
+                <answer>Like Counting Sort, but uses O(n) space instead of O(m) space.</answer>
             </question>
             <!-- None?
             <question id="algorithms-sort-advantages-bubble-sort">
@@ -387,6 +391,7 @@
             <question id="algorithms-sort-comparison-bucket-sort">
                 <text>Bucket Sort</text>
                 <answer>Non-Comparison</answer>
+                <note>Although we don't compare keys with each other, we still need to compare the keys with a part of the range to put it in a bucket.</note>
             </question>
             <question id="algorithms-sort-comparison-bubble-sort">
                 <text>Bubble Sort</text>
