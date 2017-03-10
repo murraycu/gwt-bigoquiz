@@ -624,7 +624,7 @@
             <text>Prim's Algorithm</text>
             <link>https://en.wikipedia.org/wiki/Prim's_algorithm</link>
             <answer>Minimum Spanning Tree, for dense graphs.</answer>
-            <note>Prim's is better than Kruskal's for dense graphs (more edges than nodes) only when using, for instance, a Fibonacci Heap rather than a simple binary heap.</note>
+            <note>Prim's, O(|E| log(|V|)), is better than Kruskal's, O(|E| log(|E|)), for dense graphs (more edges than nodes), particularly when using a Fibonacci Heap rather than a simple binary heap: O(|E| + |V| log(|V|)).</note>
         </question>
 
         <question id="purpose-kruskals">
