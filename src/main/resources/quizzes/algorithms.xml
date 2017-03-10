@@ -433,14 +433,14 @@
             <text>(O-1) Knapsack Problem</text>
             <link>https://en.wikipedia.org/wiki/Knapsack_problem</link>
             <answer>NP-Complete</answer>
-            <note>This is solvable by dynamic programming. The normal Knapsack problem is NP-Complete, and solvable via dynamic programming.</note>
+            <note>This is solvable by dynamic programming. The Fractional Knapsack problem is Polynomial, and solvable via a greedy algorithm.</note>
         </question>
 
         <question id="polynomial-or-np-complete-knapsack-problem">
             <text>Fractional Knapsack Problem</text>
             <link>https://en.wikipedia.org/wiki/Continuous_knapsack_problem</link>
             <answer>Polynomial</answer>
-            <note>This is solvable by a greedy algorithm. The Fractional Knapsack problem is Polynomial, and solvable via a greedy algorithm.</note>
+            <note>This is solvable by a greedy algorithm. The normal Knapsack problem is NP-Complete, and solvable via dynamic programming.</note>
         </question>
 
         <!-- TODO: Mention that this is hard, though we don't know if it's really NP-complete.
