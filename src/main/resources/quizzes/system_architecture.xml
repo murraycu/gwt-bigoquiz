@@ -3,6 +3,46 @@
     <title>System Architecture and SRE (Site Reliability Engineering)</title>
     <link>https://en.wikipedia.org/wiki/Site_reliability_engineering</link>
 
+    <section id="theory" answers_as_choices="true" and_reverse="true">
+        <title>Theory</title>
+        <!-- Much of this is inspired by http://bravenewgeek.com/from-the-ground-up-reasoning-about-distributed-systems-in-the-real-world/ -->
+
+        <question id="theory-cap">
+            <text>CAP Theorem (Brewer)</text>
+            <link>https://en.wikipedia.org/wiki/CAP_theorem</link>
+            <answer>It is impossible for a distributed computer system to provide more than 2 of these guarantees: Consistency, Availability, and Partition Tolerance.</answer>
+        </question>
+
+        <question id="theory-flp-result">
+            <text>FLP Result (Fischer, Lynch, and Patterson)</text>
+            <link>https://en.wikipedia.org/wiki/CAP_theorem</link>
+            <answer>Impossibility of distributed consensus with one faulty process.</answer>
+        </question>
+
+        <question id="theory-two-generals-problem">
+            <text>Two Generals Problem</text>
+            <link>https://en.wikipedia.org/wiki/Two_Generals'_Problem</link>
+            <answer>Coordinating an action between two actors via an unreliable link. Proved unsolvable.</answer>
+            <note>Mitigated by accepting the unreliability of the link, for instance by sending duplicate messages.</note>
+        </question>
+
+        <question id="theory-byzantine-generals-problem">
+            <text>Byzantine Generals Problem (Lamport)</text>
+            <link>https://en.wikipedia.org/wiki/Byzantine_fault_tolerance#Byzantine_Generals.27_Problem</link>
+            <answer>Coordinating an action via an unreliable link when the other actors may be unreliable or even traitorous.</answer>
+            <note>Byzantine fault tolerance is possible if the loyal (non-faulty) generals agree unanimously.</note>
+            <!-- When is this unsolvable? Wikipedia says "unsolvable in the face of arbitrary communication failures" though only on the 2 generals problem page: https://en.wikipedia.org/wiki/Two_Generals%27_Problem -->
+        </question>
+
+        <!-- This is more of a generic concurrency problem (deadlock) than a distributed-computing problem:
+        <question id="theory-dining-philosophers-problem">
+            <text>Dining Philosopher's Problem (Dijkstra)</text>
+            <link>https://en.wikipedia.org/wiki/Dining_philosophers_problem</link>
+            <answer>TODO</answer>
+        </question>
+        -->
+    </section>
+
     <section id="golden-signals" answers_as_choices="true" and_reverse="true">
         <title>Four Golden Signals</title>
 
