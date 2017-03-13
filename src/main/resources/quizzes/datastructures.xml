@@ -335,10 +335,10 @@
         </subsection>
     </section>
 
-    <section id="datastructures-implementations" answers_as_choices="true" and_reverse="true">
+    <section id="datastructures-implementations" and_reverse="true">
         <title>Implementations of Data Structures</title>
 
-        <subsection id="datastructures-implementations-trees">
+        <subsection id="datastructures-implementations-trees" answers_as_choices="true">
             <title>Trees</title>
 
             <question id="datastructures-implementation-tree">
@@ -493,7 +493,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             <video_url>https://www.youtube.com/watch?v=xVka6z1hu-I</video_url>
         </subsection>
 
-        <subsection id="datastructures-implementations-others">
+        <subsection id="datastructures-implementations-others" answers_as_choices="true">
             <title>Others</title>
 
             <question id="datastructures-implementation-bloom-filter">
@@ -558,7 +558,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             </question>
         </subsection>
 
-        <subsection id="datastructures-implementations-heaps">
+        <subsection id="datastructures-implementations-heaps" answers_as_choices="true">
             <title>Heaps</title>
 
             <question id="datastructures-implementation-heap">
