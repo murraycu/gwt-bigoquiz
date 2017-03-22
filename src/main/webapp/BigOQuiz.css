@@ -561,7 +561,12 @@ h4 * {
     margin-left: 2em;
     display: block;
     text-align: left;
-    width: 100%;
+
+    /** Don't do this because it means 100% of the parent <span>,
+     * but that also contains an <input> radio button circle at the left,
+     * so this makes the text so wide that it can be partly off the screen.
+     */
+    /* width: 100%; */
 }
 
 .question-answer-textbox {
