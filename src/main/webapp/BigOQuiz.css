@@ -586,6 +586,12 @@ h4 * {
 }
 
 .next-question-section-title {
+    /* Otherwise, combo boxes with long choices
+     * (long <option> entries in <select> tags in the HTML)
+     * cause the combo box to be wider than the div,
+     * up to the right edge of the screen, regardless of any margin or padding.
+     */
+    width: 100%
 }
 
 .next-question-section-title-label {
