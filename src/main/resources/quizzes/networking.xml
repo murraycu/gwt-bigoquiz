@@ -233,4 +233,195 @@
             <answer>Message sent by IP Suite Transport Layer, when using TCP ("TCP segment").</answer>
         </question>
     </section>
+
+    <section id="networking-protocols-tcp-or-udp" answers_as_choices="true">
+        <title>Application layer protocols: TCP or UDP</title>
+
+        <question id="networking-protocols-tcp-or-udp-http">
+            <text>HTTP</text>
+            <answer>TCP</answer>
+            <link>https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol</link>
+            <note>HTTPS is HTTP over TLS (SSL). TLS then uses TCP.</note>
+        </question>
+
+        <question id="networking-protocols-tcp-or-udp-ftp">
+            <text>FTP</text>
+            <answer>TCP</answer>
+            <link>https://en.wikipedia.org/wiki/File_Transfer_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-tcp-or-udp-ssh">
+            <text>SSH</text>
+            <answer>TCP</answer>
+            <link>https://en.wikipedia.org/wiki/Secure_Shell</link>
+        </question>
+
+        <question id="networking-protocols-tcp-or-udp-smtp">
+            <text>SMTP</text>
+            <answer>TCP</answer>
+            <link>https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-tcp-or-udp-imap">
+            <text>IMAP</text>
+            <answer>TCP</answer>
+            <link>https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-tcp-or-udp-tls">
+            <text>TLS (SSL)</text>
+            <answer>TCP or UDP</answer>
+            <link>https://en.wikipedia.org/wiki/Transport_Layer_Security</link>
+        </question>
+
+        <question id="networking-protocols-tcp-or-udp-ntp">
+            <text>NTP</text>
+            <answer>UDP</answer>
+            <link>https://en.wikipedia.org/wiki/Network_Time_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-tcp-or-udp-dns">
+            <text>DNS</text>
+            <answer>UDP</answer>
+            <link>https://en.wikipedia.org/wiki/Domain_Name_System</link>
+        </question>
+
+        <question id="networking-protocols-tcp-or-udp-snmp">
+            <text>SNMP</text>
+            <answer>UDP</answer>
+            <link>https://en.wikipedia.org/wiki/Simple_Network_Management_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-tcp-or-udp-dhcp">
+            <text>DHCP</text>
+            <answer>UDP</answer>
+            <link>https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-tcp-or-udp-rtp">
+            <text>RTP</text>
+            <answer>UDP</answer>
+            <link>https://en.wikipedia.org/wiki/Real-time_Transport_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-tcp-or-udp-sip">
+            <text>SIP</text>
+            <answer>TCP or UDP</answer>
+            <link>https://en.wikipedia.org/wiki/Session_Initiation_Protocol</link>
+        </question>
+
+
+        <question id="networking-protocols-tcp-or-udp-arp">
+            <text>ARP</text>
+            <answer>Neither</answer>
+            <link>https://en.wikipedia.org/wiki/Address_Resolution_Protocol</link>
+            <note>ARP is a link layer protocol, below the transport layer (TCP and UDP).</note>
+        </question>
+
+        <question id="networking-protocols-tcp-or-udp-ndp">
+            <text>NDP</text>
+            <answer>Neither</answer>
+            <link>https://en.wikipedia.org/wiki/Neighbor_Discovery_Protocol</link>
+            <note>NDP is a link layer protocol, below the transport layer (TCP and UDP).</note>
+        </question>
+
+        <question id="networking-protocols-tcp-or-udp-icmp">
+            <text>IMCP</text>
+            <answer>Neither</answer>
+            <link>https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol</link>
+            <note>NDP is an internet layer protocol, below the transport layer (TCP and UDP).</note>
+        </question>
+    </section>
+
+    <section id="networking-protocols-descriptions" answers_as_choices="true" and_reverse="true">
+        <title>Protocols: Descriptions</title>
+
+        <question id="networking-protocols-descriptions-http">
+            <text>HTTP</text>
+            <answer>Transfers hypertext documents. A request-response protocol.</answer>
+            <link>https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol</link>
+            <note>HTTPS is HTTP over TLS (SSL). TLS then uses TCP.</note>
+        </question>
+
+        <question id="networking-protocols-descriptions-ftp">
+            <text>FTP</text>
+            <answer>Transfers files from a server to a client. Uses a client-server model.</answer>
+            <link>https://en.wikipedia.org/wiki/File_Transfer_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-descriptions-ssh">
+            <text>SSH</text>
+            <answer>For operating network services securely over an unsecured network. For instance, to use shell accounts.</answer>
+            <link>https://en.wikipedia.org/wiki/Secure_Shell</link>
+        </question>
+
+        <question id="networking-protocols-descriptions-smtp">
+            <text>SMTP</text>
+            <answer>Sends e-mail messages from clients to mail servers, or sends and receives e-mail messages between mail servers.</answer>
+            <link>https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-descriptions-imap">
+            <text>IMAP</text>
+            <answer>Retrieves e-mail messages from a mail server.</answer>
+            <link>https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-descriptions-tls">
+            <text>TLS (SSL)</text>
+            <answer>Provides secure communication over the network using symmetric cryptography.</answer>
+            <link>https://en.wikipedia.org/wiki/Transport_Layer_Security</link>
+        </question>
+
+        <question id="networking-protocols-descriptions-ntp">
+            <text>NTP</text>
+            <answer>Synchronizes clocks between computers.</answer>
+            <link>https://en.wikipedia.org/wiki/Network_Time_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-descriptions-dns">
+            <text>DNS</text>
+            <answer>Decentralized naming system. Translates domain names and host names to IP addresses.</answer>
+            <link>https://en.wikipedia.org/wiki/Domain_Name_System</link>
+        </question>
+
+        <question id="networking-protocols-descriptions-snmp">
+            <text>SNMP</text>
+            <answer>For collecting and organizing information about devices or to change device behavior.</answer>
+            <link>https://en.wikipedia.org/wiki/Simple_Network_Management_Protocol</link>
+            <note>Often supported by routers, switches, and printers.</note>
+        </question>
+
+        <question id="networking-protocols-descriptions-dhcp">
+            <text>DHCP</text>
+            <answer>Dynamically distributes network configuration parameters, such as IP addresses, at request.</answer>
+            <link>https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-descriptions-rtp">
+            <text>RTP</text>
+            <answer>Delivers streaming audio or video.</answer>
+            <link>https://en.wikipedia.org/wiki/Real-time_Transport_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-descriptions-sip">
+            <text>SIP</text>
+            <answer>Used to set up and control voice and video calls.</answer>
+            <link>https://en.wikipedia.org/wiki/Session_Initiation_Protocol</link>
+        </question>
+
+        <question id="networking-protocols-descriptions-arp">
+            <text>ARP</text>
+            <answer>Resolves Internet layer addresses (such as an IP addresses) into link layer addresses (such as a MAC address).</answer>
+            <link>https://en.wikipedia.org/wiki/Address_Resolution_Protocol</link>
+            <note>ARP was replaced by NDP in IPv6. ARP is a link layer protocol, below the internet layer. For instance, below IP.</note>
+        </question>
+
+        <question id="networking-protocols-descriptions-ndp">
+            <text>NDP</text>
+            <answer>Used for address autoconfiguration and to tracks and discover other hosts.</answer>
+            <link>https://en.wikipedia.org/wiki/Neighbor_Discovery_Protocol</link>
+            <note>NDP is since IPv6, replacing ARP, ICMP and others in iPv4. NDP is a link layer protocol, below the internet layer. For instance, below IP.</note>
+        </question>
+    </section>
 </quiz>
