@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="networking">
+    <title>Networking</title>
+
+    <section id="networking-osi-model">
+        <title>OSI Model</title>
+
+        <subsection id="networking-osi-model-layer-numbers" answers_as_choices="true" and_reverse="true">
+            <title>Layer Numbers</title>
+            <link>https://en.wikipedia.org/wiki/OSI_model</link>
+
+            <question id="networking-osi-model-layer-numbers-1">
+                <text>Layer 1</text>
+                <answer>Physical layer</answer>
+                <link>https://en.wikipedia.org/wiki/Physical_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-numbers-2">
+                <text>Layer 2</text>
+                <answer>Data link layer</answer>
+                <link>https://en.wikipedia.org/wiki/Data_link_layer</link>
+                <note>Has 2 sublayers: Logical link control sublayer and media access control sublayer.</note>
+            </question>
+
+            <question id="networking-osi-model-layer-numbers-3">
+                <text>Layer 3</text>
+                <answer>Network layer</answer>
+                <link>https://en.wikipedia.org/wiki/Network_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-numbers-4">
+                <text>Layer 4</text>
+                <answer>Transport layer</answer>
+                <link>https://en.wikipedia.org/wiki/Transport_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-numbers-5">
+                <text>Layer 5</text>
+                <answer>Session layer</answer>
+                <link>https://en.wikipedia.org/wiki/Session_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-numbers-6">
+                <text>Layer 6</text>
+                <answer>Presentation layer</answer>
+                <link>https://en.wikipedia.org/wiki/Presentation_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-numbers-7">
+                <text>Layer 7</text>
+                <answer>Application layer</answer>
+                <link>https://en.wikipedia.org/wiki/Application_layer</link>
+            </question>
+        </subsection>
+
+        <subsection id="networking-osi-model-layer-descriptions" answers_as_choices="true" and_reverse="true">
+            <title>Layer Descriptions</title>
+            <link>https://en.wikipedia.org/wiki/OSI_model</link>
+
+            <question id="networking-osi-model-layer-descriptions-physical">
+                <text>Physical layer</text>
+                <answer>Electrical and physical transfer of bits.</answer>
+                <link>https://en.wikipedia.org/wiki/Physical_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-descriptions-data-link">
+                <text>Data link layer</text>
+                <answer>Node to node data transfer of "frames". Detects and corrects errors in physical layer. Nodes have addresses, which refer to local physical devices.</answer>
+                <link>https://en.wikipedia.org/wiki/Data_link_layer</link>
+                <note>Has 2 sublayers: Logical link control sublayer and media access control sublayer.</note>
+            </question>
+
+            <question id="networking-osi-model-layer-descriptions-network">
+                <text>Network layer</text>
+                <answer>Transfers variable length data sequences ("datagrams" or "packets") between nodes in the same network (routing). Nodes in the network have unique logical addresses, independent of particular hardware.</answer>
+                <link>https://en.wikipedia.org/wiki/Network_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-descriptions-transport">
+                <text>Transport layer</text>
+                <answer>Transfers data between hosts, across multiple networks. Does error recovery and flow control.</answer>
+                <link>https://en.wikipedia.org/wiki/Transport_layer</link>
+                <note>There are 5 classes of connection-mode transport protocols: TP0 to TP4.</note>
+            </question>
+
+            <question id="networking-osi-model-layer-descriptions-session">
+                <text>Session layer</text>
+                <answer>Establishes, manages and terminates connections between applications.</answer>
+                <link>https://en.wikipedia.org/wiki/Session_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-descriptions-presentation">
+                <text>Presentation layer</text>
+                <answer>Transforms between representations used by different computers on the network. Does translation, compression, or encryption, optionally.</answer>
+                <link>https://en.wikipedia.org/wiki/Presentation_layer</link>
+                <note>Not always needed by a protocol stack. The session layer may instead talk directly to the application layer.</note>
+            </question>
+
+            <question id="networking-osi-model-layer-descriptions-application">
+                <text>Application layer</text>
+                <answer>User interface responsible for displaying received information to the user.</answer>
+                <link>https://en.wikipedia.org/wiki/Application_layer</link>
+            </question>
+        </subsection>
+
+        <subsection id="networking-osi-model-layer-examples" answers_as_choices="true" and_reverse="true">
+            <title>Layer Examples</title>
+            <link>https://en.wikipedia.org/wiki/OSI_model</link>
+
+            <question id="networking-osi-model-layer-examples-physical">
+                <text>Physical layer</text>
+                <answer>Ethernet, ATM</answer>
+                <link>https://en.wikipedia.org/wiki/Physical_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-examples-data-link">
+                <text>Data link layer</text>
+                <answer>TCP/IP link layer, PPP.</answer>
+                <link>https://en.wikipedia.org/wiki/Data_link_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-examples-network">
+                <text>Network layer</text>
+                <answer>IPv4, IPv6, IPsec</answer>
+                <link>https://en.wikipedia.org/wiki/Network_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-examples-transport">
+                <text>Transport layer</text>
+                <answer>TCP, UDP</answer>
+                <link>https://en.wikipedia.org/wiki/Transport_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-examples-session">
+                <text>Session layer</text>
+                <answer>TCP/IP Sockets, NFS, NetBios, RPC, PPTP, RTCP, RTP</answer>
+                <link>https://en.wikipedia.org/wiki/Session_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-examples-presentation">
+                <text>Presentation layer</text>
+                <answer>ASCII, JPEG, GIF, MPEG</answer>
+                <link>https://en.wikipedia.org/wiki/Presentation_layer</link>
+            </question>
+
+            <question id="networking-osi-model-layer-examples-application">
+                <text>Application layer</text>
+                <answer>DNS, HTTP, FTP, NFS, SMTP, SNMP, Telnet</answer>
+                <link>https://en.wikipedia.org/wiki/Application_layer</link>
+            </question>
+        </subsection>
+    </section>
+
+    <section id="networking-ip-suite">
+        <title>IP Suite</title>
+
+        <subsection id="networking-ip-suite-layer-descriptions" answers_as_choices="true" and_reverse="true">
+            <title>Layers Descriptions</title>
+            <link>https://en.wikipedia.org/wiki/Internet_protocol_suite#Abstraction_layers</link>
+
+            <question id="networking-ip-suite-layer-descriptions-link">
+                <text>Link Layer</text>
+                <answer>Physical and logical interconnection of hosts (nodes) in the same network.</answer>
+                <link>https://en.wikipedia.org/wiki/Link_layer</link>
+                <note>Roughly, this is a combination of the OSI Model's Data Link layer and Physical layer. At this layer, Ethernet, transports "Ethernet frames"</note>
+            </question>
+
+            <question id="networking-ip-suite-layer-descriptions-internet">
+                <text>Internet Layer</text>
+                <answer>Internetworking: Transports datagrams between hosts, even between networks. Hosts have IP addresses.</answer>
+                <link>https://en.wikipedia.org/wiki/Internet_layer</link>
+                <note>At this layer, IP transports "IP datagrams".</note>
+            </question>
+
+            <question id="networking-ip-suite-layer-descriptions-transport">
+                <text>Transport Layer</text>
+                <answer>Communication between hosts, optionally with connections, data streams, reliability, flow control and multiplexing.</answer>
+                <link>https://en.wikipedia.org/wiki/Transport_layer</link>
+                <note>At this layer, TCP transports "TCP segments", or UDP transports "UDP datagrams".</note>
+            </question>
+
+            <question id="networking-ip-suite-layer-descriptions-application">
+                <text>Application Layer</text>
+                <answer>Process-to-process communication between hosts.</answer>
+                <link>https://en.wikipedia.org/wiki/Application_layer</link>
+            </question>
+        </subsection>
+
+        <subsection id="networking-ip-suite-layer-examples" answers_as_choices="true" and_reverse="true">
+            <title>Layer Examples</title>
+            <link>https://en.wikipedia.org/wiki/Internet_protocol_suite#Abstraction_layers</link>
+
+            <question id="networking-ip-suite-layer-examples-link">
+                <text>Link Layer</text>
+                <answer>ARP, RARP, NDP</answer>
+                <link>https://en.wikipedia.org/wiki/Link_layer</link>
+            </question>
+
+            <question id="networking-ip-suite-layer-examples-internet">
+                <text>Internet Layer</text>
+                <answer>IPv4, IPv6, ICMP, IPsec</answer>
+                <link>https://en.wikipedia.org/wiki/Internet_layer</link>
+            </question>
+
+            <question id="networking-ip-suite-layer-examples-transport">
+                <text>Transport Layer</text>
+                <answer>TCP, UDP</answer>
+                <link>https://en.wikipedia.org/wiki/Transport_layer</link>
+            </question>
+
+            <question id="networking-ip-suite-layer-examples-application">
+                <text>Application Layer</text>
+                <answer>DNS, HTTP, FTP, NFS, SMTP, SNMP, Telnet</answer>
+                <link>https://en.wikipedia.org/wiki/Application_layer</link>
+            </question>
+        </subsection>
+    </section>
+
+    <section id="networking-terminology-messages" answers_as_choices="true" and_reverse="true">
+        <title>Terminology: Messages</title>
+        <question id="networking-terminology-messages-packet">
+            <text>Packet or Datagram</text>
+            <answer>Sent by OSI Network Layer or IP Suite Internet Layer. For instance, IP Packets. Or by the IP Suite Transport layer, when using UDP ("UDP Datagram"). Often used vaguely to refer to IP Suite Transport layer messages - For instance, "TCP packet", which usually means "TCP segment".</answer>
+        </question>
+
+        <question id="networking-terminology-messages-frame">
+            <text>Frame</text>
+            <answer>Message sent by OSI Data Link Layer or Physical layer. Puts a frame around higher-level packets by adding a header. For instance, Ethernet frames (OSI Physical layer).</answer>
+        </question>
+
+        <question id="networking-terminology-messages-segment">
+            <text>Segment</text>
+            <answer>Message sent by IP Suite Transport Layer, when using TCP ("TCP segment").</answer>
+        </question>
+    </section>
+</quiz>

@@ -139,7 +139,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 "bitwise",
                 "concurrency",
                 "system_architecture",
-                "book_stepanov_fmtgp"};
+                "book_stepanov_fmtgp",
+                "networking"};
 
         for (final String name : names) {
             if (!loadQuizIntoQuizzes(name, quizzes)) {
