@@ -64,7 +64,9 @@ public class QuizServiceImpl extends ServiceWithUser implements
     @NotNull
     @Override
     public  Quiz getQuiz(final String quizId)  throws UnknownQuizException, IllegalArgumentException {
-        getOrLoadQuiz(quizId);
+        if (!loadQuizIntoQuizzes(quizId)) {
+            throw new UnknownQuizException();
+        }
 
         if (quizzes == null) {
             throw new UnknownQuizException();
@@ -76,19 +78,6 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         return result;
-    }
-
-    private Quiz getOrLoadQuiz(final String quizId) {
-        getQuizzesMap();
-
-        if (!quizzes.map.containsKey(quizId)) {
-            if (!loadQuizIntoQuizzes(quizId, quizzes)) {
-                Log.error("Could not load quiz: " + quizId);
-                return null;
-            }
-        }
-
-        return quizzes.map.get(quizId);
     }
 
     private void getQuizzesMap() {
@@ -143,9 +132,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 "networking"};
 
         for (final String name : names) {
-            if (!loadQuizIntoQuizzes(name, quizzes)) {
-                continue;
-            }
+            loadQuizIntoQuizzes(name, quizzes);
         }
 
         quizzes.allTitlesLoaded = true;
@@ -494,6 +481,19 @@ public class QuizServiceImpl extends ServiceWithUser implements
         }
 
         return getUserProfileFromDataStore(user);
+    }
+
+    private boolean loadQuizIntoQuizzes(final String quizId) {
+        getQuizzesMap();
+
+        if (!quizzes.map.containsKey(quizId)) {
+            if (!loadQuizIntoQuizzes(quizId, quizzes)) {
+                Log.error("Could not load quiz: " + quizId);
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
