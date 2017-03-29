@@ -176,6 +176,12 @@
             <answer>When a failure triggers failures of successive parts of a system.</answer>
         </question>
 
+        <question id="terminology-eventual-consistency">
+            <text>Eventual Consistency</text>
+            <link>https://en.wikipedia.org/wiki/Eventual_consistency</link>
+            <answer>Offers high availability by only ensuring that reads will all eventually return the latest value (converge), instead of guaranteeing consistency at all times.</answer>
+            <note>This requires more conflict resolution.</note>
+        </question>
     </section>
 
     <!-- This is not really a Google SRE theme: -->
@@ -227,6 +233,28 @@
             <text>Durability</text>
             <link>https://en.wikipedia.org/wiki/ACID#Durability</link>
             <answer>Once a transaction is committed, the change of state will remain.</answer>
+        </question>
+    </section>
+
+    <!-- This is not really a Google SRE theme: -->
+    <section id="base" answers_as_choices="true">
+        <title>BASE</title>
+        <link>https://en.wikipedia.org/wiki/Eventual_consistency</link>
+        <!-- http://www.dataversity.net/acid-vs-base-the-shifting-ph-of-database-transaction-processing/ -->
+
+        <question id="base-basically-available">
+            <text>Basically Available</text>
+            <answer>Requests will be served, but could return outdated values.</answer>
+        </question>
+
+        <question id="base-soft-state">
+            <text>Soft State</text>
+            <answer>The system may change state even without external writes. For instance, to achieve eventual consistency.</answer>
+        </question>
+
+        <question id="base-eventual-consistency">
+            <text>Eventual Consistency</text>
+            <answer>Reads will all eventually return the latest value (converge), but consistency is not guaranteed at all times.</answer>
         </question>
     </section>
 
