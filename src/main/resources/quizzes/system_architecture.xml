@@ -176,6 +176,24 @@
             <answer>When a failure triggers failures of successive parts of a system.</answer>
         </question>
 
+        <question id="terminology-consistent-hashing">
+            <text>Consistent Hashing</text>
+            <link>https://en.wikipedia.org/wiki/Consistent_hashing</link>
+            <answer>Allows sharding across servers, without needing rehashing and resharding when adding or removing a server.</answer>
+            <video_url>https://youtu.be/PQY2_QopWTM</video_url>
+            <!-- Also good: https://www.youtube.com/watch?v=jznJKL0CrxM -->
+            <note>Keys and their values are stored in whatever node's hashed ID is a successor to the hash of the key. The nodes are considered to be in a ring, so there is always a successor. Keys are stored in multiple nodes, either by using successor nodes or by using multiple hash functions, so we don't lose data when a node fails. Each node can identify the node responsible for a key, for instance with a finger table.</note>
+        </question>
+
+        <!-- TODO?
+        <question id="terminology-finger-tables">
+            <text>Finger Tables</text>
+            <link>https://en.wikipedia.org/wiki/Chord_(peer-to-peer)#Finger_table</link>
+            <answer>TODO: O(log n) hops.</answer>
+            <video_url>https://www.youtube.com/watch?v=GOOXa2GkPws</video_url>
+        </question>
+        -->
+
         <question id="terminology-eventual-consistency">
             <text>Eventual Consistency</text>
             <link>https://en.wikipedia.org/wiki/Eventual_consistency</link>
