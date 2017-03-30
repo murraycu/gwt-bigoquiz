@@ -224,15 +224,15 @@
             <text>Vector Clock</text>
             <link>https://en.wikipedia.org/wiki/Vector_clock</link>
             <answer>Discovers partial ordering of events and detects conflicts.</answer>
-            <note>The vector of service IDs and associated sequence numbers is sent with every message. For each received message or sent message, the service increments its own sequence number, and uses the latest sequence number for other services. There is only a conflict when one message's vector clock is not contained within another message's vector clock.</note>
+            <note>The vector of service IDs and associated sequence numbers is sent with every message. For each received message or sent message, the service increments its own sequence number, and uses the latest sequence number for other services. There is only a conflict when one message's vector clock is not contained within another message's vector clock. The application must resolve conflicts.</note>
             <video_url>https://youtu.be/IT5AqUEGLwM</video_url>
         </question>
 
         <question id="terminology-lamport-timestamp">
             <text>Lamport Timestamp</text>
             <link>https://en.wikipedia.org/wiki/Lamport_timestamps</link>
-            <answer>Discovers partial ordering of events and detects conflicts.</answer>
-            <note>The timestamp is sent with every message. For each sent message, the service adds 1 to its timestamp. For every received message, it adds 1 to the max of its own timestamp and the received timestamp.</note>
+            <answer>Discovers partial ordering of events and detect conflicts (simple ordering).</answer>
+            <note>The timestamp is sent with every message. For each sent message, the service adds 1 to its timestamp. For every received message, it adds 1 to the max of its own timestamp and the received timestamp. However, this can suggest conflicts between causally-unrelated events - vector clocks let us detect actual conflicts.</note>
             <video_url>https://youtu.be/CMBjvCzDVkY</video_url>
         </question>
 
