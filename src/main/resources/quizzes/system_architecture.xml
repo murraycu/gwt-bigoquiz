@@ -247,16 +247,20 @@
         <question id="cap-consistency">
             <text>Consistency</text>
             <answer>Every read receives the most recent write or an error.</answer>
+            <note>Network partitions are inevitable, so consistency is possible (CP), but not both complete consistency and complete availability (CA).</note>
         </question>
 
         <question id="cap-availability">
             <text>Availability</text>
             <answer>Every request receives a response, without guarantee that it contains the most recent version of the information.</answer>
+            <answer>Every read receives the most recent write or an error.</answer>
+            <note>Network partitions are inevitable, so availability is possible (AP), but not both complete consistency and complete availability (CA).</note>
         </question>
 
         <question id="cap-partition-tolerance">
             <text>Partition Tolerance</text>
             <answer>The system continues to operate despite an arbitrary number of messages being dropped by the network between nodes.</answer>
+            <note>Network partitions are inevitable, so any system must tend towards either CP or AP.</note>
         </question>
     </section>
 
