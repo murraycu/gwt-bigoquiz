@@ -200,6 +200,15 @@
             <answer>Offers high availability by only ensuring that reads will all eventually return the latest value (converge), instead of guaranteeing consistency at all times.</answer>
             <note>This requires more conflict resolution.</note>
         </question>
+
+        <question id="terminology-map-reduce">
+            <text>MapReduce</text>
+            <link>https://en.wikipedia.org/wiki/MapReduce</link>
+            <answer>Distributed batch processing of key/value pairs.</answer>
+            <note>A Mapper splits key/value pairs into multiple key/value pairs, possibly outputting keys based on parts of the input value. The framework shuffles these keys, sorting and grouping equal keys together, and the Reducer then performs some aggregate calculation on these groups of key/value pairs.</note>
+            <video_url>https://youtu.be/9CrWSHzy3BQ</video_url>
+        </question>
+
     </section>
 
     <!-- This is not really a Google SRE theme: -->
