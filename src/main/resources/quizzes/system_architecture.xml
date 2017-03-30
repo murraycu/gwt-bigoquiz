@@ -312,6 +312,64 @@
         </question>
     </section>
 
+    <section id="projects" answers_as_choices="true">
+        <title>Projects / Products</title>
+
+        <question id="projects-cassandra">
+            <text>Cassandra</text>
+            <answer>Distributed Storage</answer>
+            <link>https://en.wikipedia.org/wiki/Apache_Cassandra</link>
+            <note>Shards via consistent hashing. No master (which would be a single point of failure).</note>
+        </question>
+
+        <question id="projects-redis">
+            <text>Redis</text>
+            <answer>Distributed Storage</answer>
+            <link>https://en.wikipedia.org/wiki/Redis</link>
+            <note>Uses Master/Slave. Doesn't seem to use consistent hashing for sharding, at least by default.</note>
+        </question>
+
+        <!-- TODO:
+        <question id="projects-mongo-db">
+            <text>MongoDB</text>
+            <answer>Distributed Storage</answer>
+            <link>https://en.wikipedia.org/wiki/MongoDB</link>
+        </question>
+        -->
+
+        <question id="projects-hadoop">
+            <text>Hadoop</text>
+            <answer>Distributed Computation: Batch Processing (MapReduce)</answer>
+            <link>https://en.wikipedia.org/wiki/Apache_Hadoop</link>
+        </question>
+
+        <question id="projects-spark">
+            <text>Spark</text>
+            <answer>Distributed Computation: Batch Processing</answer>
+            <link>https://en.wikipedia.org/wiki/Apache_Spark</link>
+            <video_url>https://youtu.be/DpqIc-EggOs?list=PLXCArKglxOG9pWzw23kPY-UcFMCuTLWFs</video_url>
+            <note>Unlike Hadoop, Spark tries to keep data in memory, and doesn't restrict processing (transformation) to the MapReduce key/value API.</note>
+        </question>
+
+        <question id="projects-storm">
+            <text>Storm</text>
+            <answer>Distributed Computation: Stream Processing</answer>
+            <link>https://en.wikipedia.org/wiki/Storm_(event_processor)</link>
+        </question>
+
+        <question id="projects-kafka">
+            <text>Kafka</text>
+            <answer>Distributed Message Queue</answer>
+            <link>https://en.wikipedia.org/wiki/Apache_Kafka</link>
+        </question>
+
+        <question id="projects-zookeeper">
+            <text>Zookeeper</text>
+            <answer>Distributed Configuration and Coordination</answer>
+            <link>https://en.wikipedia.org/wiki/Apache_ZooKeeper</link>
+        </question>
+    </section>
+
     <!--
     Availability
 
