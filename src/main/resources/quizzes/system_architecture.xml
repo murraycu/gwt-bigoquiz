@@ -201,6 +201,17 @@
             <note>This requires more conflict resolution.</note>
         </question>
 
+        <question id="terminology-read-replication">
+            <text>Read Replication</text>
+            <answer>Writes are propagated to multiple replicas which serve only reads.</answer>
+            <video_url>https://youtu.be/MbqAH5OzLjE</video_url>
+        </question>
+
+        <question id="terminology-consistent-scatter-gather">
+            <text>Scatter/Gather</text>
+            <answer>Request data from multiple servers, aggregate them on one server, and return an overall response.</answer>
+        </question>
+
         <question id="terminology-map-reduce">
             <text>MapReduce</text>
             <link>https://en.wikipedia.org/wiki/MapReduce</link>
