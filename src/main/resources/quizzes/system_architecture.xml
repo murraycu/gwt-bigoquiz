@@ -234,6 +234,13 @@
             <answer>Discovers partial ordering of events and detect conflicts (simple ordering).</answer>
             <note>The timestamp is sent with every message. For each sent message, the service adds 1 to its timestamp. For every received message, it adds 1 to the max of its own timestamp and the received timestamp. However, this can suggest conflicts between causally-unrelated events - vector clocks let us detect actual conflicts.</note>
             <video_url>https://youtu.be/CMBjvCzDVkY</video_url>
+            <!-- Also https://www.youtube.com/watch?v=jD4ECsieFbE -->
+        </question>
+
+        <question id="terminology-crdt">
+            <text>CRDT</text>
+            <link>https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type</link>
+            <answer>Conflict-free Replicated Data Type.</answer>
         </question>
 
     </section>
