@@ -417,7 +417,6 @@
         </question>
     </section>
 
-
     <section id="factorials" answers_as_choices="true">
         <title>Factorials</title>
         <question id="factorials-0">
@@ -462,5 +461,68 @@
         </question>
     </section>
 
-    <!-- Cache access times. Cache misses. -->
+    <section id="time" answers_as_choices="true">
+        <title>Time</title>
+
+        <question id="time-seconds-hour">
+            <text>Seconds in an hour</text>
+            <answer>3,600</answer>
+        </question>
+
+        <question id="time-seconds-day">
+            <text>Seconds in a day</text>
+            <answer>86,400</answer>
+        </question>
+
+        <question id="time-minutes-day">
+            <text>Minutes in a day</text>
+            <answer>1,440</answer>
+        </question>
+
+        <question id="time-seconds-week">
+            <text>Seconds in a week</text>
+            <answer>604,800</answer>
+        </question>
+
+        <question id="time-minutes-week">
+            <text>Minutes in a week</text>
+            <answer>10,080</answer>
+        </question>
+
+        <question id="time-hours-week">
+            <text>Hours in a week</text>
+            <answer>168</answer>
+        </question>
+
+        <question id="time-seconds-month">
+            <text>Seconds in a (typical) month</text>
+            <answer>259,2000</answer>
+        </question>
+
+        <question id="time-minutes-month">
+            <text>Minutes in a (typical) month</text>
+            <answer>43,200</answer>
+        </question>
+
+        <question id="time-hours-month">
+            <text>Hours in a (typical) month</text>
+            <answer>720</answer>
+        </question>
+
+        <question id="time-seconds-year">
+            <text>Seconds in a (typical) year</text>
+            <answer>31,536,000</answer>
+        </question>
+
+        <question id="time-minutes-year">
+            <text>Minutes in a year</text>
+            <answer>525,600</answer>
+        </question>
+
+        <question id="time-hours-year">
+            <text>Hours in a year</text>
+            <answer>8,760</answer>
+        </question>
+    </section>
+
 </quiz>
