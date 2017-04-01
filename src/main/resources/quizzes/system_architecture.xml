@@ -260,7 +260,6 @@
         <question id="cap-availability">
             <text>Availability</text>
             <answer>Every request receives a response, without guarantee that it contains the most recent version of the information.</answer>
-            <answer>Every read receives the most recent write or an error.</answer>
             <note>Network partitions are inevitable, so availability is possible (AP), but not both complete consistency and complete availability (CA).</note>
         </question>
 
