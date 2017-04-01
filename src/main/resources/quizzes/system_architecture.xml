@@ -271,6 +271,29 @@
         </question>
     </section>
 
+    <section id="cap-protocols" answers_as_choices="true">
+        <title>CAP Theorem: Example Protocols</title>
+        <link>https://en.wikipedia.org/wiki/CAP_theorem</link>
+
+        <question id="cap-protocols-ca">
+            <text>CA (Consistency + Availability)</text>
+            <answer>2PC (Two Phase Commit)</answer>
+            <note>Assumes (unrealistically) that no network partitions will happen.</note>
+        </question>
+
+        <question id="cap-protocols-cp">
+            <text>CP (Consistency + Partition Tolerance)</text>
+            <answer>Paxos</answer>
+            <note>Tolerates network partitions, by preventing writes to minority sets of nodes.</note>
+        </question>
+
+        <question id="cap-protocols-ap">
+            <text>AP (Availability + Partition Tolerance)</text>
+            <answer>Gossip</answer>
+            <note>Tolerates network partitions (and node failures), by preventing any writes during failures.</note>
+        </question>
+    </section>
+
     <!-- This is not really a Google SRE theme: -->
     <section id="acid" answers_as_choices="true">
         <title>ACID</title>
