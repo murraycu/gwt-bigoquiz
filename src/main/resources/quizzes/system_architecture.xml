@@ -240,7 +240,7 @@
         <question id="terminology-crdt">
             <text>CRDT</text>
             <link>https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type</link>
-            <answer>Conflict-free Replicated Data Type.</answer>
+            <answer>Conflict-free Replicated Data Type (or Convergent Replicated Data Type)</answer>
         </question>
 
     </section>
