@@ -293,6 +293,79 @@
         </question>
     </section>
 
+    <section id="consistency">
+        <title>Consistency Models</title>
+        <link>https://en.wikipedia.org/wiki/Consistency_model</link>
+
+        <subsection id="consistency-strong-or-weak" answers_as_choices="true">
+            <title>Consistency Models: Strong or Weak</title>
+            <link>http://book.mixu.net/distsys/abstractions.html#strong-consistency-vs-other-consistency-models</link>
+
+            <question id="consistency-strong-or-weak-linearizable-consistency">
+                <text>Linearizable Consistency</text>
+                <answer>Strong</answer>
+            </question>
+
+            <question id="consistency-strong-or-weak-sequential-consistency">
+                <text>Sequential Consistency</text>
+                <answer>Strong</answer>
+            </question>
+
+            <question id="consistency-strong-or-weak-client-centric-consistency">
+                <text>Client-centric Consistency</text>
+                <answer>Weak</answer>
+            </question>
+
+            <question id="consistency-strong-or-weak-causal-consistency">
+                <text>Causal Consistency</text>
+                <answer>Weak</answer>
+            </question>
+
+            <question id="consistency-strong-or-weak-eventual-consistency">
+                <text>Eventual Consistency</text>
+                <answer>Weak</answer>
+            </question>
+        </subsection>
+
+        <subsection id="consistency-strong-models" answers_as_choices="true" and_reverse="true">
+            <title>Strong Consistency Models</title>
+            <link>http://book.mixu.net/distsys/abstractions.html#strong-consistency-models</link>
+            <!-- Also https://en.wikipedia.org/wiki/Consistency_model and
+                 http://www.bailis.org/blog/linearizability-versus-serializability/ -->
+
+            <question id="consistency-strong-models-linearizable">
+                <text>Linearizable Consistency (Atomic Consistency)</text>
+                <link>https://en.wikipedia.org/wiki/Linearizability</link>
+                <answer>All operations appear to have executed atomically in an order that is consistent with the global real-time ordering. After a write, all later reads return that value or the value from a later write. After a read, all later reads return that value or the value from a later write.</answer>
+                <note>Linearizability is sequential consistency with the real-time constraint.</note>
+            </question>
+
+            <question id="consistency-strong-models-sequential">
+                <text>Sequential Consistency (Serializability)</text>
+                <link>https://en.wikipedia.org/wiki/Sequential_consistency</link>
+                <answer>All operations appear to have executed atomically in some order that is consistent with the order seen at individual nodes. Writes may not be seen immediately but written values will always be read in the same order by all nodes.</answer>
+                <!-- TODO: Is Sequential Consistency really the same as serializability? See https://github.com/mixu/distsysbook/issues/34 -->
+            </question>
+        </subsection>
+
+        <subsection id="consistency-weak-models" answers_as_choices="true" and_reverse="true">
+            <title>Weak Consistency Models</title>
+
+            <question id="consistency-weak-models-client-centric">
+                <text>Client-centric Consistency</text>
+                <answer>For instance, a client caches a result, and uses it instead if a node returns an older value.</answer>
+            </question>
+
+            <question id="consistency-weak-eventual">
+                <text>Eventual Consistency</text>
+                <answer>https://en.wikipedia.org/wiki/Eventual_consistency</answer>
+                <answer>Reads will all eventually return the latest value (converge), but consistency is not guaranteed at all times.</answer>
+            </question>
+
+            <!-- TODO: Causal consistency? -->
+        </subsection>
+    </section>
+
     <!-- This is not really a Google SRE theme: -->
     <section id="acid" answers_as_choices="true">
         <title>ACID</title>
