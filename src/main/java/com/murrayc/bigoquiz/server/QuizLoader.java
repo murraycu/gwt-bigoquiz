@@ -163,7 +163,11 @@ public class QuizLoader {
             return;
         }
 
-        @Nullable String sectionTitle = getTitleNodeText(sectionElement);
+        String sectionTitle = getTitleNodeText(sectionElement);
+        if (StringUtils.isEmpty(sectionTitle)) {
+            throw new QuizLoaderException("No section title found.");
+        }
+
         if (reverse) {
             sectionId = "reverse-" + sectionId;
             sectionTitle = "Reverse: " + sectionTitle;
