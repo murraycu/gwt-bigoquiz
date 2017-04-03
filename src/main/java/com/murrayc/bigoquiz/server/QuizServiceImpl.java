@@ -127,7 +127,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 "datastructures",
                 "bitwise",
                 "concurrency",
-                "system_architecture",
+                "distributed_systems",
                 "book_stepanov_fmtgp",
                 "networking"};
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="system_architecture">
-    <title>System Architecture and SRE (Site Reliability Engineering)</title>
-    <link>https://en.wikipedia.org/wiki/Site_reliability_engineering</link>
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="distributed_systems">
+    <title>Distributed Systems</title>
 
     <section id="theory" answers_as_choices="true" and_reverse="true">
         <title>Theory</title>
@@ -44,7 +43,7 @@
     </section>
 
     <section id="golden-signals" answers_as_choices="true" and_reverse="true">
-        <title>Four Golden Signals</title>
+        <title>Google SRE: Four Golden Signals</title>
 
         <question id="golden-signals-latency">
             <text>Latency</text>
@@ -86,7 +85,7 @@
         </question>
     </section>
 
-    <section id="other-terminology" answers_as_choices="true">
+    <section id="other-terminology" answers_as_choices="true" and_reverse="true">
         <title>Other Terminology</title>
 
         <question id="terminology-slo">
@@ -246,7 +245,7 @@
         <question id="definition-liveness">
             <text>Liveness</text>
             <link>https://en.wikipedia.org/wiki/Liveness</link>
-            <answer>A promise that the system will continue to make progress toward a correct result during concurrent operations. (It will terminate sucessfully.)</answer>
+            <answer>A promise that the system will continue to make progress toward a correct result during concurrent operations. (It will terminate successfully.)</answer>
             <note>For instance, Eventual Consistency. For instance, having no deadlocks or resource starvation.</note>
         </question>
 
@@ -258,7 +257,6 @@
         </question>
     </section>
 
-    <!-- This is not really a Google SRE theme: -->
     <!-- The answer text here is directly from the Wikipedia article. -->
     <section id="cap" answers_as_choices="true">
         <title>CAP Theorem</title>
@@ -379,7 +377,6 @@
         </subsection>
     </section>
 
-    <!-- This is not really a Google SRE theme: -->
     <section id="acid" answers_as_choices="true">
         <title>ACID</title>
         <link>https://en.wikipedia.org/wiki/ACID</link>
@@ -409,7 +406,6 @@
         </question>
     </section>
 
-    <!-- This is not really a Google SRE theme: -->
     <section id="base" answers_as_choices="true">
         <title>BASE</title>
         <link>https://en.wikipedia.org/wiki/Eventual_consistency</link>
