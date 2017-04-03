@@ -243,6 +243,19 @@
             <answer>Conflict-free Replicated Data Type (or Convergent Replicated Data Type)</answer>
         </question>
 
+        <question id="definition-liveness">
+            <text>Liveness</text>
+            <link>https://en.wikipedia.org/wiki/Liveness</link>
+            <answer>A promise that the system will continue to make progress toward a correct result during concurrent operations. (It will terminate sucessfully.)</answer>
+            <note>For instance, Eventual Consistency. For instance, having no deadlocks or resource starvation.</note>
+        </question>
+
+        <question id="definition-safety">
+            <text>Safety</text>
+            <link>https://en.wikipedia.org/wiki/Safety_(distributed_computing)</link>
+            <answer>A promise that something unwanted will never happen. (Partial correctness.)</answer>
+            <note>For instance, a promise not to return null data.</note>
+        </question>
     </section>
 
     <!-- This is not really a Google SRE theme: -->
