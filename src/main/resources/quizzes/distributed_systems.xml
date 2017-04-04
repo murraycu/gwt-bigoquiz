@@ -299,7 +299,7 @@
 
         <question id="load-balancing-flow-control">
             <text>Flow Control</text>
-            <answer>Clients track the number of their own active requests on each backend server.</answer>
+            <answer>The client tracks the number of its own active requests on each backend server.</answer>
         </question>
 
         <question id="load-balancing-lame-duck-state">
@@ -312,6 +312,23 @@
             <text>Subsetting</text>
             <answer>Limits the set of backend servers used by each client.</answer>
             <note>The client can then keep connections open even when no requests are active. Google drops inactive TCP/IP connections to UDP. Google uses "Deterministic Subsetting" to spread the load more evenly than with "Random Subsetting".</note>
+        </question>
+
+        <question id="load-balancing-round-robin">
+            <text>Round Robin</text>
+            <answer>The client sends requests to the next backend server in its subset that is not in a lame-duck state.</answer>
+            <note>This does not spread the load evenly, because not all requests have the same cost, not all backend servers have the same capacity, and not all clients send the same number, or type, of requests.</note>
+        </question>
+
+        <question id="load-balancing-least-loaded-round-robin">
+            <text>Lead-Loaded Round Robin</text>
+            <answer>The client tracks the number of its own active requests on each backend server, and sends requests to the next backend server in its subset that has a minimal number of active requests.</answer>
+            <note>This spreads the load more evenly than simple round robin, but doesn't distinguish healthy servers from servers that are efficiently serving only errors. And it doesn't take into account backend servers that are waiting for other servers, and which could accept other requests in the meantime.</note>
+        </question>
+
+        <question id="load-balancing-weighted-round-robin">
+            <text>Weighted Round Robin</text>
+            <answer>The clients tracks the capability of the backend servers in its subset, based on performance metrics returned by each backend server along with each response or health check. The client sends requests to the next backend server in its subset according to the distribution of backend server capability.</answer>
         </question>
     </section>
 
