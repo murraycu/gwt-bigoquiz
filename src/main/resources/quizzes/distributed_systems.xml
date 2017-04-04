@@ -287,7 +287,7 @@
             <!-- TODO: Chapter 19 of the Google SRE book talks about changing the MAC address of packets, but it's really frames that
             are at the data link layer. -->
             <answer>The DNS server responds with the "virtual" IP address of a network load balancer that forwards the traffic to several backend servers, by changing the destination MAC address of the frames.</answer>
-            <note>This allows DSR (Direct Server Response): The server responds directly to the client, without going through the load balancer. However, this requires all servers, and the load balancer, to be reachable at the data link layer.</note>
+            <note>This allows DSR (Direct Server Response): The backend server responds directly to the client, without going through the load balancer. However, this requires all backend servers, and the load balancer, to be reachable at the data link layer.</note>
         </question>
 
         <question id="load_balancing-virtual-ip-packet-encapsulation">
@@ -295,6 +295,23 @@
             <link>https://en.wikipedia.org/wiki/Virtual_IP_address</link>
             <answer>The DNS server responds with the "virtual" IP address of a network load balancer that forwards the traffic to several backend servers, by encapsulating the IP packets in an outer packet with a backend server's destination IP address.</answer>
             <note>However, this increases the packet size, which can lead to fragmentation if the MTU (Maximum Transmission Unit) is exceeded.</note>
+        </question>
+
+        <question id="load-balancing-flow-control">
+            <text>Flow Control</text>
+            <answer>Clients track the number of their own active requests on each backend server.</answer>
+        </question>
+
+        <question id="load-balancing-lame-duck-state">
+            <text>Lame Duck State</text>
+            <answer>Backend servers can ask clients to stop sending requests.</answer>
+            <note>This also allows backend servers to shut down more cleanly, waiting until its has served its current queries.</note>
+        </question>
+
+        <question id="load-balancing-subsetting">
+            <text>Subsetting</text>
+            <answer>Limits the set of backend servers used by each client.</answer>
+            <note>The client can then keep connections open even when no requests are active. Google drops inactive TCP/IP connections to UDP. Google uses "Deterministic Subsetting" to spread the load more evenly than with "Random Subsetting".</note>
         </question>
     </section>
 
@@ -549,9 +566,5 @@
      - Service Unavailability.
 
     Retries
-
-    Distributed Consensus
-
-
     -->
 </quiz>
