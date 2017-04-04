@@ -257,6 +257,47 @@
         </question>
     </section>
 
+    <!-- These are based on chapters 19 and 20 of the Google SRE book:
+         https://landing.google.com/sre/book/chapters/load-balancing-frontend.html
+         https://landing.google.com/sre/book/chapters/load-balancing-datacenter.html
+    The wikipedia page has some more. -->
+    <section id="load-balancing" answers_as_choices="true" and_reverse="true">
+        <title>Load Balancing</title>
+        <link>https://en.wikipedia.org/wiki/Load_balancing_(computing)</link>
+
+        <question id="load_balancing-round-robin-dns">
+            <text>Round Robin DNS</text>
+            <link>https://en.wikipedia.org/wiki/Round-robin_DNS</link>
+            <answer>The DNS servers respond with different IP Addresses each time.</answer>
+            <note>This is of limited use because DNS records are cached at intermediate DNS servers and on clients.</note>
+        </question>
+
+        <question id="load_balancing-dns-delegation">
+            <!-- TODO: This is my name for this. Is there an established name? -->
+            <text>Geographically-optimal DNS</text>
+            <!-- TODO: Better link? -->
+            <link>https://landing.google.com/sre/book/chapters/load-balancing-frontend.html</link>
+            <answer>The DNS servers respond with the IP address of a datacenter that is optimal for the user's location, based on the datacenter's location and capacity. Requires EDNS0.</answer>
+            <note>This is of limited use because not all intermediate DNS servers support EDNS0, and they might not update their cached records when required.</note>
+        </question>
+
+        <question id="load_balancing-virtual-ip-link-layer">
+            <text>Network Load Balancer: OSI Data Link layer / TCP/IP Link Layer</text>
+            <link>https://en.wikipedia.org/wiki/Virtual_IP_address</link>
+            <!-- TODO: Chapter 19 of the Google SRE book talks about changing the MAC address of packets, but it's really frames that
+            are at the data link layer. -->
+            <answer>The DNS server responds with the "virtual" IP address of a network load balancer that forwards the traffic to several backend servers, by changing the destination MAC address of the frames.</answer>
+            <note>This allows DSR (Direct Server Response): The server responds directly to the client, without going through the load balancer. However, this requires all servers, and the load balancer, to be reachable at the data link layer.</note>
+        </question>
+
+        <question id="load_balancing-virtual-ip-packet-encapsulation">
+            <text>Network Load Balancer: Packet Encapsulation</text>
+            <link>https://en.wikipedia.org/wiki/Virtual_IP_address</link>
+            <answer>The DNS server responds with the "virtual" IP address of a network load balancer that forwards the traffic to several backend servers, by encapsulating the IP packets in an outer packet with a backend server's destination IP address.</answer>
+            <note>However, this increases the packet size, which can lead to fragmentation if the MTU (Maximum Transmission Unit) is exceeded.</note>
+        </question>
+    </section>
+
     <!-- The answer text here is directly from the Wikipedia article. -->
     <section id="cap" answers_as_choices="true">
         <title>CAP Theorem</title>
