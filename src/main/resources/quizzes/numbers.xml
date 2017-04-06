@@ -525,4 +525,33 @@
         </question>
     </section>
 
+    <section id="availability-nines" answers_as_choices="true">
+        <title>Nines of Availability: Downtime per year</title>
+        <link>https://en.wikipedia.org/wiki/High_availability#Percentage_calculation</link>
+
+        <question id="availability-nines-1">
+            <text>1 nine (90% availability)</text>
+            <answer>36.5 days (2.4 hours per day)</answer>
+        </question>
+
+        <question id="availability-nines-2">
+            <text>2 nines (99% availability)</text>
+            <answer>3.65 days (14.4 minutes per day)</answer>
+        </question>
+
+        <question id="availability-nines-3">
+            <text>3 nines (99.9% availability)</text>
+            <answer>8.76 hours (1.44 minutes per day)</answer>
+        </question>
+
+        <question id="availability-nines-4">
+            <text>4 nines (99.99% availability)</text>
+            <answer>52.56 minutes (8.66 seconds per day)</answer>
+        </question>
+
+        <question id="availability-nines-5">
+            <text>5 nines (99.999% availability)</text>
+            <answer>5.26 minutes (864.3 milliseconds per day)</answer>
+        </question>
+    </section>
 </quiz>
