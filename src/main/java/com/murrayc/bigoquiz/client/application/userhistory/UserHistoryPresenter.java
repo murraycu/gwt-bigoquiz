@@ -5,7 +5,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
-import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
@@ -17,6 +16,7 @@ import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
+import com.murrayc.bigoquiz.client.application.quiz.BigOQuizPresenter;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsTitleRetrievedEvent;
 import com.murrayc.bigoquiz.shared.StringUtils;
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by murrayc on 1/21/16.
  */
-public class UserHistoryPresenter extends Presenter<UserHistoryPresenter.MyView, UserHistoryPresenter.MyProxy>
+public class UserHistoryPresenter extends BigOQuizPresenter<UserHistoryPresenter.MyView, UserHistoryPresenter.MyProxy>
         implements UserHistoryUserEditUiHandlers,
         UserHistorySectionsTitleRetrievedEvent.EventHandler {
     //Put this in a shared PresenterWithUserHistoryRecent class, also used by QuizPresenter?

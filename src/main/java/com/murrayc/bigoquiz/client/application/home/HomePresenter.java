@@ -4,7 +4,6 @@ package com.murrayc.bigoquiz.client.application.home;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
-import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
@@ -14,12 +13,13 @@ import com.murrayc.bigoquiz.client.NameTokens;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
+import com.murrayc.bigoquiz.client.application.quiz.BigOQuizPresenter;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by murrayc on 1/21/16.
  */
-public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy>
+public class HomePresenter extends BigOQuizPresenter<HomePresenter.MyView, HomePresenter.MyProxy>
         implements HomeUserEditUiHandlers {
     private final PlaceManager placeManager;
 

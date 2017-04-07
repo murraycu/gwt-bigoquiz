@@ -6,19 +6,19 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
-import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
+import com.murrayc.bigoquiz.client.application.quiz.BigOQuizPresenter;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by murrayc on 1/21/16.
  */
-public class UserProfilePresenter extends Presenter<UserProfilePresenter.MyView, UserProfilePresenter.MyProxy>
+public class UserProfilePresenter extends BigOQuizPresenter<UserProfilePresenter.MyView, UserProfilePresenter.MyProxy>
         implements UserProfileUserEditUiHandlers {
 
     interface MyView extends ContentView, HasUiHandlers<UserProfileUserEditUiHandlers> {

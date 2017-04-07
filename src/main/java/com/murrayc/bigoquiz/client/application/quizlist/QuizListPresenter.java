@@ -5,7 +5,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
-import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
@@ -17,6 +16,7 @@ import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
+import com.murrayc.bigoquiz.client.application.quiz.BigOQuizPresenter;
 import com.murrayc.bigoquiz.shared.Quiz;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Created by murrayc on 1/21/16.
  */
-public class QuizListPresenter extends Presenter<QuizListPresenter.MyView, QuizListPresenter.MyProxy>
+public class QuizListPresenter extends BigOQuizPresenter<QuizListPresenter.MyView, QuizListPresenter.MyProxy>
         implements QuizListUserEditUiHandlers {
     private final PlaceManager placeManager;
 

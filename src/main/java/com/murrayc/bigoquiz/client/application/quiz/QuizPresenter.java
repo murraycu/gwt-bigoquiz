@@ -5,7 +5,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
-import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
@@ -29,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by murrayc on 1/21/16.
  */
-public class QuizPresenter extends Presenter<QuizPresenter.MyView, QuizPresenter.MyProxy>
+public class QuizPresenter extends BigOQuizPresenter<QuizPresenter.MyView, QuizPresenter.MyProxy>
         implements QuizUserEditUiHandlers {
     //Put this in a shared PresenterWithUserHistoryRecent class, also used by QuizPresenter?
     private final UserHistorySectionsPresenter userHistorySectionsPresenter;
