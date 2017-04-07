@@ -40,7 +40,7 @@ public class Quiz implements IsSerializable {
 
     //Map of section ID to (map of question IDs to question):
     @NotNull
-    private /* final */ Map<String, Map<String, QuestionAndAnswer>> questions = new HashMap<>();
+    private transient final Map<String, Map<String, QuestionAndAnswer>> questions = new HashMap<>();
 
     private /* final */ QuizSections quizSections = new QuizSections();
 
@@ -52,9 +52,9 @@ public class Quiz implements IsSerializable {
     //regardless of what section it is in.
     private transient final List<QuestionAndAnswer> listQuestions = new ArrayList<>();
 
-    //TODO: This is useless on the client:
-    //This is only for getting a random question from a particular section:
-    private transient final Map<String, List<QuestionAndAnswer>> listSectionQuestions = new HashMap<>();
+    // This is for listing the questions in order on the Quiz page,
+    // and for getting a random question from a particular section:
+    private /* final */ Map<String, List<QuestionAndAnswer>> listSectionQuestions = new HashMap<>();
 
     public Quiz() {
     }
@@ -227,11 +227,8 @@ public class Quiz implements IsSerializable {
     }
 
     public List<QuestionAndAnswer> getQuestionsForSection(@NotNull final String sectionId) {
-        if (listSectionQuestionsIsEmpty()) {
-            fillListSectionQuestions();
-            if (listSectionQuestionsIsEmpty()) {
-                return null;
-            }
+        if (listSectionQuestions == null) {
+            return null;
         }
 
         return listSectionQuestions.get(sectionId);
@@ -243,24 +240,5 @@ public class Quiz implements IsSerializable {
      */
     public int getQuestionsCount() {
         return listQuestions.size();
-    }
-
-    private boolean listSectionQuestionsIsEmpty() {
-        return listSectionQuestions == null ||
-                listSectionQuestions.isEmpty();
-    }
-
-    /**
-     * Fill the whole listSectionQuestions cache.
-     */
-    private void fillListSectionQuestions() {
-        for (final String sectionId : questions.keySet()) {
-            final Map<String, QuestionAndAnswer> mapQuestions = questions.get(sectionId);
-            if (mapQuestions == null) {
-                continue;
-            }
-
-            listSectionQuestions.put(sectionId, new ArrayList<>(mapQuestions.values()));
-        }
     }
 }
