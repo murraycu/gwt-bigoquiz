@@ -33,7 +33,7 @@
 
 
         <!-- Convenience property to set the AppEngine version -->
-		<appengine.version>1.9.44</appengine.version>
+		<appengine.version>1.9.51</appengine.version>
 		<appengine.application.version>1</appengine.application.version>
 
 		<!-- Make mvn gwt:run use SSL (HTTPS) when running Jetty.
