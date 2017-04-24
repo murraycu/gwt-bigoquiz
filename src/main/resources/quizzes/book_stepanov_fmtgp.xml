@@ -500,6 +500,29 @@
         </question>
     </section>
 
+    <section id="fmtgp-proof-techniques">
+        <title>Proof Techniques</title>
+
+        <question id="fmtgp-proof-techniques-proof-by-contradiction">
+            <text>Proof by contradiction</text>
+            <link>https://en.wikipedia.org/wiki/Proof_by_contradiction</link>
+            <answer>Assume the opposite of the original conjecture and show that this would lead to a contradiction.</answer>
+        </question>
+
+        <question id="fmtgp-proof-techniques-proof-by-induction">
+            <text>Proof by induction</text>
+            <link>https://en.wikipedia.org/wiki/Mathematical_induction</link>
+            <answer>Prove that it is true for the first element (basis) and prove that it is true for successors (inductive step).</answer>
+        </question>
+
+        <question id="fmtgp-proof-techniques-pigeonhole-principle">
+            <text>Pigeonhole Principle (Dirichlet Principle)</text>
+            <link>https://en.wikipedia.org/wiki/Pigeonhole_principle</link>
+            <answer>If n items are put into m containers, with n > m > 0, then at least one container must contain more than one item.</answer>
+            <note>For example, if we have more than 365 people, some must share birthdays.</note>
+        </question>
+    </section>
+
 
 
 
