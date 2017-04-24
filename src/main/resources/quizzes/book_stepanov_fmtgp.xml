@@ -324,6 +324,20 @@
             <answer>Rational Numbers</answer>
             <note>A number that can be a fraction of two integers. Q is for Quotient.</note>
         </question>
+
+        <question id="fmtgp-symbols-complex-numbers">
+            <text>ℂ</text>
+            <link>https://en.wikipedia.org/wiki/Complex_number</link>
+            <answer>Complex Numbers</answer>
+            <note>A number with both real and imaginary parts.</note>
+        </question>
+
+        <question id="fmtgp-symbols-prime-remainder-fields">
+            <text>ℤp</text>
+            <link>https://en.wikipedia.org/wiki/Complex_number</link>
+            <answer>Prime Remainder Fields</answer>
+            <note>Integer remainders modulo p.</note>
+        </question>
     </section>
 
     <section id="fmtgp-integers">
