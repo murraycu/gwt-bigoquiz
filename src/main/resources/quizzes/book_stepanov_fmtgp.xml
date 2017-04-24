@@ -364,6 +364,13 @@
             <answer>A complex number whose real and imaginary parts are both integers.</answer>
         </question>
         -->
+
+        <question id="fmtgp-integers-guassian">
+            <text>Guassian Integer</text>
+            <link>https://en.wikipedia.org/wiki/Gaussian_integer</link>
+            <answer>A complex number whose real and imaginary parts are both integers.</answer>
+            <note>Guassian integers, with addition and multiplication, are a commutative ring.</note>
+        </question>
     </section>
 
     <section id="fmtgp-rings">
@@ -395,6 +402,25 @@
             <link>https://en.wikipedia.org/wiki/Euclidean_domain</link>
             <answer>A commutative ring that can be endowed with an Euclidean function.</answer>
             <note>See page 150 for a detailed definition.</note>
+        </question>
+
+        <question id="fmtgp-rings-invertible-element">
+            <text>Invertible element (unit) of a ring</text>
+            <link>https://en.wikipedia.org/wiki/Unit_(ring_theory)</link>
+            <answer>A element of a ring, for which there is a xn X^-1 such that x(x^-1) = (x^-1)x = 1. For instance, 1 and -1 in the ring of integers.</answer>
+            <note>Units are closed under multiplication: A product of a unit is a unit.</note>
+        </question>
+
+        <question id="fmtgp-rings-zero-divisor">
+            <text>Zero divisor of a ring</text>
+            <link>https://en.wikipedia.org/wiki/Zero_divisor</link>
+            <answer>A element x of a ring, which is not = 0, and for which there is a y, also not = 0, for which xy = 0. For example in the ring of remainders modulo 6, the zero divisors are 2 and 3.</answer>
+        </question>
+
+        <question id="fmtgp-rings-integral-domain">
+            <text>Integral Domain</text>
+            <link>https://en.wikipedia.org/wiki/Integral_domain</link>
+            <answer>A commutative ring that has no zero divisors.</answer>
         </question>
     </section>
 
@@ -434,7 +460,45 @@
         </question>
     </section>
 
-    <!-- TODO: Fields -->
+    <section id="fmtgp-fields">
+        <title>Fields</title>
+
+        <question id="fmtgp-fields-field">
+            <text>Field</text>
+            <link>https://en.wikipedia.org/wiki/Field_(mathematics)</link>
+            <answer>An integral domain where every nonzero element is invertible.</answer>
+            <note>For instance, rational numbers, real numbers, prime remainder fields, complex numbers.</note>
+        </question>
+
+        <question id="fmtgp-fields-subfield">
+            <text>Subfield</text>
+            <answer>A subset of a field that is itself a field.</answer>
+        </question>
+
+        <question id="fmtgp-fields-proper-subfield">
+            <text>Proper subfield</text>
+            <answer>A subfield different from itself.</answer>
+        </question>
+
+        <question id="fmtgp-fields-prime-field">
+            <text>Prime Field</text>
+            <answer>A field that does not have a proper subfield.</answer>
+        </question>
+    </section>
+
+    <section id="fmtgp-canonical-example">
+        <title>Canonical Example of</title>
+
+        <question id="fmtgp-canonical-example-ring">
+            <text>Rings</text>
+            <answer>Integers</answer>
+        </question>
+
+        <question id="fmtgp-canonical-example-field">
+            <text>Field</text>
+            <answer>Rational Numbers</answer>
+        </question>
+    </section>
 
 
 
