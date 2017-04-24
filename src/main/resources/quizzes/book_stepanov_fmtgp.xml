@@ -178,7 +178,7 @@
         <question id="fmtgp-properties-of-operations-commutative">
             <text>Commutative</text>
             <link>https://en.wikipedia.org/wiki/Commutative_property</link>
-            <answer>Order can change. For instance, addition: a + b == b + a.</answer>
+            <answer>Order can change. For instance, addition: a + b == b + a. Matrix multiplication does not commute.</answer>
         </question>
 
         <question id="fmtgp-properties-of-operations-distributive">
@@ -187,10 +187,11 @@
             <answer>Operations can be applied to members of a group. For instance, multiplication over addition: a × (b + c)  =  a × b + a × c.</answer>
         </question>
 
-        <question id="fmtgp-properties-of-operationstransitive">
+        <question id="fmtgp-properties-of-operations-transitive">
             <text>Transitive</text>
             <link>https://en.wikipedia.org/wiki/Transitive_relation</link>
-            <answer>a related to b and b related to c implies a related to c. For instance, less than: If a &lt; b and b &lt; c, then a &lt; c.</answer>
+            <answer>a related to b and b related to c implies a related to c. For instance, less than: If a &lt; b and b &lt; c, then a &lt; c. Or, for instance, equality: If a == b and b == c, then a == c.</answer>
+            <!-- Equality is transitive, reflexive and symmetric. -->
         </question>
 
         <question id="fmtgp-properties-of-operations-reflexive">
