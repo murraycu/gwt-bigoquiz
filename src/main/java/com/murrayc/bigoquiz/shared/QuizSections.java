@@ -31,6 +31,7 @@ public class QuizSections implements IsSerializable {
     static public class Section extends HasIdAndTitle {
         @NotNull
         public Map<String, SubSection> subSections = new HashMap<>();
+        public List<String> subSectionsSequence = new ArrayList<>(); // IDs.
         public List<Question.Text> defaultChoices;
         public int questionsCount;
 
@@ -45,11 +46,14 @@ public class QuizSections implements IsSerializable {
     //Map of section ID to userhistorysections.
     @NotNull
     private Map<String, Section> sections = new HashMap<>();
+    private List<String> sectionsSequence = new ArrayList<>();
 
     public void addSection(final String sectionId, final String sectionTitle, final String sectionLink, final List<Question.Text> defaultChoices) {
         @NotNull final Section section = new Section(sectionId, sectionTitle, sectionLink);
         section.defaultChoices = defaultChoices;
         this.sections.put(sectionId, section);
+
+        this.sectionsSequence.add(sectionId);
     }
 
     public void addSubSection(final String sectionId, final String subSectionId, final String subSectionTitle, final String subSectionLink) {
@@ -61,6 +65,7 @@ public class QuizSections implements IsSerializable {
 
         section.subSections.put(subSectionId,
                 new SubSection(subSectionId, subSectionTitle, subSectionLink));
+        section.subSectionsSequence.add(subSectionId);
     }
 
     @NotNull
@@ -149,25 +154,23 @@ public class QuizSections implements IsSerializable {
 
     //TODO: This is only used on the client side:
     /**
-     * Generate a sorted List of the Sections.
+     * Generate a sorted List of the Sections, sorted by original sequence in the XML file, not alphabetically.
      * @return
      */
     @NotNull
     public List<Section> getSectionsSorted() {
-        final List<Section> result = new ArrayList<>(sections.values());
+        final List<Section> result = new ArrayList<>();
 
-        //Do the sorting here on the client-side,
-        //because the titles could (one day) be localized,
-        //and the sorting would need to depend on the user's locale too.
-        Collections.sort(result,
-                HasIdAndTitle.generateTitleSortComparator());
+        for (final String sectionId : sectionsSequence) {
+            result.add(getSection(sectionId));
+        }
 
         return result;
     }
 
     //TODO: This is only used on the client side:
     /**
-     * Generate a sorted List of the userhistorysections.
+     * Generate a sorted List of the sub-sections, sorted by original sequence in the XML file, not alphabetically.
      * @return
      */
     @Nullable
@@ -181,13 +184,11 @@ public class QuizSections implements IsSerializable {
             return null;
         }
 
-        final List<SubSection> result = new ArrayList<>(section.subSections.values());
+        final List<SubSection> result = new ArrayList<>();
 
-        //Do the sorting here on the client-side,
-        //because the titles could (one day) be localized,
-        //and the sorting would need to depend on the user's locale too.
-        Collections.sort(result,
-                HasIdAndTitle.generateTitleSortComparator());
+        for (final String subSectionId : section.subSectionsSequence) {
+            result.add(section.subSections.get(subSectionId));
+        }
 
         return result;
     }
