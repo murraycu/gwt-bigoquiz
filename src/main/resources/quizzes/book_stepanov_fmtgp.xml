@@ -294,7 +294,7 @@
         </question>
     </section>
 
-    <section id="fmtgp-symbols">
+    <section id="fmtgp-symbols" answers_as_choices="true" and_reverse="true">
         <title>Symbols</title>
         <link>https://en.wikipedia.org/wiki/List_of_mathematical_symbols</link>
 
@@ -341,7 +341,7 @@
         </question>
     </section>
 
-    <section id="fmtgp-integers">
+    <section id="fmtgp-integers" answers_as_choices="true" and_reverse="true">
         <title>Integers</title>
 
         <question id="fmtgp-integers-gaussian">
@@ -373,7 +373,7 @@
         </question>
     </section>
 
-    <section id="fmtgp-rings">
+    <section id="fmtgp-rings" answers_as_choices="true" and_reverse="true">
         <title>Rings</title>
 
         <question id="fmtgp-rings-ring">
@@ -424,7 +424,7 @@
         </question>
     </section>
 
-    <section id="fmtgp-norm">
+    <section id="fmtgp-norm" answers_as_choices="true" and_reverse="true">
         <title>Norm</title>
         <link>https://en.wikipedia.org/wiki/Norm_(mathematics)</link>
 
@@ -450,7 +450,8 @@
         </question>
     </section>
 
-    <section id="fmtgp-others">
+    <!-- Put this is a section with more than 1 item. -->
+    <section id="fmtgp-others" answers_as_choices="true" and_reverse="true">
         <title>Others</title>
 
         <question id="fmtgp-others-monic-polynomial">
@@ -460,7 +461,7 @@
         </question>
     </section>
 
-    <section id="fmtgp-fields">
+    <section id="fmtgp-fields" answers_as_choices="true" and_reverse="true">
         <title>Fields</title>
 
         <question id="fmtgp-fields-field">
@@ -486,7 +487,7 @@
         </question>
     </section>
 
-    <section id="fmtgp-canonical-example">
+    <section id="fmtgp-canonical-example" answers_as_choices="true" and_reverse="true">
         <title>Canonical Example of</title>
 
         <question id="fmtgp-canonical-example-ring">
@@ -500,7 +501,7 @@
         </question>
     </section>
 
-    <section id="fmtgp-proof-techniques">
+    <section id="fmtgp-proof-techniques" answers_as_choices="true" and_reverse="true">
         <title>Proof Techniques</title>
 
         <question id="fmtgp-proof-techniques-proof-by-contradiction">
