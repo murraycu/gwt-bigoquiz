@@ -810,7 +810,7 @@
             <text>Topological Sort</text>
             <link>https://en.wikipedia.org/wiki/Topological_sorting</link>
             <answer>Depth First Search to order vertices by their completion time, starting from each still unexplored vertex. Then reverse that order.</answer>
-            <note>This is only possible on DAGs (Directed Acyclic Graphs). So there can't be a topological sort if the graph is undirected, or if the graph has a cycle.</note>
+            <note>This is only possible on DAGs (Directed Acyclic Graphs). So there can't be a topological sort if the graph is undirected, or if the graph has a cycle. Find a cycle by checking for adjacent nodes that we have not completed (completed all children) with but are still exploring (still in the stack).</note>
         </question>
 
         <question id="algorithm-for-minimum-spanning-tree">
@@ -937,7 +937,7 @@
         <question id="graph-dfs-edge-classifications-back">
             <text>Back edge</text>
             <answer>A non-tree edge from a vertex to an ancestor.</answer>
-            <note>A directed acyclic graph (DAG) has no back edges. So finding a back edge during a depth first search, from a source vertex (indegree zero), means we've found a cycle.</note>
+            <note>A directed acyclic graph (DAG) has no back edges. So finding a back edge during a depth first search means we've found a cycle. A back edge points to a node we are currently exploring, whose exploration has not finished (marked as finished after the call stack unwinds).</note>
         </question>
 
         <question id="graph-dfs-edge-classifications-forward">
