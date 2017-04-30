@@ -679,7 +679,7 @@
         <question id="definition-floyd-warshall">
             <text>Floyd Warshall Algorithm for All Pairs Shortest Path</text>
             <link>https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm</link>
-            <answer>Examine every path from vertex i to vertex j, using k edges, by examining i to j using k-1 edges and examining i to k to j using k-1 edges. To detect negative cycles, check for a negative cost from a node to itself.</answer>
+            <answer>Examine every path from vertex i to vertex j, using at most k edges (using only vertices numbered from 1 to k), by examining i to j using k-1 edges (previously calculated) and examining i to k to j (i to k + k to j, both previously calculated) using at most k edges, passing through the additional kth vertex, using the minimum. To detect negative cycles, check for a negative cost from a node to itself.</answer>
         </question>
 
         <question id="definition-johnsons">
