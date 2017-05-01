@@ -66,6 +66,12 @@
             <link>https://en.wikipedia.org/wiki/Euler's_totient_function</link>
             <answer>The number of positive integers less than n that are coprime with n.</answer>
         </question>
+
+        <question id="fmtgp-numbers-carmichael">
+            <text>Carmichael Numbers</text>
+            <link>https://en.wikipedia.org/wiki/Carmichael_number</link>
+            <answer>Composite number n, greater than 1, whose coprimes up to n satisfy b^(n-1) == 1 mod n.</answer>
+        </question>
     </section>
 
     <section id="fmtgp-number-theorems" answers_as_choices="true">
@@ -131,6 +137,20 @@
                 &lt;/mrow&gt;
                 &lt;/semantics&gt;
                 &lt;/math&gt;</answer>
+        </question>
+
+        <question id="fmtgp-number-theorems-cancellation-law">
+            <text>Cancellation Law</text>
+            <answer>If p is prime, then for any 0 &lt; a &lt; p there is a number 0 &lt; b &lt; p such that ab = mp + 1, meaning a and b cancel modulo p.</answer>
+            <!-- TODO: I can't find any reference to this outside of Stepanov's book. <link></link> -->
+            <note>This leads to the self-canceling law.</note>
+        </question>
+
+        <question id="fmtgp-number-theorems-self-canceling-law">
+            <text>Self-Canceling Law</text>
+            <answer>If p is prime, then for any 0 &lt; a &lt; p, a^2 = mp + 1, if a = 1 or a = p - 1.</answer>
+            <!-- TODO: I can't find any reference to this outside of Stepanov's book. <link></link> -->
+            <note>This is based on the Cancellation Law. This is used in the proof of the Miller-Rabin primality test.</note>
         </question>
 
         <question id="fmtgp-number-theorems-wilsons">
