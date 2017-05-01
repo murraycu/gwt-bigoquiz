@@ -141,6 +141,7 @@
             <question id="stack-space">
                 <text>Space Complexity</text>
                 <answer>O(n)</answer>
+                <note>n is the number of items in the stack. A stack can be implemented as just an array and a pointer to the position that is the current top of the stack.</note>
             </question>
         </subsection>
 
@@ -270,6 +271,7 @@
             <question id="skip-list-space">
                 <text>Space Complexity</text>
                 <answer>O(n log(n))</answer>
+                <note>In the average case, a balanced skip list would need O(n) space, because each level would have half as many pointers as its lower level. But in the worst case, this could be O(n log(n)), because there would be log(n) levels, each with a possible n pointers.</note>
             </question>
         </subsection>
 
