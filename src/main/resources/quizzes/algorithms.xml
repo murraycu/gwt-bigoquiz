@@ -715,7 +715,7 @@
         <question id="algorithms-on-linked-lists-find-cycle">
             <text>Find a Cycle</text>
             <link>https://en.wikipedia.org/wiki/Cycle_detection#Tortoise_and_hare</link>
-            <answer>Use both slow and fast pointers - one stepping once each time, and once stepping twice each time. If they are ever equal then there is a cycle. To find the start of the cycle, move fast back to the start and move it slowly until fast and slow are equal again. Check for a match before moving, in case the cycle is at the start.</answer>
+            <answer>Use both slow and fast pointers - one stepping once each time, and one stepping twice each time. If they are ever equal then there is a cycle. To find the start of the cycle, move the fast pointer back to the start and move it slowly until fast and slow are equal again. Check for a match before moving, in case the cycle is at the start.</answer>
             <note>This is Floyd's Tortoise and Hare cycle-finding algorithm.</note>
         </question>
     </section>
