@@ -633,6 +633,7 @@
             <question id="trie-space">
                 <text>Space Complexity</text>
                 <answer>O(mn)</answer>
+                <note>For each of n strings, we might need to create a node for each of the m characters.</note>
             </question>
         </subsection>
 
@@ -676,6 +677,7 @@
             <question id="suffix-tree-space">
                 <text>Space Complexity</text>
                 <answer>O(mn)</answer>
+                <note>n is the number of strings, which are of length m. Each node requires only constant space, because it stores the beginning and end indices (or beginning and length) of the substring, not the substring itself. There are n*m leaves (one for each m suffixes of the n strings), so there must be less than n*m internal nodes, because each branch leads to a distinct leaf node.</note>
             </question>
         </subsection>
 
