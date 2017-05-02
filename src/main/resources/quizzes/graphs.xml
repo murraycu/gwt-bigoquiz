@@ -200,8 +200,23 @@
             <text>Minimum Spanning Tree</text>
             <link>https://en.wikipedia.org/wiki/Minimum_spanning_tree</link>
             <answer>A tree that connects each vertex in an undirected graph, using a subset of edges of the minimum weight.</answer>
+            <note>A minimum spanning tree is always a minimum bottleneck spanning tree, but a minimum bottleneck spanning tree is not necessarily a minimum spanning tree.</note> <!-- TODO: Explain why an MST is always an MBST. -->
         </question>
         <!-- TODO: Maximum Spanning Tree, Bottleneck, Cut Property -->
+
+        <question id="definition-minimum-bottleneck-spanning-tree">
+            <text>Minimum Bottleneck Spanning Tree</text>
+            <link>https://en.wikipedia.org/wiki/Minimum_bottleneck_spanning_tree</link>
+            <answer>A spanning tree whose most expensive edge is as cheap as possible.</answer>
+            <note>A minimum bottleneck spanning tree is not necessarily a minimum spanning tree, but a minimum spanning tree is always a minimum bottleneck spanning tree.</note>
+        </question>
+
+        <question id="definition-maximum-spanning-tree">
+            <text>Maximum Spanning Tree</text>
+            <link>https://en.wikipedia.org/wiki/Minimum_spanning_tree</link>
+            <answer>A tree that connects each vertex in an undirected graph, using a subset of edges of the maximum weight.</answer>
+            <note>This is the widest path in the tree. We can find the maximum spanning tree, by making the edge weights negative and then using an MST algorithm.</note>
+        </question>
 
         <!-- An Arborescence is a bit like a spanning tree, but for directed graphs.
              So says Sedgewick on page 630. -->
