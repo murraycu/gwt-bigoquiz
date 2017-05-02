@@ -604,6 +604,7 @@
             <text>Closest Pair of Points in a Plane</text>
             <link>https://en.wikipedia.org/wiki/Closest_pair_of_points_problem#Planar_case</link>
             <answer>Divide and Conquer</answer>
+            <video_url>https://www.youtube.com/watch?v=xi-WF07rAQw</video_url>
         </question>
 
         <!--
