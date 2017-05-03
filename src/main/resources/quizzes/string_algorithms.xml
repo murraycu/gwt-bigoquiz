@@ -18,7 +18,8 @@
                 <link>http://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/</link>
                 <!-- TODO: Why isn't there a wikipedia page for the Z Algorithm. -->
                 <answer>Concatenate the pattern, a special character, and the text. For each index, calculate the prefix length, if any, that starts at that position. After finding a prefix, subsequently reuse previously calculated values from the prefix itself.</answer>
-                <!-- Tushar Roy's walkthrough, starting at linear-time Z Array construction:: https://youtu.be/CpZh4eF8QBw?t=5m45s -->
+                <!-- Tushar Roy's walkthrough, starting at linear-time Z Array construction: -->
+                <video_url>https://youtu.be/CpZh4eF8QBw?t=5m45s</video_url>
                 <!-- TODO: When is this useful, compared to KMP, BM, RK, etc? -->
             </question>
 
@@ -27,6 +28,8 @@
                 <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
                 <answer>Pre-calculate a Deterministic Finite Automata (DFA), (also known as &quot;partial match table&quot; or &quot;failure function&quot;) that tells us, for each mismatch, where in the pattern we would need to start comparing characters again. For instance, this avoids re-comparing a prefix of the pattern that is identical to a suffix of the part of the pattern compared so far.</answer>
                 <note>Or, to use less space than a DFA, create a prefix array, and step through it more than once each time.</note>
+                <!-- Tushar Roy's video assumes use of a prefix array, though Sedgewick uses a DFA, both of which are valid. -->
+                <video_url>https://www.youtube.com/watch?v=GTJr8OvyEVQ&t=259s</video_url>
             </question>
 
             <question id="string-algorithms-substring-search-description-boyer-moore">
@@ -39,6 +42,7 @@
                 <text>Rabin-Karp</text>
                 <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
                 <answer>Compare hashes of the substrings, generating the next hash based on the previous hash.</answer>
+                <video_url>https://www.youtube.com/watch?v=H4VrKHVG5qI</video_url>
             </question>
 
             <!-- TODO: Boyer-Moore-Horspool -->
