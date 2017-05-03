@@ -30,7 +30,7 @@
                 <answer>Pre-calculate a Deterministic Finite Automata (DFA), (also known as &quot;partial match table&quot; or &quot;failure function&quot;) that tells us, for each mismatch, where in the pattern we would need to start comparing characters again. For instance, this avoids re-comparing a prefix of the pattern that is identical to a suffix of the part of the pattern compared so far.</answer>
                 <note>Or, to use less space than a DFA, create a prefix array, and step through it more than once each time.</note>
                 <!-- Tushar Roy's video assumes use of a prefix array, though Sedgewick uses a DFA, both of which are valid. -->
-                <video_url>https://www.youtube.com/watch?v=GTJr8OvyEVQ&t=259s</video_url>
+                <video_url>https://www.youtube.com/watch?v=GTJr8OvyEVQ&amp;t=259s</video_url>
                 <code_url>https://github.com/murraycu/murrayc-algorithms-experiments/blob/master/src/substring_search/kmp_with_prefix_array/main.cc</code_url>
                 <!-- or with DFA: https://github.com/murraycu/murrayc-algorithms-experiments/blob/master/src/substring_search/kmp_with_dfa/main.cc -->
             </question>
