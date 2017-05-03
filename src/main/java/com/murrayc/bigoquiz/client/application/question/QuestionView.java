@@ -71,6 +71,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private boolean multipleChoice = false;
     private TextBox textBox = null;
     private Button submitButton = null;
+    private final Panel showingFromPanel = new FlowPanel(ParagraphElement.TAG);
 
     @Inject
     QuestionView(final PlaceManager placeManager) {
@@ -88,7 +89,6 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
 
         //Question content:
-        @NotNull final Panel showingFromPanel = new FlowPanel(ParagraphElement.TAG);
         showingFromPanel.addStyleName("show-from-panel");
         //TODO: Avoid the " " concatenation:
         @NotNull final Label nextQuestionSectionTitle = new InlineLabel(constants.showQuestionsFrom() + " ");
@@ -224,8 +224,15 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         @Nullable String title = null;
         if (StringUtils.isEmpty(sectionId)) {
             title = constants.allSectionsTitle();
+
+            // Don't even show this if it's the default.
+            // Let people choose a section via the history's section headers.
+            // Otherwise it clutters up the default UI.
+            showingFromPanel.setVisible(false);
+
         } else if (sections != null) {
             title = sections.getSectionTitle(nextQuestionSectionId);
+            showingFromPanel.setVisible(true);
         }
 
         setNextQuestionSectionTitle(title);
