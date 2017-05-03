@@ -321,7 +321,7 @@
         </question>
 
         <question id="load-balancing-least-loaded-round-robin">
-            <text>Lead-Loaded Round Robin</text>
+            <text>Least-Loaded Round Robin</text>
             <answer>The client tracks the number of its own active requests on each backend server, and sends requests to the next backend server in its subset that has a minimal number of active requests.</answer>
             <note>This spreads the load more evenly than simple round robin, but doesn't distinguish healthy servers from servers that are efficiently serving only errors. And it doesn't take into account backend servers that are waiting for other servers, and which could accept other requests in the meantime.</note>
         </question>
