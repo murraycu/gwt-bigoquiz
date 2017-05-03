@@ -15,7 +15,8 @@
             -->
             <question id="string-algorithms-substring-search-description-z-algorithm">
                 <text>Z Algorithm</text>
-                <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
+                <link>http://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/</link>
+                <!-- TODO: Why isn't there a wikipedia page for the Z Algorithm. -->
                 <answer>Concatenate the pattern, a special character, and the text. For each index, calculate the prefix length, if any, that starts at that position. After finding a prefix, subsequently reuse previously calculated values from the prefix itself.</answer>
                 <!-- Tushar Roy's walkthrough, starting at linear-time Z Array construction:: https://youtu.be/CpZh4eF8QBw?t=5m45s -->
                 <!-- TODO: When is this useful, compared to KMP, BM, RK, etc? -->
@@ -49,7 +50,8 @@
 
             <question id="string-algorithms-substring-search-preprocessing-z-algorithm">
                 <text>Z Algorithm</text>
-                <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
+                <link>http://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/</link>
+                <!-- TODO: Why isn't there a wikipedia page for the Z Algorithm. -->
                 <answer>Build an array of length pattern + $ + text. For each index, calculate the prefix length, if any, that starts at that position. After finding a prefix (a Z box), reuse previous Z values from the start. But if the previous Z value is as large as the remaining Z box, continue checking for the rest of a matching prefix after the Z box.</answer>
             </question>
 
@@ -83,6 +85,8 @@
 
             <!-- TODO: Z algorithm
             <question id="string-algorithms-substring-search-time-z-algorithm">
+                <link>http://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/</link>
+                ODO: Why isn't there a wikipedia page for the Z Algorithm.
                 <text>Z Algorithm</text>
                 <answer></answer>
             </question>
@@ -113,6 +117,8 @@
 
             <question id="string-algorithms-substring-search-extra-space-z-algorithm">
                 <text>Z Algorithm</text>
+                <link>http://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/</link>
+                <!-- TODO: Why isn't there a wikipedia page for the Z Algorithm. -->
                 <answer>O(M + N) (substring length + text length)</answer>
             </question>
 
@@ -140,6 +146,8 @@
             <title>Backup in input?</title>
             <question id="string-algorithms-substring-search-backtracking-z-algorithm">
                 <text>Z Algorithm</text>
+                <link>http://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/</link>
+                <!-- TODO: Why isn't there a wikipedia page for the Z Algorithm. -->
                 <answer>No backup required</answer>
             </question>
 
