@@ -288,7 +288,7 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
             final Anchor anchor = new Anchor();
             anchor.setText(constants.video());
             anchor.setHref(videoUrl);
-            panelQuestionAnswer.add(anchor);
+            Utils.addParagraphWithChild(panelQuestionAnswer, anchor);
         }
 
         final String codeUrl = question.getCodeUrl();
@@ -296,7 +296,7 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
             final Anchor anchor = new Anchor();
             anchor.setText(constants.exampleCode());
             anchor.setHref(codeUrl);
-            panelQuestionAnswer.add(anchor);
+            Utils.addParagraphWithChild(panelQuestionAnswer, anchor);
         }
     }
 
