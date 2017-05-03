@@ -53,7 +53,7 @@
         </question>
 
         <question id="golden-signals-traffic">
-            <text>Traffic (throughout)</text>
+            <text>Traffic (throughput)</text>
             <link>https://en.wikipedia.org/wiki/Throughput</link>
             <answer>Rate of requests.</answer>
         </question>
