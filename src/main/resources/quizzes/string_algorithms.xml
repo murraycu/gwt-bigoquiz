@@ -62,12 +62,14 @@
                 <link>http://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/</link>
                 <!-- TODO: Why isn't there a wikipedia page for the Z Algorithm. -->
                 <answer>Build an array of length pattern + $ + text. For each index, calculate the prefix length, if any, that starts at that position. After finding a prefix (a Z box), reuse previous Z values from the start. But if the previous Z value is as large as the remaining Z box, continue checking for the rest of a matching prefix after the Z box.</answer>
+                <code_url>https://github.com/murraycu/murrayc-algorithms-experiments/tree/master/src/substring_search/z_algorithm</code_url>
             </question>
 
             <question id="string-algorithms-substring-search-preprocessing-kmp-with-dfa">
                 <text>Knuth-Morris-Pratt (KMP) with a DFA</text>
                 <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
                 <answer>Build a 2D array of pattern-size * alphabet-size. With x initially 0, set all dfa[pattern-pos][] to the values at dfa[x], then set dfa[pattern-pos][character-code] = pattern-pos + 1, update x to this value, and move to the next pattern position. </answer>
+                <code_url>https://github.com/murraycu/murrayc-algorithms-experiments/blob/master/src/substring_search/kmp_with_dfa/main.cc</code_url>
             </question>
 
             <question id="string-algorithms-substring-search-preprocessing-kmp-with-prefix-array">
@@ -82,12 +84,14 @@
                 <text>Boyer-Moore</text>
                 <link>https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm</link>
                 <answer>Build an array of alphabet-size. Iterate over the pattern, from left to right, marking the (rightmost so far) position of the character in the array.</answer>
+                <code_url>https://github.com/murraycu/murrayc-algorithms-experiments/blob/master/src/substring_search/boyer_moore/main.cc</code_url>
             </question>
 
             <question id="string-algorithms-substring-search-preprocessing-rabin-karp">
                 <text>Rabin-Karp</text>
                 <link>https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm</link>
                 <answer>Generate a hash of the pattern.</answer>
+                <code_url>https://github.com/murraycu/murrayc-algorithms-experiments/blob/master/src/substring_search/rabin_karp/main.cc</code_url>
             </question>
         </subsection>
 
