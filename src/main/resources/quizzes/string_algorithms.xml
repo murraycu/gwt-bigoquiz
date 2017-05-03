@@ -73,7 +73,9 @@
             <question id="string-algorithms-substring-search-preprocessing-kmp-with-prefix-array">
                 <text>Knuth-Morris-Pratt (KMP) with a Prefix Array</text>
                 <link>https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</link>
-                <answer>Build an array the same length as the pattern. With x initially 0, if pa[pattern-pos] == pa[x] then pa[pattern-pos] = pa[x] + 1 and increment x, else x = pa[x-1] and try again.</answer>
+                <answer>Build an array the same length as the pattern. With x initially 0 and i initially 1, if pattern[i] == pattern[x] then pa[i] = x + 1 and increment x and i, else x = pa[x-1] and try again. pa[pos] is then the number of characters at and before pos  (the suffix) that match the characters from position 0 (the prefix).</answer>
+                <video_url>https://www.youtube.com/watch?v=KG44VoDtsAA</video_url>
+                <code_url>https://github.com/murraycu/murrayc-algorithms-experiments/blob/master/src/substring_search/kmp_with_prefix_array/main.cc</code_url>
             </question>
 
             <question id="string-algorithms-substring-search-preprocessing-boyer-moore">
