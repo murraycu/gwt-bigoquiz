@@ -444,8 +444,8 @@
 
             <question id="consistency-weak-eventual">
                 <text>Eventual Consistency</text>
-                <answer>https://en.wikipedia.org/wiki/Eventual_consistency</answer>
                 <answer>Reads will all eventually return the latest value (converge), but consistency is not guaranteed at all times.</answer>
+                <link>https://en.wikipedia.org/wiki/Eventual_consistency</link>
             </question>
 
             <!-- TODO: Causal consistency? -->
