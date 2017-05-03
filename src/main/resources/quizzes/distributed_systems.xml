@@ -384,7 +384,7 @@
         <link>https://en.wikipedia.org/wiki/Consistency_model</link>
 
         <subsection id="consistency-strong-or-weak" answers_as_choices="true">
-            <title>Consistency Models: Strong or Weak</title>
+            <title>Strong or Weak</title>
             <link>http://book.mixu.net/distsys/abstractions.html#strong-consistency-vs-other-consistency-models</link>
 
             <question id="consistency-strong-or-weak-linearizable-consistency">
