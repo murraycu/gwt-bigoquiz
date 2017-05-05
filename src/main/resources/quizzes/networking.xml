@@ -419,7 +419,7 @@
 
         <question id="networking-protocols-descriptions-ndp">
             <text>NDP</text>
-            <answer>Used for address autoconfiguration and to tracks and discover other hosts.</answer>
+            <answer>Used for address autoconfiguration and to track and discover other hosts.</answer>
             <link>https://en.wikipedia.org/wiki/Neighbor_Discovery_Protocol</link>
             <note>NDP is since IPv6, replacing ARP, ICMP and others in iPv4. NDP is a link layer protocol, below the internet layer. For instance, below IP.</note>
         </question>
