@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.client.application.question;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -43,6 +44,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private Question.Text choiceSelected = null;
     private boolean questionHasOnlyTwoAnswers = false;
 
+    private HeadingElement quizTitleLabel = null;
     private final FlowPanel resultPanel;
     private final ListBox nextQuestionSectionListBox = new ListBox();
     private final Label sectionTitleLabel = new InlineLabel();
@@ -70,6 +72,8 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
     @Inject
     QuestionView() {
+        setTitle(constants.questionLabel());
+
         //Sections sidebar:
         //We use a CSS media query to only show this on wider screens:
         @NotNull Panel sidebarPanelSections = new FlowPanel();
@@ -80,6 +84,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         sidebarPanelSections.add(userHistoryRecentPanel);
         bindSlot(QuestionPresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
 
+        quizTitleLabel = Utils.addHeaderToPanel(2, mainPanel, "");
 
         //Question content:
         showingFromPanel.addStyleName("show-from-panel");
@@ -97,8 +102,6 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             }
         });
         mainPanel.add(showingFromPanel);
-
-        Utils.addHeaderToPanel(2, mainPanel, constants.questionLabel());
 
         @NotNull final Panel paraHeader = Utils.addParagraph(mainPanel, null);
         paraHeader.add(sectionTitleLabel);
@@ -258,7 +261,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         resultPanel.setVisible(true);
 
-        setTitle(question.getQuizTitle());
+        quizTitleLabel.setInnerText(question.getQuizTitle());
 
         setErrorLabelVisible(false);
 
