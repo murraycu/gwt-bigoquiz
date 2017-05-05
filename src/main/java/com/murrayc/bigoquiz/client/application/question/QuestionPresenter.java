@@ -37,7 +37,6 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
 
     private final PlaceManager placeManager;
     private String quizId = null;
-    private boolean multipleChoice = true;
     private QuizSections sections = null;
     private boolean waitingForSections = false;
     private boolean showQuestionPending = false;
@@ -45,7 +44,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
     interface MyView extends ContentView, HasUiHandlers<QuestionUserEditUiHandlers> {
         void setSections(final QuizSections sections);
 
-        void setQuestion(String quizId, final Question question, boolean multipleChoice);
+        void setQuestion(String quizId, final Question question);
 
         void setNextQuestionSectionId(final String sectionId);
 
@@ -132,11 +131,6 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
         nextQuestionSectionId = request.getParameter(NameTokens.QUESTION_PARAM_NEXT_QUESTION_SECTION_ID, null);
 
         getView().setNextQuestionSectionId(nextQuestionSectionId);
-
-        final String multipleChoiceStr = request.getParameter(NameTokens.QUESTION_PARAM_MULTIPLE_CHOICE,
-                NameTokens.QUESTION_PARAM_MULTIPLE_CHOICE_VALUE_ON);
-        multipleChoice = StringUtils.equals(multipleChoiceStr,
-                NameTokens.QUESTION_PARAM_MULTIPLE_CHOICE_VALUE_ON);
 
         //Question ID:
         final String questionId = request.getParameter(NameTokens.QUESTION_PARAM_QUESTION_ID, null);
@@ -242,7 +236,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
         };
 
         getView().setLoadingLabelVisible(true);
-        QuizServiceAsync.Util.getInstance().submitAnswer(getQuizId(), getQuestionId(), answer.text, multipleChoice,
+        QuizServiceAsync.Util.getInstance().submitAnswer(getQuizId(), getQuestionId(), answer.text,
                 nextQuestionSectionId, callback);
     }
 
@@ -264,7 +258,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
     }
 
     private void tellUserHistoryPresenterAboutQuestionContext() {
-        QuestionContextEvent.fire(this, getQuizId(), nextQuestionSectionId, multipleChoice);
+        QuestionContextEvent.fire(this, getQuizId(), nextQuestionSectionId);
     }
 
     @Override
@@ -349,7 +343,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
      */
     private void revealQuestion(@NotNull final Question question) {
         @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(quizId, question.getId(),
-                nextQuestionSectionId, multipleChoice);
+                nextQuestionSectionId);
         placeManager.revealPlace(placeRequest);
     }
 
@@ -366,7 +360,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
     private void revealSection(final String nextQuestionSectionId, final String nextQuestionId) {
         this.nextQuestionSectionId = nextQuestionSectionId;
 
-        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(getQuizId(), nextQuestionId, nextQuestionSectionId, multipleChoice);
+        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(getQuizId(), nextQuestionId, nextQuestionSectionId);
         placeManager.revealPlace(placeRequest);
     }
 
@@ -381,7 +375,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
             return;
         }
 
-        getView().setQuestion(getQuizId(), question, multipleChoice);
+        getView().setQuestion(getQuizId(), question);
     }
 
     @Override
@@ -412,7 +406,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
             @Override
             public void onFailure(@NotNull final Throwable caught) {
                 Utils.tellUserHistoryPresenterAboutNoQuestionContext(QuestionPresenter.this); //clear the sections sidebar.
-                getView().setQuestion(null, null, false);
+                getView().setQuestion(null, null);
 
                 try {
                     throw caught;

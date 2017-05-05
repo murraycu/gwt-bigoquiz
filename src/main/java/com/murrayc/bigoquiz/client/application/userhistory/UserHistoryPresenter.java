@@ -91,7 +91,7 @@ public class UserHistoryPresenter extends BigOQuizPresenter<UserHistoryPresenter
     }
 
     private void tellUserHistoryPresenterAboutQuestionContext() {
-        QuestionContextEvent.fire(this, getQuizId(), null, true);
+        QuestionContextEvent.fire(this, getQuizId(), null);
     }
 
     @Override

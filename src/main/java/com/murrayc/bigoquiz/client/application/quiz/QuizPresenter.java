@@ -90,7 +90,7 @@ public class QuizPresenter extends BigOQuizPresenter<QuizPresenter.MyView, QuizP
     }
 
     private void tellUserHistoryPresenterAboutQuestionContext() {
-        QuestionContextEvent.fire(this, getQuizId(), null, true);
+        QuestionContextEvent.fire(this, getQuizId(), null);
     }
 
     private String getQuizId() {

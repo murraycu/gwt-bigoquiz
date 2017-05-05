@@ -35,7 +35,6 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     // from BigOQuizConstants.properties
     // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
     private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
-    private final PlaceManager placeManager;
 
     //Map of section IDs to section titles.
     @Nullable
@@ -46,7 +45,6 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
     private final FlowPanel resultPanel;
     private final ListBox nextQuestionSectionListBox = new ListBox();
-    private @NotNull final Hyperlink hyperlinkMultipleChoice = new InlineHyperlink();
     private final Label sectionTitleLabel = new InlineLabel();
     private final Anchor sectionTitleAnchor = new Anchor();
     private final Label subSectionTitleLabel = new InlineLabel();
@@ -68,15 +66,10 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private boolean hasCodeUrl = false;
     @NotNull
     private State state = State.WAITING_INVALID;
-    private boolean multipleChoice = false;
-    private TextBox textBox = null;
-    private Button submitButton = null;
     private final Panel showingFromPanel = new FlowPanel(ParagraphElement.TAG);
 
     @Inject
-    QuestionView(final PlaceManager placeManager) {
-        this.placeManager = placeManager;
-
+    QuestionView() {
         //Sections sidebar:
         //We use a CSS media query to only show this on wider screens:
         @NotNull Panel sidebarPanelSections = new FlowPanel();
@@ -104,16 +97,6 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
             }
         });
         mainPanel.add(showingFromPanel);
-
-        @NotNull final Panel multipleChoicePanel = new FlowPanel(ParagraphElement.TAG);
-        showingFromPanel.addStyleName("show-as-multiple-choice-panel");
-        //TODO: Avoid the " " concatenation:
-        @NotNull final Label labelTitle = new InlineLabel(constants.offerMultipleChoice() + " ");
-        labelTitle.addStyleName("offer-multiple-choice-title-label");
-        multipleChoicePanel.add(labelTitle);
-        hyperlinkMultipleChoice.addStyleName("offer-multiple-choice-label");
-        multipleChoicePanel.add(hyperlinkMultipleChoice);
-        mainPanel.add(multipleChoicePanel);
 
         Utils.addHeaderToPanel(2, mainPanel, constants.questionLabel());
 
@@ -251,9 +234,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     }
 
     @Override
-    public void setQuestion(final String quizId, @Nullable final Question question, boolean multipleChoice) {
-
-        this.multipleChoice = multipleChoice;
+    public void setQuestion(final String quizId, @Nullable final Question question) {
 
         choicesPanel.clear();
 
@@ -283,14 +264,6 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         setQuestionText(question);
 
-        final String onOff = multipleChoice ? constants.offerMultipleChoiceOn() :
-                constants.offerMultipleChoiceOff();
-        hyperlinkMultipleChoice.setText(onOff);
-        @NotNull final PlaceRequest placeRequest = PlaceUtils.getPlaceRequestForQuestion(quizId,
-                question.getId(), nextQuestionSectionId, !multipleChoice);
-        final String historyToken = placeManager.buildHistoryToken(placeRequest);
-        hyperlinkMultipleChoice.setTargetHistoryToken(historyToken);
-
         if (sections == null) {
             Log.error("setQuestion(): userhistorysections is null.");
             return;
@@ -300,40 +273,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         setQuestionSubSectionTitle(question);
 
-        if (multipleChoice) {
-            buildChoices(question);
-        } else {
-            if (textBox == null) {
-                textBox = new TextBox();
-                textBox.addStyleName("question-answer-textbox");
-                textBox.addKeyDownHandler(new KeyDownHandler() {
-
-                    public void onKeyDown(final KeyDownEvent event) {
-                        if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-                            submitAnswer(new Question.Text(textBox.getText(), false));
-                        }
-                    }
-                });
-            }
-
-            textBox.setText("");
-            textBox.removeStyleName("question-radio-button-wrong");
-            choicesPanel.add(textBox);
-
-            if (submitButton == null) {
-                submitButton = new Button(constants.submitButton());
-
-                submitButton.addStyleName("question-submit-button");
-                submitButton.addClickHandler(new ClickHandler() {
-                    @Override
-                    public void onClick(final ClickEvent event) {
-                        submitAnswer(new Question.Text(textBox.getText(), false));
-                    }
-                });
-            }
-
-            choicesPanel.add(submitButton);
-        }
+        buildChoices(question);
 
         updateResultPanelUi(State.WAITING_FOR_ANSWER);
         resultLabel.setText("");
@@ -518,11 +458,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
     @Override
     public void showAnswer(final Question.Text correctAnswer) {
-        if (multipleChoice) {
-            showCorrectAnswerInChoices(correctAnswer);
-        } else {
-            showCorrectAnswerWithoutChoices(correctAnswer);
-        }
+        showCorrectAnswerInChoices(correctAnswer);
 
         updateResultPanelUi(State.DONT_KNOW_ANSWER);
     }
@@ -660,10 +596,6 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
                 radioButton.setEnabled(enabled);
             }
         }
-
-        if (textBox != null) {
-            textBox.setEnabled(enabled);
-        }
     }
 
     private void showCorrectAnswerInChoices(final Question.Text correctAnswer) {
@@ -695,21 +627,6 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         } else {
             Log.fatal("showCorrectAnswerInChoices(): RadioButton not found.");
         }
-    }
-
-    private void showCorrectAnswerWithoutChoices(final Question.Text correctAnswer) {
-        if (textBox == null) {
-            Log.error("showCorrectAnswerWithoutChoices(): textBox is null.");
-            return;
-        }
-
-        if (correctAnswer == null) {
-            Log.error("showCorrectAnswerInChoices: correctAnswer is null.");
-            return;
-        }
-
-        textBox.setText(correctAnswer.text);
-        textBox.addStyleName("question-radio-button-correct");
     }
 
     private void showWrongAnswerInChoices(final Question.Text wrongAnswer) {

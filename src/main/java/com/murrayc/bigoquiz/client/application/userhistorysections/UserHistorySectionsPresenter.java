@@ -28,14 +28,13 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
         UserHistoryResetSectionsEvent.EventHandler {
 
     private String nextQuestionSectionId = null;
-    private boolean multipleChoice = true;
     private boolean userIsLoggedIn = false;
     private String quizId = null;
 
     public interface MyView extends View, HasUiHandlers<UserHistorySectionsUserEditUiHandlers> {
         /** Set a whole set of history.
          */
-        void setUserRecentHistory(final String quizId, final UserHistorySections result, final String nextQuestionSectionId, boolean multipleChoice);
+        void setUserRecentHistory(final String quizId, final UserHistorySections result, final String nextQuestionSectionId);
 
         /** Add a single item of history.
          * For instance, to avoid retrieving the whole history from the server,
@@ -48,11 +47,10 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
 
         /**
          * Set details about the history presentation/links that are affected by the current question's UI.
+         *  @param nextQuestionSectionId
          *
-         * @param nextQuestionSectionId
-         * @param multipleChoice
          */
-        void setQuestionContext(final String nextQuestionSectionId, boolean multipleChoice);
+        void setQuestionContext(final String nextQuestionSectionId);
     }
 
     @Inject
@@ -89,20 +87,17 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
     public void onQuestionContextChanged(@NotNull final QuestionContextEvent event) {
         final String quizId = event.getQuizId();
         final String nextQuestionSectionId = event.getNextQuestionSectionId();
-        final boolean multipleChoice = event.getMultipleChoice();
         final boolean quizChanged = !StringUtils.equals(this.quizId, quizId);
         final boolean nextSectionChanged = !StringUtils.equals(this.nextQuestionSectionId, nextQuestionSectionId);
-        final boolean multipleChoiceChanged = this.multipleChoice != multipleChoice;
         setQuizId(quizId);
         this.nextQuestionSectionId = nextQuestionSectionId;
-        this.multipleChoice = multipleChoice;
 
         if (quizChanged) {
             //Completely refresh the data from the server:
             getAndShowHistory();
-        } else if (nextSectionChanged || multipleChoiceChanged) {
+        } else if (nextSectionChanged) {
             //Just refresh the links:
-            getView().setQuestionContext(nextQuestionSectionId, multipleChoice);
+            getView().setQuestionContext(nextQuestionSectionId);
         }
     }
 
@@ -116,7 +111,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
     private void getAndShowHistory() {
         final String quizId = getQuizId();
         if (StringUtils.isEmpty(quizId)) {
-            getView().setUserRecentHistory(null, null, null, false);
+            getView().setUserRecentHistory(null, null, null);
             return;
         }
 
@@ -156,7 +151,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
                 }
 
                 userIsLoggedIn = loginInfo.isLoggedIn();
-                getView().setUserRecentHistory(quizId, result, nextQuestionSectionId, multipleChoice);
+                getView().setUserRecentHistory(quizId, result, nextQuestionSectionId);
 
                 tellParentPresenterAboutQuizTitle(quizId, result.getQuizTitle());
             }

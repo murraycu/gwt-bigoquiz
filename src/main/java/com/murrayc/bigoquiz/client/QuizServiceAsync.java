@@ -21,7 +21,7 @@ public interface QuizServiceAsync {
     void getNextQuestion(final String quizId, final String sectionId, AsyncCallback<Question> async)
             throws IllegalArgumentException;
 
-    void submitAnswer(final String quizId, final String questionId, final String answer, final boolean exact, final String nextQuestionSectionId, AsyncCallback<QuizService.SubmissionResult> async)
+    void submitAnswer(final String quizId, final String questionId, final String answer, final String nextQuestionSectionId, AsyncCallback<QuizService.SubmissionResult> async)
             throws IllegalArgumentException;
 
     void submitDontKnowAnswer(final String quizId, final String questionId, String nextQuestionSectionId, AsyncCallback<QuizService.SubmissionResult> async)

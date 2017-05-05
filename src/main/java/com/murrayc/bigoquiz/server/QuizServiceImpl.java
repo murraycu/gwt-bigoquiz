@@ -198,7 +198,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
 
     @NotNull
     @Override
-    public SubmissionResult submitAnswer(final String quizId, final String questionId, final String answer, final boolean exact, final String nextQuestionSectionId) throws IllegalArgumentException {
+    public SubmissionResult submitAnswer(final String quizId, final String questionId, final String answer, final String nextQuestionSectionId) throws IllegalArgumentException {
         @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(quizId, questionId);
         if (questionAndAnswer == null) {
             throw new IllegalArgumentException("Unknown QuestionAndAnswer ID");
@@ -209,7 +209,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
             throw new RuntimeException("submitAnswer(): correctAnswer was null.");
         }
 
-        final boolean result = QuizUtils.answerIsCorrect(answer, correctAnswer.text, exact);
+        final boolean result = QuizUtils.answerIsCorrect(answer, correctAnswer.text);
 
         return storeAnswerCorrectnessAndGetSubmissionResult(quizId, questionId, nextQuestionSectionId, questionAndAnswer, result);
     }

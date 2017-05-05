@@ -149,7 +149,7 @@ public class Utils {
     }
 
     public static void tellUserHistoryPresenterAboutNoQuestionContext(final HasHandlers source) {
-        QuestionContextEvent.fire(source, null, null, true);
+        QuestionContextEvent.fire(source, null, null);
     }
 
     @NotNull
