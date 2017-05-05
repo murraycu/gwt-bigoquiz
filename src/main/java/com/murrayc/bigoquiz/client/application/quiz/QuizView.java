@@ -62,7 +62,7 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         setErrorLabelVisible(false);
 
         Window.setTitle(messages.windowTitleQuiz(quiz.getTitle()));
-        Utils.addHeaderToPanel(2, panelQuiz, quiz.getTitle());
+        setSecondaryTitle(quiz.getTitle());
 
         final Button buttonPlay = new Button(constants.buttonAnswerQuestions());
         buttonPlay.addStyleName("quiz-list-button-answer-questions");

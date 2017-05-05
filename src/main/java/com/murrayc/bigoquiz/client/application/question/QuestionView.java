@@ -44,7 +44,6 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     private Question.Text choiceSelected = null;
     private boolean questionHasOnlyTwoAnswers = false;
 
-    private HeadingElement quizTitleLabel = null;
     private final FlowPanel resultPanel;
     private final ListBox nextQuestionSectionListBox = new ListBox();
     private final Label sectionTitleLabel = new InlineLabel();
@@ -83,8 +82,6 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         @NotNull SimplePanel userHistoryRecentPanel = new SimplePanel();
         sidebarPanelSections.add(userHistoryRecentPanel);
         bindSlot(QuestionPresenter.SLOT_USER_HISTORY_RECENT, userHistoryRecentPanel);
-
-        quizTitleLabel = Utils.addHeaderToPanel(2, mainPanel, "");
 
         //Question content:
         showingFromPanel.addStyleName("show-from-panel");
@@ -261,7 +258,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         resultPanel.setVisible(true);
 
-        quizTitleLabel.setInnerText(question.getQuizTitle());
+        setSecondaryTitle(question.getQuizTitle());
 
         setErrorLabelVisible(false);
 

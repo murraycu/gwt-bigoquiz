@@ -31,6 +31,10 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
     private final HeadingElement titleHeading;
     @NotNull
     private final Label titleLabel = new InlineLabel();
+    @NotNull
+    private final HeadingElement secondaryTitleHeading;
+    @NotNull
+    private final Label secondaryTitleLabel = new InlineLabel();
     private final Label labelLoading = Utils.createServerLoadingLabel(constants);
     private final Label labelError = Utils.createServerErrorLabel(constants);
 
@@ -44,6 +48,10 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
         titleLabel.addStyleName("page-title-label");
         titleHeading = Utils.addHeaderToPanel(2, mainPanel, titleLabel);
         setHeadingVisible(false);
+
+        secondaryTitleLabel.addStyleName("page-secondary-title-label");
+        secondaryTitleHeading = Utils.addHeaderToPanel(2, mainPanel, secondaryTitleLabel);
+        setSecondaryHeadingVisible(false);
 
         mainPanel.add(labelLoading);
         setLoadingLabelVisible(false);
@@ -61,6 +69,11 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
         Window.setTitle(title);
     }
 
+    protected void setSecondaryTitle(final String title) {
+        secondaryTitleLabel.setText(title);
+        setSecondaryHeadingVisible(!StringUtils.isEmpty(title));
+    }
+
     @Override
     public void setLoadingLabelVisible(boolean visible) {
         labelLoading.setVisible(visible);
@@ -76,6 +89,10 @@ public class ContentViewWithUIHandlers<C extends UiHandlers> extends ViewWithUiH
 
     private void setHeadingVisible(boolean visible) {
         titleHeading.getStyle().setProperty("display", visible ? "block" : "none");
+    }
+
+    private void setSecondaryHeadingVisible(boolean visible) {
+        secondaryTitleHeading.getStyle().setProperty("display", visible ? "block" : "none");
     }
 
     @Override
