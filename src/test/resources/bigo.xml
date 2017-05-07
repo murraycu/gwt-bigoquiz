@@ -711,10 +711,12 @@
             <question id="quicksort-time-worst">
                 <text>Time (Worst)</text>
                 <answer>O(n²)</answer>
+                <note>The pivot may repeatedly create parts with only 1 and n - 1 characters, in each of n levels, with each part of n - 1 characters needing O(n) work.</note>
             </question>
             <question id="quicksort-space-worst">
                 <text>Space (Worst)</text>
                 <answer>O(log(n))</answer>
+
             </question>
         </subsection>
 
@@ -732,6 +734,7 @@
             <question id="mergesort-time-worst">
                 <text>Time (Worst)</text>
                 <answer>O(n log(n))</answer>
+                <note>Each half is halved again, meaning there must be log(n) divides until we reach a single character. At each level, across all parts, there are n characters.</note>
             </question>
             <question id="mergesort-space-worst">
                 <text>Space (Worst)</text>
