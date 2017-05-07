@@ -565,6 +565,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
                 <text>Heap</text>
                 <link>https://en.wikipedia.org/wiki/Heap_(data_structure)</link>
                 <answer>Usually implemented with an array. The K children of position i are from Ki+1 to Ki+K.</answer>
+                <!-- TODO: Why does this mention k children instead of 2 children? -->
             </question>
 
             <!-- TODO: How is it kept complete? -->
