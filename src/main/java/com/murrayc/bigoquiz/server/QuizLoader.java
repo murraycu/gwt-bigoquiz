@@ -147,16 +147,16 @@ public class QuizLoader {
         return result;
     }
 
-    private static void loadSectionNode(final Quiz result, final Element sectionElement) throws QuizLoaderException {
-        loadSectionNode(result, sectionElement, false);
+    private static void loadSectionNode(final Quiz quiz, final Element sectionElement) throws QuizLoaderException {
+        loadSectionNode(quiz, sectionElement, false);
 
         final boolean andReverse = getAttributeAsBoolean(sectionElement, ATTR_AND_REVERSE);
         if (andReverse) {
-            loadSectionNode(result, sectionElement, true);
+            loadSectionNode(quiz, sectionElement, true);
         }
     }
 
-    private static void loadSectionNode(final Quiz result, final Element sectionElement, boolean reverse) throws QuizLoaderException {
+    private static void loadSectionNode(final Quiz quiz, final Element sectionElement, boolean reverse) throws QuizLoaderException {
         String sectionId = sectionElement.getAttribute(ATTR_ID);
         if (StringUtils.isEmpty(sectionId)) {
             Log.error("loadSectionNode: sectionId is null.");
@@ -184,7 +184,7 @@ public class QuizLoader {
 
         final boolean useAnswersAsChoices = getAttributeAsBoolean(sectionElement, ATTR_ANSWERS_AS_CHOICES);
 
-        result.addSection(sectionId, sectionTitle, sectionLink, defaultChoices);
+        quiz.addSection(sectionId, sectionTitle, sectionLink, defaultChoices);
 
         int questionsCount = 0;
         @NotNull final List<Node> listSubSectionNodes = getChildrenByTagName(sectionElement, NODE_SUB_SECTION);
@@ -199,20 +199,20 @@ public class QuizLoader {
             final boolean subSectionUseAnswersAsChoices = getAttributeAsBoolean(subSectionElement, ATTR_ANSWERS_AS_CHOICES) &&
                     !useAnswersAsChoices;
 
-            result.addSubSection(sectionId, subSectionId, subSectionTitle, subSectionLink);
+            quiz.addSubSection(sectionId, subSectionId, subSectionTitle, subSectionLink);
 
             //Questions:
-            questionsCount += addChildQuestions(result, sectionId, subSectionId, defaultChoices, subSectionElement, reverse, subSectionUseAnswersAsChoices);
+            questionsCount += addChildQuestions(quiz, sectionId, subSectionId, defaultChoices, subSectionElement, reverse, subSectionUseAnswersAsChoices);
         }
 
         //Add any Questions that are not in a subsection:
-        questionsCount += addChildQuestions(result, sectionId, null, defaultChoices, sectionElement, reverse, false);
+        questionsCount += addChildQuestions(quiz, sectionId, null, defaultChoices, sectionElement, reverse, false);
 
-        result.setSectionQuestionsCount(sectionId, questionsCount);
+        quiz.setSectionQuestionsCount(sectionId, questionsCount);
 
         //Make sure that we set sub-section choices from the answers from all questions in the whole section:
         if (useAnswersAsChoices) {
-            setSectionDefaultChoicesFromAnswers(result, sectionId);
+            setSectionDefaultChoicesFromAnswers(quiz, sectionId);
         }
 
     }
