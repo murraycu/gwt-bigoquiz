@@ -892,7 +892,7 @@ Or alternatively, a (balanced) binary tree with intervals in each node, using th
             </question>
     </section>
 
-    <section id="datastructures-linked-list-operations" and_reverse="true">
+    <section id="datastructures-linked-list-operations">
         <title>Linked List Operations</title>
 
         <question id="datastructures-linked-list-operations-sort-">
