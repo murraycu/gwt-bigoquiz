@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz xmlns="http://bigoquiz.com/document" format_version="1" id="compilers">
+    <title>Compilers</title>
+
+    <section id="compilers-structure" answers_as_choices="true">
+        <title>Compiler Structure</title>
+        <!-- Pages 9 and 10 of Engineering a Compiler. -->
+
+        <question id="compilers-structure-front-end">
+            <text>Front End</text>
+            <link>https://en.wikipedia.org/wiki/Compiler#Front_end</link>
+            <answer>Scanner, Parser, Elaboration. Understands form, syntax and meaning. Receives the expression (source code). Emits IR (Intermediate Representation).</answer>
+        </question>
+
+        <question id="compilers-structure-optimizer">
+            <text>Optimizer</text>
+            <answer>Multiple optimizer steps. Receives IR (Intermediate Representation). Performs analysis and emits transformed IR.</answer>
+        </question>
+
+        <question id="compilers-structure-backend">
+            <text>Backend</text>
+            <answer>Instruction Selection, Instruction Scheduling, Register Allocation. Receives IR (Intermediate Representation) and emits code for the target machine.</answer>
+        </question>
+    </section>
+
+    <section id="compilers-regex" answers_as_choices="true" and_reverse="true">
+        <title>Regular Expressions: Syntax</title>
+        <link>https://en.wikipedia.org/wiki/Regular_expression#Formal_definition</link>
+
+        <question id="compilers-regex-syntax-alternation">
+            <text>Alternation</text>
+            <answer>For instance, a|b</answer>
+        </question>
+
+        <question id="compilers-regex-syntax-alternation">
+            <text>Concatenation</text>
+            <answer>For instance, ab</answer>
+        </question>
+
+        <question id="compilers-regex-syntax-keene-closure">
+            <text>Keene Closure</text>
+            <answer>a*</answer>
+        </question>
+    </section>
+
+    <section id="compilers-automata">
+        <title>Finite State Automata (For Scanners)</title>
+        <link>https://en.wikipedia.org/wiki/Finite-state_machine</link>
+
+        <subsection id="compilers-automata-5tuple" answers_as_choices="true" and_reverse="true">
+            <title>5-Tuple</title>
+            <link>https://en.wikipedia.org/wiki/Deterministic_finite_automaton#Formal_definition</link>
+            <!-- Page 29 of Engineering a compiler -->
+
+            <question id="compilers-automata-5tuple-s">
+                <text>S</text>
+                <answer>A set of states.</answer>
+                <note>This is called Q on the wikipedia page for DFAs.</note>
+            </question>
+
+            <question id="compilers-automata-5tuple-sigma">
+                <text>Σ</text>
+                <answer>A set of input symbols (the alphabet).</answer>
+            </question>
+
+            <question id="compilers-automata-5tuple-delta">
+                <text>δ</text>
+                <answer>A transition function: δ(s, c).</answer>
+            </question>
+
+            <question id="compilers-automata-5tuple-s0">
+                <text>s₀</text>
+                <!-- TODO: can most browsers's fonts show the subscript 0? -->
+                <answer>The start state.</answer>
+                <note>This is called q₀ on the wikipedia page for DFAs.</note>
+            </question>
+
+            <question id="compilers-automata-5tuple-sa">
+                <text>sₐ</text>
+                <!-- TODO: can most browsers' fonts show the subscript a? -->
+                <answer>The set of accepting states.</answer>
+                <note>This is called F on the wikipedia page for DFAs.</note>
+            </question>
+        </subsection>
+
+        <subsection id="compilers-automata-types" answers_as_choices="true" and_reverse="true">
+            <title>Types</title>
+
+            <question id="compilers-automata-types-dfa">
+                <text>DFA (Deterministic Finite State Automata)</text>
+                <link>https://en.wikipedia.org/wiki/Deterministic_finite_automaton</link>
+                <answer>Allows transitions on the empty string ε.   Allows states that have multiple transitions on the same character.</answer>
+                <!-- Page 44 of Engineering a Compiler. -->
+            </question>
+
+            <question id="compilers-automata-types-nfa">
+                <text>NFA (Non-deterministic Finite State Automata)</text>
+                <link>https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton</link>
+                <answer>Transition function is single-valued. Does not allow transitions on the empty string ε.</answer>
+                <!-- Page 44 of Engineering a Compiler. -->
+            </question>
+        </subsection>
+
+        <subsection id="compilers-automata-construction" answers_as_choices="true" and_reverse="true">
+            <title>Construction</title>
+
+            <question id="compilers-automata-construction-thompsons">
+                <text>Thompson's Construction</text>
+                <link>https://en.wikipedia.org/wiki/Thompson%27s_construction</link>
+                <answer>Constructs an NFA from a regular expression.</answer>
+                <!-- Page 45 of Engineering a Compiler. -->
+            </question>
+
+            <question id="compilers-automata-construction-subset">
+                <text>Subset Construction</text>
+                <link>https://en.wikipedia.org/wiki/Powerset_construction</link>
+                <answer>Constructs a DFA from an NFA.</answer>
+                <!-- Page 47 of Engineering a Compiler. -->
+                <code_url>https://github.com/murraycu/murrayc-compiler-experiments/blob/master/src/chapter_02/section_2_4_3_subset_construction.cc</code_url>
+            </question>
+
+            <question id="compilers-automata-construction-dfa-minimization">
+                <text>Hopcroft's Algorithm</text>
+                <link>https://en.wikipedia.org/wiki/DFA_minimization#Hopcroft.27s_algorithm</link>
+                <answer>Minimize a DFA.</answer>
+                <!-- Page 47 of Engineering a Compiler. -->
+                <code_url>https://github.com/murraycu/murrayc-compiler-experiments/blob/master/src/chapter_02/section_2_4_4_minimal_dfa_with_hopcrofts_algorithm.cc</code_url>
+            </question>
+        </subsection>
+    </section>
+
+    <section id="compilers-parsers">
+        <title>Parsers</title>
+        <!-- Code: https://github.com/murraycu/murrayc-compiler-experiments/tree/master/src/chapter_03 -->
+
+        <subsection id="compilers-parsers-grammar-terminology" answers_as_choices="true" and_reverse="true">
+            <title>Grammar: Terminology</title>
+            <!-- The text here is almost exactly based on the text in the sidebar sections on the mentioned pages
+            in Engineering a Compiler. -->
+
+            <question id="compilers-parsers-grammar-cfg">
+                <text>Context-free Grammar</text>
+                <answer>Defines a set of strings that are valid sentences.</answer>
+                <!-- Page 86 of Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-parsers-grammar-sentence">
+                <text>Sentence</text>
+                <answer>A string of symbols that can be derived from the rules of a grammar.</answer>
+                <!-- Page 86 of Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-parsers-grammar-production">
+                <text>Production</text>
+                <answer>A rule in a CFG (Context-free Grammar).</answer>
+                <!-- Page 86 of Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-parsers-grammar-non-terminal-symbol">
+                <text>Nonterminal Symbol</text>
+                <answer>A syntactic variable used in a grammar's productions.</answer>
+                <!-- Page 86 of Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-parsers-grammar-terminal-symbol">
+                <text>Terminal Symbol</text>
+                <answer>A word (actually, its syntactic category) that can appear in a sentence.</answer>
+                <note>A word consists of a lexeme and its syntactic category.</note>
+                <!-- Page 86 of Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-parsers-grammar-derivation">
+                <text>Derivation</text>
+                <answer>A sequence of rewriting steps that begins with the grammar's start symbol and ends with a sentence in the language.</answer>
+                <!-- Page 87 of Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-parsers-grammar-sentential-form">
+                <text>Sentential Form</text>
+                <answer>A string of symbols that occurs as one step in a valid derivation.</answer>
+                <!-- Page 87 of Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-parsers-grammar-rightmost-derivation">
+                <text>Rightmost Derivation</text>
+                <answer>A derivation that rewrites, at each step, the rightmost nonterminal.</answer>
+                <!-- Page 90 of Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-parsers-grammar-leftmost-derivation">
+                <text>Leftmost Derivation</text>
+                <answer>A derivation that rewrites, at each step, the leftmost nonterminal.</answer>
+                <!-- Page 90 of Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-parsers-grammar-left-recursive-rule">
+                <text>Left Recursive Rule</text>
+                <answer>A rule whose first symbol on the right-hand side (expansion) is the symbol on its left-hand side (direct), or can derive that symbol (indirect).</answer>
+                <!-- Page 100 of Engineering a compiler. -->
+                <note>Top-down predictive parsers are unable to handle left-recursion, though left-recursive grammars model the left-to-right associativity of expression operators in a more natural way.</note>
+                <!-- Page 115 of Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-parsers-grammar-backtrack-free-grammar">
+                <text>Backtrack-free Grammar</text>
+                <answer>A CFG for which a leftmost top-down parser can always predict the correct rule with lookahead of at most one word.</answer>
+                <note>Use the FIRST+(production) set to check if a CFG is backtrack-free.</note>
+                <!-- Page 103 of Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-parsers-grammar-backtrack-left-factoring">
+                <text>Left Factoring</text>
+                <answer>The process of extracting and isolating common prefixes in a set of productions.</answer>
+                <!-- Page 108 of Engineering a compiler. -->
+            </question>
+        </subsection>
+
+        <subsection id="compilers-parsers-grammar-classes" answers_as_choices="true" and_reverse="true">
+            <title>Grammar: Classes</title>
+            <!-- Page 05 of Engineering a Compiler.
+                 The text here is almost exactly based on the text in the sidebar sections on these pages. -->
+
+            <question id="compilers-parsers-grammar-classes-afg">
+                <text>Arbitrary CFG Grammars</text>
+                <answer>Require more time to parse than restricted LR(1) or LL(1) grammars.</answer>
+            </question>
+
+            <question id="compilers-parsers-grammar-classes-lr1">
+                <text>LR(1) Grammars</text>
+                <answer>A subset of Arbitrary CFS Grammars. Can be parsed bottom-up, scanning left to right, looking at most 1 word ahead.</answer>
+            </question>
+
+            <question id="compilers-parsers-grammar-classes-lr1">
+                <text>LL(1) Grammars</text>
+                <answer>A subset of LR(1) grammars. Can be parsed top-down, scanning from left to right, looking at most 1 word ahead.</answer>
+            </question>
+
+            <question id="compilers-parsers-grammar-classes-RG">
+                <text>RG (Regular Grammars)</text>
+                <answer>A subset of LL(1) grammars. Equivalent to regular expressions. Productions are restricted to either A -> a, or A -> aB, where A and B are nonterminal symbols, and a is a terminal symbol.</answer>
+            </question>
+        </subsection>
+
+        <subsection id="compilers-parsers-grammar-sets" answers_as_choices="true" and_reverse="true">
+            <title>Grammar: Sets</title>
+            <!-- Construction code here: https://github.com/murraycu/murrayc-compiler-experiments/blob/master/src/chapter_03/build_sets.h -->
+
+            <question id="compilers-parsers-grammar-sets-first-symbol">
+                <text>FIRST(symbol)</text>
+                <answer>The set of terminals that can appear at the start of a sentence derived from the symbol.</answer>
+                <!-- Page 104 of Engineering a compiler -->
+            </question>
+
+            <question id="compilers-parsers-grammar-sets-first-production">
+                <text>FIRST(production: a -> b1 b2 ... bk)</text>
+                <answer>The set of terminals that can appear at the start of a sentence derived from this production. Union of FIRST(symbol) for b1 b2 ... bn, where bn is the first symbol whose FIRST(symbol) does not contain the empty symbol ε.</answer>
+                <!-- Page 105 of Engineering a compiler -->
+                <note>This lets us choose the expansion whose FIRST set contains the lookahead symbol. That is the expansion whose first symbol, or various possible recursive expansions of its first symbol, could match the lookahead symbol (based on the current word).</note>
+            </question>
+
+            <question id="compilers-parsers-grammar-sets-follow">
+                <text>FOLLOW(symbol)</text>
+                <answer>The set of words that can occur immediately after the (nonterminal) symbol in a sentence.</answer>
+                <!-- Page 106 of Engineering a compiler -->
+                <note>This lets us choose a rule even if none was found by looking at the FIRST(production) sets. It lets us see if there is a rule using the empty symbol ε that is suitable. We cannot match an ε symbol to the lookahead symbol, but maybe the lookahead symbol could appear in a sentence immediately after the focus symbol, meaning it would make sense to use the rule with the ε symbol, leaving the current word for use by the next symbol.</note>
+            </question>
+
+            <question id="compilers-parsers-grammar-sets-first-plus-production">
+                <text>FIRST+(production: a -> b1 b2 ... bk)</text>
+                <answer>FIRST(production), if that does not contain the empty symbol ε. Otherwise, the union of FIRST(production) and FOLLOW(a).</answer>
+                <!-- TODO: A description rather than a definition. -->
+                <!-- Page 107 of Engineering a compiler -->
+                <note>This lets us check whether a grammar is backtrack-free (can be used to parse sentences without backtracking). A grammar is backtrack-free if, for any nonterminal symbol with multiple production rules, the intersection of its FIRST+(production) sets must be empty (have no common symbols).</note>
+            </question>
+        </subsection>
+    </section>
+
+</quiz>

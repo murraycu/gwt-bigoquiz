@@ -129,7 +129,8 @@ public class QuizServiceImpl extends ServiceWithUser implements
                 "concurrency",
                 "distributed_systems",
                 "book_stepanov_fmtgp",
-                "networking"};
+                "networking",
+                "compilers"};
 
         for (final String name : names) {
             loadQuizIntoQuizzes(name, quizzes);
