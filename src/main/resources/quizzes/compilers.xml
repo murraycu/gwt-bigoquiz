@@ -230,8 +230,8 @@
                 <answer>A subset of Arbitrary CFS Grammars. Can be parsed bottom-up, scanning left to right, looking at most 1 word ahead.</answer>
             </question>
 
-            <question id="compilers-parsers-grammar-classes-lr1">
-                <text>LL(1) Grammars</text>
+            <question id="compilers-parsers-grammar-classes-ll1">
+                <text>LL(1)  Grammars</text>
                 <answer>A subset of LR(1) grammars. Can be parsed top-down, scanning from left to right, looking at most 1 word ahead.</answer>
             </question>
 
