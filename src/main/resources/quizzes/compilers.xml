@@ -213,6 +213,19 @@
                 <answer>The process of extracting and isolating common prefixes in a set of productions.</answer>
                 <!-- Page 108 of Engineering a compiler. -->
             </question>
+
+            <question id="compilers-parsers-grammar-handle">
+                <text>Handle</text>
+                <answer>In an LR(1) parser, a pair A->B, k, such that B appears in the frontier with its right end at position k, so that replacing B with A (reducing B to A) is the next step in the parse.</answer>
+                <!-- TODO: Improve the "appears in the frontier with its right end at" text. -->
+                <!-- Page 116 of Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-parsers-grammar-reduction">
+                <text>Reduction</text>
+                <answer>In an LR(1) parser, use an A->B production to replace B with A in the frontier of the bottom-up parse.</answer>
+                <!-- Page 116 of Engineering a compiler. -->
+            </question>
         </subsection>
 
         <subsection id="compilers-parsers-grammar-classes" answers_as_choices="true" and_reverse="true">
