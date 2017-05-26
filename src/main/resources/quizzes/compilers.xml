@@ -231,8 +231,10 @@
             </question>
 
             <question id="compilers-parsers-grammar-classes-ll1">
-                <text>LL(1)  Grammars</text>
+                <text>LL(1) Grammars</text>
                 <answer>A subset of LR(1) grammars. Can be parsed top-down, scanning from left to right, looking at most 1 word ahead.</answer>
+                <note>LL(1) grammars are, by definition, backtrack-free. We can check if a grammar is backtrack-free by using the FIRST+ sets.</note>
+                <!-- The first sentence of the note text is from page 113 of Engineering a Compiler. -->
             </question>
 
             <question id="compilers-parsers-grammar-classes-RG">
