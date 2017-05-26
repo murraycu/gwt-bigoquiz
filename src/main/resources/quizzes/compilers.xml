@@ -243,12 +243,12 @@
 
         <subsection id="compilers-parsers-grammar-sets" answers_as_choices="true" and_reverse="true">
             <title>Grammar: Sets</title>
-            <!-- Construction code here: https://github.com/murraycu/murrayc-compiler-experiments/blob/master/src/chapter_03/build_sets.h -->
 
             <question id="compilers-parsers-grammar-sets-first-symbol">
                 <text>FIRST(symbol)</text>
                 <answer>The set of terminals that can appear at the start of a sentence derived from the symbol.</answer>
                 <!-- Page 104 of Engineering a compiler -->
+                <code_url>https://github.com/murraycu/murrayc-compiler-experiments/blob/master/src/chapter_03/build_sets.h</code_url>
             </question>
 
             <question id="compilers-parsers-grammar-sets-first-production">
@@ -256,6 +256,7 @@
                 <answer>The set of terminals that can appear at the start of a sentence derived from this production. Union of FIRST(symbol) for b1 b2 ... bn, where bn is the first symbol whose FIRST(symbol) does not contain the empty symbol ε.</answer>
                 <!-- Page 105 of Engineering a compiler -->
                 <note>This lets us choose the expansion whose FIRST set contains the lookahead symbol. That is the expansion whose first symbol, or various possible recursive expansions of its first symbol, could match the lookahead symbol (based on the current word).</note>
+                <code_url>https://github.com/murraycu/murrayc-compiler-experiments/blob/master/src/chapter_03/build_sets.h</code_url>
             </question>
 
             <question id="compilers-parsers-grammar-sets-follow">
@@ -263,6 +264,7 @@
                 <answer>The set of words that can occur immediately after the (nonterminal) symbol in a sentence.</answer>
                 <!-- Page 106 of Engineering a compiler -->
                 <note>This lets us choose a rule even if none was found by looking at the FIRST(production) sets. It lets us see if there is a rule using the empty symbol ε that is suitable. We cannot match an ε symbol to the lookahead symbol, but maybe the lookahead symbol could appear in a sentence immediately after the focus symbol, meaning it would make sense to use the rule with the ε symbol, leaving the current word for use by the next symbol.</note>
+                <code_url>https://github.com/murraycu/murrayc-compiler-experiments/blob/master/src/chapter_03/build_sets.h</code_url>
             </question>
 
             <question id="compilers-parsers-grammar-sets-first-plus-production">
@@ -271,6 +273,7 @@
                 <!-- TODO: A description rather than a definition. -->
                 <!-- Page 107 of Engineering a compiler -->
                 <note>This lets us check whether a grammar is backtrack-free (can be used to parse sentences without backtracking). A grammar is backtrack-free if, for any nonterminal symbol with multiple production rules, the intersection of its FIRST+(production) sets must be empty (have no common symbols).</note>
+                <code_url>https://github.com/murraycu/murrayc-compiler-experiments/blob/master/src/chapter_03/build_sets.h</code_url>
             </question>
         </subsection>
     </section>
