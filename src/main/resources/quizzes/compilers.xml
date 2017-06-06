@@ -9,7 +9,7 @@
         <question id="compilers-structure-front-end">
             <text>Front End</text>
             <link>https://en.wikipedia.org/wiki/Compiler#Front_end</link>
-            <answer>Scanner, Parser, Elaboration. Understands form, syntax and meaning. Receives the expression (source code). Emits IR (Intermediate Representation).</answer>
+            <answer>Scanner (lexical analysis. Also known as lexer, or tokenizer), Parser (syntactic analysis), Elaboration. Understands form, syntax and meaning. Receives the expression (source code). Emits IR (Intermediate Representation).</answer>
         </question>
 
         <question id="compilers-structure-optimizer">
