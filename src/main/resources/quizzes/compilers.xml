@@ -23,59 +23,59 @@
         </question>
     </section>
 
-    <section id="compilers-regex" answers_as_choices="true" and_reverse="true">
-        <title>Regular Expressions: Syntax</title>
+    <section id="compilers-scanners-regex" answers_as_choices="true" and_reverse="true">
+        <title>Scanners: Regular Expressions: Syntax</title>
         <link>https://en.wikipedia.org/wiki/Regular_expression#Formal_definition</link>
 
-        <question id="compilers-regex-syntax-alternation">
+        <question id="compilers-scanners-regex-syntax-alternation">
             <text>Alternation</text>
             <answer>For instance, a|b</answer>
         </question>
 
-        <question id="compilers-regex-syntax-alternation">
+        <question id="compilers-scanners-regex-syntax-alternation">
             <text>Concatenation</text>
             <answer>For instance, ab</answer>
         </question>
 
-        <question id="compilers-regex-syntax-keene-closure">
+        <question id="compilers-scanners-regex-syntax-keene-closure">
             <text>Keene Closure</text>
             <answer>a*</answer>
         </question>
     </section>
 
-    <section id="compilers-automata">
-        <title>Finite State Automata (For Scanners)</title>
+    <section id="compilers-scanners-automata">
+        <title>Scanners: Finite State Automata</title>
         <link>https://en.wikipedia.org/wiki/Finite-state_machine</link>
 
-        <subsection id="compilers-automata-5tuple" answers_as_choices="true" and_reverse="true">
+        <subsection id="compilers-scanners-automata-5tuple" answers_as_choices="true" and_reverse="true">
             <title>5-Tuple</title>
             <link>https://en.wikipedia.org/wiki/Deterministic_finite_automaton#Formal_definition</link>
             <!-- Page 29 of Engineering a compiler -->
 
-            <question id="compilers-automata-5tuple-s">
+            <question id="compilers-scanners-automata-5tuple-s">
                 <text>S</text>
                 <answer>A set of states.</answer>
                 <note>This is called Q on the wikipedia page for DFAs.</note>
             </question>
 
-            <question id="compilers-automata-5tuple-sigma">
+            <question id="compilers-scanners-automata-5tuple-sigma">
                 <text>Σ</text>
                 <answer>A set of input symbols (the alphabet).</answer>
             </question>
 
-            <question id="compilers-automata-5tuple-delta">
+            <question id="compilers-scanners-automata-5tuple-delta">
                 <text>δ</text>
                 <answer>A transition function: δ(s, c).</answer>
             </question>
 
-            <question id="compilers-automata-5tuple-s0">
+            <question id="compilers-scanners-automata-5tuple-s0">
                 <text>s₀</text>
                 <!-- TODO: can most browsers's fonts show the subscript 0? -->
                 <answer>The start state.</answer>
                 <note>This is called q₀ on the wikipedia page for DFAs.</note>
             </question>
 
-            <question id="compilers-automata-5tuple-sa">
+            <question id="compilers-scanners-automata-5tuple-sa">
                 <text>sₐ</text>
                 <!-- TODO: can most browsers' fonts show the subscript a? -->
                 <answer>The set of accepting states.</answer>
@@ -83,17 +83,17 @@
             </question>
         </subsection>
 
-        <subsection id="compilers-automata-types" answers_as_choices="true" and_reverse="true">
+        <subsection id="compilers-scanners-automata-types" answers_as_choices="true" and_reverse="true">
             <title>Types</title>
 
-            <question id="compilers-automata-types-dfa">
+            <question id="compilers-scanners-automata-types-dfa">
                 <text>DFA (Deterministic Finite State Automata)</text>
                 <link>https://en.wikipedia.org/wiki/Deterministic_finite_automaton</link>
                 <answer>Allows transitions on the empty string ε.   Allows states that have multiple transitions on the same character.</answer>
                 <!-- Page 44 of Engineering a Compiler. -->
             </question>
 
-            <question id="compilers-automata-types-nfa">
+            <question id="compilers-scanners-automata-types-nfa">
                 <text>NFA (Non-deterministic Finite State Automata)</text>
                 <link>https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton</link>
                 <answer>Transition function is single-valued. Does not allow transitions on the empty string ε.</answer>
@@ -101,17 +101,17 @@
             </question>
         </subsection>
 
-        <subsection id="compilers-automata-construction" answers_as_choices="true" and_reverse="true">
+        <subsection id="compilers-scanners-automata-construction" answers_as_choices="true" and_reverse="true">
             <title>Construction</title>
 
-            <question id="compilers-automata-construction-thompsons">
+            <question id="compilers-scanners-automata-construction-thompsons">
                 <text>Thompson's Construction</text>
                 <link>https://en.wikipedia.org/wiki/Thompson%27s_construction</link>
                 <answer>Constructs an NFA from a regular expression.</answer>
                 <!-- Page 45 of Engineering a Compiler. -->
             </question>
 
-            <question id="compilers-automata-construction-subset">
+            <question id="compilers-scanners-automata-construction-subset">
                 <text>Subset Construction</text>
                 <link>https://en.wikipedia.org/wiki/Powerset_construction</link>
                 <answer>Constructs a DFA from an NFA.</answer>
@@ -119,7 +119,7 @@
                 <code_url>https://github.com/murraycu/murrayc-compiler-experiments/blob/master/src/chapter_02/section_2_4_3_subset_construction.cc</code_url>
             </question>
 
-            <question id="compilers-automata-construction-dfa-minimization">
+            <question id="compilers-scanners-automata-construction-dfa-minimization">
                 <text>Hopcroft's Algorithm</text>
                 <link>https://en.wikipedia.org/wiki/DFA_minimization#Hopcroft.27s_algorithm</link>
                 <answer>Minimize a DFA.</answer>
