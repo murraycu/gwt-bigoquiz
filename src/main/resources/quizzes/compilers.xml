@@ -316,4 +316,46 @@
         </subsection>
     </section>
 
+    <section id="compilers-context-sensitive-analysis">
+    <title>Context Sensitive Analysis</title>
+
+        <subsection id="compilers-context-sensitive-analysis-techniques" answers_as_choices="true" and_reverse="true">
+            <title>Techniques</title>
+
+            <question id="compilers-context-sensitive-analysis-techniques-attribute-grammar">
+                <text>Attribute Grammar</text>
+                <link>https://en.wikipedia.org/wiki/Attribute_grammar</link>
+                <answer>A context-free grammar whose productions are augmented by rules that define one attribute value in terms of other attribute values.</answer>
+            </question>
+
+            <question id="compilers-context-sensitive-analysis-techniques-ad-hoc-syntax-directed">
+                <text>Ad Hoc Syntax-Directed Translation</text>
+                <link>https://en.wikipedia.org/wiki/Syntax-directed_translation</link>
+                <answer>A context-free grammar whose productions are augmented by code snippets that define one attribute value in terms of other attribute values.</answer>
+                <code_url>https://github.com/murraycu/murrayc-compiler-experiments/blob/master/src/chapter_04/section_4_4_1_ad_hoc_syntax_directed_translation_signed_binary_numbers.cc</code_url>
+                <note>This code would run, for instance, during each reduce step in a bottom-up shift-reduce parser. The code snippets can use a shared data structure such as a symbol table.</note>
+            </question>
+        </subsection>
+
+        <subsection id="compilers-context-sensitive-analysis-attributes" answers_as_choices="true" and_reverse="true">
+            <title>Attributes</title>
+
+            <question id="compilers-context-sensitive-analysis-techniques-attributes-synthesized">
+                <text>Synthesized Attribute</text>
+                <link>https://en.wikipedia.org/wiki/Attribute_grammar#Synthesized_attributes</link>
+                <answer>Defined in terms of the attributes of the node, its children, and constants.</answer>
+                <!-- Page 184 of "Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-context-sensitive-analysis-techniques-attributes-inherited">
+                <text>Inherited Attribute</text>
+                <link>https://en.wikipedia.org/wiki/Attribute_grammar#Inherited_attributes</link>
+                <answer>Defined in terms of the attributes of the node, its siblings, its parent, and constants.</answer>
+                <!-- Page 184 of "Engineering a compiler. -->
+                <note>Grammars that use synthesized attributes are called S-attribute grammars.</note>
+                <!-- Page 188 of "Engineering a compiler. -->
+            </question>
+        </subsection>
+    </section>
+
 </quiz>
