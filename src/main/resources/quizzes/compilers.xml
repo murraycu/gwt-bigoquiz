@@ -358,4 +358,49 @@
         </subsection>
     </section>
 
+    <section id="compilers-ir">
+        <title>Intermediate Representation</title>
+        <link>https://en.wikipedia.org/wiki/Intermediate_representation</link>
+
+        <subsection id="compilers-ir-graphical" answers_as_choices="true" and_reverse="true">
+            <title>Graphical</title>
+
+            <question id="compilers-ir-graphical-ast">
+                <text>AST (Abstract Syntax Tree)</text>
+                <link>https://en.wikipedia.org/wiki/Abstract_syntax_tree</link>
+                <answer>A contraction of the parse tree that omits most nonterminal nodes.</answer>
+                <!-- Page 227 of "Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-ir-graphical-dag">
+                <text>DAG (Directed Acyclic Graph)</text>
+                <answer>An AST whose nodes can share identical subtrees as children, avoiding repetition.</answer>
+                <!-- Page 229 of "Engineering a compiler. -->
+            </question>
+
+            <question id="compilers-ir-graphical-cfg">
+                <text>CFG (Control Flow Graph)</text>
+                <link>https://en.wikipedia.org/wiki/Control_flow_graph</link>
+                <answer>Has a node for every basic block and an edge for each possible control transfer between blocks.</answer>
+                <!-- Page 231 of "Engineering a compiler. -->
+                <note>A "basic block" is a sequence of branch-free code.</note>
+            </question>
+
+            <question id="compilers-ir-graphical-dependence-graph">
+                <text>Dependence Graph</text>
+                <link>https://en.wikipedia.org/wiki/Dependency_graph</link>
+                <answer>Models the flow of values in a code fragment, from definitions to uses.</answer>
+                <!-- Page 232 of "Engineering a compiler. -->
+                <node>This defines a partial order, allow the optimizer or the processor freedom to change the order of some operations.</node>
+            </question>
+
+            <question id="compilers-ir-graphical-call-graph">
+                <text>Call Graph</text>
+                <link>https://en.wikipedia.org/wiki/Dependency_graph</link>
+                <answer>Models the calling relationships among the procedures in a program.</answer>
+                <!-- Page 234 of "Engineering a compiler. -->
+            </question>
+        </subsection>
+    </section>
+
 </quiz>
