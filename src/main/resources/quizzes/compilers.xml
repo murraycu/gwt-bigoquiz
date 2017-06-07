@@ -401,6 +401,26 @@
                 <!-- Page 234 of "Engineering a compiler. -->
             </question>
         </subsection>
+
+        <subsection id="compilers-ir-linear" answers_as_choices="true" and_reverse="true">
+            <title>Linear</title>
+
+            <question id="compilers-ir-linear-stack-machine-code">
+                <text>Stack Machine Code</text>
+                <answer>Operations pop their operands from the stack, apply the operator, and push the results back onto the stack.</answer>
+                <link>https://en.wikipedia.org/wiki/Stack_machine</link>
+            </question>
+
+            <question id="compilers-ir-linear-three-address-code">
+                <text>Three Address Code</text>
+                <answer>Operations consist of an operator, operands, and a result.</answer>
+                <link>https://en.wikipedia.org/wiki/Three-address_code</link>
+            </question>
+        </subsection>
+
+        <!-- TODO: Mention Static Single-Assignment Form (SSA)
+         https://en.wikipedia.org/wiki/Static_single_assignment_form
+         and Φ functions. -->
     </section>
 
 </quiz>
