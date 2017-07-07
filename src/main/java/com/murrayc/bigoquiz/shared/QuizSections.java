@@ -1,5 +1,7 @@
 package com.murrayc.bigoquiz.shared;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.murrayc.bigoquiz.client.Log;
 import org.jetbrains.annotations.NotNull;
@@ -10,6 +12,7 @@ import java.util.*;
 /**
  * Created by murrayc on 1/24/16.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class QuizSections implements IsSerializable {
     //TODO: Can this be non-public while still being serializable by GWT?
 
@@ -28,6 +31,7 @@ public class QuizSections implements IsSerializable {
     }
 
     //TODO: Can this be non-public while still being serializable by GWT?
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     static public class Section extends HasIdAndTitle {
         @NotNull
         public Map<String, SubSection> subSections = new HashMap<>();
@@ -69,6 +73,7 @@ public class QuizSections implements IsSerializable {
     }
 
     @NotNull
+    @JsonIgnore
     public Set<String> getSectionIds() {
         return sections.keySet();
     }
@@ -118,6 +123,7 @@ public class QuizSections implements IsSerializable {
      * @return
      */
     @NotNull
+    @JsonIgnore
     public Collection<String> getTitles() {
         @NotNull final ArrayList<String> result = new ArrayList<>();
         for (@NotNull final Section section : sections.values()) {
