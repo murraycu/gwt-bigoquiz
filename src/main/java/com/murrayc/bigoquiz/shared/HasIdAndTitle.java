@@ -2,7 +2,6 @@ package com.murrayc.bigoquiz.shared;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 

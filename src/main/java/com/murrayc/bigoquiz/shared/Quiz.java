@@ -97,23 +97,14 @@ public class Quiz implements IsSerializable {
     }
 
     public void addQuestion(final String sectionId, @NotNull final QuestionAndAnswer questionAndAnswer) {
-        Map<String, QuestionAndAnswer> map = questions.get(sectionId);
-        if (map == null) {
-            map = new HashMap<>();
-            questions.put(sectionId, map);
-        }
-
+        Map<String, QuestionAndAnswer> map = questions.computeIfAbsent(sectionId, k -> new HashMap<>());
         map.put(questionAndAnswer.getId(), questionAndAnswer);
 
         //Store it here too:
         listQuestions.add(questionAndAnswer);
 
         //And here too:
-        List<QuestionAndAnswer> sectionList = listSectionQuestions.get(sectionId);
-        if (sectionList == null) {
-            sectionList = new ArrayList<>();
-            listSectionQuestions.put(sectionId, sectionList);
-        }
+        List<QuestionAndAnswer> sectionList = listSectionQuestions.computeIfAbsent(sectionId, k -> new ArrayList<>());
         sectionList.add(questionAndAnswer);
     }
 

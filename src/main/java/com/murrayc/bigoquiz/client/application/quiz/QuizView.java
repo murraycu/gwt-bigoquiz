@@ -318,11 +318,7 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
                 subSectionId = NO_SUBSECTION_ID;
             }
 
-            List<QuestionAndAnswer> list = result.get(subSectionId);
-            if (list == null) {
-                list = new ArrayList<>();
-                result.put(subSectionId, list);
-            }
+            List<QuestionAndAnswer> list = result.computeIfAbsent(subSectionId, k -> new ArrayList<>());
 
             list.add(questionAndAnswer);
         }
