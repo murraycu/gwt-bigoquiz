@@ -69,7 +69,7 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
 
         final QuizSections quizSections = quiz.getSections();
         if (quizSections != null) {
-            for (final QuizSections.Section section : quizSections.getSectionsSorted()) {
+            for (final QuizSections.Section section : quizSections.getSections()) {
                 if (section == null) {
                     Log.error("QuizListView: section is null.");
                     continue;

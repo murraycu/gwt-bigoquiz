@@ -158,7 +158,7 @@ public class QuizSections implements IsSerializable {
      * @return
      */
     @NotNull
-    public List<Section> getSectionsSorted() {
+    public List<Section> getSections() {
         final List<Section> result = new ArrayList<>();
 
         for (final String sectionId : sectionsSequence) {

@@ -146,7 +146,7 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
             return;
         }
 
-        @NotNull final List<QuizSections.Section> sectionItems = sections.getSectionsSorted();
+        @NotNull final List<QuizSections.Section> sectionItems = sections.getSections();
 
         for (@Nullable final QuizSections.Section section : sectionItems) {
             if (section == null) {
