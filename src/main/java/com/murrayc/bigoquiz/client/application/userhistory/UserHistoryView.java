@@ -1,8 +1,6 @@
 package com.murrayc.bigoquiz.client.application.userhistory;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
@@ -23,12 +21,7 @@ public class UserHistoryView extends ContentViewWithUIHandlers<UserHistoryUserEd
 
         final Button buttonResetSections = new Button(constants.buttonResetSections());
         buttonResetSections.addStyleName("user-history-button-reset-sections");
-        buttonResetSections.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                onResetSectionsButton();
-            }
-        });
+        buttonResetSections.addClickHandler(event -> onResetSectionsButton());
         mainPanel.add(buttonResetSections);
 
         //Show the userhistorysections (user recent history):
@@ -43,12 +36,7 @@ public class UserHistoryView extends ContentViewWithUIHandlers<UserHistoryUserEd
 
     private void onResetSectionsButton() {
         //TODO: Do this in the presenter?
-        Utils.showResetConfirmationDialog(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                getUiHandlers().onResetSections();
-            }
-        });
+        Utils.showResetConfirmationDialog(event -> getUiHandlers().onResetSections());
     }
 
     @Override

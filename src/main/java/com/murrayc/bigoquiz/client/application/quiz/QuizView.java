@@ -1,8 +1,6 @@
 package com.murrayc.bigoquiz.client.application.quiz;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
@@ -66,12 +64,7 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
 
         final Button buttonPlay = new Button(constants.buttonAnswerQuestions());
         buttonPlay.addStyleName("quiz-list-button-answer-questions");
-        buttonPlay.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                getUiHandlers().onAnswerQuestions();
-            }
-        });
+        buttonPlay.addClickHandler(event -> getUiHandlers().onAnswerQuestions());
         panelQuiz.add(buttonPlay);
 
         final QuizSections quizSections = quiz.getSections();

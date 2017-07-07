@@ -1,7 +1,5 @@
 package com.murrayc.bigoquiz.client.application.home;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.murrayc.bigoquiz.client.HtmlResources;
@@ -26,12 +24,7 @@ public class HomeView extends ContentViewWithUIHandlers<HomeUserEditUiHandlers>
         //without splitting the HTML into 2 files.
         final Button buttonPlay = new Button(constants.buttonAnswerQuestions());
         buttonPlay.addStyleName("home-button-answer-questions");
-        buttonPlay.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                getUiHandlers().onAnswerQuestions(QuizConstants.DEFAULT_QUIZ_ID);
-            }
-        });
+        buttonPlay.addClickHandler(event -> getUiHandlers().onAnswerQuestions(QuizConstants.DEFAULT_QUIZ_ID));
         mainPanel.add(buttonPlay);
 
         final FlowPanel panel2 = new FlowPanel();

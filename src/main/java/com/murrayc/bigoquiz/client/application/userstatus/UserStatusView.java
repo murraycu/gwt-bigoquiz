@@ -1,8 +1,6 @@
 package com.murrayc.bigoquiz.client.application.userstatus;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -57,12 +55,7 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
         //TODO: Set alt text for the button or its image: signInButton.setText(constants.signInLinkTitle());
         signInButton.removeStyleName("gwt-PushButton"); //We want the hover functionality, but not the borders and margins.
         signInButton.addStyleName("sign-in-button");
-        signInButton.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                onSignInClicked();
-            }
-        });
+        signInButton.addClickHandler(event -> onSignInClicked());
 
         loginPanel.add(loginFailedLabel);
         loginFailedLabel.addStyleName("login-failed");

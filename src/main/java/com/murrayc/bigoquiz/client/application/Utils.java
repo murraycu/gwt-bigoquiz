@@ -4,7 +4,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.ParagraphElement;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.i18n.client.NumberFormat;
@@ -115,22 +114,14 @@ public class Utils {
         dialog.setText(constants.dialogResetSectionsTitle());
 
         @NotNull final Button buttonOK = new Button(constants.dialogResetSectionsOkButton());
-        buttonOK.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                dialog.hide();
+        buttonOK.addClickHandler(event -> {
+            dialog.hide();
 
-                okClickHandler.onClick(event);
-            }
+            okClickHandler.onClick(event);
         });
 
         @NotNull final Button buttonCancel = new Button(constants.dialogResetSectionsCancelButton());
-        buttonCancel.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                dialog.hide();
-            }
-        });
+        buttonCancel.addClickHandler(event -> dialog.hide());
 
         @NotNull final Panel panelDialog = new FlowPanel();
         addParagraphWithText(panelDialog, constants.dialogResetSectionsText(),

@@ -180,28 +180,25 @@ public class UserStats implements IsSerializable {
         if (comparator == null) {
             // Order the problem questions with the most wrong answers first:
             // (reverseOrder doesn't seem to be supported in GWT's client-side.)
-            comparator = new Comparator<UserQuestionHistory>() {
-                @Override
-                public int compare(final UserQuestionHistory o1, final UserQuestionHistory o2) {
-                    if (o1 == null) {
-                        if (o2 == null) {
-                            return 0;
-                        }
-                    }
-
+            comparator = (o1, o2) -> {
+                if (o1 == null) {
                     if (o2 == null) {
-                        return 1;
-                    }
-
-                    final int c1 = o1.getCountAnsweredWrong();
-                    final int c2 = o2.getCountAnsweredWrong();
-                    if (c1 == c2) {
                         return 0;
                     }
-
-                    return (c1 > c2) ?
-                            -1 : 1;
                 }
+
+                if (o2 == null) {
+                    return 1;
+                }
+
+                final int c1 = o1.getCountAnsweredWrong();
+                final int c2 = o2.getCountAnsweredWrong();
+                if (c1 == c2) {
+                    return 0;
+                }
+
+                return (c1 > c2) ?
+                        -1 : 1;
             };
         }
 

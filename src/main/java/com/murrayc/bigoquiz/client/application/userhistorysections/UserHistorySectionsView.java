@@ -1,8 +1,6 @@
 package com.murrayc.bigoquiz.client.application.userhistorysections;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.logical.shared.ResizeEvent;
-import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
@@ -89,12 +87,9 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
         //Listen to window resizes, because that could trigger
         //this UI being visible again,
         //at which time we should build it:
-        Window.addResizeHandler(new ResizeHandler() {
-            @Override
-            public void onResize(final ResizeEvent event) {
-                if (buildUiPending) {
-                    buildUi();
-                }
+        Window.addResizeHandler(event -> {
+            if (buildUiPending) {
+                buildUi();
             }
         });
     }

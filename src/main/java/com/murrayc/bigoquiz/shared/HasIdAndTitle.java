@@ -24,23 +24,20 @@ public class HasIdAndTitle implements IsSerializable {
 
     @NotNull
     public static Comparator<HasIdAndTitle> generateTitleSortComparator() {
-        return new Comparator<HasIdAndTitle>() {
-            @Override
-            public int compare(@Nullable final HasIdAndTitle o1, @Nullable final HasIdAndTitle o2) {
-                if ((o1 == null) && (o2 == null)) {
-                    return 0;
-                } else if (o1 == null) {
-                    return -1;
-                }
-
-                if ((o1.title == null) && (o2.title == null)) {
-                    return 0;
-                } else if (o1.title == null) {
-                    return -1;
-                }
-
-                return o1.title.compareTo(o2.title);
+        return (o1, o2) -> {
+            if ((o1 == null) && (o2 == null)) {
+                return 0;
+            } else if (o1 == null) {
+                return -1;
             }
+
+            if ((o1.title == null) && (o2.title == null)) {
+                return 0;
+            } else if (o1.title == null) {
+                return -1;
+            }
+
+            return o1.title.compareTo(o2.title);
         };
     }
 

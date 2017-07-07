@@ -2,9 +2,6 @@ package com.murrayc.bigoquiz.client.application.question;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.ParagraphElement;
-import com.google.gwt.event.dom.client.*;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
@@ -87,12 +84,9 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         showingFromPanel.add(nextQuestionSectionTitle);
         showingFromPanel.add(nextQuestionSectionListBox);
         nextQuestionSectionListBox.addStyleName("next-question-section-title");
-        nextQuestionSectionListBox.addChangeHandler(new ChangeHandler() {
-            @Override
-            public void onChange(final ChangeEvent event) {
-                @Nullable final String nextQuestionSectionId = getSelectedNextQuestionSectionId();
-                getUiHandlers().onNextQuestionSectionSelected(nextQuestionSectionId);
-            }
+        nextQuestionSectionListBox.addChangeHandler(event -> {
+            @Nullable final String nextQuestionSectionId = getSelectedNextQuestionSectionId();
+            getUiHandlers().onNextQuestionSectionSelected(nextQuestionSectionId);
         });
         mainPanel.add(showingFromPanel);
 
@@ -122,12 +116,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
         resultPanel.add(showAnswerButton);
         showAnswerButton.addStyleName("show-answer-button");
-        showAnswerButton.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                onShowAnswerButton();
-            }
-        });
+        showAnswerButton.addClickHandler(event -> onShowAnswerButton());
 
         resultPanel.add(nextQuestionButton);
         nextQuestionButton.addStyleName("next-question-button");
@@ -148,12 +137,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         panel.add(codeAnchor);
         resultPanel.add(panel);
 
-        nextQuestionButton.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                onNextQuestionButton();
-            }
-        });
+        nextQuestionButton.addClickHandler(event -> onNextQuestionButton());
         mainPanel.add(resultPanel);
     }
 
@@ -415,12 +399,9 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
 
                 //TODO: Disable the handlers when rebuilding the widgets?
                 radioButton.addStyleName("question-radio-button");
-                radioButton.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
-                    @Override
-                    public void onValueChange(@Nullable final ValueChangeEvent<Boolean> event) {
-                        if (event != null && event.getValue()) {
-                            submitAnswer(choice);
-                        }
+                radioButton.addValueChangeHandler(event -> {
+                    if (event != null && event.getValue()) {
+                        submitAnswer(choice);
                     }
                 });
 

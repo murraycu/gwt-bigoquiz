@@ -9,7 +9,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
-import com.gwtplatform.mvp.client.proxy.NavigationHandler;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
@@ -47,17 +46,9 @@ public abstract class BigOQuizPresenter<V extends View, Proxy_ extends Proxy<?>>
         // TODO: Would it instead be enough to just call Window.scrollTo() after
         // Presenter.revealPlace()? Maybe not, because the GWTP documentation suggests that
         // revealPlace() is async (it fires an event).
-        eventBus.addHandler(NavigationEvent.getType(), new NavigationHandler() {
-            @Override
-            public void onNavigation(final NavigationEvent navigationEvent) {
-                Scheduler.get().scheduleDeferred(new Command() {
-                    @Override
-                    public void execute() {
-                        // Making the window scroll to top on every page change
-                        Window.scrollTo(0, 0);
-                    }
-                });
-            }
-        });
+        eventBus.addHandler(NavigationEvent.getType(), navigationEvent -> Scheduler.get().scheduleDeferred((Command) () -> {
+            // Making the window scroll to top on every page change
+            Window.scrollTo(0, 0);
+        }));
     }
 }

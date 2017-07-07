@@ -1,8 +1,6 @@
 package com.murrayc.bigoquiz.client.application.quizlist;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
@@ -74,22 +72,12 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
 
             final Button buttonPlay = new Button(constants.buttonAnswerQuestions());
             buttonPlay.addStyleName("button-answer-questions");
-            buttonPlay.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(final ClickEvent event) {
-                    getUiHandlers().onAnswerQuestions(details.getId());
-                }
-            });
+            buttonPlay.addClickHandler(event -> getUiHandlers().onAnswerQuestions(details.getId()));
             buttonsPanel.add(buttonPlay);
 
             final Button buttonHistory = new Button(constants.buttonHistory());
             buttonHistory.addStyleName("button-history");
-            buttonHistory.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(final ClickEvent event) {
-                    getUiHandlers().onHistory(details.getId());
-                }
-            });
+            buttonHistory.addClickHandler(event -> getUiHandlers().onHistory(details.getId()));
             buttonsPanel.add(buttonHistory);
         }
     }
