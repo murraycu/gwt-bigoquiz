@@ -1,10 +1,12 @@
 package com.murrayc.bigoquiz.server.gwtrpc;
 
 import com.google.appengine.api.users.User;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.objectify.cmd.Query;
 import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.server.QuizUtils;
 import com.murrayc.bigoquiz.server.QuizzesMap;
+import com.murrayc.bigoquiz.server.ServiceUserUtils;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
 import com.murrayc.bigoquiz.shared.*;
 import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
@@ -22,7 +24,7 @@ import java.util.*;
  * The server-side implementation of the RPC service.
  */
 @SuppressWarnings({"serial", "unchecked"})
-public class QuizServiceImpl extends ServiceWithUser implements
+public class QuizServiceImpl extends RemoteServiceServlet implements
         QuizService {
     private static final String LOADED_QUIZZES = "loaded-quizzes";
 
@@ -213,7 +215,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //Get the stats for this user, for each section:
         //We also return the LoginInfo, so we can show a sign in link,
         //and to avoid the need for a separate call to the server.
-        @NotNull LoginInfo loginInfo = getLoginInfo(requestUri);
+        @NotNull LoginInfo loginInfo = ServiceUserUtils.getLoginInfo(requestUri);
         @NotNull final UserHistorySections result = new UserHistorySections(loginInfo, sections, quiz.getTitle());
 
         //This may be null,
@@ -324,7 +326,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         //Get the stats for this user, for each section:
         //We also return the LoginInfo, so we can show a sign in link,
         //and to avoid the need for a separate call to the server.
-        @NotNull LoginInfo loginInfo = getLoginInfo(requestUri); //TODO: Check for login
+        @NotNull LoginInfo loginInfo = ServiceUserUtils.getLoginInfo(requestUri); //TODO: Check for login
 
         @NotNull final UserHistoryOverall result = new UserHistoryOverall(loginInfo);
 
@@ -419,12 +421,12 @@ public class QuizServiceImpl extends ServiceWithUser implements
     }
 
     private UserProfile getUserProfileImpl() {
-        @Nullable final User user = getUser();
+        @Nullable final User user = ServiceUserUtils.getUser();
         if (user == null) {
             return null;
         }
 
-        return getUserProfileFromDataStore(user);
+        return ServiceUserUtils.getUserProfileFromDataStore(user);
     }
 
 
@@ -551,7 +553,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
      * @return null if the user is not logged in.
      */
     private String getUserId() {
-        @Nullable final User user = getUser();
+        @Nullable final User user = ServiceUserUtils.getUser();
         if (user == null) {
             return null;
         }

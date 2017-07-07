@@ -1,4 +1,4 @@
-package com.murrayc.bigoquiz.server.gwtrpc;
+package com.murrayc.bigoquiz.server;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
@@ -14,9 +14,9 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by murrayc on 1/20/16.
  */
-public class ServiceWithUser extends RemoteServiceServlet {
+public class ServiceUserUtils {
     @Nullable
-    protected User getUser() {
+    public static User getUser() {
         final UserService userService = UserServiceFactory.getUserService();
         if (userService == null) {
             return null;
@@ -36,7 +36,7 @@ public class ServiceWithUser extends RemoteServiceServlet {
     }
 
     @NotNull
-    protected LoginInfo getLoginInfo(final String requestUri) {
+    public static LoginInfo getLoginInfo(final String requestUri) {
         @NotNull final LoginInfo loginInfo = new LoginInfo();
         loginInfo.setLoggedIn(false);
 
@@ -67,7 +67,7 @@ public class ServiceWithUser extends RemoteServiceServlet {
     }
 
     @NotNull
-    protected UserProfile getUserProfileFromDataStore(final User user) {
+    public static UserProfile getUserProfileFromDataStore(final User user) {
         UserProfile userProfile = EntityManagerFactory.ofy().load().type(UserProfile.class).id(user.getUserId()).now();
         if (userProfile == null) {
             userProfile = new UserProfile(user.getUserId(), user.getNickname());
