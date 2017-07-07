@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +41,19 @@ public class BigOQuizResource {
         }
 
         return quizzes.map.values();
+    }
+
+    @GET
+    @Path("/{id}")
+    @Produces("application/json")
+    public Quiz getById(@PathParam("id") String id) {
+        getOrLoadQuizzes();
+
+        if (quizzes == null) {
+            return null;
+        }
+
+        return quizzes.map.get(id);
     }
 
 
