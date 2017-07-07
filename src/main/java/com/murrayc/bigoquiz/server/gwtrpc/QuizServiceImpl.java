@@ -1,8 +1,10 @@
-package com.murrayc.bigoquiz.server;
+package com.murrayc.bigoquiz.server.gwtrpc;
 
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.cmd.Query;
 import com.murrayc.bigoquiz.client.*;
+import com.murrayc.bigoquiz.server.QuizLoader;
+import com.murrayc.bigoquiz.server.QuizUtils;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
 import com.murrayc.bigoquiz.shared.*;
 import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;

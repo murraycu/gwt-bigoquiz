@@ -7,7 +7,7 @@ import com.murrayc.bigoquiz.shared.StringUtils;
  */
 public class QuizUtils {
 
-    static boolean answerIsCorrect(final String answer, final String correctAnswer) {
+    public static boolean answerIsCorrect(final String answer, final String correctAnswer) {
         if (answer == null) {
             return false;
         }

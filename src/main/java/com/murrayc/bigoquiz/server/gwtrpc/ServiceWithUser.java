@@ -1,4 +1,4 @@
-package com.murrayc.bigoquiz.server;
+package com.murrayc.bigoquiz.server.gwtrpc;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;

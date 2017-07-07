@@ -1,4 +1,4 @@
-package com.murrayc.bigoquiz.server;
+package com.murrayc.bigoquiz.server.gwtrpc;
 
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.LoginService;
