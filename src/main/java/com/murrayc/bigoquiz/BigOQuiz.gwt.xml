@@ -27,6 +27,9 @@
     <extend-configuration-property name="gin.ginjector.modules"
                                    value="com.murrayc.bigoquiz.client.application.gin.ClientModule"/>
 
+    <!-- Use RestyGWT. -->
+    <inherits name="org.fusesource.restygwt.RestyGWT"/>
+
     <!-- Use ClientFactoryImpl by default -->
     <replace-with class="com.murrayc.bigoquiz.client.ClientFactoryImpl">
         <when-type-is class="com.murrayc.bigoquiz.client.ClientFactory"/>
