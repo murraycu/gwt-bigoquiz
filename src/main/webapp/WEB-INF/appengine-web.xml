@@ -4,6 +4,9 @@
     <version>0.1</version>
     <threadsafe>true</threadsafe>
 
+    <!-- See https://cloud.google.com/appengine/docs/standard/java/runtime-java8 -->
+    <runtime>java8</runtime>
+
     <!-- Configure serving/caching of GWT files -->
     <static-files>
         <include path="**"/>

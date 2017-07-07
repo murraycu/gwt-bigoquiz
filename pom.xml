@@ -46,8 +46,8 @@
 
 		<!-- GWT requires java 1.6 -->
 		<!-- TODO: Isn't this a duplicate of the maven-compiler-plugin properties below? -->
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 
 		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
 	</properties>
@@ -290,8 +290,8 @@
 				<version>3.5</version>
 				<configuration>
 					<!-- See https://code.google.com/p/googleappengine/issues/detail?id=9537 -->
-					<source>1.7</source>
- 					<target>1.7</target>
+					<source>1.8</source>
+ 					<target>1.8</target>
 				</configuration>
 			</plugin>
 
