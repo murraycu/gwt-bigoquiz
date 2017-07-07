@@ -3,8 +3,8 @@ package com.murrayc.bigoquiz.server.gwtrpc;
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.cmd.Query;
 import com.murrayc.bigoquiz.client.*;
-import com.murrayc.bigoquiz.server.QuizLoader;
 import com.murrayc.bigoquiz.server.QuizUtils;
+import com.murrayc.bigoquiz.server.QuizzesMap;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
 import com.murrayc.bigoquiz.shared.*;
 import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
@@ -16,9 +16,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -29,12 +26,6 @@ public class QuizServiceImpl extends ServiceWithUser implements
         QuizService {
     private static final String LOADED_QUIZZES = "loaded-quizzes";
 
-
-    private static class QuizzesMap {
-        @Nullable
-        public final Map<String, Quiz> map = new HashMap<>();
-        public boolean allTitlesLoaded = false;
-    }
 
     private QuizzesMap quizzes = null;
 
@@ -109,35 +100,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
         // Load all quizzes.
         getQuizzesMap();
 
-        if (quizzes.allTitlesLoaded) {
-            return;
-        }
-
-        final String[] names = {
-                QuizConstants.DEFAULT_QUIZ_ID,
-                "algorithms_analysis",
-                "designpatterns",
-                "graphs",
-                "cpp_std_algorithms",
-                "notation",
-                "numbers",
-                "algorithms",
-                "string_algorithms",
-                "combinatorics",
-                "math",
-                "datastructures",
-                "bitwise",
-                "concurrency",
-                "distributed_systems",
-                "book_stepanov_fmtgp",
-                "networking",
-                "compilers"};
-
-        for (final String name : names) {
-            loadQuizIntoQuizzes(name, quizzes);
-        }
-
-        quizzes.allTitlesLoaded = true;
+        quizzes.loadQuizzes();
     }
 
     //TODO: This seems to be called unnecessarily right after getNextQuestion().
@@ -385,27 +348,6 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return result;
     }
 
-    private static Quiz loadQuiz(@NotNull final String quizId) {
-        final String filename = "quizzes" + File.separator + quizId + ".xml";
-        try(final InputStream is = Thread.currentThread().getContextClassLoader()
-                .getResourceAsStream(filename)) {
-            if (is == null) {
-                Log.fatal("quiz XML file not found: " + filename);
-                return null;
-            }
-
-            try {
-                return QuizLoader.loadQuiz(is);
-            } catch (final QuizLoader.QuizLoaderException e) {
-                Log.fatal("loadQuiz() failed", e);
-            }
-        } catch (final IOException e) {
-            Log.error("loadQuiz(): Could not get file as stream from resouce", e);
-        }
-
-        return null;
-    }
-
     private UserStats getUserStatsForSection(@NotNull final String userId, @NotNull final String quizId, @NotNull final String sectionId) {
         Query<UserStats> q = getQueryForUserStats(userId, quizId);
         q = q.filter("sectionId", sectionId);
@@ -485,43 +427,11 @@ public class QuizServiceImpl extends ServiceWithUser implements
         return getUserProfileFromDataStore(user);
     }
 
+
     private boolean loadQuizIntoQuizzes(final String quizId) {
         getQuizzesMap();
 
-        if (!quizzes.map.containsKey(quizId)) {
-            if (!loadQuizIntoQuizzes(quizId, quizzes)) {
-                Log.error("Could not load quiz: " + quizId);
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Returns false if the load failed.
-     * @param quizId
-     * @param quizzes
-     * @return
-     */
-    private boolean loadQuizIntoQuizzes(final String quizId, final QuizzesMap quizzes) {
-        if (quizzes.map.containsKey(quizId)) {
-            Log.error("loadQuizIntoQuizzes(): quiz already loaded: " + quizId);
-            return true;
-        }
-
-        final Quiz quiz;
-        try {
-            quiz = loadQuiz(quizId);
-            if (quiz != null) {
-                quizzes.map.put(quizId, quiz);
-            }
-        } catch (@NotNull final Exception e) {
-            Log.error("Could not load quiz: " + quizId, e);
-            return false;
-        }
-
-        return true;
+        return quizzes.loadQuizIntoQuizzes(quizId);
     }
 
     @NotNull
