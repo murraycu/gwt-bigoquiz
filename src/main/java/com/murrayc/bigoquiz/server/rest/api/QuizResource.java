@@ -18,12 +18,12 @@ import java.util.Map;
  * Created by murrayc on 7/7/17.
  */
 @Path("quiz")
-public class BigOQuizResource {
+public class QuizResource {
     private static final String LOADED_QUIZZES = "loaded-quizzes";
 
     private QuizzesMap quizzes = null;
 
-    public BigOQuizResource() {
+    public QuizResource() {
     }
 
     @GET
