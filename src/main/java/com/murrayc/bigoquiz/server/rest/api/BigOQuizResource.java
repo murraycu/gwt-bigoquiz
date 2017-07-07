@@ -1,7 +1,5 @@
 package com.murrayc.bigoquiz.server.rest.api;
 
-import com.murrayc.bigoquiz.client.Log;
-import com.murrayc.bigoquiz.server.QuizLoader;
 import com.murrayc.bigoquiz.server.QuizzesMap;
 import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.QuizConstants;
@@ -12,9 +10,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
