@@ -205,7 +205,7 @@ public class UserStats implements IsSerializable {
         problemQuestionHistoriesCount = 0;
         topProblemQuestionHistoriesInOrder = new ArrayList<>(questionHistories.values());
 
-        Collections.sort(topProblemQuestionHistoriesInOrder, comparator);
+        topProblemQuestionHistoriesInOrder.sort(comparator);
 
         //Cache the count of problem questions:
         for (final UserQuestionHistory history : topProblemQuestionHistoriesInOrder) {

@@ -55,8 +55,7 @@ public class QuizServiceImpl extends ServiceWithUser implements
             result.add(quiz.getDetails());
         }
 
-        Collections.sort(result,
-                HasIdAndTitle.generateTitleSortComparator());
+        result.sort(HasIdAndTitle.generateTitleSortComparator());
 
         return result;
     }
