@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.shared;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.murrayc.bigoquiz.client.Log;
 import org.jetbrains.annotations.NotNull;
@@ -217,8 +218,15 @@ public class Quiz implements IsSerializable {
     */
 
     @NotNull
+    @JsonIgnore
     public QuizSections getSections() {
         return quizSections;
+    }
+
+    @NotNull
+    @JsonProperty("sections")
+    public List<QuizSections.Section> getSectionsList() {
+        return quizSections.getSections();
     }
 
     public List<QuestionAndAnswer> getQuestionsForSection(@NotNull final String sectionId) {
