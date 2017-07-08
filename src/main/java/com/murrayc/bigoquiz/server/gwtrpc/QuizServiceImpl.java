@@ -9,8 +9,6 @@ import com.murrayc.bigoquiz.server.QuizzesMap;
 import com.murrayc.bigoquiz.server.ServiceUserUtils;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
 import com.murrayc.bigoquiz.shared.*;
-import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
-import com.murrayc.bigoquiz.shared.db.UserProfile;
 import com.murrayc.bigoquiz.shared.db.UserStats;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -199,96 +197,6 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
         return quiz.getQuestionAndAnswer(questionId);
     }
 
-    @Nullable
-    @Override
-    public UserHistorySections getUserHistorySections(final String quizId, final String requestUri) throws UnknownQuizException, IllegalArgumentException {
-        final Quiz quiz = getQuiz(quizId);
-        if (quiz == null) {
-            throw new UnknownQuizException();
-        }
-
-        @NotNull final QuizSections sections = quiz.getSections();
-        if (sections == null) {
-            return null;
-        }
-
-        //Get the stats for this user, for each section:
-        //We also return the LoginInfo, so we can show a sign in link,
-        //and to avoid the need for a separate call to the server.
-        @NotNull LoginInfo loginInfo = ServiceUserUtils.getLoginInfo(requestUri);
-        @NotNull final UserHistorySections result = new UserHistorySections(loginInfo, sections, quiz.getTitle());
-
-        //This may be null,
-        //in which case we will return a mostly-empty set of user statistics,
-        //just to show what is possible when the user is logged in:
-        @Nullable final String userId = loginInfo.getUserId();
-
-        @Nullable Map<String, UserStats> mapUserStats = null;
-        if (!StringUtils.isEmpty(userId)) {
-            mapUserStats = getUserStats(userId, quizId);
-        }
-
-        for (final String sectionId : sections.getSectionIds()) {
-            if (StringUtils.isEmpty(sectionId)) {
-                //This seems wise.
-                continue;
-            }
-
-            @Nullable UserStats userStats = null;
-            if (mapUserStats != null) {
-                userStats = mapUserStats.get(sectionId);
-            }
-
-            if (userStats == null) {
-                //So we get the default values:
-                userStats = new UserStats(userId, quizId, sectionId);
-            }
-
-            //Set the titles.
-            //We don't store these in the datastore because we can get them easily from the Quiz.
-            //TODO: It might really be more efficient to store them in the datastore.
-            List<String> toRemove = null;
-            for (@NotNull final UserQuestionHistory userQuestionHistory : userStats.getTopProblemQuestionHistories()) {
-                final String questionId = userQuestionHistory.getQuestionId();
-                @Nullable final Question question = quiz.getQuestion(questionId);
-
-                //If the question history is invalid, remember that:
-                if (question == null ||
-                        !StringUtils.equals(question.getSectionId(), sectionId)) {
-                    Log.error("question was null or in the wrong section for id:" + questionId);
-
-                    if (toRemove == null) {
-                        toRemove = new ArrayList<>();
-                    }
-
-                    toRemove.add(questionId);
-                    continue;
-                }
-
-                userQuestionHistory.setQuestionTitle(question.getText());
-
-                @Nullable final String subSectionTitle = sections.getSubSectionTitle(question.getSectionId(),
-                        question.getSubSectionId());
-                userQuestionHistory.setSubSectionTitle(subSectionTitle);
-            }
-
-            //Remove any invalid question histories:
-            if (toRemove != null) {
-                for (final String questionId : toRemove) {
-                    userStats.removeQuestionHistory(questionId);
-                }
-
-                //Save it so we don't have to remove it next time:
-                //TODO: This doesn't seem to work - we have to remove it again next time.
-                EntityManagerFactory.ofy().save().entity(userStats).now();
-            }
-
-            result.setSectionStats(sectionId, userStats);
-        }
-
-        return result;
-    }
-
     @Override
     public void resetSections(final String quizId) {
         @Nullable final String userId = getUserId();
@@ -316,38 +224,6 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
             //TODO: Batch these:
             EntityManagerFactory.ofy().delete().entity(userStats).now();
         }
-    }
-
-    @Nullable
-    @Override
-    public UserHistoryOverall getUserHistoryOverall(final String requestUri) throws IllegalArgumentException {
-        getOrLoadQuizzes();
-
-        //Get the stats for this user, for each section:
-        //We also return the LoginInfo, so we can show a sign in link,
-        //and to avoid the need for a separate call to the server.
-        @NotNull LoginInfo loginInfo = ServiceUserUtils.getLoginInfo(requestUri); //TODO: Check for login
-
-        @NotNull final UserHistoryOverall result = new UserHistoryOverall(loginInfo);
-
-        @Nullable final String userId = loginInfo.getUserId();
-        if (StringUtils.isEmpty(userId)) {
-            return result;
-        }
-
-        final Map<String, UserStats> mapUserStats = getUserStats(userId);
-
-        for (final Quiz quiz : quizzes.map.values()) {
-            final String quizId = quiz.getId();
-            final UserStats userStats = mapUserStats.get(quizId);
-            if (userStats == null) {
-                continue;
-            }
-
-            result.setQuizStats(quizId, userStats, quiz.getTitle(), quiz.getQuestionsCount());
-        }
-
-        return result;
     }
 
     private UserStats getUserStatsForSection(@NotNull final String userId, @NotNull final String quizId, @NotNull final String sectionId) {
@@ -419,16 +295,6 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
         q = q.filter("quizId", quizId);
         return q;
     }
-
-    private UserProfile getUserProfileImpl() {
-        @Nullable final User user = ServiceUserUtils.getUser();
-        if (user == null) {
-            return null;
-        }
-
-        return ServiceUserUtils.getUserProfileFromDataStore(user);
-    }
-
 
     private boolean loadQuizIntoQuizzes(final String quizId) {
         getQuizzesMap();

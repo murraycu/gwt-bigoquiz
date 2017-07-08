@@ -45,29 +45,9 @@ public interface QuizService extends RemoteService {
     @NotNull SubmissionResult submitDontKnowAnswer(final String quizId, final String questionId, String nextQuestionSectionId) throws IllegalArgumentException;
 
     /**
-     * Gets the currently logged-in user's statistics for each section in the quiz,
-     * or an empty set of statistics for not-logged in users.
-     *
-     * @return
-     * @throws IllegalArgumentException
-     */
-    @Nullable
-    UserHistorySections getUserHistorySections(final String quizId, final String requestUri) throws UnknownQuizException, IllegalArgumentException;
-
-    /**
      * Clear all question answer history, progress, scores, etc.
      */
     void resetSections(final String quizId);
-
-    /**
-     * Gets the currently logged-in user's statistics for each quiz,
-     * or an empty set of statistics for not-logged in users.
-     *
-     * @return
-     * @throws IllegalArgumentException
-     */
-    @Nullable
-    UserHistoryOverall getUserHistoryOverall(final String requestUri) throws IllegalArgumentException;
 
     class SubmissionResult implements IsSerializable {
         private boolean result = false;
