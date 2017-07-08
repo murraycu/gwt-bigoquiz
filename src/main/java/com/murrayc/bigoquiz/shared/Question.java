@@ -1,5 +1,6 @@
 package com.murrayc.bigoquiz.shared;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -9,6 +10,7 @@ import java.util.List;
 /**
  * Created by murrayc on 1/21/16.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Question implements IsSerializable {
     private /* final */ String id;
     private /* final */ String sectionId;
