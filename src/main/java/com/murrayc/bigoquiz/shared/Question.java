@@ -82,21 +82,51 @@ public class Question implements IsSerializable {
         return id;
     }
 
+    /** Without this, the client code will not set this from the JSON.
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
+
     public String getSectionId() {
         return sectionId;
+    }
+
+    /** This is only used for the JSON input.
+     */
+    public void setSectionId(final String sectionId) {
+        this.sectionId = sectionId;
     }
 
     public String getSubSectionId() {
         return subSectionId;
     }
 
+    /** Without this, the client code will not set this from the JSON.
+     */
+    public void setSubSectionId(final String subSectionId) {
+        this.subSectionId = subSectionId;
+    }
+
     public Question.Text getText() {
         return text;
+    }
+
+    /** Without this, the client code will not set this from the JSON.
+     */
+    public void setText(final Question.Text text) {
+        this.text = text;
     }
 
     @Nullable
     public String getLink() {
         return link;
+    }
+
+    /** Without this, the client code will not set this from the JSON.
+     */
+    public void setLink(final String link) {
+        this.link = link;
     }
 
     public List<Text> getChoices() {
@@ -116,6 +146,12 @@ public class Question implements IsSerializable {
         return note;
     }
 
+    /** This is only used for the JSON input.
+     */
+    public void setNote(final String note) {
+        this.note = note;
+    }
+
     public boolean hasNote() {
         return !StringUtils.isEmpty(note);
     }
@@ -125,9 +161,21 @@ public class Question implements IsSerializable {
         return videoUrl;
     }
 
+    /** This is only used for the JSON input.
+     */
+    public void setVideoUrl(final String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
     @Nullable
     public String getCodeUrl() {
         return codeUrl;
+    }
+
+    /** This is only used for the JSON input.
+     */
+    public void setCodeUrl(final String codeUrl) {
+        this.codeUrl = codeUrl;
     }
 
     /** Set titles, just to save users of Question the bother of having to get them from the Quiz class.
@@ -152,8 +200,20 @@ public class Question implements IsSerializable {
         return quizTitle;
     }
 
+    /** This is only used for the JSON input.
+     */
+    public void setQuizTitle(final String quizTitle) {
+        this.quizTitle = quizTitle;
+    }
+
     public String getSubSectionTitle() {
         return subSectionTitle;
+    }
+
+    /** This is only used for the JSON input.
+     */
+    public void setSubSectionTitle(final String subSectionTitle) {
+        this.subSectionTitle = subSectionTitle;
     }
 
     public boolean getQuizUsesMathML() {

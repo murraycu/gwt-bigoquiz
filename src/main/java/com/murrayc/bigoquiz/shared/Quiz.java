@@ -222,15 +222,12 @@ public class Quiz implements IsSerializable {
     */
 
     @NotNull
-    @JsonIgnore
     public QuizSections getSections() {
         return quizSections;
     }
 
-    @NotNull
-    @JsonProperty("sections")
-    public List<QuizSections.Section> getSectionsList() {
-        return quizSections.getSectionsInSequence();
+    public void setSections(final QuizSections quizSections) {
+        this.quizSections = quizSections;
     }
 
     public List<QuestionAndAnswer> getQuestionsForSection(@NotNull final String sectionId) {

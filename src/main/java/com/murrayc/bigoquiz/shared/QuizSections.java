@@ -52,6 +52,14 @@ public class QuizSections implements IsSerializable {
             return questions;
         }
 
+        /** Without this, the client code will not fill the section with questions from the JSON.
+         *
+         * @param questions
+         */
+        public void setQuestions(final List<QuestionAndAnswer> questions) {
+            this.questions = questions;
+        }
+
         public void addQuestion(final QuestionAndAnswer questionAndAnswer) {
             if (questions == null) {
                 questions = new ArrayList<>();
@@ -65,6 +73,8 @@ public class QuizSections implements IsSerializable {
             return subSections;
         }
 
+        /** Without this, the client code will not fill the section with questions from the JSON.
+         */
         public void setSubSections(@NotNull Map<String, SubSection> subSections) {
             this.subSections = subSections;
         }
@@ -73,6 +83,8 @@ public class QuizSections implements IsSerializable {
             return defaultChoices;
         }
 
+        /** Without this, the client code will not fill the section with questions from the JSON.
+         */
         public void setDefaultChoices(List<Question.Text> defaultChoices) {
             this.defaultChoices = defaultChoices;
         }
@@ -102,6 +114,11 @@ public class QuizSections implements IsSerializable {
     public void addSection(final String sectionId, final String sectionTitle, final String sectionLink, final List<Question.Text> defaultChoices) {
         @NotNull final Section section = new Section(sectionId, sectionTitle, sectionLink);
         section.setDefaultChoices(defaultChoices);
+        addSection(section);
+    }
+
+    private void addSection(final Section section) {
+        final String sectionId = section.getId();
         this.sections.put(sectionId, section);
 
         this.sectionsSequence.add(sectionId);
@@ -211,6 +228,7 @@ public class QuizSections implements IsSerializable {
      * @return
      */
     @NotNull
+    @JsonIgnore
     public List<Section> getSectionsInSequence() {
         final List<Section> result = new ArrayList<>();
 
@@ -219,6 +237,34 @@ public class QuizSections implements IsSerializable {
         }
 
         return result;
+    }
+
+    /** This is only for the JSON output.
+     *
+     * @return
+     */
+    public Map<String, Section> getSections() {
+        return this.sections;
+    }
+
+    /** This is only for the JSON input.
+     */
+    public void setSections(final Map<String, Section> sections) {
+        this.sections = sections;
+    }
+
+    /** This is only for the JSON output.
+     *
+     * @return
+     */
+    public List<String> getSectionsSequence() {
+        return this.sectionsSequence;
+    }
+
+    /** This is only for the JSON input.
+     */
+    public void setSectionsSequence(final List<String> sectionsSequence) {
+        this.sectionsSequence = sectionsSequence;
     }
 
     //TODO: This is only used on the client side:

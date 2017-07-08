@@ -31,7 +31,19 @@ public class QuestionAndAnswer implements IsSerializable {
         return question;
     }
 
+    /** Without this, the client code will not fill the QuestionAndAnswer with the question from the JSON.
+     */
+    public void setQuestion(final Question question) {
+        this.question = question;
+    }
+
     public Question.Text getAnswer() {
         return answer;
+    }
+
+    /** Without this, the client code will not fill the QuestionAndAnswer with the answer from the JSON.
+     */
+    public void setAnswer(final Question.Text answer) {
+        this.answer = answer;
     }
 }
