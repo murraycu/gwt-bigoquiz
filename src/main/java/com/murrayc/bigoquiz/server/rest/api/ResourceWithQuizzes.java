@@ -1,6 +1,9 @@
 package com.murrayc.bigoquiz.server.rest.api;
 
+import com.murrayc.bigoquiz.client.UnknownQuizException;
 import com.murrayc.bigoquiz.server.QuizzesMap;
+import com.murrayc.bigoquiz.shared.Quiz;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Copyright (c) 2016 Murray Cumming
@@ -28,6 +31,31 @@ import com.murrayc.bigoquiz.server.QuizzesMap;
 public class ResourceWithQuizzes {
     private static final String LOADED_QUIZZES = "loaded-quizzes";
     protected QuizzesMap quizzes = null;
+
+
+    @NotNull
+    protected Quiz getQuiz(final String quizId) throws UnknownQuizException, IllegalArgumentException {
+        if (!loadQuizIntoQuizzes(quizId)) {
+            throw new UnknownQuizException();
+        }
+
+        if (quizzes == null) {
+            throw new UnknownQuizException();
+        }
+
+        final Quiz result = quizzes.map.get(quizId);
+        if (result == null) {
+            throw new UnknownQuizException();
+        }
+
+        return result;
+    }
+
+    private boolean loadQuizIntoQuizzes(final String quizId) {
+        getQuizzesMap();
+
+        return quizzes.loadQuizIntoQuizzes(quizId);
+    }
 
     private void getQuizzesMap() {
         /*

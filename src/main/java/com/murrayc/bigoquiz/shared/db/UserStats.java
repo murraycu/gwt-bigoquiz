@@ -1,5 +1,7 @@
 package com.murrayc.bigoquiz.shared.db;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -17,6 +19,7 @@ import java.util.*;
  * Created by murrayc on 1/27/16.
  */
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserStats implements IsSerializable {
     public static final int MAX_PROBLEM_QUESTIONS = 5;
 
@@ -64,6 +67,7 @@ public class UserStats implements IsSerializable {
         questionHistories = new HashMap<>();
     }
 
+    @JsonIgnore
     public String getUserId() {
         return userId;
     }

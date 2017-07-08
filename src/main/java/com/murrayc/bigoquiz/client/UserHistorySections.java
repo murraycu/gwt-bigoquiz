@@ -1,5 +1,7 @@
 package com.murrayc.bigoquiz.client;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
@@ -13,6 +15,7 @@ import java.util.*;
 /**
  * Created by murrayc on 1/23/16.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserHistorySections implements IsSerializable {
     /* Do not make these final, because then GWT cannot serialize them. */
     @NotNull
@@ -80,12 +83,18 @@ public class UserHistorySections implements IsSerializable {
         userStats.updateProblemQuestion(question, answerIsCorrect);
     }
 
-    public UserStats getStats(final String sectionId ) {
+    public UserStats getStats(final String sectionId) {
         return sectionStats.get(sectionId);
     }
 
+    /** This is just for the JSON output.
+     */
+    public Map<String, UserStats> getStats( ) {
+        return sectionStats;
+    }
 
     @NotNull
+    @JsonIgnore
     public QuizSections getSections() {
         return sections;
     }
