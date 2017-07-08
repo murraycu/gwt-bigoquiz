@@ -16,13 +16,6 @@ import java.util.List;
  */
 @RemoteServiceRelativePath("quiz-service")
 public interface QuizService extends RemoteService {
-
-    @Nullable
-    List<Quiz.QuizDetails> getQuizList() throws IllegalArgumentException;
-
-    @Nullable
-    Quiz getQuiz(final String quizId) throws UnknownQuizException, IllegalArgumentException;
-
     @Nullable Question getQuestion(final String quizId, final String questionId) throws IllegalArgumentException;
 
     @Nullable Question getNextQuestion(final String quizId, final String sectionId) throws IllegalArgumentException;

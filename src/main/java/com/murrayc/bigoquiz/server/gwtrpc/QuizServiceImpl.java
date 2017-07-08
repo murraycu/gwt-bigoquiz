@@ -29,33 +29,8 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
 
     private QuizzesMap quizzes = null;
 
-    @Nullable
-    @Override
-    public List<Quiz.QuizDetails> getQuizList() throws IllegalArgumentException {
-        getOrLoadQuizzes();
-
-        if (quizzes == null) {
-            return null;
-        }
-
-        //TODO: Cache this.
-        final List<Quiz.QuizDetails> result = new ArrayList<>();
-        for (final Quiz quiz : quizzes.map.values()) {
-            if (quiz == null) {
-                continue;
-            }
-
-            result.add(quiz.getDetails());
-        }
-
-        result.sort(HasIdAndTitle.generateTitleSortComparator());
-
-        return result;
-    }
-
     @NotNull
-    @Override
-    public  Quiz getQuiz(final String quizId)  throws UnknownQuizException, IllegalArgumentException {
+    private Quiz getQuiz(final String quizId)  throws UnknownQuizException, IllegalArgumentException {
         if (!loadQuizIntoQuizzes(quizId)) {
             throw new UnknownQuizException();
         }

@@ -11,10 +11,6 @@ import java.util.List;
  * The async counterpart of <code>QuizService</code>.
  */
 public interface QuizServiceAsync {
-    void getQuizList(AsyncCallback<List<Quiz.QuizDetails>> async);
-
-    void getQuiz(final String quizId, AsyncCallback<Quiz> async) throws UnknownQuizException, IllegalArgumentException;
-
     void getQuestion(final String quizId, String questionId, AsyncCallback<Question> async)
             throws IllegalArgumentException;
 
