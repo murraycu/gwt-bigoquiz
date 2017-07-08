@@ -1,6 +1,5 @@
 package com.murrayc.bigoquiz.client;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.murrayc.bigoquiz.shared.StringUtils;

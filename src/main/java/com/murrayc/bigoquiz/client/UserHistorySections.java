@@ -89,14 +89,25 @@ public class UserHistorySections implements IsSerializable {
 
     /** This is just for the JSON output.
      */
-    public Map<String, UserStats> getStats( ) {
+    public Map<String, UserStats> getStats() {
         return sectionStats;
     }
 
+    /** This is just for the JSON output.
+     */
+    public void setStats(final Map<String, UserStats> sectionStats) {
+        this.sectionStats = sectionStats;
+    }
+
     @NotNull
-    @JsonIgnore
     public QuizSections getSections() {
         return sections;
+    }
+
+    /** This is just for the JSON input.
+     */
+    public void setSections(final QuizSections sections) {
+        this.sections = sections;
     }
 
     @NotNull
@@ -123,6 +134,7 @@ public class UserHistorySections implements IsSerializable {
         return !StringUtils.isEmpty(getUserId());
     }
 
+    @JsonIgnore
     private String getUserId() {
         return loginInfo.getUserId();
     }
@@ -132,7 +144,21 @@ public class UserHistorySections implements IsSerializable {
         return loginInfo;
     }
 
+    /**
+     * This is only used for the JSON input.
+     */
+    public void setLoginInfo(final LoginInfo loginInfo) {
+        this.loginInfo = loginInfo;
+    }
+
     public String getQuizTitle() {
         return quizTitle;
+    }
+
+    /**
+     * This is only used for the JSON input.
+     */
+    void setQuizTitle(final String quizTitle) {
+        this.quizTitle = quizTitle;
     }
 }

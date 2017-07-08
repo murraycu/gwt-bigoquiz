@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.client.application.userhistorysections;
 
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
@@ -13,9 +14,13 @@ import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
+import com.murrayc.bigoquiz.client.application.quiz.QuizClient;
 import com.murrayc.bigoquiz.client.application.userhistory.UserHistoryResetSectionsEvent;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.StringUtils;
+import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -109,15 +114,18 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
     }
 
     private void getAndShowHistory() {
+        Defaults.setServiceRoot(GWT.getHostPageBaseURL());
+        final UserHistoryClient client = GWT.create(UserHistoryClient.class);
+
         final String quizId = getQuizId();
         if (StringUtils.isEmpty(quizId)) {
             getView().setUserRecentHistory(null, null, null);
             return;
         }
 
-        @NotNull final AsyncCallback<UserHistorySections> callback = new AsyncCallback<UserHistorySections>() {
+        @NotNull final MethodCallback<UserHistorySections> callback = new MethodCallback<UserHistorySections>() {
             @Override
-            public void onFailure(@NotNull final Throwable caught) {
+            public void onFailure(final Method method, @NotNull final Throwable caught) {
                 try {
                     userIsLoggedIn = false;
                     throw caught;
@@ -140,7 +148,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
             }
 
             @Override
-            public void onSuccess(final UserHistorySections result) {
+            public void onSuccess(final Method method, final UserHistorySections result) {
                 if (result == null) {
                     onFailureGeneric();
                 }
@@ -170,8 +178,7 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
             }
         };
 
-        QuizServiceAsync.Util.getInstance().getUserHistorySections(
-                quizId, Window.Location.getHref(), callback);
+        client.getByQuizId(quizId, Window.Location.getHref(), callback);
     }
 
     private String getQuizId() {

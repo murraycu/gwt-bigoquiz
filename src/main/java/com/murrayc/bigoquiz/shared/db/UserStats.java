@@ -72,12 +72,18 @@ public class UserStats implements IsSerializable {
         return userId;
     }
 
-    public void seUserId(final String userId) {
+    public void setUserId(final String userId) {
         this.userId = userId;
     }
 
     public String getQuizId() {
         return quizId;
+    }
+
+    /** Without this, the client code will not fill the section with questions from the JSON.
+     */
+    public void setQuizId(final String quizId) {
+        this.quizId = quizId;
     }
 
     public String getSectionId() {
@@ -249,12 +255,30 @@ public class UserStats implements IsSerializable {
         return problemQuestionHistoriesCount;
     }
 
+    /** Without this, the client code will not fill the section with questions from the JSON.
+     */
+    public void setProblemQuestionHistoriesCount(final int problemQuestionHistoriesCount) {
+        this.problemQuestionHistoriesCount = problemQuestionHistoriesCount;
+    }
+
     public int getAnsweredOnce() {
         return countQuestionsAnsweredOnce;
     }
 
+    /** Without this, the client code will not fill the section with questions from the JSON.
+     */
+    public void setAnsweredOnce(int countQuestionsAnsweredOnce) {
+        this.countQuestionsAnsweredOnce = countQuestionsAnsweredOnce;
+    }
+
     public int getCorrectOnce() {
         return countQuestionsCorrectOnce;
+    }
+
+    /** Without this, the client code will not fill the section with questions from the JSON.
+     */
+    public void setCorrectOnce(int countQuestionsCorrectOnce) {
+        this.countQuestionsCorrectOnce = countQuestionsCorrectOnce;
     }
 
     public boolean getQuestionWasAnswered(final String questionId) {

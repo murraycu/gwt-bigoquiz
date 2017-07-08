@@ -1,5 +1,6 @@
 package com.murrayc.bigoquiz.client;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.db.UserQuestionHistory;
@@ -8,7 +9,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -20,6 +24,7 @@ public class UserHistoryTest {
     public static final String QUIZ_ID = "somequiz";
     public static final String SECTION_1 = "section1";
     public static final String SUBSECTION_1_1 = "subsection1.1";
+    public static final String USER_ID_1 = "userid 1";
 
     @Test
     public void testAddUserAnswerAtStart() throws Exception {
@@ -52,6 +57,35 @@ public class UserHistoryTest {
         //assertEquals("question5", problems.get(0).getQuestionId());
     }
 
+    @Test
+    public void UserHistorySectionsJsonTest() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Get the JSON for an object:
+        UserHistorySections objToWrite = createUserRecentHistory();
+        final String json = objectMapper.writeValueAsString(objToWrite);
+        assertNotNull(json);
+        assertFalse(json.isEmpty());
+
+        UserHistorySections obj = objectMapper.readValue(json, UserHistorySections.class);
+        assertNotNull(obj);
+
+        final LoginInfo loginInfo = obj.getLoginInfo();
+        assertNotNull(loginInfo);
+        assertEquals(USER_ID_1, loginInfo.getUserId());
+
+        final QuizSections sections = obj.getSections();
+        assertNotNull(sections);
+
+        final List<QuizSections.Section> listSections = sections.getSections();
+        assertNotNull(listSections);
+        assertFalse(listSections.isEmpty());
+
+        final QuizSections.Section section = listSections.get(0);
+        assertNotNull(section);
+        assertEquals(SECTION_1, section.getId());
+    }
+
     @NotNull
     private UserHistorySections createUserRecentHistory() {
         @NotNull final QuizSections sections = new QuizSections();
@@ -61,7 +95,7 @@ public class UserHistoryTest {
         @NotNull final UserStats stats = new UserStats();
 
         @NotNull LoginInfo loginInfo = new LoginInfo();
-        loginInfo.setUserId("userid 1");
+        loginInfo.setUserId(USER_ID_1);
         @NotNull UserHistorySections history = new UserHistorySections(loginInfo, sections, "some title");
         history.setSectionStats("section1", stats);
 
