@@ -56,10 +56,6 @@ public class Quiz implements IsSerializable {
     //regardless of what section it is in.
     private transient final List<QuestionAndAnswer> listQuestions = new ArrayList<>();
 
-    // This is for listing the questions in order on the Quiz page,
-    // and for getting a random question from a particular section:
-    private /* final */ Map<String, List<QuestionAndAnswer>> listSectionQuestions = new HashMap<>();
-
     public Quiz() {
     }
 
@@ -109,16 +105,24 @@ public class Quiz implements IsSerializable {
         listQuestions.add(questionAndAnswer);
 
         //And here too:
-        List<QuestionAndAnswer> sectionList = listSectionQuestions.computeIfAbsent(sectionId, k -> new ArrayList<>());
-        sectionList.add(questionAndAnswer);
+        QuizSections.Section section = quizSections.getSection(sectionId);
+        if (section == null) {
+            Log.error("Quiz.addQuestion(): section not present: " + sectionId);
+            return;
+        }
+
+        section.addQuestion(questionAndAnswer);
     }
 
     @Nullable
     public Question getRandomQuestion(final String sectionId) {
         if (!StringUtils.isEmpty(sectionId)) {
-            final List<QuestionAndAnswer> sectionQuestions = listSectionQuestions.get(sectionId);
-            if ((sectionQuestions != null) && !sectionQuestions.isEmpty()) {
-                return getRandomQuestionFromList(sectionQuestions);
+            final QuizSections.Section section = quizSections.getSection(sectionId);
+            if (section != null) {
+                final List<QuestionAndAnswer> sectionQuestions = section.getQuestions();
+                if ((sectionQuestions != null) && !sectionQuestions.isEmpty()) {
+                    return getRandomQuestionFromList(sectionQuestions);
+                }
             }
         }
 
@@ -230,11 +234,13 @@ public class Quiz implements IsSerializable {
     }
 
     public List<QuestionAndAnswer> getQuestionsForSection(@NotNull final String sectionId) {
-        if (listSectionQuestions == null) {
+        QuizSections.Section section = quizSections.getSection(sectionId);
+        if (section == null) {
+            Log.error("Quiz.addQuestion(): section not present: " + sectionId);
             return null;
         }
 
-        return listSectionQuestions.get(sectionId);
+        return section.getQuestions();
     }
 
     /** Get the count of all questions in all sections.

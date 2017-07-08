@@ -37,6 +37,8 @@ public class QuizSections implements IsSerializable {
         public Map<String, SubSection> subSections = new HashMap<>();
         public List<String> subSectionsSequence = new ArrayList<>(); // IDs.
         public List<Question.Text> defaultChoices;
+        private List<QuestionAndAnswer> questions;
+
         public int questionsCount;
 
         Section() {
@@ -44,6 +46,18 @@ public class QuizSections implements IsSerializable {
 
         Section(final String id, final String title, final String link) {
             super(id, title, link);
+        }
+
+        public List<QuestionAndAnswer> getQuestions() {
+            return questions;
+        }
+
+        public void addQuestion(final QuestionAndAnswer questionAndAnswer) {
+            if (questions == null) {
+                questions = new ArrayList<>();
+            }
+
+            questions.add(questionAndAnswer);
         }
     }
 
