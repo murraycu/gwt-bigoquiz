@@ -15,10 +15,10 @@ import java.util.List;
 @Path("/api/quiz")
 public interface QuizClient extends RestService {
     @GET
-    public void getQuiz(MethodCallback<List<Quiz>> callback);
+    public void getQuiz(@QueryParam("list-only") boolean listOnly, MethodCallback<List<Quiz>> callback);
 
     @GET
     @Path("/{id}")
-    public void getQuiz(@PathParam("id") String id, MethodCallback<List<Quiz>> callback);
+    public void getQuiz(@PathParam("id") String id, @QueryParam("list-only") boolean listOnly, MethodCallback<List<Quiz>> callback);
 
 }

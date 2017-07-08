@@ -143,7 +143,7 @@ public class QuizPresenter extends BigOQuizPresenter<QuizPresenter.MyView, QuizP
 
 
         getView().setLoadingLabelVisible(true);
-        client.getQuiz(getQuizId(), callback);
+        client.getQuiz(getQuizId(), false /* not listOnly */, callback);
     }
 
     @Override

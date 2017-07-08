@@ -6,13 +6,10 @@ import com.murrayc.bigoquiz.shared.QuizConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  * Created by murrayc on 7/7/17.
@@ -25,14 +22,28 @@ public class QuizResource extends ResourceWithQuizzes {
 
     @GET
     @Produces("application/json")
-    public Collection<Quiz> get() {
+    public Collection<Quiz> get(@QueryParam("list-only") boolean listOnly) {
         getOrLoadQuizzes();
 
         if (quizzes == null) {
             return null;
         }
 
-        return quizzes.map.values();
+        if (!listOnly) {
+            return quizzes.map.values();
+        } else {
+            // Create a list of quizzes in which each quiz has only the ID and title.
+            // TODO: Cache this.
+            final List<Quiz> result = new ArrayList<>();
+            for (final Quiz quiz : quizzes.map.values()) {
+                final Quiz brief = new Quiz();
+                brief.setId(quiz.getId());
+                brief.setTitle(quiz.getTitle());
+                result.add(brief);
+            }
+
+            return result;
+        }
     }
 
     @GET
