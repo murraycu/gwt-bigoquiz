@@ -68,17 +68,19 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
         panelQuiz.add(buttonPlay);
 
         final QuizSections quizSections = quiz.getSections();
-        for(final QuizSections.Section section : quizSections.getSectionsSorted()) {
-            if (section == null) {
-                Log.error("QuizListView: section is null.");
-                continue;
+        if (quizSections != null) {
+            for (final QuizSections.Section section : quizSections.getSectionsSorted()) {
+                if (section == null) {
+                    Log.error("QuizListView: section is null.");
+                    continue;
+                }
+
+                addSection(panelQuiz, constants, quiz, quizSections, section);
             }
 
-            addSection(panelQuiz, constants, quiz, quizSections, section);
+            //Add questions that are not in a section:
+            addSection(panelQuiz, constants, quiz, quizSections, null);
         }
-
-        //Add questions that are not in a section:
-        addSection(panelQuiz, constants, quiz, quizSections, null);
 
         if (quiz.getUsesMathML()) {
             // Manually ask MathJax to render any MathML,
@@ -88,6 +90,10 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
     }
 
     private static void addSection(@NotNull final Panel panelQuiz, final BigOQuizConstants constants, @NotNull final Quiz quiz, QuizSections quizSections, final QuizSections.Section section) {
+        if (section == null) {
+            return;
+        }
+
         final Panel panelSection = new FlowPanel();
         panelSection.addStyleName("quiz-section");
         panelQuiz.add(panelSection);
@@ -189,6 +195,10 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
 
     @NotNull
     private static Widget createTitleWidget(HasIdAndTitle section) {
+        if (section == null) {
+            return null;
+        }
+
         // We can't use an Anchor with a null href - that creates a link to /null.
         Widget title = null;
         final String link = section.getLink();
