@@ -171,7 +171,7 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
                 // the actual available count of questions, if we change the question DIs after they've been answered,
                 // but this would look strange to people.
                 // TODO: Actually forget now-invalid answered questions.
-                final int questionsCount = section.questionsCount;
+                final int questionsCount = section.getQuestionsCount()  ;
                 final int answeredOnce = Math.min(stats.getAnsweredOnce(), questionsCount);
                 final int correctOnce = Math.min(stats.getCorrectOnce(), questionsCount);
                 Utils.addStackedProgressBar(detailsPanel, correctOnce, answeredOnce, questionsCount, messages);

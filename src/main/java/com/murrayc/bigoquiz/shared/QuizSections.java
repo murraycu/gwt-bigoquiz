@@ -34,12 +34,12 @@ public class QuizSections implements IsSerializable {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     static public class Section extends HasIdAndTitle {
         @NotNull
-        public Map<String, SubSection> subSections = new HashMap<>();
-        public List<String> subSectionsSequence = new ArrayList<>(); // IDs.
-        public List<Question.Text> defaultChoices;
+        private Map<String, SubSection> subSections = new HashMap<>();
+        private List<String> subSectionsSequence = new ArrayList<>(); // IDs.
+        private List<Question.Text> defaultChoices;
         private List<QuestionAndAnswer> questions;
 
-        public int questionsCount;
+        private int questionsCount;
 
         Section() {
         }
@@ -59,6 +59,39 @@ public class QuizSections implements IsSerializable {
 
             questions.add(questionAndAnswer);
         }
+
+        @NotNull
+        public Map<String, SubSection> getSubSections() {
+            return subSections;
+        }
+
+        public void setSubSections(@NotNull Map<String, SubSection> subSections) {
+            this.subSections = subSections;
+        }
+
+        public List<Question.Text> getDefaultChoices() {
+            return defaultChoices;
+        }
+
+        public void setDefaultChoices(List<Question.Text> defaultChoices) {
+            this.defaultChoices = defaultChoices;
+        }
+
+        public List<String> getSubSectionsSequence() {
+            return subSectionsSequence;
+        }
+
+        public void setSubSectionsSequence(List<String> subSectionsSequence) {
+            this.subSectionsSequence = subSectionsSequence;
+        }
+
+        public int getQuestionsCount() {
+            return questionsCount;
+        }
+
+        public void setQuestionsCount(int questionsCount) {
+            this.questionsCount = questionsCount;
+        }
     }
 
     //Map of section ID to userhistorysections.
@@ -68,7 +101,7 @@ public class QuizSections implements IsSerializable {
 
     public void addSection(final String sectionId, final String sectionTitle, final String sectionLink, final List<Question.Text> defaultChoices) {
         @NotNull final Section section = new Section(sectionId, sectionTitle, sectionLink);
-        section.defaultChoices = defaultChoices;
+        section.setDefaultChoices(defaultChoices);
         this.sections.put(sectionId, section);
 
         this.sectionsSequence.add(sectionId);
@@ -81,9 +114,9 @@ public class QuizSections implements IsSerializable {
             return;
         }
 
-        section.subSections.put(subSectionId,
+        section.getSubSections().put(subSectionId,
                 new SubSection(subSectionId, subSectionTitle, subSectionLink));
-        section.subSectionsSequence.add(subSectionId);
+        section.getSubSectionsSequence().add(subSectionId);
     }
 
     @NotNull
@@ -118,7 +151,7 @@ public class QuizSections implements IsSerializable {
             return null;
         }
 
-        return section.subSections.get(subSectionId);
+        return section.getSubSections().get(subSectionId);
     }
 
     //TODO: Internationalization.
@@ -200,14 +233,14 @@ public class QuizSections implements IsSerializable {
             return null;
         }
 
-        if (section.subSections == null) {
+        if (section.getSubSections() == null) {
             return null;
         }
 
         final List<SubSection> result = new ArrayList<>();
 
-        for (final String subSectionId : section.subSectionsSequence) {
-            result.add(section.subSections.get(subSectionId));
+        for (final String subSectionId : section.getSubSectionsSequence()) {
+            result.add(section.getSubSections().get(subSectionId));
         }
 
         return result;

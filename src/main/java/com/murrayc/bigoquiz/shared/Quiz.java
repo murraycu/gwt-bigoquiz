@@ -190,7 +190,7 @@ public class Quiz implements IsSerializable {
             return;
         }
 
-        section.questionsCount = questionsCount;
+        section.setQuestionsCount(questionsCount);
     }
 
     public void addSubSection(final String sectionId, final String subSectionId, final String subSectionTitle, final String subSectionLink) {
