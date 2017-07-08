@@ -35,7 +35,7 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
     }
 
     @Override
-    public void setQuizList(@NotNull final List<Quiz.QuizDetails> quizList) {
+    public void setQuizList(@NotNull final List<Quiz> quizList) {
         setErrorLabelVisible(false);
 
         panelList.clear();
@@ -45,7 +45,8 @@ public class QuizListView extends ContentViewWithUIHandlers<QuizListUserEditUiHa
             return;
         }
 
-        for(final Quiz.QuizDetails details : quizList) {
+        for(final Quiz quiz : quizList) {
+            final Quiz.QuizDetails details = quiz.getDetails();
             if (details == null) {
                 Log.error("QuizListView: details is null.");
                 continue;

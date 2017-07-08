@@ -1,7 +1,7 @@
 package com.murrayc.bigoquiz.client.application.quizlist;
 
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -12,12 +12,15 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.NameTokens;
-import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.quiz.BigOQuizPresenter;
+import com.murrayc.bigoquiz.client.application.quiz.QuizClient;
 import com.murrayc.bigoquiz.shared.Quiz;
+import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -30,7 +33,7 @@ public class QuizListPresenter extends BigOQuizPresenter<QuizListPresenter.MyVie
     private final PlaceManager placeManager;
 
     interface MyView extends ContentView, HasUiHandlers<QuizListUserEditUiHandlers> {
-        void setQuizList(final List<Quiz.QuizDetails> quizList);
+        void setQuizList(final List<Quiz> quizList);
 
         void setServerFailed();
     }
@@ -60,9 +63,12 @@ public class QuizListPresenter extends BigOQuizPresenter<QuizListPresenter.MyVie
     }
 
     private void getAndUseQuizList() {
-        @NotNull final AsyncCallback<List<Quiz.QuizDetails>> callback = new AsyncCallback<List<Quiz.QuizDetails>>() {
+        Defaults.setServiceRoot(GWT.getHostPageBaseURL());
+        QuizClient client = GWT.create(QuizClient.class);
+
+        @NotNull final MethodCallback<List<Quiz>> callback = new MethodCallback<List<Quiz>>() {
             @Override
-            public void onFailure(@NotNull final Throwable caught) {
+            public void onFailure(final Method method, @NotNull final Throwable caught) {
                 getView().setLoadingLabelVisible(false);
 
                 try {
@@ -79,16 +85,15 @@ public class QuizListPresenter extends BigOQuizPresenter<QuizListPresenter.MyVie
             }
 
             @Override
-            public void onSuccess(final List<Quiz.QuizDetails> result) {
+            public void onSuccess(final Method method, final List<Quiz> result) {
                 getView().setLoadingLabelVisible(false);
 
                 getView().setQuizList(result);
             }
         };
 
-
         getView().setLoadingLabelVisible(true);
-        QuizServiceAsync.Util.getInstance().getQuizList(callback);
+        client.getQuiz(true /* listOnly */, callback);
     }
 
     public void onAnswerQuestions(final String quizId) {
