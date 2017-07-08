@@ -18,10 +18,7 @@ import java.util.Map;
  * Created by murrayc on 7/7/17.
  */
 @Path("quiz")
-public class QuizResource {
-    private static final String LOADED_QUIZZES = "loaded-quizzes";
-
-    private QuizzesMap quizzes = null;
+public class QuizResource extends ResourceWithQuizzes {
 
     public QuizResource() {
     }
@@ -77,12 +74,4 @@ public class QuizResource {
             //context.setAttribute(LOADED_QUIZZES, quizzes);
         }
     }
-
-    private void getOrLoadQuizzes() {
-        // Load all quizzes.
-        getQuizzesMap();
-
-        quizzes.loadQuizzes();
-    }
-
 }
