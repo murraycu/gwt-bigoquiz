@@ -67,15 +67,28 @@ public class UserHistoryOverall implements IsSerializable {
         return quizStats;
     }
 
+    /**
+     * This is only used for the JSON input.
+     */
+    public void setStats(final Map<String, UserStats> quizStats) {
+        this.quizStats = quizStats;
+    }
+
     public UserStats getStats(final String quizId ) {
         return quizStats.get(quizId);
     }
 
 
     @NotNull
-    @JsonIgnore
     public Map<String, QuizDetails> getQuizzes() {
         return quizzes;
+    }
+
+    /**
+     * This is only used for the JSON input.
+     */
+    public void setQuizzes(final Map<String, QuizDetails> quizzes) {
+        this.quizzes = quizzes;
     }
 
     public boolean hasUser() {
@@ -89,5 +102,12 @@ public class UserHistoryOverall implements IsSerializable {
     @NotNull
     public LoginInfo getLoginInfo() {
         return loginInfo;
+    }
+
+    /**
+     * This is only used for the JSON input.
+     */
+    void setLoginInfo(final LoginInfo loginInfo) {
+        this.loginInfo = loginInfo;
     }
 }

@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.client.application.userprofile;
 
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
@@ -13,6 +14,10 @@ import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.quiz.BigOQuizPresenter;
+import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistoryClient;
+import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -48,9 +53,12 @@ public class UserProfilePresenter extends BigOQuizPresenter<UserProfilePresenter
     }
 
     private void getAndShowHistory() {
-        @NotNull final AsyncCallback<UserHistoryOverall> callback = new AsyncCallback<UserHistoryOverall>() {
+        Defaults.setServiceRoot(GWT.getHostPageBaseURL());
+        final UserHistoryClient client = GWT.create(UserHistoryClient.class);
+
+        @NotNull final MethodCallback<UserHistoryOverall> callback = new MethodCallback<UserHistoryOverall>() {
             @Override
-            public void onFailure(@NotNull final Throwable caught) {
+            public void onFailure(final Method method, @NotNull final Throwable caught) {
                 getView().setLoadingLabelVisible(false);
 
                 try {
@@ -65,7 +73,7 @@ public class UserProfilePresenter extends BigOQuizPresenter<UserProfilePresenter
             }
 
             @Override
-            public void onSuccess(final UserHistoryOverall result) {
+            public void onSuccess(final Method method, final UserHistoryOverall result) {
                 getView().setLoadingLabelVisible(false);
                 getView().setUserRecentHistory(result);
             }
@@ -76,7 +84,6 @@ public class UserProfilePresenter extends BigOQuizPresenter<UserProfilePresenter
             }
         };
 
-        QuizServiceAsync.Util.getInstance().getUserHistoryOverall(
-                Window.Location.getHref(), callback);
+        client.get(Window.Location.getHref(), callback);
     }
 }
