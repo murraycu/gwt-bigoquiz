@@ -1,7 +1,7 @@
 package com.murrayc.bigoquiz.client.application.quiz;
 
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -13,7 +13,6 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.NameTokens;
-import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.UnknownQuizException;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
@@ -23,7 +22,12 @@ import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
 import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.StringUtils;
+import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -98,9 +102,12 @@ public class QuizPresenter extends BigOQuizPresenter<QuizPresenter.MyView, QuizP
     }
 
     private void getAndUseQuiz() {
-        @NotNull final AsyncCallback<Quiz> callback = new AsyncCallback<Quiz>() {
+        Defaults.setServiceRoot(GWT.getHostPageBaseURL());
+        QuizClient client = GWT.create(QuizClient.class);
+
+        @NotNull final MethodCallback<List<Quiz>> callback = new MethodCallback<List<Quiz>>() {
             @Override
-            public void onFailure(@NotNull final Throwable caught) {
+            public void onFailure(Method method, @NotNull final Throwable caught) {
                 getView().setLoadingLabelVisible(false);
                 getView().setQuiz(null); //clear the previous quiz.
                 Utils.tellUserHistoryPresenterAboutNoQuestionContext(QuizPresenter.this); //clear the sections sidebar.
@@ -122,16 +129,21 @@ public class QuizPresenter extends BigOQuizPresenter<QuizPresenter.MyView, QuizP
             }
 
             @Override
-            public void onSuccess(final Quiz result) {
+            public void onSuccess(final Method method, final List<Quiz> result) {
                 getView().setLoadingLabelVisible(false);
 
-                getView().setQuiz(result);
+                Quiz quiz = null;
+                if (result != null && !result.isEmpty()) {
+                    quiz = result.get(0);
+                }
+
+                getView().setQuiz(quiz);
             }
         };
 
 
         getView().setLoadingLabelVisible(true);
-        QuizServiceAsync.Util.getInstance().getQuiz(getQuizId(), callback);
+        client.getQuiz(getQuizId(), callback);
     }
 
     @Override
