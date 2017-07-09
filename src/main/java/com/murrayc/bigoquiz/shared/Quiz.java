@@ -230,7 +230,7 @@ public class Quiz implements IsSerializable {
     @NotNull
     @JsonProperty("sections")
     public List<QuizSections.Section> getSectionsList() {
-        return quizSections.getSections();
+        return quizSections.getSectionsInSequence();
     }
 
     public List<QuestionAndAnswer> getQuestionsForSection(@NotNull final String sectionId) {

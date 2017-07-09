@@ -77,7 +77,7 @@ public class UserHistoryTest {
         final QuizSections sections = obj.getSections();
         assertNotNull(sections);
 
-        final List<QuizSections.Section> listSections = sections.getSections();
+        final List<QuizSections.Section> listSections = sections.getSectionsInSequence();
         assertNotNull(listSections);
         assertFalse(listSections.isEmpty());
 
