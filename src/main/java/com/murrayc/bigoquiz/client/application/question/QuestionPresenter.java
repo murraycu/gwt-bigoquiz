@@ -462,9 +462,12 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
         correctAnswer = null;
         nextQuestion = null;
 
-        @NotNull final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
+        Defaults.setServiceRoot(GWT.getHostPageBaseURL());
+        QuestionClient client = GWT.create(QuestionClient.class);
+
+        @NotNull final MethodCallback<Question> callback = new MethodCallback<Question>() {
             @Override
-            public void onFailure(@NotNull final Throwable caught) {
+            public void onFailure(final Method method, @NotNull final Throwable caught) {
                 getView().setLoadingLabelVisible(false);
                 try {
                     throw caught;
@@ -480,7 +483,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
             }
 
             @Override
-            public void onSuccess(@NotNull final Question result) {
+            public void onSuccess(final Method method, @NotNull final Question result) {
                 getView().setLoadingLabelVisible(false);
                 revealQuestion(result);
             }
@@ -488,7 +491,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
         };
 
         getView().setLoadingLabelVisible(true);
-        QuizServiceAsync.Util.getInstance().getNextQuestion(getQuizId(), sectionId, callback);
+        client.getNextQuestion(getQuizId(), sectionId, callback);
     }
 
     private void getAndUseQuestion(final String questionId) {
