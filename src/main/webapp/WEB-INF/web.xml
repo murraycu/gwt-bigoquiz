@@ -16,17 +16,6 @@
         <url-pattern>/bigoquiz/quiz-service</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>loginService</servlet-name>
-        <servlet-class>com.murrayc.bigoquiz.server.gwtrpc.LoginServiceImpl</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>loginService</servlet-name>
-        <url-pattern>/bigoquiz/login-service</url-pattern>
-    </servlet-mapping>
-
-
     <!-- Servlets for REST API -->
     <servlet>
         <servlet-name>restQuizServlet</servlet-name>
