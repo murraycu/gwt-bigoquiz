@@ -1,8 +1,8 @@
 package com.murrayc.bigoquiz.client.application.userstatus;
 
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -11,6 +11,9 @@ import com.gwtplatform.mvp.client.View;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.LoginServiceAsync;
+import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,9 +39,12 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
         theView.setUiHandlers(this);
         theView.setShowLogOutWhenAppropriate(false); //Default.
 
+        Defaults.setServiceRoot(GWT.getHostPageBaseURL());
+        final UserClient client = GWT.create(UserClient.class);
+
         // Check login status using login service.
-        LoginServiceAsync.Util.getInstance().login(Window.Location.getHref(), new AsyncCallback<LoginInfo>() {
-            public void onFailure(@NotNull final Throwable caught) {
+        client.get(Window.Location.getHref(), new MethodCallback<LoginInfo>() {
+            public void onFailure(final Method method, @NotNull final Throwable caught) {
                 try {
                     throw caught;
                 } catch (final IllegalArgumentException ex) {
@@ -52,7 +58,7 @@ public class UserStatusPresenter extends PresenterWidget<UserStatusPresenter.MyV
                 }
             }
 
-            public void onSuccess(@Nullable final LoginInfo result) {
+            public void onSuccess(final Method method, @Nullable final LoginInfo result) {
                 //TODO: Throw an exception instead of returning null?
                 if(result == null) {
                     getView().setUserStatusFailed();
