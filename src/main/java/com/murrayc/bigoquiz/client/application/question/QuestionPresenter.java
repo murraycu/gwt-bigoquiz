@@ -1,6 +1,7 @@
 package com.murrayc.bigoquiz.client.application.question;
 
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
@@ -16,6 +17,7 @@ import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.application.quiz.BigOQuizPresenter;
+import com.murrayc.bigoquiz.client.application.quiz.QuizClient;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
@@ -23,6 +25,9 @@ import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.google.inject.Inject;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
+import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -402,9 +407,12 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
     private void getAndUseSections() {
         waitingForSections = true;
 
-        @NotNull final AsyncCallback<QuizSections> callback = new AsyncCallback<QuizSections>() {
+        Defaults.setServiceRoot(GWT.getHostPageBaseURL());
+        QuizClient client = GWT.create(QuizClient.class);
+
+        @NotNull final MethodCallback<QuizSections> callback = new MethodCallback<QuizSections>() {
             @Override
-            public void onFailure(@NotNull final Throwable caught) {
+            public void onFailure(final Method method, @NotNull final Throwable caught) {
                 Utils.tellUserHistoryPresenterAboutNoQuestionContext(QuestionPresenter.this); //clear the sections sidebar.
                 getView().setQuestion(null, null);
 
@@ -427,7 +435,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
             }
 
             @Override
-            public void onSuccess(final QuizSections result) {
+            public void onSuccess(final Method method, final QuizSections result) {
                 QuestionPresenter.this.sections = result;
                 getView().setSections(result);
 
@@ -439,7 +447,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
         };
 
 
-        QuizServiceAsync.Util.getInstance().getSections(getQuizId(), callback);
+        client.getQuizSectionsById(getQuizId(), true /* list-only */, callback);
     }
 
     /** Get and show a question from the specified section.
