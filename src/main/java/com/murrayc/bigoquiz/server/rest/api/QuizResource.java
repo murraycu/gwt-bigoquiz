@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.server.rest.api;
 import com.murrayc.bigoquiz.server.QuizzesMap;
 import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.QuizConstants;
+import com.murrayc.bigoquiz.shared.QuizSections;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,6 +58,36 @@ public class QuizResource extends ResourceWithQuizzes {
         }
 
         return quizzes.map.get(id);
+    }
+
+    @GET
+    @Path("/{quiz-id}/section")
+    @Produces("application/json")
+    public QuizSections getSectionByQuizId(@PathParam("quiz-id") String quizId, @QueryParam("list-only") boolean listOnly) {
+        getOrLoadQuizzes();
+
+        if (quizzes == null) {
+            return null;
+        }
+
+        final Quiz quiz = quizzes.map.get(quizId);
+        if (quiz == null) {
+            return null;
+        }
+
+        if (!listOnly) {
+            return quiz.getSections();
+        } else {
+            // Create a list of quizzes in which each quiz has only the ID and title.
+            // TODO: Cache this.
+            final QuizSections sections = quiz.getSections();
+            final QuizSections result = new QuizSections();
+            for (final QuizSections.Section section : sections.getSectionsInSequence()) {
+                result.addSection(section.getId(), section.getTitle(), null, null);
+            }
+
+            return result;
+        }
     }
 
 
