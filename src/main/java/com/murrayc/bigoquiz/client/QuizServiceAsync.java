@@ -23,8 +23,6 @@ public interface QuizServiceAsync {
     void submitDontKnowAnswer(final String quizId, final String questionId, String nextQuestionSectionId, AsyncCallback<QuizService.SubmissionResult> async)
             throws IllegalArgumentException;
 
-    void getSections(final String quizId, AsyncCallback<QuizSections> async);
-
     /**
      * Clear all question answer history, progress, scores, etc.
      */

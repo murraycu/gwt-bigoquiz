@@ -131,13 +131,6 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
 
     @NotNull
     @Override
-    public QuizSections getSections(final String quizId) throws IllegalArgumentException {
-        @NotNull final Quiz quiz = getQuiz(quizId);
-        return quiz.getSections();
-    }
-
-    @NotNull
-    @Override
     public SubmissionResult submitAnswer(final String quizId, final String questionId, final String answer, final String nextQuestionSectionId) throws IllegalArgumentException {
         @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(quizId, questionId);
         if (questionAndAnswer == null) {
