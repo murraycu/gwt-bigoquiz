@@ -30,11 +30,6 @@ public interface QuizService extends RemoteService {
 
     @NotNull SubmissionResult submitDontKnowAnswer(final String quizId, final String questionId, String nextQuestionSectionId) throws IllegalArgumentException;
 
-    /**
-     * Clear all question answer history, progress, scores, etc.
-     */
-    void resetSections(final String quizId);
-
     class SubmissionResult implements IsSerializable {
         private boolean result = false;
         private Question.Text correctAnswer = null; //If result is false.

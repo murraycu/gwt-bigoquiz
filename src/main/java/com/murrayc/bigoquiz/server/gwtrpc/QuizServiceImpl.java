@@ -114,35 +114,6 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
         return quiz.getQuestionAndAnswer(questionId);
     }
 
-    @Override
-    public void resetSections(final String quizId) {
-        @Nullable final String userId = getUserId();
-        if (StringUtils.isEmpty(userId)) {
-            //TODO: Throw some NotLoggedIn exception?
-            Log.error("resetSections(): userId is null.");
-            return;
-        }
-
-        if (StringUtils.isEmpty(quizId)) {
-            throw new IllegalArgumentException("Empty or null quiz ID.");
-        }
-
-        //TODO: Get the keys only:
-        Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
-        q = q.filter("userId", userId);
-        q = q.filter("quizId", quizId);
-        final List<UserStats> list = q.list();
-        if (list.isEmpty()) {
-            //Presumably, they don't exist yet, or have already been deleted.
-            return;
-        }
-
-        for (final UserStats userStats : list) {
-            //TODO: Batch these:
-            EntityManagerFactory.ofy().delete().entity(userStats).now();
-        }
-    }
-
     private UserStats getUserStatsForSection(@NotNull final String userId, @NotNull final String quizId, @NotNull final String sectionId) {
         Query<UserStats> q = getQueryForUserStats(userId, quizId);
         q = q.filter("sectionId", sectionId);

@@ -19,11 +19,6 @@ public interface QuizServiceAsync {
             throws IllegalArgumentException;
 
     /**
-     * Clear all question answer history, progress, scores, etc.
-     */
-    void resetSections(final String quizId, AsyncCallback<Void> async);
-
-    /**
      * Utility class to get the RPC Async interface from client-side code
      */
     final class Util {
