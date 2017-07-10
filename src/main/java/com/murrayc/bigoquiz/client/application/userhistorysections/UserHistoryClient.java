@@ -5,14 +5,12 @@ import com.murrayc.bigoquiz.client.UserHistorySections;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.RestService;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import java.util.List;
 
 /**
  * Created by murrayc on 7/8/17.
+ * @see UserHistoryResource.
  */
 @Path("/api/user-history")
 public interface UserHistoryClient extends RestService {
@@ -37,4 +35,7 @@ public interface UserHistoryClient extends RestService {
     @Path("/{quizId}")
     public void getByQuizId(@PathParam("quizId") String quizId, @QueryParam("requestUrl") String requestUrl, MethodCallback<UserHistorySections> callback);
 
+    @POST
+    @Path("/reset-sections")
+    public void resetSections(@QueryParam("quizId") String quizId, MethodCallback<Void> callback);
 }

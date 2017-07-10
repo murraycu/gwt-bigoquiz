@@ -1,7 +1,7 @@
 package com.murrayc.bigoquiz.client.application.userhistory;
 
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -12,14 +12,17 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.NameTokens;
-import com.murrayc.bigoquiz.client.QuizServiceAsync;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.quiz.BigOQuizPresenter;
+import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistoryClient;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsTitleRetrievedEvent;
 import com.murrayc.bigoquiz.shared.StringUtils;
+import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -96,9 +99,12 @@ public class UserHistoryPresenter extends BigOQuizPresenter<UserHistoryPresenter
 
     @Override
     public void onResetSections() {
-        QuizServiceAsync.Util.getInstance().resetSections(getQuizId(), new AsyncCallback<Void>() {
+        Defaults.setServiceRoot(GWT.getHostPageBaseURL());
+        final UserHistoryClient client = GWT.create(UserHistoryClient.class);
+
+        client.resetSections(getQuizId(), new MethodCallback<Void>() {
             @Override
-            public void onFailure(@NotNull final Throwable caught) {
+            public void onFailure(final Method method, @NotNull final Throwable caught) {
                 try {
                     throw caught;
                 } catch (final IllegalArgumentException ex) {
@@ -113,7 +119,7 @@ public class UserHistoryPresenter extends BigOQuizPresenter<UserHistoryPresenter
             }
 
             @Override
-            public void onSuccess(Void result) {
+            public void onSuccess(final Method method, Void result) {
                 tellUserHistorySectionsPresenterAboutResetSections();
             }
         });
