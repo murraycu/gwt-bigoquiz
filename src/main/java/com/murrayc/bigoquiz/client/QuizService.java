@@ -18,8 +18,6 @@ import java.util.List;
 public interface QuizService extends RemoteService {
     @Nullable Question getQuestion(final String quizId, final String questionId) throws IllegalArgumentException;
 
-    @Nullable Question getNextQuestion(final String quizId, final String sectionId) throws IllegalArgumentException;
-
     /**
      * submitAnswer() returns the correct correctAnswer (if the supplied correctAnswer was wrong) and the next question.
      * This avoids the client needing to make multiple calls.

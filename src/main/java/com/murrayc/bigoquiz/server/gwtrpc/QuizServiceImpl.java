@@ -100,35 +100,6 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
         return result;
     }
 
-    @Nullable
-    @Override
-    public Question getNextQuestion(@NotNull final String quizId, final String sectionId) throws IllegalArgumentException {
-        @NotNull final Quiz quiz = getQuiz(quizId);
-
-        Question result = null;
-
-        @Nullable final String userId = getUserId();
-        if (StringUtils.isEmpty(userId)) {
-            //The user is not logged in,
-            //so just return a random question:
-            result = quiz.getRandomQuestion(sectionId);
-        } else if (StringUtils.isEmpty(sectionId)) {
-            @NotNull final Map<String, UserStats> mapUserStats = getUserStats(userId, quizId);
-            result = getNextQuestionFromUserStats(null, quiz, mapUserStats);
-        } else {
-            //This special case is a bit copy-and-pasty of the general case with the
-            //map, but it seems more efficient to avoid an unnecessary Map.
-            @Nullable final UserStats userStats = getUserStatsForSection(userId, sectionId, quizId);
-            result = getNextQuestionFromUserStatsForSection(sectionId, quiz, userStats);
-        }
-
-        if (result != null) {
-            setQuestionExtras(result, quiz);
-        }
-
-        return result;
-    }
-
     @NotNull
     @Override
     public SubmissionResult submitAnswer(final String quizId, final String questionId, final String answer, final String nextQuestionSectionId) throws IllegalArgumentException {
