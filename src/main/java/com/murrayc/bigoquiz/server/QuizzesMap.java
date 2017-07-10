@@ -3,6 +3,7 @@ package com.murrayc.bigoquiz.server;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.QuizConstants;
+import com.murrayc.bigoquiz.shared.QuizSections;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,8 +20,9 @@ public class QuizzesMap {
     @Nullable
     public final Map<String, Quiz> map = new HashMap<>();
     public final List<Quiz> listIdsAndTitles = new ArrayList(); // sorted
-    public boolean allTitlesLoaded = false;
+    public final Map<String, QuizSections> mapQuizSectionsIdAndTitle = new HashMap<>(); // in sequence
 
+    public boolean allTitlesLoaded = false;
 
     public void loadQuizzes() {
         if (allTitlesLoaded) {
@@ -76,9 +78,15 @@ public class QuizzesMap {
 
             // Keep the ID and title separately, for the list-only server query.
             final Quiz brief = new Quiz();
-            brief.setId(quiz.getId());
+            brief.setId(quizId);
             brief.setTitle(quiz.getTitle());
             listIdsAndTitles.add(brief);
+
+            // Generate the simple list of sections, in advance:
+            final QuizSections briefSections = mapQuizSectionsIdAndTitle.computeIfAbsent(quizId, k -> new QuizSections());
+            for (final QuizSections.Section section : quiz.getSections().getSectionsInSequence()) {
+                briefSections.addSection(section.getId(), section.getTitle(), null, null);
+            }
         } catch (@NotNull final Exception e) {
             Log.error("Could not load quiz: " + quizId, e);
             return false;

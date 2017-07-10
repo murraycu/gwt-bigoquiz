@@ -58,23 +58,15 @@ public class QuizResource extends ResourceWithQuizzes {
             return null;
         }
 
-        final Quiz quiz = quizzes.map.get(quizId);
-        if (quiz == null) {
-            return null;
-        }
-
         if (!listOnly) {
-            return quiz.getSections();
-        } else {
-            // Create a list of sections in which each quiz has only the ID and title.
-            // TODO: Cache this.
-            final QuizSections sections = quiz.getSections();
-            final QuizSections result = new QuizSections();
-            for (final QuizSections.Section section : sections.getSectionsInSequence()) {
-                result.addSection(section.getId(), section.getTitle(), null, null);
+            final Quiz quiz = quizzes.map.get(quizId);
+            if (quiz == null) {
+                return null;
             }
 
-            return result;
+            return quiz.getSections();
+        } else {
+            return quizzes.mapQuizSectionsIdAndTitle.get(quizId);
         }
     }
 
