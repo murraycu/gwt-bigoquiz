@@ -7,6 +7,9 @@ import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import org.jetbrains.annotations.NotNull;
 
+import javax.servlet.ServletContext;
+import javax.ws.rs.core.Context;
+
 /**
  * Copyright (c) 2016 Murray Cumming
  * <p>
@@ -34,6 +37,9 @@ public class ResourceWithQuizzes {
     private static final String LOADED_QUIZZES = "loaded-quizzes";
     protected QuizzesMap quizzes = null;
 
+    @Context
+    ServletContext context;
+
 
     @NotNull
     protected Quiz getQuiz(final String quizId) throws UnknownQuizException, IllegalArgumentException {
@@ -60,15 +66,8 @@ public class ResourceWithQuizzes {
     }
 
     private void getQuizzesMap() {
-        /*
-        final ServletConfig config = this.getServletConfig();
-        if (config == null) {
-            throw new RuntimeException("getServletConfig() returned null.");
-        }
-
-        final ServletContext context = config.getServletContext();
         if (context == null) {
-            throw new RuntimeException("getServletContext() returned null.");
+            throw new RuntimeException("ServletContext is null.");
         }
 
         //Use the existing shared quizzes if any:
@@ -78,10 +77,9 @@ public class ResourceWithQuizzes {
         }
 
         quizzes = (QuizzesMap) object;
-        */
         if (quizzes == null) {
             quizzes = new QuizzesMap();
-            //context.setAttribute(LOADED_QUIZZES, quizzes);
+            context.setAttribute(LOADED_QUIZZES, quizzes);
         }
     }
 
