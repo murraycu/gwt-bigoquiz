@@ -7,6 +7,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.server.db.EntityManagerFactory;
+import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -46,7 +47,7 @@ public class ServiceUserUtils {
             loginInfo.setLoggedIn(true);
             loginInfo.setUserId(user.getUserId());
             loginInfo.setNickname(user.getNickname());
-            loginInfo.setLogoutUrl(userService.createLogoutURL(requestUri));
+            loginInfo.setLogoutUrl(userService.createLogoutURL(StringUtils.defaultString(requestUri)));
 
             //This is superfluous, but might contain more data one day:
             UserProfile userProfile = EntityManagerFactory.ofy().load().type(UserProfile.class).id(user.getUserId()).now();
@@ -59,7 +60,7 @@ public class ServiceUserUtils {
             loginInfo.setLoggedIn(false);
 
             if (userService != null) {
-                loginInfo.setLoginUrl(userService.createLoginURL(requestUri));
+                loginInfo.setLoginUrl(userService.createLoginURL(StringUtils.defaultString(requestUri)));
             }
         }
 
