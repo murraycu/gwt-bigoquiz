@@ -20,10 +20,6 @@ import java.util.*;
  */
 @Path("question")
 public class QuestionResource extends ResourceWithQuizzes {
-
-    public QuestionResource() {
-    }
-
     @GET
     @Path("/next")
     @Produces("application/json")

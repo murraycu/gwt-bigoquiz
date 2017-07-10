@@ -13,9 +13,6 @@ import javax.ws.rs.QueryParam;
  */
 @Path("user")
 public class UserResource {
-    public UserResource() {
-    }
-
     /**
      * requestUrl is the URL that the user should be returned to after logging in or out.
      * It corresponds to the destinationURL parameter to UserService.createLogoutURL():

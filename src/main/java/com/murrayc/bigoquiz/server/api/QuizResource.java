@@ -15,10 +15,6 @@ import java.util.Collection;
  */
 @Path("quiz")
 public class QuizResource extends ResourceWithQuizzes {
-
-    public QuizResource() {
-    }
-
     @GET
     @Produces("application/json")
     public Collection<Quiz> get(@QueryParam("list-only") boolean listOnly) {

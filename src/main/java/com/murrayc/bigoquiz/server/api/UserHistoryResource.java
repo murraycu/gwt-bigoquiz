@@ -24,9 +24,6 @@ import java.util.Map;
  */
 @Path("user-history")
 public class UserHistoryResource extends ResourceWithQuizzes {
-    public UserHistoryResource() {
-    }
-
     @GET
     @Produces("application/json")
     public UserHistoryOverall get(@QueryParam("requestUrl") String requestUrl) {
