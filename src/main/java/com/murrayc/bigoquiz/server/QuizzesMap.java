@@ -1,7 +1,6 @@
 package com.murrayc.bigoquiz.server;
 
 import com.murrayc.bigoquiz.client.Log;
-import com.murrayc.bigoquiz.server.QuizLoader;
 import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.QuizConstants;
 import org.jetbrains.annotations.NotNull;
@@ -10,8 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /** A cache of loaded quizzes.
  *
@@ -20,6 +18,7 @@ import java.util.Map;
 public class QuizzesMap {
     @Nullable
     public final Map<String, Quiz> map = new HashMap<>();
+    public final List<Quiz> listIdsAndTitles = new ArrayList(); // sorted
     public boolean allTitlesLoaded = false;
 
 
@@ -52,6 +51,8 @@ public class QuizzesMap {
             loadQuizIntoQuizzes(name);
         }
 
+        listIdsAndTitles.sort(generateQuizTitleSortComparator());
+
         allTitlesLoaded = true;
     }
 
@@ -72,6 +73,12 @@ public class QuizzesMap {
             if (quiz != null) {
                 map.put(quizId, quiz);
             }
+
+            // Keep the ID and title separately, for the list-only server query.
+            final Quiz brief = new Quiz();
+            brief.setId(quiz.getId());
+            brief.setTitle(quiz.getTitle());
+            listIdsAndTitles.add(brief);
         } catch (@NotNull final Exception e) {
             Log.error("Could not load quiz: " + quizId, e);
             return false;
@@ -99,5 +106,27 @@ public class QuizzesMap {
         }
 
         return null;
+    }
+
+
+    @NotNull
+    private static Comparator<Quiz> generateQuizTitleSortComparator() {
+        return (o1, o2) -> {
+            if ((o1 == null) && (o2 == null)) {
+                return 0;
+            } else if (o1 == null) {
+                return -1;
+            }
+
+            final String title1 = o1.getTitle();
+            final String title2 = o2.getTitle();
+            if ((title1 == null) && (title2 == null)) {
+                return 0;
+            } else if (title1 == null) {
+                return -1;
+            }
+
+            return title1.compareTo(title2);
+        };
     }
 }
