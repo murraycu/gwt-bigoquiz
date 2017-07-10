@@ -8,13 +8,9 @@ import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.client.Log;
-import com.murrayc.bigoquiz.client.QuizService;
 import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
 import com.murrayc.bigoquiz.client.application.Utils;
-import com.murrayc.bigoquiz.shared.HasIdAndTitle;
-import com.murrayc.bigoquiz.shared.StringUtils;
-import com.murrayc.bigoquiz.shared.Question;
-import com.murrayc.bigoquiz.shared.QuizSections;
+import com.murrayc.bigoquiz.shared.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -418,7 +414,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     }
 
     @Override
-    public void setSubmissionResult(@Nullable final QuizService.SubmissionResult submissionResult) {
+    public void setSubmissionResult(@Nullable final SubmissionResult submissionResult) {
         if (submissionResult == null) {
             Log.error("setSubmissionResult(): submissionResult was null.");
             return;

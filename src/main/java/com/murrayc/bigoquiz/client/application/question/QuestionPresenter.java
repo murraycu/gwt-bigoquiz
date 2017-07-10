@@ -3,7 +3,6 @@ package com.murrayc.bigoquiz.client.application.question;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.annotations.NameToken;
@@ -18,6 +17,7 @@ import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.application.quiz.BigOQuizPresenter;
 import com.murrayc.bigoquiz.client.application.quiz.QuizClient;
+import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistoryClient;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySectionsPresenter;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
@@ -25,6 +25,7 @@ import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.google.inject.Inject;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
+import com.murrayc.bigoquiz.shared.SubmissionResult;
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
@@ -55,7 +56,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
 
         Question.Text getChoiceSelected();
 
-        void setSubmissionResult(final QuizService.SubmissionResult submissionResult);
+        void setSubmissionResult(final SubmissionResult submissionResult);
 
         void showAnswer(final Question.Text correctAnswer);
 
@@ -185,9 +186,12 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
             return;
         }
 
-        @NotNull final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
+        Defaults.setServiceRoot(GWT.getHostPageBaseURL());
+        UserHistoryClient client = GWT.create(UserHistoryClient.class);
+
+        @NotNull final MethodCallback<SubmissionResult> callback = new MethodCallback<SubmissionResult>() {
             @Override
-            public void onFailure(@NotNull final Throwable caught) {
+            public void onFailure(final Method method, @NotNull final Throwable caught) {
                 getView().setLoadingLabelVisible(false);
 
                 try {
@@ -195,20 +199,20 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
                 } catch (final IllegalArgumentException ex) {
                     //One of the parameters (quizID, questionId, etc) must be invalid,
                     //TODO: Handle this properly.
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: onSubmitAnswer()", ex);
+                    Log.error("MethodCallback Failed with IllegalArgumentException: onSubmitAnswer()", ex);
                     getView().setServerFailed();
                 } catch (final Throwable ex) {
-                    Log.error("AsyncCallback Failed: onSubmitAnswer()", ex);
+                    Log.error("MethodCallback Failed: onSubmitAnswer()", ex);
                     getView().setServerFailed();
                 }
             }
 
             @Override
-            public void onSuccess(@Nullable final QuizService.SubmissionResult result) {
+            public void onSuccess(final Method method, @Nullable final SubmissionResult result) {
                 getView().setLoadingLabelVisible(false);
 
                 if (result == null) {
-                    Log.error("AsyncCallback: onSubmitAnswer: onSuccess: result was null.");
+                    Log.error("MethodCallback: onSubmitAnswer: onSuccess: result was null.");
                     return;
                 }
 
@@ -241,7 +245,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
         };
 
         getView().setLoadingLabelVisible(true);
-        QuizServiceAsync.Util.getInstance().submitAnswer(getQuizId(), getQuestionId(), answer.text,
+        client.submitAnswer(getQuizId(), getQuestionId(), answer.text,
                 nextQuestionSectionId, callback);
     }
 
@@ -275,26 +279,29 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
             return;
         }
 
+        Defaults.setServiceRoot(GWT.getHostPageBaseURL());
+        UserHistoryClient client = GWT.create(UserHistoryClient.class);
+
         //The user is giving up on the question,
         //which we treat much the same way as submitting an incorrect answer:
-        @NotNull final AsyncCallback<QuizService.SubmissionResult> callback = new AsyncCallback<QuizService.SubmissionResult>() {
+        @NotNull final MethodCallback<SubmissionResult> callback = new MethodCallback<SubmissionResult>() {
             @Override
-            public void onFailure(@NotNull final Throwable caught) {
+            public void onFailure(final Method method, @NotNull final Throwable caught) {
                 getView().setLoadingLabelVisible(false);
                 try {
                     throw caught;
                 } catch (final IllegalArgumentException ex) {
                     //One of the parameters (quizID, questionId, etc) must be invalid,
                     //TODO: Handle this properly.
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: submitDontKnowAnswer()", ex);
+                    Log.error("MethodCallback Failed with IllegalArgumentException: submitDontKnowAnswer()", ex);
                 } catch (final Throwable ex) {
                     // TODO: create a way to notify users of asynchronous callback failures
-                    Log.error("AsyncCallback Failed: submitDontKnowAnswer()", ex);
+                    Log.error("MethodCallback Failed: submitDontKnowAnswer()", ex);
                 }
             }
 
             @Override
-            public void onSuccess(@NotNull final QuizService.SubmissionResult result) {
+            public void onSuccess(final Method method, @NotNull final SubmissionResult result) {
                 tellUserHistoryPresenterAboutNewUserAnswer(false);
 
                 //Store these in case they are needed soon:
@@ -307,7 +314,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
 
         };
 
-        QuizServiceAsync.Util.getInstance().submitDontKnowAnswer(getQuizId(), getQuestionId(), nextQuestionSectionId, callback);
+        client.submitDontKnowAnswer(getQuizId(), getQuestionId(), nextQuestionSectionId, callback);
     }
 
     @Override
@@ -419,15 +426,15 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
                 try {
                     throw caught;
                 } catch (final UnknownQuizException ex) {
-                    Log.error("AsyncCallback Failed with UnknownQuizException: getSections()", ex);
+                    Log.error("MethodCallback Failed with UnknownQuizException: getSections()", ex);
                     getView().setServerFailedUnknownQuiz();
                 } catch (final IllegalArgumentException ex) {
                     //One of the parameters (quizID, questionId, etc) must be invalid,
                     //TODO: Handle this properly.
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: getSections()", ex);
+                    Log.error("MethodCallback Failed with IllegalArgumentException: getSections()", ex);
                     getView().setServerFailed();
                 } catch (final Throwable ex) {
-                    Log.error("AsyncCallback Failed: getSections()", ex);
+                    Log.error("MethodCallback Failed: getSections()", ex);
                     getView().setServerFailed();
                 }
 
@@ -474,10 +481,10 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
                 } catch (final IllegalArgumentException ex) {
                     //One of the parameters (quizID, questionId, etc) must be invalid,
                     //TODO: Handle this properly.
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: getNextQuestion()", ex);
+                    Log.error("MethodCallback Failed with IllegalArgumentException: getNextQuestion()", ex);
                     getView().setServerFailed();
                 } catch (final Throwable ex) {
-                    Log.error("AsyncCallback Failed: getNextQuestion()", ex);
+                    Log.error("MethodCallback Failed: getNextQuestion()", ex);
                     getView().setServerFailed();
                 }
             }
@@ -510,11 +517,11 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
                     throw caught;
                 } catch (final IllegalArgumentException ex) {
                     //One of the parameters (quizID, questionId, etc) must be invalid,
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: getQuestion()", ex);
+                    Log.error("MethodCallback Failed with IllegalArgumentException: getQuestion()", ex);
                     //Maybe the user tried to view a non-existent question:
                     abandonQuestionAndShowAnother();
                 } catch (final Throwable ex) {
-                    Log.error("AsyncCallback Failed: getQuestion()", ex);
+                    Log.error("MethodCallback Failed: getQuestion()", ex);
                     getView().setServerFailed();
                 }
             }
@@ -526,7 +533,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
                     question = result;
                     showQuestionInView();
                 } else {
-                    Log.error("AsyncCallback Failed: getQuestion(): result was null.");
+                    Log.error("MethodCallback Failed: getQuestion(): result was null.");
 
                     abandonQuestionAndShowAnother();
                 }

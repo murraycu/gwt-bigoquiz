@@ -2,8 +2,10 @@ package com.murrayc.bigoquiz.client.application.userhistorysections;
 
 import com.murrayc.bigoquiz.client.UserHistoryOverall;
 import com.murrayc.bigoquiz.client.UserHistorySections;
+import com.murrayc.bigoquiz.shared.SubmissionResult;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.RestService;
+import org.jetbrains.annotations.NotNull;
 
 import javax.ws.rs.*;
 import java.util.List;
@@ -38,4 +40,12 @@ public interface UserHistoryClient extends RestService {
     @POST
     @Path("/reset-sections")
     public void resetSections(@QueryParam("quizId") String quizId, MethodCallback<Void> callback);
+
+    @POST
+    @Path("/submit-answer")
+    public void submitAnswer(@QueryParam("quizId") String quizId, @QueryParam("questionId") String questionId, @QueryParam("answer") String answer, @QueryParam("nextQuestionSectionId") String nextQuestionSectionId, MethodCallback<SubmissionResult> callback);
+
+    @POST
+    @Path("/submit-dont-know-answer")
+    public void submitDontKnowAnswer(@QueryParam("quizId") String quizId, @QueryParam("questionId") String questionId, @QueryParam("nextQuestionSectionId") String nextQuestionSectionId,  MethodCallback<SubmissionResult> callback);
 }
