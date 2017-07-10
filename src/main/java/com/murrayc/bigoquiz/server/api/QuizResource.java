@@ -66,7 +66,7 @@ public class QuizResource extends ResourceWithQuizzes {
         if (!listOnly) {
             return quiz.getSections();
         } else {
-            // Create a list of quizzes in which each quiz has only the ID and title.
+            // Create a list of sections in which each quiz has only the ID and title.
             // TODO: Cache this.
             final QuizSections sections = quiz.getSections();
             final QuizSections result = new QuizSections();
