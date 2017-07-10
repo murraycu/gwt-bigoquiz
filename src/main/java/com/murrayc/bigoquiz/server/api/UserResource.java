@@ -1,4 +1,4 @@
-package com.murrayc.bigoquiz.server.rest.api;
+package com.murrayc.bigoquiz.server.api;
 
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.server.ServiceUserUtils;

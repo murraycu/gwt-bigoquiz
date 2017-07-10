@@ -311,7 +311,7 @@ a.gwt-Anchor.user-name:visited {
     margin-right: 1rem;
     */
 
-    display: inline-block; /* Don't stretch the empty rest of the div across the whole screen. */
+    display: inline-block; /* Don't stretch the empty api of the div across the whole screen. */
     font-weight: 900;
     font-family: 'Lato', sans-serif;
     font-size: 2.5em;
@@ -350,7 +350,7 @@ background-color: #B6B2DD;
     margin-top: 1rem;
     margin-right: 1rem;
      */
-    display: inline-block; /* Don't stretch the empty rest of the div across the whole screen. */
+    display: inline-block; /* Don't stretch the empty api of the div across the whole screen. */
     float: right;
 }
 

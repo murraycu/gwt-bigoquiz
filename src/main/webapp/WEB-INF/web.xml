@@ -12,7 +12,7 @@
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>
-                com.murrayc.bigoquiz.server.rest.api
+                com.murrayc.bigoquiz.server.api
             </param-value>
         </init-param>
     </servlet>

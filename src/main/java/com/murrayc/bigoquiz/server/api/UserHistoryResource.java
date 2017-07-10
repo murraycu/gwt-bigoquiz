@@ -1,4 +1,4 @@
-package com.murrayc.bigoquiz.server.rest.api;
+package com.murrayc.bigoquiz.server.api;
 
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.cmd.Query;
