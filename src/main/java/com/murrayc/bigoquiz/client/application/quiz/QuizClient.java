@@ -1,5 +1,6 @@
 package com.murrayc.bigoquiz.client.application.quiz;
 
+import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import org.fusesource.restygwt.client.MethodCallback;
@@ -26,4 +27,10 @@ public interface QuizClient extends RestService {
     @GET
     @Path("/{quiz-id}/section")
     public void getQuizSectionsById(@PathParam("quiz-id") String id, @QueryParam("list-only") boolean listOnly, MethodCallback<QuizSections> callback);
+
+    // TODO: Add /{quiz-id}/question/, returning all quiz questions, just for completeness.
+
+    @GET
+    @Path("/{quiz-id}/question/{question-id}")
+    public void getQuizQuestion(@PathParam("quiz-id") String quizId, @PathParam("question-id") String questionId, MethodCallback<Question> callback);
 }
