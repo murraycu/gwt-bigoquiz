@@ -1,5 +1,6 @@
 package com.murrayc.bigoquiz.server.rest.api;
 
+import com.google.appengine.api.users.User;
 import com.googlecode.objectify.cmd.Query;
 import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.server.ServiceUserUtils;
@@ -153,6 +154,52 @@ public class UserHistoryResource extends ResourceWithQuizzes {
         }
 
         return result;
+    }
+
+    /**
+     * Clear all question answer history, progress, scores, etc.
+     */
+    @POST
+    @Path("/reset-sections")
+    public void resetSections(@QueryParam("quizId") final String quizId) {
+        @Nullable final String userId = getUserId();
+        if (StringUtils.isEmpty(userId)) {
+            //TODO: Throw some NotLoggedIn exception?
+            Log.error("resetSections(): userId is null.");
+            return;
+        }
+
+        if (StringUtils.isEmpty(quizId)) {
+            throw new IllegalArgumentException("Empty or null quiz ID.");
+        }
+
+        //TODO: Get the keys only:
+        Query<UserStats> q = EntityManagerFactory.ofy().load().type(UserStats.class);
+        q = q.filter("userId", userId);
+        q = q.filter("quizId", quizId);
+        final List<UserStats> list = q.list();
+        if (list.isEmpty()) {
+            //Presumably, they don't exist yet, or have already been deleted.
+            return;
+        }
+
+        for (final UserStats userStats : list) {
+            //TODO: Batch these:
+            EntityManagerFactory.ofy().delete().entity(userStats).now();
+        }
+    }
+
+    /**
+     *
+     * @return null if the user is not logged in.
+     */
+    private String getUserId() {
+        @Nullable final User user = ServiceUserUtils.getUser();
+        if (user == null) {
+            return null;
+        }
+
+        return user.getUserId();
     }
 
     /**
