@@ -23,25 +23,6 @@ public class HasIdAndTitle {
         this.link = link;
     }
 
-    @NotNull
-    public static Comparator<HasIdAndTitle> generateTitleSortComparator() {
-        return (o1, o2) -> {
-            if ((o1 == null) && (o2 == null)) {
-                return 0;
-            } else if (o1 == null) {
-                return -1;
-            }
-
-            if ((o1.title == null) && (o2.title == null)) {
-                return 0;
-            } else if (o1.title == null) {
-                return -1;
-            }
-
-            return o1.title.compareTo(o2.title);
-        };
-    }
-
     public String getId() {
         return id;
     }

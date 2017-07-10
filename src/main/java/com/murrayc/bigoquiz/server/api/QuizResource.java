@@ -2,6 +2,7 @@ package com.murrayc.bigoquiz.server.api;
 
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.server.QuizzesMap;
+import com.murrayc.bigoquiz.shared.HasIdAndTitle;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.QuizSections;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.ws.rs.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -37,11 +39,17 @@ public class QuizResource extends ResourceWithQuizzes {
             // TODO: Cache this.
             final List<Quiz> result = new ArrayList<>();
             for (final Quiz quiz : quizzes.map.values()) {
+                if (quiz == null) {
+                    continue;
+                }
+
                 final Quiz brief = new Quiz();
                 brief.setId(quiz.getId());
                 brief.setTitle(quiz.getTitle());
                 result.add(brief);
             }
+
+            result.sort(generateQuizTitleSortComparator());
 
             return result;
         }
@@ -111,6 +119,28 @@ public class QuizResource extends ResourceWithQuizzes {
         }
 
         return result;
+    }
+
+
+    @NotNull
+    public static Comparator<Quiz> generateQuizTitleSortComparator() {
+        return (o1, o2) -> {
+            if ((o1 == null) && (o2 == null)) {
+                return 0;
+            } else if (o1 == null) {
+                return -1;
+            }
+
+            final String title1 = o1.getTitle();
+            final String title2 = o2.getTitle();
+            if ((title1 == null) && (title2 == null)) {
+                return 0;
+            } else if (title1 == null) {
+                return -1;
+            }
+
+            return title1.compareTo(title2);
+        };
     }
 
 
