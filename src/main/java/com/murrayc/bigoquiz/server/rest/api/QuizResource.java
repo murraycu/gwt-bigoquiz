@@ -1,6 +1,8 @@
 package com.murrayc.bigoquiz.server.rest.api;
 
+import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.server.QuizzesMap;
+import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.QuizConstants;
 import com.murrayc.bigoquiz.shared.QuizSections;
@@ -88,6 +90,29 @@ public class QuizResource extends ResourceWithQuizzes {
 
             return result;
         }
+    }
+
+    //TODO: This seems to be called unnecessarily right after getNextQuestion().
+    @GET
+    @Path("/{quiz-id}/question/{question-id}")
+    @Produces("application/json")
+    public Question getQuizQuestion(@PathParam("quiz-id") String quizId, @PathParam("question-id") String questionId) {
+        @NotNull final Quiz quiz = getQuiz(quizId);
+        final Question result = quiz.getQuestion(questionId);
+        if (result == null) {
+            throw new IllegalArgumentException("Unknown question ID");
+        }
+
+        if (result != null) {
+            setQuestionExtras(result, quiz);
+        }
+
+        if (!result.hasChoices()) {
+            // This would be OK if multiple-choice should not be used with this choice.
+            Log.error("getQuestion(): The result has no answer choices: " + result.getId());
+        }
+
+        return result;
     }
 
 

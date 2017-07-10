@@ -2,7 +2,9 @@ package com.murrayc.bigoquiz.server.rest.api;
 
 import com.murrayc.bigoquiz.client.UnknownQuizException;
 import com.murrayc.bigoquiz.server.QuizzesMap;
+import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.Quiz;
+import com.murrayc.bigoquiz.shared.QuizSections;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -88,5 +90,17 @@ public class ResourceWithQuizzes {
         getQuizzesMap();
 
         quizzes.loadQuizzes();
+    }
+
+    protected void setQuestionExtras(final Question question, @NotNull Quiz quiz) {
+        String subSectionTitle = null;
+        @NotNull final QuizSections sections = quiz.getSections();
+        if (sections != null) {
+            subSectionTitle = sections.getSubSectionTitle(question.getSectionId(),
+                    question.getSubSectionId());
+        }
+        question.setTitles(quiz.getTitle(), subSectionTitle, question);
+
+        question.setQuizUsesMathML(quiz.getUsesMathML());
     }
 }

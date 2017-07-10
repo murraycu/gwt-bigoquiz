@@ -186,16 +186,4 @@ public class QuestionResource extends ResourceWithQuizzes {
 
         return questionBestSoFar;
     }
-
-    private void setQuestionExtras(final Question question, @NotNull Quiz quiz) {
-        String subSectionTitle = null;
-        @NotNull final QuizSections sections = quiz.getSections();
-        if (sections != null) {
-            subSectionTitle = sections.getSubSectionTitle(question.getSectionId(),
-                    question.getSubSectionId());
-        }
-        question.setTitles(quiz.getTitle(), subSectionTitle, question);
-
-        question.setQuizUsesMathML(quiz.getUsesMathML());
-    }
 }
