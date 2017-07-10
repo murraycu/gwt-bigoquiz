@@ -1,11 +1,9 @@
 package com.murrayc.bigoquiz.shared;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
-
 /**
  * Created by murrayc on 7/10/17.
  */
-public class SubmissionResult implements IsSerializable {
+public class SubmissionResult {
     private boolean result = false;
     private Question.Text correctAnswer = null; //If result is false.
     private Question nextQuestion = null;

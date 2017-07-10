@@ -1,7 +1,6 @@
 package com.murrayc.bigoquiz.shared;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.google.gwt.user.client.rpc.IsSerializable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,23 +10,23 @@ import java.util.List;
  * Created by murrayc on 1/21/16.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Question implements IsSerializable {
-    private /* final */ String id;
-    private /* final */ String sectionId;
-    private /* final */ String subSectionId;
-    private /* final */ Question.Text text; //The actual question text.
-    private /* final */ String link; //An informative URL.
-    private /* final */ List<Text> choices; //Possible answers, only one of which is correct.
-    private /* final */ String note;
-    private /* final */ String videoUrl;
-    private /* final */ String codeUrl;
+public class Question {
+    private String id;
+    private String sectionId;
+    private String subSectionId;
+    private Question.Text text; //The actual question text.
+    private String link; //An informative URL.
+    private List<Text> choices; //Possible answers, only one of which is correct.
+    private String note;
+    private String videoUrl;
+    private String codeUrl;
 
-    private /* final */ String quizTitle;
-    private /* final */ String subSectionTitle;
+    private String quizTitle;
+    private String subSectionTitle;
 
-    private /* final */ boolean quizUsesMathML;
+    private boolean quizUsesMathML;
 
-    public static class Text implements IsSerializable {
+    public static class Text {
         Text() {
             this.text = null;
             this.isHtml = false;
@@ -38,8 +37,8 @@ public class Question implements IsSerializable {
             this.isHtml = isHtml;
         }
 
-        public /* final */ String text;
-        public /* final */ boolean isHtml;
+        public String text;
+        public boolean isHtml;
 
         // We override equals() and hashode() so we can use this class in a Set.
         @Override

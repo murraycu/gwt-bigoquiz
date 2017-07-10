@@ -1,6 +1,5 @@
 package com.murrayc.bigoquiz.shared.db;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Ignore;
@@ -12,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
  * Created by murrayc on 1/21/16.
  */
 @Entity
-public class UserQuestionHistory implements IsSerializable {
+public class UserQuestionHistory {
     @Id
     private Long id;
 

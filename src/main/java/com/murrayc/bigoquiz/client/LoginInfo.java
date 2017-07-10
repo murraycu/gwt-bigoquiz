@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by murrayc on 1/18/16.
  */
-public class LoginInfo implements Serializable {
+public class LoginInfo {
     private boolean loggedIn = false;
     private String loginUrl;
     private String logoutUrl;

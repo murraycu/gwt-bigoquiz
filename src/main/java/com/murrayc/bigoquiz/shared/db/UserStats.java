@@ -2,7 +2,6 @@ package com.murrayc.bigoquiz.shared.db;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.google.gwt.user.client.rpc.IsSerializable;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Ignore;
@@ -20,7 +19,7 @@ import java.util.*;
  */
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserStats implements IsSerializable {
+public class UserStats {
     public static final int MAX_PROBLEM_QUESTIONS = 5;
 
     //TODO: Just use userId as the Id, but then get the query to still work.

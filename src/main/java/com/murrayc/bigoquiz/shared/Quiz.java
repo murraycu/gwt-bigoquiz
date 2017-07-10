@@ -2,7 +2,6 @@ package com.murrayc.bigoquiz.shared;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.google.gwt.user.client.rpc.IsSerializable;
 import com.murrayc.bigoquiz.client.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,15 +12,13 @@ import java.util.*;
  * Created by murrayc on 1/18/16.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Quiz implements IsSerializable {
+public class Quiz {
     /** These are the simple details of the quiz,
      * without the full details of all the questions and answers,
      * so we can describe the quiz without providing the whole thing.
      */
-    public static class QuizDetails extends HasIdAndTitle
-            implements IsSerializable {
-
-        private /* final */ boolean isPrivate = false;
+    public static class QuizDetails extends HasIdAndTitle {
+        private boolean isPrivate = false;
 
         public QuizDetails() {
         }

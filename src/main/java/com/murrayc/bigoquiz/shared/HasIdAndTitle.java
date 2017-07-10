@@ -1,7 +1,6 @@
 package com.murrayc.bigoquiz.shared;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.google.gwt.user.client.rpc.IsSerializable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Comparator;
@@ -12,7 +11,7 @@ import java.util.Comparator;
  * Created by murrayc on 23.06.16.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class HasIdAndTitle implements IsSerializable {
+public class HasIdAndTitle {
     protected String link;
 
     public HasIdAndTitle() {

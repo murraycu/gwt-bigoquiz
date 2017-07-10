@@ -1,6 +1,5 @@
 package com.murrayc.bigoquiz.shared.db;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -8,7 +7,7 @@ import com.googlecode.objectify.annotation.Id;
  * Created by murrayc on 1/19/16.
  */
 @Entity
-public class UserProfile implements IsSerializable {
+public class UserProfile {
     /**
      * This is the same as the User.getUserId().
      */
