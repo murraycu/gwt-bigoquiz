@@ -36,16 +36,16 @@ public class Quiz {
         }
     }
 
-    private /* final */ QuizDetails details = new QuizDetails();
+    private QuizDetails details = new QuizDetails();
 
     //Map of section ID to (map of question IDs to question):
     @NotNull
     private transient final Map<String, Map<String, QuestionAndAnswer>> questions = new HashMap<>();
 
-    private /* final */ QuizSections quizSections = new QuizSections();
+    private QuizSections quizSections = new QuizSections();
 
     // Whether we need extra code to support MathML, such as MathJax.
-    private /* final */ boolean usesMathML;
+    private boolean usesMathML;
 
     //TODO: This is useless on the client:
     //An extra list, used only for getting a random question,
