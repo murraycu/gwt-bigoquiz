@@ -5,10 +5,8 @@ import com.murrayc.bigoquiz.client.UserHistorySections;
 import com.murrayc.bigoquiz.shared.SubmissionResult;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.RestService;
-import org.jetbrains.annotations.NotNull;
 
 import javax.ws.rs.*;
-import java.util.List;
 
 /**
  * Created by murrayc on 7/8/17.

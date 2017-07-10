@@ -2,7 +2,6 @@ package com.murrayc.bigoquiz.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.murrayc.bigoquiz.client.application.quiz.QuizClient;
 import com.murrayc.bigoquiz.shared.Question;
 import org.fusesource.restygwt.client.Defaults;

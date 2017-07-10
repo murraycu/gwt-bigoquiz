@@ -3,7 +3,6 @@ package com.murrayc.bigoquiz.client.application.userhistorysections;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -14,7 +13,6 @@ import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
-import com.murrayc.bigoquiz.client.application.quiz.QuizClient;
 import com.murrayc.bigoquiz.client.application.userhistory.UserHistoryResetSectionsEvent;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.StringUtils;

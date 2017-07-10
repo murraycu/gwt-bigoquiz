@@ -1,11 +1,8 @@
 package com.murrayc.bigoquiz.server.rest.api;
 
 import com.murrayc.bigoquiz.client.LoginInfo;
-import com.murrayc.bigoquiz.server.QuizzesMap;
 import com.murrayc.bigoquiz.server.ServiceUserUtils;
-import org.fusesource.restygwt.client.RestService;
 
-import javax.servlet.http.HttpServlet;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;

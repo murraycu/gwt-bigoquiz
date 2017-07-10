@@ -2,7 +2,6 @@ package com.murrayc.bigoquiz.shared;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.murrayc.bigoquiz.client.Log;
 import org.jetbrains.annotations.NotNull;
