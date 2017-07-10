@@ -123,6 +123,8 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
     public void prepareFromRequest(@NotNull final PlaceRequest request) {
         super.prepareFromRequest(request);
 
+        final String oldQuizId = quizId;
+
         //Quiz ID:
         this.quizId = request.getParameter(NameTokens.PARAM_QUIZ_ID, null);
         if (StringUtils.isEmpty(quizId)) {
@@ -131,7 +133,10 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
             //TODO: Take the user to a list of quizzes.
         }
 
-        getAndUseSections();
+        // Avoid doing this for every question - the list doesn't change.
+        if (!StringUtils.equals(oldQuizId, this.quizId)) {
+            getAndUseSections();
+        }
 
         //Next question section ID,
         nextQuestionSectionId = request.getParameter(NameTokens.QUESTION_PARAM_NEXT_QUESTION_SECTION_ID, null);
