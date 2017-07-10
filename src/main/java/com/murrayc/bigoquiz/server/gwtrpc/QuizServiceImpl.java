@@ -78,28 +78,6 @@ public class QuizServiceImpl extends RemoteServiceServlet implements
         quizzes.loadQuizzes();
     }
 
-    //TODO: This seems to be called unnecessarily right after getNextQuestion().
-    @NotNull
-    @Override
-    public Question getQuestion(@NotNull final String quizId, @NotNull final String questionId) throws IllegalArgumentException {
-        @NotNull final Quiz quiz = getQuiz(quizId);
-        final Question result = quiz.getQuestion(questionId);
-        if (result == null) {
-            throw new IllegalArgumentException("Unknown question ID");
-        }
-
-        if (result != null) {
-            setQuestionExtras(result, quiz);
-        }
-
-        if (!result.hasChoices()) {
-            // This would be OK if multiple-choice should not be used with this choice.
-            Log.error("getQuestion(): The result has no answer choices: " + result.getId());
-        }
-
-        return result;
-    }
-
     @NotNull
     @Override
     public SubmissionResult submitAnswer(final String quizId, final String questionId, final String answer, final String nextQuestionSectionId) throws IllegalArgumentException {

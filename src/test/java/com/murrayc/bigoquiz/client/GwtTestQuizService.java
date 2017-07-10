@@ -1,8 +1,13 @@
 package com.murrayc.bigoquiz.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.murrayc.bigoquiz.client.application.quiz.QuizClient;
 import com.murrayc.bigoquiz.shared.Question;
+import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -14,23 +19,24 @@ public class GwtTestQuizService extends GWTTestCase {
     @Test
     public void test() {
         // Setup an asynchronous event handler.
-        @NotNull final AsyncCallback<Question> callback = new AsyncCallback<Question>() {
+        @NotNull final MethodCallback<Question> callback = new MethodCallback<Question>() {
             @Override
-            public void onFailure(@NotNull final Throwable caught) {
+            public void onFailure(final Method method, @NotNull final Throwable caught) {
                 fail(caught.toString());
             }
 
             @Override
-            public void onSuccess(final Question question) {
+            public void onSuccess(final Method method, final Question question) {
                 finishTest();
             }
         };
 
         delayTestFinish(500);
 
-        final QuizServiceAsync service = QuizServiceAsync.Util.getInstance();
-        assertNotNull(service);
-        service.getQuestion("quiz1", "question1", callback);
+        Defaults.setServiceRoot(GWT.getHostPageBaseURL());
+        QuizClient client = GWT.create(QuizClient.class);
+        assertNotNull(client);
+        client.getQuizQuestion("quiz1", "question1", callback);
     }
 
     @NotNull
