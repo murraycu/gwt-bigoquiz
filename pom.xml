@@ -214,12 +214,17 @@
 
 		<!-- To serve REST/JSON queries of REST resources.
 		     A <servlet> tag in the web.xml file indicates that Jersey should use certain classes as REST resources/servelets.
-		     These REST resources/servlets use Java methods and classes annotated with JAX-RS and Jackson annotations. -->
+		     These REST resources/servlets use Java methods and classes annotated with JAX-RS and Jackson annotations.
+
+		     jersey-container-servlet needs the Java Servlet API version 3, supported by the AppEngine Java 8 runtime (currently beta).
+		     Alternatively, jersey-container-servlet-core needs the Java Servlet API version 2, supported by the AppEngine Java 7 runtime. -->
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
-			<artifactId>jersey-container-servlet-core</artifactId>
+			<artifactId>jersey-container-servlet</artifactId>
 			<version>2.26-b07</version>
 		</dependency>
+
+		<!-- To let Jersey use Jackson. -->
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-json-jackson</artifactId>
