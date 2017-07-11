@@ -264,8 +264,7 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
         //TODO: Just use the question as it is?
         //Tell the UserHistoryRecent presenter/view that there is a new history item.
         //Otherwise it will only update when the whole page refreshes.
-        @Nullable final String subSectionTitle =
-                sections.getSubSectionTitle(question.getSectionId(), question.getSubSectionId());
+        @Nullable final String subSectionTitle = question.getSubSectionTitle();
         question.setTitles(question.getQuizTitle(), subSectionTitle, question);
 
         QuestionUserAnswerAddedEvent.fire(this, question, answerIsCorrect);
