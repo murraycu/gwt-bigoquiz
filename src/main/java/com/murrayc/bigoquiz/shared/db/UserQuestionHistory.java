@@ -5,6 +5,7 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
 import com.murrayc.bigoquiz.shared.Question;
+import com.murrayc.bigoquiz.shared.QuizSections;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -50,7 +51,8 @@ public class UserQuestionHistory {
         this.answeredCorrectlyOnce = false;
         this.countAnsweredWrong = 0;
 
-        this.subSectionTitle = question.getSubSectionTitle();
+        final QuizSections.SubSection subSection = question.getSubSection();
+        this.subSectionTitle = subSection == null ? null : subSection.getTitle();
         this.questionTitle = question.getText();
 
         /*

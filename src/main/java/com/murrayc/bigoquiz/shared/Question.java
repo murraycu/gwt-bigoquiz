@@ -22,7 +22,7 @@ public class Question {
     private String codeUrl;
 
     private String quizTitle;
-    private String subSectionTitle;
+    private QuizSections.SubSection subSection;
 
     private boolean quizUsesMathML;
 
@@ -180,12 +180,12 @@ public class Question {
     /** Set titles, just to save users of Question the bother of having to get them from the Quiz class.
      *
      * @param quizTitle The title of the quiz that this Question is from.
-     * @param subSectionTitle The title of the quiz's sub-section that this Question is from.
+     * @param subSection The title (and link) of the quiz's sub-section that this Question is from.
      * @param question
      */
-    public void setTitles(final String quizTitle, final String subSectionTitle, @NotNull final Question question) {
+    public void setTitles(final String quizTitle, final QuizSections.SubSection subSection, @NotNull final Question question) {
         this.quizTitle = quizTitle;
-        this.subSectionTitle = subSectionTitle;
+        this.subSection = subSection;
         this.text = question.getText(); //TODO: This is not useful.
     }
 
@@ -205,14 +205,14 @@ public class Question {
         this.quizTitle = quizTitle;
     }
 
-    public String getSubSectionTitle() {
-        return subSectionTitle;
+    public QuizSections.SubSection getSubSection() {
+        return subSection;
     }
 
     /** This is only used for the JSON input.
      */
-    public void setSubSectionTitle(final String subSectionTitle) {
-        this.subSectionTitle = subSectionTitle;
+    public void setSubSection(final QuizSections.SubSection subSection) {
+        this.subSection = subSection;
     }
 
     public boolean getQuizUsesMathML() {

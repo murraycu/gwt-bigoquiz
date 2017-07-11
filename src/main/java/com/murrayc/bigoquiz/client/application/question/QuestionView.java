@@ -272,9 +272,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
     }
 
     private void setQuestionSubSectionTitle(@Nullable final Question question) {
-        final String sectionId = question.getSectionId();
-        @Nullable final QuizSections.SubSection subSection = sections.getSubSection(sectionId, question.getSubSectionId());
-        fillLabelOrAnchor(subSection, subSectionTitleLabel, subSectionTitleAnchor, null);
+        fillLabelOrAnchor(question.getSubSection(), subSectionTitleLabel, subSectionTitleAnchor, null);
     }
 
     /** Fill the label if there is no link.

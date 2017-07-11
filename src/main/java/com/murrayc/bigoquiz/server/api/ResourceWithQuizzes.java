@@ -91,13 +91,13 @@ public class ResourceWithQuizzes {
     }
 
     protected void setQuestionExtras(final Question question, @NotNull Quiz quiz) {
-        String subSectionTitle = null;
+        QuizSections.SubSection subSection = null;
         @NotNull final QuizSections sections = quiz.getSections();
         if (sections != null) {
-            subSectionTitle = sections.getSubSectionTitle(question.getSectionId(),
+            subSection = sections.getSubSection(question.getSectionId(),
                     question.getSubSectionId());
         }
-        question.setTitles(quiz.getTitle(), subSectionTitle, question);
+        question.setTitles(quiz.getTitle(), subSection, question);
 
         question.setQuizUsesMathML(quiz.getUsesMathML());
     }
