@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by murrayc on 1/23/16.
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class UserHistoryOverall {
     public static class QuizDetails {
         public QuizDetails() {

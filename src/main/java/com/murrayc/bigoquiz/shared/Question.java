@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by murrayc on 1/21/16.
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Question {
     private String id;
     private String sectionId;

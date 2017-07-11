@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * Created by murrayc on 1/23/16.
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class UserHistorySections {
     @NotNull
     private LoginInfo loginInfo;

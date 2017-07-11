@@ -10,7 +10,7 @@ import java.util.Comparator;
  *
  * Created by murrayc on 23.06.16.
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class HasIdAndTitle {
     protected String link;
 

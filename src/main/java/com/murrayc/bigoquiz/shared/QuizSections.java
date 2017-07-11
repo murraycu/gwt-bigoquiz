@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * Created by murrayc on 1/24/16.
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class QuizSections {
     /**
      * Created by murrayc on 1/30/16.
@@ -28,7 +28,7 @@ public class QuizSections {
     }
 
     //TODO: Can this be non-public while still being serializable by GWT?
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     static public class Section extends HasIdAndTitle {
         @NotNull
         private Map<String, SubSection> subSections = new HashMap<>();

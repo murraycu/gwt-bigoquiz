@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * Created by murrayc on 1/18/16.
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Quiz {
     /** These are the simple details of the quiz,
      * without the full details of all the questions and answers,
