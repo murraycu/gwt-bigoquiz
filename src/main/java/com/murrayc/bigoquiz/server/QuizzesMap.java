@@ -85,7 +85,7 @@ public class QuizzesMap {
             // Generate the simple list of sections, in advance:
             final QuizSections briefSections = mapQuizSectionsIdAndTitle.computeIfAbsent(quizId, k -> new QuizSections());
             for (final QuizSections.Section section : quiz.getSections().getSectionsInSequence()) {
-                briefSections.addSection(section.getId(), section.getTitle(), null, null);
+                briefSections.addSection(section.getId(), section.getTitle(), section.getLink(), null);
             }
         } catch (@NotNull final Exception e) {
             Log.error("Could not load quiz: " + quizId, e);
