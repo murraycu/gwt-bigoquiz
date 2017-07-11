@@ -21,7 +21,10 @@ public class Question {
     private String videoUrl;
     private String codeUrl;
 
+    // These are just caches, from the Quiz, as a convenience.
+    // They are only set when something has called setTitles().
     private String quizTitle;
+    private HasIdAndTitle section;
     private QuizSections.SubSection subSection;
 
     private boolean quizUsesMathML;
@@ -180,11 +183,13 @@ public class Question {
     /** Set titles, just to save users of Question the bother of having to get them from the Quiz class.
      *
      * @param quizTitle The title of the quiz that this Question is from.
+     * @param section The title (and link) of the quiz's section that this Question is from.
      * @param subSection The title (and link) of the quiz's sub-section that this Question is from.
      * @param question
      */
-    public void setTitles(final String quizTitle, final QuizSections.SubSection subSection, @NotNull final Question question) {
+    public void setTitles(final String quizTitle, final HasIdAndTitle section, QuizSections.SubSection subSection, @NotNull final Question question) {
         this.quizTitle = quizTitle;
+        this.section = section;
         this.subSection = subSection;
         this.text = question.getText(); //TODO: This is not useful.
     }
@@ -203,6 +208,16 @@ public class Question {
      */
     public void setQuizTitle(final String quizTitle) {
         this.quizTitle = quizTitle;
+    }
+
+    public HasIdAndTitle getSection() {
+        return section;
+    }
+
+    /** This is only used for the JSON input.
+     */
+    public void setSection(final HasIdAndTitle section) {
+        this.section = section;
     }
 
     public QuizSections.SubSection getSubSection() {

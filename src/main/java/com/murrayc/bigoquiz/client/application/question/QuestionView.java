@@ -266,9 +266,7 @@ public class QuestionView extends ContentViewWithUIHandlers<QuestionUserEditUiHa
         //( <b>Section:</b> some section title )
         //properly internationalized, without putting the <b> tags in the translatable string.
         //TODO: Internationalization:
-        final String sectionId = question.getSectionId();
-        final QuizSections.Section section = sections.getSection(sectionId);
-        fillLabelOrAnchor(section, sectionTitleLabel, sectionTitleAnchor, ": ");
+        fillLabelOrAnchor(question.getSection(), sectionTitleLabel, sectionTitleAnchor, ": ");
     }
 
     private void setQuestionSubSectionTitle(@Nullable final Question question) {

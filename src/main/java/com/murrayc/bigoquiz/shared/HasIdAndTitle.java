@@ -12,7 +12,9 @@ import java.util.Comparator;
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class HasIdAndTitle {
-    protected String link;
+    private String id;
+    private String title;
+    private String link;
 
     public HasIdAndTitle() {
     }
@@ -38,9 +40,6 @@ public class HasIdAndTitle {
     public void setTitle(final String title) {
         this.title = title;
     }
-
-    private String id;
-    private String title;
 
     public String getLink() {
         return link;
