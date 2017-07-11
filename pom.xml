@@ -250,7 +250,7 @@
 		<plugins>
 			<plugin>
 				<!-- Specify a recent maven version, so we can use later plugin versions.
-                                     We specify the same thing in the prerequisites tag, but that is normal.
+                     We specify the same thing in the prerequisites tag, but that is normal.
 				     See http://maven.apache.org/enforcer/maven-enforcer-plugin/faq.html#questionAndAnswer -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
