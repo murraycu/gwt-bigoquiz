@@ -72,9 +72,24 @@ public class QuizzesMap {
         final Quiz quiz;
         try {
             quiz = loadQuiz(quizId);
-            if (quiz != null) {
-                map.put(quizId, quiz);
+            if (quiz == null) {
+                return false;
             }
+        } catch (@NotNull final Exception e) {
+            Log.error("Could not load quiz: " + quizId, e);
+            return false;
+        }
+
+        // Avoid a race when checking if it's already there and adding it,
+        // and make sure that all the maps (including the ID+title caches)
+        // are consistent.
+        synchronized(this) {
+            if (map.containsKey(quizId)) {
+                // It's already been added.
+                return true;
+            }
+
+            map.put(quizId, quiz);
 
             // Keep the ID and title separately, for the list-only server query.
             final Quiz brief = new Quiz();
@@ -87,9 +102,6 @@ public class QuizzesMap {
             for (final QuizSections.Section section : quiz.getSections().getSectionsInSequence()) {
                 briefSections.addSection(section.getId(), section.getTitle(), section.getLink(), null);
             }
-        } catch (@NotNull final Exception e) {
-            Log.error("Could not load quiz: " + quizId, e);
-            return false;
         }
 
         return true;
