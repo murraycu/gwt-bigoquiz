@@ -247,14 +247,23 @@ public class QuizSections {
      *
      * @return
      */
-    public Map<String, Section> getSections() {
-        return this.sections;
+    public Collection<Section> getSections() {
+        return Collections.unmodifiableCollection(this.sections.values());
     }
 
     /** This is only for the JSON input.
      */
-    public void setSections(final Map<String, Section> sections) {
-        this.sections = sections;
+    public void setSections(final Collection<Section> sections) {
+        this.sections.clear();
+        this.sectionsSequence.clear();
+
+        for (final Section section : sections) {
+            if (section == null) {
+                continue;
+            }
+
+            addSection(section);
+        }
     }
 
     /** This is only for the JSON output.

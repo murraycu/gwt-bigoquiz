@@ -53,7 +53,7 @@ public class QuizTest {
         assertNotNull(obj);
 
         final QuizSections sections = obj.getSections();
-        final Map<String, QuizSections.Section> listSections = sections.getSections();
+        final Collection<QuizSections.Section> listSections = sections.getSections();
         assertNotNull(listSections);
         assertFalse(listSections.isEmpty());
         assertEquals(2, listSections.size());
