@@ -306,6 +306,9 @@
 					<mode>htmlunit</mode> <!-- Because the default, manual, waits for us to paste a URL into a browser. -->
 
 					<!-- <productionMode>true</productionMode> -->
+
+					<!-- Get nicer compiled Javascript for debugging. -->
+					<!-- <style>PRETTY</style> -->
 				</configuration>
 			</plugin>
 
