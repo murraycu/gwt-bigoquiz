@@ -237,6 +237,12 @@ public class QuizSections {
         return result;
     }
 
+    // TODO: Returning a Collection or List would produce simpler JSON,
+    // but RestyGWT doesn't seem to use setSections().
+    // Maybe it tries to modify the result of getSections().
+    // (Returning Collections.unmodifiableCollection() doesn't fix that.)
+    // See https://github.com/murraycu/gwt-bigoquiz/issues/1
+    //
     /** This is only for the JSON output.
      *
      * @return
