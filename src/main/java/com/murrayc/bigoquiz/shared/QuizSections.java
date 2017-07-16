@@ -108,17 +108,18 @@ public class QuizSections {
     private Map<String, Section> sections = new HashMap<>();
     private List<String> sectionsSequence = new ArrayList<>();
 
-    public void addSection(final String sectionId, final String sectionTitle, final String sectionLink, final List<Question.Text> defaultChoices) {
+    public Section addSection(final String sectionId, final String sectionTitle, final String sectionLink, final List<Question.Text> defaultChoices) {
         @NotNull final Section section = new Section(sectionId, sectionTitle, sectionLink);
         section.setDefaultChoices(defaultChoices);
-        addSection(section);
+        return addSection(section);
     }
 
-    private void addSection(final Section section) {
+    private Section addSection(final Section section) {
         final String sectionId = section.getId();
         this.sections.put(sectionId, section);
 
         this.sectionsSequence.add(sectionId);
+        return section;
     }
 
     public void addSubSection(final String sectionId, final String subSectionId, final String subSectionTitle, final String subSectionLink) {
