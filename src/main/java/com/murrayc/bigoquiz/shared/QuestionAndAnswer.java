@@ -1,5 +1,7 @@
 package com.murrayc.bigoquiz.shared;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 /**
@@ -19,6 +21,7 @@ public class QuestionAndAnswer {
     public QuestionAndAnswer() {
     }
 
+    @JsonIgnore
     public String getId() {
         return question.getId();
     }
