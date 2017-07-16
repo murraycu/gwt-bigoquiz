@@ -240,6 +240,7 @@ public class Quiz {
      *
      * @return
      */
+    @JsonIgnore
     public int getQuestionsCount() {
         return listQuestions.size();
     }
