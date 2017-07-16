@@ -1,5 +1,7 @@
 package com.murrayc.bigoquiz.client;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuestionAndAnswer;
@@ -42,6 +44,12 @@ public class QuizTest {
     @Test
     public void QuizJsonTest() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
+
+        // Extra checks:
+        objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, true);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_READING_DUP_TREE_KEY, true);
+        //objectMapper.configure(MapperFeature.USE_GETTERS_AS_SETTERS, false);
 
         // Get the JSON for an object:
         Quiz objToWrite = createQuiz();

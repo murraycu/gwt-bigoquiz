@@ -1,5 +1,6 @@
 package com.murrayc.bigoquiz.client;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
@@ -59,6 +60,12 @@ public class UserHistoryTest {
     @Test
     public void UserHistorySectionsJsonTest() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
+
+        // Extra checks:
+        objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, true);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_READING_DUP_TREE_KEY, true);
+        //objectMapper.configure(MapperFeature.USE_GETTERS_AS_SETTERS, false);
 
         // Get the JSON for an object:
         UserHistorySections objToWrite = createUserRecentHistory();
