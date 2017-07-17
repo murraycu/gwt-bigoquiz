@@ -147,7 +147,7 @@
 			<scope>compile</scope> <!-- It is used for runtime and test scopes -->
 		</dependency>
 
-		<!-- This seems to be necessary so we can see errors from JDBC -->		
+		<!-- This seems to be necessary so we can see errors from JDBC -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
  			<artifactId>slf4j-simple</artifactId>
@@ -343,7 +343,7 @@
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>   
+				<artifactId>maven-compiler-plugin</artifactId> 
 				<version>3.5</version>
 				<configuration>
 					<!-- See https://code.google.com/p/googleappengine/issues/detail?id=9537 -->
@@ -374,16 +374,15 @@
 				<artifactId>appengine-maven-plugin</artifactId>
 				<version>${appengine.version}</version>
 				<configuration>
-          <version>${appengine.application.version}</version>
-          <enableJarClasses>false</enableJarClasses>
-          <!-- Uncomment the snippet below to bind to all IPs instead of just localhost -->
-          <!-- <address>0.0.0.0</address> <port>8080</port> -->
-          <!-- Uncomment the snippet below to enable local debugging with a remove debugger like those included with Eclipse 
-            or IntelliJ -->
-          <!-- <jvmFlags><jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag></jvmFlags> -->
-        </configuration>
+                                  <version>${appengine.application.version}</version>
+                                  <enableJarClasses>false</enableJarClasses>
+                                  <!-- Uncomment the snippet below to bind to all IPs instead of just localhost -->
+                                  <!-- <address>0.0.0.0</address> <port>8080</port> -->
+                                  <!-- Uncomment the snippet below to enable local debugging with a remote debugger like those included with Eclipse or IntelliJ -->
+                                  <!-- <jvmFlags><jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag></jvmFlags> -->
+                                </configuration>
 			</plugin>
-            
+
 		</plugins>
 		<pluginManagement>
 			<plugins>
