@@ -131,10 +131,8 @@ public class UserHistoryPresenter extends BigOQuizPresenter<UserHistoryPresenter
 
     @Override
     public void onQuizTitleRetrieved(final UserHistorySectionsTitleRetrievedEvent event) {
-        Log.fatal("debug: onQuizTitleRetrieved: getQuizId=" + getQuizId() + ", event.getQuizId()=" + event.getQuizId());
         //UserHistorySectionsPresenter knows the title and tells us here.
         if (StringUtils.equals(getQuizId(), event.getQuizId())) {
-            Log.fatal("debug: onQuizTitleRetrieved2");
             getView().setQuizTitle(event.getQuizTitle());
         }
     }
