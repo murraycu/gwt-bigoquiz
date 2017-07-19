@@ -22,7 +22,7 @@ public class UserResource {
      */
     @GET
     @Produces("application/json")
-    public LoginInfo get(@QueryParam("requestUrl") String requestUrl) {
+    public LoginInfo get(@QueryParam("request-url") String requestUrl) {
         return ServiceUserUtils.getLoginInfo(requestUrl);
     }
 }

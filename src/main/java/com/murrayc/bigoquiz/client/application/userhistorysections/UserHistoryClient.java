@@ -22,7 +22,7 @@ public interface UserHistoryClient extends RestService {
      * @return
      */
     @GET
-    public void get(@QueryParam("requestUrl") String requestUrl, MethodCallback<UserHistoryOverall> callback);
+    public void get(@QueryParam("request-url") String requestUrl, MethodCallback<UserHistoryOverall> callback);
 
     /**
      * requestUrl is the URL that the user should be returned to after logging in or out.
@@ -32,8 +32,8 @@ public interface UserHistoryClient extends RestService {
      * @return
      */
     @GET
-    @Path("/{quizId}")
-    public void getByQuizId(@PathParam("quizId") String quizId, @QueryParam("requestUrl") String requestUrl, MethodCallback<UserHistorySections> callback);
+    @Path("/{quiz-id}")
+    public void getByQuizId(@PathParam("quiz-id") String quizId, @QueryParam("request-url") String requestUrl, MethodCallback<UserHistorySections> callback);
 
     @POST
     @Path("/reset-sections")
@@ -41,9 +41,9 @@ public interface UserHistoryClient extends RestService {
 
     @POST
     @Path("/submit-answer")
-    public void submitAnswer(@QueryParam("quizId") String quizId, @QueryParam("questionId") String questionId, @QueryParam("answer") String answer, @QueryParam("nextQuestionSectionId") String nextQuestionSectionId, MethodCallback<SubmissionResult> callback);
+    public void submitAnswer(@QueryParam("quiz-id") String quizId, @QueryParam("question-id") String questionId, @QueryParam("answer") String answer, @QueryParam("next-question-section-id") String nextQuestionSectionId, MethodCallback<SubmissionResult> callback);
 
     @POST
     @Path("/submit-dont-know-answer")
-    public void submitDontKnowAnswer(@QueryParam("quizId") String quizId, @QueryParam("questionId") String questionId, @QueryParam("nextQuestionSectionId") String nextQuestionSectionId,  MethodCallback<SubmissionResult> callback);
+    public void submitDontKnowAnswer(@QueryParam("quiz-id") String quizId, @QueryParam("question-id") String questionId, @QueryParam("next-question-section-id") String nextQuestionSectionId,  MethodCallback<SubmissionResult> callback);
 }

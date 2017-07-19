@@ -26,7 +26,7 @@ import java.util.Map;
 public class UserHistoryResource extends ResourceWithQuizzes {
     @GET
     @Produces("application/json")
-    public UserHistoryOverall get(@QueryParam("requestUrl") String requestUrl) {
+    public UserHistoryOverall get(@QueryParam("request-url") String requestUrl) {
         getOrLoadQuizzes();
 
         //Get the stats for this user, for each section:
@@ -57,9 +57,9 @@ public class UserHistoryResource extends ResourceWithQuizzes {
     }
 
     @GET
-    @Path("/{quizId}")
+    @Path("/{quiz-id}")
     @Produces("application/json")
-    public UserHistorySections getByQuizId(@PathParam("quizId") String quizId, @QueryParam("requestUrl") final String requestUrl) {
+    public UserHistorySections getByQuizId(@PathParam("quiz-id") String quizId, @QueryParam("request-url") final String requestUrl) {
         final Quiz quiz = getQuiz(quizId);
         if (quiz == null) {
             throw new UnknownQuizException();
@@ -152,7 +152,7 @@ public class UserHistoryResource extends ResourceWithQuizzes {
      */
     @POST
     @Path("/reset-sections")
-    public void resetSections(@QueryParam("quizId") final String quizId) {
+    public void resetSections(@QueryParam("quiz-id") final String quizId) {
         @Nullable final String userId = getUserId();
         if (StringUtils.isEmpty(userId)) {
             //TODO: Throw some NotLoggedIn exception?
@@ -194,7 +194,7 @@ public class UserHistoryResource extends ResourceWithQuizzes {
     @Path("/submit-answer")
     @Produces("application/json")
     @NotNull
-    public SubmissionResult submitAnswer(@QueryParam("quizId") final String quizId, @QueryParam("questionId") final String questionId, @QueryParam("answer") final String answer, @QueryParam("nextQuestionSectionId") final String nextQuestionSectionId) throws IllegalArgumentException {
+    public SubmissionResult submitAnswer(@QueryParam("quiz-id") final String quizId, @QueryParam("question-id") final String questionId, @QueryParam("answer") final String answer, @QueryParam("next-question-section-id") final String nextQuestionSectionId) throws IllegalArgumentException {
         @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(quizId, questionId);
         if (questionAndAnswer == null) {
             throw new IllegalArgumentException("Unknown QuestionAndAnswer ID");
@@ -214,7 +214,7 @@ public class UserHistoryResource extends ResourceWithQuizzes {
     @Path("/submit-dont-know-answer")
     @Produces("application/json")
     @NotNull
-    public SubmissionResult submitDontKnowAnswer(@QueryParam("quizId") final String quizId, @QueryParam("questionId") final String questionId, @QueryParam("nextQuestionSectionId") final String nextQuestionSectionId) throws IllegalArgumentException {
+    public SubmissionResult submitDontKnowAnswer(@QueryParam("quiz-id") final String quizId, @QueryParam("question-id") final String questionId, @QueryParam("next-question-section-id") final String nextQuestionSectionId) throws IllegalArgumentException {
         @Nullable final QuestionAndAnswer questionAndAnswer = getQuestionAndAnswer(quizId, questionId);
         if (questionAndAnswer == null) {
             throw new IllegalArgumentException("Unknown QuestionAndAnswer ID");

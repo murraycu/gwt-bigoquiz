@@ -14,5 +14,5 @@ import javax.ws.rs.QueryParam;
 @Path("/api/user")
 public interface UserClient extends RestService {
     @GET
-    public void get(@QueryParam("requestUrl") String requestUrl, MethodCallback<LoginInfo> callback);
+    public void get(@QueryParam("request-url") String requestUrl, MethodCallback<LoginInfo> callback);
 }
