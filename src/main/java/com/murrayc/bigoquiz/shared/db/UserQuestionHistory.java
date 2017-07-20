@@ -69,7 +69,7 @@ public class UserQuestionHistory {
      *
      * @param questionId
      */
-    public void setQuestionid(final String questionId) {
+    public void setQuestionId(final String questionId) {
         this.questionId = questionId;
     }
 
