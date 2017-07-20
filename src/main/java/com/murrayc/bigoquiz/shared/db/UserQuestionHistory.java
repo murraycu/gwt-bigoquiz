@@ -65,8 +65,24 @@ public class UserQuestionHistory {
         return questionId;
     }
 
+    /** This is only for the JSON input.
+     *
+     * @param questionId
+     */
+    public void setQuestionid(final String questionId) {
+        this.questionId = questionId;
+    }
+
     public int getCountAnsweredWrong() {
         return countAnsweredWrong;
+    }
+
+    /** This is only for the JSON input.
+     *
+     * @param countAnsweredWrong
+     */
+    public void setCountAnsweredWrong(int countAnsweredWrong) {
+        this.countAnsweredWrong = countAnsweredWrong;
     }
 
     /*
@@ -99,6 +115,14 @@ public class UserQuestionHistory {
 
     public boolean getAnsweredCorrectlyOnce() {
         return answeredCorrectlyOnce;
+    }
+
+    /** This is only for the JSON input.
+     *
+     * @param answeredCorrectlyOnce
+     */
+    public void setAnsweredCorrectlyOnce(boolean answeredCorrectlyOnce) {
+        this.answeredCorrectlyOnce = answeredCorrectlyOnce;
     }
 
     public void adjustCount(boolean result) {
