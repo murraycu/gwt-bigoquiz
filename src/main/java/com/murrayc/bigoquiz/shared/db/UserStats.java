@@ -246,6 +246,15 @@ public class UserStats {
         return topProblemQuestionHistoriesInOrder;
     }
 
+    /** This is only for JSON input.
+     *
+     * @param topProblemQuestionHistoriesInOrder
+     */
+    @NotNull
+    public void setTopProblemQuestionHistories(final List<UserQuestionHistory> topProblemQuestionHistoriesInOrder) {
+        this.topProblemQuestionHistoriesInOrder = topProblemQuestionHistoriesInOrder;
+    }
+
     /** Get the count of all the questions that have been answered wrongly.
      * getTopQuestionHistories() returns just the top few of these.
      * @return
