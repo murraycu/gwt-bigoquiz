@@ -106,6 +106,7 @@ public class UserHistoryResource extends ResourceWithQuizzes {
             //We don't store these in the datastore because we can get them easily from the Quiz.
             //TODO: It might really be more efficient to store them in the datastore.
             List<String> toRemove = null;
+            userStats.calculateTopProblemQuestionHistories();
             for (@NotNull final UserQuestionHistory userQuestionHistory : userStats.getTopProblemQuestionHistories()) {
                 final String questionId = userQuestionHistory.getQuestionId();
                 @Nullable final Question question = quiz.getQuestion(questionId);

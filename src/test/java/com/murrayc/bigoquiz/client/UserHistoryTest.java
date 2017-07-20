@@ -38,6 +38,7 @@ public class UserHistoryTest {
         final UserStats stats = history.getStats(SECTION_1);
         assertNotNull(stats);
 
+        stats.calculateTopProblemQuestionHistories();
         @NotNull Collection<UserQuestionHistory> problems = stats.getTopProblemQuestionHistories();
         assertNotNull(problems);
         assertEquals(1, problems.size());
@@ -50,6 +51,7 @@ public class UserHistoryTest {
         question = createQuestion("question5", SECTION_1, SUBSECTION_1_1);
         history.addUserAnswerAtStart(QUIZ_ID, question, false);
 
+        stats.calculateTopProblemQuestionHistories();
         problems = stats.getTopProblemQuestionHistories();
         assertNotNull(problems);
         assertEquals(2, problems.size());
