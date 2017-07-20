@@ -71,6 +71,7 @@ public class UserStats {
         return userId;
     }
 
+    @JsonIgnore
     public void setUserId(final String userId) {
         this.userId = userId;
     }
