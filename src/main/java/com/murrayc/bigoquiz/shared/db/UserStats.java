@@ -237,6 +237,20 @@ public class UserStats {
         cacheIsInvalid = false;
     }
 
+    /** This is only for JSON serialization.
+     *
+     * @return
+     */
+    public Map<String, UserQuestionHistory> getQuestionHistories() {
+        return questionHistories;
+    }
+
+    /** This is only for JSON serialization.
+     */
+     public void setQuestionHistories(final Map<String, UserQuestionHistory> questionhistories) {
+        this.questionHistories = questionhistories;
+    }
+
     /**
      * Get the MAX_PROBLEM_QUESTIONS questions that have been answered wrongly the most often.
      * @return
