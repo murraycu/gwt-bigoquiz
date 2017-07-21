@@ -135,24 +135,22 @@ public class QuizView extends ContentViewWithUIHandlers<QuizUserEditUiHandlers>
             return;
         }
 
+        // Add sub-sections, if there are any.
         final List<QuizSections.SubSection> sorted = quizSections.getSubSectionsSorted(sectionId);
-        if (sorted == null) {
-            Log.error("QuizView: addQuestionsForSection(): sorted is null.");
-            return;
-        }
+        if (sorted != null) {
+            for (final QuizSections.SubSection subSection : sorted) {
+                if (subSection == null) {
+                    Log.fatal("QuizListView: subSection is null.");
+                    continue;
+                }
 
-        for (final QuizSections.SubSection subSection : sorted) {
-            if (subSection == null) {
-                Log.fatal("QuizListView: subSection is null.");
-                continue;
+                final String subSectionId = subSection.getId();
+                if (subSectionId == null) {
+                    Log.fatal("QuizListView: subSectionId is null.");
+                    continue;
+                }
+                addSubSection(panelSection, constants, questionsBySubSection.get(subSectionId), subSection);
             }
-
-            final String subSectionId = subSection.getId();
-            if (subSectionId == null) {
-                Log.fatal("QuizListView: subSectionId is null.");
-                continue;
-            }
-            addSubSection(panelSection, constants, questionsBySubSection.get(subSectionId), subSection);
         }
 
         //Add questions that have no sub-section:
