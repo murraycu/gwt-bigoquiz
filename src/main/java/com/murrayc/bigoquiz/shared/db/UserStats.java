@@ -249,7 +249,6 @@ public class UserStats {
      * and JSON serialization/deserialization.
      * @return
      */
-    @NotNull
     public List<UserQuestionHistory> getTopProblemQuestionHistories() {
         return topProblemQuestionHistoriesInOrder;
     }
