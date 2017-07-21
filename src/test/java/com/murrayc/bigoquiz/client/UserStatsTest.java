@@ -8,7 +8,9 @@ import com.murrayc.bigoquiz.shared.db.UserStats;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -52,13 +54,24 @@ public class UserStatsTest {
         final int CORRECT_ONCE = 345;
         objToWrite.setCorrectOnce(CORRECT_ONCE);
 
+        final UserQuestionHistory QUESTION_HISTORY_1 = new UserQuestionHistory(
+                new Question("questionid1", "sectionid", "subsectionid", new Question.Text("text", false), null, null, null, null, null));
+        QUESTION_HISTORY_1.setCountAnsweredWrong(4); // So it is one of the problem questions.
+        final UserQuestionHistory QUESTION_HISTORY_2 = new UserQuestionHistory(
+                new Question("questionid2", "sectionid", "subsectionid", new Question.Text("text", false), null, null, null, null, null));
+        QUESTION_HISTORY_2.setCountAnsweredWrong(3); // So it is one of the problem questions.
 
-        final int PROBLEM_QUESTIONS_HISTORIES_COUNT = 3;
+        final Map<String, UserQuestionHistory> QUESTION_HISTORIES = new HashMap<>();
+        QUESTION_HISTORIES.put(QUESTION_HISTORY_1.getQuestionId(), QUESTION_HISTORY_1);
+        QUESTION_HISTORIES.put(QUESTION_HISTORY_2.getQuestionId(), QUESTION_HISTORY_2);
+        objToWrite.setQuestionHistories(QUESTION_HISTORIES);
+
+        final int PROBLEM_QUESTIONS_HISTORIES_COUNT = QUESTION_HISTORIES.size();
         objToWrite.setProblemQuestionHistoriesCount(PROBLEM_QUESTIONS_HISTORIES_COUNT);
 
         final List<UserQuestionHistory> TOP_PROBLEM_QUESTION_HISTORIES = new ArrayList<>();
-        TOP_PROBLEM_QUESTION_HISTORIES.add(new UserQuestionHistory());
-        TOP_PROBLEM_QUESTION_HISTORIES.add(new UserQuestionHistory());
+        TOP_PROBLEM_QUESTION_HISTORIES.add(QUESTION_HISTORY_1);
+        TOP_PROBLEM_QUESTION_HISTORIES.add(QUESTION_HISTORY_2);
         objToWrite.setTopProblemQuestionHistories(TOP_PROBLEM_QUESTION_HISTORIES);
 
         // Create JSON from the object:
