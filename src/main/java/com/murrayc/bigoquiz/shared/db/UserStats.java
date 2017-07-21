@@ -118,6 +118,12 @@ public class UserStats {
         this.correct = correct;
     }
 
+    /** After calling this, the caller can then call getTopProblemQuestionHistories(),
+     * if this object has a full questionHistories.
+     *
+     * @param question
+     * @param answerIsCorrect
+     */
     public void updateProblemQuestion(@Nullable final Question question, boolean answerIsCorrect) {
         if (question == null) {
             Log.error("updateProblemQuestion(): question is null.");
