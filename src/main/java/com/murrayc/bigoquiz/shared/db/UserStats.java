@@ -138,6 +138,11 @@ public class UserStats {
 
         boolean firstTimeAsked = false;
         boolean firstTimeCorrect = false;
+
+        if (questionHistories == null) {
+            questionHistories = new HashMap<>();
+        }
+
         @Nullable UserQuestionHistory userQuestionHistory = questionHistories.get(questionId);
 
         //Add a new one, if necessary:
@@ -174,6 +179,10 @@ public class UserStats {
      * @param questionId
      */
     public void removeQuestionHistory(final String questionId) {
+        if (questionHistories == null) {
+            return;
+        }
+
         @Nullable UserQuestionHistory userQuestionHistory = questionHistories.get(questionId);
         if (userQuestionHistory == null) {
             //It's not there so there's no need to remove it.
@@ -219,7 +228,12 @@ public class UserStats {
         }
 
         problemQuestionHistoriesCount = 0;
-        topProblemQuestionHistoriesInOrder = new ArrayList<>(questionHistories.values());
+
+        if (questionHistories == null) {
+            topProblemQuestionHistoriesInOrder = new ArrayList<>();
+        } else {
+            topProblemQuestionHistoriesInOrder = new ArrayList<>(questionHistories.values());
+        }
 
         topProblemQuestionHistoriesInOrder.sort(comparator);
 
@@ -253,8 +267,22 @@ public class UserStats {
 
     /** This is only for JSON serialization.
      */
-     public void setQuestionHistories(final Map<String, UserQuestionHistory> questionhistories) {
+    public void setQuestionHistories(final Map<String, UserQuestionHistory> questionhistories) {
         this.questionHistories = questionhistories;
+    }
+
+    /** This is only for JSON serialization.
+     * See get/setQuestionHistories() and get/setTopProblemQuestionHistories()
+     */
+    public boolean getCacheIsInvalid() {
+        return cacheIsInvalid;
+    }
+
+    /** This is only for JSON serialization.
+     * See get/setQuestionHistories() and get/setTopProblemQuestionHistories()
+     */
+    public void setCacheIsInvalid() {
+        this.cacheIsInvalid = cacheIsInvalid;
     }
 
     /**
@@ -310,10 +338,14 @@ public class UserStats {
     }
 
     public boolean getQuestionWasAnswered(final String questionId) {
-        return questionHistories.containsKey(questionId);
+        return questionHistories != null && questionHistories.containsKey(questionId);
     }
 
     public int getQuestionCountAnsweredWrong(final String questionId) {
+        if (questionHistories == null) {
+            return 0;
+        }
+
         final UserQuestionHistory history = questionHistories.get(questionId);
         if (history == null) {
             return 0;
