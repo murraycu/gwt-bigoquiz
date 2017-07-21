@@ -237,19 +237,12 @@ public class UserStats {
         cacheIsInvalid = false;
     }
 
-    public void calculateTopProblemQuestionHistories() {
-        cacheList();
-    }
-
     /**
      * Get the MAX_PROBLEM_QUESTIONS questions that have been answered wrongly the most often.
-     *
-     * This is only acccurate after the caller has first called calculateTopProblemQuestionHistories().
-     * We don't call calculateTopProblemQuestionHistories() automatically, to simplify client-side code,
-     * and JSON serialization/deserialization.
      * @return
      */
     public List<UserQuestionHistory> getTopProblemQuestionHistories() {
+        cacheList();
         return topProblemQuestionHistoriesInOrder;
     }
 
