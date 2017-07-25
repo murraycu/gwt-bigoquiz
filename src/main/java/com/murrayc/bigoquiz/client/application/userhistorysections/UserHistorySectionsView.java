@@ -203,7 +203,7 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
                         continue;
                     }
 
-                    //This shouldn't be necessary, because the server should not return to many,
+                    //This shouldn't be necessary, because the server should not return too many,
                     //but let's be sure:
                     if (count >= UserStats.MAX_PROBLEM_QUESTIONS) {
                         break;
