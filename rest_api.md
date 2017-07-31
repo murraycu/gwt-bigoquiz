@@ -37,7 +37,7 @@ http://bigoquiz.com/api/quiz/bigo/section?list-only=true
 
 ### Get a specific quiz question
 
-&lt;base-uri&gt;/quiz/{quiz-id}/{question-id}
+&lt;base-uri&gt;/quiz/{quiz-id}/question/{question-id}
 
 For instance:
 http://bigoquiz.com/api/quiz/bigo/question/avl-tree-search-average
