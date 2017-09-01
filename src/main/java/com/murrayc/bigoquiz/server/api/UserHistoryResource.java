@@ -61,9 +61,6 @@ public class UserHistoryResource extends ResourceWithQuizzes {
     @Produces("application/json")
     public UserHistorySections getByQuizId(@PathParam("quiz-id") String quizId, @QueryParam("request-url") final String requestUrl) {
         final Quiz quiz = getQuiz(quizId);
-        if (quiz == null) {
-            throw new UnknownQuizException();
-        }
 
         @NotNull final QuizSections sections = quiz.getSections();
         if (sections == null) {

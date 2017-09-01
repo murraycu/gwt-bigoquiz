@@ -41,7 +41,12 @@ public class QuizResource extends ResourceWithQuizzes {
             return null;
         }
 
-        return quizzes.map.get(id);
+        final Quiz result = quizzes.map.get(id);
+        if (result == null) {
+            throw new NotFoundException("Unknown quiz ID");
+        }
+
+        return result;
     }
 
     @GET
@@ -72,9 +77,10 @@ public class QuizResource extends ResourceWithQuizzes {
     @Produces("application/json")
     public Question getQuizQuestion(@PathParam("quiz-id") String quizId, @PathParam("question-id") String questionId) {
         @NotNull final Quiz quiz = getQuiz(quizId);
+
         final Question result = quiz.getQuestion(questionId);
         if (result == null) {
-            throw new IllegalArgumentException("Unknown question ID");
+            throw new NotFoundException("Unknown question ID");
         }
 
         if (result != null) {

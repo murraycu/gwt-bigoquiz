@@ -1,6 +1,5 @@
 package com.murrayc.bigoquiz.server.api;
 
-import com.murrayc.bigoquiz.client.UnknownQuizException;
 import com.murrayc.bigoquiz.server.QuizzesMap;
 import com.murrayc.bigoquiz.shared.HasIdAndTitle;
 import com.murrayc.bigoquiz.shared.Question;
@@ -9,6 +8,7 @@ import com.murrayc.bigoquiz.shared.QuizSections;
 import org.jetbrains.annotations.NotNull;
 
 import javax.servlet.ServletContext;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Context;
 
 /**
@@ -43,18 +43,18 @@ public class ResourceWithQuizzes {
 
 
     @NotNull
-    protected Quiz getQuiz(final String quizId) throws UnknownQuizException, IllegalArgumentException {
+    protected Quiz getQuiz(final String quizId) throws NotFoundException {
         if (!loadQuizIntoQuizzes(quizId)) {
-            throw new UnknownQuizException();
+            throw new NotFoundException("Unknown quiz ID.");
         }
 
         if (quizzes == null) {
-            throw new UnknownQuizException();
+            throw new NotFoundException("Unknown quiz ID.");
         }
 
         final Quiz result = quizzes.map.get(quizId);
         if (result == null) {
-            throw new UnknownQuizException();
+            throw new NotFoundException("Unknown quiz ID.");
         }
 
         return result;
