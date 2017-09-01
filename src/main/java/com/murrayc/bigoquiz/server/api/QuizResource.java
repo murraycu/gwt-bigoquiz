@@ -20,10 +20,6 @@ public class QuizResource extends ResourceWithQuizzes {
     public Collection<Quiz> get(@QueryParam("list-only") boolean listOnly) {
         getOrLoadQuizzes();
 
-        if (quizzes == null) {
-            return null;
-        }
-
         if (!listOnly) {
             return quizzes.map.values();
         } else {
@@ -36,10 +32,6 @@ public class QuizResource extends ResourceWithQuizzes {
     @Produces("application/json")
     public Quiz getById(@PathParam("id") String id) {
         getOrLoadQuizzes();
-
-        if (quizzes == null) {
-            return null;
-        }
 
         final Quiz result = quizzes.map.get(id);
         if (result == null) {
@@ -54,10 +46,6 @@ public class QuizResource extends ResourceWithQuizzes {
     @Produces("application/json")
     public QuizSections getSectionByQuizId(@PathParam("quiz-id") String quizId, @QueryParam("list-only") boolean listOnly) {
         getOrLoadQuizzes();
-
-        if (quizzes == null) {
-            return null;
-        }
 
         if (!listOnly) {
             final Quiz quiz = quizzes.map.get(quizId);

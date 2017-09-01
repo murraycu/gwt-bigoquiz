@@ -8,6 +8,7 @@ import com.murrayc.bigoquiz.shared.QuizSections;
 import org.jetbrains.annotations.NotNull;
 
 import javax.servlet.ServletContext;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Context;
 
@@ -84,9 +85,16 @@ public class ResourceWithQuizzes {
         }
     }
 
+    /**
+     * quizzes is always set after this has been called, or an InternalServerErrorException will be thrown.
+     */
     protected void getOrLoadQuizzes() {
         // Load all quizzes.
         getQuizzesMap();
+
+        if (quizzes == null) {
+            throw new InternalServerErrorException("quizzes could not be loaded.");
+        }
 
         quizzes.loadQuizzes();
     }
