@@ -15,6 +15,7 @@ import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.quiz.BigOQuizPresenter;
 import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistoryClient;
 import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.client.FailedResponseException;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.jetbrains.annotations.NotNull;
@@ -62,10 +63,10 @@ public class UserProfilePresenter extends BigOQuizPresenter<UserProfilePresenter
 
                 try {
                     throw caught;
-                } catch (final IllegalArgumentException ex) {
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: getUserRecentHistory()", ex);
-                    onFailureGeneric();
-                } catch (final Throwable ex) {
+                } catch (final FailedResponseException ex) {
+                    Log.error("getUserRecentHistory(): AsyncCallback failed with status code: " + ex.getStatusCode());
+                    showErrorInView(getView(), ex);
+                }catch (final Throwable ex) {
                     Log.error("AsyncCallback Failed: getUserRecentHistory()", ex);
                     onFailureGeneric();
                 }

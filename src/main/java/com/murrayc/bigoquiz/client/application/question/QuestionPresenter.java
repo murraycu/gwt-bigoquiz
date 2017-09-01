@@ -27,6 +27,7 @@ import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.SubmissionResult;
 import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.client.FailedResponseException;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.jetbrains.annotations.NotNull;
@@ -201,11 +202,9 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
 
                 try {
                     throw caught;
-                } catch (final IllegalArgumentException ex) {
-                    //One of the parameters (quizID, questionId, etc) must be invalid,
-                    //TODO: Handle this properly.
-                    Log.error("MethodCallback Failed with IllegalArgumentException: onSubmitAnswer()", ex);
-                    getView().setServerFailed();
+                } catch (final FailedResponseException ex) {
+                    Log.error("onSubmitAnswer(): AsyncCallback failed with status code: " + ex.getStatusCode());
+                    showErrorInView(getView(), ex);
                 } catch (final Throwable ex) {
                     Log.error("MethodCallback Failed: onSubmitAnswer()", ex);
                     getView().setServerFailed();
@@ -293,10 +292,9 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
                 getView().setLoadingLabelVisible(false);
                 try {
                     throw caught;
-                } catch (final IllegalArgumentException ex) {
-                    //One of the parameters (quizID, questionId, etc) must be invalid,
-                    //TODO: Handle this properly.
-                    Log.error("MethodCallback Failed with IllegalArgumentException: submitDontKnowAnswer()", ex);
+                } catch (final FailedResponseException ex) {
+                    Log.error("submitDontKnowAnswer(): AsyncCallback failed with status code: " + ex.getStatusCode());
+                    showErrorInView(getView(), ex);
                 } catch (final Throwable ex) {
                     // TODO: create a way to notify users of asynchronous callback failures
                     Log.error("MethodCallback Failed: submitDontKnowAnswer()", ex);
@@ -428,14 +426,9 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
 
                 try {
                     throw caught;
-                } catch (final UnknownQuizException ex) {
-                    Log.error("MethodCallback Failed with UnknownQuizException: getSections()", ex);
-                    getView().setServerFailedUnknownQuiz();
-                } catch (final IllegalArgumentException ex) {
-                    //One of the parameters (quizID, questionId, etc) must be invalid,
-                    //TODO: Handle this properly.
-                    Log.error("MethodCallback Failed with IllegalArgumentException: getSections()", ex);
-                    getView().setServerFailed();
+                } catch (final FailedResponseException ex) {
+                    Log.error("getSections(): AsyncCallback failed with status code: " + ex.getStatusCode());
+                    showErrorInView(getView(), ex);
                 } catch (final Throwable ex) {
                     Log.error("MethodCallback Failed: getSections()", ex);
                     getView().setServerFailed();
@@ -481,11 +474,9 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
                 getView().setLoadingLabelVisible(false);
                 try {
                     throw caught;
-                } catch (final IllegalArgumentException ex) {
-                    //One of the parameters (quizID, questionId, etc) must be invalid,
-                    //TODO: Handle this properly.
-                    Log.error("MethodCallback Failed with IllegalArgumentException: getNextQuestion()", ex);
-                    getView().setServerFailed();
+                } catch (final FailedResponseException ex) {
+                    Log.error("getNextQuestion(): AsyncCallback failed with status code: " + ex.getStatusCode());
+                    showErrorInView(getView(), ex);
                 } catch (final Throwable ex) {
                     Log.error("MethodCallback Failed: getNextQuestion()", ex);
                     getView().setServerFailed();
@@ -518,10 +509,8 @@ public class QuestionPresenter extends BigOQuizPresenter<QuestionPresenter.MyVie
                 getView().setLoadingLabelVisible(false);
                 try {
                     throw caught;
-                } catch (final IllegalArgumentException ex) {
-                    //One of the parameters (quizID, questionId, etc) must be invalid,
-                    Log.error("MethodCallback Failed with IllegalArgumentException: getQuestion()", ex);
-                    //Maybe the user tried to view a non-existent question:
+                } catch (final FailedResponseException ex) {
+                    Log.error("getQuestion(): AsyncCallback failed with status code: " + ex.getStatusCode());
                     abandonQuestionAndShowAnother();
                 } catch (final Throwable ex) {
                     Log.error("MethodCallback Failed: getQuestion()", ex);

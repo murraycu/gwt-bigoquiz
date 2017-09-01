@@ -10,6 +10,8 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.murrayc.bigoquiz.client.*;
+import com.murrayc.bigoquiz.client.application.ContentView;
+import com.murrayc.bigoquiz.client.application.HttpStatusCodes;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.application.question.QuestionContextEvent;
 import com.murrayc.bigoquiz.client.application.question.QuestionUserAnswerAddedEvent;
@@ -17,6 +19,7 @@ import com.murrayc.bigoquiz.client.application.userhistory.UserHistoryResetSecti
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.client.FailedResponseException;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.jetbrains.annotations.NotNull;
@@ -127,18 +130,9 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
                 try {
                     userIsLoggedIn = false;
                     throw caught;
-                } catch (final UnknownQuizException ex) {
-                    //The quizID must be invalid,
-                    //so try the default one instead.
-                    //TODO: Do nothing, assuming that the main content presenter will offer a list of quizzes?
-                    Log.error("AsyncCallback Failed with UnknownQuizException: getUserRecentHistory()", ex);
-                    onFailureUnknownQuiz();
-              } catch (final IllegalArgumentException ex) {
-                    //The quizID must be invalid,
-                    //so try the default one instead.
-                    //TODO: Do nothing, assuming that the main content presenter will offer a list of quizzes?
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: getUserRecentHistory()", ex);
-                    onFailureGeneric();
+                } catch (final FailedResponseException ex) {
+                    Log.error("submitDontKnowAnswer(): AsyncCallback failed with status code: " + ex.getStatusCode());
+                    showErrorInView(getView(), ex);
                 } catch (final Throwable ex) {
                     Log.error("AsyncCallback Failed: getUserRecentHistory()", ex);
                     onFailureGeneric();
@@ -168,12 +162,15 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
                 Utils.tellUserHistoryPresenterAboutNoQuestionContext(UserHistorySectionsPresenter.this); //clear the sections sidebar.
             }
 
+            /*
+            // TODO: Map the 404 to this:
             private void onFailureUnknownQuiz() {
                 userIsLoggedIn = false;
                 getView().setServerFailedUnknownQuiz();
                 Utils.tellUserHistoryPresenterAboutNoQuestionContext(UserHistorySectionsPresenter.this); //clear the sections sidebar.
 
             }
+            */
         };
 
         client.getByQuizId(quizId, Window.Location.getHref(), callback);
@@ -189,5 +186,14 @@ public class UserHistorySectionsPresenter extends PresenterWidget<UserHistorySec
 
     private void tellParentPresenterAboutQuizTitle(final String quizId, final String quizTitle) {
         UserHistorySectionsTitleRetrievedEvent.fire(this, quizId, quizTitle);
+    }
+
+    protected static void showErrorInView(final MyView view, final FailedResponseException ex) {
+        if (ex.getStatusCode() == HttpStatusCodes.NOT_FOUND) {
+            //One of the parameters (quizID, questionId, etc) must be invalid
+            view.setServerFailedUnknownQuiz();
+        } else {
+            view.setServerFailed();
+        }
     }
 }

@@ -11,6 +11,9 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+import com.murrayc.bigoquiz.client.application.ContentView;
+import com.murrayc.bigoquiz.client.application.HttpStatusCodes;
+import org.fusesource.restygwt.client.FailedResponseException;
 
 /**
  * Copyright (c) 2016 Murray Cumming
@@ -39,6 +42,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 @Singleton
 public abstract class BigOQuizPresenter<V extends View, Proxy_ extends Proxy<?>> extends Presenter<V, Proxy_> {
+
     public BigOQuizPresenter(EventBus eventBus, V view, Proxy_ proxy, GwtEvent.Type<RevealContentHandler<?>> slot) {
         super(eventBus, view, proxy, slot);
 
@@ -50,5 +54,14 @@ public abstract class BigOQuizPresenter<V extends View, Proxy_ extends Proxy<?>>
             // Making the window scroll to top on every page change
             Window.scrollTo(0, 0);
         }));
+    }
+
+    protected static void showErrorInView(final ContentView view, final FailedResponseException ex) {
+        if (ex.getStatusCode() == HttpStatusCodes.NOT_FOUND) {
+            //One of the parameters (quizID, questionId, etc) must be invalid
+            view.setServerFailedUnknownQuiz();
+        } else {
+            view.setServerFailed();
+        }
     }
 }

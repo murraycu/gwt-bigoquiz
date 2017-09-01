@@ -13,7 +13,6 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.NameTokens;
-import com.murrayc.bigoquiz.client.UnknownQuizException;
 import com.murrayc.bigoquiz.client.application.ApplicationPresenter;
 import com.murrayc.bigoquiz.client.application.ContentView;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
@@ -23,6 +22,7 @@ import com.murrayc.bigoquiz.client.application.userhistorysections.UserHistorySe
 import com.murrayc.bigoquiz.shared.Quiz;
 import com.murrayc.bigoquiz.shared.StringUtils;
 import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.client.FailedResponseException;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.jetbrains.annotations.NotNull;
@@ -114,14 +114,9 @@ public class QuizPresenter extends BigOQuizPresenter<QuizPresenter.MyView, QuizP
 
                 try {
                     throw caught;
-                } catch (final UnknownQuizException ex) {
-                    Log.error("AsyncCallback Failed with UnknownQuizException: getQuiz()", ex);
-                    getView().setServerFailedUnknownQuiz();
-                } catch (final IllegalArgumentException ex) {
-                    //One of the parameters (quizID, questionId, etc) must be invalid,
-                    //TODO: Handle this properly.
-                    Log.error("AsyncCallback Failed with IllegalArgumentException: getQuiz()", ex);
-                    getView().setServerFailed();
+                } catch (final FailedResponseException ex) {
+                    Log.error("getQuiz(): AsyncCallback failed with status code: " + ex.getStatusCode());
+                    showErrorInView(getView(), ex);
                 } catch (final Throwable ex) {
                     Log.error("AsyncCallback Failed: getQuiz()", ex);
                     getView().setServerFailed();
