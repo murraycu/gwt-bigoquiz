@@ -55,7 +55,7 @@ public class LoginPresenter extends BigOQuizPresenter<LoginPresenter.MyView, Log
         final UserClient client = GWT.create(UserClient.class);
 
         // Check login status using login service.
-        client.get(Window.Location.getHref(), new MethodCallback<LoginInfo>() {
+        client.get(new MethodCallback<LoginInfo>() {
             public void onFailure(final Method method, @NotNull final Throwable caught) {
                 try {
                     throw caught;
