@@ -10,13 +10,10 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
-import com.murrayc.bigoquiz.client.Log;
-import com.murrayc.bigoquiz.client.LoginInfo;
-import com.murrayc.bigoquiz.client.UserHistorySections;
+import com.murrayc.bigoquiz.client.*;
 import com.murrayc.bigoquiz.client.application.PlaceUtils;
 import com.murrayc.bigoquiz.client.application.Utils;
 import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
-import com.murrayc.bigoquiz.client.BigOQuizMessages;
 import com.murrayc.bigoquiz.shared.Question;
 import com.murrayc.bigoquiz.shared.QuizSections;
 import com.murrayc.bigoquiz.shared.StringUtils;
@@ -117,7 +114,7 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
 
         if (!userHistorySections.hasUser()) {
             final LoginInfo loginInfo = userHistorySections.getLoginInfo();
-            loginLabel.setHTML(messages.pleaseSignIn(loginInfo.getLoginUrl()));
+            loginLabel.setHTML(messages.pleaseSignIn("#" + NameTokens.LOGIN));
             loginParagraph.setVisible(true);
         }
 
