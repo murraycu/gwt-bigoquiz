@@ -1,30 +1,22 @@
-package com.murrayc.bigoquiz.client.application.userstatus;
+package com.murrayc.bigoquiz.client.application.login;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
-import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.murrayc.bigoquiz.client.ImageResources;
-import com.murrayc.bigoquiz.client.Log;
-import com.murrayc.bigoquiz.client.LoginInfo;
-import com.murrayc.bigoquiz.client.NameTokens;
+import com.murrayc.bigoquiz.client.*;
+import com.murrayc.bigoquiz.client.application.ContentViewWithUIHandlers;
 import com.murrayc.bigoquiz.client.application.Utils;
-import com.murrayc.bigoquiz.client.ui.BigOQuizConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by murrayc on 1/21/16.
  */
-public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandlers>
-        implements UserStatusPresenter.MyView {
-    // BigOQuizConstants.java is generated in the target/ directory,
-    // from BigOQuizConstants.properties
-    // by the gwt-maven-plugin's i18n (mvn:i18n) goal.
-    private final BigOQuizConstants constants = GWT.create(BigOQuizConstants.class);
+public class LoginView extends ContentViewWithUIHandlers<LoginUserEditUiHandlers>
+        implements LoginPresenter.MyView {
+    private final BigOQuizMessages messages = GWT.create(BigOQuizMessages.class);
 
-    private final Anchor usernameLabel = new Anchor("username", "#" + NameTokens.USER_PROFILE);
-    private final Anchor loginLabel = new Anchor(constants.signInLinkTitle(), "#" + NameTokens.LOGIN);
+    private final Anchor usernameLabel = new Anchor();
 
     private final Panel loginPanel = new FlowPanel();
     private final Label loginFailedLabel = new Label(constants.errorNoServer());
@@ -37,7 +29,9 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
     private boolean loginServerFailed = false;
     private boolean showLogOutWhenAppropriate = false;
 
-    public UserStatusView() {
+    LoginView() {
+        setTitle(constants.signInTitle());
+
         @NotNull final FlowPanel statusPanel = new FlowPanel();
         statusPanel.addStyleName("status-panel");
         //box.getElement().setAttribute("id", "titlebox");
@@ -46,21 +40,26 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
 
         loginPanel.addStyleName("login-panel");
 
-        loginPanel.add(loginLabel);
+        final ImageResources images = GWT.create(ImageResources.class);
+
+        PushButton signInButton = new PushButton(constants.signInLinkTitle());
+        loginPanel.add(signInButton);
+        signInButton.getUpFace().setImage(new Image(images.getGoogleSignInNormal()));
+        signInButton.getDownFace().setImage(new Image(images.getGoogleSignInPressed()));
+        signInButton.getUpHoveringFace().setImage(new Image(images.getGoogleSignInFocus()));
+        //TODO: Set alt text for the button or its image: signInButton.setText(constants.signInLinkTitle());
+        signInButton.removeStyleName("gwt-PushButton"); //We want the hover functionality, but not the borders and margins.
+        signInButton.addStyleName("sign-in-button");
+        signInButton.addClickHandler(event -> onSignInClicked());
 
         loginPanel.add(loginFailedLabel);
         loginFailedLabel.addStyleName("login-failed");
         loginFailedLabel.setVisible(false);
 
-        @NotNull final FlowPanel mainPanel = new FlowPanel();
-        mainPanel.addStyleName("user-status-panel");
         mainPanel.add(loginPanel);
-
         mainPanel.add(statusPanel);
 
         logoutPanel = Utils.addParagraphWithChild(mainPanel, logoutLabel);
-
-        initWidget(mainPanel);
     }
 
     @Override
@@ -89,6 +88,15 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
     public void setLoginInfo(@NotNull LoginInfo result) {
         loginInfo = result;
         updateUi();
+    }
+
+    private void onSignInClicked() {
+        if (loginInfo == null) {
+            Log.error("onSignInClicked(): loginInfo was null.");
+            return;
+        }
+
+        Window.Location.assign(loginInfo.getLoginUrl());
     }
 
     private void updateUi() {
@@ -120,4 +128,5 @@ public class UserStatusView extends ViewWithUiHandlers<UserStatusUserEditUiHandl
         logoutLabel.setHref(loginInfo.getLogoutUrl());
         setLogOutVisibility();
     }
+
 }

@@ -14,4 +14,6 @@ public class NameTokens {
     public static final String USER_PROFILE = "/user";
     public static final String USER_HISTORY = "/history";
     public static final String ABOUT = "/about";
+    public static final String LOGIN = "/login";
+
 }
