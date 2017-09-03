@@ -22,6 +22,6 @@ public class UserResource {
         // Get a login URI which will return us to the home page when it
         // has finished.
         // TODO: Avoid hard-coding this.
-        return ServiceUserUtils.getLoginInfo("http://bigoquiz.com");
+        return ServiceUserUtils.getLoginInfo();
     }
 }

@@ -26,13 +26,13 @@ import java.util.Map;
 public class UserHistoryResource extends ResourceWithQuizzes {
     @GET
     @Produces("application/json")
-    public UserHistoryOverall get(@QueryParam("request-url") String requestUrl) {
+    public UserHistoryOverall get() {
         getOrLoadQuizzes();
 
         //Get the stats for this user, for each section:
         //We also return the LoginInfo, so we can show a sign in link,
         //and to avoid the need for a separate call to the server.
-        @NotNull LoginInfo loginInfo = ServiceUserUtils.getLoginInfo(requestUrl); //TODO: Check for login
+        @NotNull LoginInfo loginInfo = ServiceUserUtils.getLoginInfo(); //TODO: Check for login
 
         @NotNull final UserHistoryOverall result = new UserHistoryOverall(loginInfo);
 
@@ -59,7 +59,7 @@ public class UserHistoryResource extends ResourceWithQuizzes {
     @GET
     @Path("/{quiz-id}")
     @Produces("application/json")
-    public UserHistorySections getByQuizId(@PathParam("quiz-id") String quizId, @QueryParam("request-url") final String requestUrl) {
+    public UserHistorySections getByQuizId(@PathParam("quiz-id") String quizId) {
         final Quiz quiz = getQuiz(quizId);
 
         @NotNull final QuizSections sections = quiz.getSections();
@@ -70,7 +70,7 @@ public class UserHistoryResource extends ResourceWithQuizzes {
         //Get the stats for this user, for each section:
         //We also return the LoginInfo, so we can show a sign in link,
         //and to avoid the need for a separate call to the server.
-        @NotNull LoginInfo loginInfo = ServiceUserUtils.getLoginInfo(requestUrl);
+        @NotNull LoginInfo loginInfo = ServiceUserUtils.getLoginInfo();
         @NotNull final UserHistorySections result = new UserHistorySections(loginInfo, sections, quiz.getTitle());
 
         //This may be null,

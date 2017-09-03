@@ -15,6 +15,8 @@ import org.jetbrains.annotations.Nullable;
  * Created by murrayc on 1/20/16.
  */
 public class ServiceUserUtils {
+    private static final String HOME_URL = "http://bigoquiz.com";
+
     @Nullable
     public static User getUser() {
         final UserService userService = UserServiceFactory.getUserService();
@@ -36,7 +38,7 @@ public class ServiceUserUtils {
     }
 
     @NotNull
-    public static LoginInfo getLoginInfo(final String requestUri) {
+    public static LoginInfo getLoginInfo() {
         @NotNull final LoginInfo loginInfo = new LoginInfo();
         loginInfo.setLoggedIn(false);
 
@@ -46,7 +48,7 @@ public class ServiceUserUtils {
             loginInfo.setLoggedIn(true);
             loginInfo.setUserId(user.getUserId());
             loginInfo.setNickname(user.getNickname());
-            loginInfo.setLogoutUrl(userService.createLogoutURL(StringUtils.defaultString(requestUri)));
+            loginInfo.setLogoutUrl(userService.createLogoutURL(HOME_URL));
 
             //This is superfluous, but might contain more data one day:
             UserProfile userProfile = EntityManagerFactory.ofy().load().type(UserProfile.class).id(user.getUserId()).now();
@@ -59,7 +61,7 @@ public class ServiceUserUtils {
             loginInfo.setLoggedIn(false);
 
             if (userService != null) {
-                loginInfo.setLoginUrl(userService.createLoginURL(StringUtils.defaultString(requestUri)));
+                loginInfo.setLoginUrl(userService.createLoginURL(HOME_URL));
             }
         }
 
