@@ -1,9 +1,6 @@
 package com.murrayc.bigoquiz.shared;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Comparator;
 
 /**
  * Copyright (c) 2016 Murray Cumming

@@ -2,8 +2,6 @@ package com.murrayc.bigoquiz.client;
 
 import com.murrayc.bigoquiz.shared.db.UserProfile;
 
-import java.io.Serializable;
-
 /**
  * Created by murrayc on 1/18/16.
  */

@@ -1,10 +1,8 @@
 package com.murrayc.bigoquiz.client.application.userstatus;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.murrayc.bigoquiz.client.ImageResources;
 import com.murrayc.bigoquiz.client.Log;
 import com.murrayc.bigoquiz.client.LoginInfo;
 import com.murrayc.bigoquiz.client.NameTokens;
