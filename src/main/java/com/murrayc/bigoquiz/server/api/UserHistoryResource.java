@@ -62,16 +62,10 @@ public class UserHistoryResource extends ResourceWithQuizzes {
     public UserHistorySections getByQuizId(@PathParam("quiz-id") String quizId) {
         final Quiz quiz = getQuiz(quizId);
 
-        @NotNull final QuizSections sections = quiz.getSections();
-        if (sections == null) {
-            return null;
-        }
-
         //Get the stats for this user, for each section:
         //We also return the LoginInfo, so we can show a sign in link,
         //and to avoid the need for a separate call to the server.
         @NotNull LoginInfo loginInfo = ServiceUserUtils.getLoginInfo();
-        @NotNull final UserHistorySections result = new UserHistorySections(loginInfo, sections, quiz.getTitle());
 
         //This may be null,
         //in which case we will return a mostly-empty set of user statistics,
@@ -82,6 +76,20 @@ public class UserHistoryResource extends ResourceWithQuizzes {
         if (!StringUtils.isEmpty(userId)) {
             mapUserStats = getUserStats(userId, quizId);
         }
+
+        return buildUserHistorySections(loginInfo, quiz, mapUserStats);
+    }
+
+    private static UserHistorySections buildUserHistorySections(@NotNull final LoginInfo loginInfo, @NotNull final Quiz quiz, @Nullable final Map<String, UserStats> mapUserStats) {
+        @NotNull final QuizSections sections = quiz.getSections();
+        if (sections == null) {
+            return null;
+        }
+
+        @Nullable final String userId = loginInfo.getUserId();
+        final String quizId = quiz.getId();
+
+        @NotNull final UserHistorySections result = new UserHistorySections(loginInfo, sections, quiz.getTitle());
 
         for (final String sectionId : sections.getSectionIds()) {
             if (StringUtils.isEmpty(sectionId)) {
@@ -99,49 +107,60 @@ public class UserHistoryResource extends ResourceWithQuizzes {
                 userStats = new UserStats(userId, quizId, sectionId);
             }
 
-            //Set the titles.
-            //We don't store these in the datastore because we can get them easily from the Quiz.
-            //TODO: It might really be more efficient to store them in the datastore.
-            List<String> toRemove = null;
-            for (@NotNull final UserQuestionHistory userQuestionHistory : userStats.getTopProblemQuestionHistories()) {
-                final String questionId = userQuestionHistory.getQuestionId();
-                @Nullable final Question question = quiz.getQuestion(questionId);
-
-                //If the question history is invalid, remember that:
-                if (question == null ||
-                        !StringUtils.equals(question.getSectionId(), sectionId)) {
-                    Log.error("question was null or in the wrong section for id:" + questionId);
-
-                    if (toRemove == null) {
-                        toRemove = new ArrayList<>();
-                    }
-
-                    toRemove.add(questionId);
-                    continue;
-                }
-
-                userQuestionHistory.setQuestionTitle(question.getText());
-
-                @Nullable final String subSectionTitle = sections.getSubSectionTitle(question.getSectionId(),
-                        question.getSubSectionId());
-                userQuestionHistory.setSubSectionTitle(subSectionTitle);
-            }
-
-            //Remove any invalid question histories:
-            if (toRemove != null) {
-                for (final String questionId : toRemove) {
-                    userStats.removeQuestionHistory(questionId);
-                }
-
-                //Save it so we don't have to remove it next time:
-                //TODO: This doesn't seem to work - we have to remove it again next time.
-                EntityManagerFactory.ofy().save().entity(userStats).now();
-            }
+            fillUserStatsTitles(userStats, quiz);
 
             result.setSectionStats(sectionId, userStats);
         }
 
         return result;
+    }
+
+    private static void fillUserStatsTitles(final UserStats userStats, final Quiz quiz) {
+        @NotNull final QuizSections sections = quiz.getSections();
+        if (sections == null) {
+            return;
+        }
+
+        final String sectionId = userStats.getSectionId();
+
+        //Set the titles.
+        //We don't store these in the datastore because we can get them easily from the Quiz.
+        //TODO: It might really be more efficient to store them in the datastore.
+        List<String> toRemove = null;
+        for (@NotNull final UserQuestionHistory userQuestionHistory : userStats.getTopProblemQuestionHistories()) {
+            final String questionId = userQuestionHistory.getQuestionId();
+            @Nullable final Question question = quiz.getQuestion(questionId);
+
+            //If the question history is invalid, remember that:
+            if (question == null ||
+                    !StringUtils.equals(question.getSectionId(), sectionId)) {
+                Log.error("question was null or in the wrong section for id:" + questionId);
+
+                if (toRemove == null) {
+                    toRemove = new ArrayList<>();
+                }
+
+                toRemove.add(questionId);
+                continue;
+            }
+
+            userQuestionHistory.setQuestionTitle(question.getText());
+
+            @Nullable final String subSectionTitle = sections.getSubSectionTitle(question.getSectionId(),
+                    question.getSubSectionId());
+            userQuestionHistory.setSubSectionTitle(subSectionTitle);
+        }
+
+        //Remove any invalid question histories:
+        if (toRemove != null) {
+            for (final String questionId : toRemove) {
+                userStats.removeQuestionHistory(questionId);
+            }
+
+            //Save it so we don't have to remove it next time:
+            //TODO: This doesn't seem to work - we have to remove it again next time.
+            EntityManagerFactory.ofy().save().entity(userStats).now();
+        }
     }
 
     /**
