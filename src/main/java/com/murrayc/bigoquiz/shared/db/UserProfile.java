@@ -16,6 +16,10 @@ public class UserProfile {
 
     private String name;
 
+    // The email address that is associated the the user's Google account,
+    // if the google account it associated with this user's bigoquiz account.
+    private String googleEmail;
+
     UserProfile() {
     }
 
@@ -34,5 +38,13 @@ public class UserProfile {
 
     public String getName() {
         return name;
+    }
+
+    public String getGoogleEmail() {
+        return googleEmail;
+    }
+
+    public void setGoogleEmail(final String googleEmail) {
+        this.googleEmail = googleEmail;
     }
 }

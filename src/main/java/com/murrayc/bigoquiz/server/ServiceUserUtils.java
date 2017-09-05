@@ -56,6 +56,8 @@ public class ServiceUserUtils {
                 userProfile = new UserProfile(user.getUserId(), user.getNickname());
                 EntityManagerFactory.ofy().save().entity(userProfile).now();
             }
+
+            userProfile.setGoogleEmail(user.getEmail());
             loginInfo.setUserProfile(userProfile);
         } else {
             loginInfo.setLoggedIn(false);
