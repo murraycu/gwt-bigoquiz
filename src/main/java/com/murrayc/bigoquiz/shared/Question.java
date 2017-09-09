@@ -187,11 +187,10 @@ public class Question {
      * @param subSection The title (and link) of the quiz's sub-section that this Question is from.
      * @param question
      */
-    public void setTitles(final String quizTitle, final HasIdAndTitle section, QuizSections.SubSection subSection, @NotNull final Question question) {
+    public void setTitles(final String quizTitle, final HasIdAndTitle section, QuizSections.SubSection subSection) {
         this.quizTitle = quizTitle;
         this.section = section;
         this.subSection = subSection;
-        this.text = question.getText(); //TODO: This is not useful.
     }
 
     /** This is just to save users of Question the bother of having to get it from the Quiz class.

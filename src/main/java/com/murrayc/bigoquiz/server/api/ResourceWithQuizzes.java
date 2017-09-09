@@ -112,7 +112,7 @@ public class ResourceWithQuizzes {
             subSection = sections.getSubSection(question.getSectionId(),
                     question.getSubSectionId());
         }
-        question.setTitles(quiz.getTitle(), briefSection, subSection, question);
+        question.setTitles(quiz.getTitle(), briefSection, subSection);
 
         question.setQuizUsesMathML(quiz.getUsesMathML());
     }
