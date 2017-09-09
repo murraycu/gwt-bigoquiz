@@ -36,8 +36,11 @@ public class UserHistoryResource extends ResourceWithQuizzes {
 
         @NotNull final UserHistoryOverall result = new UserHistoryOverall(loginInfo);
 
+
         @Nullable final String userId = loginInfo.getUserId();
         if (StringUtils.isEmpty(userId)) {
+            // We only show the entire user history for logged-in users,
+            // so there is no point in constructing an empty sets of stats.
             return result;
         }
 
@@ -251,8 +254,8 @@ public class UserHistoryResource extends ResourceWithQuizzes {
         // Get the UserStats (or a map of them), and use it for both storing the answer and getting the next question,
         // to avoid getting the UserStats twice from the datastore.
         //
-        // Call different methods depending on whether nextQuestionSectionId is specified an as is the same as the
-        // questino's section ID, to avoid allocating a Map just containing one UserStats.
+        // Call different methods depending on whether nextQuestionSectionId is specified and is the same as the
+        // question's section ID, to avoid allocating a Map just containing one UserStats.
         if (!StringUtils.isEmpty(nextQuestionSectionId) &&
                 StringUtils.equals(nextQuestionSectionId, sectionId)) {
             @Nullable UserStats userStats = null;
