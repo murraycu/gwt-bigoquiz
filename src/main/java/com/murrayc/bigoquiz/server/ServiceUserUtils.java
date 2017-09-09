@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
  * Created by murrayc on 1/20/16.
  */
 public class ServiceUserUtils {
-    private static final String HOME_URL = "http://bigoquiz.com";
+    private static final String HOME_URL = "https://bigoquiz.com";
 
     @Nullable
     public static User getUser() {
