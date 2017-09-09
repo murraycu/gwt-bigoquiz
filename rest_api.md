@@ -9,20 +9,20 @@ The server provides the following REST resources, using JSON
 &lt;base-uri&gt;/quiz/
 
 For instance:
-http://bigoquiz.com/api/quiz/?list_only=true
+https://bigoquiz.com/api/quiz/?list_only=true
 
 #### Get just the IDs and titles of all quizzes
 
 &lt;base-uri&gt;/quiz/?list_only=true.
 
 For instance:
-http://bigoquiz.com/api/quiz/?list_only=true
+https://bigoquiz.com/api/quiz/?list_only=true
 
 ### Get a specific quiz
 
 &lt;base-uri&gt;/quiz/{quiz-id}.
 
-http://bigoquiz.com/api/quiz/algorithms
+https://bigoquiz.com/api/quiz/algorithms
 
 ### Get the sections for a quiz
 
@@ -33,14 +33,14 @@ http://bigoquiz.com/api/quiz/algorithms
 &lt;base-uri&gt;/quiz/{quiz-id}/section?list-only=true
 
 For instance:
-http://bigoquiz.com/api/quiz/bigo/section?list-only=true
+https://bigoquiz.com/api/quiz/bigo/section?list-only=true
 
 ### Get a specific quiz question
 
 &lt;base-uri&gt;/quiz/{quiz-id}/question/{question-id}
 
 For instance:
-http://bigoquiz.com/api/quiz/bigo/question/avl-tree-search-average
+https://bigoquiz.com/api/quiz/bigo/question/avl-tree-search-average
 
 ## Question
 
@@ -49,14 +49,14 @@ http://bigoquiz.com/api/quiz/bigo/question/avl-tree-search-average
 &lt;base-uri&gt;/question/next/quiz-id={quiz-id}
 
 For instance:
-http://bigoquiz.com/api/question/next?quiz-id=bigo
+https://bigoquiz.com/api/question/next?quiz-id=bigo
 
 ### Get the next question for a specific section of a quiz
 
 &lt;base-uri&gt;/question/next/quiz-id={quiz-id}?section-id={section-id}
 
 For instance:
-http://bigoquiz.com/api/question/next?quiz-id=bigo?section-id=data-structure-operations
+https://bigoquiz.com/api/question/next?quiz-id=bigo?section-id=data-structure-operations
 
 Example JSON Response. TODO.
 
@@ -73,7 +73,7 @@ See also [Get a specific quiz question](#get-a-specific-quiz-question).
 &lt;base-uri&gt;/user
 
 For instance:
-http://bigoquiz.com/api/user
+https://bigoquiz.com/api/user
 
 ## User History
 
@@ -82,13 +82,13 @@ http://bigoquiz.com/api/user
 &lt;base-uri&gt;/user-history
 
 For instance:
-http://bigoquiz.com/api/user-history
+https://bigoquiz.com/api/user-history
 
 ### To get the history for the logged-in user for a specific quiz
 
 &lt;base-uri&gt;/user-history/{quiz-id}
 
 For instance:
-http://bigoquiz.com/api/user-history/distributed_systems
+https://bigoquiz.com/api/user-history/distributed_systems
 
 
