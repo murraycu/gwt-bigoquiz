@@ -5,6 +5,16 @@
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
 
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>everything</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
     <!-- Servlets for REST API -->
     <servlet>
         <servlet-name>restServlet</servlet-name>
