@@ -18,8 +18,7 @@ import com.murrayc.bigoquiz.shared.db.UserStats;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by murrayc on 1/21/16.
@@ -81,7 +80,9 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
             Utils.addParagraphWithText(detailsPanel, constants.quizHistoryPlaceholder(), "");
         }
 
-        @NotNull final Set<String> quizIds = quizzes.keySet();
+        @NotNull final Set<String> quizIdsSet = quizzes.keySet();
+        @NotNull List<String> quizIds = new ArrayList<>(quizIdsSet);
+        quizIds.sort(generateQuizDetailsComparator(quizzes));
 
         for (@Nullable final String quizId : quizIds) {
             if (quizId == null) {
@@ -115,6 +116,39 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
                 Log.error("buildUi(): UserStats is null.");
             }
         }
+    }
+
+    /**
+     * A comparator, to sort a list of quiz IDs by the titles of the corresponding quizzes.
+     */
+    @NotNull
+    private Comparator<String> generateQuizDetailsComparator(final Map<String, UserHistoryOverall.QuizDetails> quizzes) {
+        return (o1, o2) -> {
+            if ((o1 == null) && (o2 == null)) {
+                return 0;
+            } else if (o1 == null) {
+                return -1;
+            }
+
+            final UserHistoryOverall.QuizDetails q1 = quizzes.get(o1);
+            final UserHistoryOverall.QuizDetails q2 = quizzes.get(o2);
+
+            if ((q1 == null) && (q2 == null)) {
+                return 0;
+            } else if (q1 == null) {
+                return -1;
+            }
+
+            final String title1 = q1.title;
+            final String title2 = q2.title;
+            if ((title1 == null) && (title2 == null)) {
+                return 0;
+            } else if (title1 == null) {
+                return -1;
+            }
+
+            return title1.compareTo(title2);
+        };
     }
 
 }
