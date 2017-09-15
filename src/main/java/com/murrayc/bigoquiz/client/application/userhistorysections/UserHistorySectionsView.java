@@ -78,7 +78,7 @@ public class UserHistorySectionsView extends ViewWithUiHandlers<UserHistorySecti
         loginParagraph.setVisible(false);
 
         mainPanel.add(detailsPanel);
-        detailsPanel.addStyleName("user-status-answers-panel");
+        detailsPanel.addStyleName("user-history-answers-panel");
         initWidget(mainPanel);
 
         //Listen to window resizes, because that could trigger

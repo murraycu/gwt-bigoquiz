@@ -590,7 +590,7 @@ h4 * {
     clear: both;
 }
 
-.user-status-answers-panel {
+.user-history-answers-panel {
 
 }
 
@@ -680,12 +680,12 @@ h4 * {
     margin-top: 0;
 }
 
-.user-status-answers-panel h3 {
+.user-history-answers-panel h3 {
     font-family: 'Lato', sans-serif;
     margin-top: 1.5em;
 }
 
-.user-status-answers-panel h3:first-child {
+.user-history-answers-panel h3:first-child {
     margin-top: 0;
 }
 

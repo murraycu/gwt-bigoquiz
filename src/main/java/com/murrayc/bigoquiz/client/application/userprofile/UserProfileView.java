@@ -43,7 +43,7 @@ public class UserProfileView extends ContentViewWithUIHandlers<UserProfileUserEd
 
         Utils.addHeaderToPanel(2, mainPanel, constants.historyTitle());
         mainPanel.add(detailsPanel);
-        detailsPanel.addStyleName("user-status-answers-panel");
+        detailsPanel.addStyleName("user-history-answers-panel");
     }
 
     @Override
