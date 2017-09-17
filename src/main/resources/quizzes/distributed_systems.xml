@@ -255,6 +255,26 @@
             <answer>A promise that something unwanted will never happen. (Partial correctness.)</answer>
             <note>For instance, a promise not to return null data.</note>
         </question>
+
+        <question id="definition-circuit-breaker">
+            <text>Circuit Breaker</text>
+            <link>https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern</link>
+            <answer>Interrupts calls that take too long, and prevents calls to failing servers.</answer>
+            <note>For instance, with Netflix's Hystrix.</note>
+        </question>
+
+        <question id="definition-bulkhead">
+            <text>Bulkhead</text>
+            <answer>Isolates sets of calls to particular services, to stop slow calls affecting calls to healthy services.</answer>
+            <note>For instance, with Netflix's Hystrix, with divides sets of calls into different thread pools.</note>
+        </question>
+
+        <question id="definition-fallback">
+            <text>Fallback</text>
+            <answer>If the call to a service fails, use an alternative result, possibly from another service.</answer>
+            <link>https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern</link>
+            <note>For instance, with Netflix's Hystrix.</note>
+        </question>
     </section>
 
     <!-- These are based on chapters 19 and 20 of the Google SRE book:
@@ -557,6 +577,27 @@
             <text>Zookeeper</text>
             <answer>Distributed Configuration and Coordination</answer>
             <link>https://en.wikipedia.org/wiki/Apache_ZooKeeper</link>
+        </question>
+
+        <question id="projects-ribbon">
+            <text>Ribbon</text>
+            <answer>Client-side load balancing library</answer>
+            <link>https://github.com/Netflix/Ribbon</link>
+            <note>For instance, discovering available service instances via a Eureka service.</note>
+        </question>
+
+        <question id="projects-hystrix">
+            <text>Hystrix</text>
+            <answer>Client-side fault tolerance</answer>
+            <link>https://github.com/Netflix/Hystrix</link>
+            <note>Including load balancing (via Ribbon) and the circuit breaker, bulkhead, and fallback patterns.</note>
+        </question>
+
+        <question id="projects-eureka">
+            <text>Eureka</text>
+            <answer>Service Discovery</answer>
+            <link>https://github.com/Netflix/eureka</link>
+            <note>Service instances register with the Eureka service. Clients query Eureka for service instances.</note>
         </question>
     </section>
 
