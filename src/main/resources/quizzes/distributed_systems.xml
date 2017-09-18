@@ -599,6 +599,13 @@
             <link>https://github.com/Netflix/eureka</link>
             <note>Service instances register with the Eureka service. Clients query Eureka for service instances.</note>
         </question>
+
+        <question id="projects-zuul">
+            <text>Zuul</text>
+            <answer>Service Gateway (Edge Service)</answer>
+            <link>https://github.com/Netflix/zuul</link>
+            <note>Routing, logging, authentication, authorization.</note>
+        </question>
     </section>
 
     <!--
