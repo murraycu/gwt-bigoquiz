@@ -69,7 +69,7 @@ public class QuizLoader {
                 question.setChoices(choices);
             } else {
                 //Reduce the list:
-                final List<Question.Text> less_choices = reduce_choices(choices, questionAndAnswer.getAnswer());
+                final List<Question.Text> less_choices = reduceChoices(choices, questionAndAnswer.getAnswer());
                 question.setChoices(less_choices);
             }
         }
@@ -414,7 +414,7 @@ public class QuizLoader {
         return result;
     }
 
-    private static List<Question.Text> reduce_choices(final List<Question.Text> choices, final Question.Text answer) {
+    private static List<Question.Text> reduceChoices(final List<Question.Text> choices, final Question.Text answer) {
         //TODO: The shuffling is inefficient.
         List<Question.Text> result = new ArrayList<>(choices);
         Collections.shuffle(result);
